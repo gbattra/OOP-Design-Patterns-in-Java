@@ -8,28 +8,58 @@ import enums.BirdDiet;
 import enums.BirdType;
 import interfaces.IWaterbird;
 
+/**
+ * Class representing type of bird that lives near water.
+ */
 public class WaterBird extends Bird implements IWaterbird {
-  protected static final ArrayList<BirdClassification> permissibleBirdClassifications =
+  /**
+   * The list of permissible bird classifications. Used to validate BirdType passed into
+   * constructor.
+   */
+  protected final ArrayList<BirdClassification> permissibleBirdClassifications =
           new ArrayList<>(Arrays.asList(
                   BirdClassification.WATERFOWL,
                   BirdClassification.SHOREBIRD));
 
+  /**
+   * Water body closest to the bird's dwelling.
+   */
   private final String nearestWaterBody;
 
+  /**
+   * Constructor for the WaterBird class. Passes some args up to AbstractBird class for validation.
+   *
+   * @param name String the name of the bird
+   * @param type BirdType the type of the bird
+   * @param diet ArrayList<BirdDiet> the diet of the bird
+   * @param wingCount int how many wings the bird has
+   * @param nearestWaterBody String the name of the water body nearest this bird's habitat
+   * @throws IllegalArgumentException when the provided inputs violate any constraints
+   */
   public WaterBird(
           String name,
           BirdType type,
           ArrayList<BirdDiet> diet,
           int wingCount,
-          String nearestWaterBody) {
+          String nearestWaterBody) throws IllegalArgumentException {
     super(name, type, diet, wingCount);
     this.nearestWaterBody = nearestWaterBody;
   }
 
+  /**
+   * Accessor for the bird instance nearest water body.
+   *
+   * @return String name of the nearest water body
+   */
   public String getNearestWaterBody() {
     return this.nearestWaterBody;
   }
 
+  /**
+   * Overrides the default descriptor method to incorporate unique attributes (nearestWaterBody).
+   *
+   * @return String the instance description
+   */
   @Override
   public String describe() {
     String description = super.describe();
