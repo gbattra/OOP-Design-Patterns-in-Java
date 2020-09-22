@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Interface extending IBird for birds that have the ability to speak. These birds have a
  * favorite word and a list of other known words.
  */
-public interface ITalkingBird extends IBird {
+public interface ITalkingBird {
   /**
    * Accessor for the bird instance favorite word.
    *

@@ -9,12 +9,11 @@ import enums.BirdType;
 
 public class Bird extends AbstractBird {
   protected static final ArrayList<BirdClassification> permissibleBirdClassifications =
-          new ArrayList<>(
-                  Arrays.asList(
-                    BirdClassification.BIRD_OF_PREY,
-                    BirdClassification.FLIGHTLESS_BIRD,
-                    BirdClassification.OWL,
-                    BirdClassification.PIGEON));
+          new ArrayList<>(Arrays.asList(
+                  BirdClassification.BIRD_OF_PREY,
+                  BirdClassification.FLIGHTLESS_BIRD,
+                  BirdClassification.OWL,
+                  BirdClassification.PIGEON));
 
   public Bird(
           String name,
@@ -22,5 +21,10 @@ public class Bird extends AbstractBird {
           ArrayList<BirdDiet> diet,
           int wingCount) {
     super(name, type, diet, wingCount);
+  }
+
+  @Override
+  protected ArrayList<BirdClassification> getPermissibleBirdClassifications() {
+    return Bird.permissibleBirdClassifications;
   }
 }

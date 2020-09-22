@@ -13,8 +13,6 @@ public abstract class AbstractBird implements IBird {
   protected final BirdType type;
   protected final ArrayList<BirdDiet> diet;
 
-  protected final ArrayList<BirdClassification> permissibleBirdClassifications = new ArrayList<>();
-
   public AbstractBird(
           String name,
           BirdType type,
@@ -25,15 +23,18 @@ public abstract class AbstractBird implements IBird {
     this.diet = diet;
     this.wingCount = wingCount;
 
-    if (!permissibleBirdClassifications.contains(this.type.classification)) {
+    if (!this.getPermissibleBirdClassifications().contains(this.type.classification)) {
       throw new IllegalArgumentException(
               String.format(
-                "Instance BirdType classification must belong to permissible classification." +
+                "Provided bird type must belong to a permissible classification." +
                 "Provided bird type classification: %s. Permissible bird type classifications: %s",
-                this.type.classification.toString(),
-                this.permissibleBirdClassifications.toString()));
+                this.type.classification.label,
+                      this.getPermissibleBirdClassifications().stream().map(
+                        birdClassification -> birdClassification.label)));
     }
   }
+
+  protected abstract ArrayList<BirdClassification> getPermissibleBirdClassifications();
 
   public String describe() {
     return String.format(
