@@ -1,4 +1,4 @@
-package interfaces;
+package birds.interfaces;
 
 /**
  * Interface extending IBird for birds that live near water (i.e. waterfowl, shorebirds).

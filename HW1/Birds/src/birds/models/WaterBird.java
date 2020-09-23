@@ -1,22 +1,22 @@
-package models;
+package birds.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import enums.BirdClassification;
-import enums.BirdDiet;
-import enums.BirdType;
-import interfaces.IWaterbird;
+import birds.enums.BirdClassification;
+import birds.enums.BirdDiet;
+import birds.enums.BirdType;
+import birds.interfaces.IWaterbird;
 
 /**
  * Class representing type of bird that lives near water.
  */
-public class WaterBird extends Bird implements IWaterbird {
+public class WaterBird extends AbstractBird implements IWaterbird {
   /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
    */
-  protected final ArrayList<BirdClassification> permissibleBirdClassifications =
+  protected static final ArrayList<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
           new ArrayList<>(Arrays.asList(
                   BirdClassification.WATERFOWL,
                   BirdClassification.SHOREBIRD));
@@ -44,6 +44,21 @@ public class WaterBird extends Bird implements IWaterbird {
           String nearestWaterBody) throws IllegalArgumentException {
     super(name, type, diet, wingCount);
     this.nearestWaterBody = nearestWaterBody;
+
+    if (this.nearestWaterBody.isEmpty()) {
+      throw new IllegalArgumentException("nearestWaterBody input cannot be empty.");
+    }
+
+    // enforces constraint that the provided BirdType belongs to a permissible classification
+    if (!TalkingBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)) {
+      throw new IllegalArgumentException(
+              String.format(
+                "Provided bird type must belong to a permissible classification." +
+                "Provided bird type classification: %s. Permissible bird type classifications: %s",
+                this.type.classification.label,
+                TalkingBird.PERMISSIBLE_CLASSIFICATIONS.stream().map(
+                        birdClassification -> birdClassification.label)));
+    }
   }
 
   /**

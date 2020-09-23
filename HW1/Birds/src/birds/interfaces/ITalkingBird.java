@@ -1,4 +1,4 @@
-package interfaces;
+package birds.interfaces;
 
 import java.util.ArrayList;
 

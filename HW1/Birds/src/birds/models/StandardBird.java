@@ -1,16 +1,13 @@
-package models;
+package birds.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import enums.BirdClassification;
-import enums.BirdDiet;
-import enums.BirdType;
+import birds.enums.BirdClassification;
+import birds.enums.BirdDiet;
+import birds.enums.BirdType;
 
-/**
- * Default / Base class for AbstractBird.
- */
-public class Bird extends AbstractBird {
+public class StandardBird extends Bird {
   /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
@@ -31,22 +28,22 @@ public class Bird extends AbstractBird {
    * @param wingCount int how many wings the bird has
    * @throws IllegalArgumentException when the provided inputs violate any constraints
    */
-  public Bird(
+  public StandardBird(
           String name,
           BirdType type,
           ArrayList<BirdDiet> diet,
           int wingCount) throws IllegalArgumentException {
     super(name, type, diet, wingCount);
-  }
 
-  /**
-   * Passes the list of permissible bird classifications to the abstract class for validation
-   * during instantiation.
-   *
-   * @return ArrayList<BirdClassification> the list of permissible bird classifications
-   */
-  @Override
-  protected ArrayList<BirdClassification> getPermissibleBirdClassifications() {
-    return this.permissibleBirdClassifications;
+    // enforces constraint that the provided BirdType belongs to a permissible classification
+    if (!this.permissibleBirdClassifications.contains(this.type.classification)) {
+      throw new IllegalArgumentException(
+              String.format(
+                      "Provided bird type must belong to a permissible classification." +
+                              "Provided bird type classification: %s. Permissible bird type classifications: %s",
+                      this.type.classification.label,
+                      this.permissibleBirdClassifications.stream().map(
+                              birdClassification -> birdClassification.label)));
+    }
   }
 }

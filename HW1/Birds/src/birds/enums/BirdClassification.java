@@ -1,4 +1,4 @@
-package enums;
+package birds.enums;
 
 /**
  * Enum representing the different classifications of birds. Each BirdType is linked to one of
@@ -12,7 +12,7 @@ public enum BirdClassification {
   FLIGHTLESS_BIRD(
           "Flightless Bird",
           "Flightless birds live on the ground and have no (or undeveloped) wings." +
-          "They include theemus, kiwis, and moas. Some (but not all) of these birds are extinct."),
+          "They include emus, kiwis, and moas. Some (but not all) of these birds are extinct."),
   OWL(
           "Owl",
           "Owls are distinguished by the facial disks that frame the eyes and bill."),

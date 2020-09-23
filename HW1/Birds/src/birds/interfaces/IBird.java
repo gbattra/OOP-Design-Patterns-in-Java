@@ -1,10 +1,10 @@
-package interfaces;
+package birds.interfaces;
 
 import java.util.ArrayList;
 
-import enums.BirdClassification;
-import enums.BirdDiet;
-import enums.BirdType;
+import birds.enums.BirdClassification;
+import birds.enums.BirdDiet;
+import birds.enums.BirdType;
 
 /**
  * Interface for a bird object. Birds have names, a type which is linked to a classification, a

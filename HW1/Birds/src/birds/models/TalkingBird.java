@@ -1,22 +1,22 @@
-package models;
+package birds.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import enums.BirdClassification;
-import enums.BirdDiet;
-import enums.BirdType;
-import interfaces.ITalkingBird;
+import birds.enums.BirdClassification;
+import birds.enums.BirdDiet;
+import birds.enums.BirdType;
+import birds.interfaces.ITalkingBird;
 
 /**
  * Class representing the type of bird that can speak human language.
  */
-public class TalkingBird extends Bird implements ITalkingBird {
+public class TalkingBird extends AbstractBird implements ITalkingBird {
   /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
    */
-  protected final ArrayList<BirdClassification> permissibleBirdClassifications =
+  protected static final ArrayList<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
           new ArrayList<>(Arrays.asList(BirdClassification.PARROT));
 
   /**
@@ -46,10 +46,25 @@ public class TalkingBird extends Bird implements ITalkingBird {
           ArrayList<BirdDiet> diet,
           int wingCount,
           String favoriteWord,
-          ArrayList<String> vocabulary) {
+          ArrayList<String> vocabulary) throws IllegalArgumentException {
     super(name, type, diet, wingCount);
     this.favoriteWord = favoriteWord;
     this.vocabulary = vocabulary;
+
+    if (this.vocabulary.size() > 100) {
+      throw new IllegalArgumentException("Vocabulary size must not be greater than 100.");
+    }
+
+    // enforces constraint that the provided BirdType belongs to a permissible classification
+    if (!TalkingBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)) {
+      throw new IllegalArgumentException(
+              String.format(
+                "Provided bird type must belong to a permissible classification." +
+                "Provided bird type classification: %s. Permissible bird type classifications: %s",
+                this.type.classification.label,
+                TalkingBird.PERMISSIBLE_CLASSIFICATIONS.stream().map(
+                        birdClassification -> birdClassification.label)));
+    }
   }
 
   /**

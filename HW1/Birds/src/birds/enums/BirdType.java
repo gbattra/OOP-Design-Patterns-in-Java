@@ -1,4 +1,4 @@
-package enums;
+package birds.enums;
 
 /**
  * Enum for each type of bird. Each BirdType is linked to a classification and is either extinct

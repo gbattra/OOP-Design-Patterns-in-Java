@@ -1,4 +1,4 @@
-package enums;
+package birds.enums;
 
 /**
  * Enum representing each type of food a bird may consume.
