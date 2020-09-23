@@ -128,5 +128,33 @@ public class BirdTest {
     assertEquals(BirdType.EAGLE.classification, bird.getClassification());
     assertEquals(diet, bird.getDiet());
     assertEquals(2, bird.getWingCount());
+    assertEquals(BirdType.EAGLE.isExtinct, bird.isExtinct());
+  }
+
+  @Test
+  public void testDescribe() {
+    ArrayList<BirdDiet> diet = new ArrayList<>(Arrays.asList(
+            BirdDiet.SMALL_MAMMALS,
+            BirdDiet.FISH,
+            BirdDiet.OTHER_BIRDS));
+
+    Bird bird = new Bird(
+            "Rex",
+            BirdType.EAGLE,
+            diet,
+            2);
+
+    String expectedDescription = String.format(
+            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
+            "%s likes to eat %s.",
+            "Rex",
+            "Rex",
+            BirdType.EAGLE.label,
+            BirdType.EAGLE.classification.label,
+            BirdType.EAGLE.classification.description,
+            "Rex",
+            "Small mammals, Fish, Other birds");
+
+    assertEquals(expectedDescription, bird.describe());
   }
 }

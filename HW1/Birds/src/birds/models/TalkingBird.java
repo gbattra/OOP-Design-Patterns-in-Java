@@ -99,7 +99,7 @@ public class TalkingBird extends Bird implements ITalkingBird {
   public String describe() {
     String description = super.describe();
     description += String.format(
-            "%s knows %s words and its favorite word is: %s",
+            " %s knows %s words and its favorite word is: %s.",
             this.name,
             this.vocabulary.size(),
             this.favoriteWord);

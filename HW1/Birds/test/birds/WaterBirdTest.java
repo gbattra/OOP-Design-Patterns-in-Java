@@ -8,6 +8,7 @@ import java.util.Arrays;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 import birds.models.Bird;
+import birds.models.TalkingBird;
 import birds.models.WaterBird;
 
 import static org.junit.Assert.assertEquals;
@@ -107,5 +108,35 @@ public class WaterBirdTest {
             "Moosehead Lake");
 
     assertEquals("Moosehead Lake", bird.getNearestWaterBody());
+  }
+
+  @Test
+  public void testDescribe() {
+    ArrayList<BirdDiet> diet = new ArrayList<>(Arrays.asList(
+            BirdDiet.FISH,
+            BirdDiet.INSECTS,
+            BirdDiet.LARVAE));
+
+    WaterBird bird = new WaterBird(
+            "Rex",
+            BirdType.DUCK,
+            diet,
+            2,
+            "Moosehead Lake");
+
+    String expectedDescription = String.format(
+            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
+            "%s likes to eat %s. %s lives near the water body %s.",
+            "Rex",
+            "Rex",
+            BirdType.DUCK.label,
+            BirdType.DUCK.classification.label,
+            BirdType.DUCK.classification.description,
+            "Rex",
+            "Fish, Insects, Larvae",
+            "Rex",
+            "Moosehead Lake");
+
+    assertEquals(expectedDescription, bird.describe());
   }
 }

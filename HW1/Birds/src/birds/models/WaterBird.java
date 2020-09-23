@@ -79,7 +79,7 @@ public class WaterBird extends Bird implements IWaterbird {
   public String describe() {
     String description = super.describe();
     description += String.format(
-            "%s lives near the water body %s",
+            " %s lives near the water body %s.",
             this.name,
             this.nearestWaterBody);
     return description;

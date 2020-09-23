@@ -167,4 +167,34 @@ public class TalkingBirdTest {
     assertEquals("Trampoline", bird.getFavoriteWord());
     assertEquals(new ArrayList<>(Arrays.asList("One", "Two", "Three")), bird.getVocabulary());
   }
+
+  @Test
+  public void testDescribe() {
+    TalkingBird bird = new TalkingBird(
+            "Rex",
+            BirdType.GRAY_PARROT,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.BERRIES,
+                    BirdDiet.BUDS,
+                    BirdDiet.FRUIT)),
+            2,
+            "Trampoline",
+            new ArrayList<>(Arrays.asList("One", "Two", "Three")));
+
+    String expectedDescription = String.format(
+            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
+            "%s likes to eat %s. %s knows %s words and its favorite word is: %s.",
+            "Rex",
+            "Rex",
+            BirdType.GRAY_PARROT.label,
+            BirdType.GRAY_PARROT.classification.label,
+            BirdType.GRAY_PARROT.classification.description,
+            "Rex",
+            "Berries, Buds, Fruit",
+            "Rex",
+            3,
+            "Trampoline");
+
+    assertEquals(expectedDescription, bird.describe());
+  }
 }

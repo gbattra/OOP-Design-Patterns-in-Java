@@ -1,6 +1,7 @@
 package birds.models;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
@@ -74,7 +75,7 @@ public abstract class AbstractBird implements IBird {
    */
   public String describe() {
     return String.format(
-            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s" +
+            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
             "%s likes to eat %s.",
             this.name,
             this.name,
@@ -82,7 +83,7 @@ public abstract class AbstractBird implements IBird {
             this.type.classification.label,
             this.type.classification.description,
             this.name,
-            this.diet.stream().map((birdDiet -> birdDiet.label)));
+            this.diet.stream().map((birdDiet -> birdDiet.label)).collect(Collectors.joining(", ")));
   }
 
   /**
