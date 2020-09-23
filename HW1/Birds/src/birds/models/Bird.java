@@ -1,18 +1,40 @@
 package birds.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
+import birds.interfaces.IBird;
 
 /**
  * Default / Base class for AbstractBird.
  */
-public class Bird extends AbstractBird {
+public class Bird implements IBird {
   /**
-   * Constructor for the Bird class. Passes all args up to AbstractBird class for validation.
+   * The bird's name.
+   */
+  protected final String name;
+
+  /**
+   * The bird's wing count. Greater than or equal to zero, less than or equal to two.
+   */
+  protected final int wingCount;
+
+  /**
+   * The bird's type.
+   */
+  protected final BirdType type;
+
+  /**
+   * The bird's diet. Length is greater than or equal to two, less than or equal to four.
+   */
+  protected final ArrayList<BirdDiet> diet;
+
+  /**
+   * The constructor for AbstractBird class. Enforces constraints on inputs, such as diet length,
+   * wing count, and ensuring the provided type belongs to a permitted classification.
    *
    * @param name String the name of the bird
    * @param type BirdType the type of the bird
@@ -25,6 +47,95 @@ public class Bird extends AbstractBird {
           BirdType type,
           ArrayList<BirdDiet> diet,
           int wingCount) throws IllegalArgumentException {
-    super(name, type, diet, wingCount);
+    this.name = name;
+    this.type = type;
+    this.diet = diet;
+    this.wingCount = wingCount;
+
+    if (this.name.isEmpty()) {
+      throw new IllegalArgumentException("Bird must be given a name.");
+    }
+
+    if (diet.size() < 2 || diet.size() > 4) {
+      throw new IllegalArgumentException(
+              "Diet list length must be at least 2 and no greater than 4.");
+    }
+
+    if (wingCount < 0 || wingCount > 2) {
+      throw new IllegalArgumentException(
+              "Wing count must be non-negative and less than or equal to 2.");
+    }
+  }
+
+  /**
+   * Default descriptor method which generates a string based on instance attributes.
+   *
+   * @return String the instance description
+   */
+  public String describe() {
+    return String.format(
+            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
+                    "%s likes to eat %s.",
+            this.name,
+            this.name,
+            this.type.label,
+            this.type.classification.label,
+            this.type.classification.description,
+            this.name,
+            this.diet.stream().map((birdDiet -> birdDiet.label)).collect(Collectors.joining(", ")));
+  }
+
+  /**
+   * Accessor method for the instance name attribute.
+   *
+   * @return String the instance name
+   */
+  public String getName() {
+    return this.name;
+  }
+
+  /**
+   * Accessor for the bird instance type.
+   *
+   * @return BirdType the type of the bird
+   */
+  public BirdType getType() {
+    return this.type;
+  }
+
+  /**
+   * Accessor for the bird instance classification. Determined by type.
+   *
+   * @return BirdClassification the bird instance classification
+   */
+  public BirdClassification getClassification() {
+    return this.type.classification;
+  }
+
+  /**
+   * Accessor for the bird instance wing count.
+   *
+   * @return int the bird instance wing count
+   */
+  public int getWingCount() {
+    return this.wingCount;
+  }
+
+  /**
+   * Accessor for the bird instance extinct attribute
+   *
+   * @return boolean is bird extinct?
+   */
+  public boolean isExtinct() {
+    return this.type.isExtinct;
+  }
+
+  /**
+   * Accessor for the bird instance diet list.
+   *
+   * @return ArrayList<BirdDiet> the list of BirdDiet types consumed by this bird instance
+   */
+  public ArrayList<BirdDiet> getDiet() {
+    return this.diet;
   }
 }
