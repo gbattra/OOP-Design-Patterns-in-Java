@@ -12,7 +12,7 @@ public class StandardBird extends Bird {
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
    */
-  protected final ArrayList<BirdClassification> permissibleBirdClassifications =
+  protected static final ArrayList<BirdClassification> permissibleBirdClassifications =
           new ArrayList<>(Arrays.asList(
                   BirdClassification.BIRD_OF_PREY,
                   BirdClassification.FLIGHTLESS_BIRD,
@@ -36,14 +36,14 @@ public class StandardBird extends Bird {
     super(name, type, diet, wingCount);
 
     // enforces constraint that the provided BirdType belongs to a permissible classification
-    if (!this.permissibleBirdClassifications.contains(this.type.classification)) {
+    if (!StandardBird.permissibleBirdClassifications.contains(this.type.classification)) {
       throw new IllegalArgumentException(
               String.format(
-                      "Provided bird type must belong to a permissible classification." +
-                              "Provided bird type classification: %s. Permissible bird type classifications: %s",
-                      this.type.classification.label,
-                      this.permissibleBirdClassifications.stream().map(
-                              birdClassification -> birdClassification.label)));
+                "Provided bird type must belong to a permissible classification." +
+                "Provided bird type classification: %s. Permissible bird type classifications: %s",
+                this.type.classification.label,
+                StandardBird.permissibleBirdClassifications.stream().map(
+                        birdClassification -> birdClassification.label)));
     }
   }
 }

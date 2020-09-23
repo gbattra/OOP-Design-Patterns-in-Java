@@ -2,7 +2,6 @@ package birds;
 
 import org.junit.Test;
 
-import java.text.Bidi;
 import java.util.ArrayList;
 import java.util.Arrays;
 

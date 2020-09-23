@@ -50,13 +50,13 @@ public class WaterBird extends AbstractBird implements IWaterbird {
     }
 
     // enforces constraint that the provided BirdType belongs to a permissible classification
-    if (!TalkingBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)) {
+    if (!WaterBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)) {
       throw new IllegalArgumentException(
               String.format(
                 "Provided bird type must belong to a permissible classification." +
                 "Provided bird type classification: %s. Permissible bird type classifications: %s",
                 this.type.classification.label,
-                TalkingBird.PERMISSIBLE_CLASSIFICATIONS.stream().map(
+                WaterBird.PERMISSIBLE_CLASSIFICATIONS.stream().map(
                         birdClassification -> birdClassification.label)));
     }
   }

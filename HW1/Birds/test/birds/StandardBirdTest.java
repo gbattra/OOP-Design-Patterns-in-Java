@@ -7,13 +7,11 @@ import java.util.Arrays;
 
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
-import birds.models.Bird;
 import birds.models.StandardBird;
 
 import static org.junit.Assert.fail;
 
 public class StandardBirdTest {
-
   @Test
   public void testValidConstructorBirdTypes() {
     ArrayList<BirdType> birdTypes = new ArrayList<>(Arrays.asList(
@@ -29,7 +27,7 @@ public class StandardBirdTest {
 
     birdTypes.forEach(birdType -> {
       try {
-        Bird bird = new StandardBird(
+        StandardBird bird = new StandardBird(
                 "Rex",
                 birdType,
                 new ArrayList<>(Arrays.asList(
@@ -59,7 +57,7 @@ public class StandardBirdTest {
     invalidBirdTypes.forEach(invalidBirdType -> {
       try {
         StandardBird bird = new StandardBird(
-                "",
+                "Rex",
                 invalidBirdType,
                 new ArrayList<>(Arrays.asList(
                         BirdDiet.SMALL_MAMMALS,
