@@ -11,7 +11,7 @@ import birds.interfaces.IWaterbird;
 /**
  * Class representing type of bird that lives near water.
  */
-public class WaterBird extends AbstractBird implements IWaterbird {
+public class WaterBird extends Bird implements IWaterbird {
   /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.

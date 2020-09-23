@@ -74,4 +74,22 @@ public class WaterBirdTest {
       }
     });
   }
+
+  @Test
+  public void testInvalidConstructorNearestWaterBody() {
+    try {
+      WaterBird bird = new WaterBird(
+              "Rex",
+              BirdType.DUCK,
+              new ArrayList<>(Arrays.asList(
+                      BirdDiet.FISH,
+                      BirdDiet.INSECTS,
+                      BirdDiet.LARVAE)),
+              2,
+              "");
+      fail("Invalid constructor should have failed. Invalid BirdType for Bird class.");
+    } catch (IllegalArgumentException e) {
+      // do nothing, test passes
+    }
+  }
 }

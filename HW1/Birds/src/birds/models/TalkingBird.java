@@ -11,7 +11,7 @@ import birds.interfaces.ITalkingBird;
 /**
  * Class representing the type of bird that can speak human language.
  */
-public class TalkingBird extends AbstractBird implements ITalkingBird {
+public class TalkingBird extends Bird implements ITalkingBird {
   /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
@@ -51,7 +51,11 @@ public class TalkingBird extends AbstractBird implements ITalkingBird {
     this.favoriteWord = favoriteWord;
     this.vocabulary = vocabulary;
 
-    if (this.vocabulary.size() > 100) {
+    if (this.favoriteWord.isEmpty()) {
+      throw new IllegalArgumentException("No favorite word provided.");
+    }
+
+    if (this.vocabulary.size() > 100 || this.vocabulary.size() == 0) {
       throw new IllegalArgumentException("Vocabulary size must not be greater than 100.");
     }
 
