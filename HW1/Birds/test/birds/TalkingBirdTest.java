@@ -9,6 +9,7 @@ import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 import birds.models.TalkingBird;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class TalkingBirdTest {
@@ -148,5 +149,22 @@ public class TalkingBirdTest {
     } catch (IllegalArgumentException e) {
       // do nothing, test passes
     }
+  }
+
+  @Test
+  public void testAccessors() {
+    TalkingBird bird = new TalkingBird(
+            "Rex",
+            BirdType.GRAY_PARROT,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.BERRIES,
+                    BirdDiet.BUDS,
+                    BirdDiet.FRUIT)),
+            2,
+            "Trampoline",
+            new ArrayList<>(Arrays.asList("One", "Two", "Three")));
+
+    assertEquals("Trampoline", bird.getFavoriteWord());
+    assertEquals(new ArrayList<>(Arrays.asList("One", "Two", "Three")), bird.getVocabulary());
   }
 }

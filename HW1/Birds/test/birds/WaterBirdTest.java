@@ -10,6 +10,7 @@ import birds.enums.BirdType;
 import birds.models.Bird;
 import birds.models.WaterBird;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class WaterBirdTest {
@@ -91,5 +92,20 @@ public class WaterBirdTest {
     } catch (IllegalArgumentException e) {
       // do nothing, test passes
     }
+  }
+
+  @Test
+  public void testAccessors() {
+    WaterBird bird = new WaterBird(
+            "Rex",
+            BirdType.DUCK,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.FISH,
+                    BirdDiet.INSECTS,
+                    BirdDiet.LARVAE)),
+            2,
+            "Moosehead Lake");
+
+    assertEquals("Moosehead Lake", bird.getNearestWaterBody());
   }
 }
