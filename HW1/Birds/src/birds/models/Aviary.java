@@ -131,7 +131,7 @@ public class Aviary implements IAviary {
     for (IBird bird : this.birds) {
       for (BirdDiet birdDiet : bird.getDiet()) {
         if (requirements.containsKey(birdDiet)) {
-          requirements.put(birdDiet, requirements.get(birdDiet) + 1);
+          requirements.replace(birdDiet, requirements.get(birdDiet) + 1);
         } else {
           requirements.put(birdDiet, 1);
         }
