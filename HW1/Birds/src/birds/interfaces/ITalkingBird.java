@@ -1,6 +1,7 @@
 package birds.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interface extending IBird for birds that have the ability to speak. These birds have a
@@ -19,5 +20,5 @@ public interface ITalkingBird {
    *
    * @return ArrayList<String> the bird's vocabulary list
    */
-  ArrayList<String> getVocabulary();
+  List<String> getVocabulary();
 }

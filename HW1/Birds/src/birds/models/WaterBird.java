@@ -2,21 +2,22 @@ package birds.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
-import birds.interfaces.IWaterbird;
+import birds.interfaces.IWaterBird;
 
 /**
  * Class representing type of bird that lives near water.
  */
-public class WaterBird extends Bird implements IWaterbird {
+public class WaterBird extends Bird implements IWaterBird {
   /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
    */
-  protected static final ArrayList<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
+  protected static final List<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
           new ArrayList<>(Arrays.asList(
                   BirdClassification.WATERFOWL,
                   BirdClassification.SHOREBIRD));
@@ -39,7 +40,7 @@ public class WaterBird extends Bird implements IWaterbird {
   public WaterBird(
           String name,
           BirdType type,
-          ArrayList<BirdDiet> diet,
+          List<BirdDiet> diet,
           int wingCount,
           String nearestWaterBody) throws IllegalArgumentException {
     super(name, type, diet, wingCount);

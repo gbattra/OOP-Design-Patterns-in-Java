@@ -1,6 +1,7 @@
 package birds.models;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import birds.enums.BirdClassification;
@@ -30,7 +31,7 @@ public class Bird implements IBird {
   /**
    * The bird's diet. Length is greater than or equal to two, less than or equal to four.
    */
-  protected final ArrayList<BirdDiet> diet;
+  protected final List<BirdDiet> diet;
 
   /**
    * The constructor for AbstractBird class. Enforces constraints on inputs, such as diet length,
@@ -45,7 +46,7 @@ public class Bird implements IBird {
   public Bird(
           String name,
           BirdType type,
-          ArrayList<BirdDiet> diet,
+          List<BirdDiet> diet,
           int wingCount) throws IllegalArgumentException {
     this.name = name;
     this.type = type;
@@ -135,7 +136,7 @@ public class Bird implements IBird {
    *
    * @return ArrayList<BirdDiet> the list of BirdDiet types consumed by this bird instance
    */
-  public ArrayList<BirdDiet> getDiet() {
+  public List<BirdDiet> getDiet() {
     return this.diet;
   }
 }

@@ -1,6 +1,7 @@
 package birds.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
@@ -44,7 +45,7 @@ public interface IBird {
    *
    * @return ArrayList<BirdDiet> the list of BirdDiet types consumed by this bird instance
    */
-  ArrayList<BirdDiet> getDiet();
+  List<BirdDiet> getDiet();
 
   /**
    * Accessor for the bird instance extinct attribute

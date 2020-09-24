@@ -3,7 +3,7 @@ package birds.interfaces;
 /**
  * Interface extending IBird for birds that live near water (i.e. waterfowl, shorebirds).
  */
-public interface IWaterbird {
+public interface IWaterBird {
   /**
    * Accessor for the bird instance nearest water body
    *

@@ -2,6 +2,7 @@ package birds.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
@@ -12,7 +13,7 @@ public class StandardBird extends Bird {
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
    */
-  protected static final ArrayList<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
+  protected static final List<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
           new ArrayList<>(Arrays.asList(
                   BirdClassification.BIRD_OF_PREY,
                   BirdClassification.FLIGHTLESS_BIRD,
@@ -31,7 +32,7 @@ public class StandardBird extends Bird {
   public StandardBird(
           String name,
           BirdType type,
-          ArrayList<BirdDiet> diet,
+          List<BirdDiet> diet,
           int wingCount) throws IllegalArgumentException {
     super(name, type, diet, wingCount);
 

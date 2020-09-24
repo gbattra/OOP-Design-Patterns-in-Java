@@ -2,6 +2,7 @@ package birds.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
@@ -16,7 +17,7 @@ public class TalkingBird extends Bird implements ITalkingBird {
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
    */
-  protected static final ArrayList<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
+  protected static final List<BirdClassification> PERMISSIBLE_CLASSIFICATIONS =
           new ArrayList<>(Arrays.asList(BirdClassification.PARROT));
 
   /**
@@ -27,7 +28,7 @@ public class TalkingBird extends Bird implements ITalkingBird {
   /**
    * The list of words known by the bird.
    */
-  private final ArrayList<String> vocabulary;
+  private final List<String> vocabulary;
 
   /**
    * Constructor for the TalkingBird class. Passes some args up to AbstractBird class for validation.
@@ -43,10 +44,10 @@ public class TalkingBird extends Bird implements ITalkingBird {
   public TalkingBird(
           String name,
           BirdType type,
-          ArrayList<BirdDiet> diet,
+          List<BirdDiet> diet,
           int wingCount,
           String favoriteWord,
-          ArrayList<String> vocabulary) throws IllegalArgumentException {
+          List<String> vocabulary) throws IllegalArgumentException {
     super(name, type, diet, wingCount);
     this.favoriteWord = favoriteWord;
     this.vocabulary = vocabulary;
@@ -85,7 +86,7 @@ public class TalkingBird extends Bird implements ITalkingBird {
    *
    * @return ArrayList<String> the bird's vocabulary list
    */
-  public ArrayList<String> getVocabulary() {
+  public List<String> getVocabulary() {
     return this.vocabulary;
   }
 
