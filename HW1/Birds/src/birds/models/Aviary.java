@@ -1,6 +1,6 @@
 package birds.models;
 
-import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +9,6 @@ import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 import birds.interfaces.IAviary;
 import birds.interfaces.IBird;
-import birds.interfaces.IFoodRequirement;
 
 /**
  * Aviaries are medium-sized structures that can house up to 5 birds. Some birds cannot be mixed
@@ -113,13 +112,26 @@ public class Aviary implements IAviary {
   }
 
   /**
-   * Returns a list of food requirements based on the birds housed in the aviary.
+   * Returns a list of daily food requirements based on the birds housed in the aviary. Assumes
+   * each bird needs one of each of its diet per day.
    *
-   * @return List<IFoodRequirement<BirdDiet>> the list of food requirements
+   * @return Hashtable<BirdDiet, Integer> the list of food requirements
    */
-  public List<IFoodRequirement<BirdDiet>> getFoodRequirements()
+  public Hashtable<BirdDiet, Integer> getFoodRequirements()
   {
-    return new ArrayList<>();
+    Hashtable<BirdDiet, Integer> requirements = new Hashtable<>();
+
+    for (IBird bird : this.birds) {
+      for (BirdDiet birdDiet : bird.getDiet()) {
+        if (requirements.containsKey(birdDiet)) {
+          requirements.put(birdDiet, requirements.get(birdDiet) + 1);
+        } else {
+          requirements.put(birdDiet, 1);
+        }
+      }
+    }
+
+    return requirements;
   }
 
   /**
@@ -137,10 +149,10 @@ public class Aviary implements IAviary {
                       .map(bird -> bird.getType().label)
                       .collect(Collectors.joining(", ")));
 
-    for (int i = 0; i < this.birds.size(); i++) {
+    for (IBird bird : this.birds) {
       description += String.format(
               "- %s\n",
-              this.birds.get(i).describe());
+              bird.describe());
     }
 
     return description;

@@ -1,5 +1,6 @@
 package birds.interfaces;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import birds.enums.BirdDiet;
@@ -49,7 +50,7 @@ public interface IAviary {
   /**
    * Returns a list of food requirements based on the birds housed in the aviary.
    *
-   * @return List<IFoodRequirement<BirdDiet>> the list of food requirements
+   * @return Hashtable<BirdDiet, Integer> the list of food requirements
    */
-  List<IFoodRequirement<BirdDiet>> getFoodRequirements();
+  Hashtable<BirdDiet, Integer> getFoodRequirements();
 }
