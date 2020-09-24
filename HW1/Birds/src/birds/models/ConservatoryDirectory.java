@@ -108,6 +108,20 @@ public class ConservatoryDirectory implements IConservatoryDirectory  {
    * @return String describing the directory
    */
   public String describe() {
-    return "";
+    String description = String.format(
+            "There are %s aviaries in the conservatory:\n",
+            this.directory.size());
+
+    for (IAviary aviary : this.directory.values())
+    {
+      description += String.format(
+              "- Sector %s has an aviary with the bird types: %s\n",
+              aviary.getSector(),
+              aviary.getBirdTypes()
+                    .stream().map(birdType -> birdType.label)
+                    .collect(Collectors.joining(", ")));
+    }
+
+    return description;
   }
 }
