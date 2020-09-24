@@ -358,7 +358,7 @@ public class AviaryTest {
                     BirdDiet.EGGS)),
             2);
     IBird luke = new Bird(
-            "Luke",
+            "Axel",
             BirdType.GRAY_PARROT,
             new ArrayList<>(Arrays.asList(
                     BirdDiet.FISH,
@@ -368,8 +368,11 @@ public class AviaryTest {
             new ArrayList<>(Arrays.asList(rex, axel)),
             1);
     try {
+      // adding dupes ensures all checks are made with this test
       aviary.addBird(luke);
-      fail("Valid addBird call should have thrown an exception.");
+      aviary.addBird(axel);
+      aviary.addBird(rex);
+      fail("Invalid addBird call should have thrown an exception.");
     } catch (IllegalArgumentException e) {
       // do nothing, test passes
     }
