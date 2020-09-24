@@ -13,6 +13,7 @@ import birds.interfaces.IBird;
 import birds.models.Aviary;
 import birds.models.Bird;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class AviaryTest {
@@ -181,5 +182,32 @@ public class AviaryTest {
     } catch (Exception e) {
       // do nothing, test passes
     }
+  }
+
+  @Test
+  public void testGetters() {
+    List<IBird> birds = new ArrayList<>(
+            Arrays.asList(
+                    new Bird(
+                            "Rex",
+                            BirdType.EAGLE,
+                            new ArrayList<>(Arrays.asList(
+                                    BirdDiet.SMALL_MAMMALS,
+                                    BirdDiet.FISH,
+                                    BirdDiet.OTHER_BIRDS)),
+                            2),
+                    new Bird(
+                            "Axel",
+                            BirdType.EAGLE,
+                            new ArrayList<>(Arrays.asList(
+                                    BirdDiet.BERRIES,
+                                    BirdDiet.FRUIT)),
+                            2)));
+    IAviary aviary = new Aviary(
+            birds,
+            1);
+    assertEquals(2, aviary.getBirds().size());
+    assertEquals(new ArrayList<>(Arrays.asList(BirdType.EAGLE)), aviary.getBirdTypes());
+    assertEquals(1, aviary.getSector());
   }
 }

@@ -100,7 +100,7 @@ public class Aviary implements IAviary {
    * @return List<BirdType> the list of bird types in the aviary
    */
   public List<BirdType> getBirdTypes() {
-    return this.birds.stream().map(IBird::getType).collect(Collectors.toList());
+    return this.birds.stream().map(IBird::getType).distinct().collect(Collectors.toList());
   }
 
   /**
