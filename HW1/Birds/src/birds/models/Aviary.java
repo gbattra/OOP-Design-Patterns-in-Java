@@ -17,6 +17,21 @@ import birds.interfaces.IBird;
  */
 public class Aviary implements IAviary {
   /**
+   * Any provided sector id < this value is invalid.
+   */
+  private static final int SECTOR_ID_MIN = 1;
+
+  /**
+   * The max number of birds this aviary can house.
+   */
+  private static final int BIRD_COUNT_MAX = 5;
+
+  /**
+   * The number to increment a given BirdDiet when computing required food quantities.
+   */
+  private static final int BIRD_DIET_INCREMENT = 1;
+
+  /**
    * Attribute holding the birds housed in this aviary.
    */
   private final List<IBird> birds;
@@ -39,11 +54,11 @@ public class Aviary implements IAviary {
     this.birds = birds;
     this.sector = sector;
 
-    if (this.birds.size() > 5) {
+    if (this.birds.size() > Aviary.BIRD_COUNT_MAX) {
       throw new IllegalStateException("Aviary cannot house more than 5 birds at a time.");
     }
 
-    if (this.sector <= 0) {
+    if (this.sector < Aviary.SECTOR_ID_MIN) {
       throw new IllegalStateException("Aviary must have valid sector number.");
     }
 
@@ -131,9 +146,9 @@ public class Aviary implements IAviary {
     for (IBird bird : this.birds) {
       for (BirdDiet birdDiet : bird.getDiet()) {
         if (requirements.containsKey(birdDiet)) {
-          requirements.replace(birdDiet, requirements.get(birdDiet) + 1);
+          requirements.replace(birdDiet, requirements.get(birdDiet) + Aviary.BIRD_DIET_INCREMENT);
         } else {
-          requirements.put(birdDiet, 1);
+          requirements.put(birdDiet, Aviary.BIRD_DIET_INCREMENT);
         }
       }
     }

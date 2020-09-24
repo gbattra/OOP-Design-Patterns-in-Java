@@ -14,6 +14,26 @@ import birds.interfaces.IBird;
  */
 public class Bird implements IBird {
   /**
+   * The minimum number of BirdDiet items to pass constructor.
+   */
+  private static final int DIET_COUNT_MIN = 2;
+
+  /**
+   * The maximum number of BirdDiet items to pass constructor.
+   */
+  private static final int DIET_COUNT_MAX = 4;
+
+  /**
+   * The minimum number of wings a bird can have.
+   */
+  private static final int WING_COUNT_MAX = 4;
+
+  /**
+   * The maximum number of wings a bird can have.
+   */
+  private static final int WING_COUNT_MIN = 2;
+
+  /**
    * The bird's name.
    */
   protected final String name;
@@ -57,12 +77,12 @@ public class Bird implements IBird {
       throw new IllegalArgumentException("Bird must be given a name.");
     }
 
-    if (diet.size() < 2 || diet.size() > 4) {
+    if (diet.size() < Bird.DIET_COUNT_MIN || diet.size() > Bird.DIET_COUNT_MAX) {
       throw new IllegalArgumentException(
               "Diet list length must be at least 2 and no greater than 4.");
     }
 
-    if (wingCount < 0 || wingCount > 2) {
+    if (wingCount < Bird.WING_COUNT_MIN || wingCount > Bird.WING_COUNT_MAX) {
       throw new IllegalArgumentException(
               "Wing count must be non-negative and less than or equal to 2.");
     }

@@ -14,6 +14,15 @@ import birds.interfaces.ITalkingBird;
  */
 public class TalkingBird extends Bird implements ITalkingBird {
   /**
+   * Max number of words this bird can know.
+   */
+  private static final int VOCABULARY_MAX = 100;
+
+  /**
+   * Minimum number of words to provide constructor.
+   */
+  private static final int VOCABULARY_MIN = 0;
+  /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
    * constructor.
    */
@@ -56,7 +65,8 @@ public class TalkingBird extends Bird implements ITalkingBird {
       throw new IllegalArgumentException("No favorite word provided.");
     }
 
-    if (this.vocabulary.size() > 100 || this.vocabulary.size() == 0) {
+    if (this.vocabulary.size() > TalkingBird.VOCABULARY_MAX
+        || this.vocabulary.size() == TalkingBird.VOCABULARY_MIN) {
       throw new IllegalArgumentException("Vocabulary size must not be greater than 100.");
     }
 
