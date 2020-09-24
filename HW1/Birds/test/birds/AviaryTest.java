@@ -302,4 +302,76 @@ public class AviaryTest {
     expectedDescription += String.format("- %s\n", axel.describe());
     assertEquals(expectedDescription, aviary.describe());
   }
+
+  @Test
+  public void testValidAddBird() {
+    IBird rex = new Bird(
+            "Rex",
+            BirdType.EAGLE,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.SMALL_MAMMALS,
+                    BirdDiet.FISH,
+                    BirdDiet.OTHER_BIRDS)),
+            2);
+    IBird axel = new Bird(
+            "Axel",
+            BirdType.HAWK,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.FISH,
+                    BirdDiet.EGGS)),
+            2);
+    IBird luke = new Bird(
+            "Luke",
+            BirdType.HAWK,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.FISH,
+                    BirdDiet.EGGS)),
+            2);
+    IAviary aviary = new Aviary(
+            new ArrayList<>(Arrays.asList(rex, axel)),
+            1);
+    try {
+      IAviary updatedAviary = aviary.addBird(luke);
+      assertEquals(2, aviary.getBirds().size());
+      assertEquals(3, updatedAviary.getBirds().size());
+      // do nothing, test passes
+    } catch (IllegalArgumentException e) {
+      fail("Valid addBird call should not have thrown an exception.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddBird() {
+    IBird rex = new Bird(
+            "Rex",
+            BirdType.EAGLE,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.SMALL_MAMMALS,
+                    BirdDiet.FISH,
+                    BirdDiet.OTHER_BIRDS)),
+            2);
+    IBird axel = new Bird(
+            "Axel",
+            BirdType.HAWK,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.FISH,
+                    BirdDiet.EGGS)),
+            2);
+    IBird luke = new Bird(
+            "Luke",
+            BirdType.GRAY_PARROT,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.FISH,
+                    BirdDiet.EGGS)),
+            2);
+    IAviary aviary = new Aviary(
+            new ArrayList<>(Arrays.asList(rex, axel)),
+            1);
+    try {
+      aviary.addBird(luke);
+      fail("Valid addBird call should have thrown an exception.");
+    } catch (IllegalArgumentException e) {
+      // do nothing, test passes
+    }
+  }
 }

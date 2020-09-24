@@ -1,5 +1,6 @@
 package birds.models;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -126,7 +127,7 @@ public class Aviary implements IAviary {
    * @throws IllegalArgumentException when any constructor constraint is violated
    */
   public IAviary addBird(IBird bird) throws IllegalArgumentException {
-    List<IBird> birds = this.birds;
+    List<IBird> birds = new ArrayList<>(this.birds);
     birds.add(bird);
     return new Aviary(
             birds,
