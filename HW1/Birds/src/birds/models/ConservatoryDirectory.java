@@ -77,6 +77,13 @@ public class ConservatoryDirectory implements IConservatoryDirectory  {
   public IConservatoryDirectory addAviary(IAviary aviary) throws IllegalStateException {
     try {
       Hashtable<Integer, IAviary> newDirectory = new Hashtable<>(this.directory);
+      if (this.directory.containsKey(aviary.getSector())) {
+        throw new IllegalArgumentException(
+                String.format(
+                        "Directory already contains aviary at sector %s",
+                        aviary.getSector()));
+      }
+
       newDirectory.put(aviary.getSector(), aviary);
       return new ConservatoryDirectory(
               this.limit,
