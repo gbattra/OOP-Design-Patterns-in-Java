@@ -51,6 +51,13 @@ public class Aviary implements IAviary {
       throw new IllegalArgumentException("Extinct birds cannot be added to an aviary.");
     }
 
+    List<String> birdNames = this.birds.stream().map(bird -> bird.getName())
+                                                .collect(Collectors.toList());
+    if (!(birdNames.size() ==
+          birdNames.stream().distinct().collect(Collectors.toList()).size())) {
+      throw new IllegalArgumentException("All birds must have unique names.");
+    }
+
     List<BirdClassification> currentBirdClasses = this.birds.stream()
                                                 .map(bird -> bird.getType().classification)
                                                 .distinct()
