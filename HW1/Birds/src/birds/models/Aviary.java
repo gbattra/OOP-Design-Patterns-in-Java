@@ -11,10 +11,29 @@ import birds.interfaces.IAviary;
 import birds.interfaces.IBird;
 import birds.interfaces.IFoodRequirement;
 
+/**
+ * Aviaries are medium-sized structures that can house up to 5 birds. Some birds cannot be mixed
+ * with others depending on their type. An aviary resides in a sector which is identified by an
+ * int. Extinct birds cannot be added to an aviary.
+ */
 public class Aviary implements IAviary {
+  /**
+   * Attribute holding the birds housed in this aviary.
+   */
   private final List<IBird> birds;
+
+  /**
+   * Sector id where the aviary is located.
+   */
   private final int sector;
 
+  /**
+   * Constructor for the Aviary.
+   *
+   * @param birds  List<IBird> list of birds housed in the aviary
+   * @param sector int the sector id where the aviary is located
+   * @throws IllegalArgumentException when any state constraint is violated by constructor args
+   */
   public Aviary(
           List<IBird> birds,
           int sector) throws IllegalArgumentException {
@@ -51,18 +70,40 @@ public class Aviary implements IAviary {
     }
   }
 
+  /**
+   * Accessor for the birds in this aviary.
+   *
+   * @return List<IBird> the list of birds in the aviary
+   */
   public List<IBird> getBirds() {
     return this.birds;
   }
 
+  /**
+   * Accessor for the aviary's sector id.
+   *
+   * @return int the sector id
+   */
   public int getSector() {
     return this.sector;
   }
 
+  /**
+   * Accessor for the types of birds in the aviary.
+   *
+   * @return List<BirdType> the list of bird types in the aviary
+   */
   public List<BirdType> getBirdTypes() {
     return this.birds.stream().map(IBird::getType).collect(Collectors.toList());
   }
 
+  /**
+   * Adds a bird to the aviary.
+   *
+   * @param bird IBird to add to the aviary
+   * @return IAviary new Aviary instance with updated birds list
+   * @throws IllegalArgumentException when any constructor constraint is violated
+   */
   public IAviary addBird(IBird bird) throws IllegalArgumentException {
     List<IBird> birds = this.birds;
     birds.add(bird);
@@ -71,11 +112,21 @@ public class Aviary implements IAviary {
             this.sector);
   }
 
+  /**
+   * Returns a list of food requirements based on the birds housed in the aviary.
+   *
+   * @return List<IFoodRequirement<BirdDiet>> the list of food requirements
+   */
   public List<IFoodRequirement<BirdDiet>> getFoodRequirements()
   {
     return new ArrayList<>();
   }
 
+  /**
+   * Describes the aviaries birds and location in a human-readable way.
+   *
+   * @return String the description of the aviary
+   */
   public String describe() {
     String description = String.format(
             "The aviary in sector %s houses %s birds of types %s. " +
