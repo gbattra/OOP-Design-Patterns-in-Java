@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 import birds.interfaces.IAviary;
@@ -265,5 +268,38 @@ public class AviaryTest {
     } catch (Exception e) {
       fail("Computed food requirements are missing a BirdDiet key.");
     }
+  }
+
+  @Test
+  public void testDescribe() {
+    IBird rex = new Bird(
+            "Rex",
+            BirdType.EAGLE,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.SMALL_MAMMALS,
+                    BirdDiet.FISH,
+                    BirdDiet.OTHER_BIRDS)),
+            2);
+    IBird axel = new Bird(
+            "Axel",
+            BirdType.HAWK,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.FISH,
+                    BirdDiet.EGGS)),
+            2);
+    List<IBird> birds = new ArrayList<>(Arrays.asList(rex, axel));
+    IAviary aviary = new Aviary(
+            birds,
+            1);
+    String expectedDescription =
+            String.format(
+                    "The aviary in sector 1 houses 2 birds of types %s. " +
+                    "Below are descriptions of each bird living in this aviary:\n",
+                    String.join(", ",
+                            BirdType.EAGLE.label,
+                            BirdType.HAWK.label));
+    expectedDescription += String.format("- %s\n", rex.describe());
+    expectedDescription += String.format("- %s\n", axel.describe());
+    assertEquals(expectedDescription, aviary.describe());
   }
 }

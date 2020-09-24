@@ -167,8 +167,7 @@ public class Aviary implements IAviary {
             "Below are descriptions of each bird living in this aviary:\n",
             this.sector,
             this.birds.size(),
-            this.birds.stream()
-                      .map(bird -> bird.getType().label)
+            this.birds.stream().map(bird -> bird.getType().label)
                       .collect(Collectors.joining(", ")));
 
     for (IBird bird : this.birds) {
