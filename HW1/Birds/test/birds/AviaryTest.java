@@ -99,6 +99,28 @@ public class AviaryTest {
   }
 
   @Test
+  public void testInvalidConstructorExtinctBird() {
+    try {
+      List<IBird> birds  = new ArrayList<>(
+              Arrays.asList(
+                      new Bird(
+                              "Sleepy",
+                              BirdType.MOA,
+                              new ArrayList<>(Arrays.asList(
+                                      BirdDiet.SMALL_MAMMALS,
+                                      BirdDiet.FISH,
+                                      BirdDiet.OTHER_BIRDS)),
+                              2)));
+      IAviary aviary = new Aviary(
+              birds,
+              1);
+      fail("Instantiation of aviary should have thrown exception.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
   public void testInvalidConstructorBirdNames() {
     try {
       List<IBird> birds  = new ArrayList<>(
@@ -185,7 +207,7 @@ public class AviaryTest {
   }
 
   @Test
-  public void testGetters() {
+  public void testAccessors() {
     List<IBird> birds = new ArrayList<>(
             Arrays.asList(
                     new Bird(
