@@ -31,7 +31,7 @@ public interface IAviary {
    * @return IAviary new Aviary instance with updated birds list
    * @throws IllegalArgumentException when any constructor constraint is violated
    */
-  IAviary addBird(IBird bird) throws IllegalArgumentException;
+  IAviary addBird(IBird bird) throws IllegalStateException ;
 
   /**
    * Accessor for the aviary's sector id.

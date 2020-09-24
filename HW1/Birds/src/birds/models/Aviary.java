@@ -45,6 +45,21 @@ public class Aviary implements IAviary {
   /**
    * Constructor for the Aviary.
    *
+   * @param sector int the sector id where the aviary is located
+   * @throws IllegalArgumentException if invalid sector id passed to constructor
+   */
+  public Aviary(int sector) {
+    this.sector = sector;
+    this.birds = new ArrayList<>();
+
+    if (this.sector < Aviary.SECTOR_ID_MIN) {
+      throw new IllegalStateException("Aviary must have valid sector number.");
+    }
+  }
+
+  /**
+   * Constructor for the Aviary.
+   *
    * @param birds  List<IBird> list of birds housed in the aviary
    * @param sector int the sector id where the aviary is located
    * @throws IllegalArgumentException when any state constraint is violated by constructor args
@@ -126,12 +141,17 @@ public class Aviary implements IAviary {
    * @return IAviary new Aviary instance with updated birds list
    * @throws IllegalArgumentException when any constructor constraint is violated
    */
-  public IAviary addBird(IBird bird) throws IllegalArgumentException {
-    List<IBird> birds = new ArrayList<>(this.birds);
-    birds.add(bird);
-    return new Aviary(
-            birds,
-            this.sector);
+  public IAviary addBird(IBird bird) throws IllegalStateException {
+    try {
+      List<IBird> birds = new ArrayList<>(this.birds);
+      birds.add(bird);
+      return new Aviary(
+              birds,
+              this.sector);
+
+    } catch (IllegalArgumentException e) {
+      throw new IllegalStateException(e.getMessage());
+    }
   }
 
   /**
