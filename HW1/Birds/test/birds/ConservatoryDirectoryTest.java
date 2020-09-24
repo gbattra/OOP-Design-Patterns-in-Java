@@ -21,23 +21,11 @@ import static org.junit.Assert.fail;
 
 public class ConservatoryDirectoryTest {
   @Test
-  public void testValidConstructorEmpty() {
-    try {
-      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(20);
-      // do nothing, test passes
-    } catch (IllegalArgumentException e) {
-      fail("Instantiation of ConservatoryDirectory should not have failed.");
-    }
-  }
-
-  @Test
   public void testValidConstructorWithAviary() {
     try {
       Hashtable<Integer, IAviary> directory = new Hashtable<>();
       directory.put(1, new Aviary(1));
-      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(
-              20,
-              directory);
+      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(directory);
       // do nothing, test passes
     } catch (IllegalArgumentException e) {
       fail("Instantiation of ConservatoryDirectory should not have failed.");
@@ -50,9 +38,7 @@ public class ConservatoryDirectoryTest {
       Hashtable<Integer, IAviary> directory = new Hashtable<>();
       directory.put(1, new Aviary(1));
       directory.put(2, new Aviary(1));  // directory cannot have aviaries with same sector
-      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(
-              20,
-              directory);
+      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(directory);
       fail("Instantiation of ConservatoryDirectory should have failed.");
     } catch (IllegalArgumentException e) {
       // do nothing, test passes
@@ -65,45 +51,9 @@ public class ConservatoryDirectoryTest {
       Hashtable<Integer, IAviary> directory = new Hashtable<>();
       directory.put(1, new Aviary(1));
       directory.put(2, new Aviary(1));  // directory cannot have aviaries with same sector
-      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(
-              1,
-              directory);
+      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(directory);
       fail("Instantiation of ConservatoryDirectory should have failed.");
     } catch (IllegalArgumentException e) {
-      // do nothing, test passes
-    }
-  }
-
-  @Test
-  public void testValidAddAviary() {
-    try {
-      Hashtable<Integer, IAviary> directory = new Hashtable<>();
-      directory.put(1, new Aviary(1));
-      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(
-              10,
-              directory);
-      IConservatoryDirectory updatedConservatoryDirectory =
-              conservatoryDirectory.addAviary(new Aviary(2));
-      assertEquals(1, conservatoryDirectory.getDirectory().size());
-      assertEquals(2, updatedConservatoryDirectory.getDirectory().size());
-      // do nothing, test should not have failed
-    } catch (IllegalArgumentException e) {
-      fail("Adding aviary to directory should not have failed.");
-    }
-  }
-
-  @Test
-  public void testInvalidAddAviary() {
-    try {
-      Hashtable<Integer, IAviary> directory = new Hashtable<>();
-      directory.put(1, new Aviary(1));
-      IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(
-              1,
-              directory);
-      IConservatoryDirectory updatedConservatoryDirectory =
-              conservatoryDirectory.addAviary(new Aviary(1));
-      fail("Adding aviary to directory should have failed.");
-    } catch (IllegalStateException e) {
       // do nothing, test passes
     }
   }
@@ -128,15 +78,14 @@ public class ConservatoryDirectoryTest {
                                     BirdDiet.FISH,
                                     BirdDiet.OTHER_BIRDS)),
                             2)));
-    IAviary aviary = new Aviary(
-            birds,
-            1);
-    IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(1);
-    IConservatoryDirectory updatedDirectory = conservatoryDirectory.addAviary(aviary);
+    IAviary aviary = new Aviary(birds, 1);
+    Hashtable<Integer, IAviary> directory = new Hashtable<>();
+    directory.put(aviary.getSector(), aviary);
+    IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(directory);
 
     String expectedDescription =
             "There are 1 aviaries in the conservatory:\n" +
             "- Sector 1 has an aviary with the bird types: Eagle, Hawk\n";
-    assertEquals(expectedDescription, updatedDirectory.describe());
+    assertEquals(expectedDescription, conservatoryDirectory.describe());
   }
 }

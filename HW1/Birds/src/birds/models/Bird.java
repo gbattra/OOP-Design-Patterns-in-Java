@@ -159,4 +159,33 @@ public class Bird implements IBird {
   public List<BirdDiet> getDiet() {
     return this.diet;
   }
+
+  @Override
+  public String toString() {
+    return String.format(
+            "%s_%s_%s_%s",
+            this.name,
+            this.type.label,
+            this.wingCount,
+            this.diet.stream().map(diet -> diet.label).collect(Collectors.joining("_")));
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof Bird)) {
+      return false;
+    }
+
+    Bird bird = (Bird) other;
+    if (bird.hashCode() == other.hashCode()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
 }
