@@ -22,7 +22,7 @@ import birds.models.StandardBird;
 import birds.models.TalkingBird;
 import birds.models.WaterBird;
 
-public class Driver {
+public class Demo {
   public static void main(String[] args) {
     System.out.println("Welcome to our bird conservatory, where we rescue and house birds.\n");
 

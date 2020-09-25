@@ -184,9 +184,7 @@ public class Conservatory implements IConservatory {
         birdTypeStrList.add(birdType.label);
       }
     }
-
-
-
+    
     String description = String.format(
             "This conservatory has %s aviaries located in sectors %s. These aviaries are home " +
             "to the following types of birds: %s. For more information please read the " +

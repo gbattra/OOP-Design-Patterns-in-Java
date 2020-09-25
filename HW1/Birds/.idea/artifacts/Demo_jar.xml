@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Birds:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Birds_jar</output-path>
+  <artifact type="jar" name="Demo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Demo_jar</output-path>
     <root id="archive" name="Birds.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/rec/META-INF/MANIFEST.MF" />
