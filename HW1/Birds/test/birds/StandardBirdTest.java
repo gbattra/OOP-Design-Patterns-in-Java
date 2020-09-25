@@ -10,12 +10,23 @@ import birds.enums.BirdType;
 import birds.models.StandardBird;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
  * Tests for the StandardBird class.
  */
 public class StandardBirdTest {
+  /**
+   * Used to track overall success of valid constructor test.
+   */
+  private boolean validConstructorSuccess;
+
+  /**
+   * Used to track overall success of invalid constructor test.
+   */
+  private boolean invalidConstructorSuccess;
+
   @Test
   public void testValidConstructorBirdTypes() {
     ArrayList<BirdType> birdTypes = new ArrayList<>(Arrays.asList(
@@ -40,12 +51,13 @@ public class StandardBirdTest {
                         BirdDiet.OTHER_BIRDS)),
                 2);
         // do nothing, test passes
+        this.validConstructorSuccess = true;
       } catch (IllegalArgumentException e) {
         fail("Valid constructor should not have thrown exception.");
       }
     });
 
-    assertEquals(1, 1);  // here to silence Checkstyle
+    assertTrue(this.validConstructorSuccess);
   }
 
   @Test
@@ -73,9 +85,10 @@ public class StandardBirdTest {
         fail("Invalid constructor should have failed. Invalid BirdType for Bird class.");
       } catch (IllegalArgumentException e) {
         // do nothing, test passes
+        this.invalidConstructorSuccess = true;
       }
     });
 
-    assertEquals(1, 1);  // here to silence Checkstyle
+    assertTrue(this.invalidConstructorSuccess);
   }
 }
