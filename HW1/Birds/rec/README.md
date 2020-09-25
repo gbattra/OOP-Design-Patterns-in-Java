@@ -175,6 +175,7 @@ NUTS
 VEGETATION
 ```
 # Implementation
+
 ###The Bird
 
 The program centers around the concept of a bird. Birds have various features such
@@ -270,7 +271,7 @@ bird.getDiet();  // ArrayList<BirdDiet>
 bird.getWingCount();  // 2
 ```
 
-##### Unique birds
+#### Unique birds
 Some birds have unique features that other birds do not. Some birds can talk,
 others live near water. To manage these differences programmatically, there are
 three subclasses of the `Bird` base class.
@@ -352,6 +353,7 @@ Other birds.
 ```
 
 ###The Aviary
+
 To manage small groups of birds, conservatories typically have multiple "aviaries",
 small  structures that can house several birds. There are restrictions, however,
 in terms of the quantity of birds in a given aviary, as well as the type of each bird
