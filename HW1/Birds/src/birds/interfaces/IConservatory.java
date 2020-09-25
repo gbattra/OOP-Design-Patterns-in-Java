@@ -62,4 +62,11 @@ public interface IConservatory {
    * @return a index instance
    */
   IConservatoryIndex getIndex();
+
+  /**
+   * Describes the contents of the conservatory in human-readable form.
+   *
+   * @return String describing the conservatory
+   */
+  String describe();
 }

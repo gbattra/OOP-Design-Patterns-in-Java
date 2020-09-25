@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import birds.enums.BirdDiet;
 import birds.interfaces.IAviary;
@@ -108,5 +109,22 @@ public class Conservatory implements IConservatory {
     }
 
     return requirements;
+  }
+
+  public String describe() {
+    String description = String.format(
+            "This conservatory has %s aviaries located in sectors %s. These aviaries are home " +
+            "to the following types of birds: %s. For more information please read the " +
+            "conservatory directory or index.",
+            this.aviaries.size(),
+            this.aviaries.stream().map(aviary -> String.valueOf(aviary.getBirds()))
+                                  .collect(Collectors.joining(", ")),
+            this.aviaries.stream().map(aviary -> aviary.getBirdTypes().stream()
+                                  .map(birdType -> birdType.label)
+                                  .distinct()
+                                  .collect(Collectors.joining(", "))));
+
+
+    return description;
   }
 }
