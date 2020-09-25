@@ -1,6 +1,12 @@
 #Documentation
 ### Interfaces
+### `IDescribable`
+Interface for objects that need to provide a human-readable description of their contents.
+- `String describe()` <br>
+Describes the contents of the object in human-readable form.
 ### `IBird`
+- _Extendeds **IDescribable**_
+
 Interface for a bird object. Birds have names, a type which is linked to a classification, a
 wing count, a diet, and a description. They may or may not be extinct.
 - `String getName()` <br>
@@ -22,10 +28,9 @@ Returns the list of `BirdDiet` enums representing the bird instance's diet.
 - `boolean isExtinct()`  <br>
 Returns the `BirdType` enum's `isExtinct` property.
 
-- `String describe()`  <br>
-Generates a human-readable description of the bird instance.
-
 ### `ITalkingBird`
+- _Extendeds **IBird**_
+
 Interface extending IBird for birds that have the ability to speak. These birds have a
 favorite word and a list of other known words.
 - `String getFavoriteWord()` <br>
@@ -35,11 +40,15 @@ Returns the talking bird instance's `favoriteWord` as set by constructor.
 Returns the talking bird's list of known words.
 
 ### `IWaterBird`
+- _Extendeds **IBird**_
+
 Interface extending IBird for birds that live near water (i.e. waterfowl, shorebirds).
 - `String getNearestWaterBody()` <br>
 Returns the name of the body of water nearest the where the bird lives.
 
 ### `IAviary`
+- _Extendeds **IDescribable**_
+
 Interface for an Aviary object. Aviaries house birds and track food requirements.
 - `List<IBird> getBirds()` <br>
 Returns the list of birds housed in the aviary. An aviary can house up to 5 birds.
@@ -59,10 +68,9 @@ Returns the sector id where the aviary is located.
 Returns a list of daily food requirements based on the birds housed in the aviary.
 Assumes a bird needs one of each of its diet members per day.
 
-- `String describe()` <br>
-Describes the contents of the aviary instance in human-readable form.
-
 ### `IConservatory`
+- _Extendeds **IDescribable**_
+
 Interface for a conservatory object. Conservatories are made up of aviaries, which are located
 at unique sectors through the conservatory.
 - ` List<IAviary> getAviaries()` <br>
@@ -84,7 +92,6 @@ the provided sector.
 Computes the list of daily food requirements for all birds within the conservatory.
 Assumes that each bird needs one of each of its diet per day.
 
-
 - `IConservatoryDirectory getDirectory()` <br>
 Builds and returns an `IConservatoryDirectory` instance. Useful for tracking the
 aviaries and their sector within the conservatory.
@@ -93,12 +100,17 @@ aviaries and their sector within the conservatory.
 Builds and returns an `IConservatoryIndex` instance. Useful for tracking each
 bird's sector location within the conservatory.
 
-- `String describe()` <br>
-Returns a human-readable description of the contents of the aviary.
-
 ### `IConservatoryIndex`
+Interface for a conservatory index. Useful for tracking the location
+of birds within the conservatory.
+- `Hashtable<IBird, Integer> getIndex()` <br>
+Returns a table tracking each bird and the sector where the bird is located.
 
 ### `IConservatoryDirectory`
+Interface for a conservatory directory object. Useful for tracking aviaries and thier
+sector locations.
+- `Hashtable<Integer, IAviary> getDirectory()` <br>
+Returns a table of sectors and the aviary within that sector.
 
 ### Enums
 
