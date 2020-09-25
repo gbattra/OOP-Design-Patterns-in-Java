@@ -191,11 +191,7 @@ public class Aviary implements IAviary {
                       .collect(Collectors.joining(", ")));
 
     for (IBird bird : this.birds) {
-      description += String.format(
-              "- %s is a %s which belongs to the bird classification %s.\n",
-              bird.getName(),
-              bird.getType().label,
-              bird.getClassification().label);
+      description += "- " + bird.describe() + "\n";
     }
 
     return description;

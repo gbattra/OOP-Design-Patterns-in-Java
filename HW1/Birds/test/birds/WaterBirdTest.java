@@ -125,9 +125,8 @@ public class WaterBirdTest {
             "Moosehead Lake");
 
     String expectedDescription = String.format(
-            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
+            "%s is a %s, which belongs to the classification %s. %s " +
             "%s likes to eat %s. %s lives near the water body %s.",
-            "Rex",
             "Rex",
             BirdType.DUCK.label,
             BirdType.DUCK.classification.label,

@@ -182,9 +182,8 @@ public class TalkingBirdTest {
             new ArrayList<>(Arrays.asList("One", "Two", "Three")));
 
     String expectedDescription = String.format(
-            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
+            "%s is a %s, which belongs to the classification %s. %s " +
             "%s likes to eat %s. %s knows %s words and its favorite word is: %s.",
-            "Rex",
             "Rex",
             BirdType.GRAY_PARROT.label,
             BirdType.GRAY_PARROT.classification.label,

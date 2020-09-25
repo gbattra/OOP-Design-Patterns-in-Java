@@ -296,14 +296,8 @@ public class AviaryTest {
                     String.join(", ",
                             BirdType.EAGLE.label,
                             BirdType.HAWK.label));
-    expectedDescription += String.format(
-            "- Rex is a %s which belongs to the bird classification %s.\n",
-            BirdType.EAGLE.label,
-            BirdClassification.BIRD_OF_PREY.label);
-    expectedDescription += String.format(
-            "- Axel is a %s which belongs to the bird classification %s.\n",
-            BirdType.HAWK.label,
-            BirdClassification.BIRD_OF_PREY.label);
+    expectedDescription += "- " + rex.describe() + "\n";
+    expectedDescription += "- " + axel.describe() + "\n";
     assertEquals(expectedDescription, aviary.describe());
   }
 

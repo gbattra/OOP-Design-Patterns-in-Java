@@ -146,9 +146,8 @@ public class BirdTest {
             2);
 
     String expectedDescription = String.format(
-            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
+            "%s is a %s, which belongs to the classification %s. %s " +
             "%s likes to eat %s.",
-            "Rex",
             "Rex",
             BirdType.EAGLE.label,
             BirdType.EAGLE.classification.label,

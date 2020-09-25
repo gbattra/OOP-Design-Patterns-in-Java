@@ -3,9 +3,7 @@ package birds;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import birds.enums.BirdClassification;
@@ -19,7 +17,6 @@ import birds.interfaces.IConservatoryIndex;
 import birds.interfaces.ITalkingBird;
 import birds.interfaces.IWaterBird;
 import birds.models.Aviary;
-import birds.models.Bird;
 import birds.models.Conservatory;
 import birds.models.StandardBird;
 import birds.models.TalkingBird;
@@ -51,7 +48,7 @@ public class Driver {
                     BirdDiet.OTHER_BIRDS)),
             2);
     System.out.println("Description of this bird of prey:\n");
-    System.out.println(birdOfPrey.describe());
+    System.out.println(birdOfPrey.describe() + "\n");
 
     System.out.println("Some birds can talk.\n");
     System.out.println("Instantiating a Talking Bird...\n");
@@ -85,6 +82,16 @@ public class Driver {
             "The instantiated water bird lives near: %s\n",
             waterBird.getNearestWaterBody()));
 
+    IWaterBird shorebird = new WaterBird(
+            "Sam",
+            BirdType.HORNED_PUFFIN,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.BERRIES,
+                    BirdDiet.SEEDS,
+                    BirdDiet.INSECTS)),
+            2,
+            "Bar Harbor");
+
     System.out.println(String.format(
             "Birds have a diet. For example, the water bird we just initialized eats: %s\n",
             waterBird.getDiet().stream().map(birdDiet -> birdDiet.label)
@@ -99,13 +106,17 @@ public class Driver {
 
     System.out.println("You may add up to 5 birds to an aviary.\n");
     System.out.println("Adding a Talking Bird to the aviary...\n");
-    aviary.addBird(talkingBird);
+    aviary = aviary.addBird(talkingBird);
+    aviary = aviary.addBird(shorebird);
+    System.out.println("Description of the aviary:\n");
+    System.out.println(String.format("%s\n", aviary.describe()));
 
     System.out.println("But careful not to mix any types!\n");
     System.out.println("Adding a Bird of Prey to the same aviary...\n");
     try {
       aviary.addBird(birdOfPrey);
     } catch (Exception e) {
+      System.out.println("Failed!\n");
       System.out.println(e.getMessage() + "\n");
     }
 
@@ -121,6 +132,7 @@ public class Driver {
     try {
       aviary.addBird(extinctBird);
     } catch (Exception e) {
+      System.out.println("Failed!\n");
       System.out.println(e.getMessage() + "\n");
     }
 
@@ -135,7 +147,7 @@ public class Driver {
     Hashtable<BirdDiet, Integer> foodRequirements = aviary.getFoodRequirements();
     String foodRequirementsStr = "";
     for (Map.Entry<BirdDiet, Integer> entry : foodRequirements.entrySet()) {
-      foodRequirementsStr += String.format("%s - %s", entry.getKey(), entry.getValue());
+      foodRequirementsStr += String.format("%s - %s, ", entry.getKey().label, entry.getValue());
     }
     System.out.println(String.format(
             "For example, the aviary we just created computes that we need the following food: %s\n",
@@ -164,35 +176,37 @@ public class Driver {
             locatedAviary.getSector()));
 
     System.out.println("We can get the aviary at certain sector.\n");
+    System.out.println("Finding aviary at sector 1.\n");
     IAviary sectorAviary = conservatory.getAviaryAtSector(1).get();
     System.out.println(String.format(
             "The resulting aviary is located at %s\n",
             sectorAviary.getSector()));
 
     System.out.println(
-            "A conservatory can provide a directory linking aviaries to their sectors.\n");
-    System.out.println("Generating a directory for the conservatory...\n");
-    IConservatoryDirectory directory = conservatory.getDirectory();
-    System.out.println("The resulting directory contents:\n");
-    System.out.println(directory.describe() + "\n");
-
-    System.out.println(
-            "A conservatory can also provide an index linking birds to their sectors.\n");
-    System.out.println("Generating a directory for the conservatory...\n");
-    IConservatoryIndex index = conservatory.getIndex();
-    System.out.println("The resulting index contents:\n");
-    System.out.println(index.describe() + "\n");
-
-    System.out.println(
             "A conservatory can calculate the daily food requirements for all its aviaries.\n");
     Hashtable<BirdDiet, Integer> totalFoodRequirements = conservatory.getFoodRequirements();
     String totalFoodRequirementsStr = "";
     for (Map.Entry<BirdDiet, Integer> entry : totalFoodRequirements.entrySet()) {
-      totalFoodRequirementsStr += String.format("%s - %s", entry.getKey(), entry.getValue());
+      totalFoodRequirementsStr += String.format("%s - %s, ", entry.getKey().label, entry.getValue());
     }
     System.out.println(String.format(
             "For the conservatory we just created, we need the following food: %s\n",
             totalFoodRequirementsStr));
+
+    System.out.println(
+            "A conservatory can provide a directory linking aviaries to their sectors.\n");
+    System.out.println("Generating a directory for the conservatory...\n");
+    IConservatoryDirectory directory = conservatory.getDirectory();
+
+    System.out.println("The resulting directory contents:\n");
+    System.out.println(directory.describe());
+
+    System.out.println(
+            "A conservatory can also provide an index linking birds to their sectors.\n");
+    System.out.println("Generating a index for the conservatory...\n");
+    IConservatoryIndex index = conservatory.getIndex();
+    System.out.println("The resulting index contents:\n");
+    System.out.println(index.describe() + "\n");
 
   }
 }

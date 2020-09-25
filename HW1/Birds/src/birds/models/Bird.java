@@ -95,9 +95,8 @@ public class Bird implements IBird {
    */
   public String describe() {
     return String.format(
-            "This bird's name is %s. %s is a %s, which belongs to the classification %s. %s " +
-                    "%s likes to eat %s.",
-            this.name,
+            "%s is a %s, which belongs to the classification %s. %s " +
+            "%s likes to eat %s.",
             this.name,
             this.type.label,
             this.type.classification.label,
