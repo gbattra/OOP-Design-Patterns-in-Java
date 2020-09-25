@@ -9,7 +9,7 @@ import birds.enums.BirdType;
 /**
  * Interface for an Aviary object. Aviaries house birds and track food requirements.
  */
-public interface IAviary {
+public interface IAviary extends IDescribable {
   /**
    * Accessor for the birds in this aviary.
    *
@@ -39,13 +39,6 @@ public interface IAviary {
    * @return int the sector id
    */
   int getSector();
-
-  /**
-   * Describes the aviaries birds and location in a human-readable way.
-   *
-   * @return String the description of the aviary
-   */
-  String describe();
 
   /**
    * Returns a list of food requirements based on the birds housed in the aviary.

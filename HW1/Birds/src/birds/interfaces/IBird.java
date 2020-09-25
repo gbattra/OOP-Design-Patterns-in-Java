@@ -11,7 +11,7 @@ import birds.enums.BirdType;
  * Interface for a bird object. Birds have names, a type which is linked to a classification, a
  * wing count, a diet, and a description. They may or may not be extinct.
  */
-public interface IBird {
+public interface IBird extends IDescribable {
   /**
    * Accessor for the bird instance name.
    *
@@ -53,11 +53,4 @@ public interface IBird {
    * @return boolean is bird extinct?
    */
   boolean isExtinct();
-
-  /**
-   * Descriptor of this bird instance.
-   *
-   * @return String describing this bird instance
-   */
-  String describe();
 }

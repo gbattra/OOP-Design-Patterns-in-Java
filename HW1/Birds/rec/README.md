@@ -1,24 +1,167 @@
 #Documentation
-### Abstractions
+### Interfaces
 ### `IBird`
-`String getName()`
+Interface for a bird object. Birds have names, a type which is linked to a classification, a
+wing count, a diet, and a description. They may or may not be extinct.
+- `String getName()` <br>
+Returns the name of the bird instance.
 
+- `BirdType getType()`  <br>
+Returns the BirdType enum of the bird instance. Each BirdType enum has a human-readable
+`label` property.
 
-`String BirdType getType()`
+- `BirdClassification getClassification()`  <br>
+Uses the instance's `BirdType` enum to return the corresponding `BirdClassification` enum.
+
+- `int getWingCount()`  <br>
+Returns the number of wings the bird has.
+
+- `List<BirdDiet> getDiet()`  <br>
+Returns the list of `BirdDiet` enums representing the bird instance's diet.
+
+- `boolean isExtinct()`  <br>
+Returns the `BirdType` enum's `isExtinct` property.
+
+- `String describe()`  <br>
+Generates a human-readable description of the bird instance.
 
 ### `ITalkingBird`
+Interface extending IBird for birds that have the ability to speak. These birds have a
+favorite word and a list of other known words.
+- `String getFavoriteWord()` <br>
+Returns the talking bird instance's `favoriteWord` as set by constructor.
+
+- `List<String> getVocabulary()` <br>
+Returns the talking bird's list of known words.
 
 ### `IWaterBird`
+Interface extending IBird for birds that live near water (i.e. waterfowl, shorebirds).
+- `String getNearestWaterBody()` <br>
+Returns the name of the body of water nearest the where the bird lives.
 
 ### `IAviary`
+Interface for an Aviary object. Aviaries house birds and track food requirements.
+- `List<IBird> getBirds()` <br>
+Returns the list of birds housed in the aviary. An aviary can house up to 5 birds.
+Bird of Prey, Waterfowl and Flightless birds cannot be housed together.
+
+- `List<BirdType> getBirdTypes()` <br>
+Returns a list of distinct `BirdType` values from each of the birds housed in the aviary.
+
+- `IAviary addBird(IBird bird)` <br>
+Adds a bird to the aviary. Is a factory method which generates and returns a new `IAviary`
+instance with the updated list of birds.
+
+- `int getSector()` <br>
+Returns the sector id where the aviary is located.
+
+- `Hashtable<BirdDiet, Integer> getFoodRequirements` <br>
+Returns a list of daily food requirements based on the birds housed in the aviary.
+Assumes a bird needs one of each of its diet members per day.
+
+- `String describe()` <br>
+Describes the contents of the aviary instance in human-readable form.
 
 ### `IConservatory`
+Interface for a conservatory object. Conservatories are made up of aviaries, which are located
+at unique sectors through the conservatory.
+- ` List<IAviary> getAviaries()` <br>
+Returns a list of the aviaries in the conservatory instance.
+
+- `IConservatory addAviary(IAviary aviary)` <br>
+Adds an aviary to the conservatory. Is a factory method which generates and returns
+a new `IConservatory` instance with the updated list of aviaries.
+
+- `Optional<IAviary> getAviaryWithBird(IBird bird)` <br>
+Filters the list of aviaries in the conservatory and returns the aviary housing
+the provided bird.
+
+- `Optional<IAviary> getAviaryAtSector(int sector)` <br>
+Queries the conservatories list of aviaries and returns the aviary located at
+the provided sector.
+
+- `Hashtable<BirdDiet, Integer> getFoodRequirements()` <br>
+Computes the list of daily food requirements for all birds within the conservatory.
+Assumes that each bird needs one of each of its diet per day.
+
+
+- `IConservatoryDirectory getDirectory()` <br>
+Builds and returns an `IConservatoryDirectory` instance. Useful for tracking the
+aviaries and their sector within the conservatory.
+
+- `IConservatoryIndex getIndex()` <br>
+Builds and returns an `IConservatoryIndex` instance. Useful for tracking each
+bird's sector location within the conservatory.
+
+- `String describe()` <br>
+Returns a human-readable description of the contents of the aviary.
 
 ### `IConservatoryIndex`
 
 ### `IConservatoryDirectory`
 
+### Enums
 
+### `BirdType`
+Each enum has the following properties:
+- `String label`
+- `BirdClassification classification`
+- `boolean isExtinct`
+Below are the possible enum values:
+```
+HAWK
+EAGLE
+OSPREY
+EMU
+KIWIS
+MOA
+OWL
+ROSE_RING_PARAKEET
+GRAY_PARROT
+SULFUR_CRESTED_COCKATOO
+PASSENGER_PIGEON
+HOMING_PIGEON
+GREAT_AUK
+HORNED_PUFFIN
+AFRICAN_JACANA
+DUCK
+SWAN
+GOOSE
+```
+### `BirdClassification`
+Each enum has the following properties:
+- `String label`
+- `String description`
+Below are the possible enum values:
+```
+BIRD_OF_PREY
+FLIGHTLESS_BIRD
+OWL
+PARROT
+PIGEON
+SHOREBIRD
+WATERFOWL
+```
+
+### `BirdDiet`
+Each enum has the following properties:
+- `String label`
+Below are the possible enum values:
+```
+BERRIES
+SEEDS
+FRUIT
+INSECTS
+OTHER_BIRDS
+EGGS
+SMALL_MAMMALS
+FISH
+BUDS
+LARVAE
+AQUATIC_INVERTEBRATES
+NUTS
+VEGETATION
+```
 # Implementation
 ###The Bird
 

@@ -12,7 +12,7 @@ import birds.enums.BirdDiet;
  * Interface for a conservatory object. Conservatories are made up of aviaries, which are located
  * at unique sectors through the conservatory.
  */
-public interface IConservatory {
+public interface IConservatory extends IDescribable {
   /**
    * Accessor to the list of aviaries in the conservatory.
    *
@@ -65,11 +65,4 @@ public interface IConservatory {
    * @return a index instance
    */
   IConservatoryIndex getIndex();
-
-  /**
-   * Describes the contents of the conservatory in human-readable form.
-   *
-   * @return String describing the conservatory
-   */
-  String describe();
 }
