@@ -47,12 +47,11 @@ public class Conservatory implements IConservatory {
     this.aviaries = aviaries;
 
     if (aviaries.stream().anyMatch(aviary -> aviary.getSector() > AVIARY_LIMIT)) {
-      throw new IllegalArgumentException(
-              "Invalid aviary sector. Sector value greater than aviary limit.");
+      throw new IllegalArgumentException("Sector value out of bounds.");
     }
 
     if (aviaries.size() !=
-        aviaries.stream().map(IAviary::getSector).count()) {
+        aviaries.stream().map(IAviary::getSector).distinct().count()) {
       throw new IllegalArgumentException("Each aviary must reside in unique sector.");
     }
 

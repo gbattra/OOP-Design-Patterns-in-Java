@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
+import birds.interfaces.IBird;
 import birds.models.Bird;
 
 import static org.junit.Assert.assertEquals;
@@ -17,7 +18,7 @@ public class BirdTest {
   @Test
   public void testValidConstructorBirdTypes() {
     try {
-      Bird bird = new Bird(
+      IBird bird = new Bird(
               "Rex",
               BirdType.EAGLE,
               new ArrayList<>(Arrays.asList(
@@ -34,7 +35,7 @@ public class BirdTest {
   @Test
   public void testInvalidConstructorName() {
     try {
-      Bird bird = new Bird(
+      IBird bird = new Bird(
               "",
               BirdType.EAGLE,
               new ArrayList<>(Arrays.asList(
@@ -51,7 +52,7 @@ public class BirdTest {
   @Test
   public void testInvalidConstructorDiet() {
     try {
-      Bird bird = new Bird(
+      IBird bird = new Bird(
               "",
               BirdType.EAGLE,
               new ArrayList<>(Arrays.asList(
@@ -67,7 +68,7 @@ public class BirdTest {
     }
 
     try {
-      Bird bird = new Bird(
+      IBird bird = new Bird(
               "",
               BirdType.EAGLE,
               new ArrayList<>(Arrays.asList(
@@ -82,7 +83,7 @@ public class BirdTest {
   @Test
   public void testInvalidConstructorWingCount() {
     try {
-      Bird bird = new Bird(
+      IBird bird = new Bird(
               "",
               BirdType.EAGLE,
               new ArrayList<>(Arrays.asList(
@@ -96,7 +97,7 @@ public class BirdTest {
     }
 
     try {
-      Bird bird = new Bird(
+      IBird bird = new Bird(
               "",
               BirdType.EAGLE,
               new ArrayList<>(Arrays.asList(
@@ -117,7 +118,7 @@ public class BirdTest {
             BirdDiet.FISH,
             BirdDiet.OTHER_BIRDS));
 
-    Bird bird = new Bird(
+    IBird bird = new Bird(
             "Rex",
             BirdType.EAGLE,
             diet,
@@ -138,7 +139,7 @@ public class BirdTest {
             BirdDiet.FISH,
             BirdDiet.OTHER_BIRDS));
 
-    Bird bird = new Bird(
+    IBird bird = new Bird(
             "Rex",
             BirdType.EAGLE,
             diet,
