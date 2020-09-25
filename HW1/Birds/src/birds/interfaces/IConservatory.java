@@ -47,7 +47,7 @@ public interface IConservatory {
    *
    * @return Hashtable<BirdDiet, Integer> the list of food requirements
    */
-  Hashtable<BirdDiet, Integer> getRequiredFood();
+  Hashtable<BirdDiet, Integer> getFoodRequirements();
 
   /**
    * Gets a Directory object for the aviaries in the conservatory and their sector.

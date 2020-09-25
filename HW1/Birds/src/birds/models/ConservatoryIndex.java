@@ -26,6 +26,13 @@ public class ConservatoryIndex implements IConservatoryIndex {
   }
 
   /**
+   * Constructor for ConservatoryIndex.
+   */
+  public ConservatoryIndex() {
+    this.index = new Hashtable<>();
+  }
+
+  /**
    * Accessor for the hashtable mapping the birds to their sector.
    *
    * @return Hashtable of birds and their respective sector

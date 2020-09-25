@@ -37,6 +37,13 @@ public class ConservatoryDirectory implements IConservatoryDirectory  {
   }
 
   /**
+   * Constructor for ConservatoryDirectory.
+   */
+  public ConservatoryDirectory() {
+    this.directory = new Hashtable<>();
+  }
+
+  /**
    * Accessor to the Hashtable of sector, aviary mappings.
    *
    * @return the hashtable of the directory
