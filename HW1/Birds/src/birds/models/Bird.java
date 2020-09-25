@@ -160,6 +160,11 @@ public class Bird implements IBird {
     return this.diet;
   }
 
+  /**
+   * Computes a string representation of this bird instance.
+   *
+   * @return the string representation
+   */
   @Override
   public String toString() {
     return String.format(
@@ -170,6 +175,12 @@ public class Bird implements IBird {
             this.diet.stream().map(diet -> diet.label).collect(Collectors.joining("_")));
   }
 
+  /**
+   * Compares one object to this instance.
+   *
+   * @param other the object to compare
+   * @return true/false if they are equal
+   */
   @Override
   public boolean equals(Object other) {
     if (!(other instanceof Bird)) {
@@ -177,13 +188,14 @@ public class Bird implements IBird {
     }
 
     Bird bird = (Bird) other;
-    if (bird.hashCode() == other.hashCode()) {
-      return true;
-    }
-
-    return false;
+    return bird.hashCode() == other.hashCode();
   }
 
+  /**
+   * Computes a int encoding of this bird instance.
+   *
+   * @return the int encoding
+   */
   @Override
   public int hashCode() {
     return this.toString().hashCode();

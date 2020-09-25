@@ -200,4 +200,44 @@ public class Aviary implements IAviary {
 
     return description;
   }
+
+  /**
+   * Computes a string representation of this instance.
+   *
+   * @return a string representation of this instance
+   */
+  @Override
+  public String toString() {
+    return String.format(
+            "%s_%s_%s",
+            this.sector,
+            this.birds.size(),
+            this.birds.stream().map(IBird::toString).collect(Collectors.joining("_")));
+  }
+
+  /**
+   * Computes a int encoding of this bird instance.
+   *
+   * @return the int encoding
+   */
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
+
+  /**
+   * Compares one object to this instance.
+   *
+   * @param other the object to compare
+   * @return true/false if they are equal
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof Aviary)) {
+      return false;
+    }
+
+    Aviary aviary = (Aviary) other;
+    return aviary.hashCode() == other.hashCode();
+  }
 }

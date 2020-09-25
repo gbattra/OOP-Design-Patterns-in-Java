@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import birds.enums.BirdDiet;
+import birds.enums.BirdType;
 import birds.interfaces.IAviary;
 import birds.interfaces.IBird;
 import birds.interfaces.IConservatory;
@@ -177,17 +178,23 @@ public class Conservatory implements IConservatory {
    * @return String describing the conservatory
    */
   public String describe() {
+    ArrayList<String> birdTypeStrList = new ArrayList<>();
+    for (IAviary aviary : this.aviaries) {
+      for (BirdType birdType : aviary.getBirdTypes()) {
+        birdTypeStrList.add(birdType.label);
+      }
+    }
+
+
+
     String description = String.format(
             "This conservatory has %s aviaries located in sectors %s. These aviaries are home " +
             "to the following types of birds: %s. For more information please read the " +
             "conservatory directory or index.",
             this.aviaries.size(),
-            this.aviaries.stream().map(aviary -> String.valueOf(aviary.getBirds()))
+            this.aviaries.stream().map(aviary -> String.valueOf(aviary.getSector()))
                                   .collect(Collectors.joining(", ")),
-            this.aviaries.stream().map(aviary -> aviary.getBirdTypes().stream()
-                                  .map(birdType -> birdType.label)
-                                  .distinct()
-                                  .collect(Collectors.joining(", "))));
+            String.join(", ", birdTypeStrList));
 
 
     return description;
