@@ -2,6 +2,9 @@ package birds.interfaces;
 
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Optional;
+
+import javax.swing.text.html.Option;
 
 import birds.enums.BirdDiet;
 
@@ -32,7 +35,7 @@ public interface IConservatory {
    * @param bird the birds to search by
    * @return the aviary housing that bird
    */
-  IAviary getAviaryWithBird(IBird bird);
+  Optional<IAviary> getAviaryWithBird(IBird bird);
 
   /**
    * Finds the aviary located at the provided sector.
@@ -40,7 +43,7 @@ public interface IConservatory {
    * @param sector the sector to search by
    * @return the aviary located at the sector
    */
-  IAviary getAviaryAtSector(int sector);
+  Optional<IAviary> getAviaryAtSector(int sector);
 
   /**
    * Returns a list of food requirements based on the birds housed in the conservatory.

@@ -14,15 +14,34 @@ import birds.interfaces.IConservatory;
 import birds.interfaces.IConservatoryDirectory;
 import birds.interfaces.IConservatoryIndex;
 
+/**
+ * Class for a conservatory. Conservatories are made up of a collection of Aviaries, which each
+ * house up to 5 birds. Conservatories can provide information about the birds it houses, such as
+ * the sector or aviary where a bird is located, as well as human-readable descriptions.
+ */
 public class Conservatory implements IConservatory {
+  /**
+   * The max number of aviaries the conservatory can hold.
+   */
   private static final int AVIARY_LIMIT = 20;
 
+  /**
+   * The list of aviaries within the conservatory.
+   */
   private final List<IAviary> aviaries;
 
+  /**
+   * Constructor for the Conservatory class.
+   */
   public Conservatory() {
     this.aviaries = new ArrayList<>();
   }
 
+  /**
+   * Constructor for the Conservatory class
+   * @param aviaries the list of aviaries in the conservatory
+   * @throws IllegalArgumentException if list of aviaries is too big or has invalid sectors
+   */
   public Conservatory(
           List<IAviary> aviaries) throws IllegalArgumentException {
     this.aviaries = aviaries;
@@ -42,6 +61,13 @@ public class Conservatory implements IConservatory {
     }
   }
 
+  /**
+   * Adds an aviary to the list of aviaries.
+   *
+   * @param aviary IAviary the aviary to add
+   * @return new Conservatory instance with updated aviary list
+   * @throws IllegalStateException if aviary addition breaks any constructor constraints
+   */
   public IConservatory addAviary(IAviary aviary) throws IllegalStateException {
     List<IAviary> aviaries = new ArrayList<>(this.aviaries);
     aviaries.add(aviary);
@@ -53,10 +79,20 @@ public class Conservatory implements IConservatory {
     }
   }
 
+  /**
+   * Accessor for the aviary list
+   * @return List<IAviary> the list of aviaries
+   */
   public List<IAviary> getAviaries() {
     return this.aviaries;
   }
 
+  /**
+   * Builds and returns a directory object tracking aviaries and their sectors.
+   *
+   * @return the directory object
+   * @throws IllegalArgumentException if the directory state constraints are violated
+   */
   public IConservatoryDirectory getDirectory() throws IllegalArgumentException {
     Hashtable<Integer, IAviary> directory = new Hashtable<>();
     for (IAviary aviary : this.aviaries) {
@@ -66,6 +102,12 @@ public class Conservatory implements IConservatory {
     return new ConservatoryDirectory(directory);
   }
 
+  /**
+   * Builds and returns a index object tracking birds and their sectors.
+   *
+   * @return the index object
+   * @throws IllegalArgumentException if the index state constraints are violated
+   */
   public IConservatoryIndex getIndex() throws IllegalArgumentException {
     Hashtable<IBird, Integer> index = new Hashtable<>();
     for (IAviary aviary : this.aviaries) {
@@ -77,22 +119,41 @@ public class Conservatory implements IConservatory {
     return new ConservatoryIndex(index);
   }
 
-  public IAviary getAviaryWithBird(IBird bird) {
+  /**
+   * Finds the aviary housing a bird. Searches by name, type, diet, and wing count.
+   *
+   * @param bird the birds to search by
+   * @return the aviary with that bird
+   */
+  public Optional<IAviary> getAviaryWithBird(IBird bird) {
     Optional<IAviary> aviary = this.aviaries.stream()
             .filter(a -> a.getBirds().stream().anyMatch(b -> b.equals(bird)))
             .findFirst();
 
-    return aviary.orElse(null);
+    return aviary;
   }
 
-  public IAviary getAviaryAtSector(int sector) {
+  /**
+   * Finds the aviary located at a given sector.
+   *
+   * @param sector the sector to search by
+   * @return the aviary at that sector
+   */
+  public Optional<IAviary> getAviaryAtSector(int sector) {
     Optional<IAviary> aviary = this.aviaries.stream()
             .filter(a -> a.getSector() == sector)
             .findFirst();
 
-    return aviary.orElse(null);
+    return aviary;
   }
 
+  /**
+   * Computes the daily required food quantities for the conservatory. Aggregates the food requirements
+   * for each of its aviaries. Food quantity calculations assume each bird needs 1 of each food
+   * it consumes per day.
+   *
+   * @return a Hashtable tracking each BirdDiet and the required quantity
+   */
   public Hashtable<BirdDiet, Integer> getFoodRequirements() {
     Hashtable<BirdDiet, Integer> requirements = new Hashtable<>();
 
@@ -111,6 +172,11 @@ public class Conservatory implements IConservatory {
     return requirements;
   }
 
+  /**
+   * Describes the contents of the conservatory in human-readable form.
+   *
+   * @return String describing the conservatory
+   */
   public String describe() {
     String description = String.format(
             "This conservatory has %s aviaries located in sectors %s. These aviaries are home " +
