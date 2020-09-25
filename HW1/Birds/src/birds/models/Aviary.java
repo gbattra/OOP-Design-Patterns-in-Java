@@ -78,14 +78,13 @@ public class Aviary implements IAviary {
       throw new IllegalStateException("Aviary must have valid sector number.");
     }
 
-    if (this.birds.stream().anyMatch(bird -> bird.isExtinct())) {
+    if (this.birds.stream().anyMatch(IBird::isExtinct)) {
       throw new IllegalArgumentException("Extinct birds cannot be added to an aviary.");
     }
 
-    List<String> birdNames = this.birds.stream().map(bird -> bird.getName())
+    List<String> birdNames = this.birds.stream().map(IBird::getName)
                                                 .collect(Collectors.toList());
-    if (!(birdNames.size() ==
-          birdNames.stream().distinct().collect(Collectors.toList()).size())) {
+    if (!(birdNames.size() == birdNames.stream().distinct().count())) {
       throw new IllegalArgumentException("All birds must have unique names.");
     }
 
@@ -193,8 +192,10 @@ public class Aviary implements IAviary {
 
     for (IBird bird : this.birds) {
       description += String.format(
-              "- %s\n",
-              bird.describe());
+              "- %s is a %s which belongs to the bird classification %s.\n",
+              bird.getName(),
+              bird.getType().label,
+              bird.getClassification().label);
     }
 
     return description;

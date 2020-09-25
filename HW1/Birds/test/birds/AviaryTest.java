@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
+import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 import birds.interfaces.IAviary;
@@ -295,8 +296,14 @@ public class AviaryTest {
                     String.join(", ",
                             BirdType.EAGLE.label,
                             BirdType.HAWK.label));
-    expectedDescription += String.format("- %s\n", rex.describe());
-    expectedDescription += String.format("- %s\n", axel.describe());
+    expectedDescription += String.format(
+            "- Rex is a %s which belongs to the bird classification %s.\n",
+            BirdType.EAGLE.label,
+            BirdClassification.BIRD_OF_PREY.label);
+    expectedDescription += String.format(
+            "- Axel is a %s which belongs to the bird classification %s.\n",
+            BirdType.HAWK.label,
+            BirdClassification.BIRD_OF_PREY.label);
     assertEquals(expectedDescription, aviary.describe());
   }
 
@@ -367,7 +374,7 @@ public class AviaryTest {
     try {
       aviary.addBird(luke);
       fail("Invalid addBird call should have thrown an exception.");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalStateException e) {
       // do nothing, test passes
     }
   }
