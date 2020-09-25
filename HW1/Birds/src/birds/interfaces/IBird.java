@@ -1,6 +1,5 @@
 package birds.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import birds.enums.BirdClassification;
@@ -48,7 +47,7 @@ public interface IBird extends IDescribable {
   List<BirdDiet> getDiet();
 
   /**
-   * Accessor for the bird instance extinct attribute
+   * Accessor for the bird instance extinct attribute.
    *
    * @return boolean is bird extinct?
    */

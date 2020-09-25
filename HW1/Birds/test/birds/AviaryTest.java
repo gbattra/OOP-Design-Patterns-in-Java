@@ -7,13 +7,11 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
-import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 import birds.interfaces.IAviary;
 import birds.interfaces.IBird;
 import birds.models.Aviary;
-import birds.models.Bird;
 import birds.models.StandardBird;
 import birds.models.TalkingBird;
 

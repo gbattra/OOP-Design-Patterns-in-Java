@@ -25,7 +25,7 @@ public enum BirdType {
   GOOSE("Goose", BirdClassification.WATERFOWL, false);
 
   /**
-   * A string representation of the enum type
+   * A string representation of the enum type.
    */
   public final String label;
 

@@ -7,8 +7,6 @@ import java.util.Arrays;
 
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
-import birds.models.Bird;
-import birds.models.TalkingBird;
 import birds.models.WaterBird;
 
 import static org.junit.Assert.assertEquals;

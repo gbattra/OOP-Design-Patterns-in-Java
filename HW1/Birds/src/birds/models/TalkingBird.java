@@ -40,7 +40,8 @@ public class TalkingBird extends Bird implements ITalkingBird {
   private final List<String> vocabulary;
 
   /**
-   * Constructor for the TalkingBird class. Passes some args up to AbstractBird class for validation.
+   * Constructor for the TalkingBird class. Passes some args up to AbstractBird class for
+   * validation.
    *
    * @param name String the name of the bird
    * @param type BirdType the type of the bird

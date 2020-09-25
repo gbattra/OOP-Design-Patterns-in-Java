@@ -62,8 +62,7 @@ public class ConservatoryDirectory implements IConservatoryDirectory  {
             "There are %s aviaries in the conservatory:\n",
             this.directory.size());
 
-    for (IAviary aviary : this.directory.values())
-    {
+    for (IAviary aviary : this.directory.values()) {
       description += String.format(
               "- Sector %s has an aviary with the bird types: %s\n",
               aviary.getSector(),

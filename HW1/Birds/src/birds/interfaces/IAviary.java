@@ -31,7 +31,7 @@ public interface IAviary extends IDescribable {
    * @return IAviary new Aviary instance with updated birds list
    * @throws IllegalArgumentException when any constructor constraint is violated
    */
-  IAviary addBird(IBird bird) throws IllegalStateException ;
+  IAviary addBird(IBird bird) throws IllegalStateException;
 
   /**
    * Accessor for the aviary's sector id.

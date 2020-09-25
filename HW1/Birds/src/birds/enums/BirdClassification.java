@@ -25,7 +25,7 @@ public enum BirdClassification {
   PIGEON(
           "Pigeon",
           "Pigeons (or doves) are known for feeding their young \"bird milk\" very similar to " +
-          "THE milk of mammals. Found all over the world, there are several varieties that are " +
+          "the milk of mammals. Found all over the world, there are several varieties that are " +
           "extinct."),
   SHOREBIRD(
           "Shorebird",
@@ -36,7 +36,7 @@ public enum BirdClassification {
           "Waterfowl live near water sources (fresh or salt) and include ducks, swans, and geese.");
 
   /**
-   * A string representation of the enum type
+   * A string representation of the enum type.
    */
   public final String label;
 

@@ -1,6 +1,5 @@
 package birds.models;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -142,7 +141,7 @@ public class Bird implements IBird {
   }
 
   /**
-   * Accessor for the bird instance extinct attribute
+   * Accessor for the bird instance extinct attribute.
    *
    * @return boolean is bird extinct?
    */

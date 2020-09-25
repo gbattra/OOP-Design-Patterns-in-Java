@@ -39,7 +39,8 @@ public class Conservatory implements IConservatory {
   }
 
   /**
-   * Constructor for the Conservatory class
+   * Constructor for the Conservatory class.
+   *
    * @param aviaries the list of aviaries in the conservatory
    * @throws IllegalArgumentException if list of aviaries is too big or has invalid sectors
    */
@@ -51,8 +52,8 @@ public class Conservatory implements IConservatory {
       throw new IllegalArgumentException("Sector value out of bounds.");
     }
 
-    if (aviaries.size() !=
-        aviaries.stream().map(IAviary::getSector).distinct().count()) {
+    if (aviaries.size()
+        != aviaries.stream().map(IAviary::getSector).distinct().count()) {
       throw new IllegalArgumentException("Each aviary must reside in unique sector.");
     }
 
@@ -73,8 +74,7 @@ public class Conservatory implements IConservatory {
     aviaries.add(aviary);
     try {
       return new Conservatory(aviaries);
-    } catch (IllegalArgumentException e)
-    {
+    } catch (IllegalArgumentException e) {
       throw new IllegalStateException(e.getMessage());
     }
   }
@@ -148,9 +148,9 @@ public class Conservatory implements IConservatory {
   }
 
   /**
-   * Computes the daily required food quantities for the conservatory. Aggregates the food requirements
-   * for each of its aviaries. Food quantity calculations assume each bird needs 1 of each food
-   * it consumes per day.
+   * Computes the daily required food quantities for the conservatory. Aggregates the food
+   * requirements for each of its aviaries. Food quantity calculations assume each bird needs
+   * 1 of each food it consumes per day.
    *
    * @return a Hashtable tracking each BirdDiet and the required quantity
    */

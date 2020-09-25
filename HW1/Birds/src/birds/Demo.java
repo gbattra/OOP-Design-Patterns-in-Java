@@ -6,7 +6,6 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 import birds.interfaces.IAviary;
@@ -22,6 +21,9 @@ import birds.models.StandardBird;
 import birds.models.TalkingBird;
 import birds.models.WaterBird;
 
+/**
+ * Driver class to demo the program.
+ */
 public class Demo {
   public static void main(String[] args) {
     System.out.println("Instantiating a Bird of Prey...\n");
@@ -66,16 +68,6 @@ public class Demo {
             "The instantiated water bird lives near: %s\n",
             waterBird.getNearestWaterBody()));
 
-    IWaterBird shorebird = new WaterBird(
-            "Sam",
-            BirdType.HORNED_PUFFIN,
-            new ArrayList<>(Arrays.asList(
-                    BirdDiet.BERRIES,
-                    BirdDiet.SEEDS,
-                    BirdDiet.INSECTS)),
-            2,
-            "Bar Harbor");
-
     System.out.println(String.format(
             "Birds have a diet. For example, the water bird we just initialized eats: %s\n",
             waterBird.getDiet().stream().map(birdDiet -> birdDiet.label)
@@ -89,6 +81,16 @@ public class Demo {
 
     System.out.println("Adding a Talking Bird to the aviary...\n");
     aviary = aviary.addBird(talkingBird);
+    System.out.println("Adding a Shorebird to the aviary...\n");
+    IWaterBird shorebird = new WaterBird(
+            "Sam",
+            BirdType.HORNED_PUFFIN,
+            new ArrayList<>(Arrays.asList(
+                    BirdDiet.BERRIES,
+                    BirdDiet.SEEDS,
+                    BirdDiet.INSECTS)),
+            2,
+            "Bar Harbor");
     aviary = aviary.addBird(shorebird);
     System.out.println(String.format("%s\n", aviary.describe()));
 
@@ -153,7 +155,8 @@ public class Demo {
     Hashtable<BirdDiet, Integer> totalFoodRequirements = conservatory.getFoodRequirements();
     String totalFoodRequirementsStr = "";
     for (Map.Entry<BirdDiet, Integer> entry : totalFoodRequirements.entrySet()) {
-      totalFoodRequirementsStr += String.format("%s - %s, ", entry.getKey().label, entry.getValue());
+      totalFoodRequirementsStr +=
+              String.format("%s - %s, ", entry.getKey().label, entry.getValue());
     }
     System.out.println(String.format(
             "For the conservatory we just created, we need the following food: %s\n",

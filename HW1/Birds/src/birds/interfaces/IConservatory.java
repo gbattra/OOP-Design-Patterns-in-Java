@@ -4,8 +4,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
-
 import birds.enums.BirdDiet;
 
 /**
@@ -27,7 +25,7 @@ public interface IConservatory extends IDescribable {
    *
    * @return a new IConservatory instance with updated aviaries
    */
-  IConservatory addAviary(IAviary aviary) throws IllegalStateException ;
+  IConservatory addAviary(IAviary aviary) throws IllegalStateException;
 
   /**
    * Finds the aviary housing the provided bird.

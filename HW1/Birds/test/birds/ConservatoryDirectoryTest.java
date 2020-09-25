@@ -13,7 +13,6 @@ import birds.interfaces.IAviary;
 import birds.interfaces.IBird;
 import birds.interfaces.IConservatoryDirectory;
 import birds.models.Aviary;
-import birds.models.Bird;
 import birds.models.ConservatoryDirectory;
 import birds.models.StandardBird;
 

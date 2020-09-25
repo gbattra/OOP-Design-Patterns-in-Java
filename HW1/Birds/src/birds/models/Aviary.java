@@ -84,7 +84,7 @@ public class Aviary implements IAviary {
 
     List<String> birdNames = this.birds.stream().map(IBird::getName)
                                                 .collect(Collectors.toList());
-    if (!(birdNames.size() == birdNames.stream().distinct().count())) {
+    if (birdNames.size() != birdNames.stream().distinct().count()) {
       throw new IllegalArgumentException("All birds must have unique names.");
     }
 
@@ -159,8 +159,7 @@ public class Aviary implements IAviary {
    *
    * @return Hashtable<BirdDiet, Integer> the list of food requirements
    */
-  public Hashtable<BirdDiet, Integer> getFoodRequirements()
-  {
+  public Hashtable<BirdDiet, Integer> getFoodRequirements() {
     Hashtable<BirdDiet, Integer> requirements = new Hashtable<>();
 
     for (IBird bird : this.birds) {
