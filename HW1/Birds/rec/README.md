@@ -176,8 +176,7 @@ VEGETATION
 ```
 # Implementation
 
-###The Bird
-
+### The Bird
 The program centers around the concept of a bird. Birds have various features such
 wing count, diet, type and classification, and extinction status.
 
@@ -352,8 +351,7 @@ sharp, hooked beaks with visible nostrils. Rex likes to eat Small mammals, Fish,
 Other birds.
 ```
 
-###The Aviary
-
+### The Aviary
 To manage small groups of birds, conservatories typically have multiple "aviaries",
 small  structures that can house several birds. There are restrictions, however,
 in terms of the quantity of birds in a given aviary, as well as the type of each bird
@@ -439,7 +437,7 @@ each bird living in this aviary:
   freshwater and saltwater shorelands, even the ocean. Sam likes to eat Berries, Seeds, Insects.
   Sam lives near the water body Bar Harbor.
 ``` 
-###The Conservatory
+### The Conservatory
 The last significant structure used by the program is the `Conservatory` class,
 which implements `IConservatory`. Conservatories organize aviaries into sectors,
 help manage food requirements, and can provide a directory and index for its birds and
