@@ -404,3 +404,259 @@ This conservatory has 3 aviaries located in sectors 1, 2, 3. These aviaries are 
 following types of birds: Gray Parrot, Horned Puffin, Goose, Eagle. For more information please
 read the conservatory directory or index.
 ```
+
+# Demo Output
+The following walks through the code in `Demo.java` and the corresponding output.
+```
+System.out.println("Instantiating a Bird of Prey...\n");
+IBird birdOfPrey = new StandardBird(
+        "Rex",
+        BirdType.EAGLE,
+        new ArrayList<>(Arrays.asList(
+                BirdDiet.SMALL_MAMMALS,
+                BirdDiet.FISH,
+                BirdDiet.OTHER_BIRDS)),
+        2);
+System.out.println("Description of this bird of prey:\n");
+System.out.println(birdOfPrey.describe() + "\n");
+```
+```
+Instantiating a Bird of Prey...
+
+Description of this bird of prey:
+
+Rex is a Eagle, which belongs to the classification Bird of Prey. Birds of prey all have sharp,
+hooked beaks with visible nostrils. They include hawks, eagles, and osprey. Rex likes to eat
+Small mammals, Fish, Other birds.
+```
+```
+System.out.println("Instantiating a Talking Bird...\n");
+ITalkingBird talkingBird = new TalkingBird(
+        "Luke",
+        BirdType.GRAY_PARROT,
+        new ArrayList<>(Arrays.asList(
+                BirdDiet.BERRIES,
+                BirdDiet.SEEDS,
+                BirdDiet.INSECTS)),
+        2,
+        "Flamingo",
+        new ArrayList<>(Arrays.asList("Hello", "Goodbye", "Okay", "Love", "Sorry")));
+System.out.println(String.format(
+        "This bird knows %s words and its favorite word is: %s.\n",
+        talkingBird.getVocabulary().size(),
+        talkingBird.getFavoriteWord()));
+```
+```
+Instantiating a Talking Bird...
+
+This bird knows 5 words and its favorite word is: Flamingo.
+```
+```
+System.out.println("Instantiating a WaterBird...\n");
+IWaterBird waterBird = new WaterBird(
+        "Lucy",
+        BirdType.GOOSE,
+        new ArrayList<>(Arrays.asList(
+                BirdDiet.BERRIES,
+                BirdDiet.SEEDS,
+                BirdDiet.INSECTS)),
+        2,
+        "Moosehead Lake");
+System.out.println(String.format(
+        "The instantiated water bird lives near: %s\n",
+        waterBird.getNearestWaterBody()));
+```
+```
+Instantiating a WaterBird...
+
+The instantiated water bird lives near: Moosehead Lake
+```
+```
+System.out.println(String.format(
+    "Birds have a diet. For example, the water bird we just initialized eats: %s\n",
+    waterBird.getDiet().stream().map(birdDiet -> birdDiet.label)
+                                .collect(Collectors.joining(", "))));
+```
+```
+Birds have a diet. For example, the water bird we just initialized eats: Berries, Seeds, Insects
+```
+```
+System.out.println("Instantiating an aviary...\n");
+IAviary aviary = new Aviary(1);
+System.out.println(String.format(
+        "The aviary we just instantiated resides in sector %s. \n",
+        aviary.getSector()));
+```
+```
+Instantiating an aviary...
+
+The aviary we just instantiated resides in sector 1. 
+```
+```
+System.out.println("Adding a Talking Bird to the aviary...\n");
+aviary = aviary.addBird(talkingBird);
+aviary = aviary.addBird(shorebird);
+System.out.println(String.format("%s\n", aviary.describe()));
+```
+```
+Adding a Talking Bird to the aviary...
+
+The aviary in sector 1 houses 2 birds of types Gray Parrot, Horned Puffin. Below are descriptions
+of each bird living in this aviary:
+-   Luke is a Gray Parrot, which belongs to the classification Parrot. Parrots have a short, curved
+    beak and are known for their intelligence and ability to mimic sounds. Many pet parrots can learn
+    a vocabulary of up to 100 words and often adopt a single "favorite" saying.  They include the
+    rose-ring parakeet, gray parrot, and sulfur-crested cockatoo. Luke likes to eat Berries, Seeds,
+    Insects. Luke knows 5 words and its favorite word is: Flamingo.
+-   Sam is a Horned Puffin, which belongs to the classification Shorebird. Shorebirds include the
+    great auk, horned puffin, and African Jacana. They live near water sources including wetlands,
+    freshwater and saltwater shorelands, even the ocean. Sam likes to eat Berries, Seeds, Insects.
+    Sam lives near the water body Bar Harbor.
+```
+```
+System.out.println("Adding a Bird of Prey to the same aviary...\n");
+try {
+  aviary.addBird(birdOfPrey);
+} catch (Exception e) {
+  System.out.println("Failed!\n");
+  System.out.println(e.getMessage() + "\n");
+}
+```
+```
+Adding a Bird of Prey to the same aviary...
+
+Failed!
+
+Bird of Prey, Flightless Bird, and Waterfowl cannot be mixed with other bird types.
+```
+```
+System.out.println("Adding an extinct bird to the same aviary...\n");
+IBird extinctBird = new StandardBird(
+        "Ancient",
+        BirdType.MOA,
+        new ArrayList<>(Arrays.asList(
+                BirdDiet.INSECTS,
+                BirdDiet.LARVAE)),
+        2);
+try {
+  aviary.addBird(extinctBird);
+} catch (Exception e) {
+  System.out.println("Failed!\n");
+  System.out.println(e.getMessage() + "\n");
+}
+```
+```
+Adding an extinct bird to the same aviary...
+
+Failed!
+
+Extinct birds cannot be added to an aviary.
+```
+```
+System.out.println(String.format(
+    "The aviary houses birds of the follow types: %s.\n",
+    aviary.getBirdTypes().stream().map(birdType -> birdType.label)
+                                  .collect(Collectors.joining(", "))));
+```
+```
+The aviary houses birds of the follow types: Gray Parrot, Horned Puffin.
+```
+```
+Hashtable<BirdDiet, Integer> foodRequirements = aviary.getFoodRequirements();
+String foodRequirementsStr = "";
+for (Map.Entry<BirdDiet, Integer> entry : foodRequirements.entrySet()) {
+  foodRequirementsStr += String.format("%s - %s, ", entry.getKey().label, entry.getValue());
+}
+System.out.println(String.format(
+        "The aviary we just created computes that we need the following food: %s\n",
+        foodRequirementsStr));
+```
+```
+The aviary we just created computes that we need the following food: Seeds - 2,
+Berries - 2, Insects - 2, 
+```
+```
+System.out.println("Instantiating a conservatory...\n");
+IConservatory conservatory = new Conservatory().addAviary(aviary);
+System.out.println("Adding aviaries to the conservatory...\n");
+conservatory = conservatory
+                  .addAviary(new Aviary(2).addBird(waterBird))
+                  .addAviary(new Aviary(3).addBird(birdOfPrey));
+
+System.out.println(conservatory.describe() + "\n");
+```
+```
+Instantiating a conservatory...
+
+Adding aviaries to the conservatory...
+
+This conservatory has 3 aviaries located in sectors 1, 2, 3. These aviaries are home to the
+following types of birds: Gray Parrot, Horned Puffin, Goose, Eagle. For more information please
+read the conservatory directory or index.
+```
+```
+System.out.println("Let's find our water bird, Lucy...\n");
+IAviary locatedAviary = conservatory.getAviaryWithBird(waterBird).get();
+System.out.println(String.format(
+        "%s is located at the aviary in sector %s.\n",
+        waterBird.getName(),
+        locatedAviary.getSector()));
+```
+```
+Let's find our water bird, Lucy...
+
+Lucy is located at the aviary in sector 1.
+```
+```
+System.out.println("Finding aviary at sector 1.\n");
+IAviary sectorAviary = conservatory.getAviaryAtSector(1).get();
+System.out.println(String.format(
+        "The resulting aviary is located at %s\n",
+        sectorAviary.getSector()));
+```
+```
+Finding aviary at sector 1.
+
+The resulting aviary is located at 1
+```
+```
+Hashtable<BirdDiet, Integer> totalFoodRequirements = conservatory.getFoodRequirements();
+String totalFoodRequirementsStr = "";
+for (Map.Entry<BirdDiet, Integer> entry : totalFoodRequirements.entrySet()) {
+  totalFoodRequirementsStr += String.format("%s - %s, ", entry.getKey().label, entry.getValue());
+}
+System.out.println(String.format(
+    "For the conservatory we just created, we need the following food: %s\n",
+    totalFoodRequirementsStr));
+```
+```
+For the conservatory we just created, we need the following food: Berries - 3, Seeds - 3,
+Fish - 1, Small mammals - 1, Other birds - 1, Insects - 3, 
+```
+```
+System.out.println("Generating a directory for the conservatory...\n");
+IConservatoryDirectory directory = conservatory.getDirectory();
+System.out.println(directory.describe());
+```
+```
+Generating a directory for the conservatory...
+
+There are 3 aviaries in the conservatory:
+- Sector 3 has an aviary with the bird types: Eagle
+- Sector 2 has an aviary with the bird types: Goose
+- Sector 1 has an aviary with the bird types: Gray Parrot, Horned Puffin
+```
+```
+System.out.println("Generating a index for the conservatory...\n");
+IConservatoryIndex index = conservatory.getIndex();
+System.out.println(index.describe() + "\n");
+```
+```
+Generating a index for the conservatory...
+
+The following birds are housed in this conservatory:
+- Rex the Eagle lives in the aviary at sector 3
+- Sam the Horned Puffin lives in the aviary at sector 1
+- Luke the Gray Parrot lives in the aviary at sector 1
+- Lucy the Goose lives in the aviary at sector 2
+```
