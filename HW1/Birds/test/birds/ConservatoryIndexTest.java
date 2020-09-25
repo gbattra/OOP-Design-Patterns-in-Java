@@ -17,6 +17,9 @@ import birds.models.StandardBird;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for the ConservatoryIndex class.
+ */
 public class ConservatoryIndexTest {
   private IConservatoryIndex conservatoryIndex;
 
@@ -53,8 +56,8 @@ public class ConservatoryIndexTest {
   @Test
   public void testDescribe() {
     String expectedDescription =
-            "The following birds are housed in this conservatory:\n" +
-            "- Rex the Eagle lives in the aviary at sector 1\n";
+            "The following birds are housed in this conservatory:\n"
+            + "- Rex the Eagle lives in the aviary at sector 1\n";
     assertEquals(expectedDescription, this.conservatoryIndex.describe());
   }
 }

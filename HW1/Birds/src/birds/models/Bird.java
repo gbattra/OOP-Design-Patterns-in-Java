@@ -58,7 +58,7 @@ public class Bird implements IBird {
    *
    * @param name String the name of the bird
    * @param type BirdType the type of the bird
-   * @param diet ArrayList<BirdDiet> the diet of the bird
+   * @param diet the diet of the bird
    * @param wingCount int how many wings the bird has
    * @throws IllegalArgumentException when the provided inputs violate any constraints
    */
@@ -94,8 +94,8 @@ public class Bird implements IBird {
    */
   public String describe() {
     return String.format(
-            "%s is a %s, which belongs to the classification %s. %s " +
-            "%s likes to eat %s.",
+            "%s is a %s, which belongs to the classification %s. %s "
+            + "%s likes to eat %s.",
             this.name,
             this.type.label,
             this.type.classification.label,
@@ -152,7 +152,7 @@ public class Bird implements IBird {
   /**
    * Accessor for the bird instance diet list.
    *
-   * @return ArrayList<BirdDiet> the list of BirdDiet types consumed by this bird instance
+   * @return the list of BirdDiet types consumed by this bird instance
    */
   public List<BirdDiet> getDiet() {
     return this.diet;

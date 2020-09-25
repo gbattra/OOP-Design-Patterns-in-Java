@@ -25,6 +25,11 @@ import birds.models.WaterBird;
  * Driver class to demo the program.
  */
 public class Demo {
+  /**
+   * Entry point to driver.
+   *
+   * @param args should be empty, takes no args
+   */
   public static void main(String[] args) {
     System.out.println("Instantiating a Bird of Prey...\n");
     IBird birdOfPrey = new StandardBird(

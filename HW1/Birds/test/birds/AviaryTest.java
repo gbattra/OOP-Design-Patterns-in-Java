@@ -18,6 +18,9 @@ import birds.models.TalkingBird;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the Aviary class.
+ */
 public class AviaryTest {
   @Test
   public void testValidConstructor() {
@@ -291,8 +294,8 @@ public class AviaryTest {
             1);
     String expectedDescription =
             String.format(
-                    "The aviary in sector 1 houses 2 birds of types %s. " +
-                    "Below are descriptions of each bird living in this aviary:\n",
+                    "The aviary in sector 1 houses 2 birds of types %s. "
+                    + "Below are descriptions of each bird living in this aviary:\n",
                     String.join(", ",
                             BirdType.EAGLE.label,
                             BirdType.HAWK.label));

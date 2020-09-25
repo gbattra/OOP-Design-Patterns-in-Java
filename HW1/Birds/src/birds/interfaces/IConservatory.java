@@ -14,7 +14,7 @@ public interface IConservatory extends IDescribable {
   /**
    * Accessor to the list of aviaries in the conservatory.
    *
-   * @return List<IAviary> the list of aviaries
+   * @return the list of aviaries
    */
   List<IAviary> getAviaries();
 
@@ -46,7 +46,7 @@ public interface IConservatory extends IDescribable {
   /**
    * Returns a list of food requirements based on the birds housed in the conservatory.
    *
-   * @return Hashtable<BirdDiet, Integer> the list of food requirements
+   * @return the list of food requirements
    */
   Hashtable<BirdDiet, Integer> getFoodRequirements();
 

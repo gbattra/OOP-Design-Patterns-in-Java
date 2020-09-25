@@ -32,7 +32,7 @@ public class WaterBird extends Bird implements IWaterBird {
    *
    * @param name String the name of the bird
    * @param type BirdType the type of the bird
-   * @param diet ArrayList<BirdDiet> the diet of the bird
+   * @param diet the diet of the bird
    * @param wingCount int how many wings the bird has
    * @param nearestWaterBody String the name of the water body nearest this bird's habitat
    * @throws IllegalArgumentException when the provided inputs violate any constraints
@@ -54,11 +54,11 @@ public class WaterBird extends Bird implements IWaterBird {
     if (!WaterBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)) {
       throw new IllegalArgumentException(
               String.format(
-                "Provided bird type must belong to a permissible classification." +
-                "Provided bird type classification: %s. Permissible bird type classifications: %s",
+                "Provided bird type must belong to a permissible classification."
+                + "Provided bird type classification: %s. Permissible classifications: %s",
                 this.type.classification.label,
                 WaterBird.PERMISSIBLE_CLASSIFICATIONS.stream().map(
-                        birdClassification -> birdClassification.label)));
+                    birdClassification -> birdClassification.label)));
     }
   }
 

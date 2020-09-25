@@ -17,7 +17,7 @@ public interface ITalkingBird extends IBird {
   /**
    * Accessor for the bird instance vocabulary list.
    *
-   * @return ArrayList<String> the bird's vocabulary list
+   * @return the bird's vocabulary list
    */
   List<String> getVocabulary();
 }

@@ -19,6 +19,9 @@ import birds.models.StandardBird;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the ConservatoryDirectory class.
+ */
 public class ConservatoryDirectoryTest {
   @Test
   public void testValidConstructorWithAviary() {
@@ -84,8 +87,8 @@ public class ConservatoryDirectoryTest {
     IConservatoryDirectory conservatoryDirectory = new ConservatoryDirectory(directory);
 
     String expectedDescription =
-            "There are 1 aviaries in the conservatory:\n" +
-            "- Sector 1 has an aviary with the bird types: Eagle, Hawk\n";
+            "There are 1 aviaries in the conservatory:\n"
+            + "- Sector 1 has an aviary with the bird types: Eagle, Hawk\n";
     assertEquals(expectedDescription, conservatoryDirectory.describe());
   }
 }

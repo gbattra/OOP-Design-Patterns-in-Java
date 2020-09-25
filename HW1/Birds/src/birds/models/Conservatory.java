@@ -80,8 +80,9 @@ public class Conservatory implements IConservatory {
   }
 
   /**
-   * Accessor for the aviary list
-   * @return List<IAviary> the list of aviaries
+   * Accessor for the aviary list.
+   *
+   * @return the list of aviaries
    */
   public List<IAviary> getAviaries() {
     return this.aviaries;
@@ -186,9 +187,9 @@ public class Conservatory implements IConservatory {
     }
     
     String description = String.format(
-            "This conservatory has %s aviaries located in sectors %s. These aviaries are home " +
-            "to the following types of birds: %s. For more information please read the " +
-            "conservatory directory or index.",
+            "This conservatory has %s aviaries located in sectors %s. These aviaries are home "
+            + "to the following types of birds: %s. For more information please read the "
+            + "conservatory directory or index.",
             this.aviaries.size(),
             this.aviaries.stream().map(aviary -> String.valueOf(aviary.getSector()))
                                   .collect(Collectors.joining(", ")),

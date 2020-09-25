@@ -13,7 +13,9 @@ import birds.models.Bird;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-
+/**
+ * Tests for the Bird class.
+ */
 public class BirdTest {
   @Test
   public void testValidConstructorBirdTypes() {
@@ -146,8 +148,8 @@ public class BirdTest {
             2);
 
     String expectedDescription = String.format(
-            "%s is a %s, which belongs to the classification %s. %s " +
-            "%s likes to eat %s.",
+            "%s is a %s, which belongs to the classification %s. %s "
+            + "%s likes to eat %s.",
             "Rex",
             BirdType.EAGLE.label,
             BirdType.EAGLE.classification.label,

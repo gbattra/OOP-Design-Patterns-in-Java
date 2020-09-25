@@ -45,10 +45,10 @@ public class TalkingBird extends Bird implements ITalkingBird {
    *
    * @param name String the name of the bird
    * @param type BirdType the type of the bird
-   * @param diet ArrayList<BirdDiet> the diet of the bird
+   * @param diet the diet of the bird
    * @param wingCount int how many wings the bird has
    * @param favoriteWord String the bird's favorite word
-   * @param vocabulary ArrayList<String> list of known words
+   * @param vocabulary list of known words
    * @throws IllegalArgumentException when the provided inputs violate any constraints
    */
   public TalkingBird(
@@ -75,11 +75,11 @@ public class TalkingBird extends Bird implements ITalkingBird {
     if (!TalkingBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)) {
       throw new IllegalArgumentException(
               String.format(
-                "Provided bird type must belong to a permissible classification." +
-                "Provided bird type classification: %s. Permissible bird type classifications: %s",
+                "Provided bird type must belong to a permissible classification."
+                + "Provided bird type classification: %s. Permissible classifications: %s",
                 this.type.classification.label,
                 TalkingBird.PERMISSIBLE_CLASSIFICATIONS.stream().map(
-                        birdClassification -> birdClassification.label)));
+                    birdClassification -> birdClassification.label)));
     }
   }
 
@@ -95,7 +95,7 @@ public class TalkingBird extends Bird implements ITalkingBird {
   /**
    * Accessor for the bird instance vocabulary list.
    *
-   * @return ArrayList<String> the bird's vocabulary list
+   * @return the bird's vocabulary list
    */
   public List<String> getVocabulary() {
     return this.vocabulary;

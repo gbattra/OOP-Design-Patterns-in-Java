@@ -13,14 +13,14 @@ public interface IAviary extends IDescribable {
   /**
    * Accessor for the birds in this aviary.
    *
-   * @return List<IBird> the list of birds in the aviary
+   * @return the list of birds in the aviary
    */
   List<IBird> getBirds();
 
   /**
    * Accessor for the types of birds in the aviary.
    *
-   * @return List<BirdType> the list of bird types in the aviary
+   * @return the list of bird types in the aviary
    */
   List<BirdType> getBirdTypes();
 
@@ -43,7 +43,7 @@ public interface IAviary extends IDescribable {
   /**
    * Returns a list of food requirements based on the birds housed in the aviary.
    *
-   * @return Hashtable<BirdDiet, Integer> the list of food requirements
+   * @return the list of food requirements
    */
   Hashtable<BirdDiet, Integer> getFoodRequirements();
 }

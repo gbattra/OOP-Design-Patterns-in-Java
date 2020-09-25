@@ -22,11 +22,17 @@ import birds.models.StandardBird;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the Conservatory class.
+ */
 public class ConservatoryTest {
   private final IConservatory genericConservatory;
   private final IBird rex;
   private final IBird alex;
 
+  /**
+   * Constructor for the Conservatory test class.
+   */
   public ConservatoryTest() {
     this.alex = new StandardBird(
             "Alex",
@@ -183,9 +189,9 @@ public class ConservatoryTest {
   @Test
   public void testDescribe() {
     String expectedDescription = String.format(
-            "This conservatory has %s aviaries located in sectors %s. These aviaries are home " +
-            "to the following types of birds: %s. For more information please read the " +
-            "conservatory directory or index.",
+            "This conservatory has %s aviaries located in sectors %s. These aviaries are home "
+            + "to the following types of birds: %s. For more information please read the "
+            + "conservatory directory or index.",
             2,
             "1, 2",
             String.format("%s, %s", this.rex.getType().label, this.alex.getType().label));

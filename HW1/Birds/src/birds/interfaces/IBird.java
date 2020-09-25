@@ -42,7 +42,7 @@ public interface IBird extends IDescribable {
   /**
    * Accessor for the bird instance diet list.
    *
-   * @return ArrayList<BirdDiet> the list of BirdDiet types consumed by this bird instance
+   * @return the list of BirdDiet types consumed by this bird instance
    */
   List<BirdDiet> getDiet();
 

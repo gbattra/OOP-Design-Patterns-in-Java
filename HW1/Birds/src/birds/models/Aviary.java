@@ -60,7 +60,7 @@ public class Aviary implements IAviary {
   /**
    * Constructor for the Aviary.
    *
-   * @param birds  List<IBird> list of birds housed in the aviary
+   * @param birds  list of birds housed in the aviary
    * @param sector int the sector id where the aviary is located
    * @throws IllegalArgumentException when any state constraint is violated by constructor args
    */
@@ -109,7 +109,7 @@ public class Aviary implements IAviary {
   /**
    * Accessor for the birds in this aviary.
    *
-   * @return List<IBird> the list of birds in the aviary
+   * @return the list of birds in the aviary
    */
   public List<IBird> getBirds() {
     return this.birds;
@@ -127,7 +127,7 @@ public class Aviary implements IAviary {
   /**
    * Accessor for the types of birds in the aviary.
    *
-   * @return List<BirdType> the list of bird types in the aviary
+   * @return the list of bird types in the aviary
    */
   public List<BirdType> getBirdTypes() {
     return this.birds.stream().map(IBird::getType).distinct().collect(Collectors.toList());
@@ -157,7 +157,7 @@ public class Aviary implements IAviary {
    * Returns a list of daily food requirements based on the birds housed in the aviary. Assumes
    * each bird needs one of each of its diet per day.
    *
-   * @return Hashtable<BirdDiet, Integer> the list of food requirements
+   * @return the list of food requirements
    */
   public Hashtable<BirdDiet, Integer> getFoodRequirements() {
     Hashtable<BirdDiet, Integer> requirements = new Hashtable<>();
@@ -182,8 +182,8 @@ public class Aviary implements IAviary {
    */
   public String describe() {
     String description = String.format(
-            "The aviary in sector %s houses %s birds of types %s. " +
-            "Below are descriptions of each bird living in this aviary:\n",
+            "The aviary in sector %s houses %s birds of types %s. "
+            + "Below are descriptions of each bird living in this aviary:\n",
             this.sector,
             this.birds.size(),
             this.birds.stream().map(bird -> bird.getType().label)

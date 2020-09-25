@@ -8,6 +8,9 @@ import birds.enums.BirdClassification;
 import birds.enums.BirdDiet;
 import birds.enums.BirdType;
 
+/**
+ * Primary subclass of Bird. Can instantiate most of bird classifications.
+ */
 public class StandardBird extends Bird {
   /**
    * The list of permissible bird classifications. Used to validate BirdType passed into
@@ -25,7 +28,7 @@ public class StandardBird extends Bird {
    *
    * @param name String the name of the bird
    * @param type BirdType the type of the bird
-   * @param diet ArrayList<BirdDiet> the diet of the bird
+   * @param diet the diet of the bird
    * @param wingCount int how many wings the bird has
    * @throws IllegalArgumentException when the provided inputs violate any constraints
    */
@@ -40,11 +43,11 @@ public class StandardBird extends Bird {
     if (!StandardBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)) {
       throw new IllegalArgumentException(
               String.format(
-                "Provided bird type must belong to a permissible classification." +
-                "Provided bird type classification: %s. Permissible bird type classifications: %s",
+                "Provided bird type must belong to a permissible classification."
+                + "Provided bird type classification: %s. Permissible classifications: %s",
                 this.type.classification.label,
                 StandardBird.PERMISSIBLE_CLASSIFICATIONS.stream().map(
-                        birdClassification -> birdClassification.label)));
+                    birdClassification -> birdClassification.label)));
     }
   }
 }
