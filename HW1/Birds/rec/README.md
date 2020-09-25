@@ -1,4 +1,4 @@
-#Documentation
+# Documentation
 ### Interfaces
 ### `IDescribable`
 Interface for objects that need to provide a human-readable description of their contents.
@@ -197,7 +197,7 @@ public Bird(
     this.wingCount = wingCount;
 ```
 The `wingCount` is represented as an `int` and the birds are also provided a
-`String name`. To track its diet, the program uses a custon `BirdDiet` enum,
+`String name`. To track its diet, the program uses a custom `BirdDiet` enum,
 each with a `String label`.
 
 ```
@@ -310,7 +310,7 @@ if (!StandardBird.PERMISSIBLE_CLASSIFICATIONS.contains(this.type.classification)
 The program also exposes unique functionality for each of these subclasses.
 
 `TalkingBird` instances have a `String favoriteWord` and a `List<String> vocabulary`.
-It's constructor enforces that these be set on instantiation. To expose these properties,
+Its constructor enforces that these be set on instantiation. To expose these properties,
 the `TalkingBird` class implements `ITalkingBird`.
 
 ```
@@ -411,9 +411,9 @@ method, passing the current state, plus the new bird, into the constructor of a 
 `Aviary` instance:
 ```
 IAviary aviary = new Aviary(1);
-aviary.add(waterBird);  // waterBird is of type BirdType.DUCK
+aviary = aviary.add(waterBird);  // waterBird is of type BirdType.DUCK
 try {
-  aviary.addBird(birdOfPrey);  // birdOfPrey is of BirdType.EAGLE
+  aviary = aviary.addBird(birdOfPrey);  // birdOfPrey is of BirdType.EAGLE
 } catch (Exception e) {
   System.out.println("Failed!\n");
   System.out.println(e.getMessage() + "\n");
