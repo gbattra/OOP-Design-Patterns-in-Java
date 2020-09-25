@@ -101,12 +101,16 @@ Builds and returns an `IConservatoryIndex` instance. Useful for tracking each
 bird's sector location within the conservatory.
 
 ### `IConservatoryIndex`
+- _Extendeds **IDescribable**_
+
 Interface for a conservatory index. Useful for tracking the location
 of birds within the conservatory.
 - `Hashtable<IBird, Integer> getIndex()` <br>
 Returns a table tracking each bird and the sector where the bird is located.
 
 ### `IConservatoryDirectory`
+- _Extendeds **IDescribable**_
+
 Interface for a conservatory directory object. Useful for tracking aviaries and thier
 sector locations.
 - `Hashtable<Integer, IAviary> getDirectory()` <br>
@@ -203,7 +207,7 @@ FRUIT("Fruit"),
 ...
 ```
 To encapsulate the types of the bird and its classifications, the program
-and uses custom enums.
+again uses custom enums.
 
 First, the `BirdClassification` enum represents the classifications of each
 bird type. Each `BirdClassification` enum has the following properties:
@@ -536,7 +540,7 @@ There are 3 aviaries in the conservatory:
 - Sector 1 has an aviary with the bird types: Gray Parrot, Horned Puffin
 ```
 
-Similarly, a `Conservatory` instance can produce a `ConservatoryDirectory` tracking
+Similarly, a `Conservatory` instance can produce a `ConservatoryIndex` tracking
 the sector location of each bird:
 ```
 IConservatoryIndex index = conservatory.getIndex();
