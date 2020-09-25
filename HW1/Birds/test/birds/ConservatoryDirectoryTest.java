@@ -15,6 +15,7 @@ import birds.interfaces.IConservatoryDirectory;
 import birds.models.Aviary;
 import birds.models.Bird;
 import birds.models.ConservatoryDirectory;
+import birds.models.StandardBird;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -62,7 +63,7 @@ public class ConservatoryDirectoryTest {
   public void testDescribe() {
     List<IBird> birds  = new ArrayList<>(
             Arrays.asList(
-                    new Bird(
+                    new StandardBird(
                             "Rex",
                             BirdType.EAGLE,
                             new ArrayList<>(Arrays.asList(
@@ -70,7 +71,7 @@ public class ConservatoryDirectoryTest {
                                     BirdDiet.FISH,
                                     BirdDiet.OTHER_BIRDS)),
                             2),
-                    new Bird(
+                    new StandardBird(
                             "Axel",
                             BirdType.HAWK,
                             new ArrayList<>(Arrays.asList(

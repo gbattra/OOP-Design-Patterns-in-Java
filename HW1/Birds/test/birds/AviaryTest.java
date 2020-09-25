@@ -14,6 +14,8 @@ import birds.interfaces.IAviary;
 import birds.interfaces.IBird;
 import birds.models.Aviary;
 import birds.models.Bird;
+import birds.models.StandardBird;
+import birds.models.TalkingBird;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -24,7 +26,7 @@ public class AviaryTest {
     try {
       List<IBird> birds  = new ArrayList<>(
               Arrays.asList(
-                      new Bird(
+                      new StandardBird(
                               "Rex",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
@@ -32,7 +34,7 @@ public class AviaryTest {
                                       BirdDiet.FISH,
                                       BirdDiet.OTHER_BIRDS)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Axel",
                               BirdType.HAWK,
                               new ArrayList<>(Arrays.asList(
@@ -54,7 +56,7 @@ public class AviaryTest {
     try {
       List<IBird> birds  = new ArrayList<>(
               Arrays.asList(
-                      new Bird(
+                      new StandardBird(
                               "Rex",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
@@ -62,7 +64,7 @@ public class AviaryTest {
                                       BirdDiet.FISH,
                                       BirdDiet.OTHER_BIRDS)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Axel",
                               BirdType.PASSENGER_PIGEON,  // can't mix these bird types
                               new ArrayList<>(Arrays.asList(
@@ -83,7 +85,7 @@ public class AviaryTest {
     try {
       List<IBird> birds  = new ArrayList<>(
               Arrays.asList(
-                      new Bird(
+                      new StandardBird(
                               "Rex",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
@@ -105,7 +107,7 @@ public class AviaryTest {
     try {
       List<IBird> birds  = new ArrayList<>(
               Arrays.asList(
-                      new Bird(
+                      new StandardBird(
                               "Sleepy",
                               BirdType.MOA,  // cannot add extinct bird
                               new ArrayList<>(Arrays.asList(
@@ -127,7 +129,7 @@ public class AviaryTest {
     try {
       List<IBird> birds  = new ArrayList<>(
               Arrays.asList(
-                      new Bird(
+                      new StandardBird(
                               "Rex",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
@@ -135,7 +137,7 @@ public class AviaryTest {
                                       BirdDiet.FISH,
                                       BirdDiet.OTHER_BIRDS)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Rex",  // names must be unique
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
@@ -156,7 +158,7 @@ public class AviaryTest {
     try {
       List<IBird> birds  = new ArrayList<>(  // too many birds (6) for aviary
               Arrays.asList(
-                      new Bird(
+                      new StandardBird(
                               "Rex",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
@@ -164,35 +166,35 @@ public class AviaryTest {
                                       BirdDiet.FISH,
                                       BirdDiet.OTHER_BIRDS)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Axel",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
                                       BirdDiet.BERRIES,
                                       BirdDiet.FRUIT)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Baron",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
                                       BirdDiet.BERRIES,
                                       BirdDiet.FRUIT)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Alyx",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
                                       BirdDiet.BERRIES,
                                       BirdDiet.FRUIT)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Red",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
                                       BirdDiet.BERRIES,
                                       BirdDiet.FRUIT)),
                               2),
-                      new Bird(
+                      new StandardBird(
                               "Suzie",
                               BirdType.EAGLE,
                               new ArrayList<>(Arrays.asList(
@@ -212,7 +214,7 @@ public class AviaryTest {
   public void testAccessors() {
     List<IBird> birds = new ArrayList<>(
             Arrays.asList(
-                    new Bird(
+                    new StandardBird(
                             "Rex",
                             BirdType.EAGLE,
                             new ArrayList<>(Arrays.asList(
@@ -220,7 +222,7 @@ public class AviaryTest {
                                     BirdDiet.FISH,
                                     BirdDiet.OTHER_BIRDS)),
                             2),
-                    new Bird(
+                    new StandardBird(
                             "Axel",
                             BirdType.EAGLE,
                             new ArrayList<>(Arrays.asList(
@@ -239,7 +241,7 @@ public class AviaryTest {
   public void testGetFoodRequirements() {
     List<IBird> birds = new ArrayList<>(
             Arrays.asList(
-                    new Bird(
+                    new StandardBird(
                             "Rex",
                             BirdType.EAGLE,
                             new ArrayList<>(Arrays.asList(
@@ -247,7 +249,7 @@ public class AviaryTest {
                                     BirdDiet.FISH,
                                     BirdDiet.OTHER_BIRDS)),
                             2),
-                    new Bird(
+                    new StandardBird(
                             "Axel",
                             BirdType.HAWK,
                             new ArrayList<>(Arrays.asList(
@@ -270,7 +272,7 @@ public class AviaryTest {
 
   @Test
   public void testDescribe() {
-    IBird rex = new Bird(
+    IBird rex = new StandardBird(
             "Rex",
             BirdType.EAGLE,
             new ArrayList<>(Arrays.asList(
@@ -278,7 +280,7 @@ public class AviaryTest {
                     BirdDiet.FISH,
                     BirdDiet.OTHER_BIRDS)),
             2);
-    IBird axel = new Bird(
+    IBird axel = new StandardBird(
             "Axel",
             BirdType.HAWK,
             new ArrayList<>(Arrays.asList(
@@ -303,7 +305,7 @@ public class AviaryTest {
 
   @Test
   public void testValidAddBird() {
-    IBird rex = new Bird(
+    IBird rex = new StandardBird(
             "Rex",
             BirdType.EAGLE,
             new ArrayList<>(Arrays.asList(
@@ -311,14 +313,14 @@ public class AviaryTest {
                     BirdDiet.FISH,
                     BirdDiet.OTHER_BIRDS)),
             2);
-    IBird axel = new Bird(
+    IBird axel = new StandardBird(
             "Axel",
             BirdType.HAWK,
             new ArrayList<>(Arrays.asList(
                     BirdDiet.FISH,
                     BirdDiet.EGGS)),
             2);
-    IBird luke = new Bird(
+    IBird luke = new StandardBird(
             "Luke",
             BirdType.HAWK,
             new ArrayList<>(Arrays.asList(
@@ -340,7 +342,7 @@ public class AviaryTest {
 
   @Test
   public void testInvalidAddBird() {
-    IBird rex = new Bird(
+    IBird rex = new StandardBird(
             "Rex",
             BirdType.EAGLE,
             new ArrayList<>(Arrays.asList(
@@ -348,20 +350,22 @@ public class AviaryTest {
                     BirdDiet.FISH,
                     BirdDiet.OTHER_BIRDS)),
             2);
-    IBird axel = new Bird(
+    IBird axel = new StandardBird(
             "Axel",
             BirdType.HAWK,
             new ArrayList<>(Arrays.asList(
                     BirdDiet.FISH,
                     BirdDiet.EGGS)),
             2);
-    IBird luke = new Bird(
-            "Axel",
+    IBird luke = new TalkingBird(
+            "Luke",
             BirdType.GRAY_PARROT,
             new ArrayList<>(Arrays.asList(
                     BirdDiet.FISH,
                     BirdDiet.EGGS)),
-            2);
+            2,
+            "Flamingo",
+            new ArrayList<>(Arrays.asList("Hello", "Goodbye", "Okay", "Love", "Sorry")));
     IAviary aviary = new Aviary(
             new ArrayList<>(Arrays.asList(rex, axel)),
             1);

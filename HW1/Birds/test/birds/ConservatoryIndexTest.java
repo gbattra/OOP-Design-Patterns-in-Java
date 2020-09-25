@@ -13,6 +13,7 @@ import birds.interfaces.IBird;
 import birds.interfaces.IConservatoryIndex;
 import birds.models.Bird;
 import birds.models.ConservatoryIndex;
+import birds.models.StandardBird;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +23,7 @@ public class ConservatoryIndexTest {
   @Before
   public void setup() {
     Hashtable<IBird, Integer> index = new Hashtable<>();
-    Bird bird = new Bird(
+    Bird bird = new StandardBird(
             "Rex",
             BirdType.EAGLE,
             new ArrayList<>(Arrays.asList(
@@ -37,7 +38,7 @@ public class ConservatoryIndexTest {
   @Test
   public void testAccessors() {
     Hashtable<IBird, Integer> index = new Hashtable<>();
-    Bird bird = new Bird(
+    Bird bird = new StandardBird(
             "Rex",
             BirdType.EAGLE,
             new ArrayList<>(Arrays.asList(
