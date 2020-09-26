@@ -221,7 +221,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     }
 
     this.treasureCount++;
-    Treasure treasure = new Treasure("A healing potion", 1);
+    Treasure treasure = new Treasure("a healing potion", 1);
     this.level.addTreasure(roomNumber, treasure);
 
     return this;
@@ -255,7 +255,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     }
 
     this.treasureCount++;
-    Treasure treasure = new Treasure("Gold", value);
+    Treasure treasure = new Treasure("pieces of gold", value);
     this.level.addTreasure(roomNumber, treasure);
 
     return this;
