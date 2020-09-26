@@ -1,5 +1,9 @@
 package dungeon;
 
+/**
+ * Builder class for a medieval level. Can add rooms, monsters (goblins, orcs, ogres and humans),
+ * treasure (potions, gold, weapons and special items).
+ */
 public class MedievalLevelBuilder implements ILevelBuilder {
   private final int numberOfRooms;
   private final int numberOfMonsters;
@@ -11,6 +15,15 @@ public class MedievalLevelBuilder implements ILevelBuilder {
   private int monsterCount;
   private int treasureCount;
 
+  /**
+   * Constructor for MedievalLevelBuilder.
+   *
+   * @param levelNumber the number for the level being built
+   * @param numberOfRooms the required number of rooms in the level
+   * @param numberOfMonsters the required number of monsters in the level
+   * @param numberOfTreasures the required number of treasures in the level
+   * @throws IllegalArgumentException if any of the above args are <= 0
+   */
   public MedievalLevelBuilder(
           int levelNumber,
           int numberOfRooms,
@@ -56,7 +69,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
-  public ILevelBuilder addGoblin(
+  public ILevelBuilder addGoblins(
           int roomNumber,
           int count) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
@@ -87,14 +100,12 @@ public class MedievalLevelBuilder implements ILevelBuilder {
    * Add orc monsters to a specified room.
    *
    * @param roomNumber the room to which the monster is added
-   * @param count the number of orcs to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
   public ILevelBuilder addOrc(
-          int roomNumber,
-          int count) throws IllegalStateException, IllegalArgumentException {
+          int roomNumber) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
     }
@@ -102,19 +113,17 @@ public class MedievalLevelBuilder implements ILevelBuilder {
       throw new IllegalArgumentException(
               String.format("Room number %s has not yet been set.", roomNumber));
     }
-    if (this.monsterCount + count > this.numberOfMonsters) {
+    if (this.monsterCount + 1 > this.numberOfMonsters) {
       throw new IllegalStateException(
               String.format("Total number of monsters cannot exceed %s", this.numberOfMonsters));
     }
 
-    for (int i = 0; i < count; i++) {
-      this.monsterCount++;
-      Monster monster = new Monster(
-              MonsterType.ORC.name,
-              MonsterType.ORC.description,
-              MonsterType.ORC.hitPoints);
-      this.level.addMonster(roomNumber, monster);
-    }
+    this.monsterCount++;
+    Monster monster = new Monster(
+            MonsterType.ORC.name,
+            MonsterType.ORC.description,
+            MonsterType.ORC.hitPoints);
+    this.level.addMonster(roomNumber, monster);
 
     return this;
   }
@@ -123,14 +132,12 @@ public class MedievalLevelBuilder implements ILevelBuilder {
    * Add ogre monsters to a specified.
    *
    * @param roomNumber the room to which the monster is added
-   * @param count the number of ogres to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
   public ILevelBuilder addOgre(
-          int roomNumber,
-          int count) throws IllegalStateException, IllegalArgumentException{
+          int roomNumber) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
     }
@@ -138,19 +145,17 @@ public class MedievalLevelBuilder implements ILevelBuilder {
       throw new IllegalArgumentException(
               String.format("Room number %s has not yet been set.", roomNumber));
     }
-    if (this.monsterCount + count > this.numberOfMonsters) {
+    if (this.monsterCount + 1 > this.numberOfMonsters) {
       throw new IllegalStateException(
               String.format("Total number of monsters cannot exceed %s", this.numberOfMonsters));
     }
 
-    for (int i = 0; i < count; i++) {
-      this.monsterCount++;
-      Monster monster = new Monster(
-              MonsterType.OGRE.name,
-              MonsterType.OGRE.description,
-              MonsterType.OGRE.hitPoints);
-      this.level.addMonster(roomNumber, monster);
-    }
+    this.monsterCount++;
+    Monster monster = new Monster(
+            MonsterType.OGRE.name,
+            MonsterType.OGRE.description,
+            MonsterType.OGRE.hitPoints);
+    this.level.addMonster(roomNumber, monster);
 
     return this;
   }
@@ -202,8 +207,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
    * @throws IllegalStateException when too many treasures are added to a level
    */
   public ILevelBuilder addPotion(
-          int roomNumber) throws IllegalStateException, IllegalArgumentException
-  {
+          int roomNumber) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
     }
@@ -298,7 +302,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
    * @throws IllegalStateException when the specified room has not been set or value <= 0
    * @throws IllegalArgumentException when too many treasures are added to a level
    */
-  public ILevelBuilder addSpecialItem(
+  public ILevelBuilder addSpecial(
           int roomNumber,
           String description,
           int value) throws IllegalStateException, IllegalArgumentException {
@@ -330,7 +334,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
    * @return the level instance
    * @throws IllegalStateException when the level has not yet been fully built
    */
-  public Level build() throws IllegalStateException{
+  public Level build() throws IllegalStateException {
     if (this.treasureCount < this.numberOfTreasures) {
       throw new IllegalStateException("Required number of treasures not met.");
     }

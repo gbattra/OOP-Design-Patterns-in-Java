@@ -22,31 +22,29 @@ public interface ILevelBuilder {
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
-  ILevelBuilder addGoblin(int roomNumber, int count)
+  ILevelBuilder addGoblins(int roomNumber, int count)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Add orc monsters to a specified room.
    *
    * @param roomNumber the room to which the monster is added
-   * @param count the number of orcs to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
-  ILevelBuilder addOrc(int roomNumber, int count)
+  ILevelBuilder addOrc(int roomNumber)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Add org monsters to a specified.
    *
    * @param roomNumber the room to which the monster is added
-   * @param count the number of ogres to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
-  ILevelBuilder addOgre(int roomNumber, int count)
+  ILevelBuilder addOgre(int roomNumber)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
@@ -111,7 +109,7 @@ public interface ILevelBuilder {
    * @throws IllegalStateException when the specified room has not been set or value <= 0
    * @throws IllegalArgumentException when too many treasures are added to a level
    */
-  ILevelBuilder addSpecialItem(int roomNumber, String description, int value)
+  ILevelBuilder addSpecial(int roomNumber, String description, int value)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
