@@ -15,7 +15,15 @@ public class MedievalLevelBuilder implements ILevelBuilder {
           int levelNumber,
           int numberOfRooms,
           int numberOfMonsters,
-          int numberOfTreasures) {
+          int numberOfTreasures) throws IllegalArgumentException {
+    if (levelNumber < 0
+        || numberOfRooms < 0
+        || numberOfMonsters < 0
+        || numberOfTreasures < 0) {
+      throw new IllegalArgumentException(
+              "Level number, number of rooms, number of monsters and number of treasures"
+              + "must all be non-negative.");
+    }
     this.level = new Level(levelNumber);
     this.numberOfRooms = numberOfRooms;
     this.numberOfMonsters = numberOfMonsters;
@@ -32,7 +40,9 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
-  public ILevelBuilder addGoblin(int roomNumber, int count) {
+  public ILevelBuilder addGoblin(
+          int roomNumber,
+          int count) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
     }
@@ -57,7 +67,9 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
-  public ILevelBuilder addOrc(int roomNumber, int count) {
+  public ILevelBuilder addOrc(
+          int roomNumber,
+          int count) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
     }
@@ -82,7 +94,9 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
-  public ILevelBuilder addOgre(int roomNumber, int count) {
+  public ILevelBuilder addOgre(
+          int roomNumber,
+          int count) throws IllegalStateException, IllegalArgumentException{
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
     }
@@ -111,9 +125,12 @@ public class MedievalLevelBuilder implements ILevelBuilder {
           int roomNumber,
           String name,
           String description,
-          int hitPoints) {
+          int hitPoints) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
+    }
+    if (hitPoints <= 0) {
+      throw new IllegalArgumentException("Hit points must be great than zero.");
     }
     if (this.roomCount - 1 < roomNumber) {
       throw new IllegalArgumentException(
@@ -131,7 +148,8 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
-  public ILevelBuilder addPotion(int roomNumber)
+  public ILevelBuilder addPotion(
+          int roomNumber) throws IllegalStateException, IllegalArgumentException
   {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
@@ -152,9 +170,14 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
-  public ILevelBuilder addGold(int roomNumber, int value) {
+  public ILevelBuilder addGold(
+          int roomNumber,
+          int value) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
+    }
+    if (value <= 0) {
+      throw new IllegalArgumentException("Gold must have a value greater than zero.");
     }
     if (this.roomCount - 1 < roomNumber) {
       throw new IllegalArgumentException(
@@ -172,7 +195,9 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
-  public ILevelBuilder addWeapon(int roomNumber, String description) {
+  public ILevelBuilder addWeapon(
+          int roomNumber,
+          String description) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
     }
@@ -195,9 +220,12 @@ public class MedievalLevelBuilder implements ILevelBuilder {
   public ILevelBuilder addSpecial(
           int roomNumber,
           String description,
-          int value) {
+          int value) throws IllegalStateException, IllegalArgumentException {
     if (roomNumber < 0) {
       throw new IllegalArgumentException("Invalid room number. Must be non-negative.");
+    }
+    if (value <= 0) {
+      throw new IllegalArgumentException("Gold must have a value greater than zero.");
     }
     if (this.roomCount - 1 < roomNumber) {
       throw new IllegalArgumentException(
@@ -213,5 +241,19 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     this.level.addTreasure(roomNumber, treasure);
 
     return this;
+  }
+
+  public Level build() throws IllegalStateException{
+    if (this.treasureCount < this.numberOfTreasures) {
+      throw new IllegalStateException("Required number of treasures not met.");
+    }
+    if (this.monsterCount < this.numberOfMonsters) {
+      throw new IllegalStateException("Required number of monsters not met.");
+    }
+    if (this.roomCount < this.numberOfRooms) {
+      throw new IllegalStateException("Required number of rooms not met.");
+    }
+
+    return this.level;
   }
 }
