@@ -16,37 +16,37 @@ public interface ILevelBuilder {
   /**
    * Add goblin monsters to a specified room.
    *
-   * @param room the room to which the monster is added
+   * @param roomNumber the room to which the monster is added
    * @param count the number of goblins to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
-  ILevelBuilder addGoblin(int room, int count)
+  ILevelBuilder addGoblin(int roomNumber, int count)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Add orc monsters to a specified room.
    *
-   * @param room the room to which the monster is added
+   * @param roomNumber the room to which the monster is added
    * @param count the number of orcs to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
-  ILevelBuilder addOrc(int room, int count)
+  ILevelBuilder addOrc(int roomNumber, int count)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Add org monsters to a specified.
    *
-   * @param room the room to which the monster is added
+   * @param roomNumber the room to which the monster is added
    * @param count the number of ogres to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
    * @throws IllegalStateException when too many monsters are added to the level
    */
-  ILevelBuilder addOgre(int room, int count)
+  ILevelBuilder addOgre(int roomNumber, int count)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
@@ -69,49 +69,49 @@ public interface ILevelBuilder {
   /**
    * Adds a potion to the specified room.
    *
-   * @param room the room to which the potion is added
+   * @param roomNumber the room to which the potion is added
    * @return the level builder instance with updated level data
    * @throws IllegalStateException when the specified room has not been set
    * @throws IllegalStateException when too many treasures are added to a level
    */
-  ILevelBuilder addPotion(int room)
+  ILevelBuilder addPotion(int roomNumber)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Adds gold to a room in the level.
    *
-   * @param room the room to which the gold is added
+   * @param roomNumber the room to which the gold is added
    * @param value the value of the gold added
    * @return the level builder instance with updated level data
    * @throws IllegalStateException when the specified room has not been set or value is <= 0
    * @throws IllegalArgumentException when too many treasures are added to a level
    */
-  ILevelBuilder addGold(int room, int value)
+  ILevelBuilder addGold(int roomNumber, int value)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Adds a weapon to a room in the level.
    *
-   * @param room the room to which the weapon is added
+   * @param roomNumber the room to which the weapon is added
    * @param description the level builder instance with updated level data
    * @return the level builder instance with updated level data
    * @throws IllegalStateException when the specified room has not been set
    * @throws IllegalArgumentException when too many treasures are added to a level
    */
-  ILevelBuilder addWeapon(int room, String description)
+  ILevelBuilder addWeapon(int roomNumber, String description)
           throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Adds a special item to a room in the level.
    *
-   * @param room the room to which the item is added
+   * @param roomNumber the room to which the item is added
    * @param description a description of the item
    * @param value the value of the item
    * @return the level builder instance with updated level data
    * @throws IllegalStateException when the specified room has not been set or value <= 0
    * @throws IllegalArgumentException when too many treasures are added to a level
    */
-  ILevelBuilder addSpecial(int room, String description, int value)
+  ILevelBuilder addSpecialItem(int roomNumber, String description, int value)
           throws IllegalStateException, IllegalArgumentException;
 
   /**

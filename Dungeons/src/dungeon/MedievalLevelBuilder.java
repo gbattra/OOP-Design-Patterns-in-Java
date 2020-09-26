@@ -30,6 +30,13 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     this.numberOfTreasures = numberOfTreasures;
   }
 
+  /**
+   * Add a room to the level.
+   *
+   * @param description the description of the room
+   * @return the level builder instance with updated level data
+   * @throws IllegalStateException if too many rooms are added to the level
+   */
   public ILevelBuilder addRoom(String description) throws IllegalStateException {
     if (this.roomCount == numberOfRooms) {
       throw new IllegalStateException(
@@ -40,6 +47,15 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Add goblin monsters to a specified room.
+   *
+   * @param room the room to which the monster is added
+   * @param count the number of goblins to add
+   * @return the level builder instance with updated level data
+   * @throws IllegalArgumentException when specified room has not yet been added
+   * @throws IllegalStateException when too many monsters are added to the level
+   */
   public ILevelBuilder addGoblin(
           int roomNumber,
           int count) throws IllegalStateException, IllegalArgumentException {
@@ -67,6 +83,15 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Add orc monsters to a specified room.
+   *
+   * @param room the room to which the monster is added
+   * @param count the number of orcs to add
+   * @return the level builder instance with updated level data
+   * @throws IllegalArgumentException when specified room has not yet been added
+   * @throws IllegalStateException when too many monsters are added to the level
+   */
   public ILevelBuilder addOrc(
           int roomNumber,
           int count) throws IllegalStateException, IllegalArgumentException {
@@ -94,6 +119,15 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Add ogre monsters to a specified.
+   *
+   * @param roomNumber the room to which the monster is added
+   * @param count the number of ogres to add
+   * @return the level builder instance with updated level data
+   * @throws IllegalArgumentException when specified room has not yet been added
+   * @throws IllegalStateException when too many monsters are added to the level
+   */
   public ILevelBuilder addOgre(
           int roomNumber,
           int count) throws IllegalStateException, IllegalArgumentException{
@@ -121,6 +155,17 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Adds a human to the level.
+   *
+   * @param roomNumber the number to which the human is added
+   * @param name the name of the human
+   * @param description a description of the human
+   * @param hitPoints the hitpoints for the human
+   * @return the level builder instance with updated level data
+   * @throws IllegalArgumentException when the room has not been added or hitPoint is negative
+   * @throws IllegalStateException when too many monsters are added to the level
+   */
   public ILevelBuilder addHuman(
           int roomNumber,
           String name,
@@ -148,6 +193,14 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Adds a potion to the specified room.
+   *
+   * @param roomNumber the room to which the potion is added
+   * @return the level builder instance with updated level data
+   * @throws IllegalStateException when the specified room has not been set
+   * @throws IllegalStateException when too many treasures are added to a level
+   */
   public ILevelBuilder addPotion(
           int roomNumber) throws IllegalStateException, IllegalArgumentException
   {
@@ -170,6 +223,15 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Adds gold to a room in the level.
+   *
+   * @param roomNumber the room to which the gold is added
+   * @param value the value of the gold added
+   * @return the level builder instance with updated level data
+   * @throws IllegalStateException when the specified room has not been set or value is <= 0
+   * @throws IllegalArgumentException when too many treasures are added to a level
+   */
   public ILevelBuilder addGold(
           int roomNumber,
           int value) throws IllegalStateException, IllegalArgumentException {
@@ -195,6 +257,15 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Adds a weapon to a room in the level.
+   *
+   * @param roomNumber the room to which the weapon is added
+   * @param description the level builder instance with updated level data
+   * @return the level builder instance with updated level data
+   * @throws IllegalStateException when the specified room has not been set
+   * @throws IllegalArgumentException when too many treasures are added to a level
+   */
   public ILevelBuilder addWeapon(
           int roomNumber,
           String description) throws IllegalStateException, IllegalArgumentException {
@@ -217,7 +288,17 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
-  public ILevelBuilder addSpecial(
+  /**
+   * Adds a special item to a room in the level.
+   *
+   * @param roomNumber the room to which the item is added
+   * @param description a description of the item
+   * @param value the value of the item
+   * @return the level builder instance with updated level data
+   * @throws IllegalStateException when the specified room has not been set or value <= 0
+   * @throws IllegalArgumentException when too many treasures are added to a level
+   */
+  public ILevelBuilder addSpecialItem(
           int roomNumber,
           String description,
           int value) throws IllegalStateException, IllegalArgumentException {
@@ -243,6 +324,12 @@ public class MedievalLevelBuilder implements ILevelBuilder {
     return this;
   }
 
+  /**
+   * Builds and returns the Level instance.
+   *
+   * @return the level instance
+   * @throws IllegalStateException when the level has not yet been fully built
+   */
   public Level build() throws IllegalStateException{
     if (this.treasureCount < this.numberOfTreasures) {
       throw new IllegalStateException("Required number of treasures not met.");
