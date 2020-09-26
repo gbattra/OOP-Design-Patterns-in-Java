@@ -50,7 +50,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
   /**
    * Add goblin monsters to a specified room.
    *
-   * @param room the room to which the monster is added
+   * @param roomNumber the room to which the monster is added
    * @param count the number of goblins to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added
@@ -86,7 +86,7 @@ public class MedievalLevelBuilder implements ILevelBuilder {
   /**
    * Add orc monsters to a specified room.
    *
-   * @param room the room to which the monster is added
+   * @param roomNumber the room to which the monster is added
    * @param count the number of orcs to add
    * @return the level builder instance with updated level data
    * @throws IllegalArgumentException when specified room has not yet been added

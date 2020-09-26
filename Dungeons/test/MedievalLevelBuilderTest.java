@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import dungeon.ILevelBuilder;
+import dungeon.Level;
 import dungeon.MedievalLevelBuilder;
 
 import static org.junit.Assert.fail;
@@ -11,7 +13,7 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidConstructor() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 5, 10);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 5, 10);
       // do nothing test passes
     } catch (Exception e) {
       fail("Valid instantiation of builder should not have failed.");
@@ -21,7 +23,7 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testInvalidConstructorNegativeLevelNumber() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(-1, 10, 5, 10);
+      ILevelBuilder builder = new MedievalLevelBuilder(-1, 10, 5, 10);
       fail("Invalid instantiation of builder should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -31,7 +33,7 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testInvalidConstructorNegativeRoomCount() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, -10, 5, 10);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, -10, 5, 10);
       fail("Invalid instantiation of builder should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -41,7 +43,7 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testInvalidConstructorNegativeMonsterCount() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, -5, 10);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, -5, 10);
       fail("Invalid instantiation of builder should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -51,7 +53,7 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testInvalidConstructorNegativeTreasureCount() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 5, -10);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 5, -10);
       fail("Invalid instantiation of builder should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -61,8 +63,8 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddRoom() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 1, 5, 10);
-      builder.addRoom("This is the first room.");
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 1, 5, 10)
+              .addRoom("This is the first room.");
     } catch (Exception e) {
       fail("Valid addRoom() call should not have failed.");
     }
@@ -71,9 +73,9 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testInvalidAddRoomTooMany() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 1, 5, 10);
-      builder.addRoom("This is the first room.");
-      builder.addRoom("This is the second room.");  // this should throw
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 1, 5, 10)
+              .addRoom("This is the first room.")
+              .addRoom("This is the second room.");  // this should throw
       fail(" Invalid addRoom() call should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -83,9 +85,9 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddGoblin() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addRoom("This is the first room.");
-      builder.addGoblin(0, 1);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addGoblin(0, 1);
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid addGoblin() call should not have failed.");
@@ -95,8 +97,8 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testInvalidAddGoblinRoomNotSet() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addGoblin(0, 1);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addGoblin(0, 1);
       fail("Invalid addGoblin() call should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -106,10 +108,10 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testInvalidAddGoblinTooManyMonsters() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addRoom("This is the first room.");
-      builder.addGoblin(0, 1);
-      builder.addGoblin(0, 1);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addGoblin(0, 1)
+              .addGoblin(0, 1);
       fail("Invalid addGoblin() call should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -119,9 +121,9 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddOrc() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addRoom("This is the first room.");
-      builder.addOrc(0, 1);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addOrc(0, 1);
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid addOrc() call should not have failed.");
@@ -131,8 +133,8 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddOrcRoomNotSet() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addOrc(0, 1);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addOrc(0, 1);
       fail("Invalid addOrc() call should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -142,10 +144,10 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddOrcTooManyMonsters() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addRoom("This is the first room.");
-      builder.addOrc(0, 1);
-      builder.addOrc(0, 1);  // this should throw
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addOrc(0, 1)
+              .addOrc(0, 1);  // this should throw
       fail("Invalid addOrc() call should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -155,9 +157,9 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddOgre() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addRoom("This is the first room.");
-      builder.addOgre(0, 1);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addOgre(0, 1);
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid addOgre() call should not have failed.");
@@ -167,8 +169,8 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddOgreRoomNotSet() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addOgre(0, 1);
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addOgre(0, 1);
       fail("Invalid addOgre() call should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -178,11 +180,297 @@ public class MedievalLevelBuilderTest {
   @Test
   public void testValidAddOgreTooManyMonsters() {
     try {
-      MedievalLevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10);
-      builder.addRoom("This is the first room.");
-      builder.addOgre(0, 1);
-      builder.addOgre(0, 1);  // this should throw
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addOgre(0, 1)
+              .addOgre(0, 1);  // this should throw
       fail("Invalid addOgre() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddHuman() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addHuman(
+                      0,
+                      "Bob",
+                      "Bob is a criminal and his punishment is to navigate this dungeon.",
+                      10);
+    } catch (Exception e) {
+      fail("Valid addHuman() call should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddHumanNegativeHitPoints() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addHuman(
+                      0,
+                      "Bob",
+                      "Bob is a criminal and his punishment is to navigate this dungeon.",
+                      -10);
+      fail("Invalid addHuman() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHumanRoomNotSet() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addHuman(
+                      0,
+                      "Bob",
+                      "Bob is a criminal and his punishment is to navigate this dungeon.",
+                      10);
+      fail("Invalid addHuman() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHumanTooManyMonsters() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room.")
+              .addHuman(
+                      0,
+                      "Bob",
+                      "Bob is a criminal and his punishment is to navigate this dungeon.",
+                      10)
+              .addHuman(
+                      0,
+                      "Sally",
+                      "Sally is here to rescue Bob from the dungeon.",
+                      10);
+      fail("Invalid addHuman() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddPotion() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room")
+              .addPotion(0);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addPotion() call should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddPotionRoomNotSet() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addPotion(0);
+      fail("Invalid addPotion() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddPotionTooManyTreasures() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 1)
+              .addRoom("This is the first room")
+              .addPotion(0)
+              .addPotion(0); // this throws
+      fail("Invalid addPotion() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddGold() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room")
+              .addGold(0, 10);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addGold() call should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddGoldRoomNotSet() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addGold(0, 10);
+      fail("Invalid addGold() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddGoldTooManyTreasures() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 1)
+              .addRoom("This is the first room")
+              .addGold(0, 10)
+              .addGold(0, 10); // this throws
+      fail("Invalid addGold() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddGoldNegativeValue() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 1)
+              .addRoom("This is the first room")
+              .addGold(0, -10);
+      fail("Invalid addGold() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddWeapon() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room")
+              .addWeapon(0, "I am cool weapon!");
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addWeapon() call should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddWeaponRoomNotSet() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addWeapon(0, "I am cool weapon!");
+      fail("Invalid addWeapon() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddWeaponTooManyTreasures() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 1)
+              .addRoom("This is the first room")
+              .addWeapon(0, "I am cool weapon!")
+              .addWeapon(0, "I am cool weapon!"); // this throws
+      fail("Invalid addWeapon() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddSpecialItem() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addRoom("This is the first room")
+              .addSpecialItem(0, "I am a special item!", 10);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addSpecialItem() call should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddSpecialItemRoomNotSet() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 10)
+              .addSpecialItem(0, "I am a special item!", 10);
+      fail("Invalid addSpecialItem() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddSpecialItemTooManyTreasures() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 1)
+              .addRoom("This is the first room")
+              .addSpecialItem(0, "I am a special item!", 10)
+              .addSpecialItem(0, "I am a special item!", 10); // this throws
+      fail("Invalid addSpecialItem() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddSpecialItemNegativeValue() {
+    try {
+      ILevelBuilder builder = new MedievalLevelBuilder(1, 10, 1, 1)
+              .addRoom("This is the first room")
+              .addSpecialItem(0, "I am a special item!", -10);
+      fail("Invalid addSpecialItem() call should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidBuild() {
+    try {
+      Level level = new MedievalLevelBuilder(1, 1, 1, 1)
+              .addRoom("This is the first room")
+              .addGold(0, 1)
+              .addGoblin(0, 1)
+              .build();
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid build() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidBuildNoMonsters() {
+    try {
+      Level level = new MedievalLevelBuilder(1, 1, 1, 1)
+              .addRoom("This is the first room")
+              .addGold(0, 1)
+              .build();
+      fail("Invalid build() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidBuildNoTreasures() {
+    try {
+      Level level = new MedievalLevelBuilder(1, 1, 1, 1)
+              .addRoom("This is the first room")
+              .addGoblin(0, 1)
+              .build();
+      fail("Invalid build() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidBuildNoRooms() {
+    try {
+      Level level = new MedievalLevelBuilder(1, 1, 1, 1)
+              .build();
+      fail("Invalid build() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
     }
