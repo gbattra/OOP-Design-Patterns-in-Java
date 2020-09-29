@@ -14,6 +14,7 @@ import rpg.models.HandGear;
 import rpg.models.HeadGear;
 import rpg.models.Player;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class PlayerTest {
@@ -164,5 +165,57 @@ public class PlayerTest {
     } catch (Exception e) {
       // do nothing, test passes
     }
+  }
+
+  @Test
+  public void testGetNumber() {
+    IPlayer player = new Player(1, 10, 10);
+    assertEquals(1, player.getNumber());
+  }
+
+  @Test
+  public void getAttackNoGear() {
+    IPlayer player = new Player(1, 10, 10);
+    assertEquals(10, player.getAttack());
+  }
+
+  @Test
+  public void getDefenseNoGear() {
+    IPlayer player = new Player(1, 10, 10);
+    assertEquals(10, player.getDefense());
+  }
+
+  @Test
+  public void getAttackWithGears() {
+    IPlayer player = new Player(
+            1,
+            10,
+            10,
+            new ArrayList<>(Arrays.asList(this.headGear1)),
+            new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
+            new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
+    assertEquals(
+            10
+            + this.headGear1.getAttack()
+            + this.handGear1.getAttack() + this.handGear2.getAttack()
+            + this.footGear1.getAttack() + this.footGear2.getAttack(),
+            player.getAttack());
+  }
+
+  @Test
+  public void getDefenseWithGears() {
+    IPlayer player = new Player(
+            1,
+            10,
+            10,
+            new ArrayList<>(Arrays.asList(this.headGear1)),
+            new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
+            new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
+    assertEquals(
+            10
+                    + this.headGear1.getDefense()
+                    + this.handGear1.getDefense() + this.handGear2.getDefense()
+                    + this.footGear1.getDefense() + this.footGear2.getDefense(),
+            player.getDefense());
   }
 }

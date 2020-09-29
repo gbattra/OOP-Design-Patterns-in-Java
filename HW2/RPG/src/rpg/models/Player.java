@@ -90,7 +90,7 @@ public class Player implements IPlayer {
   public int getAttack() {
     int aggregateAttack = this.attack;
     List<IGear> gears = new ArrayList<>();
-    Stream.of(this.handGears, this.handGears, this.footGears).forEach(gears::addAll);
+    Stream.of(this.headGears, this.handGears, this.footGears).forEach(gears::addAll);
     for (IGear gear : gears) {
       aggregateAttack += gear.getAttack();
     }
@@ -100,7 +100,7 @@ public class Player implements IPlayer {
   public int getDefense() {
     int aggregateDefense = this.defense;
     List<IGear> gears = new ArrayList<>();
-    Stream.of(this.handGears, this.handGears, this.footGears).forEach(gears::addAll);
+    Stream.of(this.headGears, this.handGears, this.footGears).forEach(gears::addAll);
     for (IGear gear : gears) {
       aggregateDefense += gear.getDefense();
     }
