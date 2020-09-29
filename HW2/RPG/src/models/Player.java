@@ -2,8 +2,10 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import interfaces.IFootGear;
+import interfaces.IGear;
 import interfaces.IHandGear;
 import interfaces.IHeadGear;
 import interfaces.IPlayer;
@@ -87,11 +89,22 @@ public class Player implements IPlayer {
 
   public int getAttack() {
     int aggregateAttack = this.attack;
-    return this.attack;
+    List<IGear> gears = new ArrayList<>();
+    Stream.of(this.handGears, this.handGears, this.footGears).forEach(gears::addAll);
+    for (IGear gear : gears) {
+      aggregateAttack += gear.getAttack();
+    }
+    return aggregateAttack;
   }
 
   public int getDefense() {
-    return this.defense;
+    int aggregateDefense = this.defense;
+    List<IGear> gears = new ArrayList<>();
+    Stream.of(this.handGears, this.handGears, this.footGears).forEach(gears::addAll);
+    for (IGear gear : gears) {
+      aggregateDefense += gear.getDefense();
+    }
+    return aggregateDefense;
   }
 
   public IPlayer addHeadGear(IHeadGear gear) throws IllegalStateException {
