@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import interfaces.IFootGear;
 import interfaces.IGear;
 import interfaces.IHandGear;
 
 /**
- * Type of IGear specifically for hand gear. Has both attack and defense value.
+ * Type of IGear specifically for head gear. Has both attack and defense values.
  */
-public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
+public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
   /**
    * Constructor for when this gear is not combined.
    *
@@ -20,7 +21,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
    * @param noun String the noun for this gear
    * @throws IllegalArgumentException when attack or defense < 0, adjective or noun empty
    */
-  public HandGear(
+  public FootGear(
           int attack,
           int defense,
           String adjective,
@@ -39,12 +40,12 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
    * @throws IllegalArgumentException when attack or defense < 0, adjective or noun empty,
    * combinedGears != 2
    */
-  public HandGear(
+  public FootGear(
           int attack,
           int defense,
           String adjective,
           String noun,
-          List<IGear<IHandGear>> combinedGears) throws IllegalArgumentException {
+          List<IGear<IFootGear>> combinedGears) throws IllegalArgumentException {
     super(attack, defense, adjective, noun, combinedGears);
   }
 
@@ -55,7 +56,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
    * @return the new combined gear instance
    * @throws IllegalStateException when either this or the gear provided in is already combined
    */
-  public IGear<IHandGear> combine(IGear<IHandGear> gear) throws IllegalStateException {
+  public IGear<IFootGear> combine(IGear<IFootGear> gear) throws IllegalStateException {
     if (this.isCombined) {
       throw new IllegalStateException(
               "Cannot combine self to gear. Self is already combined with another gear.");
@@ -66,7 +67,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
               "Cannot combine self to gear. Gear is already combined with another gear.");
     }
 
-    IGear<IHandGear> newGear = new HandGear(
+    IGear<IFootGear> newGear = new FootGear(
             this.attack + gear.getAttack(),
             this.defense + gear.getDefense(),
             String.format("%s, %s", this.adjective, gear.getAdjective()),

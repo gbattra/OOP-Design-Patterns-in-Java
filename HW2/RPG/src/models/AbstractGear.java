@@ -39,6 +39,15 @@ public abstract class AbstractGear<T> implements IGear<T> {
     this.combinedWith = null;
   }
 
+  /**
+   * Constructor for when gear is combined.
+   *
+   * @param attack int the base attack value for this gear
+   * @param defense int the base defense value for this gear
+   * @param adjective String the adjective for this gear
+   * @param noun String the noun for this gear
+   * @param combinedGears List of gears combined to form this gear
+   */
   public AbstractGear(
           int attack,
           int defense,
@@ -79,22 +88,47 @@ public abstract class AbstractGear<T> implements IGear<T> {
     return this.isCombined;
   }
 
+  /**
+   * Returns the attack value for this gear.
+   *
+   * @return the int attack property value
+   */
   public int getAttack() {
     return this.attack;
   }
 
+  /**
+   * Returns the defense value for this gear.
+   *
+   * @return the int defense property value
+   */
   public int getDefense() {
     return this.defense;
   }
 
+  /**
+   * Returns the adjective describing this gear.
+   *
+   * @return the String adjective property value
+   */
   public String getAdjective() {
     return this.adjective;
   }
 
+  /**
+   * Returns the noun describing this gear.
+   *
+   * @return the String noun property value
+   */
   public String getNoun() {
     return this.noun;
   }
 
+  /**
+   * Returns the name of this gear.
+   *
+   * @return String combination of adjective and noun properties
+   */
   public String getName() {
     return String.format("%s %s", this.adjective, this.noun);
   }
