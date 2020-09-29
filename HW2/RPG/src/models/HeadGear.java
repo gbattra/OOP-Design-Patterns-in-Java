@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import interfaces.IGear;
 import interfaces.IHeadGear;
 
 /**
@@ -40,7 +39,7 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
           int defense,
           String adjective,
           String noun,
-          List<IGear<IHeadGear>> combinedGears) throws IllegalArgumentException {
+          List<IHeadGear> combinedGears) throws IllegalArgumentException {
     super(0, defense, adjective, noun, combinedGears);
   }
 

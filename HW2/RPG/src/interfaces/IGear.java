@@ -6,5 +6,4 @@ public interface IGear {
   String getAdjective();
   String getNoun();
   String getName();
-  boolean isCombined();
 }

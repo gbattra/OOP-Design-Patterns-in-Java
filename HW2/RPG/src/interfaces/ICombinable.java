@@ -6,4 +6,5 @@ import java.util.Optional;
 public interface ICombinable<T> {
   T combine(T other) throws IllegalStateException;
   Optional<List<T>> combinedWith();
+  boolean isCombined();
 }

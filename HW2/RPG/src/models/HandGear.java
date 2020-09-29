@@ -44,7 +44,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
           int defense,
           String adjective,
           String noun,
-          List<IGear<IHandGear>> combinedGears) throws IllegalArgumentException {
+          List<IHandGear> combinedGears) throws IllegalArgumentException {
     super(attack, defense, adjective, noun, combinedGears);
   }
 
