@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import rpg.interfaces.IFootGear;
 import rpg.interfaces.IHeadGear;
 
 /**
@@ -63,10 +64,30 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
 
     IHeadGear newGear = new HeadGear(
             this.defense + gear.getDefense(),
-            String.format("%s, %s", this.adjective, gear.getAdjective()),
+            String.format("%s, %s", gear.getAdjective(), this.adjective),
             this.noun,
             new ArrayList<>(Arrays.asList(this, gear)));
 
     return newGear;
+  }
+
+  /**
+   * Override equals() method.
+   *
+   * @param other the object to compare
+   * @return boolean is this object equal to the other
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other == this) {
+      return true;
+    }
+
+    if (other instanceof IHeadGear) {
+      IHeadGear gear = (IHeadGear) other;
+      return gear.hashCode() == this.hashCode();
+    }
+
+    return false;
   }
 }

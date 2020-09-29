@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import rpg.interfaces.IFootGear;
+import rpg.interfaces.IGear;
 
 /**
  * Type of IGear specifically for head gear. Has both attack and defense values.
@@ -68,10 +69,30 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
     IFootGear newGear = new FootGear(
             this.attack + gear.getAttack(),
             this.defense + gear.getDefense(),
-            String.format("%s, %s", this.adjective, gear.getAdjective()),
+            String.format("%s, %s", gear.getAdjective(), this.adjective),
             this.noun,
             new ArrayList<>(Arrays.asList(this, gear)));
 
     return newGear;
+  }
+
+  /**
+   * Override equals() method.
+   *
+   * @param other the object to compare
+   * @return boolean is this object equal to the other
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other == this) {
+      return true;
+    }
+
+    if (other instanceof IFootGear) {
+      IFootGear gear = (IFootGear) other;
+      return gear.hashCode() == this.hashCode();
+    }
+
+    return false;
   }
 }

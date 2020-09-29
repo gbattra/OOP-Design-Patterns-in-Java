@@ -28,12 +28,21 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
    * @param noun String the noun for this gear
+   * @throws IllegalArgumentException when attack or def < 0, adj or noun empty
    */
   public AbstractGear(
           int attack,
           int defense,
           String adjective,
-          String noun) {
+          String noun) throws IllegalArgumentException {
+    if (attack < 0 || defense < 0) {
+      throw new IllegalArgumentException("Attack and defense values must be non-negative.");
+    }
+
+    if (adjective.isEmpty() || noun.isEmpty()) {
+      throw new IllegalArgumentException("Adjective and noun must not be empty.");
+    }
+
     this.attack = attack;
     this.defense = defense;
     this.adjective = adjective;
@@ -146,5 +155,38 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
    */
   public String getName() {
     return String.format("%s %s", this.adjective, this.noun);
+  }
+
+  /**
+   * Overrides toString() method.
+   *
+   * @return the string representation of this instance
+   */
+  @Override
+  public String toString() {
+    String description = String.format(
+            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            this.adjective,
+            this.noun,
+            this.attack,
+            this.defense);
+    if (this.isCombined) {
+      description += " Combined with: ";
+      for (T gear : this.combinedWith) {
+        description += String.format("%s", gear.toString());
+      }
+    }
+
+    return description;
+  }
+
+  /**
+   * Overrides the hashCode() method.
+   *
+   * @return int the hashcode
+   */
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
   }
 }
