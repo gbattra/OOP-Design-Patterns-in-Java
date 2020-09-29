@@ -7,7 +7,6 @@ import java.util.List;
 import rpg.enums.GearClass;
 import rpg.enums.GearType;
 import rpg.interfaces.IFootGear;
-import rpg.interfaces.IGear;
 
 /**
  * Type of IGear specifically for head gear. Has both attack and defense values.

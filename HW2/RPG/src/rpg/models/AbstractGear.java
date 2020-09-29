@@ -10,6 +10,7 @@ import rpg.interfaces.IGear;
 /**
  * Abstract class for objects implementing IGear. Contains common functionality such as
  * basic getters and aggregators.
+ *
  * @param <T> Interface for the gear type represented by whatever extends this abstract class
  */
 public abstract class AbstractGear<T> implements IGear, ICombinable<T> {

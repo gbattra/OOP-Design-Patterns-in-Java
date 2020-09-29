@@ -6,7 +6,6 @@ import java.util.List;
 
 import rpg.enums.GearClass;
 import rpg.enums.GearType;
-import rpg.interfaces.IFootGear;
 import rpg.interfaces.IHandGear;
 
 /**
