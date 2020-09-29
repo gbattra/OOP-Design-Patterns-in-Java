@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import rpg.enums.GearType;
 import rpg.interfaces.IFootGear;
 import rpg.interfaces.IGear;
 import rpg.models.FootGear;
@@ -22,9 +23,10 @@ public class FootGearTest {
 
   @Before
   public void setup() {
-    this.footGear1 = new FootGear(10, 10, "strong", "boot");
-    this.footGear2 = new FootGear(1, 1, "weak", "slipper");
+    this.footGear1 = new FootGear(GearType.BOOT, 10, 10, "strong", "boot");
+    this.footGear2 = new FootGear(GearType.BOOT, 1, 1, "weak", "boot");
     this.combinedFootGear = new FootGear(
+            GearType.BOOT,
             this.footGear1.getAttack() + this.footGear2.getAttack(),
             this.footGear1.getDefense() + this.footGear2.getDefense(),
             this.footGear2.getAdjective() + ", " + this.footGear1.getAdjective(),
@@ -35,7 +37,7 @@ public class FootGearTest {
   @Test
   public void testValidConstructorNotCombined() {
     try {
-      IFootGear gear = new FootGear(10, 10, "strong", "shoe");
+      IFootGear gear = new FootGear(GearType.BOOT, 10, 10, "strong", "shoe");
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -43,9 +45,19 @@ public class FootGearTest {
   }
 
   @Test
+  public void testInvalidConstructorNotCombinedWrongType() {
+    try {
+      IFootGear gear = new FootGear(GearType.HAT, 10, 10, "strong", "shoe");
+      fail("Invalid constructor should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
   public void testInvalidConstructorNotCombinedNegAttack() {
     try {
-      IFootGear gear = new FootGear(-10, 10, "strong", "shoe");
+      IFootGear gear = new FootGear(GearType.BOOT, -10, 10, "strong", "shoe");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -55,7 +67,7 @@ public class FootGearTest {
   @Test
   public void testInvalidConstructorNotCombinedNegDefense() {
     try {
-      IFootGear gear = new FootGear(10, -10, "strong", "shoe");
+      IFootGear gear = new FootGear(GearType.BOOT, 10, -10, "strong", "shoe");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -65,7 +77,7 @@ public class FootGearTest {
   @Test
   public void testInvalidConstructorNotCombinedEmptyAdj() {
     try {
-      IFootGear gear = new FootGear(10, 10, "", "shoe");
+      IFootGear gear = new FootGear(GearType.BOOT, 10, 10, "", "shoe");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -75,7 +87,7 @@ public class FootGearTest {
   @Test
   public void testInvalidConstructorNotCombinedEmptyNoun() {
     try {
-      IFootGear gear = new FootGear(10, 10, "strong", "");
+      IFootGear gear = new FootGear(GearType.BOOT, 10, 10, "strong", "");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -86,6 +98,7 @@ public class FootGearTest {
   public void testValidConstructorCombined() {
     try {
       IFootGear gear = new FootGear(
+              GearType.BOOT,
               10,
               10,
               "strong",
@@ -97,9 +110,26 @@ public class FootGearTest {
   }
 
   @Test
+  public void testInvalidConstructorCombinedWrongType() {
+    try {
+      IFootGear gear = new FootGear(
+              GearType.HAT,
+              10,
+              10,
+              "strong",
+              "shoe",
+              new ArrayList<>(Arrays.asList(this.footGear2)));
+      fail("Invalid constructor should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
   public void testInvalidConstructorCombinedWrongCount() {
     try {
       IFootGear gear = new FootGear(
+              GearType.BOOT,
               10,
               10,
               "strong",
@@ -115,6 +145,7 @@ public class FootGearTest {
   public void testInvalidConstructorCombinedNegAttack() {
     try {
       IFootGear gear = new FootGear(
+              GearType.BOOT,
               -10,
               10,
               "strong",
@@ -130,6 +161,7 @@ public class FootGearTest {
   public void testInvalidConstructorCombinedNegDefense() {
     try {
       IFootGear gear = new FootGear(
+              GearType.BOOT,
               10,
               -10,
               "strong",
@@ -145,6 +177,7 @@ public class FootGearTest {
   public void testInvalidConstructorCombinedEmptyAdj() {
     try {
       IFootGear gear = new FootGear(
+              GearType.BOOT,
               10,
               10,
               "",
@@ -160,6 +193,7 @@ public class FootGearTest {
   public void testInvalidConstructorCombinedEmptyNoun() {
     try {
       IFootGear gear = new FootGear(
+              GearType.BOOT,
               10,
               10,
               "strong",
@@ -174,28 +208,29 @@ public class FootGearTest {
   @Test
   public void testToStringNotCombined() {
     String expected = String.format(
-            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "strong", "boot", 10, 10);
+            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(), "strong", "boot", 10, 10);
     assertEquals(expected, this.footGear1.toString());
   }
 
   @Test
-  public void testToCombined() {
+  public void testToStringCombined() {
     String expected = String.format(
-            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "weak, strong", "boot", 11, 11);
+            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(), "weak, strong", "boot", 11, 11);
     expected += String.format(
-            " Combined with: Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "strong", "boot", 10, 10);
+            " Combined with: Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(),  "strong", "boot", 10, 10);
     expected += String.format(
-            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "weak", "slipper", 1, 1);
+            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(),  "weak", "boot", 1, 1);
     assertEquals(expected, this.combinedFootGear.toString());
   }
 
   @Test
   public void testEqualsTrue() {
     IFootGear copyGear1 = new FootGear(
+            this.footGear1.getType(),
             this.footGear1.getAttack(),
             this.footGear1.getDefense(),
             this.footGear1.getAdjective(),
@@ -296,6 +331,19 @@ public class FootGearTest {
   public void testInvalidCombineProvidedAlreadyCombined() {
     try {
       IFootGear combined = this.footGear1.combine(this.combinedFootGear);
+      fail("Invalid combine() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidCombineWrongType() {
+    try {
+      IFootGear gear = new FootGear(
+              GearType.SNEAKER,
+              10, 10, "nice", "sneaker");
+      IFootGear combined = this.footGear1.combine(gear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes

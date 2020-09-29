@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import rpg.enums.GearClass;
+import rpg.enums.GearType;
 import rpg.interfaces.IFootGear;
 import rpg.interfaces.IGear;
 
@@ -14,6 +16,7 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
   /**
    * Constructor for when this gear is not combined.
    *
+   * @param type GearType for this gear instance
    * @param attack int the base attack value for this gear
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
@@ -21,16 +24,23 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
    * @throws IllegalArgumentException when attack or defense < 0, adjective or noun empty
    */
   public FootGear(
+          GearType type,
           int attack,
           int defense,
           String adjective,
           String noun) throws IllegalArgumentException {
-    super(attack, defense, adjective, noun);
+    super(type, attack, defense, adjective, noun);
+
+    if (type.gearClass != GearClass.FOOTGEAR) {
+      throw new IllegalArgumentException(
+              String.format("GearType provided not of class %s", GearClass.FOOTGEAR.toString()));
+    }
   }
 
   /**
    * Constructor for when this gear is combined.
    *
+   * @param type GearType for this gear instance
    * @param attack int the base attack value for this gear
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
@@ -40,12 +50,18 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
    * combinedGears != 2
    */
   public FootGear(
+          GearType type,
           int attack,
           int defense,
           String adjective,
           String noun,
           List<IFootGear> combinedGears) throws IllegalArgumentException {
-    super(attack, defense, adjective, noun, combinedGears);
+    super(type, attack, defense, adjective, noun, combinedGears);
+
+    if (type.gearClass != GearClass.FOOTGEAR) {
+      throw new IllegalArgumentException(
+              String.format("GearType provided not of class %s", GearClass.FOOTGEAR.toString()));
+    }
   }
 
   /**
@@ -55,7 +71,7 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
    * @return the new combined gear instance
    * @throws IllegalStateException when either this or the gear provided in is already combined
    */
-  public IFootGear combine(IFootGear gear) throws IllegalStateException {
+  public IFootGear combine(IFootGear gear) throws IllegalArgumentException, IllegalStateException {
     if (this.isCombined) {
       throw new IllegalStateException(
               "Cannot combine self to gear. Self is already combined with another gear.");
@@ -66,7 +82,12 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
               "Cannot combine self to gear. Gear is already combined with another gear.");
     }
 
+    if (this.type != gear.getType()) {
+      throw new IllegalArgumentException("Cannot combine gears of two different types.");
+    }
+
     IFootGear newGear = new FootGear(
+            this.type,
             this.attack + gear.getAttack(),
             this.defense + gear.getDefense(),
             String.format("%s, %s", gear.getAdjective(), this.adjective),

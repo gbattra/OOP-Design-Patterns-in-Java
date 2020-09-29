@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import rpg.enums.GearClass;
+import rpg.enums.GearType;
 import rpg.interfaces.IFootGear;
 import rpg.interfaces.IHeadGear;
 
@@ -14,21 +16,29 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
   /**
    * Constructor for when this gear is not combined.
    *
+   * @param type GearType for this gear instance
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
    * @param noun String the noun for this gear
    * @throws IllegalArgumentException when attack or defense < 0, adjective or noun empty
    */
   public HeadGear(
+          GearType type,
           int defense,
           String adjective,
           String noun) throws IllegalArgumentException {
-    super(0, defense, adjective, noun);
+    super(type, 0, defense, adjective, noun);
+
+    if (type.gearClass != GearClass.HEADGEAR) {
+      throw new IllegalArgumentException(
+              String.format("GearType provided not of class %s", GearClass.HEADGEAR.toString()));
+    }
   }
 
   /**
    * Constructor for when this gear is combined.
    *
+   * @param type GearType for this gear instance
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
    * @param noun String the noun for this gear
@@ -37,11 +47,17 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
    * combinedGears != 2
    */
   public HeadGear(
+          GearType type,
           int defense,
           String adjective,
           String noun,
           List<IHeadGear> combinedGears) throws IllegalArgumentException {
-    super(0, defense, adjective, noun, combinedGears);
+    super(type, 0, defense, adjective, noun, combinedGears);
+
+    if (type.gearClass != GearClass.HEADGEAR) {
+      throw new IllegalArgumentException(
+              String.format("GearType provided not of class %s", GearClass.HEADGEAR.toString()));
+    }
   }
 
   /**
@@ -51,7 +67,7 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
    * @return the new combined gear instance
    * @throws IllegalStateException when either this or the gear provided in is already combined
    */
-  public IHeadGear combine(IHeadGear gear) throws IllegalStateException {
+  public IHeadGear combine(IHeadGear gear) throws IllegalArgumentException, IllegalStateException {
     if (this.isCombined) {
       throw new IllegalStateException(
               "Cannot combine self to gear. Self is already combined with another gear.");
@@ -63,6 +79,7 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
     }
 
     IHeadGear newGear = new HeadGear(
+            this.type,
             this.defense + gear.getDefense(),
             String.format("%s, %s", gear.getAdjective(), this.adjective),
             this.noun,

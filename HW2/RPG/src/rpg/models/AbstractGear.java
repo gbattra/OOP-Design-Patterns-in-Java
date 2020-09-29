@@ -3,6 +3,7 @@ package rpg.models;
 import java.util.List;
 import java.util.Optional;
 
+import rpg.enums.GearType;
 import rpg.interfaces.ICombinable;
 import rpg.interfaces.IGear;
 
@@ -14,6 +15,7 @@ import rpg.interfaces.IGear;
 public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   private static final int COMBINED_COUNT = 2;
 
+  protected final GearType type;
   protected final int attack;
   protected final int defense;
   protected final String adjective;
@@ -24,6 +26,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   /**
    * Constructor for when gear is not combined.
    *
+   * @param type GearType of this gear instance
    * @param attack int the base attack value for this gear
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
@@ -31,6 +34,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
    * @throws IllegalArgumentException when attack or def < 0, adj or noun empty
    */
   public AbstractGear(
+          GearType type,
           int attack,
           int defense,
           String adjective,
@@ -42,7 +46,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
     if (adjective.isEmpty() || noun.isEmpty()) {
       throw new IllegalArgumentException("Adjective and noun must not be empty.");
     }
-
+    this.type = type;
     this.attack = attack;
     this.defense = defense;
     this.adjective = adjective;
@@ -54,6 +58,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   /**
    * Constructor for when gear is combined.
    *
+   * @param type GearType of this gear instance
    * @param attack int the base attack value for this gear
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
@@ -61,6 +66,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
    * @param combinedWith List of gears combined to form this gear
    */
   public AbstractGear(
+          GearType type,
           int attack,
           int defense,
           String adjective,
@@ -78,6 +84,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
       throw new IllegalArgumentException("Invalid combinedWith list. Must have exactly 2 items.");
     }
 
+    this.type = type;
     this.attack = attack;
     this.defense = defense;
     this.adjective = adjective;
@@ -110,6 +117,15 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
    */
   public boolean isCombined() {
     return this.isCombined;
+  }
+
+  /**
+   * Returns the gear type.
+   *
+   * @return GearType enum value
+   */
+  public GearType getType() {
+    return this.type;
   }
 
   /**
@@ -165,7 +181,8 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   @Override
   public String toString() {
     String description = String.format(
-            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            this.type.toString(),
             this.adjective,
             this.noun,
             this.attack,

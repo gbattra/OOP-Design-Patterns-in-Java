@@ -6,7 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import rpg.enums.GearType;
+import rpg.interfaces.IFootGear;
 import rpg.interfaces.IHandGear;
+import rpg.models.FootGear;
 import rpg.models.HandGear;
 
 import static org.junit.Assert.assertEquals;
@@ -21,9 +24,10 @@ public class HandGearTest {
 
   @Before
   public void setup() {
-    this.handGear1 = new HandGear(10, 10, "strong", "glove");
-    this.handGear2 = new HandGear(1, 1, "weak", "shield");
+    this.handGear1 = new HandGear(GearType.GLOVE, 10, 10, "strong", "glove");
+    this.handGear2 = new HandGear(GearType.GLOVE, 1, 1, "weak", "glove");
     this.combinedHandGear = new HandGear(
+            GearType.GLOVE,
             this.handGear1.getAttack() + this.handGear2.getAttack(),
             this.handGear1.getDefense() + this.handGear2.getDefense(),
             this.handGear2.getAdjective() + ", " + this.handGear1.getAdjective(),
@@ -34,7 +38,7 @@ public class HandGearTest {
   @Test
   public void testValidConstructorNotCombined() {
     try {
-      IHandGear gear = new HandGear(10, 10, "strong", "glove");
+      IHandGear gear = new HandGear(GearType.GLOVE, 10, 10, "strong", "glove");
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -42,9 +46,19 @@ public class HandGearTest {
   }
 
   @Test
+  public void testInvalidConstructorWrongType() {
+    try {
+      IHandGear gear = new HandGear(GearType.HAT, 10, 10, "strong", "glove");
+      fail("Invalid constructor should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
   public void testInvalidConstructorNotCombinedNegAttack() {
     try {
-      IHandGear gear = new HandGear(-10, 10, "strong", "glove");
+      IHandGear gear = new HandGear(GearType.GLOVE, -10, 10, "strong", "glove");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -54,7 +68,7 @@ public class HandGearTest {
   @Test
   public void testInvalidConstructorNotCombinedNegDefense() {
     try {
-      IHandGear gear = new HandGear(10, -10, "strong", "glove");
+      IHandGear gear = new HandGear(GearType.GLOVE, 10, -10, "strong", "glove");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -64,7 +78,7 @@ public class HandGearTest {
   @Test
   public void testInvalidConstructorNotCombinedEmptyAdj() {
     try {
-      IHandGear gear = new HandGear(10, 10, "", "glove");
+      IHandGear gear = new HandGear(GearType.GLOVE, 10, 10, "", "glove");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -74,7 +88,7 @@ public class HandGearTest {
   @Test
   public void testInvalidConstructorNotCombinedEmptyNoun() {
     try {
-      IHandGear gear = new HandGear(10, 10, "strong", "");
+      IHandGear gear = new HandGear(GearType.GLOVE, 10, 10, "strong", "");
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -85,6 +99,7 @@ public class HandGearTest {
   public void testValidConstructorCombined() {
     try {
       IHandGear gear = new HandGear(
+              GearType.GLOVE,
               10,
               10,
               "strong",
@@ -96,9 +111,26 @@ public class HandGearTest {
   }
 
   @Test
+  public void testInvalidConstructorCombinedWrongType() {
+    try {
+      IHandGear gear = new HandGear(
+              GearType.HAT,
+              10,
+              10,
+              "strong",
+              "glove",
+              new ArrayList<>(Arrays.asList(this.handGear2)));
+      fail("Invalid constructor should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
   public void testInvalidConstructorCombinedWrongCount() {
     try {
       IHandGear gear = new HandGear(
+              GearType.GLOVE,
               10,
               10,
               "strong",
@@ -114,6 +146,7 @@ public class HandGearTest {
   public void testInvalidConstructorCombinedNegAttack() {
     try {
       IHandGear gear = new HandGear(
+              GearType.GLOVE,
               -10,
               10,
               "strong",
@@ -129,6 +162,7 @@ public class HandGearTest {
   public void testInvalidConstructorCombinedNegDefense() {
     try {
       IHandGear gear = new HandGear(
+              GearType.GLOVE,
               10,
               -10,
               "strong",
@@ -144,6 +178,7 @@ public class HandGearTest {
   public void testInvalidConstructorCombinedEmptyAdj() {
     try {
       IHandGear gear = new HandGear(
+              GearType.GLOVE,
               10,
               10,
               "",
@@ -159,6 +194,7 @@ public class HandGearTest {
   public void testInvalidConstructorCombinedEmptyNoun() {
     try {
       IHandGear gear = new HandGear(
+              GearType.GLOVE,
               10,
               10,
               "strong",
@@ -173,28 +209,29 @@ public class HandGearTest {
   @Test
   public void testToStringNotCombined() {
     String expected = String.format(
-            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "strong", "glove", 10, 10);
+            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.GLOVE, "strong", "glove", 10, 10);
     assertEquals(expected, this.handGear1.toString());
   }
 
   @Test
-  public void testToCombined() {
+  public void testToStringCombined() {
     String expected = String.format(
-            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "weak, strong", "glove", 11, 11);
+            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.GLOVE, "weak, strong", "glove", 11, 11);
     expected += String.format(
-            " Combined with: Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "strong", "glove", 10, 10);
+            " Combined with: Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.GLOVE, "strong", "glove", 10, 10);
     expected += String.format(
-            "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            "weak", "shield", 1, 1);
+            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            GearType.GLOVE, "weak", "glove", 1, 1);
     assertEquals(expected, this.combinedHandGear.toString());
   }
 
   @Test
   public void testEqualsTrue() {
     IHandGear copyGear1 = new HandGear(
+            this.handGear1.getType(),
             this.handGear1.getAttack(),
             this.handGear1.getDefense(),
             this.handGear1.getAdjective(),
@@ -295,6 +332,19 @@ public class HandGearTest {
   public void testInvalidCombineProvidedAlreadyCombined() {
     try {
       IHandGear combined = this.handGear1.combine(this.combinedHandGear);
+      fail("Invalid combine() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidCombineWrongType() {
+    try {
+      IHandGear gear = new HandGear(
+              GearType.SHIELD,
+              10, 10, "nice", "sneaker");
+      IHandGear combined = this.handGear1.combine(gear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
