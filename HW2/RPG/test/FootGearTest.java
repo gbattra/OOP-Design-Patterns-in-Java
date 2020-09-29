@@ -8,7 +8,6 @@ import java.util.Optional;
 
 import rpg.enums.GearType;
 import rpg.interfaces.IFootGear;
-import rpg.interfaces.IGear;
 import rpg.models.FootGear;
 
 import static org.junit.Assert.assertEquals;
