@@ -2,6 +2,7 @@ package rpg.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import rpg.interfaces.IFootGear;
@@ -234,5 +235,52 @@ public class Player implements IPlayer {
             newFootGears);
 
     return player;
+  }
+
+  /**
+   * Overrides toString() method.
+   *
+   * @return the string representation of this instance
+   */
+  @Override
+  public String toString() {
+    return String.format(
+            "Player %s: Attack: %s, Defense: %s, HeadGear: %s, Handgear: %s, Footgear: %s",
+            this.number,
+            this.attack,
+            this.defense,
+            this.headGears.stream().map(IHeadGear::toString).collect(Collectors.joining("; ")),
+            this.handGears.stream().map(IHandGear::toString).collect(Collectors.joining("; ")),
+            this.footGears.stream().map(IFootGear::toString).collect(Collectors.joining("; ")));
+  }
+
+  /**
+   * Overrides the hashCode() method.
+   *
+   * @return int the hashcode
+   */
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
+
+  /**
+   * Override equals() method.
+   *
+   * @param other the object to compare
+   * @return boolean is this object equal to the other
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other == this) {
+      return true;
+    }
+
+    if (other instanceof IPlayer) {
+      IPlayer player = (IPlayer) other;
+      return player.hashCode() == other.hashCode();
+    }
+
+    return false;
   }
 }

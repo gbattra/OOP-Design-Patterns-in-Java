@@ -375,4 +375,22 @@ public class PlayerTest {
       // do nothing, test passes
     }
   }
+
+  @Test
+  public void testToString() {
+    IPlayer player = new Player(1, 10, 10)
+            .addHeadGear(this.headGear1)
+            .addHandGear(this.handGear1)
+            .addFootGear(this.footGear1);
+    String expect = String.format(
+            "Player %s: Attack: %s, Defense: %s, HeadGear: %s, Handgear: %s, Footgear: %s",
+            1,
+            10,
+            10,
+            this.headGear1.toString(),
+            this.handGear1.toString(),
+            this.footGear1.toString());
+
+    assertEquals(expect, player.toString());
+  }
 }
