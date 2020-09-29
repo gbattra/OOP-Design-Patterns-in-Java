@@ -1,4 +1,4 @@
 package interfaces;
 
-public interface IFootGear extends IGear<IFootGear> {
+public interface IFootGear extends IGear, ICombinable<IFootGear> {
 }

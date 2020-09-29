@@ -1,4 +1,4 @@
 package interfaces;
 
-public interface IHandGear extends IGear<IHandGear> {
+public interface IHandGear extends IGear, ICombinable<IHandGear> {
 }

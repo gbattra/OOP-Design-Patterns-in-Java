@@ -3,6 +3,7 @@ package models;
 import java.util.List;
 import java.util.Optional;
 
+import interfaces.ICombinable;
 import interfaces.IGear;
 
 /**
@@ -10,12 +11,14 @@ import interfaces.IGear;
  * basic getters and aggregators.
  * @param <T> Interface for the gear type represented by whatever extends this abstract class
  */
-public abstract class AbstractGear<T> implements IGear<T> {
+public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
+  private static final int COMBINED_COUNT = 2;
+
   protected final int attack;
   protected final int defense;
   protected final String adjective;
   protected final String noun;
-  protected final List<IGear<T>> combinedWith;
+  protected final List<T> combinedWith;
   protected final boolean isCombined;
 
   /**
@@ -46,19 +49,31 @@ public abstract class AbstractGear<T> implements IGear<T> {
    * @param defense int the base defense value for this gear
    * @param adjective String the adjective for this gear
    * @param noun String the noun for this gear
-   * @param combinedGears List of gears combined to form this gear
+   * @param combinedWith List of gears combined to form this gear
    */
   public AbstractGear(
           int attack,
           int defense,
           String adjective,
           String noun,
-          List<IGear<T>> combinedGears) {
+          List<T> combinedWith) throws IllegalArgumentException {
+    if (attack < 0 || defense < 0) {
+      throw new IllegalArgumentException("Attack and defense values must be non-negative.");
+    }
+
+    if (adjective.isEmpty() || noun.isEmpty()) {
+      throw new IllegalArgumentException("Adjective and noun must not be empty.");
+    }
+
+    if (combinedWith.size() != COMBINED_COUNT) {
+      throw new IllegalArgumentException("Invalid combinedWith list. Must have exactly 2 items.");
+    }
+
     this.attack = attack;
     this.defense = defense;
     this.adjective = adjective;
     this.noun = noun;
-    this.combinedWith = combinedGears;
+    this.combinedWith = combinedWith;
     this.isCombined = true;
   }
 
@@ -75,7 +90,7 @@ public abstract class AbstractGear<T> implements IGear<T> {
    *
    * @return the IGear instance that this is combined with
    */
-  public Optional<List<IGear<T>>> combinedWith() {
+  public Optional<List<T>> combinedWith() {
     return Optional.ofNullable(this.combinedWith);
   }
 

@@ -8,6 +8,9 @@ import interfaces.IHandGear;
 import interfaces.IHeadGear;
 import interfaces.IPlayer;
 
+/**
+ * Class representing a player in the RPG
+ */
 public class Player implements IPlayer {
   private static final int HEAD_GEAR_COUNT = 1;
   private static final int HAND_GEAR_COUNT = 2;
@@ -20,10 +23,22 @@ public class Player implements IPlayer {
   private final List<IHandGear> handGears;
   private final List<IFootGear> footGears;
 
+  /**
+   * Basic player constructor.
+   *
+   * @param number the player number / id
+   * @param attack the player's initial attack strength
+   * @param defense the palyer's initial defense strenght
+   * @throws IllegalArgumentException when number, attack or defense < 0
+   */
   public Player(
           int number,
           int attack,
-          int defense) {
+          int defense) throws IllegalArgumentException {
+    if (number < 0 || attack < 0 || defense < 0) {
+      throw new IllegalArgumentException("Number, attack and defense must be non-negative");
+    }
+
     this.number = number;
     this.attack = attack;
     this.defense = defense;
@@ -38,13 +53,45 @@ public class Player implements IPlayer {
           int defense,
           List<IHeadGear> headGears,
           List<IHandGear> handGears,
-          List<IFootGear> footGears) {
+          List<IFootGear> footGears) throws IllegalArgumentException {
+    if (number < 0 || attack < 0 || defense < 0) {
+      throw new IllegalArgumentException("Number, attack and defense must be non-negative");
+    }
+
+    if (headGears.size() > HEAD_GEAR_COUNT) {
+      throw new IllegalStateException(
+              String.format("Too many head gear items provided. Max: %s", HEAD_GEAR_COUNT));
+    }
+
+    if (handGears.size() > HAND_GEAR_COUNT) {
+      throw new IllegalStateException(
+              String.format("Too many hand gear items provided. Max: %s", HAND_GEAR_COUNT));
+    }
+
+    if (footGears.size() > FOOT_GEAR_COUNT) {
+      throw new IllegalStateException(
+              String.format("Too many foot gear items provided. Max: %s", FOOT_GEAR_COUNT));
+    }
+
     this.number = number;
     this.attack = attack;
     this.defense = defense;
     this.headGears = headGears;
     this.handGears = handGears;
     this.footGears = footGears;
+  }
+
+  public int getNumber() {
+    return this.number;
+  }
+
+  public int getAttack() {
+    int aggregateAttack = this.attack;
+    return this.attack;
+  }
+
+  public int getDefense() {
+    return this.defense;
   }
 
   public IPlayer addHeadGear(IHeadGear gear) throws IllegalStateException {
@@ -77,7 +124,8 @@ public class Player implements IPlayer {
     }
 
     if (!combined) {
-      throw new IllegalStateException("Failed to add head gear.");
+      throw new IllegalStateException(
+              "Failed to add head gear. No remaining un-combined head gears.");
     }
 
     IPlayer player = new Player(
@@ -121,7 +169,8 @@ public class Player implements IPlayer {
     }
 
     if (!combined) {
-      throw new IllegalStateException("Failed to add hand gear.");
+      throw new IllegalStateException(
+              "Failed to add hand gear. No remaining un-combined hand gears.");
     }
 
     IPlayer player = new Player(
@@ -165,7 +214,8 @@ public class Player implements IPlayer {
     }
 
     if (!combined) {
-      throw new IllegalStateException("Failed to add foot gear.");
+      throw new IllegalStateException(
+              "Failed to add foot gear. No remaining un-combined foot gears.");
     }
 
     IPlayer player = new Player(

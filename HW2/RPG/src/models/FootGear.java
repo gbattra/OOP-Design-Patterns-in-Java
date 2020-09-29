@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import interfaces.IFootGear;
-import interfaces.IGear;
-import interfaces.IHandGear;
 
 /**
  * Type of IGear specifically for head gear. Has both attack and defense values.
@@ -45,7 +43,7 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
           int defense,
           String adjective,
           String noun,
-          List<IGear<IFootGear>> combinedGears) throws IllegalArgumentException {
+          List<IFootGear> combinedGears) throws IllegalArgumentException {
     super(attack, defense, adjective, noun, combinedGears);
   }
 

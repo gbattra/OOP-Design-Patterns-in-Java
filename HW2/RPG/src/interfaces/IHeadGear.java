@@ -1,4 +1,4 @@
 package interfaces;
 
-public interface IHeadGear extends IGear<IHeadGear> {
+public interface IHeadGear extends IGear, ICombinable<IHeadGear> {
 }
