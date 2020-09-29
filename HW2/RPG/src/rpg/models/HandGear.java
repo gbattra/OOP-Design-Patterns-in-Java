@@ -78,7 +78,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
     }
 
     if (gear.isCombined()) {
-      throw new IllegalStateException(
+      throw new IllegalArgumentException(
               "Cannot combine self to gear. Gear is already combined with another gear.");
     }
 

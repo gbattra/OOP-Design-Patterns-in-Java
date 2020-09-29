@@ -50,6 +50,17 @@ public class Player implements IPlayer {
     this.footGears = new ArrayList<>();
   }
 
+  /**
+   * Player constructor with gear.
+   *
+   * @param number the player number / id
+   * @param attack the player's initial attack strength
+   * @param defense the palyer's initial defense strenght
+   * @param headGears the headgears worn by the player
+   * @param handGears the handgears worn by the player
+   * @param footGears the footgears worn by the player
+   * @throws IllegalArgumentException when number, attack or defense < 0, or invalid gear types
+   */
   public Player(
           int number,
           int attack,
@@ -84,10 +95,21 @@ public class Player implements IPlayer {
     this.footGears = footGears;
   }
 
+  /**
+   * Getter for this player's number.
+   *
+   * @return int the player number
+   */
   public int getNumber() {
     return this.number;
   }
 
+  /**
+   * Aggregates the attack values of player attack plus all its gears' attack and returns the
+   * total.
+   *
+   * @return the aggregated attack value
+   */
   public int getAttack() {
     int aggregateAttack = this.attack;
     List<IGear> gears = new ArrayList<>();
@@ -98,6 +120,12 @@ public class Player implements IPlayer {
     return aggregateAttack;
   }
 
+  /**
+   * Aggregates the defense values of player defense plus all its gears' defense and returns the
+   * total.
+   *
+   * @return the aggregated defense value
+   */
   public int getDefense() {
     int aggregateDefense = this.defense;
     List<IGear> gears = new ArrayList<>();
@@ -108,6 +136,13 @@ public class Player implements IPlayer {
     return aggregateDefense;
   }
 
+  /**
+   * Adds a headgear item to this player.
+   *
+   * @param gear the gear to add
+   * @return a new player instance with updated attire
+   * @throws IllegalStateException when geartype is invalid or player has no more room
+   */
   public IPlayer addHeadGear(IHeadGear gear) throws IllegalStateException {
     List<IHeadGear> headGearsCopy = new ArrayList<>(this.headGears);
     if (headGearsCopy.size() < HEAD_GEAR_COUNT) {
@@ -151,6 +186,13 @@ public class Player implements IPlayer {
     return player;
   }
 
+  /**
+   * Adds a handgear item to this player.
+   *
+   * @param gear the gear to add
+   * @return a new player instance with updated attire
+   * @throws IllegalStateException when geartype is invalid or player has no more room
+   */
   public IPlayer addHandGear(IHandGear gear) throws IllegalStateException {
     List<IHandGear> handGearsCopy = new ArrayList<>(this.handGears);
     if (handGearsCopy.size() < HAND_GEAR_COUNT) {
@@ -194,6 +236,13 @@ public class Player implements IPlayer {
     return player;
   }
 
+  /**
+   * Adds a footgear item to this player.
+   *
+   * @param gear the gear to add
+   * @return a new player instance with updated attire
+   * @throws IllegalStateException when geartype is invalid or player has no more room
+   */
   public IPlayer addFootGear(IFootGear gear) throws IllegalStateException {
     List<IFootGear> footGearsCopy = new ArrayList<>(this.footGears);
     if (footGearsCopy.size() < FOOT_GEAR_COUNT) {

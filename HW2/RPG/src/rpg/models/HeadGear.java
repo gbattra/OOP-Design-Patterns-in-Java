@@ -74,7 +74,7 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
     }
 
     if (gear.isCombined()) {
-      throw new IllegalStateException(
+      throw new IllegalArgumentException(
               "Cannot combine self to gear. Gear is already combined with another gear.");
     }
 
