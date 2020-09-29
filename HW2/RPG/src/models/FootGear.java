@@ -52,11 +52,11 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
   /**
    * Combines this gear with another and returns a new instance with the merged values.
    *
-   * @param gear IGear instance to merge with this
+   * @param gear IFootGear instance to merge with this
    * @return the new combined gear instance
    * @throws IllegalStateException when either this or the gear provided in is already combined
    */
-  public IGear<IFootGear> combine(IGear<IFootGear> gear) throws IllegalStateException {
+  public IFootGear combine(IFootGear gear) throws IllegalStateException {
     if (this.isCombined) {
       throw new IllegalStateException(
               "Cannot combine self to gear. Self is already combined with another gear.");
@@ -67,7 +67,7 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
               "Cannot combine self to gear. Gear is already combined with another gear.");
     }
 
-    IGear<IFootGear> newGear = new FootGear(
+    IFootGear newGear = new FootGear(
             this.attack + gear.getAttack(),
             this.defense + gear.getDefense(),
             String.format("%s, %s", this.adjective, gear.getAdjective()),

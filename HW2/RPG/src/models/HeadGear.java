@@ -47,11 +47,11 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
   /**
    * Combines this gear with another and returns a new instance with the merged values.
    *
-   * @param gear IGear instance to merge with this
+   * @param gear IHeadGear instance to merge with this
    * @return the new combined gear instance
    * @throws IllegalStateException when either this or the gear provided in is already combined
    */
-  public IGear<IHeadGear> combine(IGear<IHeadGear> gear) throws IllegalStateException {
+  public IHeadGear combine(IHeadGear gear) throws IllegalStateException {
     if (this.isCombined) {
       throw new IllegalStateException(
               "Cannot combine self to gear. Self is already combined with another gear.");
@@ -62,7 +62,7 @@ public class HeadGear extends AbstractGear<IHeadGear> implements IHeadGear {
               "Cannot combine self to gear. Gear is already combined with another gear.");
     }
 
-    IGear<IHeadGear> newGear = new HeadGear(
+    IHeadGear newGear = new HeadGear(
             this.defense + gear.getDefense(),
             String.format("%s, %s", this.adjective, gear.getAdjective()),
             this.noun,

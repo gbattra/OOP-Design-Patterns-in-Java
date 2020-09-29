@@ -65,10 +65,10 @@ public abstract class AbstractGear<T> implements IGear<T> {
   /**
    * Abstract method for combining one gear to another.
    *
-   * @param gear IGear instance to merge with this
+   * @param gear T type of gear instance to merge with this
    * @return a new IGear instance
    */
-  public abstract IGear<T> combine(IGear<T> gear);
+  public abstract T combine(T gear);
 
   /**
    * Getter for the combinedGear property.

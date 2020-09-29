@@ -10,6 +10,6 @@ public interface IGear<T> {
   String getNoun();
   String getName();
   Optional<List<IGear<T>>> combinedWith();
-  IGear<T> combine(IGear<T> gear) throws IllegalStateException;
+  T combine(T gear) throws IllegalStateException;
   boolean isCombined();
 }
