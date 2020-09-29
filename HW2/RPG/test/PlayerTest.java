@@ -17,6 +17,9 @@ import rpg.models.Player;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the Player class.
+ */
 public class PlayerTest {
   private IHeadGear headGear1;
   private IHeadGear headGear2;

@@ -15,6 +15,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the HandGear class.
+ */
 public class HandGearTest {
   private IHandGear handGear1;
   private IHandGear handGear2;

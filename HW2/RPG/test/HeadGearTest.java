@@ -15,6 +15,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the HeadGear class.
+ */
 public class HeadGearTest {
   private IHeadGear headGear1;
   private IHeadGear headGear2;

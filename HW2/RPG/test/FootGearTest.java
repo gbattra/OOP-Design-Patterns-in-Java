@@ -15,6 +15,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the FootGear class.
+ */
 public class FootGearTest {
   private IFootGear footGear1;
   private IFootGear footGear2;
