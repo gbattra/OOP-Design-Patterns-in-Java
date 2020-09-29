@@ -96,9 +96,9 @@ public class Battle implements IBattle {
 
   /**
    * A recursive function which pops the first two players off the list, fights them against
-   * one another. If no more players remain, the victor from the fight is returned. Otherwise,
-   * the victor is added to the end of the players list, and the function calls itself with
-   * the new list until all players have fought.
+   * one another, and determines a victor. If no more players remain, the victor from the fight
+   * is returned. Otherwise, the victor is added to the end of the players list, and the function
+   * calls itself with the new list until all players have fought and only one player remains.
    *
    * @param players the players fighting each other
    * @return the victor from the fight

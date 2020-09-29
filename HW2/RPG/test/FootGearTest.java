@@ -210,22 +210,22 @@ public class FootGearTest {
   @Test
   public void testToStringNotCombined() {
     String expected = String.format(
-            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.BOOT.toString(), "strong", "boot", 10, 10);
+            "Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(), "strong boot", 10, 10);
     assertEquals(expected, this.footGear1.toString());
   }
 
   @Test
   public void testToStringCombined() {
     String expected = String.format(
-            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.BOOT.toString(), "weak, strong", "boot", 11, 11);
+            "Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(), "weak, strong boot", 11, 11);
     expected += String.format(
-            " Combined with: Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.BOOT.toString(),  "strong", "boot", 10, 10);
+            " Combined with: Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(),  "strong boot", 10, 10);
     expected += String.format(
-            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.BOOT.toString(),  "weak", "boot", 1, 1);
+            "Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.BOOT.toString(),  "weak boot", 1, 1);
     assertEquals(expected, this.combinedFootGear.toString());
   }
 

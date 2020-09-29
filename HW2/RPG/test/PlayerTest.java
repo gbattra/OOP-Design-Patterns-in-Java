@@ -386,10 +386,11 @@ public class PlayerTest {
             .addHandGear(this.handGear1)
             .addFootGear(this.footGear1);
     String expect = String.format(
-            "Player %s: Attack: %s, Defense: %s, HeadGear: %s, Handgear: %s, Footgear: %s",
+            "Player %s:\n"
+            + "- Attack: %s,\n - Defense: %s,\n - HeadGear: %s,\n - Handgear: %s,\n Footgear: %s",
             1,
-            10,
-            10,
+            10 + 10 + 10,
+            10 + 10 + 10 + 10,
             this.headGear1.toString(),
             this.handGear1.toString(),
             this.footGear1.toString());

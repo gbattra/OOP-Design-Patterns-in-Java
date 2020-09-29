@@ -165,7 +165,7 @@ public class Player implements IPlayer {
         newHeadGears.set(i, newGear);
         combined = true;
         break;
-      } catch (IllegalStateException e) {
+      } catch (Exception e) {
         newHeadGears.set(i, this.headGears.get(i));
       }
     }
@@ -215,7 +215,7 @@ public class Player implements IPlayer {
         newHandGears.set(i, newGear);
         combined = true;
         break;
-      } catch (IllegalStateException e) {
+      } catch (Exception e) {
         newHandGears.set(i, this.handGears.get(i));
       }
     }
@@ -265,7 +265,7 @@ public class Player implements IPlayer {
         newFootGears.set(i, newGear);
         combined = true;
         break;
-      } catch (IllegalStateException e) {
+      } catch (Exception e) {
         newFootGears.set(i, this.footGears.get(i));
       }
     }
@@ -294,10 +294,11 @@ public class Player implements IPlayer {
   @Override
   public String toString() {
     return String.format(
-            "Player %s: Attack: %s, Defense: %s, HeadGear: %s, Handgear: %s, Footgear: %s",
+            "Player %s:\n"
+            + "- Attack: %s,\n - Defense: %s,\n - HeadGear: %s,\n - Handgear: %s,\n Footgear: %s",
             this.number,
-            this.attack,
-            this.defense,
+            this.getAttack(),
+            this.getDefense(),
             this.headGears.stream().map(IHeadGear::toString).collect(Collectors.joining("; ")),
             this.handGears.stream().map(IHandGear::toString).collect(Collectors.joining("; ")),
             this.footGears.stream().map(IFootGear::toString).collect(Collectors.joining("; ")));

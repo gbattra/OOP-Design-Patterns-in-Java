@@ -177,22 +177,22 @@ public class HeadGearTest {
   @Test
   public void testToStringNotCombined() {
     String expected = String.format(
-            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.HAT, "strong", "hat", 0, 10);
+            "Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.HAT, "strong hat", 0, 10);
     assertEquals(expected, this.headGear1.toString());
   }
 
   @Test
   public void testToStringCombined() {
     String expected = String.format(
-            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.HAT, "weak, strong", "hat", 0, 11);
+            "Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.HAT, "weak, strong hat", 0, 11);
     expected += String.format(
-            " Combined with: Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.HAT, "strong", "hat", 0, 10);
+            " Combined with: Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.HAT, "strong hat", 0, 10);
     expected += String.format(
-            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
-            GearType.HAT, "weak", "hat", 0, 1);
+            "Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
+            GearType.HAT, "weak hat", 0, 1);
     assertEquals(expected, this.combinedHeadGear.toString());
   }
 

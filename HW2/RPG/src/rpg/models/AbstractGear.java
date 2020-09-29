@@ -182,10 +182,9 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   @Override
   public String toString() {
     String description = String.format(
-            "Gear - Type: %s, Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
+            "Gear - Type: %s, Name: %s, Attack: %s, Defense: %s.",
             this.type.toString(),
-            this.adjective,
-            this.noun,
+            this.getName(),
             this.attack,
             this.defense);
     if (this.isCombined) {
