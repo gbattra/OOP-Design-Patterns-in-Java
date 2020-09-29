@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import rpg.enums.GearType;
-import rpg.interfaces.IFootGear;
 import rpg.interfaces.IHandGear;
-import rpg.models.FootGear;
 import rpg.models.HandGear;
 
 import static org.junit.Assert.assertEquals;
