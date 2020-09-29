@@ -268,7 +268,37 @@ public class FootGearTest {
 
   @Test
   public void testCombinedWithNotCombined() {
-    Optional<List<IFootGear>> combined = this.combinedFootGear.combinedWith();
+    Optional<List<IFootGear>> combined = this.footGear1.combinedWith();
     assertFalse(combined.isPresent());
+  }
+
+  @Test
+  public void testValidCombine() {
+    try {
+      IFootGear combined = this.footGear1.combine(this.footGear2);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid combine() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidCombineCallerAlreadyCombined() {
+    try {
+      IFootGear combined = this.combinedFootGear.combine(this.footGear2);
+      fail("Invalid combine() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidCombineProvidedAlreadyCombined() {
+    try {
+      IFootGear combined = this.footGear1.combine(this.combinedFootGear);
+      fail("Invalid combine() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
   }
 }
