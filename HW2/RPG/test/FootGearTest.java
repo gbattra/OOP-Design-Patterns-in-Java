@@ -15,11 +15,18 @@ import static org.junit.Assert.fail;
 public class FootGearTest {
   private IFootGear footGear1;
   private IFootGear footGear2;
+  private IFootGear combinedFootGear;
 
   @Before
   public void setup() {
-    footGear1 = new FootGear(10, 10, "strong", "boot");
-    footGear2 = new FootGear(1, 1, "weak", "slipper");
+    this.footGear1 = new FootGear(10, 10, "strong", "boot");
+    this.footGear2 = new FootGear(1, 1, "weak", "slipper");
+    this.combinedFootGear = new FootGear(
+            this.footGear1.getAttack() + this.footGear2.getAttack(),
+            this.footGear1.getDefense() + this.footGear2.getDefense(),
+            this.footGear2.getAdjective() + ", " + this.footGear1.getAdjective(),
+            this.footGear1.getNoun(),
+            new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
   }
 
   @Test
@@ -180,13 +187,7 @@ public class FootGearTest {
     expected += String.format(
             "Gear - Adj: %s, Noun: %s, Attack: %s, Defense: %s.",
             "weak", "slipper", 1, 1);
-    IFootGear combined = new FootGear(
-            this.footGear1.getAttack() + this.footGear2.getAttack(),
-            this.footGear1.getDefense() + this.footGear2.getDefense(),
-            this.footGear2.getAdjective() + ", " + this.footGear1.getAdjective(),
-            this.footGear1.getNoun(),
-            new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
-    assertEquals(expected, combined.toString());
+    assertEquals(expected, this.combinedFootGear.toString());
   }
 
   @Test
@@ -197,5 +198,50 @@ public class FootGearTest {
             this.footGear1.getAdjective(),
             this.footGear1.getNoun());
     assertEquals(copyGear1, this.footGear1);
+  }
+
+  @Test
+  public void testGetName() {
+    assertEquals("strong boot", this.footGear1.getName());
+  }
+
+  @Test
+  public void testGetNoun() {
+    assertEquals("boot", this.footGear1.getNoun());
+  }
+
+  @Test
+  public void testGetAdjective() {
+    assertEquals("strong", this.footGear1.getAdjective());
+  }
+
+  @Test
+  public void testGetAttack() {
+    assertEquals(10, this.footGear1.getAttack());
+  }
+
+  @Test
+  public void testGetDefense() {
+    assertEquals(10, this.footGear1.getDefense());
+  }
+
+  @Test
+  public void testGetAttackCombined() {
+    assertEquals(11, this.combinedFootGear.getAttack());
+  }
+
+  @Test
+  public void testGetDefenseCombined() {
+    assertEquals(11, this.combinedFootGear.getDefense());
+  }
+
+  @Test
+  public void testGetAdjectiveCombined() {
+    assertEquals("weak, strong", this.combinedFootGear.getAdjective());
+  }
+
+  @Test
+  public void testGetNameCombined() {
+    assertEquals("weak, strong boot", this.combinedFootGear.getName());
   }
 }
