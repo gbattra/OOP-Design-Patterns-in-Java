@@ -3,12 +3,15 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import rpg.interfaces.IFootGear;
 import rpg.interfaces.IGear;
 import rpg.models.FootGear;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -243,5 +246,29 @@ public class FootGearTest {
   @Test
   public void testGetNameCombined() {
     assertEquals("weak, strong boot", this.combinedFootGear.getName());
+  }
+
+  @Test
+  public void testIsCombinedTrue() {
+    assertTrue(this.combinedFootGear.isCombined());
+  }
+
+  @Test
+  public void testIsCombinedFalse() {
+    assertFalse(this.footGear1.isCombined());
+  }
+
+  @Test
+  public void testCombinedWithCombined() {
+    Optional<List<IFootGear>> combined = this.combinedFootGear.combinedWith();
+    assertTrue(combined.isPresent());
+    assertEquals(this.footGear1, combined.get().get(0));
+    assertEquals(this.footGear2, combined.get().get(1));
+  }
+
+  @Test
+  public void testCombinedWithNotCombined() {
+    Optional<List<IFootGear>> combined = this.combinedFootGear.combinedWith();
+    assertFalse(combined.isPresent());
   }
 }
