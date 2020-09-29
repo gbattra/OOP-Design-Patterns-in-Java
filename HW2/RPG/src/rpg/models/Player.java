@@ -1,14 +1,14 @@
-package models;
+package rpg.models;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import interfaces.IFootGear;
-import interfaces.IGear;
-import interfaces.IHandGear;
-import interfaces.IHeadGear;
-import interfaces.IPlayer;
+import rpg.interfaces.IFootGear;
+import rpg.interfaces.IGear;
+import rpg.interfaces.IHandGear;
+import rpg.interfaces.IHeadGear;
+import rpg.interfaces.IPlayer;
 
 /**
  * Class representing a player in the RPG
@@ -124,13 +124,11 @@ public class Player implements IPlayer {
     boolean combined = false;
     List<IHeadGear> newHeadGears = new ArrayList<>(this.headGears);
     for (int i = 0; i < this.headGears.size(); i++) {
-      if (combined) {
-        break;
-      }
       try {
         IHeadGear newGear = this.headGears.get(i).combine(gear);
         newHeadGears.set(i, newGear);
         combined = true;
+        break;
       } catch (IllegalStateException e) {
         newHeadGears.set(i, this.headGears.get(i));
       }
@@ -169,13 +167,11 @@ public class Player implements IPlayer {
     boolean combined = false;
     List<IHandGear> newHandGears = new ArrayList<>(this.handGears);
     for (int i = 0; i < this.handGears.size(); i++) {
-      if (combined) {
-        break;
-      }
       try {
         IHandGear newGear = this.handGears.get(i).combine(gear);
         newHandGears.set(i, newGear);
         combined = true;
+        break;
       } catch (IllegalStateException e) {
         newHandGears.set(i, this.handGears.get(i));
       }
@@ -214,13 +210,11 @@ public class Player implements IPlayer {
     boolean combined = false;
     List<IFootGear> newFootGears = new ArrayList<>(this.footGears);
     for (int i = 0; i < this.footGears.size(); i++) {
-      if (combined) {
-        break;
-      }
       try {
         IFootGear newGear = this.footGears.get(i).combine(gear);
         newFootGears.set(i, newGear);
         combined = true;
+        break;
       } catch (IllegalStateException e) {
         newFootGears.set(i, this.footGears.get(i));
       }

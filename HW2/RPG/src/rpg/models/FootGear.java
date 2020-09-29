@@ -1,10 +1,10 @@
-package models;
+package rpg.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import interfaces.IFootGear;
+import rpg.interfaces.IFootGear;
 
 /**
  * Type of IGear specifically for head gear. Has both attack and defense values.

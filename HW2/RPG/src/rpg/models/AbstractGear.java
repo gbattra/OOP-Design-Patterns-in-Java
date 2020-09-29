@@ -1,10 +1,10 @@
-package models;
+package rpg.models;
 
 import java.util.List;
 import java.util.Optional;
 
-import interfaces.ICombinable;
-import interfaces.IGear;
+import rpg.interfaces.ICombinable;
+import rpg.interfaces.IGear;
 
 /**
  * Abstract class for objects implementing IGear. Contains common functionality such as

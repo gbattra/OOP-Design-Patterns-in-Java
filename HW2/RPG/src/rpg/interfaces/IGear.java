@@ -1,4 +1,4 @@
-package interfaces;
+package rpg.interfaces;
 
 public interface IGear {
   int getAttack();

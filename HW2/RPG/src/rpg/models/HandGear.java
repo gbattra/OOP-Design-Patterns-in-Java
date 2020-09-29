@@ -1,11 +1,10 @@
-package models;
+package rpg.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import interfaces.IGear;
-import interfaces.IHandGear;
+import rpg.interfaces.IHandGear;
 
 /**
  * Type of IGear specifically for hand gear. Has both attack and defense value.
