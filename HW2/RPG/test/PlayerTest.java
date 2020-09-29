@@ -106,10 +106,7 @@ public class PlayerTest {
   @Test
   public void testValidConstructorWithGears() {
     try {
-      IPlayer player = new Player(
-              1,
-              10,
-              10,
+      IPlayer player = new Player(1, 10, 10,
               new ArrayList<>(Arrays.asList(this.headGear1)),
               new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
               new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
@@ -120,12 +117,48 @@ public class PlayerTest {
   }
 
   @Test
+  public void testValidConstructorWithGearsNegNumber() {
+    try {
+      IPlayer player = new Player(-1, 10, 10,
+              new ArrayList<>(Arrays.asList(this.headGear1)),
+              new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
+              new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
+      fail("Invalid constructor should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidConstructorWithGearsNegAttack() {
+    try {
+      IPlayer player = new Player(1, -10, 10,
+              new ArrayList<>(Arrays.asList(this.headGear1)),
+              new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
+              new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
+      fail("Invalid constructor should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidConstructorWithGearsNegDefense() {
+    try {
+      IPlayer player = new Player(1, 10, -10,
+              new ArrayList<>(Arrays.asList(this.headGear1)),
+              new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
+              new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
+      fail("Invalid constructor should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
   public void testInvalidConstructorWithGearsTooManyHeadGears() {
     try {
-      IPlayer player = new Player(
-              1,
-              10,
-              10,
+      IPlayer player = new Player(1, 10, 10,
               new ArrayList<>(Arrays.asList(this.headGear1, this.headGear2)),
               new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
               new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
@@ -138,10 +171,7 @@ public class PlayerTest {
   @Test
   public void testInvalidConstructorWithGearsTooManyhandGears() {
     try {
-      IPlayer player = new Player(
-              1,
-              10,
-              10,
+      IPlayer player = new Player(1, 10, 10,
               new ArrayList<>(Arrays.asList(this.headGear1, this.headGear2)),
               new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2, this.handGear2)),
               new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
@@ -154,10 +184,7 @@ public class PlayerTest {
   @Test
   public void testInvalidConstructorWithGearsTooManyFootGears() {
     try {
-      IPlayer player = new Player(
-              1,
-              10,
-              10,
+      IPlayer player = new Player(1, 10, 10,
               new ArrayList<>(Arrays.asList(this.headGear1, this.headGear2)),
               new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
               new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2, this.footGear2)));
@@ -187,10 +214,7 @@ public class PlayerTest {
 
   @Test
   public void getAttackWithGears() {
-    IPlayer player = new Player(
-            1,
-            10,
-            10,
+    IPlayer player = new Player(1, 10, 10,
             new ArrayList<>(Arrays.asList(this.headGear1)),
             new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
             new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
@@ -204,18 +228,151 @@ public class PlayerTest {
 
   @Test
   public void getDefenseWithGears() {
-    IPlayer player = new Player(
-            1,
-            10,
-            10,
+    IPlayer player = new Player(1, 10, 10,
             new ArrayList<>(Arrays.asList(this.headGear1)),
             new ArrayList<>(Arrays.asList(this.handGear1, this.handGear2)),
             new ArrayList<>(Arrays.asList(this.footGear1, this.footGear2)));
     assertEquals(
             10
-                    + this.headGear1.getDefense()
-                    + this.handGear1.getDefense() + this.handGear2.getDefense()
-                    + this.footGear1.getDefense() + this.footGear2.getDefense(),
+            + this.headGear1.getDefense()
+            + this.handGear1.getDefense() + this.handGear2.getDefense()
+            + this.footGear1.getDefense() + this.footGear2.getDefense(),
             player.getDefense());
+  }
+
+  @Test
+  public void testValidAddHeadGear() {
+    try {
+      IPlayer player = new Player(1, 10, 10).addHeadGear(this.headGear1);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addHeadGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddHeadGearCombine() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addHeadGear(this.headGear1)
+              .addHeadGear(this.headGear2);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addHeadGear() should have not failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddHeadGearCombined() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addHeadGear(this.combinedHeadGear)
+              .addHeadGear(this.headGear2);
+      fail("Invalid addHeadGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddHandGear() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addHandGear(this.handGear1)
+              .addHandGear(this.handGear2);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addHandGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddHandGearCombine() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addHandGear(this.handGear1)
+              .addHandGear(this.handGear2)
+              .addHandGear(this.handGear1);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addHandGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddHandGearOneAlreadyCombined() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addHandGear(this.combinedHandGear)
+              .addHandGear(this.handGear2)
+              .addHandGear(this.handGear1);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addHandGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddHandGearBothAlreadyCombined() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addHandGear(this.combinedHandGear)
+              .addHandGear(this.combinedHandGear)
+              .addHandGear(this.handGear1);
+      fail("Invalid addHandGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddFootGear() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addFootGear(this.footGear1)
+              .addFootGear(this.footGear2);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addFootGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddFootGearCombine() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addFootGear(this.footGear1)
+              .addFootGear(this.footGear2)
+              .addFootGear(this.footGear1);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addFootGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddFootGearOneAlreadyCombined() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addFootGear(this.combinedFootGear)
+              .addFootGear(this.footGear2)
+              .addFootGear(this.footGear1);
+      // do nothing, test passes
+    } catch (Exception e) {
+      fail("Valid addFootGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddFootGearBothAlreadyCombined() {
+    try {
+      IPlayer player = new Player(1, 10, 10)
+              .addFootGear(this.combinedFootGear)
+              .addFootGear(this.combinedFootGear)
+              .addFootGear(this.footGear1);
+      fail("Invalid addFootGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
   }
 }
