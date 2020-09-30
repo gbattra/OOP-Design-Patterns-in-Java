@@ -138,6 +138,20 @@ public class Player implements IPlayer {
   }
 
   /**
+   * Compiles the player gear into a list and returns the list.
+   *
+   * @return the list of gear worn by the player
+   */
+  public List<IGear> getGear() {
+    List<IGear> gears = new ArrayList<>();
+    gears.addAll(this.headGears);
+    gears.addAll(this.handGears);
+    gears.addAll(this.footGears);
+
+    return gears;
+  }
+
+  /**
    * Factory method which takes any IGear instance and adds it to the appropriate list. Returns
    * updated player instance.
    *

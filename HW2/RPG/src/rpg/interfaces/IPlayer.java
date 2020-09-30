@@ -1,5 +1,7 @@
 package rpg.interfaces;
 
+import java.util.List;
+
 /**
  * Interface for an RPG player object.
  */
@@ -26,6 +28,13 @@ public interface IPlayer {
    * @return the aggregated defense value
    */
   int getDefense();
+
+  /**
+   * Compiles the player gear into a list and returns the list.
+   *
+   * @return the list of gear worn by the player
+   */
+  List<IGear> getGear();
 
   /**
    * Factory method which takes any IGear instance and adds it to the appropriate list. Returns

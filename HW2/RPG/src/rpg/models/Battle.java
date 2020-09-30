@@ -205,9 +205,42 @@ public class Battle implements IBattle {
    * @param player the player to dress
    * @param gears the gears from which to choose
    * @return the index of the best gear from the list of gears
+   * @throws IllegalArgumentException when the provided list of gear is empty
    */
   private int getBestGearIndex(IPlayer player, List<IGear> gears) {
-    return 0;
+    if (gears.isEmpty()) {
+      throw new IllegalArgumentException("List of gear is empty.");
+    }
+
+    int highestAttack = player.getAttack();
+    int highestDefense = player.getDefense();
+    int bestGearIndex = 0;
+
+    for (int i = 0; i < gears.size(); i++) {
+      IGear gear = gears.get(i);
+      IPlayer tmpPlayer = player.addGear(gear);
+
+      // if this gear was combined with another worn by player, choose it and break out of the loop
+      if (tmpPlayer.getGear().size() == player.getGear().size()) {
+        bestGearIndex = i;
+        break;
+      }
+
+      // if this gear provides the highest increase to attack, choose it
+      if (tmpPlayer.getAttack() > highestAttack) {
+        highestAttack = tmpPlayer.getAttack();
+        bestGearIndex = i;
+        continue;
+      }
+
+      // while no gear with attack has been set, choose this gear if it has the highest defense
+      if (tmpPlayer.getDefense() > highestDefense && !(highestAttack > player.getAttack())) {
+        highestDefense += tmpPlayer.getDefense();
+        bestGearIndex = i;
+      }
+    }
+
+    return bestGearIndex;
   }
 
   /**
