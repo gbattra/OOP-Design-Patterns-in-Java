@@ -3,6 +3,7 @@ package rpg.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import rpg.enums.GearType;
 import rpg.interfaces.IBattle;
 import rpg.interfaces.IGear;
 import rpg.interfaces.IPlayer;
@@ -43,7 +44,7 @@ public class Battle implements IBattle {
    * @param players the players participating in the battle
    * @throws IllegalArgumentException when playerCount <= 0 is provided
    */
-  private Battle(
+  public Battle(
           int playerCount,
           int gearCount,
           List<IPlayer> players,
@@ -88,11 +89,19 @@ public class Battle implements IBattle {
    * Adds a gear to the battle's gear list. Will be used to dress players before
    * the fight.
    *
-   * @param gear the IGear instance to add
+   * @param type GearType enum for the gear
+   * @param attack attack power of the gear
+   * @param defense defensive power of the gear
+   * @param adjective adjective describing the gear
+   * @param noun noun describing the gear
    * @return a new updated IBattle instance with new gear list
    * @throws IllegalStateException when the max number of gears has already been reached
    */
-  public IBattle addGear(IGear gear) throws IllegalStateException {
+  public IBattle addGear(GearType type,
+                         int attack,
+                         int defense,
+                         String adjective,
+                         String noun) throws IllegalStateException, IllegalArgumentException {
     if (this.gears.size() == this.gearCount) {
       throw new IllegalStateException(
               "Max number of gear for this battle has already been reached.");

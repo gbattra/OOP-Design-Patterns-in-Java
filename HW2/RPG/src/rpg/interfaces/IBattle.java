@@ -2,6 +2,8 @@ package rpg.interfaces;
 
 import java.util.List;
 
+import rpg.enums.GearType;
+
 /**
  * Interface for a battle object.
  */
@@ -24,11 +26,20 @@ public interface IBattle {
    * Adds a gear to the battle's gear list. Will be used to dress players before
    * the fight.
    *
-   * @param gear the IGear instance to add
+   * @param type GearType enum for the gear
+   * @param attack attack power of the gear
+   * @param defense defensive power of the gear
+   * @param adjective adjective describing the gear
+   * @param noun noun describing the gear
    * @return a new updated IBattle instance with new gear list
    * @throws IllegalStateException when the max number of gears has already been reached
+   * @throws IllegalArgumentException when attack, def, adj or noun are negative or empty
    */
-  IBattle addGear(IGear gear);
+  IBattle addGear(GearType type,
+                  int attack,
+                  int defense,
+                  String adjective,
+                  String noun) throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Fight the players against one another and return the victor.

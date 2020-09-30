@@ -26,17 +26,19 @@ public class BattleTest {
   @Before
   public void setup() {
     this.battleTwoPlayer = new Battle(
-            2,
-            new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo)));
+            2, 10,
+            new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo)),
+            new ArrayList<>());
     this.battleThreePlayer = new Battle(
-            3,
-            new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo, this.playerThree)));
+            3, 10,
+            new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo, this.playerThree)),
+            new ArrayList<>());
   }
 
   @Test
   public void testValidConstructorNoPlayers() {
     try {
-      IBattle battle = new Battle(2);
+      IBattle battle = new Battle(2, 10);
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -46,7 +48,7 @@ public class BattleTest {
   @Test
   public void testInvalidConstructorNoPlayersInvalidPlayerCount() {
     try {
-      IBattle battle = new Battle(1);
+      IBattle battle = new Battle(1, 10);
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -57,8 +59,9 @@ public class BattleTest {
   public void testValidConstructorWithPlayers() {
     try {
       IBattle battle = new Battle(
-              2,
-              new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo)));
+              2, 10,
+              new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo)),
+              new ArrayList<>());
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -69,8 +72,9 @@ public class BattleTest {
   public void testInvalidConstructorWithPlayersInvalidPlayerCount() {
     try {
       IBattle battle = new Battle(
-              1,
-              new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo)));
+              1, 10,
+              new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo)),
+              new ArrayList<>());
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -81,8 +85,9 @@ public class BattleTest {
   public void testInvalidConstructorWithPlayersTooManyPlayers() {
     try {
       IBattle battle = new Battle(
-              2,
-              new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo, this.playerThree)));
+              2, 10,
+              new ArrayList<>(Arrays.asList(this.playerOne, this.playerTwo, this.playerThree)),
+              new ArrayList<>());
       fail("Invalid constructor should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -110,7 +115,7 @@ public class BattleTest {
   @Test
   public void testValidAddPlayer() {
     try {
-      IBattle battle = new Battle(2)
+      IBattle battle = new Battle(2, 10)
               .addPlayer(this.playerOne)
               .addPlayer(this.playerTwo);
     } catch (Exception e) {
@@ -121,7 +126,7 @@ public class BattleTest {
   @Test
   public void testInvalidAddPlayer() {
     try {
-      IBattle battle = new Battle(2)
+      IBattle battle = new Battle(2, 10)
               .addPlayer(this.playerOne)
               .addPlayer(this.playerTwo)
               .addPlayer(this.playerThree);
@@ -134,7 +139,7 @@ public class BattleTest {
   @Test
   public void testInvalidAddPlayerDuplicate() {
     try {
-      IBattle battle = new Battle(2)
+      IBattle battle = new Battle(2, 10)
               .addPlayer(this.playerTwo)
               .addPlayer(this.playerTwo);
       fail("Invalid addPlayer() should have failed.");
