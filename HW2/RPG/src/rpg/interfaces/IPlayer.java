@@ -28,6 +28,17 @@ public interface IPlayer {
   int getDefense();
 
   /**
+   * Factory method which takes any IGear instance and adds it to the appropriate list. Returns
+   * updated player instance.
+   *
+   * @param gear the IGear instance to add
+   * @return the updated player with gear added
+   * @throws IllegalStateException when player state does not permit adding the gear
+   * @throws IllegalArgumentException when provided gear has invalid sub-interface of IGear
+   */
+  IPlayer addGear(IGear gear) throws IllegalStateException, IllegalArgumentException;
+
+  /**
    * Adds a headgear item to this player.
    *
    * @param gear the gear to add

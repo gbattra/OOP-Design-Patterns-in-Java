@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import rpg.enums.GearClass;
 import rpg.interfaces.IFootGear;
 import rpg.interfaces.IGear;
 import rpg.interfaces.IHandGear;
@@ -134,6 +135,30 @@ public class Player implements IPlayer {
       aggregateDefense += gear.getDefense();
     }
     return aggregateDefense;
+  }
+
+  /**
+   * Factory method which takes any IGear instance and adds it to the appropriate list. Returns
+   * updated player instance.
+   *
+   * @param gear the IGear instance to add
+   * @return the updated player with gear added
+   * @throws IllegalStateException when player state does not permit adding the gear
+   * @throws IllegalArgumentException when provided gear has invalid sub-interface of IGear
+   */
+  public IPlayer addGear(IGear gear) throws IllegalStateException, IllegalArgumentException {
+    if (gear instanceof IHeadGear) {
+      return this.addHeadGear((IHeadGear) gear);
+    }
+    if (gear instanceof IHandGear) {
+      return this.addHandGear((IHandGear) gear);
+    }
+    if (gear instanceof IFootGear) {
+      return this.addFootGear((IFootGear) gear);
+    }
+
+    throw new IllegalArgumentException(
+            "Provided gear does not implement valid sub-interface of IGear.");
   }
 
   /**
