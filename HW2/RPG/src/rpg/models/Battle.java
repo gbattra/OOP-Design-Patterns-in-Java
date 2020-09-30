@@ -95,7 +95,7 @@ public class Battle implements IBattle {
               "Cannot fight until all players have been added to the battle");
     }
 
-    return this.fight(this.players);
+    return this.fightPlayers(this.players);
   }
 
   /**
@@ -109,7 +109,7 @@ public class Battle implements IBattle {
    *
    * @throws IllegalArgumentException when less than 2 players are provided to the function
    */
-  private IPlayer fight(List<IPlayer> players) throws IllegalArgumentException {
+  private IPlayer fightPlayers(List<IPlayer> players) throws IllegalArgumentException {
     if (players.size() < 2) {
       throw new IllegalArgumentException("Size of players list is less than two.");
     }
@@ -125,7 +125,7 @@ public class Battle implements IBattle {
 
     if (!playersCopy.isEmpty()) {
       playersCopy.add(victor);
-      fight(playersCopy);
+      fightPlayers(playersCopy);
     }
 
     return victor;
@@ -139,9 +139,9 @@ public class Battle implements IBattle {
    * @return the victorious player
    */
   private IPlayer duel(IPlayer playerOne, IPlayer playerTwo) {
-    int playerOneDamage = playerTwo.getAttack() - playerOne.getDefense();
-    int playerTwoDamage = playerOne.getAttack() - playerTwo.getDefense();
+    int playerOneDamage = playerOne.getAttack() - playerTwo.getDefense();
+    int playerTwoDamage = playerTwo.getAttack() - playerOne.getDefense();
 
-    return playerOneDamage < playerTwoDamage ? playerOne : playerTwo;
+    return playerOneDamage > playerTwoDamage ? playerOne : playerTwo;
   }
 }

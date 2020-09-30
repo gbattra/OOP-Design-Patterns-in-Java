@@ -18,7 +18,7 @@ import static org.junit.Assert.fail;
 public class BattleTest {
   private final IPlayer playerOne = new Player(1, 10, 5);
   private final IPlayer playerTwo = new Player(2, 5, 15);
-  private final IPlayer playerThree = new Player(3, 17, 10);
+  private final IPlayer playerThree = new Player(3, 17, 11);
 
   private IBattle battleTwoPlayer;
   private IBattle battleThreePlayer;

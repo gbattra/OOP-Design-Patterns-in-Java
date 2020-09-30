@@ -3,8 +3,10 @@ import org.junit.Test;
 import rpg.enums.GearType;
 import rpg.interfaces.IPlayer;
 import rpg.interfaces.IPlayerBuilder;
+import rpg.models.HeadGear;
 import rpg.models.PlayerBuilder;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class PlayerBuilderTest {
@@ -57,58 +59,233 @@ public class PlayerBuilderTest {
               .addFootGear(GearType.BOOT, 10, 15, "steel-toed", "boot")
               .addHandGear(GearType.SWORD, 20, 5, "long", "sword")
               .build();
-      // do nothing, test passes
+      assertEquals(1, player.getNumber());
+      assertEquals(43, player.getAttack());
+      assertEquals(45, player.getDefense());
     } catch (Exception e) {
       fail("Valid player build() should not have failed.");
     }
   }
 
   @Test
-  public void testInvalidPlayerBuildWrongType() {
+  public void testValidAddHeadGear() {
     try {
-      IPlayer player = new PlayerBuilder(1, 10, 10)
-              .addHeadGear(GearType.SWORD, 10, "small", "hat")  // wrong type
-              .addFootGear(GearType.SNEAKER, 3, 5, "soft", "sneaker")
-              .addFootGear(GearType.BOOT, 10, 15, "steel-toed", "boot")
-              .addHandGear(GearType.SWORD, 20, 5, "long", "sword")
-              .build();
-      fail("Invalid player build() should have failed.");
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHeadGear(GearType.HAT, 10, "small", "hat")
+              .addHeadGear(GearType.HAT, 10, "small", "hat");
+    } catch (Exception e) {
+      fail("Valid player build() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddHeadGearAlreadyCombined() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHeadGear(GearType.HAT, 10, "small", "hat")
+              .addHeadGear(GearType.HAT, 10, "small", "hat")
+              .addHeadGear(GearType.HAT, 10, "small", "hat");
+      fail("Invalid addHeadGear() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
     }
   }
 
   @Test
-  public void testInvalidPlayerBuildNegAttack() {
+  public void testInvalidAddHeadGearWrongType() {
     try {
-      IPlayer player = new PlayerBuilder(1, 10, 10)
-              .addHeadGear(GearType.SWORD, 10, "small", "hat")  // wrong type
-              .addFootGear(GearType.SNEAKER, -3, 5, "soft", "sneaker")
-              .addFootGear(GearType.BOOT, 10, 15, "steel-toed", "boot")
-              .addHandGear(GearType.SWORD, 20, 5, "long", "sword")
-              .build();
-      fail("Invalid player build() should have failed.");
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHeadGear(GearType.SWORD, 10, "small", "hat");
+      fail("Invalid addHeadGear() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
     }
   }
 
   @Test
-  public void testInvalidPlayerBuildTooMuchGear() {
+  public void testInvalidAddHeadGearNegDefense() {
     try {
-      IPlayer player = new PlayerBuilder(1, 10, 10)
-              .addHeadGear(GearType.SWORD, 10, "small", "hat")  // wrong type
-              .addFootGear(GearType.SNEAKER, 3, 5, "soft", "sneaker")
-              .addFootGear(GearType.SNEAKER, 5, 7, "hard", "sneaker")
-              .addFootGear(GearType.BOOT, 10, 15, "steel-toed", "boot")
-              .addFootGear(GearType.BOOT, 5, 10, "soft", "boot")
-              .addHandGear(GearType.SWORD, 20, 5, "long", "sword")
-              .addHandGear(GearType.SWORD, 10, 10, "steel", "sword")
-              .addHandGear(GearType.SHIELD, 4, 15, "soft", "shield")
-              .addHandGear(GearType.SHIELD, 10, 10, "steel", "shield")
-              .addHandGear(GearType.SHIELD, 10, 10, "steel", "shield")
-              .build();
-      fail("Invalid player build() should have failed.");
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHeadGear(GearType.SWORD, -10, "small", "hat");
+      fail("Invalid addHeadGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHeadGearNoAdj() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHeadGear(GearType.SWORD, 10, "", "hat");
+      fail("Invalid addHeadGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHeadGearNoNoun() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHeadGear(GearType.SWORD, 10, "small", "");
+      fail("Invalid addHeadGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddHandGear() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHandGear(GearType.GLOVE, 10, 10, "small", "glove")
+              .addHandGear(GearType.GLOVE, 10, 10, "small", "glove");
+    } catch (Exception e) {
+      fail("Valid addHandGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddHandGearAlreadyCombined() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHandGear(GearType.GLOVE, 10, 10, "small", "glove")
+              .addHandGear(GearType.GLOVE, 10, 10, "small", "glove")
+              .addHandGear(GearType.GLOVE, 10, 10, "small", "glove");
+    } catch (Exception e) {
+      fail("Valid addHandGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddHandGearWrongType() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHandGear(GearType.HELMET, 10, 10, "small", "glove");
+      fail("Invalid addHandGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHandGearNegAttack() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHandGear(GearType.GLOVE, -10, 10, "small", "glove");
+      fail("Invalid addHandGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHandGearNegDefense() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHandGear(GearType.GLOVE, 10, -10, "small", "glove");
+      fail("Invalid addHandGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHandGearNoAdj() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHandGear(GearType.GLOVE, 10, 10, "", "glove");
+      fail("Invalid addHandGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddHandGearNoNoun() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addHandGear(GearType.GLOVE, 10, 10, "small", "");
+      fail("Invalid addHandGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testValidAddFootGear() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addFootGear(GearType.SNEAKER, 10, 10, "small", "sneaker")
+              .addFootGear(GearType.SNEAKER, 10, 10, "small", "sneaker");
+    } catch (Exception e) {
+      fail("Valid addFootGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidAddFootGearAlreadyCombined() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addFootGear(GearType.SNEAKER, 10, 10, "small", "sneaker")
+              .addFootGear(GearType.SNEAKER, 10, 10, "small", "sneaker")
+              .addFootGear(GearType.SNEAKER, 10, 10, "small", "sneaker");
+    } catch (Exception e) {
+      fail("Valid addFootGear() should not have failed.");
+    }
+  }
+
+  @Test
+  public void testInvalidAddFootGearWrongType() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addFootGear(GearType.HELMET, 10, 10, "small", "sneaker");
+      fail("Invalid addFootGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddFootGearNegAttack() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addFootGear(GearType.SNEAKER, -10, 10, "small", "sneaker");
+      fail("Invalid addFootGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddFootGearNegDefense() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addFootGear(GearType.SNEAKER, 10, -10, "small", "sneaker");
+      fail("Invalid addFootGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddFootGearNoAdj() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addFootGear(GearType.SNEAKER, 10, 10, "", "sneaker");
+      fail("Invalid addFootGear() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
+
+  @Test
+  public void testInvalidAddFootGearNoNoun() {
+    try {
+      IPlayerBuilder builder = new PlayerBuilder(1, 10, 10)
+              .addFootGear(GearType.SNEAKER, 10, 10, "small", "");
+      fail("Invalid addFootGear() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
     }
