@@ -3,7 +3,7 @@ package rpg.interfaces;
 import rpg.enums.GearType;
 
 /**
- * Interface for an IPlayer builder object
+ * Interface for an IPlayer builder object.
  */
 public interface IPlayerBuilder {
   /**

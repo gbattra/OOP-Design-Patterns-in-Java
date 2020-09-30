@@ -206,4 +206,13 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   public int hashCode() {
     return this.toString().hashCode();
   }
+
+  /**
+   * Override for equals method. To be implemented by extending classes.
+   *
+   * @param other the object to compare
+   * @return true/false the objects are equal
+   */
+  @Override
+  public abstract boolean equals(Object other);
 }

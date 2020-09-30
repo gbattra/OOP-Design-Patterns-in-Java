@@ -45,8 +45,7 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
    * @param adjective String the adjective for this gear
    * @param noun String the noun for this gear
    * @param combinedGears List of gears combined to form this gear
-   * @throws IllegalArgumentException when attack or defense < 0, adjective or noun empty,
-   * combinedGears != 2
+   * @throws IllegalArgumentException attack/defense < 0, adjective/noun empty, combinedGears != 2
    */
   public FootGear(
           GearType type,
@@ -94,6 +93,26 @@ public class FootGear extends AbstractGear<IFootGear> implements IFootGear {
             new ArrayList<>(Arrays.asList(this, gear)));
 
     return newGear;
+  }
+
+  /**
+   * Overrides toString() method.
+   *
+   * @return the string representation of this instance
+   */
+  @Override
+  public String toString() {
+    return super.toString();
+  }
+
+  /**
+   * Overrides the hashCode() method.
+   *
+   * @return int the hashcode
+   */
+  @Override
+  public int hashCode() {
+    return super.hashCode();
   }
 
   /**

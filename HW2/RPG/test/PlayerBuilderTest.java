@@ -3,7 +3,6 @@ import org.junit.Test;
 import rpg.enums.GearType;
 import rpg.interfaces.IPlayer;
 import rpg.interfaces.IPlayerBuilder;
-import rpg.models.HeadGear;
 import rpg.models.PlayerBuilder;
 
 import static org.junit.Assert.assertEquals;

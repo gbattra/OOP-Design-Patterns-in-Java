@@ -12,7 +12,7 @@ import rpg.interfaces.IHeadGear;
 import rpg.interfaces.IPlayer;
 
 /**
- * Class representing a player in the RPG
+ * Class representing a player in the RPG.
  */
 public class Player implements IPlayer {
   private static final int HEAD_GEAR_COUNT = 1;

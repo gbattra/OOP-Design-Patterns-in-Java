@@ -10,7 +10,7 @@ import rpg.interfaces.IPlayer;
  * A class representing a battle between multiple players.
  */
 public class Battle implements IBattle {
-  private final static int PLAYER_COUNT_MIN = 2;
+  private static final int PLAYER_COUNT_MIN = 2;
   private final List<IPlayer> players;
   private final int playerCount;
 
