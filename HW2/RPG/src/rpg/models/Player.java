@@ -295,10 +295,13 @@ public class Player implements IPlayer {
   public String toString() {
     return String.format(
             "Player %s:\n"
-            + "- Attack: %s,\n- Defense: %s,\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
+            + "- Total Attack: %s,\n- Total Defense: %s,\n- Base Attack: %s,\n- Base Defense: %s,"
+            + "\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
             this.number,
             this.getAttack(),
             this.getDefense(),
+            this.attack,
+            this.defense,
             this.headGears.stream().map(IHeadGear::toString).collect(Collectors.joining("; ")),
             this.handGears.stream().map(IHandGear::toString).collect(Collectors.joining("; ")),
             this.footGears.stream().map(IFootGear::toString).collect(Collectors.joining("; ")));
@@ -328,7 +331,7 @@ public class Player implements IPlayer {
 
     if (other instanceof IPlayer) {
       IPlayer player = (IPlayer) other;
-      return player.hashCode() == other.hashCode();
+      return player.hashCode() == this.hashCode();
     }
 
     return false;

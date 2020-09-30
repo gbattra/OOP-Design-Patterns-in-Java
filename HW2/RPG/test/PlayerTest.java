@@ -15,6 +15,8 @@ import rpg.models.HeadGear;
 import rpg.models.Player;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -387,14 +389,42 @@ public class PlayerTest {
             .addFootGear(this.footGear1);
     String expect = String.format(
             "Player %s:\n"
-            + "- Attack: %s,\n- Defense: %s,\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
+            + "- Total Attack: %s,\n- Total Defense: %s,\n- Base Attack: %s,\n- Base Defense: %s,"
+            + "\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
             1,
             10 + 10 + 10,
             10 + 10 + 10 + 10,
+            10,
+            10,
             this.headGear1.toString(),
             this.handGear1.toString(),
             this.footGear1.toString());
 
     assertEquals(expect, player.toString());
+  }
+
+  @Test
+  public void testEqualsTrue() {
+    IPlayer playerOne = new Player(1, 10, 10)
+            .addHeadGear(this.headGear1)
+            .addHandGear(this.handGear1)
+            .addFootGear(this.footGear1);
+    IPlayer playerTwo = new Player(1, 10, 10)
+            .addHeadGear(this.headGear1)
+            .addHandGear(this.handGear1)
+            .addFootGear(this.footGear1);
+    assertEquals(playerOne, playerTwo);
+  }
+
+  @Test
+  public void testEqualsFalse() {
+    IPlayer playerOne = new Player(1, 5, 5)
+            .addHeadGear(this.headGear1)
+            .addHandGear(this.handGear1)
+            .addFootGear(this.footGear1);
+    IPlayer playerTwo = new Player(1, 10, 10)
+            .addHeadGear(this.headGear1)
+            .addHandGear(this.handGear1);
+    assertNotEquals(playerOne, playerTwo);
   }
 }
