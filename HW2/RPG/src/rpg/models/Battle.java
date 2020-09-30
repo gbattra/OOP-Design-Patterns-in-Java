@@ -70,6 +70,10 @@ public class Battle implements IBattle {
    * @throws IllegalStateException when the player count has already been met
    */
   public IBattle addPlayer(IPlayer player) throws IllegalStateException {
+    if (this.players.stream().anyMatch(p -> p.getNumber() == player.getNumber())) {
+      throw new IllegalStateException("A player with that number has already been added.");
+    }
+
     if (this.players.size() == this.playerCount) {
       throw new IllegalStateException("Cannot add player to battle. Player limit already reached.");
     }

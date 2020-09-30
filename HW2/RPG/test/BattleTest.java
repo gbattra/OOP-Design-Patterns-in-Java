@@ -130,4 +130,16 @@ public class BattleTest {
       // do nothing, test passes
     }
   }
+
+  @Test
+  public void testInvalidAddPlayerDuplicate() {
+    try {
+      IBattle battle = new Battle(2)
+              .addPlayer(this.playerTwo)
+              .addPlayer(this.playerTwo);
+      fail("Invalid addPlayer() should have failed.");
+    } catch (Exception e) {
+      // do nothing, test passes
+    }
+  }
 }
