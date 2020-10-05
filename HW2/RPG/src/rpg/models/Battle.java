@@ -224,26 +224,6 @@ public class Battle implements IBattle {
   }
 
   /**
-   * Public method to initiate fight between players.
-   *
-   * @return the victor from the fight
-   * @throws IllegalStateException when not enough players have been set before calling fight()
-   */
-  public IPlayer fight() throws IllegalStateException {
-    if (this.players.size() < this.playerCount) {
-      throw new IllegalStateException(
-              "Cannot fight until all players have been added to the battle");
-    }
-
-    if (this.gears.size() < this.gearCount) {
-      throw new IllegalStateException(
-              "Cannot fight until all gear has been added to the battle.");
-    }
-
-    return this.fight(this.players);
-  }
-
-  /**
    * Recursive function which pops the first player off the list, determines the best gear for
    * that player. Adds that gear to the player and removes it from the list. Then adds the player
    * back to the list. If more gears remain, call itself with updated lists. Else return players.
@@ -332,6 +312,26 @@ public class Battle implements IBattle {
     }
 
     return bestGearIndex;
+  }
+
+  /**
+   * Public method to initiate fight between players.
+   *
+   * @return the victor from the fight
+   * @throws IllegalStateException when not enough players have been set before calling fight()
+   */
+  public IPlayer fight() throws IllegalStateException {
+    if (this.players.size() < this.playerCount) {
+      throw new IllegalStateException(
+              "Cannot fight until all players have been added to the battle");
+    }
+
+    if (this.gears.size() < this.gearCount) {
+      throw new IllegalStateException(
+              "Cannot fight until all gear has been added to the battle.");
+    }
+
+    return this.fight(this.players);
   }
 
   /**

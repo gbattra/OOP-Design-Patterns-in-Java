@@ -198,8 +198,8 @@ public class Player implements IPlayer {
   public String toString() {
     return String.format(
             "Player %s:\n"
-                    + "- Total Attack: %s,\n- Total Defense: %s,\n- Base Attack: %s,\n- Base Defense: %s,"
-                    + "\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
+            + "- Total Attack: %s,\n- Total Defense: %s,\n- Base Attack: %s,\n- Base Defense: %s,"
+            + "\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
             this.number,
             this.getAttack(),
             this.getDefense(),

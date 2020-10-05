@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import rpg.enums.GearType;
-import rpg.interfaces.ICombinable;
 import rpg.interfaces.IGear;
 
 /**
