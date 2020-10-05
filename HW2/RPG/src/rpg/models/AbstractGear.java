@@ -76,11 +76,6 @@ public abstract class AbstractGear implements IGear {
               "Cannot created combined gear with gears of different types.");
     }
 
-    if (combinedWith.stream().anyMatch(gear -> gear.getType().gearClass != type.gearClass)) {
-      throw new IllegalArgumentException(
-              "Cannot create combined gear with gears of different type.");
-    }
-
     if (attack < 0 || defense < 0) {
       throw new IllegalArgumentException("Attack and defense values must be non-negative.");
     }
