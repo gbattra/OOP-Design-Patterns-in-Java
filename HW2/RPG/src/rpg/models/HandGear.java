@@ -6,12 +6,13 @@ import java.util.List;
 
 import rpg.enums.GearClass;
 import rpg.enums.GearType;
+import rpg.interfaces.IGear;
 import rpg.interfaces.IHandGear;
 
 /**
  * Type of IGear specifically for hand gear. Has both attack and defense value.
  */
-public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
+public class HandGear extends AbstractGear implements IHandGear {
   /**
    * Constructor for when this gear is not combined.
    *
@@ -53,7 +54,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
           int defense,
           String adjective,
           String noun,
-          List<IHandGear> combinedGears) throws IllegalArgumentException {
+          List<IGear> combinedGears) throws IllegalArgumentException {
     super(type, attack, defense, adjective, noun, combinedGears);
 
     if (type.gearClass != GearClass.HANDGEAR) {
@@ -69,7 +70,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
    * @return the new combined gear instance
    * @throws IllegalStateException when either this or the gear provided in is already combined
    */
-  public IHandGear combine(IHandGear gear) throws IllegalArgumentException, IllegalStateException {
+  public IGear combine(IGear gear) throws IllegalArgumentException, IllegalStateException {
     if (this.isCombined) {
       throw new IllegalStateException(
               "Cannot combine self to gear. Self is already combined with another gear.");
@@ -80,11 +81,7 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
               "Cannot combine self to gear. Gear is already combined with another gear.");
     }
 
-    if (this.type != gear.getType()) {
-      throw new IllegalArgumentException("Cannot combine gears of two different types.");
-    }
-
-    IHandGear newGear = new HandGear(
+    IGear newGear = new HandGear(
             this.type,
             this.attack + gear.getAttack(),
             this.defense + gear.getDefense(),
@@ -93,45 +90,5 @@ public class HandGear extends AbstractGear<IHandGear> implements IHandGear {
             new ArrayList<>(Arrays.asList(this, gear)));
 
     return newGear;
-  }
-
-  /**
-   * Overrides toString() method.
-   *
-   * @return the string representation of this instance
-   */
-  @Override
-  public String toString() {
-    return super.toString();
-  }
-
-  /**
-   * Overrides the hashCode() method.
-   *
-   * @return int the hashcode
-   */
-  @Override
-  public int hashCode() {
-    return super.hashCode();
-  }
-
-  /**
-   * Override equals() method.
-   *
-   * @param other the object to compare
-   * @return boolean is this object equal to the other
-   */
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
-    }
-
-    if (other instanceof IHandGear) {
-      IHandGear gear = (IHandGear) other;
-      return gear.hashCode() == this.hashCode();
-    }
-
-    return false;
   }
 }

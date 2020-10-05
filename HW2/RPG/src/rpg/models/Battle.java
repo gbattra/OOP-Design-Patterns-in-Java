@@ -5,7 +5,10 @@ import java.util.List;
 
 import rpg.enums.GearType;
 import rpg.interfaces.IBattle;
+import rpg.interfaces.IFootGear;
 import rpg.interfaces.IGear;
+import rpg.interfaces.IHandGear;
+import rpg.interfaces.IHeadGear;
 import rpg.interfaces.IPlayer;
 
 /**
@@ -86,18 +89,48 @@ public class Battle implements IBattle {
   }
 
   /**
-   * Adds a gear to the battle's gear list. Will be used to dress players before
+   * Adds a headgear to the battle's gear list. Will be used to dress players before
    * the fight.
    *
    * @param type GearType enum for the gear
-   * @param attack attack power of the gear
    * @param defense defensive power of the gear
    * @param adjective adjective describing the gear
    * @param noun noun describing the gear
    * @return a new updated IBattle instance with new gear list
    * @throws IllegalStateException when the max number of gears has already been reached
    */
-  public IBattle addGear(GearType type,
+  public IBattle addHeadGear(GearType type,
+                             int defense,
+                             String adjective,
+                             String noun) throws IllegalStateException, IllegalArgumentException {
+    if (this.gears.size() == this.gearCount) {
+      throw new IllegalStateException(
+              "Max number of gear for this battle has already been reached.");
+    }
+
+    List<IGear> gearsCopy = new ArrayList<>(this.gears);
+    IHeadGear gear = new HeadGear(type, defense, adjective, noun);
+    gearsCopy.add(gear);
+
+    return new Battle(
+            this.playerCount,
+            this.gearCount,
+            this.players,
+            gearsCopy);
+  }
+
+  /**
+   * Adds a hand gear to the battle's gear list. Will be used to dress players before
+   * the fight.
+   *
+   * @param type GearType enum for the gear
+   * @param defense defensive power of the gear
+   * @param adjective adjective describing the gear
+   * @param noun noun describing the gear
+   * @return a new updated IBattle instance with new gear list
+   * @throws IllegalStateException when the max number of gears has already been reached
+   */
+  public IBattle addHandGear(GearType type,
                          int attack,
                          int defense,
                          String adjective,
@@ -108,6 +141,39 @@ public class Battle implements IBattle {
     }
 
     List<IGear> gearsCopy = new ArrayList<>(this.gears);
+    IHandGear gear = new HandGear(type, attack, defense, adjective, noun);
+    gearsCopy.add(gear);
+
+    return new Battle(
+            this.playerCount,
+            this.gearCount,
+            this.players,
+            gearsCopy);
+  }
+
+  /**
+   * Adds a footgear to the battle's gear list. Will be used to dress players before
+   * the fight.
+   *
+   * @param type GearType enum for the gear
+   * @param defense defensive power of the gear
+   * @param adjective adjective describing the gear
+   * @param noun noun describing the gear
+   * @return a new updated IBattle instance with new gear list
+   * @throws IllegalStateException when the max number of gears has already been reached
+   */
+  public IBattle addFootGear(GearType type,
+                             int attack,
+                             int defense,
+                             String adjective,
+                             String noun) throws IllegalStateException, IllegalArgumentException {
+    if (this.gears.size() == this.gearCount) {
+      throw new IllegalStateException(
+              "Max number of gear for this battle has already been reached.");
+    }
+
+    List<IGear> gearsCopy = new ArrayList<>(this.gears);
+    IFootGear gear = new FootGear(type, attack, defense, adjective, noun);
     gearsCopy.add(gear);
 
     return new Battle(
@@ -169,6 +235,11 @@ public class Battle implements IBattle {
               "Cannot fight until all players have been added to the battle");
     }
 
+    if (this.gears.size() < this.gearCount) {
+      throw new IllegalStateException(
+              "Cannot fight until all gear has been added to the battle.");
+    }
+
     return this.fight(this.players);
   }
 
@@ -198,14 +269,22 @@ public class Battle implements IBattle {
     IGear bestGear = gearsCopy.get(bestGearIndex);
     gearsCopy.remove(bestGearIndex);
 
-    IPlayer updatedPlayer = player.addGear(bestGear);
-    playersCopy.add(updatedPlayer);
+    // in the event that no player can acquire any of the remaining gear, we catch and return
+    try {
+      IPlayer updatedPlayer = player.addGear(bestGear);
+      playersCopy.add(updatedPlayer);
+      if (!gearsCopy.isEmpty()) {
+        return this.dressPlayers(playersCopy, gearsCopy);
+      }
 
-    if (!gearsCopy.isEmpty()) {
-      return this.dressPlayers(playersCopy, gearsCopy);
+      return playersCopy;
+    } catch (Exception e) {
+      if (!gearsCopy.isEmpty()) {
+        return this.dressPlayers(playersCopy, gearsCopy);
+      }
+
+      return playersCopy;
     }
-
-    return playersCopy;
   }
 
   /**
@@ -227,25 +306,28 @@ public class Battle implements IBattle {
 
     for (int i = 0; i < gears.size(); i++) {
       IGear gear = gears.get(i);
-      IPlayer tmpPlayer = player.addGear(gear);
+      try {
+        IPlayer tmpPlayer = player.addGear(gear);
+        // if this gear is combinable, choose it and break out of the loop
+        if (tmpPlayer.getGear().size() == player.getGear().size()) {
+          bestGearIndex = i;
+          break;
+        }
 
-      // if this gear was combined with another worn by player, choose it and break out of the loop
-      if (tmpPlayer.getGear().size() == player.getGear().size()) {
-        bestGearIndex = i;
-        break;
-      }
+        // if this gear provides the highest increase to attack, choose it
+        if (tmpPlayer.getAttack() > highestAttack) {
+          highestAttack = tmpPlayer.getAttack();
+          bestGearIndex = i;
+          continue;
+        }
 
-      // if this gear provides the highest increase to attack, choose it
-      if (tmpPlayer.getAttack() > highestAttack) {
-        highestAttack = tmpPlayer.getAttack();
-        bestGearIndex = i;
+        // while no gear with attack has been set, choose this gear if it has the highest defense
+        if (tmpPlayer.getDefense() > highestDefense && highestAttack <= player.getAttack()) {
+          highestDefense += tmpPlayer.getDefense();
+          bestGearIndex = i;
+        }
+      } catch (Exception e) {
         continue;
-      }
-
-      // while no gear with attack has been set, choose this gear if it has the highest defense
-      if (tmpPlayer.getDefense() > highestDefense && !(highestAttack > player.getAttack())) {
-        highestDefense += tmpPlayer.getDefense();
-        bestGearIndex = i;
       }
     }
 
@@ -293,9 +375,14 @@ public class Battle implements IBattle {
    * @return the victorious player
    */
   private IPlayer duel(IPlayer playerOne, IPlayer playerTwo) {
-    int playerOneDamage = playerOne.getAttack() - playerTwo.getDefense();
-    int playerTwoDamage = playerTwo.getAttack() - playerOne.getDefense();
+    int playerOneHp = playerOne.getDefense();
+    int playerTwoHp = playerTwo.getDefense();
 
-    return playerOneDamage > playerTwoDamage ? playerOne : playerTwo;
+    while (playerOneHp > 0 && playerTwoHp > 0) {
+      playerOneHp -= playerTwo.getAttack();
+      playerTwoHp -= playerOne.getAttack();
+    }
+
+    return playerTwoHp <= 0 ? playerOne : playerTwo;
   }
 }

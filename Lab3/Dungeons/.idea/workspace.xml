@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c3ec8619-7ef3-475e-9aad-ff5405295e78" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1i3a2dACKYNN4jYemr5PSocvhgK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\grega\Projects\NEU\PDP\Dungeons\src\dungeon" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.MedievalLevelBuilderTest">
+    <configuration name="All in Dungeons" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Dungeons" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MedievalLevelBuilderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Dungeons" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MedievalLevelBuilderTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MedievalLevelBuilderTest" />
+        <item itemvalue="JUnit.All in Dungeons" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3ec8619-7ef3-475e-9aad-ff5405295e78" name="Default Changelist" comment="" />
+      <created>1601138524319</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601138524319</updated>
+      <workItem from="1601138525375" duration="11217000" />
+      <workItem from="1601256364856" duration="2069000" />
+      <workItem from="1601338656933" duration="131000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="739" y="261" key="FileChooserDialogImpl" timestamp="1601338674466">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601338674466" />
+    <state width="1877" height="340" key="GridCell.Tab.0.bottom" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state width="1877" height="340" key="GridCell.Tab.0.center" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.0.center/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state width="1877" height="340" key="GridCell.Tab.0.left" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.0.left/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state width="1877" height="340" key="GridCell.Tab.0.right" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.0.right/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state width="1877" height="340" key="GridCell.Tab.1.bottom" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state width="1877" height="340" key="GridCell.Tab.1.center" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.center/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state width="1877" height="340" key="GridCell.Tab.1.left" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.left/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state width="1877" height="340" key="GridCell.Tab.1.right" timestamp="1601155877398">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="340" key="GridCell.Tab.1.right/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601155877398" />
+    <state x="664" y="408" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1601149801144">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="664" y="408" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601149801144" />
+    <state x="1912" y="-415" width="1096" height="1022" key="dock-window-1" timestamp="1601338787486">
+      <screen x="1920" y="-407" width="1080" height="1880" />
+    </state>
+    <state x="1912" y="-415" width="1096" height="1022" key="dock-window-1/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601338787486" />
+    <state x="690" y="230" key="extract.method.dialog" timestamp="1601146914267">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="230" key="extract.method.dialog/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601146914267" />
+    <state x="668" y="237" width="583" height="566" key="find.popup" timestamp="1601152398606">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="237" width="583" height="566" key="find.popup/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601152398606" />
+    <state x="342" y="95" key="new project wizard" timestamp="1601338785722">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="342" y="95" key="new project wizard/0.0.1920.1040/1920.-407.1080.1880@0.0.1920.1040" timestamp="1601338785722" />
+  </component>
+</project>

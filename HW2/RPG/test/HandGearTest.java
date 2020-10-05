@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import rpg.enums.GearType;
+import rpg.interfaces.IGear;
 import rpg.interfaces.IHandGear;
 import rpg.models.HandGear;
 
@@ -297,7 +298,7 @@ public class HandGearTest {
 
   @Test
   public void testCombinedWithCombined() {
-    Optional<List<IHandGear>> combined = this.combinedHandGear.combinedWith();
+    Optional<List<IGear>> combined = this.combinedHandGear.combinedWith();
     assertTrue(combined.isPresent());
     assertEquals(this.handGear1, combined.get().get(0));
     assertEquals(this.handGear2, combined.get().get(1));
@@ -305,14 +306,14 @@ public class HandGearTest {
 
   @Test
   public void testCombinedWithNotCombined() {
-    Optional<List<IHandGear>> combined = this.handGear1.combinedWith();
+    Optional<List<IGear>> combined = this.handGear1.combinedWith();
     assertFalse(combined.isPresent());
   }
 
   @Test
   public void testValidCombine() {
     try {
-      IHandGear combined = this.handGear1.combine(this.handGear2);
+      IGear combined = this.handGear1.combine(this.handGear2);
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid combine() should not have failed.");
@@ -322,7 +323,7 @@ public class HandGearTest {
   @Test
   public void testInvalidCombineCallerAlreadyCombined() {
     try {
-      IHandGear combined = this.combinedHandGear.combine(this.handGear2);
+      IGear combined = this.combinedHandGear.combine(this.handGear2);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -332,7 +333,7 @@ public class HandGearTest {
   @Test
   public void testInvalidCombineProvidedAlreadyCombined() {
     try {
-      IHandGear combined = this.handGear1.combine(this.combinedHandGear);
+      IGear combined = this.handGear1.combine(this.combinedHandGear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -343,9 +344,9 @@ public class HandGearTest {
   public void testInvalidCombineWrongType() {
     try {
       IHandGear gear = new HandGear(
-              GearType.SHIELD,
-              10, 10, "nice", "sneaker");
-      IHandGear combined = this.handGear1.combine(gear);
+              GearType.SNEAKER,
+              10, 10, "nice", "shield");
+      IGear combined = this.handGear1.combine(gear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes

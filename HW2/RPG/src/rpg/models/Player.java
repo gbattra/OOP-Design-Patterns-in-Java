@@ -3,29 +3,20 @@ package rpg.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import rpg.enums.GearClass;
-import rpg.interfaces.IFootGear;
 import rpg.interfaces.IGear;
-import rpg.interfaces.IHandGear;
-import rpg.interfaces.IHeadGear;
 import rpg.interfaces.IPlayer;
 
 /**
- * Class representing a player in the RPG.
+ * Class representing a player in the RPG. Players have a base defense and attack, and can wear
+ * gear that augments their attack and defense values.
  */
 public class Player implements IPlayer {
-  private static final int HEAD_GEAR_COUNT = 1;
-  private static final int HAND_GEAR_COUNT = 2;
-  private static final int FOOT_GEAR_COUNT = 2;
-
   private final int number;
   private final int attack;
   private final int defense;
-  private final List<IHeadGear> headGears;
-  private final List<IHandGear> handGears;
-  private final List<IFootGear> footGears;
+  private final List<IGear> gears;
 
   /**
    * Basic player constructor.
@@ -46,9 +37,7 @@ public class Player implements IPlayer {
     this.number = number;
     this.attack = attack;
     this.defense = defense;
-    this.headGears = new ArrayList<>();
-    this.handGears = new ArrayList<>();
-    this.footGears = new ArrayList<>();
+    this.gears = new ArrayList<>();
   }
 
   /**
@@ -57,43 +46,46 @@ public class Player implements IPlayer {
    * @param number the player number / id
    * @param attack the player's initial attack strength
    * @param defense the palyer's initial defense strenght
-   * @param headGears the headgears worn by the player
-   * @param handGears the handgears worn by the player
-   * @param footGears the footgears worn by the player
+   * @param gears the gear worn by the player
    * @throws IllegalArgumentException when number, attack or defense < 0, or invalid gear types
    */
   public Player(
           int number,
           int attack,
           int defense,
-          List<IHeadGear> headGears,
-          List<IHandGear> handGears,
-          List<IFootGear> footGears) throws IllegalArgumentException {
+          List<IGear> gears) throws IllegalArgumentException {
     if (number < 0 || attack < 0 || defense < 0) {
       throw new IllegalArgumentException("Number, attack and defense must be non-negative");
     }
 
-    if (headGears.size() > HEAD_GEAR_COUNT) {
+    if (gears.stream().filter(gear -> gear.getType().gearClass == GearClass.HEADGEAR).count()
+            > GearClass.HEADGEAR.count) {
       throw new IllegalStateException(
-              String.format("Too many head gear items provided. Max: %s", HEAD_GEAR_COUNT));
+              String.format(
+                      "Too many head gear items provided. Max: %s",
+                      GearClass.HEADGEAR.count));
     }
 
-    if (handGears.size() > HAND_GEAR_COUNT) {
+    if (gears.stream().filter(gear -> gear.getType().gearClass == GearClass.HANDGEAR).count()
+            > GearClass.HANDGEAR.count) {
       throw new IllegalStateException(
-              String.format("Too many hand gear items provided. Max: %s", HAND_GEAR_COUNT));
+              String.format(
+                      "Too many hand gear items provided. Max: %s",
+                      GearClass.HANDGEAR.count));
     }
 
-    if (footGears.size() > FOOT_GEAR_COUNT) {
+    if (gears.stream().filter(gear -> gear.getType().gearClass == GearClass.FOOTGEAR).count()
+            > GearClass.FOOTGEAR.count) {
       throw new IllegalStateException(
-              String.format("Too many foot gear items provided. Max: %s", FOOT_GEAR_COUNT));
+              String.format(
+                      "Too many foot gear items provided. Max: %s",
+                      GearClass.FOOTGEAR.count));
     }
 
     this.number = number;
     this.attack = attack;
     this.defense = defense;
-    this.headGears = headGears;
-    this.handGears = handGears;
-    this.footGears = footGears;
+    this.gears = gears;
   }
 
   /**
@@ -113,9 +105,7 @@ public class Player implements IPlayer {
    */
   public int getAttack() {
     int aggregateAttack = this.attack;
-    List<IGear> gears = new ArrayList<>();
-    Stream.of(this.headGears, this.handGears, this.footGears).forEach(gears::addAll);
-    for (IGear gear : gears) {
+    for (IGear gear : this.gears) {
       aggregateAttack += gear.getAttack();
     }
     return aggregateAttack;
@@ -129,26 +119,19 @@ public class Player implements IPlayer {
    */
   public int getDefense() {
     int aggregateDefense = this.defense;
-    List<IGear> gears = new ArrayList<>();
-    Stream.of(this.headGears, this.handGears, this.footGears).forEach(gears::addAll);
-    for (IGear gear : gears) {
+    for (IGear gear : this.gears) {
       aggregateDefense += gear.getDefense();
     }
     return aggregateDefense;
   }
 
   /**
-   * Compiles the player gear into a list and returns the list.
+   * Returns the list of gear worn by the player instace.
    *
    * @return the list of gear worn by the player
    */
   public List<IGear> getGear() {
-    List<IGear> gears = new ArrayList<>();
-    gears.addAll(this.headGears);
-    gears.addAll(this.handGears);
-    gears.addAll(this.footGears);
-
-    return gears;
+    return this.gears;
   }
 
   /**
@@ -158,169 +141,50 @@ public class Player implements IPlayer {
    * @param gear the IGear instance to add
    * @return the updated player with gear added
    * @throws IllegalStateException when player state does not permit adding the gear
-   * @throws IllegalArgumentException when provided gear has invalid sub-interface of IGear
    */
   public IPlayer addGear(IGear gear) throws IllegalStateException, IllegalArgumentException {
-    if (gear instanceof IHeadGear) {
-      return this.addHeadGear((IHeadGear) gear);
-    }
-    if (gear instanceof IHandGear) {
-      return this.addHandGear((IHandGear) gear);
-    }
-    if (gear instanceof IFootGear) {
-      return this.addFootGear((IFootGear) gear);
-    }
+    List<IGear> gearsFromClass = this.gears
+            .stream()
+            .filter(g -> g.getType().gearClass == gear.getType().gearClass)
+            .collect(Collectors.toList());
+    List<IGear> gearsNotFromClass = this.gears
+            .stream()
+            .filter(g -> g.getType().gearClass != gear.getType().gearClass)
+            .collect(Collectors.toList());
 
-    throw new IllegalArgumentException(
-            "Provided gear does not implement valid sub-interface of IGear.");
-  }
+    if (gearsFromClass.size() < gear.getType().gearClass.count) {
+      gearsFromClass.add(gear);
+    } else {
+      boolean combined = false;
 
-  /**
-   * Adds a headgear item to this player.
-   *
-   * @param gear the gear to add
-   * @return a new player instance with updated attire
-   * @throws IllegalStateException when geartype is invalid or player has no more room
-   */
-  public IPlayer addHeadGear(IHeadGear gear) throws IllegalStateException {
-    List<IHeadGear> headGearsCopy = new ArrayList<>(this.headGears);
-    if (headGearsCopy.size() < HEAD_GEAR_COUNT) {
-      headGearsCopy.add(gear);
-      IPlayer player = new Player(
-              this.number,
-              this.attack,
-              this.defense,
-              headGearsCopy,
-              this.handGears,
-              this.footGears);
-      return player;
-    }
+      for (int i = 0; i < gearsFromClass.size(); i++) {
+        try {
+          IGear newGear = gearsFromClass.get(i).combine(gear);
+          gearsFromClass.set(i, newGear);
+          combined = true;
+          break;
+        } catch (Exception e) {
+          gearsFromClass.set(i, gearsFromClass.get(i));
+        }
+      }
 
-    boolean combined = false;
-    List<IHeadGear> newHeadGears = new ArrayList<>(this.headGears);
-    for (int i = 0; i < this.headGears.size(); i++) {
-      try {
-        IHeadGear newGear = this.headGears.get(i).combine(gear);
-        newHeadGears.set(i, newGear);
-        combined = true;
-        break;
-      } catch (Exception e) {
-        newHeadGears.set(i, this.headGears.get(i));
+      if (!combined) {
+        throw new IllegalStateException(
+                String.format(
+                        "Failed to add head gear. No remaining un-combined gear of class: %s",
+                        gear.getType().gearClass.toString()));
       }
     }
 
-    if (!combined) {
-      throw new IllegalStateException(
-              "Failed to add head gear. No remaining un-combined head gears.");
-    }
+    List<IGear> newGearList = new ArrayList<>();
+    newGearList.addAll(gearsFromClass);
+    newGearList.addAll(gearsNotFromClass);
 
     IPlayer player = new Player(
             this.number,
             this.attack,
             this.defense,
-            newHeadGears,
-            this.handGears,
-            this.footGears);
-
-    return player;
-  }
-
-  /**
-   * Adds a handgear item to this player.
-   *
-   * @param gear the gear to add
-   * @return a new player instance with updated attire
-   * @throws IllegalStateException when geartype is invalid or player has no more room
-   */
-  public IPlayer addHandGear(IHandGear gear) throws IllegalStateException {
-    List<IHandGear> handGearsCopy = new ArrayList<>(this.handGears);
-    if (handGearsCopy.size() < HAND_GEAR_COUNT) {
-      handGearsCopy.add(gear);
-      IPlayer player = new Player(
-              this.number,
-              this.attack,
-              this.defense,
-              this.headGears,
-              handGearsCopy,
-              this.footGears);
-      return player;
-    }
-
-    boolean combined = false;
-    List<IHandGear> newHandGears = new ArrayList<>(this.handGears);
-    for (int i = 0; i < this.handGears.size(); i++) {
-      try {
-        IHandGear newGear = this.handGears.get(i).combine(gear);
-        newHandGears.set(i, newGear);
-        combined = true;
-        break;
-      } catch (Exception e) {
-        newHandGears.set(i, this.handGears.get(i));
-      }
-    }
-
-    if (!combined) {
-      throw new IllegalStateException(
-              "Failed to add hand gear. No remaining un-combined hand gears.");
-    }
-
-    IPlayer player = new Player(
-            this.number,
-            this.attack,
-            this.defense,
-            this.headGears,
-            newHandGears,
-            this.footGears);
-
-    return player;
-  }
-
-  /**
-   * Adds a footgear item to this player.
-   *
-   * @param gear the gear to add
-   * @return a new player instance with updated attire
-   * @throws IllegalStateException when geartype is invalid or player has no more room
-   */
-  public IPlayer addFootGear(IFootGear gear) throws IllegalStateException {
-    List<IFootGear> footGearsCopy = new ArrayList<>(this.footGears);
-    if (footGearsCopy.size() < FOOT_GEAR_COUNT) {
-      footGearsCopy.add(gear);
-      IPlayer player = new Player(
-              this.number,
-              this.attack,
-              this.defense,
-              this.headGears,
-              this.handGears,
-              footGearsCopy);
-      return player;
-    }
-
-    boolean combined = false;
-    List<IFootGear> newFootGears = new ArrayList<>(this.footGears);
-    for (int i = 0; i < this.footGears.size(); i++) {
-      try {
-        IFootGear newGear = this.footGears.get(i).combine(gear);
-        newFootGears.set(i, newGear);
-        combined = true;
-        break;
-      } catch (Exception e) {
-        newFootGears.set(i, this.footGears.get(i));
-      }
-    }
-
-    if (!combined) {
-      throw new IllegalStateException(
-              "Failed to add foot gear. No remaining un-combined foot gears.");
-    }
-
-    IPlayer player = new Player(
-            this.number,
-            this.attack,
-            this.defense,
-            this.headGears,
-            this.handGears,
-            newFootGears);
+            newGearList);
 
     return player;
   }
@@ -334,16 +198,19 @@ public class Player implements IPlayer {
   public String toString() {
     return String.format(
             "Player %s:\n"
-            + "- Total Attack: %s,\n- Total Defense: %s,\n- Base Attack: %s,\n- Base Defense: %s,"
-            + "\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
+                    + "- Total Attack: %s,\n- Total Defense: %s,\n- Base Attack: %s,\n- Base Defense: %s,"
+                    + "\n- HeadGear: %s,\n- Handgear: %s,\n- Footgear: %s",
             this.number,
             this.getAttack(),
             this.getDefense(),
             this.attack,
             this.defense,
-            this.headGears.stream().map(IHeadGear::toString).collect(Collectors.joining("; ")),
-            this.handGears.stream().map(IHandGear::toString).collect(Collectors.joining("; ")),
-            this.footGears.stream().map(IFootGear::toString).collect(Collectors.joining("; ")));
+            this.gears.stream().filter(gear -> gear.getType().gearClass == GearClass.HEADGEAR)
+                    .map(IGear::toString).collect(Collectors.joining("; ")),
+            this.gears.stream().filter(gear -> gear.getType().gearClass == GearClass.HANDGEAR)
+                    .map(IGear::toString).collect(Collectors.joining("; ")),
+            this.gears.stream().filter(gear -> gear.getType().gearClass == GearClass.FOOTGEAR)
+                    .map(IGear::toString).collect(Collectors.joining("; ")));
   }
 
   /**

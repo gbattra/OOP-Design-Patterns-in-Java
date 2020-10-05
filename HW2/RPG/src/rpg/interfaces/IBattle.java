@@ -23,7 +23,24 @@ public interface IBattle {
   List<IGear> getGears();
 
   /**
-   * Adds a gear to the battle's gear list. Will be used to dress players before
+   * Adds a headgear to the battle's gear list. Will be used to dress players before
+   * the fight.
+   *
+   * @param type GearType enum for the gear
+   * @param defense defensive power of the gear
+   * @param adjective adjective describing the gear
+   * @param noun noun describing the gear
+   * @return a new updated IBattle instance with new gear list
+   * @throws IllegalStateException when the max number of gears has already been reached
+   * @throws IllegalArgumentException when attack, def, adj or noun are negative or empty
+   */
+  IBattle addHeadGear(GearType type,
+                  int defense,
+                  String adjective,
+                  String noun) throws IllegalStateException, IllegalArgumentException;
+
+  /**
+   * Adds a handgear to the battle's gear list. Will be used to dress players before
    * the fight.
    *
    * @param type GearType enum for the gear
@@ -35,7 +52,26 @@ public interface IBattle {
    * @throws IllegalStateException when the max number of gears has already been reached
    * @throws IllegalArgumentException when attack, def, adj or noun are negative or empty
    */
-  IBattle addGear(GearType type,
+  IBattle addHandGear(GearType type,
+                  int attack,
+                  int defense,
+                  String adjective,
+                  String noun) throws IllegalStateException, IllegalArgumentException;
+
+  /**
+   * Adds a footgear to the battle's gear list. Will be used to dress players before
+   * the fight.
+   *
+   * @param type GearType enum for the gear
+   * @param attack attack power of the gear
+   * @param defense defensive power of the gear
+   * @param adjective adjective describing the gear
+   * @param noun noun describing the gear
+   * @return a new updated IBattle instance with new gear list
+   * @throws IllegalStateException when the max number of gears has already been reached
+   * @throws IllegalArgumentException when attack, def, adj or noun are negative or empty
+   */
+  IBattle addFootGear(GearType type,
                   int attack,
                   int defense,
                   String adjective,

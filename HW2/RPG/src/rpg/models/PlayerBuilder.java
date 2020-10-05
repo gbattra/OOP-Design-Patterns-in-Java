@@ -50,7 +50,7 @@ public class PlayerBuilder implements IPlayerBuilder  {
           String noun) throws IllegalStateException, IllegalArgumentException {
     try {
       IHeadGear gear = new HeadGear(type, defense, adjective, noun);
-      this.player = this.player.addHeadGear(gear);
+      this.player = this.player.addGear(gear);
       return this;
     } catch (Exception e) {
       throw e;
@@ -77,7 +77,7 @@ public class PlayerBuilder implements IPlayerBuilder  {
           String noun) throws IllegalStateException, IllegalArgumentException {
     try {
       IHandGear gear = new HandGear(type, attack, defense, adjective, noun);
-      this.player = this.player.addHandGear(gear);
+      this.player = this.player.addGear(gear);
       return this;
     } catch (Exception e) {
       throw e;
@@ -104,7 +104,7 @@ public class PlayerBuilder implements IPlayerBuilder  {
           String noun) throws IllegalStateException, IllegalArgumentException {
     try {
       IFootGear gear = new FootGear(type, attack, defense, adjective, noun);
-      this.player = this.player.addFootGear(gear);
+      this.player = this.player.addGear(gear);
       return this;
     } catch (Exception e) {
       throw e;

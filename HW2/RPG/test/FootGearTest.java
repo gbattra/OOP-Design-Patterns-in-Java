@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import rpg.enums.GearType;
 import rpg.interfaces.IFootGear;
+import rpg.interfaces.IGear;
 import rpg.models.FootGear;
 
 import static org.junit.Assert.assertEquals;
@@ -297,7 +298,7 @@ public class FootGearTest {
 
   @Test
   public void testCombinedWithCombined() {
-    Optional<List<IFootGear>> combined = this.combinedFootGear.combinedWith();
+    Optional<List<IGear>> combined = this.combinedFootGear.combinedWith();
     assertTrue(combined.isPresent());
     assertEquals(this.footGear1, combined.get().get(0));
     assertEquals(this.footGear2, combined.get().get(1));
@@ -305,14 +306,14 @@ public class FootGearTest {
 
   @Test
   public void testCombinedWithNotCombined() {
-    Optional<List<IFootGear>> combined = this.footGear1.combinedWith();
+    Optional<List<IGear>> combined = this.footGear1.combinedWith();
     assertFalse(combined.isPresent());
   }
 
   @Test
   public void testValidCombine() {
     try {
-      IFootGear combined = this.footGear1.combine(this.footGear2);
+      IGear combined = this.footGear1.combine(this.footGear2);
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid combine() should not have failed.");
@@ -322,7 +323,7 @@ public class FootGearTest {
   @Test
   public void testInvalidCombineCallerAlreadyCombined() {
     try {
-      IFootGear combined = this.combinedFootGear.combine(this.footGear2);
+      IGear combined = this.combinedFootGear.combine(this.footGear2);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -332,7 +333,7 @@ public class FootGearTest {
   @Test
   public void testInvalidCombineProvidedAlreadyCombined() {
     try {
-      IFootGear combined = this.footGear1.combine(this.combinedFootGear);
+      IGear combined = this.footGear1.combine(this.combinedFootGear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -343,9 +344,9 @@ public class FootGearTest {
   public void testInvalidCombineWrongType() {
     try {
       IFootGear gear = new FootGear(
-              GearType.SNEAKER,
+              GearType.HAT,
               10, 10, "nice", "sneaker");
-      IFootGear combined = this.footGear1.combine(gear);
+      IGear combined = this.footGear1.combine(gear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes

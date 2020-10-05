@@ -46,31 +46,4 @@ public interface IPlayer {
    * @throws IllegalArgumentException when provided gear has invalid sub-interface of IGear
    */
   IPlayer addGear(IGear gear) throws IllegalStateException, IllegalArgumentException;
-
-  /**
-   * Adds a headgear item to this player.
-   *
-   * @param gear the gear to add
-   * @return a new player instance with updated attire
-   * @throws IllegalStateException when player has no more room or cannot combine any more gears
-   */
-  IPlayer addHeadGear(IHeadGear gear) throws IllegalStateException;
-
-  /**
-   * Adds a handgear item to this player.
-   *
-   * @param gear the gear to add
-   * @return a new player instance with updated attire
-   * @throws IllegalStateException when player has no more room or cannot combine any more gears
-   */
-  IPlayer addHandGear(IHandGear gear) throws IllegalStateException;
-
-  /**
-   * Adds a footgear item to this player.
-   *
-   * @param gear the gear to add
-   * @return a new player instance with updated attire
-   * @throws IllegalStateException when player has no more room or cannot combine any more gears
-   */
-  IPlayer addFootGear(IFootGear gear) throws IllegalStateException;
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import rpg.enums.GearType;
+import rpg.interfaces.IGear;
 import rpg.interfaces.IHeadGear;
 import rpg.models.HeadGear;
 
@@ -263,7 +264,7 @@ public class HeadGearTest {
 
   @Test
   public void testCombinedWithCombined() {
-    Optional<List<IHeadGear>> combined = this.combinedHeadGear.combinedWith();
+    Optional<List<IGear>> combined = this.combinedHeadGear.combinedWith();
     assertTrue(combined.isPresent());
     assertEquals(this.headGear1, combined.get().get(0));
     assertEquals(this.headGear2, combined.get().get(1));
@@ -271,14 +272,14 @@ public class HeadGearTest {
 
   @Test
   public void testCombinedWithNotCombined() {
-    Optional<List<IHeadGear>> combined = this.headGear1.combinedWith();
+    Optional<List<IGear>> combined = this.headGear1.combinedWith();
     assertFalse(combined.isPresent());
   }
 
   @Test
   public void testValidCombine() {
     try {
-      IHeadGear combined = this.headGear1.combine(this.headGear2);
+      IGear combined = this.headGear1.combine(this.headGear2);
       // do nothing, test passes
     } catch (Exception e) {
       fail("Valid combine() should not have failed.");
@@ -288,7 +289,7 @@ public class HeadGearTest {
   @Test
   public void testInvalidCombineCallerAlreadyCombined() {
     try {
-      IHeadGear combined = this.combinedHeadGear.combine(this.headGear2);
+      IGear combined = this.combinedHeadGear.combine(this.headGear2);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -298,7 +299,7 @@ public class HeadGearTest {
   @Test
   public void testInvalidCombineProvidedAlreadyCombined() {
     try {
-      IHeadGear combined = this.headGear1.combine(this.combinedHeadGear);
+      IGear combined = this.headGear1.combine(this.combinedHeadGear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes
@@ -308,8 +309,8 @@ public class HeadGearTest {
   @Test
   public void testInvalidCombineWrongType() {
     try {
-      IHeadGear gear = new HeadGear(GearType.VISOR, 10, "nice", "visor");
-      IHeadGear combined = this.headGear1.combine(gear);
+      IHeadGear gear = new HeadGear(GearType.SWORD, 10, "nice", "visor");
+      IGear combined = this.headGear1.combine(gear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {
       // do nothing, test passes

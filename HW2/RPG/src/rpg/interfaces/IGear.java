@@ -5,7 +5,7 @@ import rpg.enums.GearType;
 /**
  * Interface for gear objects.
  */
-public interface IGear {
+public interface IGear extends ICombinable<IGear> {
   /**
    * Returns the gear type.
    *

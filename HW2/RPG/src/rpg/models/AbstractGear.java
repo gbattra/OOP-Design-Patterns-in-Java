@@ -10,10 +10,8 @@ import rpg.interfaces.IGear;
 /**
  * Abstract class for objects implementing IGear. Contains common functionality such as
  * basic getters and aggregators.
- *
- * @param <T> Interface for the gear type represented by whatever extends this abstract class
  */
-public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
+public abstract class AbstractGear implements IGear {
   private static final int COMBINED_COUNT = 2;
 
   protected final GearType type;
@@ -21,7 +19,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   protected final int defense;
   protected final String adjective;
   protected final String noun;
-  protected final List<T> combinedWith;
+  protected final List<IGear> combinedWith;
   protected final boolean isCombined;
 
   /**
@@ -72,7 +70,17 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
           int defense,
           String adjective,
           String noun,
-          List<T> combinedWith) throws IllegalArgumentException {
+          List<IGear> combinedWith) throws IllegalArgumentException {
+    if (combinedWith.stream().anyMatch(gear -> gear.getType().gearClass != type.gearClass)) {
+      throw new IllegalArgumentException(
+              "Cannot created combined gear with gears of different types.");
+    }
+
+    if (combinedWith.stream().anyMatch(gear -> gear.getType().gearClass != type.gearClass)) {
+      throw new IllegalArgumentException(
+              "Cannot create combined gear with gears of different type.");
+    }
+
     if (attack < 0 || defense < 0) {
       throw new IllegalArgumentException("Attack and defense values must be non-negative.");
     }
@@ -100,14 +108,14 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
    * @param gear T type of gear instance to merge with this
    * @return a new IGear instance
    */
-  public abstract T combine(T gear);
+  public abstract IGear combine(IGear gear);
 
   /**
    * Getter for the combinedGear property.
    *
    * @return the IGear instance that this is combined with
    */
-  public Optional<List<T>> combinedWith() {
+  public Optional<List<IGear>> combinedWith() {
     return Optional.ofNullable(this.combinedWith);
   }
 
@@ -189,7 +197,7 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
             this.defense);
     if (this.isCombined) {
       description += " Combined with: ";
-      for (T gear : this.combinedWith) {
+      for (IGear gear : this.combinedWith) {
         description += String.format("%s", gear.toString());
       }
     }
@@ -208,11 +216,22 @@ public abstract class AbstractGear<T> implements IGear, ICombinable<T> {
   }
 
   /**
-   * Override for equals method. To be implemented by extending classes.
+   * Override equals() method.
    *
    * @param other the object to compare
-   * @return true/false the objects are equal
+   * @return boolean is this object equal to the other
    */
   @Override
-  public abstract boolean equals(Object other);
+  public boolean equals(Object other) {
+    if (other == this) {
+      return true;
+    }
+
+    if (other instanceof IGear) {
+      IGear gear = (IGear) other;
+      return gear.hashCode() == this.hashCode();
+    }
+
+    return false;
+  }
 }
