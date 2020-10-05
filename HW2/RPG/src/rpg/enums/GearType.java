@@ -1,5 +1,8 @@
 package rpg.enums;
 
+/**
+ * Enum to encapsulate each type of gear instance.
+ */
 public enum GearType {
   HAT(GearClass.HEADGEAR),
   HELMET(GearClass.HEADGEAR),

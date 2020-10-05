@@ -8,6 +8,9 @@ import rpg.models.PlayerBuilder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test for the PlayerBuilder class.
+ */
 public class PlayerBuilderTest {
   @Test
   public void testValidConstructor() {
