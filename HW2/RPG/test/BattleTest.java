@@ -345,9 +345,9 @@ public class BattleTest {
       List<IPlayer> players = battle.getPlayers();
       assertTrue(players.stream().noneMatch(player -> player.getGear().size() == 0));
 
-      assertEquals(43, players.get(0).getDefense());
+      assertEquals(52, players.get(0).getDefense());
       assertEquals(37, players.get(0).getAttack());
-      assertEquals(57, players.get(1).getDefense());
+      assertEquals(48, players.get(1).getDefense());
       assertEquals(27, players.get(1).getAttack());
     } catch (Exception e) {
       fail("Valid dressPlayers() call should not have failed.");

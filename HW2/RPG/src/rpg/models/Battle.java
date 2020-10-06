@@ -375,14 +375,9 @@ public class Battle implements IBattle {
    * @return the victorious player
    */
   private IPlayer duel(IPlayer playerOne, IPlayer playerTwo) {
-    int playerOneHp = playerOne.getDefense();
-    int playerTwoHp = playerTwo.getDefense();
+    int playerOneDamage = playerOne.getAttack() - playerTwo.getDefense();
+    int playerTwoDamage = playerTwo.getAttack() - playerOne.getDefense();
 
-    while (playerOneHp > 0 && playerTwoHp > 0) {
-      playerOneHp -= playerTwo.getAttack();
-      playerTwoHp -= playerOne.getAttack();
-    }
-
-    return playerTwoHp <= 0 ? playerOne : playerTwo;
+    return playerOneDamage > playerTwoDamage ? playerOne : playerTwo;
   }
 }

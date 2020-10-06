@@ -309,7 +309,7 @@ public class HeadGearTest {
   @Test
   public void testInvalidCombineWrongType() {
     try {
-      IHeadGear gear = new HeadGear(GearType.SWORD, 10, "nice", "visor");
+      IHeadGear gear = new HeadGear(GearType.HELMET, 10, "nice", "visor");
       IGear combined = this.headGear1.combine(gear);
       fail("Invalid combine() should have failed.");
     } catch (Exception e) {

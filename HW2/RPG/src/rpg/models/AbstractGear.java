@@ -70,7 +70,7 @@ public abstract class AbstractGear implements IGear {
           String adjective,
           String noun,
           List<IGear> combinedWith) throws IllegalArgumentException {
-    if (combinedWith.stream().anyMatch(gear -> gear.getType().gearClass != type.gearClass)) {
+    if (combinedWith.stream().anyMatch(gear -> gear.getType() != type)) {
       throw new IllegalArgumentException(
               "Cannot created combined gear with gears of different types.");
     }

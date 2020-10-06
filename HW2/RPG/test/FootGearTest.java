@@ -344,7 +344,7 @@ public class FootGearTest {
   public void testInvalidCombineWrongType() {
     try {
       IFootGear gear = new FootGear(
-              GearType.HAT,
+              GearType.SNEAKER,
               10, 10, "nice", "sneaker");
       IGear combined = this.footGear1.combine(gear);
       fail("Invalid combine() should have failed.");
