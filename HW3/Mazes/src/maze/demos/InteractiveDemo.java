@@ -48,24 +48,35 @@ public class InteractiveDemo {
 
     System.out.print("Is a room maze? (enter 'true' or 'false')\n");
     boolean isRoom = scanner.nextBoolean();
+    builder = builder.setIsRoomMaze(isRoom);
+    
     int targetEdgeCount = 0;
     if (isRoom) {
       targetEdgeCount = readTargetEdgeCount(rowCount, columnCount);
+      builder.setTargetEdgeCount(targetEdgeCount);
     }
 
     System.out.print("Is a wrapping maze? (enter 'true' or 'false')\n");
     boolean isWrapping = scanner.nextBoolean();
+    builder.setIsWrappingMaze(isWrapping);
 
     System.out.print("----------------------------------------------------\n");
     System.out.print("MAZE SUMMARY:\n");
-    System.out.printf("%s rows X %s columns\n", rowCount, columnCount);
-    System.out.printf("Start: row %s, column %s\n", startRow, startColumn);
-    System.out.printf("Goal: row %s, column %s\n", goalRow, goalColumn);
+    System.out.printf(
+            "%s rows X %s columns\n",
+            builder.getRowCount(),
+            builder.getColumnCount());
+    System.out.printf(
+            "Start: row %s, column %s\n",
+            builder.getStart().getY(), builder.getStart().getX());
+    System.out.printf(
+            "Goal: row %s, column %s\n",
+            builder.getGoal().getY(), builder.getGoal().getX());
     if (isRoom) {
-      System.out.printf("Target edge count: %s\n", targetEdgeCount);
+      System.out.printf("Target edge count: %s\n", builder.getTargetEdgeCount());
     }
-    System.out.printf("%s a room maze\n", isRoom ? "Is" : "Is not");
-    System.out.printf("%s a wrapping maze\n", isWrapping ? "Is" : "Is not");
+    System.out.printf("%s a room maze\n", builder.getIsRoomMaze() ? "Is" : "Is not");
+    System.out.printf("%s a wrapping maze\n", builder.getIsWrappingMaze() ? "Is" : "Is not");
     System.out.print("----------------------------------------------------\n");
 
     System.out.print("Building the maze...\n");
