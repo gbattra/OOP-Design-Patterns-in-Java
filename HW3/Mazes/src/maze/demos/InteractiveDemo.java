@@ -49,7 +49,7 @@ public class InteractiveDemo {
     System.out.print("Is a room maze? (enter 'true' or 'false')\n");
     boolean isRoom = scanner.nextBoolean();
     builder = builder.setIsRoomMaze(isRoom);
-    
+
     int targetEdgeCount = 0;
     if (isRoom) {
       targetEdgeCount = readTargetEdgeCount(rowCount, columnCount);
