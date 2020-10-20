@@ -28,14 +28,14 @@ public interface Configuration {
    *
    * @return the start coordinates
    */
-  Coordinates getStartCoordinates();
+  Coordinates startCoordinates();
 
   /**
    * Getter for the maze goal coordinates.
    *
    * @return the goal coordinates
    */
-  Coordinates getGoalCoordinates();
+  Coordinates goalCoordinates();
 
   /**
    * Getter for the thief penalty. Thief penalty determines percent of gold taken.

@@ -19,15 +19,15 @@ import maze.interfaces.Path;
  * count.
  */
 public abstract class AbstractRoomNode implements Node {
-  private Node north = new DeadEndNode();
-  private Node south = new DeadEndNode();
-  private Node east = new DeadEndNode();
-  private Node west = new DeadEndNode();
+  protected Node north = new DeadEndNode();
+  protected Node south = new DeadEndNode();
+  protected Node east = new DeadEndNode();
+  protected Node west = new DeadEndNode();
 
-  private final Coordinates coordinates;
-  private final int goldCount;
-  private final boolean isGoal;
-  private final double thiefPenalty;
+  protected final Coordinates coordinates;
+  protected final int goldCount;
+  protected final boolean isGoal;
+  protected final double thiefPenalty;
 
   /**
    * First constructor for RoomNode. Use when room contains gold for the player.

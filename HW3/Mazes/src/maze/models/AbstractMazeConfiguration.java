@@ -181,12 +181,12 @@ public abstract class AbstractMazeConfiguration implements Configuration {
   }
 
   @Override
-  public Coordinates getStartCoordinates() {
+  public Coordinates startCoordinates() {
     return this.start;
   }
 
   @Override
-  public Coordinates getGoalCoordinates() {
+  public Coordinates goalCoordinates() {
     return this.goal;
   }
 
