@@ -57,6 +57,7 @@ public class MazeGame implements Game {
   public boolean movePlayer(Direction direction) {
     boolean moved = maze.move(direction);
     if (moved && !path.getCoordinatesTraversed().contains(maze.getCurrent().getCoordinates())) {
+      path.enter(maze.getCurrent());
       this.player = player.loot(maze.getCurrent());
     }
 
@@ -67,6 +68,7 @@ public class MazeGame implements Game {
 
   @Override
   public void start() {
+    path.enter(maze.getCurrent());
     player.loot(maze.getCurrent());
     this.isOver &= !maze.getCurrent().isGoal();
   }

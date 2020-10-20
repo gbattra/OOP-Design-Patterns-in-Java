@@ -35,7 +35,7 @@ public class DeadEndNodeTest {
             new MazePath(new MazeCoordinates(0, 0)),
             node.exploreTo(new MazeCoordinates(0, 0)));
     assertEquals("Dead End Node", node.toString());
-    assertEquals(node, new DeadEndNode());
+    assertEquals(node.get(new MazeCoordinates(0, 0)), new DeadEndNode());
   }
 
   @Test
