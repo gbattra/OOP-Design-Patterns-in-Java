@@ -153,21 +153,19 @@ public class InteractiveDemo {
   }
 
   private static Direction directionFromInput(String input) {
-    switch (input.toLowerCase()) {
-      case "north" -> {
-        return Direction.NORTH;
-      }
-      case "south" -> {
-        return Direction.SOUTH;
-      }
-      case "east" -> {
-        return Direction.EAST;
-      }
-      case "west" -> {
-        return Direction.WEST;
-      }
-      default -> throw new IllegalArgumentException("Input direction not valid.");
+    if (input.toLowerCase().equals("north")) {
+      return Direction.NORTH;
     }
+    if (input.toLowerCase().equals("south")) {
+      return Direction.SOUTH;
+    }
+    if (input.toLowerCase().equals("east")) {
+      return Direction.EAST;
+    }
+    if (input.toLowerCase().equals("west")) {
+      return Direction.WEST;
+    }
+    throw new IllegalArgumentException("Input direction not valid.");
   }
 
   private static int readColumnCount() {

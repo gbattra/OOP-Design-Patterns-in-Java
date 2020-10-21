@@ -14,20 +14,18 @@ public final class DirectionHelper {
    * @return the opposite direction
    */
   public static Direction oppositeOf(Direction direction) {
-    switch (direction) {
-      case NORTH -> {
-        return Direction.SOUTH;
-      }
-      case SOUTH -> {
-        return Direction.NORTH;
-      }
-      case EAST -> {
-        return Direction.WEST;
-      }
-      case WEST -> {
-        return Direction.EAST;
-      }
-      default -> throw new IllegalArgumentException("Invalid direction provided.");
+    if (direction == Direction.NORTH) {
+      return Direction.SOUTH;
     }
+    if (direction == Direction.SOUTH) {
+      return Direction.NORTH;
+    }
+    if (direction == Direction.EAST) {
+      return Direction.WEST;
+    }
+    if (direction == Direction.WEST) {
+      return Direction.EAST;
+    }
+    throw new IllegalArgumentException("Invalid direction provided.");
   }
 }

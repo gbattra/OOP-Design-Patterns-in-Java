@@ -176,27 +176,35 @@ public abstract class AbstractRoomNode implements Node {
 
   @Override
   public void setNode(Node node, Direction dir) throws IllegalArgumentException {
-    switch (dir) {
-      case NORTH -> this.north = node;
-      case SOUTH -> this.south = node;
-      case EAST -> this.east = node;
-      case WEST -> this.west = node;
-      default -> throw new IllegalArgumentException("Invalid direction provided.");
+    if (dir  == Direction.NORTH) {
+      this.north = node;
+    }
+    if (dir  == Direction.SOUTH) {
+      this.south = node;
+    }
+    if (dir  == Direction.EAST) {
+      this.east = node;
+    }
+    if (dir  == Direction.WEST) {
+      this.west = node;
     }
   }
 
   @Override
   public Node getNode(Direction dir) throws IllegalArgumentException {
-    Node node;
-    switch (dir) {
-      case NORTH -> node = this.north;
-      case SOUTH -> node = this.south;
-      case EAST -> node = this.east;
-      case WEST -> node = this.west;
-      default -> throw new IllegalArgumentException("Invalid direction provided.");
+    if (dir  == Direction.NORTH) {
+      return this.north;
     }
-
-    return node;
+    if (dir  == Direction.SOUTH) {
+      return this.south;
+    }
+    if (dir  == Direction.EAST) {
+      return  this.east;
+    }
+    if (dir  == Direction.WEST) {
+      return  this.west;
+    }
+    throw new IllegalArgumentException("Invalid direction provided.");
   }
 
   @Override
@@ -367,40 +375,37 @@ public abstract class AbstractRoomNode implements Node {
           Direction dir, Configuration configuration) throws IllegalArgumentException {
     int x = 0;
     int y = 0;
-    switch (dir) {
-      case NORTH -> {
-        if (this.coordinates.getY() == 0) {
-          y = configuration.rowCount() - 1;
-        } else {
-          y = this.coordinates.getY() - 1;
-        }
-        x = this.coordinates.getX();
+    if (dir == Direction.NORTH) {
+      if (this.coordinates.getY() == 0) {
+        y = configuration.rowCount() - 1;
+      } else {
+        y = this.coordinates.getY() - 1;
       }
-      case SOUTH -> {
-        if (this.coordinates.getY() == configuration.rowCount() - 1) {
-          y = 0;
-        } else {
-          y = this.coordinates.getY() + 1;
-        }
-        x = this.coordinates.getX();
+      x = this.coordinates.getX();
+    }
+    if (dir == Direction.SOUTH) {
+      if (this.coordinates.getY() == configuration.rowCount() - 1) {
+        y = 0;
+      } else {
+        y = this.coordinates.getY() + 1;
       }
-      case WEST -> {
-        if (this.coordinates.getX() == 0) {
-          x = configuration.columnCount() - 1;
-        } else {
-          x = this.coordinates.getX() - 1;
-        }
-        y = this.coordinates.getY();
+      x = this.coordinates.getX();
+    }
+    if (dir == Direction.WEST) {
+      if (this.coordinates.getX() == 0) {
+        x = configuration.columnCount() - 1;
+      } else {
+        x = this.coordinates.getX() - 1;
       }
-      case EAST -> {
-        if (this.coordinates.getX() == configuration.columnCount() - 1) {
-          x = 0;
-        } else {
-          x = this.coordinates.getX() + 1;
-        }
-        y = this.coordinates.getY();
+      y = this.coordinates.getY();
+    }
+    if (dir == Direction.EAST) {
+      if (this.coordinates.getX() == configuration.columnCount() - 1) {
+        x = 0;
+      } else {
+        x = this.coordinates.getX() + 1;
       }
-      default -> throw new IllegalArgumentException("Invalid configuration or direction.");
+      y = this.coordinates.getY();
     }
 
     return new MazeCoordinates(x, y);
