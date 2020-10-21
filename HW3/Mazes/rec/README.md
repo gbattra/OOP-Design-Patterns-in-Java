@@ -20,7 +20,7 @@ A `Maze` is composed of `Nodes`. Each node has four `exits` also of type `Node`.
 exits are `DeadEndNodes` which mirror the function of empty nodes in a linked-list.
 All other nodes are extensions of the abstract class `AbstractRoomNode`. This abstract 
 representation of a `Node` interface implements the bulk of the functionality related to
-building the maze, which is done recursively. There are three classes which extend this
+building and navigating the maze, which is done recursively. There are three classes which extend this
 class:
 - `StandardRoomNode` - Has no gold and is not a thief. Effectively an empty room
 - `GoldRoomNode` - This node contains gold which a player may pick up
