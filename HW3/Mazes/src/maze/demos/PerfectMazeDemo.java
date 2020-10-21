@@ -47,7 +47,7 @@ public class PerfectMazeDemo {
       System.out.printf(
               "Player: location - %s, gold count - %s\n", c.toString(), player.getGold());
 
-      Node current = perfectMaze.getStart().get(c);
+      Node current = perfectMaze.get(c);
       player = player.loot(current);
 
       if (current.isThiefRoom()) {

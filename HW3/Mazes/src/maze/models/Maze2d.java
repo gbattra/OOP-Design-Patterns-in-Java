@@ -67,4 +67,9 @@ public class Maze2d implements Maze {
   public Path exploreTo(Coordinates coordinates) {
     return this.current.exploreTo(coordinates);
   }
+
+  @Override
+  public Node get(Coordinates coordinates) {
+    return this.current.get(coordinates);
+  }
 }

@@ -1,5 +1,6 @@
 # Mazes
 
+### Building the maze
 
 The `mazes` package is a Java library for instantiating 2D mazes. It implements a linked-list
 approach to representing mazes.
@@ -143,6 +144,205 @@ Builder builder = new Maze2dBuilder()
 Maze perfectMaze = builder.build();
 ```
 
+### Traversing the maze
+Nodes also traverse the maze recursively. A given `node` is able to determine
+if it `canReach()` another node given the coordinates for that node. It can `get()`
+a node at a given coordinate set. A node can also `exploreTo()` a coordinate set, entering
+every room the maze before terminating. A node can create a random `pathTo()` a node at a coordinate set. And
+a node can find the `wealthiestPathTo()` a node.
 
+Similar algorithms to "Rat in a Maze" are used here. For example, here is the `exploreTo()`
+implementation:
+```
+@Override
+public Path exploreTo(Coordinates coordinates) {
+    return this.exploreHelper(new MazePath(coordinates));
+}
 
+@Override
+public Path exploreHelper(Path path) {
+    if (path.getCoordinatesTraversed().contains(this.coordinates)) {
+      return path;
+    }
 
+    path = path.enter(this);
+
+    path = this.north.exploreHelper(path);
+    path = this.south.exploreHelper(path);
+    path = this.east.exploreHelper(path);
+    path = this.west.exploreHelper(path);
+
+    return path;
+}
+```
+
+As you can see, some of these functions require traversing the
+entire maze recursively, which a shortcoming of this implementation, as at some point,
+`StackOverflow` is unavoidable. However, with this implementation, I was able to construct
+mazes of up to `100x100` dimensions and perform each of these operations successfully.
+Of course, that is on my machine, so results will vary.
+
+### Playing the game
+
+Finally, to put it all together, a `Game` object is used to facilitate navigating
+a `Player` instance through the maze, collecting gold (or losing it) and handling
+when the player enters the `goal` node, thus ending the game.
+
+A `Game` node is instantiated with a reference to the `Maze` and a `Player` instance.
+The two major methods of the `Game` object are:
+- `void start()` <br>
+Moves the player into the `start` node of the `Maze`.
+
+- `boolean movePlayer(Direction direction)` <br>
+Attempts to move the player from the maze's `current` node to the node
+at the specified direction, relative to the `current` node. Returns false the `maze`
+rejects this move (either because it is a border / `DeadEndNode` or because the
+player has already visited that node). Otherwise, moves the player into that node,
+`loot()`s it and checks if the entered node is the `goal` node. If yes, sets `gameOver`
+to `true`.
+
+### Interactive Program
+To try out a sample program running this maze library, execute the `JAR` file: `InteractiveDemo`
+found in the `rec` folder.
+
+You will be promped to enter your name and to provide basic configurations
+for the maze:
+```
+System.out.print("What is your name?\n");
+String name = scanner.nextLine();
+Player player = new MazePlayer(name);
+System.out.printf("Hello, %s!\n", player.getName());
+
+System.out.print("Configure your maze...\n");
+Builder builder = new Maze2dBuilder();
+int columnCount = readColumnCount();
+int rowCount = readRowCount();
+builder = builder.setColumnCount(columnCount).setRowCount(rowCount);
+...
+```
+```
+----------------------------------------------------
+This is an INTERACTIVE demo of the maze program.
+----------------------------------------------------
+What is your name?
+> Greg
+Hello, Greg!
+Configure your maze...
+Enter the number of columns:
+> 10
+Enter the number of rows:
+> 10
+Enter the start row index (starting at zero):
+> 0
+Enter the start column index (starting at zero):
+> 0
+Enter the goal column index (starting at zero):
+...
+```
+Once finished, the program will build a `maze` and setup a `game`. Then a loop
+while wait for user input while the `!game.isOver()`:
+```
+System.out.print("Building the maze...\n");
+Maze maze = builder.build();
+System.out.print("Setting up the game...\n");
+Game game = new MazeGame(player, maze);
+System.out.print("Ready to play!\n");
+game.start();
+
+while (!game.isOver()) {
+...
+```
+```
+MAZE SUMMARY:
+10 rows X 10 columns
+Start: row 0, column 0
+Goal: row 9, column 0
+Is not a room maze
+Is not a wrapping maze
+----------------------------------------------------
+Building the maze...
+Setting up the game...
+Ready to play!
+----------------------------------------------------
+Player (Greg): location - (0, 0), gold count - 0
+----------------------------------------------------
+Move the player (type 'north', 'south', 'east', or 'west'):
+```
+To navigate, type either `north`, `east`, `south`, or `west`.
+
+After each move, the program will indicate:
+- whether the move was successful, if not why
+- if a gold node was entered, how much gold was looted
+- if a thief node was entered, how much gold was taken
+- the player's new location and updated gold count
+
+```
+System.out.print("Move the player (type 'north', 'south', 'east', or 'west'):\n");
+Direction direction = readDirectionInput();
+    System.out.printf("Moving %s\n", direction.toString());
+
+if (!game.movePlayer(direction)) {
+    System.out.printf(
+        "Cannot move %s. Wall blocking the player!\n", direction.toString());
+    System.out.print(playerState(game));
+    continue;
+}
+
+Node current = game.getMaze().getCurrent();
+
+if (current.isThiefRoom()) {
+    System.out.print("Player encountered a thief!\n");
+    System.out.printf("Gold count is now: %s gold pieces\n", game.getPlayer().getGold());
+}
+if (current.isGoldRoom()) {
+    System.out.print("Player entered a room with gold!\n");
+    System.out.printf("Gold count is now: %s gold pieces\n", game.getPlayer().getGold());
+}
+if (current.isGoal()) {
+    System.out.print("Player reached the goal node of the maze!\n");
+}
+System.out.print(playerState(game));
+```
+```
+----------------------------------------------------
+Move the player (type 'north', 'south', 'east', or 'west'):
+> east
+Moving EAST
+Cannot move EAST. Wall blocking the player!
+Player (Greg): location - (1, 7), gold count - 0
+----------------------------------------------------
+Move the player (type 'north', 'south', 'east', or 'west'):
+> north
+Moving NORTH
+Player entered a room with gold!
+Gold count is now: 10 gold pieces
+Player (Greg): location - (0, 7), gold count - 10
+----------------------------------------------------
+Move the player (type 'north', 'south', 'east', or 'west'):
+> east
+Moving EAST
+Player encountered a thief!
+Gold count is now: 9 gold pieces
+Player (Greg): location - (0, 8), gold count - 9
+```
+
+### Demos
+There are four other `JAR` files in `rec/JAR`. Each is a hardcoded run of the maze
+program:
+- `ExploreDemo` - This demo builds a simple maze and has the player explore every
+room in the maze. To do this, it calls the `maze`'s `explore()` method, which returns
+a `Path` object outlining a path through each node.
+- `PerfectMazeDemo` - This demo builds a perfect maze and has the player navigate to
+goal node.
+- `WealthiestPathDemo` - This demo builds a simple maze and finds the `Path` from
+the `start` to the `goal` of the maze which yields the highest `goldCount` for the
+player.
+- `WrappingMazeDemo` - This demo constructs a wrapping maze and finds a random path
+to the goal node.
+
+The player then moves through each node, with its `goldCount` and `coordinates`
+printed out at each step, until it reaches the `goal` node and the loop exists.
+
+As these demos is not a user-driven interaction, the `Game` object was not used for these demos.
+Instead, I implemented a simple loop through the `Path`'s `coordinatesTraversed` to print out the
+computed path.

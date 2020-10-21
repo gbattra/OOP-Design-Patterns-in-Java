@@ -50,7 +50,7 @@ public class WrappingMazeDemo {
       System.out.printf(
               "Player: location - %s, gold count - %s\n", c.toString(), player.getGold());
 
-      Node current = wrappingMaze.getStart().get(c);
+      Node current = wrappingMaze.get(c);
       player = player.loot(current);
 
       if (current.isThiefRoom()) {

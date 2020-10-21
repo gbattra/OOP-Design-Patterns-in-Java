@@ -60,4 +60,12 @@ public interface Maze {
    * @return the path taken through the maze
    */
   Path exploreTo(Coordinates coordinates);
+
+  /**
+   * Gets the node at the specified coordinates.
+   *
+   * @param coordinates the coordinates at which the desired node resides
+   * @return the queried node
+   */
+  Node get(Coordinates coordinates);
 }
