@@ -42,12 +42,12 @@ The "Rat in a Maze" algorithm works as follows:
 1. In a node, mark the node as `visited`
 2. randomly pick an exit
 3. Attempt to move to the node at that exit
-    a. If we have already visited that node randomly select a remaining exit
-    b. Else move into that node and call that node to continue the recursion
+    a. If we have already visited that node, randomly select a remaining exit
+    b. Else call that node to continue the recursion
 ```
 
-This implementation differs in some respects. Below, I'll walk through the function
-responsible for this:
+The `maze` package implementation differs in some respects. Below, I'll walk through the function
+responsible for growing out the maze:
 ```
 interface Node {
     Configuration grow(Configuration config);
@@ -56,23 +56,23 @@ interface Node {
 The implementation resides in the `AbstractRoomNode` class:
 ```
 @Override
-  public Configuration grow(Configuration configuration) {
+public Configuration grow(Configuration configuration) {
     // add this to the visited list
     configuration.addVisited(this);
 ```
 The first thing to occur upon entering the function is to mark the node as
 `visited` by setting a reference to it in the `config`'s `Node[][] visited` property,
-where the first index is the node's `Coordinate` `y` and the second coordinate `x`.
+where the first index is the node's `Coordinate` `y` and the second `x`.
 
 ```
 // get exit candidates
-    List<Direction> exits = this.getPotentialExits(configuration);
+List<Direction> exits = this.getPotentialExits(configuration);
 ```
 
-Then, it compiles a list of potential directions to attempt to "grow into". It
-does this using a `Configuration` object which helps the node understand its
+Then, it compiles a list of potential directions to "grow into". It
+decides which exits are viable using a `Configuration` object which helps the node understand its
 coordinates relative to the rest of the maze. For example, if the node resides
-on the border of a non-wrapping maze, it would the direction to that border from
+on the border of a non-wrapping maze, it would remove the direction to that border from
 the list of exit candidates.
 
 ```
@@ -88,18 +88,18 @@ and removes the one chosen from the list.
 
 ```
 // check if node where exit points has been visited
-      Node other = configuration.visited()[c.getY()][c.getX()];
+Node other = configuration.visited()[c.getY()][c.getX()];
 ```
 It checks if there is a reference to a node at the `node`'s coordinates
 in the `configuration`'s `visited` array.
 
 ```
 if (other != null) {
-        // if has been visited, add an edge
-        configuration.addEdge(
-                this.getCoordinates(),
-                other.getCoordinates(),
-                DirectionHelper.oppositeOf(exit), exit);
+    // if has been visited, add an edge
+    configuration.addEdge(
+            this.getCoordinates(),
+            other.getCoordinates(),
+            DirectionHelper.oppositeOf(exit), exit);
 }
 ```
 If a reference does exist, a new `Edge` object is added to the `List<Edges>`.
@@ -110,13 +110,18 @@ else {
     Node room = configuration.generateRoom(c);
     this.setNode(room, exit);
     room.setNode(this, DirectionHelper.oppositeOf(exit));
+...
+```
 
+Otherwise, instantiate a new `node` and set it at the current node's chosen `exit`.
+Additionally, the new corresponding exit on the new node is set to the current node,
+to allow for backtracking and navigating in any direction.
+
+```
     // recursively call new node's grow to continue building out the maze
     configuration = room.grow(configuration);
 }
 ```
-
-Otherwise, instantiate a new `node` and set it at the current node's chosen `exit`.
 Then call into that new node's `grow()` method to continue building the maze.
 
 Once the list of `exits` has been exhausted, the `while` loop will exit, and the function
@@ -126,8 +131,8 @@ The node which "kicked off" the whole process will be set as the `start` node
 of the `Maze` object. A `Maze` object is a light-weight ADT wrapper around the `Node`
 functionality. A `Maze` holds a reference to both the `start` and `goal` nodes of the maze.
 It also has a "pointer" to another node `current`, which can be moved by calling
-the `move(Direction dir)`, which will set the pointer at whatever node reside at the
-specified direction relative to `current`'s position. When a maze is initialized,
+the `move(Direction dir)`. This will attempt to set the pointer at whatever node reside at the
+specified direction relative to `current`. When a maze is initialized,
 `current` is set to `start`.
 
 As mentioned, there exists a `Builder` object which handles setting up the configuration
@@ -148,8 +153,9 @@ Maze perfectMaze = builder.build();
 Nodes also traverse the maze recursively. A given `node` is able to determine
 if it `canReach()` another node given the coordinates for that node. It can `get()`
 a node at a given coordinate set. A node can also `exploreTo()` a coordinate set, entering
-every room the maze before terminating. A node can create a random `pathTo()` a node at a coordinate set. And
-a node can find the `wealthiestPathTo()` a node.
+every room the maze before terminating. A node can create a random `pathTo()` a node. And
+a node can find the `wealthiestPathTo()` a node, which yields the highest gold count for
+the player.
 
 Similar algorithms to "Rat in a Maze" are used here. For example, here is the `exploreTo()`
 implementation:
@@ -177,8 +183,9 @@ public Path exploreHelper(Path path) {
 ```
 
 As you can see, some of these functions require traversing the
-entire maze recursively, which a shortcoming of this implementation, as at some point,
-`StackOverflow` is unavoidable. However, with this implementation, I was able to construct
+entire maze recursively, which a shortcoming of this implementation as at some point,
+`StackOverflow` is unavoidable. However, the recursive nature of the implemenation
+makes complex traversals easier and doable in less code. And still, with this implementation I was able to construct
 mazes of up to `100x100` dimensions and perform each of these operations successfully.
 Of course, that is on my machine, so results will vary.
 
@@ -195,14 +202,14 @@ Moves the player into the `start` node of the `Maze`.
 
 - `boolean movePlayer(Direction direction)` <br>
 Attempts to move the player from the maze's `current` node to the node
-at the specified direction, relative to the `current` node. Returns false the `maze`
-rejects this move (either because it is a border / `DeadEndNode` or because the
-player has already visited that node). Otherwise, moves the player into that node,
-`loot()`s it and checks if the entered node is the `goal` node. If yes, sets `gameOver`
+at the specified direction. Returns false if the `maze`
+rejects this move (either because the direction points to a border / `DeadEndNode` or because the
+player has already visited that node). Otherwise, it moves the player into that node,
+`loot()`s it for gold (or gets robbed) and checks if the entered node is the `goal` node. If yes, sets `gameOver`
 to `true`.
 
 ### Interactive Program
-To try out a sample program running this maze library, execute the `JAR` file: `InteractiveDemo`
+To try out a sample program running the `maze` package, execute the `JAR` file: `InteractiveDemo`
 found in the `rec` folder.
 
 You will be promped to enter your name and to provide basic configurations
@@ -239,8 +246,8 @@ Enter the start column index (starting at zero):
 Enter the goal column index (starting at zero):
 ...
 ```
-Once finished, the program will build a `maze` and setup a `game`. Then a loop
-while wait for user input while the `!game.isOver()`:
+Once finished with configuration, the program will build a `maze` and setup a `game`. Then a
+loop will wait for user input while the `!game.isOver()`:
 ```
 System.out.print("Building the maze...\n");
 Maze maze = builder.build();
@@ -279,7 +286,7 @@ After each move, the program will indicate:
 ```
 System.out.print("Move the player (type 'north', 'south', 'east', or 'west'):\n");
 Direction direction = readDirectionInput();
-    System.out.printf("Moving %s\n", direction.toString());
+System.out.printf("Moving %s\n", direction.toString());
 
 if (!game.movePlayer(direction)) {
     System.out.printf(
@@ -324,6 +331,17 @@ Moving EAST
 Player encountered a thief!
 Gold count is now: 9 gold pieces
 Player (Greg): location - (0, 8), gold count - 9
+```
+Eventually, the player will reach the `goal` node and the game will end.
+```
+Move the player (type 'north', 'south', 'east', or 'west'):
+> south
+Moving SOUTH
+Player reached the goal node of the maze!
+Player (Greg): location - (9, 9), gold count - 20
+----------------------------------------------------
+GAME OVER
+Gold pieces collected: 20
 ```
 
 ### Demos
