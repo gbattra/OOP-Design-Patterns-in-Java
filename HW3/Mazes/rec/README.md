@@ -33,7 +33,7 @@ here is how it would be done manually:
 - Instantiate a `start` node, typically at `Coordinate(0, 0)`
 - Call that node's `grow(Configuration config)` method, passing in the custom configurations
 
-The algorithm for recursively growing the maze is a mix of "Rat in a Maze" / Backtracking
+The algorithm for recursively growing the maze is a mix of "Rat in a Maze" (Backtracking)
 and Kruskal's. The program uses "Rat in a Maze" to generate a perfect maze. If the configs require
 a room maze, Kruskal's algorithm is applied to reach the user-specified `targetEdgeCount`.
 
