@@ -6,6 +6,9 @@ import maze.models.MazeCoordinates;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test for the MazeCoordinates.
+ */
 public class MazeCoordinatesTest {
   @Test
   public void testValidConstructor() {

@@ -7,6 +7,9 @@ import maze.models.MazeCoordinates;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test for the Maze2dBuilder.
+ */
 public class Maze2dBuilderTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidSetColumnCountZero() {

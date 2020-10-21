@@ -12,6 +12,9 @@ import maze.interfaces.Player;
 import maze.models.Maze2dBuilder;
 import maze.models.MazePlayer;
 
+/**
+ * Driver for the wealthiestPathTo() functionality demo.
+ */
 public class WealthiestPathDemo {
   private static final Random random = new Random();
 

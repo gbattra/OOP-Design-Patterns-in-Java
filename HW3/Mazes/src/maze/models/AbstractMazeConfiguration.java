@@ -10,6 +10,10 @@ import maze.interfaces.Coordinates;
 import maze.interfaces.Edge;
 import maze.interfaces.Node;
 
+/**
+ * Abstract class holding basic configuration getter methods as well as some helper methods
+ * for creating the start node and generating nodes as the maze is built.
+ */
 public abstract class AbstractMazeConfiguration implements Configuration {
   protected final int columnCount;
   protected final int rowCount;

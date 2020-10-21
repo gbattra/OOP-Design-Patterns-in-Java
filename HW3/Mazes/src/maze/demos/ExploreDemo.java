@@ -12,6 +12,9 @@ import maze.interfaces.Player;
 import maze.models.Maze2dBuilder;
 import maze.models.MazePlayer;
 
+/**
+ * Demo driver for the exploreTo() functionality.
+ */
 public class ExploreDemo {
   private static final Random random = new Random();
 

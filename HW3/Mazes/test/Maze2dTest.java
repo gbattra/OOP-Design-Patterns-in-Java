@@ -11,6 +11,9 @@ import maze.models.StandardRoomNode;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test for the Maze2d.
+ */
 public class Maze2dTest {
   private Node start;
   private Node node;

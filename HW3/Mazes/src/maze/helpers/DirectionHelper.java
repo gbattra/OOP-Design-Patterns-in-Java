@@ -1,7 +1,6 @@
 package maze.helpers;
 
 import maze.enums.Direction;
-import maze.interfaces.Coordinates;
 
 /**
  * Helper class to determine directions relative to one another.

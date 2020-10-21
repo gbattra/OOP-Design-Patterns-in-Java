@@ -9,6 +9,9 @@ import maze.models.MazePlayer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test for the MazePlayer.
+ */
 public class MazePlayerTest {
   @Test
   public void testValidConstructor() {

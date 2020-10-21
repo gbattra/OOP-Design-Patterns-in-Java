@@ -2,6 +2,9 @@ package maze.models;
 
 import maze.interfaces.Coordinates;
 
+/**
+ * Maze node which has gold for the player to pick up.
+ */
 public class GoldRoomNode extends AbstractRoomNode {
   /**
    * First constructor for GoldRoomNode. Use when room contains gold for the player.

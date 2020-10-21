@@ -18,6 +18,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Test for the MazeConfiguration.
+ */
 public class MazeConfigurationTest {
   private Coordinates start;
   private Coordinates exit;

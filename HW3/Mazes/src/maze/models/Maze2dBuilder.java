@@ -5,6 +5,9 @@ import maze.interfaces.Configuration;
 import maze.interfaces.Coordinates;
 import maze.interfaces.Maze;
 
+/**
+ * Builder class for the Maze2d class. Contains default configs to make customizing easier.
+ */
 public class Maze2dBuilder implements Builder {
   private int columnCount = 10;
   private int rowCount = 10;

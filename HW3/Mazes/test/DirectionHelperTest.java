@@ -5,6 +5,9 @@ import maze.helpers.DirectionHelper;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test for the DirectionHelper.
+ */
 public class DirectionHelperTest {
   @Test
   public void testOppositeOf() {

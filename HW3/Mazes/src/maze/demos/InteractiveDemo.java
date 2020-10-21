@@ -13,6 +13,9 @@ import maze.models.Maze2dBuilder;
 import maze.models.MazeGame;
 import maze.models.MazePlayer;
 
+/**
+ * Interactive demo of the maze package. Setups a game and has the user navigate the maze.
+ */
 public class InteractiveDemo {
   private static final Random random = new Random();
   private static Scanner scanner = new Scanner(System.in);

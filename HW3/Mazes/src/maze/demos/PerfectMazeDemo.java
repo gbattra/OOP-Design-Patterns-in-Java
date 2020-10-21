@@ -12,6 +12,9 @@ import maze.interfaces.Player;
 import maze.models.Maze2dBuilder;
 import maze.models.MazePlayer;
 
+/**
+ * Driver for a perfect maze demonstration.
+ */
 public class PerfectMazeDemo {
   private static final Random random = new Random();
 

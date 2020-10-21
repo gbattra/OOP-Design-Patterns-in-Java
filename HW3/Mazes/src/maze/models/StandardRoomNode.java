@@ -2,6 +2,9 @@ package maze.models;
 
 import maze.interfaces.Coordinates;
 
+/**
+ * A standard maze node. No gold, no thief. Empty room basically.
+ */
 public class StandardRoomNode extends AbstractRoomNode {
   /**
    * First constructor for RoomNode. Use when room contains gold for the player.

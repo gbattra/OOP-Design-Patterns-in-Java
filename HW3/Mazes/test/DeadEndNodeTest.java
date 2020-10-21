@@ -10,6 +10,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
+/**
+ * Test for the DeadEndNode.
+ */
 public class DeadEndNodeTest {
   @Test
   public void testConstructor() {

@@ -6,6 +6,10 @@ import maze.interfaces.Maze;
 import maze.interfaces.Node;
 import maze.interfaces.Path;
 
+/**
+ * A maze ADT class which wraps Node functionality. Has start and goal node references. Also
+ * has a pointer 'current' which can be moved using move().
+ */
 public class Maze2d implements Maze {
   private final Node start;
   private final Node goal;

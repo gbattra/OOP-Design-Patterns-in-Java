@@ -2,6 +2,9 @@ package maze.models;
 
 import maze.interfaces.Coordinates;
 
+/**
+ * Maze node which contains a thief that steals a percent of the player's gold if they enter.
+ */
 public class ThiefRoomNode extends AbstractRoomNode {
   /**
    * First constructor for ThiefRoomNode. Use when room contains gold for the player.
