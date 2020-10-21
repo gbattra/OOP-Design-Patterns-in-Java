@@ -1,9 +1,9 @@
 # Mazes
 
-### Building the maze
-
 The `mazes` package is a Java library for instantiating 2D mazes. It implements a linked-list
 approach to representing mazes.
+
+### Building the maze
 
 There are four types of mazes that can be constructed by this library:
 - *perfect maze* - where there are no circular paths
