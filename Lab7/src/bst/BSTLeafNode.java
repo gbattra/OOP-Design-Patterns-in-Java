@@ -50,4 +50,9 @@ public class BSTLeafNode<T extends Comparable<? super T>> implements BSTNode<T> 
   public int heightHelper(int height) {
     return height;
   }
+
+  @Override
+  public String preOrder() {
+    return "";
+  }
 }

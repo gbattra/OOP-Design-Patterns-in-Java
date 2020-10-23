@@ -52,4 +52,10 @@ public class BSTLeafNodeTest {
     BSTNode<Integer> node = new BSTLeafNode<>();
     assertEquals(0, node.height());
   }
+
+  @Test
+  public void testPreOrder() {
+    BSTNode<Integer> node = new BSTLeafNode<>();
+    assertEquals("", node.preOrder());
+  }
 }

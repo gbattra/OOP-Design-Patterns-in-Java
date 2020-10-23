@@ -89,4 +89,14 @@ public class BSTGroupNode <T extends Comparable<? super T>> implements BSTNode<T
 
     return Math.max(leftHeight, rightHeight);
   }
+
+  @Override
+  public String preOrder() {
+    return String.format(
+              "%s %s %s",
+              this.data,
+              this.left.preOrder(),
+              this.right.preOrder())
+            .trim();
+  }
 }

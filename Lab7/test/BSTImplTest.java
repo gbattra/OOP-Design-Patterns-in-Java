@@ -88,4 +88,15 @@ public class BSTImplTest {
     tree.add(1);
     assertEquals(3, tree.height());
   }
+
+  @Test
+  public void testPreOrder() {
+    BST<Integer> tree = new BSTImpl<>();
+    tree.add(10);
+    tree.add(3);
+    tree.add(5);
+    tree.add(15);
+    tree.add(1);
+    assertEquals("10 3 1 5 15", tree.preOrder());
+  }
 }

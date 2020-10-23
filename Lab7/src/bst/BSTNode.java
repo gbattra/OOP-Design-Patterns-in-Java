@@ -10,4 +10,5 @@ public interface BSTNode<T extends Comparable<? super T>> {
   T maximumHelper(T other);
   int height();
   int heightHelper(int height);
+  String preOrder();
 }

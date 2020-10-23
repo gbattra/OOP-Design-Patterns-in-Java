@@ -7,4 +7,5 @@ public interface BST<T> {
   T minimum();
   T maximum();
   int height();
+  String preOrder();
 }
