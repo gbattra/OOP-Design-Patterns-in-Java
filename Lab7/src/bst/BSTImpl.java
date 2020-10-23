@@ -1,7 +1,5 @@
 package bst;
 
-import java.util.Comparator;
-
 public class BSTImpl<T extends Comparable<? super T>> implements BST<T> {
   private BSTNode<T> root;
 
@@ -9,7 +7,23 @@ public class BSTImpl<T extends Comparable<? super T>> implements BST<T> {
     this.root = new BSTLeafNode<>();
   }
 
+  @Override
   public void add(T obj) {
-    this.root = this.root.add(obj, Comparator.naturalOrder());
+    this.root = this.root.add(obj);
+  }
+
+  @Override
+  public int size() {
+    return this.root.size();
+  }
+
+  @Override
+  public boolean present(T obj) {
+    return this.root.present(obj);
+  }
+
+  @Override
+  public T minimum() {
+    return this.root.minimum();
   }
 }

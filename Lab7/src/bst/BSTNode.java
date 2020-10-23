@@ -1,7 +1,13 @@
 package bst;
 
-import java.util.Comparator;
+import java.util.function.BiFunction;
 
 public interface BSTNode<T extends Comparable<? super T>> {
-  BSTNode<T> add(T obj, Comparator<T> comparator);
+  BSTNode<T> add(T obj);
+  int size();
+  boolean present(T obj);
+  T minimum();
+  T minimumHelper(T other);
+  T maximum();
+  T maximumHelper(T other);
 }
