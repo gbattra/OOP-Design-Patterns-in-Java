@@ -76,4 +76,17 @@ public class BSTGroupNode <T extends Comparable<? super T>> implements BSTNode<T
               this.right.toString())
             .trim();
   }
+
+  @Override
+  public int height() {
+    return this.heightHelper(0);
+  }
+
+  @Override
+  public int heightHelper(int height) {
+    int leftHeight = this.left.heightHelper(height + 1);
+    int rightHeight = this.right.heightHelper(height + 1);
+
+    return Math.max(leftHeight, rightHeight);
+  }
 }

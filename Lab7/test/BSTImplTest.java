@@ -77,4 +77,15 @@ public class BSTImplTest {
     tree.add(1);
     assertEquals("[1 3 5 10 15]", tree.toString());
   }
+
+  @Test
+  public void testHeight() {
+    BST<Integer> tree = new BSTImpl<>();
+    tree.add(10);
+    tree.add(3);
+    tree.add(5);
+    tree.add(15);
+    tree.add(1);
+    assertEquals(3, tree.height());
+  }
 }

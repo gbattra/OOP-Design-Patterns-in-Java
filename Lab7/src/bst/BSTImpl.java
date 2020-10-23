@@ -33,6 +33,11 @@ public class BSTImpl<T extends Comparable<? super T>> implements BST<T> {
   }
 
   @Override
+  public int height() {
+    return this.root.height();
+  }
+
+  @Override
   public String toString() {
     return "[" + this.root.toString() + "]";
   }

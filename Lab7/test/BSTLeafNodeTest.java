@@ -46,4 +46,10 @@ public class BSTLeafNodeTest {
     BSTNode<Integer> node = new BSTLeafNode<>();
     assertEquals("", node.toString());
   }
+
+  @Test
+  public void testHeight() {
+    BSTNode<Integer> node = new BSTLeafNode<>();
+    assertEquals(0, node.height());
+  }
 }

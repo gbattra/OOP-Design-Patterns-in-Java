@@ -6,4 +6,5 @@ public interface BST<T> {
   boolean present(T obj);
   T minimum();
   T maximum();
+  int height();
 }

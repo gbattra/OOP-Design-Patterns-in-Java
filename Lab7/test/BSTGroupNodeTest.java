@@ -54,6 +54,13 @@ public class BSTGroupNodeTest {
   }
 
   @Test
+  public void testHeight() {
+    BSTNode<Integer> node = new BSTGroupNode<>(10);
+    node = node.add(3).add(5).add(15).add(1);
+    assertEquals(3, node.height());
+  }
+
+  @Test
   public void testToString() {
     BSTNode<Integer> node = new BSTGroupNode<>(10);
     node = node.add(3).add(5).add(15).add(1);

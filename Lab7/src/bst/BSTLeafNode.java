@@ -40,4 +40,14 @@ public class BSTLeafNode<T extends Comparable<? super T>> implements BSTNode<T> 
   public String toString() {
     return "";
   }
+
+  @Override
+  public int height() {
+    return this.heightHelper(0);
+  }
+
+  @Override
+  public int heightHelper(int height) {
+    return height;
+  }
 }

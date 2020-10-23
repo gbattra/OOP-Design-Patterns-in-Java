@@ -1,7 +1,5 @@
 package bst;
 
-import java.util.function.BiFunction;
-
 public interface BSTNode<T extends Comparable<? super T>> {
   BSTNode<T> add(T obj);
   int size();
@@ -10,4 +8,6 @@ public interface BSTNode<T extends Comparable<? super T>> {
   T minimumHelper(T other);
   T maximum();
   T maximumHelper(T other);
+  int height();
+  int heightHelper(int height);
 }
