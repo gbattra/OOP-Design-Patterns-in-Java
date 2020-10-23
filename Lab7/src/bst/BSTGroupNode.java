@@ -66,4 +66,14 @@ public class BSTGroupNode <T extends Comparable<? super T>> implements BSTNode<T
   public T maximumHelper(T other) {
     return this.right.maximumHelper(this.data);
   }
+
+  @Override
+  public String toString() {
+    return String.format(
+              "%s %s %s",
+              this.left.toString(),
+              this.data,
+              this.right.toString())
+            .trim();
+  }
 }

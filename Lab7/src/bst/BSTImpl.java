@@ -26,4 +26,14 @@ public class BSTImpl<T extends Comparable<? super T>> implements BST<T> {
   public T minimum() {
     return this.root.minimum();
   }
+
+  @Override
+  public T maximum() {
+    return this.root.maximum();
+  }
+
+  @Override
+  public String toString() {
+    return "[" + this.root.toString() + "]";
+  }
 }

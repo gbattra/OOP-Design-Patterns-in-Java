@@ -52,4 +52,11 @@ public class BSTGroupNodeTest {
     node = node.add(3).add(5).add(15).add(1);
     assertEquals(15, node.maximum(), 0.0001);
   }
+
+  @Test
+  public void testToString() {
+    BSTNode<Integer> node = new BSTGroupNode<>(10);
+    node = node.add(3).add(5).add(15).add(1);
+    assertEquals("1 3 5 10 15", node.toString());
+  }
 }

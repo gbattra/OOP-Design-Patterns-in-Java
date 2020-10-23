@@ -40,4 +40,10 @@ public class BSTLeafNodeTest {
     BSTNode<Integer> node = new BSTLeafNode<>();
     assertNull(node.maximum());
   }
+
+  @Test
+  public void testToString() {
+    BSTNode<Integer> node = new BSTLeafNode<>();
+    assertEquals("", node.toString());
+  }
 }

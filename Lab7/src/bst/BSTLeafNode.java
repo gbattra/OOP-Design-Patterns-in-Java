@@ -35,4 +35,9 @@ public class BSTLeafNode<T extends Comparable<? super T>> implements BSTNode<T> 
   public T maximumHelper(T other) {
     return other;
   }
+
+  @Override
+  public String toString() {
+    return "";
+  }
 }

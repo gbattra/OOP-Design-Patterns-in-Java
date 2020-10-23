@@ -5,4 +5,5 @@ public interface BST<T> {
   int size();
   boolean present(T obj);
   T minimum();
+  T maximum();
 }
