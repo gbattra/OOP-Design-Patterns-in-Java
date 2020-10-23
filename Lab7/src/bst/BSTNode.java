@@ -11,4 +11,6 @@ public interface BSTNode<T extends Comparable<? super T>> {
   int height();
   int heightHelper(int height);
   String preOrder();
+  String inOrder();
+  String postOrder();
 }

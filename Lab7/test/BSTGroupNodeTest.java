@@ -73,4 +73,18 @@ public class BSTGroupNodeTest {
     node = node.add(3).add(5).add(15).add(1);
     assertEquals("10 3 1 5 15", node.preOrder());
   }
+
+  @Test
+  public void testInOrder() {
+    BSTNode<Integer> node = new BSTGroupNode<>(10);
+    node = node.add(3).add(5).add(15).add(1);
+    assertEquals("1 3 5 10 15", node.inOrder());
+  }
+
+  @Test
+  public void testPostOrder() {
+    BSTNode<Integer> node = new BSTGroupNode<>(10);
+    node = node.add(3).add(5).add(15).add(1);
+    assertEquals("1 5 3 15 10", node.postOrder());
+  }
 }

@@ -39,7 +39,17 @@ public class BSTImpl<T extends Comparable<? super T>> implements BST<T> {
 
   @Override
   public String preOrder() {
-    return this.root.preOrder();
+    return "[" + this.root.preOrder() + "]";
+  }
+
+  @Override
+  public String inOrder() {
+    return "[" + this.root.inOrder() + "]";
+  }
+
+  @Override
+  public String postOrder() {
+    return "[" + this.root.postOrder() + "]";
   }
 
   @Override

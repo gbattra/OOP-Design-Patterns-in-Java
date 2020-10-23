@@ -97,6 +97,28 @@ public class BSTImplTest {
     tree.add(5);
     tree.add(15);
     tree.add(1);
-    assertEquals("10 3 1 5 15", tree.preOrder());
+    assertEquals("[10 3 1 5 15]", tree.preOrder());
+  }
+
+  @Test
+  public void testInOrder() {
+    BST<Integer> tree = new BSTImpl<>();
+    tree.add(10);
+    tree.add(3);
+    tree.add(5);
+    tree.add(15);
+    tree.add(1);
+    assertEquals("[1 3 5 10 15]", tree.inOrder());
+  }
+
+  @Test
+  public void testPostOrder() {
+    BST<Integer> tree = new BSTImpl<>();
+    tree.add(10);
+    tree.add(3);
+    tree.add(5);
+    tree.add(15);
+    tree.add(1);
+    assertEquals("[1 5 3 15 10]", tree.postOrder());
   }
 }

@@ -8,4 +8,6 @@ public interface BST<T> {
   T maximum();
   int height();
   String preOrder();
+  String inOrder();
+  String postOrder();
 }

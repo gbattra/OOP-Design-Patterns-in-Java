@@ -55,4 +55,14 @@ public class BSTLeafNode<T extends Comparable<? super T>> implements BSTNode<T> 
   public String preOrder() {
     return "";
   }
+
+  @Override
+  public String inOrder() {
+    return "";
+  }
+
+  @Override
+  public String postOrder() {
+    return "";
+  }
 }

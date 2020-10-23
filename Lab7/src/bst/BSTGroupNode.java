@@ -99,4 +99,24 @@ public class BSTGroupNode <T extends Comparable<? super T>> implements BSTNode<T
               this.right.preOrder())
             .trim();
   }
+
+  @Override
+  public String inOrder() {
+    return String.format(
+              "%s %s %s",
+              this.left.inOrder(),
+              this.data,
+              this.right.inOrder())
+            .trim();
+  }
+
+  @Override
+  public String postOrder() {
+    return String.format(
+              "%s %s %s",
+              this.left.postOrder(),
+              this.right.postOrder(),
+              this.data)
+            .trim();
+  }
 }

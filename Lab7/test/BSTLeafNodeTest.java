@@ -58,4 +58,16 @@ public class BSTLeafNodeTest {
     BSTNode<Integer> node = new BSTLeafNode<>();
     assertEquals("", node.preOrder());
   }
+
+  @Test
+  public void testInOrder() {
+    BSTNode<Integer> node = new BSTLeafNode<>();
+    assertEquals("", node.inOrder());
+  }
+
+  @Test
+  public void testPostOrder() {
+    BSTNode<Integer> node = new BSTLeafNode<>();
+    assertEquals("", node.postOrder());
+  }
 }
