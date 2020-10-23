@@ -1,13 +1,22 @@
 package bst;
 
-import java.util.Comparator;
-
-public class BSTGroupNode <T extends Comparable<? super T>> implements BSTNode<T> {
+/**
+ * Implementation of binary search tree group node. Has a data attribute,
+ * a left child and a right child.
+ *
+ * @param <T> the type of data held by the node
+ */
+public class BSTGroupNode<T extends Comparable<? super T>> implements BSTNode<T> {
   protected final T data;
 
   private BSTNode<T> left;
   private BSTNode<T> right;
 
+  /**
+   * Constructor for node. All BSTNode's are instantiated with leaf nodes for left and right.
+   *
+   * @param data the data held by this node
+   */
   public BSTGroupNode(T data) {
     this.data = data;
     this.left = new BSTLeafNode<>();

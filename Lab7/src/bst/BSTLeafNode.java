@@ -1,5 +1,12 @@
 package bst;
 
+
+/**
+ * Implementation of binary search tree leaf node. Has no attributes and exists to allow
+ * for easier recursion.
+ *
+ * @param <T> the type of data held by the node
+ */
 public class BSTLeafNode<T extends Comparable<? super T>> implements BSTNode<T> {
   @Override
   public BSTNode<T> add(T obj) {

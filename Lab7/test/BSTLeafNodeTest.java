@@ -6,8 +6,10 @@ import bst.BSTNode;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 
+/**
+ * Tests for the BSTLeafNode class.
+ */
 public class BSTLeafNodeTest {
   @Test
   public void testAdd() {
