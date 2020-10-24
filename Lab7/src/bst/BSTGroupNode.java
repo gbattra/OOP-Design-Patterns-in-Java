@@ -1,5 +1,7 @@
 package bst;
 
+import java.util.Arrays;
+
 /**
  * Implementation of binary search tree group node. Has a data attribute,
  * a left child and a right child.
@@ -16,8 +18,13 @@ public class BSTGroupNode<T extends Comparable<? super T>> implements BSTNode<T>
    * Constructor for node. All BSTNode's are instantiated with leaf nodes for left and right.
    *
    * @param data the data held by this node
+   * @throws IllegalArgumentException if initialized with empty data
    */
-  public BSTGroupNode(T data) {
+  public BSTGroupNode(T data) throws IllegalArgumentException {
+    if (data == null) {
+      throw new IllegalArgumentException("Cannot instantiate node with null data.");
+    }
+
     this.data = data;
     this.left = new BSTLeafNode<>();
     this.right = new BSTLeafNode<>();
@@ -101,31 +108,34 @@ public class BSTGroupNode<T extends Comparable<? super T>> implements BSTNode<T>
 
   @Override
   public String preOrder() {
-    return String.format(
-              "%s %s %s",
-              this.data,
-              this.left.preOrder(),
-              this.right.preOrder())
+    return String.join(
+            " ",
+            Arrays.asList(
+                    this.data.toString().trim(),
+                    this.left.preOrder(),
+                    this.right.preOrder()))
             .trim();
   }
 
   @Override
   public String inOrder() {
-    return String.format(
-              "%s %s %s",
-              this.left.inOrder(),
-              this.data,
-              this.right.inOrder())
+    return String.join(
+            " ",
+            Arrays.asList(
+                    this.left.inOrder(),
+                    this.data.toString().trim(),
+                    this.right.inOrder()))
             .trim();
   }
 
   @Override
   public String postOrder() {
-    return String.format(
-              "%s %s %s",
-              this.left.postOrder(),
-              this.right.postOrder(),
-              this.data)
+    return String.join(
+              " ",
+              Arrays.asList(
+                      this.left.postOrder(),
+                      this.right.postOrder(),
+                      this.data.toString().trim()))
             .trim();
   }
 }

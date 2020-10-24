@@ -21,6 +21,12 @@ public class BSTGroupNodeTest {
     }
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidConstructor() {
+    BSTNode<Integer> node = new BSTGroupNode<>(null);
+    fail("Invalid constructor should have failed.");
+  }
+
   @Test
   public void testSize() {
     BSTNode<Integer> node = new BSTGroupNode<>(10);
@@ -89,5 +95,12 @@ public class BSTGroupNodeTest {
     BSTNode<Integer> node = new BSTGroupNode<>(10);
     node = node.add(3).add(5).add(15).add(1);
     assertEquals("1 5 3 15 10", node.postOrder());
+  }
+
+  @Test
+  public void testPostOrderString() {
+    BSTNode<String> node = new BSTGroupNode<>("10 ");
+    node = node.add("3").add("5").add("15").add("1");
+    assertEquals("1 15 5 3 10", node.postOrder());
   }
 }
