@@ -5,6 +5,9 @@ import java.math.BigInteger;
 import lookandsay.LookAndSayIterator;
 import lookandsay.RIterator;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class LookAndSayIteratorTest {
   @Test
   public void testValidConstructor() {
@@ -61,5 +64,21 @@ public class LookAndSayIteratorTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidSecondConstructorSeedHasZeros() {
     RIterator<BigInteger> iterator = new LookAndSayIterator(new BigInteger("10"));
+  }
+
+  @Test
+  public void testLookAndSay() {
+    String[] expected = { "1", "11", "21", "1211", "111221", "312211" };
+    int counter = 0;
+
+    BigInteger start = new BigInteger("1");
+    BigInteger end = new BigInteger("999999");
+    RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
+    for (RIterator<BigInteger> it = lookAndSay; it.hasNext();) {
+      BigInteger number = it.next();
+      assertTrue(number.compareTo(end) <= 0);
+      assertEquals(expected[counter], number.toString());
+      counter++;
+    }
   }
 }
