@@ -7,13 +7,18 @@ import lookandsay.RIterator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class LookAndSayIteratorTest {
   @Test
   public void testValidConstructor() {
-    RIterator<BigInteger> iterator = new LookAndSayIterator(
-            new BigInteger("1"),
-            new BigInteger("10"));
+    try {
+      RIterator<BigInteger> iterator = new LookAndSayIterator(
+              new BigInteger("1"),
+              new BigInteger("10"));
+    } catch (Exception e) {
+      fail("Valid constructor should not have failed.");
+    }
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -39,15 +44,22 @@ public class LookAndSayIteratorTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorSeedHasZeros() {
-    RIterator<BigInteger> iterator = new LookAndSayIterator(
-            new BigInteger("10"),
-            new BigInteger("100"));
+    try {
+      RIterator<BigInteger> iterator = new LookAndSayIterator(
+              new BigInteger("10"),
+              new BigInteger("100"));
+    } catch (Exception e) {
+      fail("Valid constructor should not have failed.");
+    }
   }
 
   @Test
   public void testValidSecondConstructor() {
-    RIterator<BigInteger> iterator = new LookAndSayIterator(new BigInteger("1"));
-
+    try {
+      RIterator<BigInteger> iterator = new LookAndSayIterator(new BigInteger("1"));
+    } catch (Exception e) {
+      fail("Valid constructor should not have failed.");
+    }
   }
 
   @Test(expected = IllegalArgumentException.class)
