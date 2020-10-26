@@ -67,18 +67,31 @@ public class LookAndSayIteratorTest {
   }
 
   @Test
-  public void testLookAndSay() {
-    String[] expected = { "1", "11", "21", "1211", "111221", "312211" };
-    int counter = 0;
-
+  public void testNext() {
     BigInteger start = new BigInteger("1");
     BigInteger end = new BigInteger("999999");
     RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
+
+    String[] expected = { "1", "11", "21", "1211", "111221", "312211" };
+    int counter = 0;
     for (RIterator<BigInteger> it = lookAndSay; it.hasNext();) {
       BigInteger number = it.next();
       assertTrue(number.compareTo(end) <= 0);
       assertEquals(expected[counter], number.toString());
       counter++;
+    }
+  }
+
+  @Test
+  public void testPrevious() {
+    BigInteger start = new BigInteger("11");
+    BigInteger end = new BigInteger("999999");
+    RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
+
+    BigInteger prev = new BigInteger("1");
+    for (RIterator<BigInteger> it = lookAndSay; it.hasNext();) {
+      assertEquals(prev.toString(), lookAndSay.prev().toString());
+      prev = it.next();
     }
   }
 }

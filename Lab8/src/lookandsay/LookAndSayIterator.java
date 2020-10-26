@@ -61,22 +61,22 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
   @Override
   public BigInteger next() {
     BigInteger c = this.current;
-    this.current = this.lookAndSay();
+    this.current = this.forward(c);
     return c;
   }
 
   @Override
   public BigInteger prev() {
-    return null;
+    return this.reverse(this.current);
   }
 
   @Override
   public boolean hasPrevious() {
-    return false;
+    return this.current.toString().toCharArray().length > 1;
   }
 
-  private BigInteger lookAndSay() {
-    char[] cArray = this.current.toString().toCharArray();
+  private BigInteger forward(BigInteger seq) {
+    char[] cArray = seq.toString().toCharArray();
     StringBuilder number = new StringBuilder();
     char s = '0';
     int sCount = 0;
@@ -84,22 +84,44 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
       if (c == s) {
         sCount++;
       } else {
-        number.append(this.lookAndSay(s, sCount));
+        number.append(this.forward(s, sCount));
         s = c;
         sCount = 1;
       }
     }
-    number.append(this.lookAndSay(s, sCount));
+    number.append(this.forward(s, sCount));
 
     return new BigInteger(number.toString());
   }
 
-  private String lookAndSay(char s, int sCount) {
+  private String forward(char s, int sCount) {
     if (s == '0' || sCount < 1) {
       return "";
     }
 
     int sInt = Integer.parseInt(String.valueOf(s));
     return String.format("%s%s", sCount, sInt);
+  }
+
+  private BigInteger reverse(BigInteger seq) {
+    char[] cArray = seq.toString().toCharArray();
+    StringBuilder number = new StringBuilder();
+    for (int i = 0; i < cArray.length; i+=2) {
+      char j = cArray[i];
+      char k = cArray[i+1];
+      number.append(this.reverse(j, k));
+    }
+
+    return new BigInteger(number.toString());
+  }
+
+  private String reverse(char j, char k) {
+    int count = Integer.parseInt(String.valueOf(j));
+    StringBuilder str = new StringBuilder();
+    for (int i = 0; i < count; i++) {
+      str.append(k);
+    }
+
+    return str.toString();
   }
 }
