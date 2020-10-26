@@ -40,4 +40,26 @@ public class LookAndSayIteratorTest {
             new BigInteger("10"),
             new BigInteger("100"));
   }
+
+  @Test
+  public void testValidSecondConstructor() {
+    RIterator<BigInteger> iterator = new LookAndSayIterator(new BigInteger("1"));
+
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidSecondConstructorNegSeed() {
+    RIterator<BigInteger> iterator = new LookAndSayIterator(new BigInteger("-1"));
+
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidSecondConstructorSeedEqualToEnd() {
+    RIterator<BigInteger> iterator = new LookAndSayIterator(new BigInteger("9".repeat(100)));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidSecondConstructorSeedHasZeros() {
+    RIterator<BigInteger> iterator = new LookAndSayIterator(new BigInteger("10"));
+  }
 }

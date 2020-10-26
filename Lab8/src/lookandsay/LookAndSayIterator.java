@@ -26,6 +26,23 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
     this.endValue = endValue;
   }
 
+  public LookAndSayIterator(BigInteger startSeed) {
+    if (startSeed.toString().contains("0")) {
+      throw new IllegalArgumentException("Start seed cannot contain any zeros.");
+    }
+    if (startSeed.compareTo(new BigInteger("0")) <= 0) {
+      throw new IllegalArgumentException("Start seed must be greater than zero.");
+    }
+
+    BigInteger endValue = new BigInteger("9".repeat(100));
+    if (startSeed.compareTo(endValue) >= 0) {
+      throw new IllegalArgumentException("Start seed must be less than end value.");
+    }
+
+    this.startSeed = startSeed;
+    this.endValue = endValue;
+  }
+
   @Override
   public boolean hasNext() {
     return false;
