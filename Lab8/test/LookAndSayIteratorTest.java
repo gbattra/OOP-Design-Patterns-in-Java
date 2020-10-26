@@ -96,15 +96,16 @@ public class LookAndSayIteratorTest {
 
   @Test
   public void testPrevious() {
-    BigInteger start = new BigInteger("11");
+    BigInteger start = new BigInteger("312211");
     BigInteger end = new BigInteger("999999");
     RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
 
-    BigInteger prev = new BigInteger("1");
-    for (RIterator<BigInteger> it = lookAndSay; it.hasNext();) {
-      BigInteger curr = it.next();
-      assertEquals(prev.toString(), lookAndSay.prev().toString());
-      prev = curr;
+    String[] expected = { "1", "11", "21", "1211", "111221", "312211" };
+    int counter = 4;
+    for (RIterator<BigInteger> it = lookAndSay; it.hasPrevious();) {
+      BigInteger number = it.prev();
+      assertEquals(expected[counter], number.toString());
+      counter--;
     }
   }
 

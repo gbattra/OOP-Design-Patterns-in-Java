@@ -91,12 +91,15 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
 
   @Override
   public BigInteger prev() {
-    return this.backward(this.previous);
+    BigInteger prev = this.backward(this.previous);
+    this.current = this.previous;
+    this.previous = prev;
+    return prev;
   }
 
   @Override
   public boolean hasPrevious() {
-    return this.current.toString().toCharArray().length % 2 == 0;
+    return this.previous.toString().toCharArray().length % 2 == 0;
   }
 
   /**
