@@ -43,6 +43,11 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
     this.endValue = endValue;
   }
 
+  public LookAndSayIterator() {
+    this.startSeed = new BigInteger("1");
+    this.endValue = new BigInteger("9".repeat(100));
+  }
+
   @Override
   public boolean hasNext() {
     return false;
