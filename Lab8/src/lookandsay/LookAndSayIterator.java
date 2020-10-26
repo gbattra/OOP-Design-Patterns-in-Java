@@ -10,6 +10,7 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
   private final BigInteger endValue;
 
   private BigInteger current;
+  private BigInteger previous;
 
   /**
    * Constructor for LookAndStayIterator class.
@@ -37,6 +38,7 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
     this.startSeed = startSeed;
     this.endValue = endValue;
     this.current = startSeed;
+    this.previous = startSeed;
   }
 
   /**
@@ -61,6 +63,7 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
     this.startSeed = startSeed;
     this.endValue = endValue;
     this.current = startSeed;
+    this.previous = startSeed;
   }
 
   /**
@@ -70,6 +73,7 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
     this.startSeed = new BigInteger("1");
     this.endValue = new BigInteger("9".repeat(100));
     this.current = this.startSeed;
+    this.previous = this.startSeed;
   }
 
   @Override
@@ -81,17 +85,18 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
   public BigInteger next() {
     BigInteger c = this.current;
     this.current = this.forward(c);
+    this.previous = c;
     return c;
   }
 
   @Override
   public BigInteger prev() {
-    return this.backward(this.current);
+    return this.backward(this.previous);
   }
 
   @Override
   public boolean hasPrevious() {
-    return this.current.toString().toCharArray().length > 1;
+    return this.current.toString().toCharArray().length % 2 == 0;
   }
 
   /**
@@ -142,6 +147,7 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
    */
   private BigInteger backward(BigInteger seq) {
     char[] charArray = seq.toString().toCharArray();
+
     StringBuilder number = new StringBuilder();
     for (int i = 0; i < charArray.length; i += 2) {
       char j = charArray[i];
@@ -154,6 +160,7 @@ public class LookAndSayIterator implements RIterator<BigInteger> {
 
   /**
    * Helper for backward() which returns a string containing k, j number of times.
+   *
    * @param j the count for the loop
    * @param k the value to add to the string
    * @return a string containing k, j number of times

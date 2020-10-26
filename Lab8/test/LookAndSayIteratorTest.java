@@ -6,9 +6,13 @@ import lookandsay.LookAndSayIterator;
 import lookandsay.RIterator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for LookAndSay class.
+ */
 public class LookAndSayIteratorTest {
   @Test
   public void testValidConstructor() {
@@ -44,13 +48,9 @@ public class LookAndSayIteratorTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorSeedHasZeros() {
-    try {
-      RIterator<BigInteger> iterator = new LookAndSayIterator(
-              new BigInteger("10"),
-              new BigInteger("100"));
-    } catch (Exception e) {
-      fail("Valid constructor should not have failed.");
-    }
+    RIterator<BigInteger> iterator = new LookAndSayIterator(
+            new BigInteger("10"),
+            new BigInteger("100"));
   }
 
   @Test
@@ -102,8 +102,44 @@ public class LookAndSayIteratorTest {
 
     BigInteger prev = new BigInteger("1");
     for (RIterator<BigInteger> it = lookAndSay; it.hasNext();) {
+      BigInteger curr = it.next();
       assertEquals(prev.toString(), lookAndSay.prev().toString());
-      prev = it.next();
+      prev = curr;
     }
+  }
+
+  @Test
+  public void testHasPreviousTrue() {
+    BigInteger start = new BigInteger("11");
+    BigInteger end = new BigInteger("999999");
+    RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
+    lookAndSay.next();
+    assertTrue(lookAndSay.hasPrevious());
+  }
+
+  @Test
+  public void testHasPreviousFalse() {
+    BigInteger start = new BigInteger("1");
+    BigInteger end = new BigInteger("999999");
+    RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
+    assertFalse(lookAndSay.hasPrevious());
+  }
+
+  @Test
+  public void testHasNextFalse() {
+    BigInteger start = new BigInteger("123458");
+    BigInteger end = new BigInteger("999999");
+    RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
+    lookAndSay.next();
+    assertFalse(lookAndSay.hasNext());
+  }
+
+  @Test
+  public void testHasNextTrue() {
+    BigInteger start = new BigInteger("999998");
+    BigInteger end = new BigInteger("999999");
+    RIterator<BigInteger> lookAndSay = new LookAndSayIterator(start, end);
+    lookAndSay.next();
+    assertTrue(lookAndSay.hasNext());
   }
 }
