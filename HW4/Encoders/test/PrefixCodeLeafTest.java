@@ -31,7 +31,7 @@ public class PrefixCodeLeafTest {
     assertEquals("A", leaf.getSymbol());
     assertEquals("", leaf.getCode());
 
-    leaf = leaf.set("0", leaf.getSymbol());
+    leaf = leaf.setCode("0");
     assertEquals("0", leaf.getCode());
     assertEquals("A", leaf.getSymbol());
   }

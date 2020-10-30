@@ -21,5 +21,13 @@ public interface CodeNode<K, S> {
    */
   S getSymbol();
 
-  CodeNode<K, S> set(String code, String symbol);
+  /**
+   * Sets the 'code' on the called instance node. Factory method which returns new node instance.
+   *
+   * @param code the code of the node
+   * @return a new node instance with the provided code and string
+   */
+  CodeNode<K, S> setCode(K code);
+
+//  CodeNode<K, S> add(K code, S symbol);
 }

@@ -36,7 +36,7 @@ public class PrefixCodeLeaf implements CodeNode<String, String> {
   }
 
   @Override
-  public CodeNode<String, String> set(String code, String symbol) {
-    return new PrefixCodeLeaf(code, symbol);
+  public CodeNode<String, String> setCode(String code) {
+    return new PrefixCodeLeaf(code, this.symbol);
   }
 }
