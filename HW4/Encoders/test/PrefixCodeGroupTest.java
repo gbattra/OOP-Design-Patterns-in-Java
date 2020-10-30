@@ -46,4 +46,11 @@ public class PrefixCodeGroupTest {
     CodeNode<String, String> node = new PrefixCodeGroup(this.children).setCode("");
     fail("Invalid setCode() should have failed.");
   }
+
+  @Test
+  public void testGetters() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.children).setCode("0");
+    assertEquals("AB", node.getSymbol());
+    assertEquals("0", node.getCode());
+  }
 }
