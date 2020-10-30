@@ -53,4 +53,36 @@ public class PrefixCodeGroupTest {
     assertEquals("AB", node.getSymbol());
     assertEquals("0", node.getCode());
   }
+
+  @Test
+  public void testValidAdd() {
+    try {
+      CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+      node = node.add("C", "2");
+      assertEquals("ABC", node.getSymbol());
+    } catch (Exception e) {
+      fail("Valid add() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidAddEmptySymbol() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+    node = node.add("", "2");
+    fail("Invalid add() should have failed.");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidAddEmptyEncoding() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+    node = node.add("A", "");
+    fail("Invalid add() should have failed.");
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testInvalidAddExistingNode() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+    node = node.add("A", "0");
+    fail("Invalid add() should have failed.");
+  }
 }

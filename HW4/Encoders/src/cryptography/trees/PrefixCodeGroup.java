@@ -24,7 +24,7 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
           String code,
           List<CodeNode<String, String>> children) {
     if (code == null || code.isEmpty()) {
-      throw new IllegalArgumentException("Code cannot be empty.");
+      throw new IllegalArgumentException("Cannot instantiate group node: Code is empty.");
     }
 
     this.code = code;
@@ -50,15 +50,16 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
   public CodeNode<String, String> add(String symbol, String encoding)
           throws IllegalStateException, IllegalArgumentException {
     if (symbol == null || symbol.isEmpty() || encoding == null || encoding.isEmpty()) {
-      throw new IllegalArgumentException("Symbol and encoding cannot be empty.");
+      throw new IllegalArgumentException(
+              "Call to add() invalid: Symbol and encoding must not be empty.");
     }
     if (this.getSymbol().equals(symbol)) {
-      throw new IllegalStateException(
-              String.format("A node with symbol %s already exists in the tree.", symbol));
+      throw new IllegalStateException(String.format(
+              "Call to add() invalid: A node with symbol %s already exists in the tree.", symbol));
     }
     if (this.getCode().equals(encoding)) {
-      throw new IllegalStateException(
-              String.format("A node already exists at encoding %s", encoding));
+      throw new IllegalStateException(String.format(
+              "Call to add() invalid: A node already exists at encoding %s", encoding));
     }
 
     char code = encoding.charAt(0);
@@ -73,17 +74,20 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
                 .setCode(String.valueOf(code))
                 .add(symbol, encoding.substring(1));
         children.add(group);
-        return new PrefixCodeGroup(this.code, children);
+        return this.getCode().isEmpty() ?
+                new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
       }
 
       CodeNode<String, String> leaf = new PrefixCodeLeaf(symbol).setCode(String.valueOf(code));
       children.add(leaf);
-      return new PrefixCodeGroup(this.code, children);
+      return this.getCode().isEmpty() ?
+              new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
     }
 
     CodeNode<String, String> node = child.get(0);
     int i = children.indexOf(node);
     children.set(i, node.add(symbol, encoding.substring(1)));
-    return new PrefixCodeGroup(this.code, children);
+    return this.getCode().isEmpty() ?
+            new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
   }
 }

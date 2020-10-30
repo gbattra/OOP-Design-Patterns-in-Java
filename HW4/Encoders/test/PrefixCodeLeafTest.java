@@ -35,4 +35,11 @@ public class PrefixCodeLeafTest {
     assertEquals("0", leaf.getCode());
     assertEquals("A", leaf.getSymbol());
   }
+
+  @Test(expected = IllegalStateException.class)
+  public void testAdd() {
+    CodeNode<String, String> leaf = new PrefixCodeLeaf("A");
+    leaf.add("B", "1");
+    fail("Invalid add() should have failed.");
+  }
 }
