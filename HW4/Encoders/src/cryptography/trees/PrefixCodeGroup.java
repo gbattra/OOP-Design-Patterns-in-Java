@@ -57,10 +57,6 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
       throw new IllegalStateException(String.format(
               "Call to add() invalid: A node with symbol %s already exists in the tree.", symbol));
     }
-    if (this.getCode().equals(encoding)) {
-      throw new IllegalStateException(String.format(
-              "Call to add() invalid: A node already exists at encoding %s", encoding));
-    }
 
     char code = encoding.charAt(0);
     List<CodeNode<String, String>> children = new LinkedList<>(this.children);

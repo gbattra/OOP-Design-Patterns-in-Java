@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,19 +15,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class PrefixCodeGroupTest {
-  private List<CodeNode<String, String>> children;
+  private List<CodeNode<String, String>> leafChildren;
+  private List<CodeNode<String, String>> groupChildren;
 
   @Before
   public void setup() {
     CodeNode<String, String> a = new PrefixCodeLeaf("A").setCode("0");
     CodeNode<String, String> b = new PrefixCodeLeaf("B").setCode("1");
-    this.children = new ArrayList<>(Arrays.asList(a, b));
+    this.leafChildren = new ArrayList<>(Arrays.asList(a, b));
+
+    CodeNode<String, String> group = new PrefixCodeGroup(this.leafChildren).setCode("0");
+    this.groupChildren = new ArrayList<>(Collections.singletonList(group));
   }
 
   @Test
   public void testValidConstructor() {
     try {
-      CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+      CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -35,7 +40,7 @@ public class PrefixCodeGroupTest {
   @Test
   public void testSetCode() {
     try {
-      CodeNode<String, String> node = new PrefixCodeGroup(this.children).setCode("0");
+      CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren).setCode("0");
     } catch (Exception e) {
       fail("Valid setCode() should not have failed");
     }
@@ -43,13 +48,13 @@ public class PrefixCodeGroupTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidSetCode() {
-    CodeNode<String, String> node = new PrefixCodeGroup(this.children).setCode("");
+    CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren).setCode("");
     fail("Invalid setCode() should have failed.");
   }
 
   @Test
   public void testGetters() {
-    CodeNode<String, String> node = new PrefixCodeGroup(this.children).setCode("0");
+    CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren).setCode("0");
     assertEquals("AB", node.getSymbol());
     assertEquals("0", node.getCode());
   }
@@ -57,7 +62,7 @@ public class PrefixCodeGroupTest {
   @Test
   public void testValidAdd() {
     try {
-      CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+      CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
       node = node.add("C", "2");
       assertEquals("ABC", node.getSymbol());
     } catch (Exception e) {
@@ -67,22 +72,33 @@ public class PrefixCodeGroupTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidAddEmptySymbol() {
-    CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+    CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
     node = node.add("", "2");
     fail("Invalid add() should have failed.");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidAddEmptyEncoding() {
-    CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+    CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
     node = node.add("A", "");
     fail("Invalid add() should have failed.");
   }
 
   @Test(expected = IllegalStateException.class)
   public void testInvalidAddExistingNode() {
-    CodeNode<String, String> node = new PrefixCodeGroup(this.children);
+    CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
     node = node.add("A", "0");
     fail("Invalid add() should have failed.");
+  }
+
+  @Test
+  public void testMultilayerAdd() {
+    try {
+      CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+      node = node.add("C", "101");
+      assertEquals("ABC", node.getSymbol());
+    } catch (Exception e) {
+      fail("Valid add() should not have failed.");
+    }
   }
 }

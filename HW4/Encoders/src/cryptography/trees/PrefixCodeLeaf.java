@@ -43,6 +43,6 @@ public class PrefixCodeLeaf implements CodeNode<String, String> {
   @Override
   public CodeNode<String, String> add(String symbol, String encoding)
           throws IllegalStateException, IllegalArgumentException {
-    throw new IllegalStateException("Cannot add a node to a leaf node.");
+    throw new IllegalStateException("Invalid call to add(): A symbol already exists at encoding.");
   }
 }
