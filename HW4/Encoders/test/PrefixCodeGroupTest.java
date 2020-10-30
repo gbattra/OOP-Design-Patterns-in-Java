@@ -115,4 +115,22 @@ public class PrefixCodeGroupTest {
     node.decode("101");
     fail("Invalid decode should have failed.");
   }
+
+  @Test
+  public void testValidEncode() {
+    try {
+      CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+      node = node.add("C", "101");
+      assertEquals("101", node.encode("C"));
+    } catch (Exception e) {
+      fail("Valid encode() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidEncode() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+    node.encode("C");
+    fail("Invalid encode() should have failed.");
+  }
 }

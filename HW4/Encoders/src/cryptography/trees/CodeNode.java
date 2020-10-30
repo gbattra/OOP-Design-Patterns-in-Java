@@ -42,11 +42,30 @@ public interface CodeNode<K, S> {
   CodeNode<K, S> add(S symbol, K encoding) throws IllegalStateException, IllegalArgumentException;
 
   /**
-   * Takes an encoding and returns the next symbol in the encoding.
+   * Takes an encoding and returns its corresponding symbol.
    *
-   * @param encoding the encoding for the character
+   * @param encoding the encoding to decode
    * @return the symbol corresponding to the encoding
    * @throws IllegalArgumentException if no symbol found at provided encoding
    */
   S decode(K encoding) throws IllegalArgumentException;
+
+  /**
+   * Takes a symbol and returns its corresponding encoding.
+   *
+   * @param symbol the symbol to encode
+   * @return the encoding corresponding to the symbol
+   * @throws IllegalArgumentException if the provided symbol does not exist in the code tree
+   */
+  K encode(S symbol) throws IllegalArgumentException;
+
+  /**
+   * Helper for the encode method. Builds the encoding as an accumulator through each traversal.
+   *
+   * @param symbol the symbol to encode
+   * @param encoding the work-in-progress encoding
+   * @return the final encoding
+   * @throws IllegalArgumentException if the provided symbol does not exist in the code tree
+   */
+  K encode(S symbol, K encoding) throws IllegalArgumentException;
 }

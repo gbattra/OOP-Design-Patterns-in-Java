@@ -103,4 +103,22 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
 
     return filtered.get(0).decode(encoding.substring(1));
   }
+
+  @Override
+  public String encode(String symbol) throws IllegalArgumentException {
+    return this.encode(symbol, "");
+  }
+
+  @Override
+  public String encode(String symbol, String encoding) throws IllegalArgumentException {
+    for (CodeNode<String, String> child : this.children) {
+      try {
+        encoding = child.encode(symbol, encoding + this.getCode());
+        return encoding;
+      } catch (Exception ignored) {
+      }
+    }
+
+    throw new IllegalArgumentException("Provided symbol not found in code tree.");
+  }
 }

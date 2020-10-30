@@ -54,4 +54,18 @@ public class PrefixCodeLeaf implements CodeNode<String, String> {
 
     return this.getSymbol();
   }
+
+  @Override
+  public String encode(String symbol) throws IllegalArgumentException {
+    return this.encode(symbol, "");
+  }
+
+  @Override
+  public String encode(String symbol, String encoding) throws IllegalArgumentException {
+    if (!this.getSymbol().equals(symbol)) {
+      throw new IllegalArgumentException("Provided symbol not present in code tree.");
+    }
+
+    return encoding + this.getCode();
+  }
 }
