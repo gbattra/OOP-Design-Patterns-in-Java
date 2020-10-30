@@ -4,7 +4,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import cryptography.trees.CodeNode;
@@ -73,21 +72,21 @@ public class PrefixCodeGroupTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidAddEmptySymbol() {
     CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
-    node = node.add("", "2");
+    node.add("", "2");
     fail("Invalid add() should have failed.");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidAddEmptyEncoding() {
     CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
-    node = node.add("A", "");
+    node.add("A", "");
     fail("Invalid add() should have failed.");
   }
 
   @Test(expected = IllegalStateException.class)
   public void testInvalidAddExistingNode() {
     CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren);
-    node = node.add("A", "0");
+    node.add("A", "0");
     fail("Invalid add() should have failed.");
   }
 
@@ -132,5 +131,32 @@ public class PrefixCodeGroupTest {
     CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
     node.encode("C");
     fail("Invalid encode() should have failed.");
+  }
+
+  @Test
+  public void testValidNext() {
+    try {
+      CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+      node = node.add("C", "101");
+      assertEquals("C", node.next("101100"));
+    } catch (Exception e) {
+      fail("Valid encode() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidNextNoMatch() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+    node = node.add("C", "101");
+    node.next("");
+    fail("Invalid next() should have failed.");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidNextNoChild() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+    node = node.add("C", "101");
+    node.next("10010");
+    fail("Invalid next() should have failed.");
   }
 }

@@ -68,4 +68,13 @@ public interface CodeNode<K, S> {
    * @throws IllegalArgumentException if the provided symbol does not exist in the code tree
    */
   K encode(S symbol, K encoding) throws IllegalArgumentException;
+
+  /**
+   * Takes a sequence of encodings and returns the next decoded symbol in the sequence.
+   *
+   * @param sequence the sequence to decode
+   * @return the next symbol in the sequence
+   * @throws IllegalArgumentException if the next codes in the sequence do not map to a symbol
+   */
+  S next(K sequence) throws IllegalArgumentException;
 }

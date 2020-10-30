@@ -68,4 +68,9 @@ public class PrefixCodeLeaf implements CodeNode<String, String> {
 
     return encoding + this.getCode();
   }
+
+  @Override
+  public String next(String sequence) throws IllegalArgumentException {
+    return this.getSymbol();
+  }
 }

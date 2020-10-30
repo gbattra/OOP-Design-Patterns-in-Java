@@ -76,4 +76,14 @@ public class PrefixCodeLeafTest {
     leaf.encode("B");
     fail("Invalid encode should have failed.");
   }
+
+  @Test
+  public void testValidNext() {
+    try {
+      CodeNode<String, String> leaf = new PrefixCodeLeaf("A").setCode("1");
+      assertEquals("A", leaf.next("1"));
+    } catch (Exception e) {
+      fail("Valid encode() should not have failed.");
+    }
+  }
 }

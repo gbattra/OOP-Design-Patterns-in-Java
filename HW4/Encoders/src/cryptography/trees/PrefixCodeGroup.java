@@ -3,6 +3,7 @@ package cryptography.trees;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PrefixCodeGroup implements CodeNode<String, String> {
   private final String code;
@@ -120,5 +121,23 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
     }
 
     throw new IllegalArgumentException("Provided symbol not found in code tree.");
+  }
+
+  @Override
+  public String next(String sequence) throws IllegalArgumentException {
+    if (sequence.isEmpty()) {
+      throw new IllegalArgumentException("Sequence does not map to a symbol. Empty sequence.");
+    }
+
+    char code = sequence.charAt(0);
+    List<CodeNode<String, String>> filtered = this.children.stream()
+            .filter(c -> c.getCode().equals(String.valueOf(code)))
+            .collect(Collectors.toList());
+    if (filtered.isEmpty()) {
+      throw new IllegalArgumentException("Sequence does not map to a symbol. No child found.");
+    }
+
+    CodeNode<String, String> child = filtered.get(0);
+    return child.next(sequence.substring(1));
   }
 }
