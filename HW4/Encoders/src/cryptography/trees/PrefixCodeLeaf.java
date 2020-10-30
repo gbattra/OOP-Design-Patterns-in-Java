@@ -45,4 +45,13 @@ public class PrefixCodeLeaf implements CodeNode<String, String> {
           throws IllegalStateException, IllegalArgumentException {
     throw new IllegalStateException("Invalid call to add(): A symbol already exists at encoding.");
   }
+
+  @Override
+  public String decode(String encoding) throws IllegalArgumentException {
+    if (!encoding.isEmpty()) {
+      throw new IllegalArgumentException("No symbol found for provided encoding.");
+    }
+
+    return this.getSymbol();
+  }
 }

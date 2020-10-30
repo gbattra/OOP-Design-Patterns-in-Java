@@ -101,4 +101,18 @@ public class PrefixCodeGroupTest {
       fail("Valid add() should not have failed.");
     }
   }
+
+  @Test
+  public void testDecode() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+    node = node.add("C", "101");
+    assertEquals("C", node.decode("101"));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidDecode() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.groupChildren);
+    node.decode("101");
+    fail("Invalid decode should have failed.");
+  }
 }

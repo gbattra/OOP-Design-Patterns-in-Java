@@ -42,4 +42,21 @@ public class PrefixCodeLeafTest {
     leaf.add("B", "1");
     fail("Invalid add() should have failed.");
   }
+
+  @Test
+  public void testDecode() {
+    try {
+      CodeNode<String, String> leaf = new PrefixCodeLeaf("A");
+      assertEquals("A", leaf.decode(""));
+    } catch (Exception e) {
+      fail("Valid decode() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidDecode() {
+    CodeNode<String, String> leaf = new PrefixCodeLeaf("A");
+    leaf.decode("0");
+    fail("Invalid decode() should have failed.");
+  }
 }

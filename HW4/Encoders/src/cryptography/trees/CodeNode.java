@@ -40,4 +40,13 @@ public interface CodeNode<K, S> {
    * @throws IllegalStateException if a node already exists at the encoding address
    */
   CodeNode<K, S> add(S symbol, K encoding) throws IllegalStateException, IllegalArgumentException;
+
+  /**
+   * Takes an encoding and returns the next symbol in the encoding.
+   *
+   * @param encoding the encoding for the character
+   * @return the symbol corresponding to the encoding
+   * @throws IllegalArgumentException if no symbol found at provided encoding
+   */
+  S decode(K encoding) throws IllegalArgumentException;
 }

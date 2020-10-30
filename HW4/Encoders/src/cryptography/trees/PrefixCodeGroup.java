@@ -60,11 +60,11 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
 
     char code = encoding.charAt(0);
     List<CodeNode<String, String>> children = new LinkedList<>(this.children);
-    List<CodeNode<String, String>> child = children.stream()
+    List<CodeNode<String, String>> filtered = children.stream()
             .filter(c -> c.getCode().equals(String.valueOf(code)))
             .collect(Collectors.toList());
 
-    if (child.isEmpty()) {
+    if (filtered.isEmpty()) {
       if (encoding.length() > 1) {
         CodeNode<String, String> group = new PrefixCodeGroup()
                 .setCode(String.valueOf(code))
@@ -80,10 +80,27 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
               new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
     }
 
-    CodeNode<String, String> node = child.get(0);
-    int i = children.indexOf(node);
-    children.set(i, node.add(symbol, encoding.substring(1)));
+    CodeNode<String, String> child = filtered.get(0);
+    int i = children.indexOf(child);
+    children.set(i, child.add(symbol, encoding.substring(1)));
     return this.getCode().isEmpty() ?
             new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
+  }
+
+  @Override
+  public String decode(String encoding) throws IllegalArgumentException {
+    if (encoding.isEmpty()) {
+      return this.getSymbol();
+    }
+
+    char code = encoding.charAt(0);
+    List<CodeNode<String, String>> filtered = this.children.stream()
+            .filter(c -> c.getCode().equals(String.valueOf(code)))
+            .collect(Collectors.toList());
+    if (filtered.isEmpty()) {
+      throw new IllegalArgumentException("No symbol found for provided encoding.");
+    }
+
+    return filtered.get(0).decode(encoding.substring(1));
   }
 }
