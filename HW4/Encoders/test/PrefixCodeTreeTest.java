@@ -1,0 +1,60 @@
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import cryptography.trees.CodeNode;
+import cryptography.trees.CodeTree;
+import cryptography.trees.PrefixCodeGroup;
+import cryptography.trees.PrefixCodeLeaf;
+import cryptography.trees.PrefixCodeTree;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+public class PrefixCodeTreeTest {
+  private CodeNode<String, String> root;
+
+  @Before
+  public void setup() {
+    CodeNode<String, String> a = new PrefixCodeLeaf("A").setCode("0");
+    CodeNode<String, String> b = new PrefixCodeLeaf("B").setCode("1");
+    List<CodeNode<String, String>> children = new ArrayList<>(Arrays.asList(a, b));
+
+    CodeNode<String, String> group = new PrefixCodeGroup(children).setCode("0");
+    List<CodeNode<String, String>> grouping = new ArrayList<>(Collections.singletonList(group));
+
+    this.root = new PrefixCodeGroup(grouping);
+    this.root = root.add("C", "101");
+  }
+
+  @Test
+  public void testConstructor() {
+    try {
+      CodeTree<String, String> tree = new PrefixCodeTree(this.root);
+    } catch (Exception e) {
+      fail("Valid constructor should not have failed.");
+    }
+  }
+
+  @Test
+  public void testValidEncode() {
+    try {
+      CodeTree<String, String> tree = new PrefixCodeTree(this.root);
+      String encoding = tree.encode("ABC");
+      assertEquals("0001101", encoding);
+    } catch (Exception e) {
+      fail("Valid encode() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidEncode() {
+    CodeTree<String, String> tree = new PrefixCodeTree(this.root);
+    tree.encode("ABCD");
+    fail("Invalid encode() should have failed.");
+  }
+}
