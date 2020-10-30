@@ -29,5 +29,15 @@ public interface CodeNode<K, S> {
    */
   CodeNode<K, S> setCode(K code);
 
-//  CodeNode<K, S> add(K code, S symbol);
+  /**
+   * Adds a node with specified symbol to the code tree. Uses the provided encoding as an 'address'
+   * for the location of the new node.
+   *
+   * @param symbol the symbol to add
+   * @param encoding the encoding address for the symbol
+   * @return a new tree with the added symbol
+   * @throws IllegalArgumentException if encoding or symbol is empty
+   * @throws IllegalStateException if a node already exists at the encoding address
+   */
+  CodeNode<K, S> add(S symbol, K encoding) throws IllegalStateException, IllegalArgumentException;
 }

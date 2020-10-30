@@ -39,4 +39,10 @@ public class PrefixCodeLeaf implements CodeNode<String, String> {
   public CodeNode<String, String> setCode(String code) {
     return new PrefixCodeLeaf(code, this.symbol);
   }
+
+  @Override
+  public CodeNode<String, String> add(String symbol, String encoding)
+          throws IllegalStateException, IllegalArgumentException {
+    throw new IllegalStateException("Cannot add a node to a leaf node.");
+  }
 }
