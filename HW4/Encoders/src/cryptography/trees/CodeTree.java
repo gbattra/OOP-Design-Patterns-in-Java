@@ -15,4 +15,13 @@ public interface CodeTree<K, S> {
    * @throws IllegalArgumentException if sequence does not map to symbols
    */
   K encode(S sequence) throws IllegalArgumentException;
+
+  /**
+   * Decodes a sequence of encodings into their corresponding symbols.
+   *
+   * @param sequence the sequence to decode
+   * @return the decoded sequence of symbols
+   * @throws IllegalArgumentException if the provided sequence does not map to any symbols
+   */
+  S decode(K sequence) throws IllegalArgumentException;
 }

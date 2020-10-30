@@ -57,4 +57,22 @@ public class PrefixCodeTreeTest {
     tree.encode("ABCD");
     fail("Invalid encode() should have failed.");
   }
+
+  @Test
+  public void testValidDecode() {
+    try {
+      CodeTree<String, String> tree = new PrefixCodeTree(this.root);
+      String decoding = tree.decode("0001101");
+      assertEquals("ABC", decoding);
+    } catch (Exception e) {
+      fail("Valid decode() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidDecode() {
+    CodeTree<String, String> tree = new PrefixCodeTree(this.root);
+    String decoding = tree.decode("01001101");
+    fail("Invalid decode() should have failed.");
+  }
 }
