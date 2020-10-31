@@ -41,8 +41,9 @@ public abstract class AbstractPrefixEncoder {
     }
 
     codes = StringHelper.distinctCharacters(codes);
+    Stack<FrequencyItem<CodeNode<String, String>>> nodes =
+            this.frequencyTableToNodeStack(freqTable);
 
-    Stack<FrequencyItem<CodeNode<String, String>>> nodes = this.frequencyTableToNodeList(freqTable);
     while (nodes.size() > 1) {
       int frequency = 0;
       List<CodeNode<String, String>> children = new ArrayList<>();
@@ -62,7 +63,7 @@ public abstract class AbstractPrefixEncoder {
     return new PrefixCodeTree(nodes.get(0).getNode());
   }
 
-  private Stack<FrequencyItem<CodeNode<String, String>>> frequencyTableToNodeList(
+  private Stack<FrequencyItem<CodeNode<String, String>>> frequencyTableToNodeStack(
           Map<String, Integer> freqTable) {
     Stack<FrequencyItem<CodeNode<String, String>>> nodes = new Stack<>();
     for (Map.Entry<String, Integer> entry : freqTable.entrySet()) {
