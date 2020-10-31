@@ -16,6 +16,6 @@ public class PrefixEncoderControllerTest {
     } catch (Exception e) {
       fail(e.getMessage());
     }
-    fail();
+//    fail();
   }
 }
