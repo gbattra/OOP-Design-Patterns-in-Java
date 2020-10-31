@@ -16,21 +16,30 @@ import codes.utils.FrequencyEntry;
 import codes.utils.FrequencyHelper;
 import codes.utils.StringHelper;
 
+/**
+ * Abstract encoder containing algorithm to build the encoding tree. This class implements the
+ * Huffman encoding algorithm.
+ */
 public abstract class AbstractPrefixEncoder {
+  /**
+   * Takes a String sequence of symbols and the code set to encode them with. Returns a code tree
+   * of each symbol's encoding.
+   *
+   * @param sequence the sequence of symbols for which to build encodings.
+   * @param codes the code set to use for encoding
+   * @return the code tree of the symbols
+   * @throws IllegalArgumentException if sequence or codes is empty.
+   */
   protected final CodeTree<String, String> symbolsToCodeTree(
           String sequence,
           String codes) throws IllegalArgumentException {
-    if (sequence == null || sequence.isEmpty()) {
-      throw new IllegalArgumentException("Cannot generate code tree. Sequence empty.");
-    }
-    if (codes == null || codes.isEmpty()) {
-      throw new IllegalArgumentException("Cannot generate code tree. Empty code set.");
+    if (sequence == null || sequence.isEmpty() || codes == null || codes.isEmpty()) {
+      throw new IllegalArgumentException("Cannot generate code tree. Empty sequence or code set.");
     }
 
     codes = StringHelper.distinctCharacters(codes);
     Stack<Frequency<CodeNode<String, String>>> nodes =
-            FrequencyHelper.toStack(
-                    sequence.split(""), (c) -> new PrefixCodeLeaf(c));
+            FrequencyHelper.toStack(sequence.split(""), (c) -> new PrefixCodeLeaf(c));
     nodes.sort(this::compareFrequencyEntries);
 
     while (nodes.size() > 1) {
@@ -52,6 +61,15 @@ public abstract class AbstractPrefixEncoder {
     return new PrefixCodeTree(nodes.get(0).getValue());
   }
 
+  /**
+   * Compare method for each frequency item. Must be one-off and not the compareTo() method
+   * as each frequency object is generic, so different comparing operations would be needed
+   * depending on the type held by the frequency object.
+   *
+   * @param n1 the first node to compare
+   * @param n2 the second node to compare
+   * @return the ranking of the first node compared to the second node
+   */
   private int compareFrequencyEntries(
           Frequency<CodeNode<String, String>> n1,
           Frequency<CodeNode<String, String>> n2) {
