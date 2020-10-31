@@ -1,7 +1,10 @@
 package codes.trees;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PrefixCodeGroup implements CodeNode<String, String> {
@@ -138,5 +141,19 @@ public class PrefixCodeGroup implements CodeNode<String, String> {
 
     CodeNode<String, String> child = filtered.get(0);
     return child.next(sequence.substring(1));
+  }
+
+  @Override
+  public Map<String, String> toMap() {
+    return this.toMap(new HashMap<>(), "");
+  }
+
+  @Override
+  public Map<String, String> toMap(Map<String, String> map, String encoding) {
+    for (CodeNode<String, String> child : this.children) {
+      map.putAll(child.toMap(map, encoding + this.code));
+    }
+
+    return map;
   }
 }

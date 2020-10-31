@@ -1,5 +1,7 @@
 package codes.trees;
 
+import java.util.Map;
+
 public class PrefixCodeTree implements CodeTree<String, String> {
   private final CodeNode<String, String> root;
 
@@ -30,5 +32,10 @@ public class PrefixCodeTree implements CodeTree<String, String> {
     }
 
     return decoding.toString();
+  }
+
+  @Override
+  public Map<String, String> toMap() {
+    return this.root.toMap();
   }
 }

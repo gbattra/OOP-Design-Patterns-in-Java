@@ -2,11 +2,11 @@ package codes.utils;
 
 import codes.trees.CodeNode;
 
-public class PrefixCodeFrequencyItem implements FrequencyItem<CodeNode<String, String>> {
+public class PrefixCodeFrequency implements CodeFrequency<CodeNode<String, String>> {
   private final Integer frequency;
   private final CodeNode<String, String> node;
 
-  public PrefixCodeFrequencyItem(Integer frequency, CodeNode<String, String> node) {
+  public PrefixCodeFrequency(Integer frequency, CodeNode<String, String> node) {
     this.frequency = frequency;
     this.node = node;
   }
@@ -22,7 +22,7 @@ public class PrefixCodeFrequencyItem implements FrequencyItem<CodeNode<String, S
   }
 
   @Override
-  public int compareTo(FrequencyItem<CodeNode<String, String>> o) {
+  public int compareTo(CodeFrequency<CodeNode<String, String>> o) {
     if (o.getFrequency() > this.getFrequency()) {
       return -1;
     }

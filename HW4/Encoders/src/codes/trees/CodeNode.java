@@ -1,12 +1,16 @@
 package codes.trees;
 
+import java.util.Map;
+
+import codes.utils.Mappable;
+
 /**
  * Interface for a node in a code tree. Has a code of type K and a symbol of type S.
  *
  * @param <K> the type of the code
  * @param <S> the type of the symbol
  */
-public interface CodeNode<K, S> {
+public interface CodeNode<K, S> extends Mappable<K, S> {
   /**
    * Getter for the node code.
    *
@@ -77,4 +81,13 @@ public interface CodeNode<K, S> {
    * @throws IllegalArgumentException if the next codes in the sequence do not map to a symbol
    */
   S next(K sequence) throws IllegalArgumentException;
+
+  /**
+   * Helper method for mapping the tree to a map.
+   *
+   * @param map the map to build
+   * @param encoding the working encoding
+   * @return the map of the node
+   */
+  Map<K, S> toMap(Map<K, S> map, String encoding);
 }

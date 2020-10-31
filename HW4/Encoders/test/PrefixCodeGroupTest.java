@@ -4,7 +4,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import codes.trees.CodeNode;
 import codes.trees.PrefixCodeGroup;
@@ -161,5 +163,14 @@ public class PrefixCodeGroupTest {
     node = node.add("C", "101");
     node.next("10010");
     fail("Invalid next() should have failed.");
+  }
+
+  @Test
+  public void testToMap() {
+    CodeNode<String, String> node = new PrefixCodeGroup(this.leafChildren).setCode("0");
+    Map<String, String> map = new HashMap<>();
+    map.put("00", "A");
+    map.put("01", "B");
+    assertEquals(map, node.toMap());
   }
 }

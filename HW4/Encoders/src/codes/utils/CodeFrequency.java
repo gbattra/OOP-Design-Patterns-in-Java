@@ -5,8 +5,8 @@ package codes.utils;
  *
  * @param <T> the type of the node tracked by the item
  */
-public interface FrequencyItem<T>
-        extends Comparable<FrequencyItem<T>> {
+public interface CodeFrequency<T>
+        extends Comparable<CodeFrequency<T>> {
   /**
    * Getter for the frequency.
    *

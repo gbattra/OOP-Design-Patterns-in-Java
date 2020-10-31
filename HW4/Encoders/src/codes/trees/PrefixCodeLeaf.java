@@ -1,5 +1,8 @@
 package codes.trees;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PrefixCodeLeaf implements CodeNode<String, String> {
   private final String code;
   private final String symbol;
@@ -72,5 +75,16 @@ public class PrefixCodeLeaf implements CodeNode<String, String> {
   @Override
   public String next(String sequence) throws IllegalArgumentException {
     return this.getSymbol();
+  }
+
+  @Override
+  public Map<String, String> toMap() {
+    return this.toMap(new HashMap<>(), "");
+  }
+
+  @Override
+  public Map<String, String> toMap(Map<String, String> map, String encoding) {
+    map.put(encoding + this.code, this.symbol);
+    return map;
   }
 }

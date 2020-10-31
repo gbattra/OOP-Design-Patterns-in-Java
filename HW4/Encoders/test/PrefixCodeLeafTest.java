@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import codes.trees.CodeNode;
 import codes.trees.PrefixCodeLeaf;
 
@@ -85,5 +88,13 @@ public class PrefixCodeLeafTest {
     } catch (Exception e) {
       fail("Valid encode() should not have failed.");
     }
+  }
+
+  @Test
+  public void testToMap() {
+    CodeNode<String, String> leaf = new PrefixCodeLeaf("A").setCode("1");
+    Map<String, String> map = new HashMap<>();
+    map.put("1", "A");
+    assertEquals(map, leaf.toMap());
   }
 }

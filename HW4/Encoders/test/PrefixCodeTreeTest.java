@@ -4,7 +4,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import codes.trees.CodeNode;
 import codes.trees.CodeTree;
@@ -77,5 +79,15 @@ public class PrefixCodeTreeTest {
     CodeTree<String, String> tree = new PrefixCodeTree(this.root);
     String decoding = tree.decode("01001101");
     fail("Invalid decode() should have failed.");
+  }
+
+  @Test
+  public void testToMap() {
+    CodeTree<String, String> tree = new PrefixCodeTree(this.root);
+    Map<String, String> map = new HashMap<>();
+    map.put("00", "A");
+    map.put("01", "B");
+    map.put("101", "C");
+    assertEquals(map, tree.toMap());
   }
 }
