@@ -1,7 +1,7 @@
 import org.junit.Test;
 
-import cryptography.trees.CodeNode;
-import cryptography.trees.PrefixCodeLeaf;
+import codes.trees.CodeNode;
+import codes.trees.PrefixCodeLeaf;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

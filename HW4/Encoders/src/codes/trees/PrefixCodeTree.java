@@ -1,4 +1,4 @@
-package cryptography.trees;
+package codes.trees;
 
 public class PrefixCodeTree implements CodeTree<String, String> {
   private final CodeNode<String, String> root;

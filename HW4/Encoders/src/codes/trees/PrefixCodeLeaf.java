@@ -1,4 +1,4 @@
-package cryptography.trees;
+package codes.trees;
 
 public class PrefixCodeLeaf implements CodeNode<String, String> {
   private final String code;

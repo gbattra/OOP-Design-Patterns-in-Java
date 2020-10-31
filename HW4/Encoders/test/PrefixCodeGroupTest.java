@@ -6,13 +6,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import cryptography.trees.CodeNode;
-import cryptography.trees.PrefixCodeGroup;
-import cryptography.trees.PrefixCodeLeaf;
+import codes.trees.CodeNode;
+import codes.trees.PrefixCodeGroup;
+import codes.trees.PrefixCodeLeaf;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the prefix code group node.
+ */
 public class PrefixCodeGroupTest {
   private List<CodeNode<String, String>> leafChildren;
   private List<CodeNode<String, String>> groupChildren;

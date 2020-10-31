@@ -6,15 +6,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import cryptography.trees.CodeNode;
-import cryptography.trees.CodeTree;
-import cryptography.trees.PrefixCodeGroup;
-import cryptography.trees.PrefixCodeLeaf;
-import cryptography.trees.PrefixCodeTree;
+import codes.trees.CodeNode;
+import codes.trees.CodeTree;
+import codes.trees.PrefixCodeGroup;
+import codes.trees.PrefixCodeLeaf;
+import codes.trees.PrefixCodeTree;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the prefix code tree.
+ */
 public class PrefixCodeTreeTest {
   private CodeNode<String, String> root;
 

@@ -1,4 +1,4 @@
-package cryptography.trees;
+package codes.trees;
 
 /**
  * Interface for a code tree. Maps codes (of type K) to symbols (of type S).
