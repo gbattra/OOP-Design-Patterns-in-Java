@@ -9,6 +9,15 @@ public class PrefixCodeTree implements CodeTree<String, String> {
     this.root = root;
   }
 
+  public PrefixCodeTree(Map<String, String> map) {
+    CodeNode<String, String> root = new PrefixCodeGroup();
+    for (Map.Entry<String, String> entry : map.entrySet()) {
+      root = root.add(entry.getValue(), entry.getKey());
+    }
+
+    this.root = root;
+  }
+
   @Override
   public String encode(String sequence) throws IllegalArgumentException {
     StringBuilder encoding = new StringBuilder();

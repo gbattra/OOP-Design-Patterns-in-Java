@@ -3,6 +3,7 @@ package codes.encoders;
 import java.util.Map;
 
 import codes.trees.CodeTree;
+import codes.trees.PrefixCodeTree;
 
 public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<String, String> {
   private final CodeTree<String, String> tree;
@@ -18,6 +19,10 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
 
     Map<String, Integer> freqTable = this.symbolsToFrequencyTable(symbols);
     this.tree = this.frequencyTableToCodeTree(freqTable, codes);
+  }
+
+  public PrefixEncoder(Map<String, String> map) {
+    this.tree = new PrefixCodeTree(map);
   }
 
   @Override

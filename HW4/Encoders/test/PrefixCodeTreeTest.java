@@ -46,6 +46,22 @@ public class PrefixCodeTreeTest {
   }
 
   @Test
+  public void testConstructorFromMap() {
+    try {
+      Map<String, String> map = new HashMap<>();
+      map.put("00", "A");
+      map.put("01", "B");
+      map.put("101", "C");
+      CodeTree<String, String> tree = new PrefixCodeTree(map);
+      assertEquals("00", tree.encode("A"));
+      assertEquals("01", tree.encode("B"));
+      assertEquals("101", tree.encode("C"));
+    } catch (Exception e) {
+      fail("Valid constructor with map should not have failed.");
+    }
+  }
+
+  @Test
   public void testValidEncode() {
     try {
       CodeTree<String, String> tree = new PrefixCodeTree(this.root);

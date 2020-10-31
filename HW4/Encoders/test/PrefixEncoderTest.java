@@ -1,7 +1,12 @@
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
+import codes.trees.CodeTree;
+import codes.trees.PrefixCodeTree;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,6 +24,22 @@ public class PrefixEncoderTest {
       Encoder<String, String> encoder = new PrefixEncoder(binaryCodes, this.symbolSequence);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
+    }
+  }
+
+  @Test
+  public void testConstructorFromMap() {
+    try {
+      Map<String, String> map = new HashMap<>();
+      map.put("00", "A");
+      map.put("01", "B");
+      map.put("101", "C");
+      Encoder<String, String> encoder = new PrefixEncoder(map);
+      assertEquals("00", encoder.encode("A"));
+      assertEquals("01", encoder.encode("B"));
+      assertEquals("101", encoder.encode("C"));
+    } catch (Exception e) {
+      fail("Valid constructor with map should not have failed.");
     }
   }
 
