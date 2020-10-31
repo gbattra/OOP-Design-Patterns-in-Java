@@ -2,7 +2,7 @@ package codes.trees;
 
 import java.util.Map;
 
-import codes.utils.Mappable;
+import codes.utils.Mapper;
 
 /**
  * Interface for a node in a code tree. Has a code of type K and a symbol of type S.
@@ -10,7 +10,7 @@ import codes.utils.Mappable;
  * @param <K> the type of the code
  * @param <S> the type of the symbol
  */
-public interface CodeNode<K, S> extends Mappable<K, S> {
+public interface CodeNode<K, S> extends Mapper<K, S> {
   /**
    * Getter for the node code.
    *

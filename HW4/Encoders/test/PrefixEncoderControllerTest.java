@@ -1,9 +1,10 @@
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class PrefixEncoderControllerTest {
@@ -11,11 +12,11 @@ public class PrefixEncoderControllerTest {
   public void testConstructor() {
     String directory = System.getProperty("user.dir");
     String filepath = directory + File.separator + "test.txt";
-    try(FileReader reader = new FileReader(filepath)) {
-
+    try {
+      String contents = Files.readString(Paths.get(filepath));
+      assertEquals(1,1);
     } catch (Exception e) {
-      fail(e.getMessage());
+      fail("Valid file read should not have failed");
     }
-//    fail();
   }
 }

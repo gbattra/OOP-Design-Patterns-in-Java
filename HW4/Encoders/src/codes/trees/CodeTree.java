@@ -1,6 +1,6 @@
 package codes.trees;
 
-import codes.utils.Mappable;
+import codes.utils.Mapper;
 
 /**
  * Interface for a code tree. Maps codes (of type K) to symbols (of type S).
@@ -8,7 +8,7 @@ import codes.utils.Mappable;
  * @param <K> the type of the codes
  * @param <S> the type of the symbols
  */
-public interface CodeTree<K, S> extends Mappable<K, S> {
+public interface CodeTree<K, S> extends Mapper<K, S> {
   /**
    * Encodes a sequence of symbols into a sequence of encodings.
    *

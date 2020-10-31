@@ -13,49 +13,25 @@ import codes.trees.PrefixCodeLeaf;
 import codes.trees.PrefixCodeTree;
 import codes.utils.Frequency;
 import codes.utils.FrequencyEntry;
+import codes.utils.FrequencyHelper;
 import codes.utils.StringHelper;
 
 public abstract class AbstractPrefixEncoder {
-  protected final Map<String, Integer> symbolsToFrequencyTable(
-          String symbols) throws IllegalArgumentException {
-    if (symbols.isEmpty()) {
-      throw new IllegalArgumentException("Cannot generate frequency table. Symbol string empty.");
-    }
-
-    Map<String, Integer> frequencyTable = new HashMap<>();
-    for (char c : symbols.toCharArray()) {
-      frequencyTable.merge(String.valueOf(c), 1, Integer::sum);
-    }
-
-    return frequencyTable;
-  }
-
-  private Stack<Frequency<CodeNode<String, String>>> frequencyTableToNodeStack(
-          Map<String, Integer> freqTable) {
-    Stack<Frequency<CodeNode<String, String>>> nodes = new Stack<>();
-    for (Map.Entry<String, Integer> entry : freqTable.entrySet()) {
-      Frequency<CodeNode<String, String>> item = new FrequencyEntry<>(
-              entry.getValue(),
-              new PrefixCodeLeaf(entry.getKey()));
-      nodes.add(item);
-    }
-    nodes.sort(this::compareFrequencyEntries);
-
-    return nodes;
-  }
-
-  protected final CodeTree<String, String> frequencyTableToCodeTree(
-          Map<String, Integer> freqTable,
+  protected final CodeTree<String, String> symbolsToCodeTree(
+          String sequence,
           String codes) throws IllegalArgumentException {
-    if (freqTable.isEmpty()) {
-      throw new IllegalArgumentException("Cannot generate code tree. Frequency table empty.");
+    if (sequence == null || sequence.isEmpty()) {
+      throw new IllegalArgumentException("Cannot generate code tree. Sequence empty.");
     }
     if (codes == null || codes.isEmpty()) {
       throw new IllegalArgumentException("Cannot generate code tree. Empty code set.");
     }
 
     codes = StringHelper.distinctCharacters(codes);
-    Stack<Frequency<CodeNode<String, String>>> nodes = this.frequencyTableToNodeStack(freqTable);
+    Stack<Frequency<CodeNode<String, String>>> nodes =
+            FrequencyHelper.toStack(
+                    sequence.split(""), (c) -> new PrefixCodeLeaf(c));
+    nodes.sort(this::compareFrequencyEntries);
 
     while (nodes.size() > 1) {
       int frequency = 0;

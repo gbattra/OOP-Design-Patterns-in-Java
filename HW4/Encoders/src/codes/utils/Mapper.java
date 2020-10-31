@@ -8,7 +8,7 @@ import java.util.Map;
  * @param <K> the key type
  * @param <V> the value type
  */
-public interface Mappable<K, V> {
+public interface Mapper<K, V> {
   /**
    * Converts the object to a map.
    *

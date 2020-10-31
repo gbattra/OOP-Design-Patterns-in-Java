@@ -17,8 +17,7 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
               "Insufficient number of codes provided. At least 2 codes required.");
     }
 
-    Map<String, Integer> freqTable = this.symbolsToFrequencyTable(symbols);
-    this.tree = this.frequencyTableToCodeTree(freqTable, codes);
+    this.tree = this.symbolsToCodeTree(symbols, codes);
   }
 
   public PrefixEncoder(Map<String, String> map) {
