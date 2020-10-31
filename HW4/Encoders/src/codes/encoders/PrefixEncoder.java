@@ -11,6 +11,10 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
     if (codes == null || codes.isEmpty() || symbols == null || symbols.isEmpty()) {
       throw new IllegalArgumentException("Codes and symbols cannot be empty.");
     }
+    if (codes.length() < 2) {
+      throw new IllegalArgumentException(
+              "Insufficient number of codes provided. At least 2 codes required.");
+    }
 
     Map<String, Integer> freqTable = this.symbolsToFrequencyTable(symbols);
     this.tree = this.frequencyTableToCodeTree(freqTable, codes);

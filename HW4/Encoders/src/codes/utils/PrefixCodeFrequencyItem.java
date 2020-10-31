@@ -24,10 +24,10 @@ public class PrefixCodeFrequencyItem implements FrequencyItem<CodeNode<String, S
   @Override
   public int compareTo(FrequencyItem<CodeNode<String, String>> o) {
     if (o.getFrequency() > this.getFrequency()) {
-      return 1;
+      return -1;
     }
     if (o.getFrequency() < this.getFrequency()) {
-      return -1;
+      return 1;
     }
     return o.getNode().getSymbol().compareTo(this.getNode().getSymbol());
   }

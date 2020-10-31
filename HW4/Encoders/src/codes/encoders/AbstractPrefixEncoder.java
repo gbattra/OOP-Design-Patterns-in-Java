@@ -2,9 +2,9 @@ package codes.encoders;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import codes.trees.CodeNode;
 import codes.trees.CodeTree;
@@ -13,6 +13,7 @@ import codes.trees.PrefixCodeLeaf;
 import codes.trees.PrefixCodeTree;
 import codes.utils.FrequencyItem;
 import codes.utils.PrefixCodeFrequencyItem;
+import codes.utils.StringHelper;
 
 public abstract class AbstractPrefixEncoder {
   protected final Map<String, Integer> symbolsToFrequencyTable(
@@ -35,14 +36,22 @@ public abstract class AbstractPrefixEncoder {
     if (freqTable.isEmpty()) {
       throw new IllegalArgumentException("Cannot generate code tree. Frequency table empty.");
     }
+    if (codes == null || codes.isEmpty()) {
+      throw new IllegalArgumentException("Cannot generate code tree. Empty code set.");
+    }
 
-    List<FrequencyItem<CodeNode<String, String>>> nodes = this.frequencyTableToNodeList(freqTable);
+    codes = StringHelper.distinctCharacters(codes);
+
+    Stack<FrequencyItem<CodeNode<String, String>>> nodes = this.frequencyTableToNodeList(freqTable);
     while (nodes.size() > 1) {
       int frequency = 0;
       List<CodeNode<String, String>> children = new ArrayList<>();
-      for (int i = 0; i < codes.length() && i < nodes.size(); i++) {
-        FrequencyItem<CodeNode<String, String>> item = nodes.get(i);
-        nodes.remove(i);
+      for (int i = 0; i < codes.length(); i++) {
+        if (nodes.empty()) {
+          break;
+        }
+
+        FrequencyItem<CodeNode<String, String>> item = nodes.pop();
         frequency += item.getFrequency();
         children.add(item.getNode().setCode(String.valueOf(codes.charAt(i))));
       }
@@ -53,9 +62,9 @@ public abstract class AbstractPrefixEncoder {
     return new PrefixCodeTree(nodes.get(0).getNode());
   }
 
-  private List<FrequencyItem<CodeNode<String, String>>> frequencyTableToNodeList(
+  private Stack<FrequencyItem<CodeNode<String, String>>> frequencyTableToNodeList(
           Map<String, Integer> freqTable) {
-    List<FrequencyItem<CodeNode<String, String>>> nodes = new ArrayList<>();
+    Stack<FrequencyItem<CodeNode<String, String>>> nodes = new Stack<>();
     for (Map.Entry<String, Integer> entry : freqTable.entrySet()) {
       FrequencyItem<CodeNode<String, String>> item = new PrefixCodeFrequencyItem(
               entry.getValue(),
