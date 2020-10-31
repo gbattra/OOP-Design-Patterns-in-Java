@@ -13,6 +13,7 @@ import codes.trees.PrefixCodeGroup;
 import codes.trees.PrefixCodeLeaf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -172,5 +173,16 @@ public class PrefixCodeGroupTest {
     map.put("00", "A");
     map.put("01", "B");
     assertEquals(map, node.toMap());
+  }
+
+  @Test
+  public void testEquals() {
+    CodeNode<String, String> one = new PrefixCodeGroup(this.leafChildren).setCode("1");
+    CodeNode<String, String> two = new PrefixCodeGroup(this.groupChildren).setCode("2");
+    CodeNode<String, String> three = new PrefixCodeGroup(this.leafChildren).setCode("2");
+    CodeNode<String, String> four = new PrefixCodeGroup(this.leafChildren).setCode("1");
+    assertEquals(one, four);
+    assertNotEquals(one, three);
+    assertNotEquals(two, four);
   }
 }

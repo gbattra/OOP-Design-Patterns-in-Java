@@ -7,6 +7,7 @@ import codes.trees.CodeNode;
 import codes.trees.PrefixCodeLeaf;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -96,5 +97,14 @@ public class PrefixCodeLeafTest {
     Map<String, String> map = new HashMap<>();
     map.put("1", "A");
     assertEquals(map, leaf.toMap());
+  }
+
+  @Test
+  public void testEquals() {
+    CodeNode<String, String> one = new PrefixCodeLeaf("A").setCode("1");
+    CodeNode<String, String> two = new PrefixCodeLeaf("B").setCode("1");
+    CodeNode<String, String> three = new PrefixCodeLeaf("B").setCode("1");
+    assertEquals(two, three);
+    assertNotEquals(one, two);
   }
 }

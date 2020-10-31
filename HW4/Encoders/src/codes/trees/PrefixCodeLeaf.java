@@ -3,7 +3,8 @@ package codes.trees;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PrefixCodeLeaf implements CodeNode<String, String> {
+public class PrefixCodeLeaf
+        extends AbstractCodeNode<String, String> implements CodeNode<String, String> {
   private final String code;
   private final String symbol;
 
