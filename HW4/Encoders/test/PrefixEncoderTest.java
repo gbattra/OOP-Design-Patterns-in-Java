@@ -5,8 +5,6 @@ import java.util.Map;
 
 import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
-import codes.trees.CodeTree;
-import codes.trees.PrefixCodeTree;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -41,6 +39,17 @@ public class PrefixEncoderTest {
     } catch (Exception e) {
       fail("Valid constructor with map should not have failed.");
     }
+  }
+
+  @Test
+  public void testToString() {
+    Map<String, String> map = new HashMap<>();
+    map.put("00", "A");
+    map.put("01", "B");
+    map.put("101", "C");
+    Encoder<String, String> encoder = new PrefixEncoder(map);
+    String str = "00,A\n01,B\n101,C\n";
+    assertEquals(str, encoder.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)

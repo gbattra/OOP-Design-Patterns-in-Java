@@ -34,4 +34,15 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
   public String decode(String sequence) throws IllegalArgumentException {
     return this.tree.decode(sequence);
   }
+
+  @Override
+  public String toString() {
+    Map<String, String> map = this.tree.toMap();
+    StringBuilder str = new StringBuilder();
+    for (Map.Entry<String, String> entry : map.entrySet()) {
+      str.append(String.format("%s,%s\n", entry.getKey(), entry.getValue()));
+    }
+
+    return str.toString();
+  }
 }
