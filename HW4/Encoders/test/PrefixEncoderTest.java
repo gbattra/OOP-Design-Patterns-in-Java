@@ -119,7 +119,7 @@ public class PrefixEncoderTest {
   @After
   public void teardown() {
     try {
-      File file = new File(this.filename);
+      File file = new File(this.filename + ".txt");
       boolean success = file.delete();
     } catch (Exception ignored) {
     }

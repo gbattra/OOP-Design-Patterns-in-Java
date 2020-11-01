@@ -90,10 +90,55 @@ public class PrefixEncoderControllerTest {
     }
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidSaveEncoderEmptyFilename() {
+    EncoderController<String, String> controller = new PrefixEncoderController();
+    boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
+    assertTrue(success);
+
+    success = controller.saveEncoder("");
+    fail("Invalid saveEncoder() should have failed.");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidSaveEncoderNoEncoderLoaded() {
+    EncoderController<String, String> controller = new PrefixEncoderController();
+    boolean success = controller.saveEncoder("");
+    fail("Invalid saveEncoder() should have failed.");
+  }
+
+  @Test
+  public void testValidEncode() {
+    try {
+      EncoderController<String, String> controller = new PrefixEncoderController();
+      boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
+      assertTrue(success);
+      controller.encode(this.symbolSequence);
+    } catch (Exception e) {
+      fail("Valid encode() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidEncodeEmptySeq() {
+    EncoderController<String, String> controller = new PrefixEncoderController();
+    boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
+    assertTrue(success);
+    controller.encode("");
+    fail("Invalid encode() should have failed.");
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testInvalidEncodeNoEncoder() {
+    EncoderController<String, String> controller = new PrefixEncoderController();
+    controller.encode(this.symbolSequence);
+    fail("Invalid encode() should have failed.");
+  }
+
   @After
   public void tearDown() {
     try {
-      File file = new File(this.filename);
+      File file = new File(this.filename + ".txt");
       boolean success = file.delete();
     } catch (Exception ignored) {
     }
