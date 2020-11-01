@@ -26,8 +26,8 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
     this.tree = new PrefixCodeTree(map);
   }
 
-  public PrefixEncoder(String filename) throws IOException {
-    this.tree = this.codeTreeFromFile(filename);
+  public PrefixEncoder(String filepath) throws IOException {
+    this.tree = this.codeTreeFromFile(filepath);
   }
 
   @Override

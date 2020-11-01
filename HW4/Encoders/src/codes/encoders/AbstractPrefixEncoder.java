@@ -1,7 +1,5 @@
 package codes.encoders;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,19 +27,21 @@ public abstract class AbstractPrefixEncoder {
   /**
    * Reads the contents of a file into a map, which is used to instantiate a CodeTree.
    *
-   * @param filename the path to the file
+   * @param filepath the path to the file
    * @return the code tree loaded from the file
    */
-  protected final CodeTree<String, String> codeTreeFromFile(String filename) throws IOException {
-    String directory = System.getProperty("user.dir");
-    String filepath = directory + File.separator + filename;
-
+  protected final CodeTree<String, String> codeTreeFromFile(String filepath)
+          throws IOException, IllegalArgumentException {
     String contents = Files.readString(Paths.get(filepath));
-    String[] entries = contents.split("\n");
 
+    String[] entries = contents.split("\n");
     Map<String, String> map = new HashMap<>();
+
     for (String entry : entries) {
       String[] elements = entry.split(",");
+      if (elements.length != 2) {
+        throw new IllegalArgumentException("Contents of file not formatted properly.");
+      }
       map.put(elements[0], elements[1]);
     }
 

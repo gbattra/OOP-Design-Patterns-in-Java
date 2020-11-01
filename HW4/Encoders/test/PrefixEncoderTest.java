@@ -42,6 +42,36 @@ public class PrefixEncoderTest {
     }
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidConstructorEmptyCodes() {
+    Encoder<String, String> encoder = new PrefixEncoder("", this.symbolSequence);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidConstructorEmptySequence() {
+    Encoder<String, String> encoder = new PrefixEncoder(binaryCodes, "");
+  }
+
+  @Test
+  public void testEncodeDecodeBinary() {
+    Encoder<String, String> encoder = new PrefixEncoder(binaryCodes, this.symbolSequence);
+    String encoding = encoder.encode(symbolSequence);
+    for (Character c : encoding.toCharArray()) {
+      assertTrue(binaryCodes.contains(String.valueOf(c)));
+    }
+    assertEquals(symbolSequence, encoder.decode(encoding));
+  }
+
+  @Test
+  public void testEncodeDecodeHex() {
+    Encoder<String, String> encoder = new PrefixEncoder(hexCodes, this.symbolSequence);
+    String encoding = encoder.encode(symbolSequence);
+    for (Character c : encoding.toCharArray()) {
+      assertTrue(hexCodes.contains(String.valueOf(c)));
+    }
+    assertEquals(symbolSequence, encoder.decode(encoding));
+  }
+
   @Test
   public void testSave() {
     Map<String, String> map = new HashMap<>();
@@ -89,35 +119,5 @@ public class PrefixEncoderTest {
     Encoder<String, String> encoder = new PrefixEncoder(map);
     String str = "00,A\n01,B\n101,C\n";
     assertEquals(str, encoder.toString());
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidConstructorEmptyCodes() {
-    Encoder<String, String> encoder = new PrefixEncoder("", this.symbolSequence);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidConstructorEmptySequence() {
-    Encoder<String, String> encoder = new PrefixEncoder(binaryCodes, "");
-  }
-
-  @Test
-  public void testEncodeDecodeBinary() {
-    Encoder<String, String> encoder = new PrefixEncoder(binaryCodes, this.symbolSequence);
-    String encoding = encoder.encode(symbolSequence);
-    for (Character c : encoding.toCharArray()) {
-      assertTrue(binaryCodes.contains(String.valueOf(c)));
-    }
-    assertEquals(symbolSequence, encoder.decode(encoding));
-  }
-
-  @Test
-  public void testEncodeDecodeHex() {
-    Encoder<String, String> encoder = new PrefixEncoder(hexCodes, this.symbolSequence);
-    String encoding = encoder.encode(symbolSequence);
-    for (Character c : encoding.toCharArray()) {
-      assertTrue(hexCodes.contains(String.valueOf(c)));
-    }
-    assertEquals(symbolSequence, encoder.decode(encoding));
   }
 }
