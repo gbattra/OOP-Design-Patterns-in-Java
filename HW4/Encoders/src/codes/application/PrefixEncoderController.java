@@ -65,4 +65,16 @@ public class PrefixEncoderController implements EncoderController<String, String
 
     return this.encoder.encode(sequence);
   }
+
+  @Override
+  public String decode(String sequence) throws IllegalArgumentException, IllegalStateException {
+    if (sequence == null || sequence.isEmpty()) {
+      throw new IllegalArgumentException("Sequence cannot be empty.");
+    }
+    if (this.encoder == null) {
+      throw new IllegalStateException("Encoder not yet loaded for use.");
+    }
+
+    return this.encoder.decode(sequence);
+  }
 }

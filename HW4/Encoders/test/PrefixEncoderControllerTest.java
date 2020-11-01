@@ -8,6 +8,8 @@ import codes.application.EncoderController;
 import codes.application.PrefixEncoderController;
 import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -132,6 +134,37 @@ public class PrefixEncoderControllerTest {
   public void testInvalidEncodeNoEncoder() {
     EncoderController<String, String> controller = new PrefixEncoderController();
     controller.encode(this.symbolSequence);
+    fail("Invalid encode() should have failed.");
+  }
+
+  @Test
+  public void testValidDecode() {
+    try {
+      EncoderController<String, String> controller = new PrefixEncoderController();
+      boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
+      assertTrue(success);
+
+      String encoding = controller.encode(this.symbolSequence);
+      String decoding = controller.decode(encoding);
+      assertEquals(this.symbolSequence, decoding);
+    } catch (Exception e) {
+      fail("Valid encode() should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidDecodeEmptySeq() {
+    EncoderController<String, String> controller = new PrefixEncoderController();
+    boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
+    assertTrue(success);
+    controller.decode("");
+    fail("Invalid encode() should have failed.");
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testInvalidDecodeNoEncoder() {
+    EncoderController<String, String> controller = new PrefixEncoderController();
+    controller.decode(this.symbolSequence);
     fail("Invalid encode() should have failed.");
   }
 

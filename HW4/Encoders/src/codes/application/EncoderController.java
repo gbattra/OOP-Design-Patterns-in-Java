@@ -39,5 +39,12 @@ public interface EncoderController<K, S> {
    * @return the encoding of the sequence
    */
   K encode(S sequence) throws IllegalArgumentException, IllegalStateException;
-//  S decode(K sequence);
+
+  /**
+   * Decodes the provided encoding into the corresponding symbol sequence.
+   *
+   * @param sequence the encoding to decode
+   * @return the decoded sequence
+   */
+  S decode(K sequence) throws IllegalArgumentException, IllegalStateException;
 }
