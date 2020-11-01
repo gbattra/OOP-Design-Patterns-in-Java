@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +39,24 @@ public class PrefixEncoderTest {
       assertEquals("101", encoder.encode("C"));
     } catch (Exception e) {
       fail("Valid constructor with map should not have failed.");
+    }
+  }
+
+  @Test
+  public void testSave() {
+    Map<String, String> map = new HashMap<>();
+    map.put("00", "A");
+    map.put("01", "B");
+    map.put("101", "C");
+    Encoder<String, String> encoder = new PrefixEncoder(map);
+    try {
+      String filename = "test.txt";
+      encoder.save(filename);
+      File file = new File(filename);
+      boolean success = file.delete();
+      assertTrue(success);
+    } catch (Exception e) {
+      fail("Valid save() should not have failed.");
     }
   }
 

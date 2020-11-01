@@ -1,12 +1,14 @@
 package codes.encoders;
 
+import codes.utils.Savable;
+
 /**
  * An encoder encodes symbols of type S into encodings of type K.
  *
  * @param <K> the type of the codes
  * @param <S> the type of the symbols
  */
-public interface Encoder<K, S> {
+public interface Encoder<K, S> extends Savable {
   /**
    * Takes a sequence of symbols and encodes it.
    *

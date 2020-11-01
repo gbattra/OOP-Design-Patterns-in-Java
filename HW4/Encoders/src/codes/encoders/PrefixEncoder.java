@@ -1,5 +1,7 @@
 package codes.encoders;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 
 import codes.trees.CodeTree;
@@ -24,6 +26,10 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
     this.tree = new PrefixCodeTree(map);
   }
 
+  public PrefixEncoder(String filename) throws IOException {
+    this.tree = this.codeTreeFromFile(filename);
+  }
+
   @Override
   public String encode(String sequence) throws IllegalArgumentException {
     return this.tree.encode(sequence);
@@ -43,5 +49,13 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
     }
 
     return str.toString();
+  }
+
+  @Override
+  public boolean save(String filepath) throws IOException {
+    FileWriter writer = new FileWriter(filepath);
+    writer.write(this.toString());
+    writer.close();
+    return true;
   }
 }
