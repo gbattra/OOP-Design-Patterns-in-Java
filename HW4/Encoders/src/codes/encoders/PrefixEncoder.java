@@ -53,7 +53,7 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
 
   @Override
   public boolean save(String filename) throws IOException {
-    FileWriter writer = new FileWriter(filename + ".txt");
+    FileWriter writer = new FileWriter(filename);
     writer.write(this.toString());
     writer.close();
     return true;

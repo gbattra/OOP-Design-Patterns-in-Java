@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PrefixEncoderTest {
-  private final String filename = "encoder";
+  private final String filename = "encoder.txt";
   private final String binaryCodes = "01";
   private final String hexCodes = "0123456789ABCDEF";
   private final String symbolSequence =
@@ -119,7 +119,7 @@ public class PrefixEncoderTest {
   @After
   public void teardown() {
     try {
-      File file = new File(this.filename + ".txt");
+      File file = new File(this.filename);
       boolean success = file.delete();
     } catch (Exception ignored) {
     }

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PrefixEncoderControllerTest {
-  private final String filename = "encoder";
+  private final String filename = "encoder.txt";
   private final String hexCodes = "0123456789ABCDEF";
   private final String symbolSequence =
           "this is a symbol sequence with many chars and thus is a suitable sample.";
@@ -171,7 +171,7 @@ public class PrefixEncoderControllerTest {
   @After
   public void tearDown() {
     try {
-      File file = new File(this.filename + ".txt");
+      File file = new File(this.filename);
       boolean success = file.delete();
     } catch (Exception ignored) {
     }

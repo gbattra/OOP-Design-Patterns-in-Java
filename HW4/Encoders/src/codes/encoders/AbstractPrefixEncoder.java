@@ -32,7 +32,7 @@ public abstract class AbstractPrefixEncoder {
    */
   protected final CodeTree<String, String> codeTreeFromFile(String filename)
           throws IOException, IllegalArgumentException {
-    String contents = Files.readString(Paths.get(filename + ".txt"));
+    String contents = Files.readString(Paths.get(filename));
 
     String[] entries = contents.split("\n");
     Map<String, String> map = new HashMap<>();
