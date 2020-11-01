@@ -151,7 +151,7 @@ public class PrefixCodeGroup
   @Override
   public Map<String, String> toMap(Map<String, String> map, String encoding) {
     for (CodeNode<String, String> child : this.children) {
-      map.putAll(child.toMap(map, encoding + this.code));
+      map.putAll(child.toMap(map, encoding + this.getCode()));
     }
 
     return map;
