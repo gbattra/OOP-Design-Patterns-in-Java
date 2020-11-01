@@ -61,6 +61,26 @@ public class PrefixEncoderTest {
   }
 
   @Test
+  public void testLoadFromFile() {
+    Map<String, String> map = new HashMap<>();
+    map.put("00", "A");
+    map.put("01", "B");
+    map.put("101", "C");
+    Encoder<String, String> encoder = new PrefixEncoder(map);
+    try {
+      String filename = "test.txt";
+      encoder.save(filename);
+      Encoder<String, String> loadedEncoder = new PrefixEncoder(filename);
+      assertEquals(encoder.toString(), loadedEncoder.toString());
+      File file = new File(filename);
+      boolean success = file.delete();
+      assertTrue(success);
+    } catch (Exception e) {
+      fail("Valid save() should not have failed.");
+    }
+  }
+
+  @Test
   public void testToString() {
     Map<String, String> map = new HashMap<>();
     map.put("00", "A");
