@@ -23,7 +23,14 @@ public interface EncoderController<K, S> {
    * @return was the operation successful
    */
   boolean newEncoder(K codes, S symbols);
-//  boolean saveEncoder(String filepath);
+
+  /**
+   * Saves the encoder in use to the specified filepath.
+   *
+   * @param filepath the filepath to save the encoder.
+   * @return was the save successful
+   */
+  boolean saveEncoder(String filepath);
 //  K encode(S sequence);
 //  S decode(K sequence);
 }

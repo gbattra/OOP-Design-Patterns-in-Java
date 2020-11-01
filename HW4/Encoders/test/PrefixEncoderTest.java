@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PrefixEncoderTest {
+  private final String filename = "encoder";
   private final String binaryCodes = "01";
   private final String hexCodes = "0123456789ABCDEF";
   private final String symbolSequence =
@@ -80,10 +82,7 @@ public class PrefixEncoderTest {
     map.put("101", "C");
     Encoder<String, String> encoder = new PrefixEncoder(map);
     try {
-      String filename = "test.txt";
-      encoder.save(filename);
-      File file = new File(filename);
-      boolean success = file.delete();
+      boolean success = encoder.save(this.filename);
       assertTrue(success);
     } catch (Exception e) {
       fail("Valid save() should not have failed.");
@@ -98,13 +97,9 @@ public class PrefixEncoderTest {
     map.put("101", "C");
     Encoder<String, String> encoder = new PrefixEncoder(map);
     try {
-      String filename = "test.txt";
-      encoder.save(filename);
-      Encoder<String, String> loadedEncoder = new PrefixEncoder(filename);
+      encoder.save(this.filename);
+      Encoder<String, String> loadedEncoder = new PrefixEncoder(this.filename);
       assertEquals(encoder.toString(), loadedEncoder.toString());
-      File file = new File(filename);
-      boolean success = file.delete();
-      assertTrue(success);
     } catch (Exception e) {
       fail("Valid save() should not have failed.");
     }
@@ -119,5 +114,14 @@ public class PrefixEncoderTest {
     Encoder<String, String> encoder = new PrefixEncoder(map);
     String str = "00,A\n01,B\n101,C\n";
     assertEquals(str, encoder.toString());
+  }
+
+  @After
+  public void teardown() {
+    try {
+      File file = new File(this.filename);
+      boolean success = file.delete();
+    } catch (Exception ignored) {
+    }
   }
 }

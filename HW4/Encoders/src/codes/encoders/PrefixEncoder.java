@@ -26,8 +26,8 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
     this.tree = new PrefixCodeTree(map);
   }
 
-  public PrefixEncoder(String filepath) throws IOException {
-    this.tree = this.codeTreeFromFile(filepath);
+  public PrefixEncoder(String filename) throws IOException {
+    this.tree = this.codeTreeFromFile(filename);
   }
 
   @Override
@@ -52,8 +52,8 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
   }
 
   @Override
-  public boolean save(String filepath) throws IOException {
-    FileWriter writer = new FileWriter(filepath);
+  public boolean save(String filename) throws IOException {
+    FileWriter writer = new FileWriter(filename + ".txt");
     writer.write(this.toString());
     writer.close();
     return true;

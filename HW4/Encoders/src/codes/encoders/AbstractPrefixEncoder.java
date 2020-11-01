@@ -27,12 +27,12 @@ public abstract class AbstractPrefixEncoder {
   /**
    * Reads the contents of a file into a map, which is used to instantiate a CodeTree.
    *
-   * @param filepath the path to the file
+   * @param filename the path to the file
    * @return the code tree loaded from the file
    */
-  protected final CodeTree<String, String> codeTreeFromFile(String filepath)
+  protected final CodeTree<String, String> codeTreeFromFile(String filename)
           throws IOException, IllegalArgumentException {
-    String contents = Files.readString(Paths.get(filepath));
+    String contents = Files.readString(Paths.get(filename + ".txt"));
 
     String[] entries = contents.split("\n");
     Map<String, String> map = new HashMap<>();

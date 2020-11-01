@@ -9,13 +9,13 @@ public class PrefixEncoderController implements EncoderController<String, String
   private Encoder<String, String> encoder;
 
   @Override
-  public boolean loadEncoder(String filepath) throws IllegalArgumentException {
-    if (filepath == null || filepath.isEmpty()) {
+  public boolean loadEncoder(String filename) throws IllegalArgumentException {
+    if (filename == null || filename.isEmpty()) {
       throw new IllegalArgumentException("Filepath cannot be empty.");
     }
 
     try {
-      this.encoder = new PrefixEncoder(filepath);
+      this.encoder = new PrefixEncoder(filename);
       return true;
     } catch (IOException e) {
       return false;
@@ -30,6 +30,16 @@ public class PrefixEncoderController implements EncoderController<String, String
 
     try {
       this.encoder = new PrefixEncoder(codes, symbols);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  @Override
+  public boolean saveEncoder(String filename) {
+    try {
+      this.encoder.save(filename);
       return true;
     } catch (Exception e) {
       return false;

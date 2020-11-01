@@ -1,32 +1,19 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import codes.application.EncoderController;
 import codes.application.PrefixEncoderController;
 import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
-import codes.trees.CodeNode;
-import codes.trees.CodeTree;
-import codes.trees.PrefixCodeGroup;
-import codes.trees.PrefixCodeLeaf;
-import codes.trees.PrefixCodeTree;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PrefixEncoderControllerTest {
+  private final String filename = "encoder";
   private final String hexCodes = "0123456789ABCDEF";
   private final String symbolSequence =
           "this is a symbol sequence with many chars and thus is a suitable sample.";
@@ -41,15 +28,10 @@ public class PrefixEncoderControllerTest {
   @Test
   public void testValidLoadEncoder() {
     try {
-      String filename = "test.txt";
-      this.encoder.save(filename);
+      this.encoder.save(this.filename);
 
       EncoderController<String, String> controller = new PrefixEncoderController();
-      boolean success = controller.loadEncoder(filename);
-      assertTrue(success);
-
-      File file = new File(filename);
-      success = file.delete();
+      boolean success = controller.loadEncoder(this.filename);
       assertTrue(success);
     } catch (Exception e) {
       fail("Valid load should not have failed.");
@@ -90,7 +72,30 @@ public class PrefixEncoderControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidNewEncoder() {
     EncoderController<String, String> controller = new PrefixEncoderController();
-    boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
+    boolean success = controller.newEncoder("", "");
     fail("Invalid newEncoder() should have failed.");
+  }
+
+  @Test
+  public void testValidSaveEncoder() {
+    try {
+      EncoderController<String, String> controller = new PrefixEncoderController();
+      boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
+      assertTrue(success);
+
+      success = controller.saveEncoder(this.filename);
+      assertTrue(success);
+    } catch (Exception e) {
+      fail("Valid saveEncoder() should not have failed.");
+    }
+  }
+
+  @After
+  public void tearDown() {
+    try {
+      File file = new File(this.filename);
+      boolean success = file.delete();
+    } catch (Exception ignored) {
+    }
   }
 }
