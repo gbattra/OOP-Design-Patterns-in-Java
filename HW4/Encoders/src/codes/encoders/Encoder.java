@@ -1,7 +1,7 @@
 package codes.encoders;
 
-import codes.utils.Loadable;
-import codes.utils.Savable;
+import codes.utils.FileLoadable;
+import codes.utils.FileSavable;
 
 /**
  * An encoder encodes symbols of type S into encodings of type K.
@@ -9,7 +9,7 @@ import codes.utils.Savable;
  * @param <K> the type of the codes
  * @param <S> the type of the symbols
  */
-public interface Encoder<K, S> extends Savable, Loadable<Encoder<K, S>> {
+public interface Encoder<K, S> extends FileSavable, FileLoadable<Encoder<K, S>> {
   /**
    * Takes a sequence of symbols and encodes it.
    *

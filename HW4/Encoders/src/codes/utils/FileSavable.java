@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Interface for an object which can save itself to a file.
  */
-public interface Savable {
+public interface FileSavable {
   /**
    * Saves the instance to a file, presumably in such a way that a new instance could load itself
    * from the contents of the file.

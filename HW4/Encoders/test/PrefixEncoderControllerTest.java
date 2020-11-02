@@ -6,10 +6,9 @@ import java.io.File;
 
 import codes.application.EncoderController;
 import codes.application.PrefixEncoderController;
-import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
-import codes.factories.EncoderFactory;
-import codes.factories.PrefixEncoderFactory;
+import factories.DummyEncoderFactory;
+import mocks.DummyEncoder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -21,23 +20,23 @@ public class PrefixEncoderControllerTest {
   private final String hexCodes = "0123456789ABCDEF";
   private final String symbolSequence =
           "this is a symbol sequence with many chars and thus is a suitable sample.";
-  private final EncoderFactory<String, String> factory = new PrefixEncoderFactory();
 
-  private Encoder<String, String> encoder;
+  private DummyEncoderFactory factory;
+  private StringBuilder log;
 
   @Before
   public void setup() {
-    this.encoder = new PrefixEncoder(hexCodes, symbolSequence);
+    this.log = new StringBuilder();
+    this.factory = new DummyEncoderFactory(this.log);
   }
 
   @Test
   public void testValidLoadEncoder() {
     try {
-      this.encoder.save(this.filename);
-
       EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
       boolean success = controller.loadEncoder(this.filename);
       assertTrue(success);
+      assertEquals(this.filename, this.log.toString());
     } catch (Exception e) {
       fail("Valid load should not have failed.");
     }
@@ -51,24 +50,12 @@ public class PrefixEncoderControllerTest {
   }
 
   @Test
-  public void testInvalidLoadEncoderNoFile() {
-    try {
-      EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
-      boolean success = controller.loadEncoder("file-that-does-not-exist.txt");
-      assertFalse(success);
-    } catch (Exception e) {
-      fail(
-              "Although the file doesn't exist, this should be handled internally" +
-              "and a 'false' boolean should still be returned.");
-    }
-  }
-
-  @Test
   public void testNewEncoder() {
     try {
       EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
+      assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
     } catch (Exception e) {
       fail("Valid newEncoder() should not have failed.");
     }
@@ -87,9 +74,11 @@ public class PrefixEncoderControllerTest {
       EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
+      assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
 
       success = controller.saveEncoder(this.filename);
       assertTrue(success);
+      assertEquals(this.filename, this.log.toString());
     } catch (Exception e) {
       fail("Valid saveEncoder() should not have failed.");
     }
@@ -100,6 +89,7 @@ public class PrefixEncoderControllerTest {
     EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
     boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
     assertTrue(success);
+    assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
 
     success = controller.saveEncoder("");
     fail("Invalid saveEncoder() should have failed.");
@@ -118,7 +108,8 @@ public class PrefixEncoderControllerTest {
       EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
-      controller.encode(this.symbolSequence);
+      String encoding = controller.encode(this.symbolSequence);
+      assertEquals(this.symbolSequence, encoding);
     } catch (Exception e) {
       fail("Valid encode() should not have failed.");
     }
@@ -146,10 +137,10 @@ public class PrefixEncoderControllerTest {
       EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
+      assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
 
-      String encoding = controller.encode(this.symbolSequence);
-      String decoding = controller.decode(encoding);
-      assertEquals(this.symbolSequence, decoding);
+      String decoding = controller.decode(this.hexCodes);
+      assertEquals(this.hexCodes, decoding);
     } catch (Exception e) {
       fail("Valid encode() should not have failed.");
     }
@@ -169,14 +160,5 @@ public class PrefixEncoderControllerTest {
     EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
     controller.decode(this.symbolSequence);
     fail("Invalid encode() should have failed.");
-  }
-
-  @After
-  public void tearDown() {
-    try {
-      File file = new File(this.filename);
-      boolean success = file.delete();
-    } catch (Exception ignored) {
-    }
   }
 }

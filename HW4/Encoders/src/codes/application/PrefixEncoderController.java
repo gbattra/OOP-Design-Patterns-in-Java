@@ -3,7 +3,6 @@ package codes.application;
 import java.io.IOException;
 
 import codes.encoders.Encoder;
-import codes.encoders.PrefixEncoder;
 import codes.factories.EncoderFactory;
 
 public class PrefixEncoderController implements EncoderController<String, String> {
@@ -22,7 +21,7 @@ public class PrefixEncoderController implements EncoderController<String, String
     }
 
     try {
-      this.encoder = factory.load(filename);
+      this.encoder = this.factory.load(filename);
       return true;
     } catch (IOException e) {
       return false;
@@ -36,7 +35,7 @@ public class PrefixEncoderController implements EncoderController<String, String
     }
 
     try {
-      this.encoder = new PrefixEncoder(codes, symbols);
+      this.encoder = this.factory.make(codes, symbols);
       return true;
     } catch (Exception e) {
       return false;

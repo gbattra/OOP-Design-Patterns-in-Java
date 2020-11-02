@@ -5,10 +5,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import codes.application.EncoderController;
+import codes.application.PrefixEncoderController;
 import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -114,6 +117,15 @@ public class PrefixEncoderTest {
     Encoder<String, String> encoder = new PrefixEncoder(map);
     String str = "00,A\n01,B\n101,C\n";
     assertEquals(str, encoder.toString());
+  }
+
+  @Test
+  public void testInvalidLoadEncoderNoFile() {
+    try {
+      Encoder<String, String> encoder = new PrefixEncoder().load("file-not-exists.txt");
+      fail("Invalid load() should have failed.");
+    } catch (Exception ignored) {
+    }
   }
 
   @After
