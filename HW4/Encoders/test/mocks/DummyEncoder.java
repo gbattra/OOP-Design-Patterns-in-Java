@@ -5,7 +5,7 @@ import java.io.IOException;
 import codes.encoders.PrefixEncoder;
 
 public class DummyEncoder extends PrefixEncoder {
-  private StringBuilder log;
+  private final StringBuilder log;
 
   public DummyEncoder(StringBuilder log) {
     this.log = log;

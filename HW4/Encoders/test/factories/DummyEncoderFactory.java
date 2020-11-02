@@ -7,7 +7,7 @@ import codes.factories.EncoderFactory;
 import mocks.DummyEncoder;
 
 public class DummyEncoderFactory implements EncoderFactory<String, String> {
-  private StringBuilder log;
+  private final StringBuilder log;
 
   public DummyEncoderFactory(StringBuilder log) {
     this.log = log;
