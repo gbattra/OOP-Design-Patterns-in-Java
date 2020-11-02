@@ -15,72 +15,37 @@ public class PrefixEncoderController implements EncoderController<String, String
   }
 
   @Override
-  public boolean loadEncoder(String filename) throws IllegalArgumentException {
-    if (filename == null || filename.isEmpty()) {
-      throw new IllegalArgumentException("Filename cannot be empty.");
-    }
-
-    try {
-      this.encoder = this.factory.load(filename);
-      return true;
-    } catch (IOException e) {
-      return false;
-    }
+  public boolean loadEncoder(String filename) throws IllegalArgumentException, IOException {
+    this.encoder = this.factory.load(filename);
+    return true;
   }
 
   @Override
   public boolean newEncoder(String codes, String symbols) throws IllegalArgumentException {
-    if (codes == null || codes.isEmpty() || symbols == null || symbols.isEmpty()) {
-      throw new IllegalArgumentException("Codes and symbols cannot be empty.");
-    }
-
-    try {
-      this.encoder = this.factory.make(codes, symbols);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+    this.encoder = this.factory.make(codes, symbols);
+    return true;
   }
 
   @Override
   public boolean saveEncoder(String filename)
-          throws IllegalArgumentException, IllegalStateException {
-    if (filename == null || filename.isEmpty()) {
-      throw new IllegalArgumentException("Filename cannot be empty.");
-    }
-    if (this.encoder == null) {
-      throw new IllegalStateException("Encoder not yet loaded.");
-    }
-
-    try {
-      this.encoder.save(filename);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+          throws IllegalArgumentException, IllegalStateException, IOException {
+    this.encoder.save(filename);
+    return true;
   }
 
   @Override
   public String encode(String sequence) throws IllegalArgumentException, IllegalStateException {
-    if (sequence == null || sequence.isEmpty()) {
-      throw new IllegalArgumentException("Sequence cannot be empty.");
-    }
     if (this.encoder == null) {
-      throw new IllegalStateException("Encoder not yet loaded for use.");
+      throw new IllegalStateException("Encoder is null.");
     }
-
     return this.encoder.encode(sequence);
   }
 
   @Override
   public String decode(String sequence) throws IllegalArgumentException, IllegalStateException {
-    if (sequence == null || sequence.isEmpty()) {
-      throw new IllegalArgumentException("Sequence cannot be empty.");
-    }
     if (this.encoder == null) {
-      throw new IllegalStateException("Encoder not yet loaded for use.");
+      throw new IllegalStateException("Encoder is null.");
     }
-
     return this.encoder.decode(sequence);
   }
 }

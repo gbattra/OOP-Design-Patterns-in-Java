@@ -40,7 +40,10 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
   }
 
   @Override
-  public boolean save(String filename) throws IOException {
+  public boolean save(String filename) throws IllegalArgumentException, IOException {
+    if (filename == null || filename.isEmpty()) {
+      throw new IllegalArgumentException("Filename cannot be empty.");
+    }
     FileWriter writer = new FileWriter(filename);
     writer.write(this.toString());
     writer.close();

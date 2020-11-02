@@ -1,5 +1,7 @@
 package codes.application;
 
+import java.io.IOException;
+
 /**
  * Interface for an encoder controller. Can load or save an encoder, encode or decode a sequence.
  *
@@ -13,7 +15,7 @@ public interface EncoderController<K, S> {
    * @param filepath the path to the file of the encoder
    * @return was the load successful
    */
-  boolean loadEncoder(String filepath) throws IllegalArgumentException;
+  boolean loadEncoder(String filepath) throws IllegalArgumentException, IOException;
 
   /**
    * Creates a new encoder instance for the controller to work with.
@@ -30,7 +32,7 @@ public interface EncoderController<K, S> {
    * @param filename the filepath to save the encoder.
    * @return was the save successful
    */
-  boolean saveEncoder(String filename) throws IllegalArgumentException, IllegalStateException;
+  boolean saveEncoder(String filename) throws IllegalArgumentException, IllegalStateException, IOException;
 
   /**
    * Encodes the provided sequence using the loaded encoder.

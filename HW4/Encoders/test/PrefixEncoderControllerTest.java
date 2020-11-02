@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import codes.application.EncoderController;
 import codes.application.PrefixEncoderController;
 import factories.DummyEncoderFactory;
@@ -36,13 +38,6 @@ public class PrefixEncoderControllerTest {
     }
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidLoadEncoderEmptyPath() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
-    boolean success = controller.loadEncoder("");
-    fail("Invalid loadEncoder() should have failed.");
-  }
-
   @Test
   public void testNewEncoder() {
     try {
@@ -53,13 +48,6 @@ public class PrefixEncoderControllerTest {
     } catch (Exception e) {
       fail("Valid newEncoder() should not have failed.");
     }
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidNewEncoder() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
-    boolean success = controller.newEncoder("", "");
-    fail("Invalid newEncoder() should have failed.");
   }
 
   @Test
@@ -78,24 +66,6 @@ public class PrefixEncoderControllerTest {
     }
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidSaveEncoderEmptyFilename() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
-    boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
-    assertTrue(success);
-    assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
-
-    success = controller.saveEncoder("");
-    fail("Invalid saveEncoder() should have failed.");
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidSaveEncoderNoEncoderLoaded() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
-    boolean success = controller.saveEncoder("");
-    fail("Invalid saveEncoder() should have failed.");
-  }
-
   @Test
   public void testValidEncode() {
     try {
@@ -107,15 +77,6 @@ public class PrefixEncoderControllerTest {
     } catch (Exception e) {
       fail("Valid encode() should not have failed.");
     }
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidEncodeEmptySeq() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
-    boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
-    assertTrue(success);
-    controller.encode("");
-    fail("Invalid encode() should have failed.");
   }
 
   @Test(expected = IllegalStateException.class)
@@ -138,15 +99,6 @@ public class PrefixEncoderControllerTest {
     } catch (Exception e) {
       fail("Valid encode() should not have failed.");
     }
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testInvalidDecodeEmptySeq() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
-    boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
-    assertTrue(success);
-    controller.decode("");
-    fail("Invalid encode() should have failed.");
   }
 
   @Test(expected = IllegalStateException.class)
