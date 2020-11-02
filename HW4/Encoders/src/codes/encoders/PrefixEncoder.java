@@ -24,12 +24,6 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
   }
 
   @Override
-  public Encoder<String, String> load(String filepath) throws IOException {
-    String contents = Files.readString(Paths.get(filepath));
-    return new PrefixEncoder(contents);
-  }
-
-  @Override
   public String encode(String sequence) throws IllegalArgumentException {
     return this.tree.encode(sequence);
   }
@@ -37,6 +31,12 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
   @Override
   public String decode(String sequence) throws IllegalArgumentException {
     return this.tree.decode(sequence);
+  }
+
+  @Override
+  public Encoder<String, String> load(String filepath) throws IOException {
+    String contents = Files.readString(Paths.get(filepath));
+    return new PrefixEncoder(contents);
   }
 
   @Override
