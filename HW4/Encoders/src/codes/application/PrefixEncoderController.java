@@ -32,8 +32,7 @@ public class PrefixEncoderController implements EncoderController<String, String
     if (this.encoder == null) {
       throw new IllegalStateException("Encoder is not yet loaded.");
     }
-    this.encoder.save(filename);
-    return true;
+    return this.encoder.save(filename);
   }
 
   @Override
