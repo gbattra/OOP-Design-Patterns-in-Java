@@ -16,7 +16,8 @@ public class SaveCommand implements Command<EncoderController<String, String>> {
   @Override
   public void execute(EncoderController<String, String> receiver) throws IOException {
     try {
-      receiver.saveEncoder(this.filepath);
+      boolean success = receiver.saveEncoder(this.filepath);
+      this.out.append(success ? "Encoder saved successfully.\n" : "Unable to save encoder.\n");
     } catch (Exception e) {
       this.out.append(String.format("Failed to save encoder. %s\n", e.getMessage()));
     }

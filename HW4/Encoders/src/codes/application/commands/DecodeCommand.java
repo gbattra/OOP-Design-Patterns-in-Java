@@ -17,7 +17,7 @@ public class DecodeCommand implements Command<EncoderController<String, String>>
   public void execute(EncoderController<String, String> receiver) throws IOException {
     try {
       String decoding = receiver.decode(this.sequence);
-      this.out.append(decoding);
+      this.out.append(decoding).append("\n");
     } catch (Exception e) {
       this.out.append(String.format("Failed to decode sequence. %s\n", e.getMessage()));
     }

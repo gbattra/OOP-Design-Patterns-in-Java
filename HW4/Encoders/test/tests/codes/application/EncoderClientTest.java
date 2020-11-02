@@ -34,7 +34,7 @@ public class  EncoderClientTest {
   @Test
   public void testInvalidCommand() {
     StringBuffer out = new StringBuffer();
-    Readable in = new StringReader("afdadfssa q");
+    Readable in = new StringReader("afdadfssa\nq");
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals(
@@ -48,7 +48,7 @@ public class  EncoderClientTest {
   @Test
   public void testNewEncoder() {
     StringBuffer out = new StringBuffer();
-    Readable in = new StringReader("new 01 abcd q");
+    Readable in = new StringReader("new\n01\nabcd\nq");
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals("new-01-abcd", this.stringBuilder.toString());
@@ -57,7 +57,7 @@ public class  EncoderClientTest {
   @Test
   public void testLoadEncoder() {
     StringBuffer out = new StringBuffer();
-    Readable in = new StringReader("load filepath q");
+    Readable in = new StringReader("load\nfilepath\nq");
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals("load-filepath", this.stringBuilder.toString());
@@ -66,7 +66,7 @@ public class  EncoderClientTest {
   @Test
   public void testSaveEncoder() {
     StringBuffer out = new StringBuffer();
-    Readable in = new StringReader("save filepath q");
+    Readable in = new StringReader("save\nfilepath\nq");
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals("save-filepath", this.stringBuilder.toString());
@@ -75,7 +75,7 @@ public class  EncoderClientTest {
   @Test
   public void testEncode() {
     StringBuffer out = new StringBuffer();
-    Readable in = new StringReader("encode abcd q");
+    Readable in = new StringReader("encode\nabcd\nq");
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals("encode-abcd", this.stringBuilder.toString());
@@ -84,7 +84,7 @@ public class  EncoderClientTest {
   @Test
   public void testDecode() {
     StringBuffer out = new StringBuffer();
-    Readable in = new StringReader("decode 0101 q");
+    Readable in = new StringReader("decode\n0101\nq");
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals("decode-0101", this.stringBuilder.toString());

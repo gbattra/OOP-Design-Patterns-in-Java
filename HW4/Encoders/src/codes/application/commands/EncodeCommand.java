@@ -17,7 +17,7 @@ public class EncodeCommand implements Command<EncoderController<String, String>>
   public void execute(EncoderController<String, String> receiver) throws IOException {
     try {
       String encoding = receiver.encode(this.sequence);
-      this.out.append(encoding);
+      this.out.append(encoding).append("\n");
     } catch (Exception e) {
       this.out.append(String.format("Failed to encode sequence. %s\n", e.getMessage()));
     }

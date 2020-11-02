@@ -16,8 +16,8 @@ public class LoadCommand implements Command<EncoderController<String, String>> {
   @Override
   public void execute(EncoderController<String, String> receiver) throws IOException {
     try {
-      receiver.loadEncoder(this.filepath);
-
+      boolean success = receiver.loadEncoder(this.filepath);
+      this.out.append(success ? "Encoder loaded successfully.\n" : "Unable to load encoder.\n");
     } catch (Exception e) {
       this.out.append(String.format("Failed to load encoder. %s\n", e.getMessage()));
     }

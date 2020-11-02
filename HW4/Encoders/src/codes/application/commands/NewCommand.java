@@ -18,7 +18,8 @@ public class NewCommand implements Command<EncoderController<String, String>> {
   @Override
   public void execute(EncoderController<String, String> receiver) throws IOException {
     try {
-      receiver.newEncoder(this.codes, this.symbols);
+      boolean success = receiver.newEncoder(this.codes, this.symbols);
+      this.out.append(success ? "New encoder created.\n" : "Unable to create encoder.\n");
     } catch (IllegalArgumentException e) {
       this.out.append(String.format("Failed to create new encoder. %s\n", e.getMessage()));
     }

@@ -45,7 +45,7 @@ public class EncoderClient implements Client {
       try {
         this.out.append(
                 "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n");
-        String next = this.scanner.next();
+        String next = this.scanner.nextLine();
         if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
           this.out.append("Quitting...\n");
           break;
@@ -73,10 +73,10 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> newCommand(Scanner scanner) {
     try {
       this.out.append("Enter codes:\n");
-      String codes = scanner.next();
+      String codes = scanner.nextLine();
 
       this.out.append("Enter symbols:\n");
-      String symbols = scanner.next();
+      String symbols = scanner.nextLine();
 
       return new NewCommand(codes, symbols, this.out);
     } catch (IOException e) {
@@ -88,7 +88,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> loadCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
-      String filename = scanner.next();
+      String filename = scanner.nextLine();
 
       return new LoadCommand(filename, this.out);
     } catch (IOException e) {
@@ -100,7 +100,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> saveCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
-      String filename = scanner.next();
+      String filename = scanner.nextLine();
 
       return new SaveCommand(filename, this.out);
     } catch (IOException e) {
@@ -112,7 +112,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> encodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");
-      String sequence = scanner.next();
+      String sequence = scanner.nextLine();
 
       return new EncodeCommand(sequence, this.out);
     } catch (IOException e) {
@@ -124,7 +124,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> decodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");
-      String sequence = scanner.next();
+      String sequence = scanner.nextLine();
 
       return new DecodeCommand(sequence, this.out);
     } catch (IOException e) {
