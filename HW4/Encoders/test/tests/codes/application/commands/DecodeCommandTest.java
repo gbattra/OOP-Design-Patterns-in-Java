@@ -5,7 +5,7 @@ import org.junit.Test;
 import codes.application.EncoderController;
 import codes.application.commands.Command;
 import codes.application.commands.DecodeCommand;
-import factories.DummyController;
+import mocks.DummyController;
 
 import static org.junit.Assert.assertEquals;
 
