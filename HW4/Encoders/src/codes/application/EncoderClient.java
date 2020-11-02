@@ -43,6 +43,7 @@ public class EncoderClient implements Client {
     int status = 1;
     while (this.scanner.hasNext()) {
       try {
+        this.out.append("Enter: 'new', 'load', 'save', 'encode', or 'decode':\n");
         String next = this.scanner.next();
         if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
           this.out.append("Quitting...\n");

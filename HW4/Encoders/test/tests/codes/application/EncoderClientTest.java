@@ -26,7 +26,20 @@ public class  EncoderClientTest {
     Readable in = new StringReader("q");
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
-    assertEquals("Quitting...\n", out.toString());
+    assertEquals(
+            "Enter: 'new', 'load', 'save', 'encode', or 'decode':\n" +
+            "Quitting...\n", out.toString());
+  }
+
+  @Test
+  public void testInvalidCommand() {
+    StringBuffer out = new StringBuffer();
+    Readable in = new StringReader("afdadfssa");
+    EncoderClient client = new EncoderClient(this.controller, in, out);
+    client.run();
+    assertEquals(
+            "Enter: 'new', 'load', 'save', 'encode', or 'decode':\n" +
+            "Command not found. Try again.\n", out.toString());
   }
 
   @Test
@@ -66,7 +79,7 @@ public class  EncoderClientTest {
   }
 
   @Test
-  public void testDencode() {
+  public void testDecode() {
     StringBuffer out = new StringBuffer();
     Readable in = new StringReader("decode 0101 q");
     EncoderClient client = new EncoderClient(this.controller, in, out);
