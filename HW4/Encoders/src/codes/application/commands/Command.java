@@ -1,5 +1,7 @@
 package codes.application.commands;
 
+import java.io.IOException;
+
 /**
  * Interface for a command object. Follows the command design pattern.
  *
@@ -11,5 +13,5 @@ public interface Command<T> {
    *
    * @param receiver the receiver which will be called by the command
    */
-  void execute(T receiver);
+  void execute(T receiver) throws Exception;
 }

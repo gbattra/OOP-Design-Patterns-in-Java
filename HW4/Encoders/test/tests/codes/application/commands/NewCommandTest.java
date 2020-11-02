@@ -8,14 +8,20 @@ import codes.application.commands.NewCommand;
 import mocks.DummyController;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class NewCommandTest {
   @Test
   public void testCommand() {
-    StringBuilder log = new StringBuilder();
-    EncoderController<String, String> controller = new DummyController(log);
-    Command<EncoderController<String, String>> newCmd = new NewCommand("codes", "symbols");
-    newCmd.execute(controller);
-    assertEquals("new-codes-symbols", log.toString());
+    try {
+      StringBuffer out = new StringBuffer();
+      StringBuilder log = new StringBuilder();
+      EncoderController<String, String> controller = new DummyController(log);
+      Command<EncoderController<String, String>> newCmd = new NewCommand("codes", "symbols", out);
+      newCmd.execute(controller);
+      assertEquals("new-codes-symbols", log.toString());
+    } catch (Exception e) {
+      fail("Valid command execution should not have failed.");
+    }
   }
 }

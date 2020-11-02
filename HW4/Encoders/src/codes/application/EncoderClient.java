@@ -41,9 +41,10 @@ public class EncoderClient implements Client {
   @Override
   public int run() {
     int status = 1;
-    while (this.scanner.hasNext()) {
+    while (true) {
       try {
-        this.out.append("Enter: 'new', 'load', 'save', 'encode', or 'decode':\n");
+        this.out.append(
+                "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n");
         String next = this.scanner.next();
         if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
           this.out.append("Quitting...\n");
@@ -77,7 +78,7 @@ public class EncoderClient implements Client {
       this.out.append("Enter symbols:\n");
       String symbols = scanner.next();
 
-      return new NewCommand(codes, symbols);
+      return new NewCommand(codes, symbols, this.out);
     } catch (IOException e) {
       throw new IllegalStateException(
               String.format("Failed to instantiate newCommand. %s", e.getMessage()));
@@ -89,7 +90,7 @@ public class EncoderClient implements Client {
       this.out.append("Enter filename:\n");
       String filename = scanner.next();
 
-      return new LoadCommand(filename);
+      return new LoadCommand(filename, this.out);
     } catch (IOException e) {
       throw new IllegalStateException(
               String.format("Failed to instantiate loadCommand. %s", e.getMessage()));
@@ -101,7 +102,7 @@ public class EncoderClient implements Client {
       this.out.append("Enter filename:\n");
       String filename = scanner.next();
 
-      return new SaveCommand(filename);
+      return new SaveCommand(filename, this.out);
     } catch (IOException e) {
       throw new IllegalStateException(
       String.format("Failed to instantiate saveCommand. %s", e.getMessage()));
@@ -113,7 +114,7 @@ public class EncoderClient implements Client {
       this.out.append("Enter sequence:\n");
       String sequence = scanner.next();
 
-      return new EncodeCommand(sequence);
+      return new EncodeCommand(sequence, this.out);
     } catch (IOException e) {
       throw new IllegalStateException(
       String.format("Failed to instantiate encodeCommand. %s", e.getMessage()));
@@ -125,7 +126,7 @@ public class EncoderClient implements Client {
       this.out.append("Enter sequence:\n");
       String sequence = scanner.next();
 
-      return new DecodeCommand(sequence);
+      return new DecodeCommand(sequence, this.out);
     } catch (IOException e) {
       throw new IllegalStateException(
       String.format("Failed to instantiate decodeCommand. %s", e.getMessage()));
