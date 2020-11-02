@@ -45,6 +45,7 @@ public class EncoderClient implements Client {
       try {
         String next = this.scanner.next();
         if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
+          this.out.append("Quitting...\n");
           break;
         }
 
@@ -70,10 +71,10 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> newCommand(Scanner scanner) {
     try {
       this.out.append("Enter codes:\n");
-      String codes = scanner.nextLine();
+      String codes = scanner.next();
 
       this.out.append("Enter symbols:\n");
-      String symbols = scanner.nextLine();
+      String symbols = scanner.next();
 
       return new NewCommand(codes, symbols);
     } catch (IOException e) {
@@ -85,7 +86,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> loadCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
-      String filename = scanner.nextLine();
+      String filename = scanner.next();
 
       return new LoadCommand(filename);
     } catch (IOException e) {
@@ -97,7 +98,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> saveCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
-      String filename = scanner.nextLine();
+      String filename = scanner.next();
 
       return new SaveCommand(filename);
     } catch (IOException e) {
@@ -109,7 +110,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> encodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");
-      String sequence = scanner.nextLine();
+      String sequence = scanner.next();
 
       return new EncodeCommand(sequence);
     } catch (IOException e) {
@@ -121,7 +122,7 @@ public class EncoderClient implements Client {
   private Command<EncoderController<String, String>> decodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");
-      String sequence = scanner.nextLine();
+      String sequence = scanner.next();
 
       return new DecodeCommand(sequence);
     } catch (IOException e) {
