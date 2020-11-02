@@ -2,13 +2,20 @@ package codes.encoders;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import codes.trees.CodeTree;
+import codes.trees.PrefixCodeGroup;
 import codes.trees.PrefixCodeTree;
 
 public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<String, String> {
   private final CodeTree<String, String> tree;
+
+  public PrefixEncoder() {
+    this.tree = new PrefixCodeTree(new PrefixCodeGroup());
+  }
 
   public PrefixEncoder(String codes, String symbols) throws IllegalArgumentException {
     if (codes == null || codes.isEmpty() || symbols == null || symbols.isEmpty()) {
@@ -26,8 +33,14 @@ public class PrefixEncoder extends AbstractPrefixEncoder implements Encoder<Stri
     this.tree = new PrefixCodeTree(map);
   }
 
-  public PrefixEncoder(String filename) throws IOException {
-    this.tree = this.codeTreeFromFile(filename);
+  private PrefixEncoder(String contents) throws IOException {
+    this.tree = this.codeTreeFromString(contents);
+  }
+
+  @Override
+  public Encoder<String, String> load(String filepath) throws IOException {
+    String contents = Files.readString(Paths.get(filepath));
+    return new PrefixEncoder(contents);
   }
 
   @Override

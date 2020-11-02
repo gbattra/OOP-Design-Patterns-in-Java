@@ -98,7 +98,7 @@ public class PrefixEncoderTest {
     Encoder<String, String> encoder = new PrefixEncoder(map);
     try {
       encoder.save(this.filename);
-      Encoder<String, String> loadedEncoder = new PrefixEncoder(this.filename);
+      Encoder<String, String> loadedEncoder = new PrefixEncoder().load(this.filename);
       assertEquals(encoder.toString(), loadedEncoder.toString());
     } catch (Exception e) {
       fail("Valid save() should not have failed.");

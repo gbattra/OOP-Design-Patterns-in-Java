@@ -1,5 +1,6 @@
 package codes.encoders;
 
+import codes.utils.Loadable;
 import codes.utils.Savable;
 
 /**
@@ -8,7 +9,7 @@ import codes.utils.Savable;
  * @param <K> the type of the codes
  * @param <S> the type of the symbols
  */
-public interface Encoder<K, S> extends Savable {
+public interface Encoder<K, S> extends Savable, Loadable<Encoder<K, S>> {
   /**
    * Takes a sequence of symbols and encodes it.
    *
