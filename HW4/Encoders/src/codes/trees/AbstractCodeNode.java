@@ -2,6 +2,11 @@ package codes.trees;
 
 public abstract class AbstractCodeNode<K, S> implements CodeNode<K, S> {
   @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
+
+  @Override
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;

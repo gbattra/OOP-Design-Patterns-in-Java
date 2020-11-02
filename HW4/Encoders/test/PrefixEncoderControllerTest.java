@@ -1,17 +1,11 @@
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-
 import codes.application.EncoderController;
 import codes.application.PrefixEncoderController;
-import codes.encoders.PrefixEncoder;
 import factories.DummyEncoderFactory;
-import mocks.DummyEncoder;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 

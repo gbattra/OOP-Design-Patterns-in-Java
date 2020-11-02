@@ -1,8 +1,6 @@
 package codes.encoders;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +22,32 @@ import codes.utils.StringHelper;
  * Huffman encoding algorithm.
  */
 public abstract class AbstractPrefixEncoder {
+  protected final CodeTree<String, String> tree;
+
+  public AbstractPrefixEncoder() {
+    this.tree = new PrefixCodeTree(new PrefixCodeGroup());
+  }
+
+  protected AbstractPrefixEncoder(String codes, String symbols) {
+    if (codes == null || codes.isEmpty() || symbols == null || symbols.isEmpty()) {
+      throw new IllegalArgumentException("Codes and symbols cannot be empty.");
+    }
+    if (codes.length() < 2) {
+      throw new IllegalArgumentException(
+              "Insufficient number of codes provided. At least 2 codes required.");
+    }
+
+    this.tree = this.symbolsToCodeTree(symbols, codes);
+  }
+
+  protected AbstractPrefixEncoder(Map<String, String> map) {
+    this.tree = new PrefixCodeTree(map);
+  }
+
+  protected AbstractPrefixEncoder(String contents) throws IOException {
+    this.tree = this.codeTreeFromString(contents);
+  }
+
   /**
    * Reads the contents into a map, which is used to instantiate a CodeTree.
    *
@@ -106,5 +130,35 @@ public abstract class AbstractPrefixEncoder {
       return 1;
     }
     return n1.getValue().getSymbol().compareTo(n2.getValue().getSymbol());
+  }
+
+  @Override
+  public String toString() {
+    Map<String, String> map = this.tree.toMap();
+    StringBuilder str = new StringBuilder();
+    for (Map.Entry<String, String> entry : map.entrySet()) {
+      str.append(String.format("%s,%s\n", entry.getKey(), entry.getValue()));
+    }
+
+    return str.toString();
+  }
+
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (obj instanceof PrefixEncoder) {
+      PrefixEncoder other = (PrefixEncoder) obj;
+      return other.toString().equals(this.toString());
+    }
+
+    return false;
   }
 }

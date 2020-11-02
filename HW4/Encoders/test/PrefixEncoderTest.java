@@ -5,13 +5,11 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import codes.application.EncoderController;
-import codes.application.PrefixEncoderController;
 import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -126,6 +124,19 @@ public class PrefixEncoderTest {
       fail("Invalid load() should have failed.");
     } catch (Exception ignored) {
     }
+  }
+
+  @Test
+  public void testEquals() {
+    Map<String, String> map = new HashMap<>();
+    map.put("00", "A");
+    map.put("01", "B");
+    map.put("101", "C");
+    Encoder<String, String> one = new PrefixEncoder(map);
+    Encoder<String, String> two = new PrefixEncoder(map);
+    Encoder<String, String> three = new PrefixEncoder();
+    assertEquals(one, two);
+    assertNotEquals(one, three);
   }
 
   @After
