@@ -9,8 +9,7 @@ import java.util.stream.Collectors;
 public class PrefixCodeGroup
         extends AbstractCodeNode<String, String> implements CodeNode<String, String> {
   private final String code;
-
-  private List<CodeNode<String, String>> children;
+  private final List<CodeNode<String, String>> children;
 
   public PrefixCodeGroup() {
     this.code = "";

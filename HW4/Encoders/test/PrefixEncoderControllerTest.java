@@ -67,6 +67,16 @@ public class PrefixEncoderControllerTest {
   }
 
   @Test
+  public void testInvalidSaveEncoderNoEncoderLoaded() {
+    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+    try {
+      boolean success = controller.saveEncoder("");
+      fail("Invalid saveEncoder() should have failed.");
+    } catch (Exception ignored) {
+    }
+  }
+
+  @Test
   public void testValidEncode() {
     try {
       EncoderController<String, String> controller = new PrefixEncoderController(this.factory);

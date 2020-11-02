@@ -29,6 +29,9 @@ public class PrefixEncoderController implements EncoderController<String, String
   @Override
   public boolean saveEncoder(String filename)
           throws IllegalArgumentException, IllegalStateException, IOException {
+    if (this.encoder == null) {
+      throw new IllegalStateException("Encoder is not yet loaded.");
+    }
     this.encoder.save(filename);
     return true;
   }
@@ -36,7 +39,7 @@ public class PrefixEncoderController implements EncoderController<String, String
   @Override
   public String encode(String sequence) throws IllegalArgumentException, IllegalStateException {
     if (this.encoder == null) {
-      throw new IllegalStateException("Encoder is null.");
+      throw new IllegalStateException("Encoder is not yet loaded.");
     }
     return this.encoder.encode(sequence);
   }
@@ -44,7 +47,7 @@ public class PrefixEncoderController implements EncoderController<String, String
   @Override
   public String decode(String sequence) throws IllegalArgumentException, IllegalStateException {
     if (this.encoder == null) {
-      throw new IllegalStateException("Encoder is null.");
+      throw new IllegalStateException("Encoder is not yet loaded.");
     }
     return this.encoder.decode(sequence);
   }
