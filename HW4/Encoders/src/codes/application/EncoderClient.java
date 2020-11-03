@@ -42,12 +42,12 @@ public class EncoderClient implements Client {
     this.in = in;
     this.out = out;
     this.scanner = new Scanner(this.in);
-    this.commands =  new HashMap<>() {{
-          put("new", s -> newCommand(s));
-          put("load", s -> loadCommand(s));
-          put("save", s -> saveCommand(s));
-          put("encode", s -> encodeCommand(s));
-          put("decode", s -> decodeCommand(s));
+    this.commands = new HashMap<>() {{
+        put("new", s -> newCommand(s));
+        put("load", s -> loadCommand(s));
+        put("save", s -> saveCommand(s));
+        put("encode", s -> encodeCommand(s));
+        put("decode", s -> decodeCommand(s));
     }};
   }
 
