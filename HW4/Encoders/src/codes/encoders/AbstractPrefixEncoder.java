@@ -67,7 +67,7 @@ public abstract class AbstractPrefixEncoder {
    * @throws IllegalArgumentException if an invalid string is provided
    */
   protected AbstractPrefixEncoder(String contents) throws IllegalArgumentException {
-    this.tree = this.codeTreeFromString(contents);
+    this.tree = this.stringToCodeTree(contents);
   }
 
   /**
@@ -76,7 +76,7 @@ public abstract class AbstractPrefixEncoder {
    * @param contents the path to the file
    * @return the code tree loaded from the file
    */
-  protected final CodeTree<String, String> codeTreeFromString(String contents)
+  private CodeTree<String, String> stringToCodeTree(String contents)
           throws IllegalArgumentException {
     String[] entries = contents.split("\n");
     Map<String, String> map = new HashMap<>();
@@ -101,7 +101,7 @@ public abstract class AbstractPrefixEncoder {
    * @return the code tree of the symbols
    * @throws IllegalArgumentException if sequence or codes is empty.
    */
-  protected final CodeTree<String, String> symbolsToCodeTree(
+  private CodeTree<String, String> symbolsToCodeTree(
           String sequence,
           String codes) throws IllegalArgumentException {
     if (sequence == null || sequence.isEmpty() || codes == null || codes.isEmpty()) {

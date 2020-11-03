@@ -1,4 +1,4 @@
-package demos;
+package codes.demos;
 
 import java.io.InputStreamReader;
 

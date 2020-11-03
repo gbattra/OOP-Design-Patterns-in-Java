@@ -32,6 +32,6 @@ public class DummyEncoder extends PrefixEncoder {
   public boolean save(String filepath) throws IOException {
     this.log.setLength(0);
     this.log.append(filepath);
-    return false;
+    return true;
   }
 }
