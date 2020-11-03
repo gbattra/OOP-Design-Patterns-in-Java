@@ -1,3 +1,5 @@
+package demos;
+
 import java.io.InputStreamReader;
 
 import codes.application.EncoderClient;

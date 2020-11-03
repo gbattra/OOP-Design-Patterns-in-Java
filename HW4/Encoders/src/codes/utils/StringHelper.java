@@ -5,6 +5,13 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class StringHelper {
+  /**
+   * Takes a string and returns another string consisting of the distinct characters in the
+   * original.
+   *
+   * @param str the string to read
+   * @return a string with only distinct characters from original
+   */
   public static String distinctCharacters(String str) {
     Set<Character> chars = new TreeSet<>();
     for (char c : str.toCharArray()) {

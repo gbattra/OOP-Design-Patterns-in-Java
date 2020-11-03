@@ -6,22 +6,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Concrete implementation of a group node in a code tree.
+ */
 public class PrefixCodeGroup
         extends AbstractCodeNode<String, String> implements CodeNode<String, String> {
   private final String code;
   private final List<CodeNode<String, String>> children;
 
+  /**
+   * Empty constructor for a group node. Typically used to start a new tree and serves as the root
+   * of that new tree.
+   */
   public PrefixCodeGroup() {
     this.code = "";
     this.children = new LinkedList<>();
   }
 
-  public PrefixCodeGroup(List<CodeNode<String, String>> children)
-          throws IllegalArgumentException {
+  /**
+   * Constructor of a group node which takes the list of children of the node.
+   *
+   * @param children the children of the group node
+   */
+  public PrefixCodeGroup(List<CodeNode<String, String>> children) {
     this.code = "";
     this.children = children;
   }
 
+  /**
+   * Private constructor which sets the code and the children on the group node.
+   *
+   * @param code the code of the group node
+   * @param children the group node children
+   */
   private PrefixCodeGroup(
           String code,
           List<CodeNode<String, String>> children) {
@@ -72,21 +89,21 @@ public class PrefixCodeGroup
                 .setCode(String.valueOf(code))
                 .add(symbol, encoding.substring(1));
         children.add(group);
-        return this.getCode().isEmpty() ?
-                new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
+        return this.getCode().isEmpty()
+                ? new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
       }
 
       CodeNode<String, String> leaf = new PrefixCodeLeaf(symbol).setCode(String.valueOf(code));
       children.add(leaf);
-      return this.getCode().isEmpty() ?
-              new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
+      return this.getCode().isEmpty()
+              ? new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
     }
 
     CodeNode<String, String> child = filtered.get(0);
     int i = children.indexOf(child);
     children.set(i, child.add(symbol, encoding.substring(1)));
-    return this.getCode().isEmpty() ?
-            new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
+    return this.getCode().isEmpty()
+            ? new PrefixCodeGroup(children) : new PrefixCodeGroup(this.code, children);
   }
 
   @Override
@@ -118,6 +135,7 @@ public class PrefixCodeGroup
         encoding = child.encode(symbol, encoding + this.getCode());
         return encoding;
       } catch (Exception ignored) {
+        // do nothing
       }
     }
 

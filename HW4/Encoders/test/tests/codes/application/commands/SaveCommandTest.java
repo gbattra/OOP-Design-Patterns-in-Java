@@ -10,6 +10,9 @@ import mocks.DummyController;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the SaveCommand.
+ */
 public class SaveCommandTest {
   @Test
   public void testCommand() {

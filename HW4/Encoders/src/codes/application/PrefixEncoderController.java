@@ -5,11 +5,20 @@ import java.io.IOException;
 import codes.encoders.Encoder;
 import codes.factories.EncoderFactory;
 
+/**
+ * Async controller for a PrefixEncoder object. Endpoints allow for creating new encoders,
+ * saving / loading encoders, and encoding / decoding sequences.
+ */
 public class PrefixEncoderController implements EncoderController<String, String> {
   private final EncoderFactory<String, String> factory;
 
   private Encoder<String, String> encoder;
 
+  /**
+   * Constructor for the controller. Takes an encoder factory to support dependency injection.
+   *
+   * @param factory the factory which instantiates the encoder to use
+   */
   public PrefixEncoderController(EncoderFactory<String, String> factory) {
     this.factory = factory;
   }

@@ -4,11 +4,23 @@ import java.io.IOException;
 
 import codes.application.EncoderController;
 
+/**
+ * New command for an encoder client. Tells the controller to create a new encoder
+ * from the provided codes and symbols.
+ */
 public class NewCommand implements Command<EncoderController<String, String>> {
   private final String codes;
   private final String symbols;
   private final Appendable out;
 
+  /**
+   * Constructor for the new command. Takes the codes and symbols for the encoder, as well as
+   * an appendable to write the output of the command to.
+   *
+   * @param codes the codes for the encoder
+   * @param symbols the symbols for the encoder
+   * @param out where the output from the command goes
+   */
   public NewCommand(String codes, String symbols, Appendable out) {
     this.codes = codes;
     this.symbols = symbols;

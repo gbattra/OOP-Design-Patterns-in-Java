@@ -4,9 +4,16 @@ import java.io.IOException;
 
 import codes.application.EncoderController;
 
+/**
+ * A mock controller for testing.
+ */
 public class DummyController implements EncoderController<String, String> {
   private final StringBuilder log;
 
+  /**
+   * Constructor takes a string builder object to populate when its methods are called.
+   * @param log the log to maintain
+   */
   public DummyController(StringBuilder log) {
     this.log = log;
   }

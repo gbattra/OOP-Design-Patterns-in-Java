@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Objects implementing this interface can be loadable given a filepath.
  *
- * @param <T>
+ * @param <T> the type of object loaded from the file
  */
 public interface FileLoadable<T> {
   /**

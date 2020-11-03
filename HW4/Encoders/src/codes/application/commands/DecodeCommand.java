@@ -4,10 +4,20 @@ import java.io.IOException;
 
 import codes.application.EncoderController;
 
+/**
+ * A decode command for an encoder client. Calls the controller to decode a sequence.
+ */
 public class DecodeCommand implements Command<EncoderController<String, String>> {
   private final String sequence;
   private final Appendable out;
 
+  /**
+   * Constructor for the decode command. Takes the sequence to decode and an appendable to
+   * write the decoding to.
+   *
+   * @param sequence the sequence to decode
+   * @param out where to write the decoding
+   */
   public DecodeCommand(String sequence, Appendable out) {
     this.sequence = sequence;
     this.out = out;

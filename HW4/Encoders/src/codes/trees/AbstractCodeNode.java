@@ -1,5 +1,11 @@
 package codes.trees;
 
+/**
+ * Abstract representation of a node in a code tree.
+ *
+ * @param <K> the type of the codes
+ * @param <S> the type of the symbols
+ */
 public abstract class AbstractCodeNode<K, S> implements CodeNode<K, S> {
   @Override
   public int hashCode() {

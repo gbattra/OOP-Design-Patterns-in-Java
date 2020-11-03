@@ -14,6 +14,9 @@ import codes.factories.PrefixEncoderFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the PrefixEncoderFactory.
+ */
 public class PrefixEncoderFactoryTest {
   private final String filename = "encoder.txt";
   private final String hexCodes = "0123456789ABCDEF";

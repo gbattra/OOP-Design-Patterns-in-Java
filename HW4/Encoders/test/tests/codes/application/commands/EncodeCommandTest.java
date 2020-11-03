@@ -10,6 +10,9 @@ import mocks.DummyController;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the EncodeCommand.
+ */
 public class EncodeCommandTest {
   @Test
   public void testCommand() {

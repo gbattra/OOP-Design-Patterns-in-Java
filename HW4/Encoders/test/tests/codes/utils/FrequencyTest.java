@@ -7,6 +7,9 @@ import codes.utils.FrequencyEntry;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for the frequency class.
+ */
 public class FrequencyTest {
   @Test
   public void testConstructor() {

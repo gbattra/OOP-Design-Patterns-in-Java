@@ -1,7 +1,5 @@
 package codes.application.commands;
 
-import java.io.IOException;
-
 /**
  * Interface for a command object. Follows the command design pattern.
  *

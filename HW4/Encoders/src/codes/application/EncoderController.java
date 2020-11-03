@@ -32,7 +32,8 @@ public interface EncoderController<K, S> {
    * @param filename the filepath to save the encoder.
    * @return was the save successful
    */
-  boolean saveEncoder(String filename) throws IllegalArgumentException, IllegalStateException, IOException;
+  boolean saveEncoder(String filename)
+          throws IllegalArgumentException, IllegalStateException, IOException;
 
   /**
    * Encodes the provided sequence using the loaded encoder.

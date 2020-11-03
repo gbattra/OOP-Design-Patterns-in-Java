@@ -6,9 +6,16 @@ import codes.encoders.Encoder;
 import codes.factories.EncoderFactory;
 import mocks.DummyEncoder;
 
+/**
+ * Mock encoder factory for testing.
+ */
 public class DummyEncoderFactory implements EncoderFactory<String, String> {
   private final StringBuilder log;
 
+  /**
+   * Constructor takes a string builder object to populate when its methods are called.
+   * @param log the log to maintain
+   */
   public DummyEncoderFactory(StringBuilder log) {
     this.log = log;
   }

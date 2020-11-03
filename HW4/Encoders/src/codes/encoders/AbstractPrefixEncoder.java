@@ -24,10 +24,19 @@ import codes.utils.StringHelper;
 public abstract class AbstractPrefixEncoder {
   protected final CodeTree<String, String> tree;
 
+  /**
+   * Empty constructor for the encoder. Sets tree to empty tree.
+   */
   public AbstractPrefixEncoder() {
     this.tree = new PrefixCodeTree(new PrefixCodeGroup());
   }
 
+  /**
+   * Standard constructor for a PrefixEncoder. Takes the codes to use and the symbols to encode.
+   *
+   * @param codes the codes to use
+   * @param symbols the symbols to encode
+   */
   protected AbstractPrefixEncoder(String codes, String symbols) {
     if (codes == null || codes.isEmpty() || symbols == null || symbols.isEmpty()) {
       throw new IllegalArgumentException("Codes and symbols cannot be empty.");
@@ -40,11 +49,25 @@ public abstract class AbstractPrefixEncoder {
     this.tree = this.symbolsToCodeTree(symbols, codes);
   }
 
-  protected AbstractPrefixEncoder(Map<String, String> map) {
+  /**
+   * Constructor which takes a map of the code tree and builds the tree from that map.
+   *
+   * @param map the map of the code tree.
+   * @throws IllegalArgumentException if map contains invalid entries
+   * @throws IllegalStateException if map contains duplicate entries
+   */
+  protected AbstractPrefixEncoder(Map<String, String> map)
+          throws IllegalArgumentException, IllegalStateException {
     this.tree = new PrefixCodeTree(map);
   }
 
-  protected AbstractPrefixEncoder(String contents) throws IOException {
+  /**
+   * Constructs the encoder from a string representation of the code tree.
+   *
+   * @param contents the string representation of the code tree
+   * @throws IllegalArgumentException if an invalid string is provided
+   */
+  protected AbstractPrefixEncoder(String contents) throws IllegalArgumentException {
     this.tree = this.codeTreeFromString(contents);
   }
 
@@ -55,7 +78,7 @@ public abstract class AbstractPrefixEncoder {
    * @return the code tree loaded from the file
    */
   protected final CodeTree<String, String> codeTreeFromString(String contents)
-          throws IOException, IllegalArgumentException {
+          throws IllegalArgumentException {
     String[] entries = contents.split("\n");
     Map<String, String> map = new HashMap<>();
 

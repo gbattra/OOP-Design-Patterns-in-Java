@@ -13,6 +13,11 @@ import codes.application.commands.LoadCommand;
 import codes.application.commands.NewCommand;
 import codes.application.commands.SaveCommand;
 
+/**
+ * Client object for an encoder controller. Implements a set of commands which interact with
+ * the controller, allowing the user to create encoders, save or load encoders, and encode/decode
+ * sequences.
+ */
 public class EncoderClient implements Client {
   private final Map<String,
                     Function<Scanner, Command<EncoderController<String, String>>>> commands;
@@ -21,6 +26,14 @@ public class EncoderClient implements Client {
   private final Appendable out;
   private final Scanner scanner;
 
+  /**
+   * Constructor for the encoder client. Takes a controller instance and abstract readable &
+   * appendable objects (could be sys.out or file, etc).
+   *
+   * @param controller the controller which loads and operates the encoder
+   * @param in where the input to the client comes from
+   * @param out where the output from the client goes
+   */
   public EncoderClient(
           EncoderController<String, String> controller,
           Readable in,
@@ -30,11 +43,11 @@ public class EncoderClient implements Client {
     this.out = out;
     this.scanner = new Scanner(this.in);
     this.commands =  new HashMap<>() {{
-      put("new", s -> newCommand(s));
-      put("load", s -> loadCommand(s));
-      put("save", s -> saveCommand(s));
-      put("encode", s -> encodeCommand(s));
-      put("decode", s -> decodeCommand(s));
+          put("new", s -> newCommand(s));
+          put("load", s -> loadCommand(s));
+          put("save", s -> saveCommand(s));
+          put("encode", s -> encodeCommand(s));
+          put("decode", s -> decodeCommand(s));
     }};
   }
 
@@ -70,6 +83,12 @@ public class EncoderClient implements Client {
     return status;
   }
 
+  /**
+   * Instantiates a NewCommand.
+   *
+   * @param scanner the scanner to read inputs from
+   * @return the newCommand instance
+   */
   private Command<EncoderController<String, String>> newCommand(Scanner scanner) {
     try {
       this.out.append("Enter codes:\n");
@@ -85,6 +104,12 @@ public class EncoderClient implements Client {
     }
   }
 
+  /**
+   * Creates a LoadCommand.
+   *
+   * @param scanner the scanner to read inputs from
+   * @return the new LoadCommand instance
+   */
   private Command<EncoderController<String, String>> loadCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
@@ -97,6 +122,12 @@ public class EncoderClient implements Client {
     }
   }
 
+  /**
+   * Creates a SaveCommand.
+   *
+   * @param scanner the scanner to read inputs from
+   * @return the new SaveCommand instance
+   */
   private Command<EncoderController<String, String>> saveCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
@@ -109,6 +140,12 @@ public class EncoderClient implements Client {
     }
   }
 
+  /**
+   * Creates a EncodeCommand.
+   *
+   * @param scanner the scanner to read inputs from
+   * @return the new EncodeCommand instance
+   */
   private Command<EncoderController<String, String>> encodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");
@@ -121,6 +158,12 @@ public class EncoderClient implements Client {
     }
   }
 
+  /**
+   * Creates a DecodeCommand.
+   *
+   * @param scanner the scanner to read inputs from
+   * @return the new DecodeCommand instance
+   */
   private Command<EncoderController<String, String>> decodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");

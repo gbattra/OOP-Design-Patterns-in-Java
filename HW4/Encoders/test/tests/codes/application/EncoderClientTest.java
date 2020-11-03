@@ -11,6 +11,9 @@ import mocks.DummyController;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for the EncoderClient.
+ */
 public class  EncoderClientTest {
   private StringBuilder stringBuilder;
   private EncoderController<String, String> controller;

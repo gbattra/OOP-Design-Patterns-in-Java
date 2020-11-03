@@ -15,6 +15,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the PrefixEncoder.
+ */
 public class PrefixEncoderTest {
   private final String filename = "encoder.txt";
   private final String binaryCodes = "01";

@@ -4,10 +4,20 @@ import java.io.IOException;
 
 import codes.application.EncoderController;
 
+/**
+ * Save command for an encoder client. Saves the encoder to the provided filepath.
+ */
 public class SaveCommand implements Command<EncoderController<String, String>> {
   private final String filepath;
   private final Appendable out;
 
+  /**
+   * Constructor for the save command. Takes the name of the file to save to save to and an
+   * appendable to write the command output.
+   *
+   * @param filepath the name of the file to save to
+   * @param out where to write the command output
+   */
   public SaveCommand(String filepath, Appendable out) {
     this.filepath = filepath;
     this.out = out;

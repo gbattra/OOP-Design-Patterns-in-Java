@@ -11,6 +11,9 @@ import codes.utils.FrequencyHelper;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for the FrequencyHelper.
+ */
 public class FrequencyHelperTest {
   @Test
   public void testToStack() {

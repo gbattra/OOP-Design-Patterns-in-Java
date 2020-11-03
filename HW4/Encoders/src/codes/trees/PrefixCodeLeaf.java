@@ -3,11 +3,20 @@ package codes.trees;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Concrete implementation of a leaf node in a prefix code tree.
+ */
 public class PrefixCodeLeaf
         extends AbstractCodeNode<String, String> implements CodeNode<String, String> {
   private final String code;
   private final String symbol;
 
+  /**
+   * Constructor for the leaf node of a code tree.
+   *
+   * @param symbol the symbol held by this node.
+   * @throws IllegalArgumentException if symbol is empty
+   */
   public PrefixCodeLeaf(String symbol) throws IllegalArgumentException {
     if (symbol == null || symbol.isEmpty()) {
       throw new IllegalArgumentException("Symbol cannot be empty.");
@@ -17,6 +26,13 @@ public class PrefixCodeLeaf
     this.code = "";
   }
 
+  /**
+   * Private constructor which takes the code of the node and the symbol associated with
+   * this node.
+   *
+   * @param code the code of the node
+   * @param symbol the symbol for this node
+   */
   private PrefixCodeLeaf(String code, String symbol) {
     if (symbol == null || symbol.isEmpty()) {
       throw new IllegalArgumentException("Symbol cannot be empty.");

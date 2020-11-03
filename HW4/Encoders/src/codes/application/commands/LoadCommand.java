@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import codes.application.EncoderController;
 
+/**
+ * A load command for an encoder client. Loads an encoder from a file.
+ */
 public class LoadCommand implements Command<EncoderController<String, String>> {
   private final String filepath;
   private final Appendable out;

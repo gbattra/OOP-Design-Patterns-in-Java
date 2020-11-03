@@ -11,6 +11,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the PrefixEncoderController.
+ */
 public class PrefixEncoderControllerTest {
   private final String filename = "encoder.txt";
   private final String hexCodes = "0123456789ABCDEF";

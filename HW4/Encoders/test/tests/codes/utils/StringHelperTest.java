@@ -10,6 +10,9 @@ import codes.utils.StringHelper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Tests for the string helper class.
+ */
 public class StringHelperTest {
   @Test
   public void testDistinctCharacters() {
