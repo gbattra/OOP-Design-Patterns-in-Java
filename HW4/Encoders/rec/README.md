@@ -250,6 +250,21 @@ types `K` and `S`. As a constructor argument, the controller takes an `EncoderFa
 allows for a rudimentary form of dependency injection. This way the same controller may be
 used for interfacing with many types of encoders.
 
+- `boolean loadEncoder(String filepath);`<br>
+Loads an encoder instance from the `String` contents of a file located at the provided path.
+The new instance is then set on the controller itself, and _not_ returned to the caller. This
+protects the encoder model even further, as the user is not directly calling the encoder itself.
+
+- `boolean newEncoder(K codes, S symbols);`<br>
+Instantiates a new encoder using the provided `codes` and `symbols` and sets the new encoder
+to the controller's `encoder` field.
+
+- `boolean saveEncoder(String filename);`<br>
+Saves the encoder by writing its `toString()` oupput to a file with the specified name.
+
+And of course, the controller exposes methods to `encode()` and `decode()` sequences, returning
+the output to the caller.
+
 ### `Client`
 Finally, we have the `EncoderClient`, which serves (unsurprisingly) as the client of the
 encoder controller. The `Client` interface exposes just a single method: `int run();`. This
