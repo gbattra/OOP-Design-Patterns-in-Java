@@ -309,17 +309,63 @@ The command is instantiated with the user-provided `codes` and `symbols`, as wel
 where it may write output.
 
 # Demo
+To run an interactive demo of the `codes` package, right click the `Encoders.jar` file found in
+`/rec`. You will be prompted to enter among the following commands:
 
-// run the JAR
+- `new`<br>
+The new command sets up a brand new encoder instance to interact with. You will be prompted
+to enter the `codes` and `symbols` for the encoder. For example:
+```
+Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):
+> new
+Enter codes:
+> 01
+Enter symbols:
+> abcdefghijklmnopqrstuvwxyz
+New encoder created.
+```
 
-// explain each command
+- `load`<br>
+You may also load an encoder from an existing file. You will be prompted to enter the `filepath`
+where the encoder representation is written.
+```
+Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):
+> load
+Enter filename:
+> encoder.txt
+Failed to load encoder: encoder.txt
+```
+In this case, the load failed as there was no file `ecoder.txt` to be found. Let's fix this by
+saving an existing encoder to a file.
 
-// 'new' walk through
+- `save`<br>
+To save an encoder, first set one up using the `new` command. Once complete, you may enter `save`
+which will prompt you to name the file where the encoder will be written. (**Note:** when this
+command finishes, you may not see the file at the root of the project directory until after you
+_stop_ the running program. I am not sure why this is.) Now there exists a file containing the
+`String` representation of our encoder and we can load it from that file using the `load` command.
 
-// 'save' walk through
-
-// 'load' walk through
-
-// 'encode' walk through
-
-// 'decode' walk through
+- `encode`<br>
+To encode a message, enter `encode`. If an encoder has not yet been loaded, this command will
+not succeed, so be sure to call `new` or `load` before using `encode`. You will be prompted
+to enter the sequence to encode. If you enter a character not present in the encoder's code tree
+the operation will also fail. If the sequence entered is valid, the program will output the
+encoded `String`. For example:
+```
+Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):
+> encode
+Enter sequence:
+> hello, world!
+110011010101101111100110001011001011110000
+```
+- `decode`<br>
+We can prove that this encoding is correct by copying it to the clipboard and entering
+`decode`. Paste the encoding when prompted for the sequence. The program will output the decoded
+sequence.
+```
+Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):
+> decode
+Enter sequence:
+> 110011010101101111100110001011001011110000
+hello, world!
+```
