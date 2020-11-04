@@ -162,7 +162,7 @@ return decoding.toString();
 ```
 
 ### `Encoder`
-The `Encoder` object is most a wrapper around the `CodeTree` but it supports operations outside
+The `Encoder<K, S>` object is most a wrapper around the `CodeTree` but it supports operations outside
 of just `encode()` and `decode()`, such as `load()` and `save()` methods which load the encoder
 from or save it to a file. These extra functionalities are separated into their own interfaces:
 `FileSavable` and `FileLoadable<T>`. I was torn on whether to implement the `load()` and `save()` methods
@@ -244,9 +244,54 @@ Each node that was popped from the stack is collected into a list which is used 
 `children` of a new `PrefixCodeGroup` node. This group node is reinserted back into the stack,
 which is again sorted to ensure proper order during each iteration.
 
-// encoder controller and factory
+### `Controller`
+The `EncoderController` serves as an interface for an encoder model. It too defines generic
+types `K` and `S`. As a constructor argument, the controller takes an `EncoderFactory` which
+allows for a rudimentary form of dependency injection. This way the same controller may be
+used for interfacing with many types of encoders.
 
-// encoder client and commands
+### `Client`
+Finally, we have the `EncoderClient`, which serves (unsurprisingly) as the client of the
+encoder controller. The `Client` interface exposes just a single method: `int run();`. This
+spins up the client, which loops infinitely, reading user input and executing commands corresponding
+to those inputs. The `int` response value indicates to the driver running the client whether
+the run was successful (`1`) or failed (`0`).
+
+I chose to implement the Command Pattern here. So for each controller method, there exists
+a `Command<T>` where `T` is `EncoderController`. The client maintains a map of inputs to
+the corresponding command. For example, if a user wanted to create a new encoder, they would
+enter _"new"_, which maps to a function: `s -> new NewCommand(s)`, returning a new instance
+of the `NewCommand` object. The client, once it has retrieved this command instance, blindly
+executes the `execute(T receiver)` method, passing in its `controller` field as `T`.
+```
+Function<Scanner, Command<EncoderController<String, String>>> entry =
+                commands.getOrDefault(next, null);
+
+Command<EncoderController<String, String>> cmd = entry.apply(this.scanner);
+cmd.execute(this.controller);
+```
+
+Below is a look inside that command class:
+
+```
+public NewCommand(String codes, String symbols, Appendable out) {
+    this.codes = codes;
+    this.symbols = symbols;
+    this.out = out;
+}
+
+@Override
+public void execute(EncoderController<String, String> receiver) throws IOException {
+    try {
+      boolean success = receiver.newEncoder(this.codes, this.symbols);
+      this.out.append(success ? "New encoder created.\n" : "Unable to create encoder.\n");
+    } catch (IllegalArgumentException e) {
+      this.out.append(String.format("Failed to create new encoder. %s\n", e.getMessage()));
+    }
+}
+```
+The command is instantiated with the user-provided `codes` and `symbols`, as well as an `Appendable`
+where it may write output.
 
 # Demo
 
