@@ -1,8 +1,9 @@
-package codes.factories;
+package codes.encoders;
 
 import java.io.IOException;
 
 import codes.encoders.Encoder;
+import codes.encoders.EncoderFactory;
 import codes.encoders.PrefixEncoder;
 
 /**

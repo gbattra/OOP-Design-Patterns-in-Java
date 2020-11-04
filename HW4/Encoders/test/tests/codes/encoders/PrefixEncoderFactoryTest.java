@@ -1,4 +1,4 @@
-package tests.codes.factories;
+package tests.codes.encoders;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,8 +8,8 @@ import java.io.File;
 
 import codes.encoders.Encoder;
 import codes.encoders.PrefixEncoder;
-import codes.factories.EncoderFactory;
-import codes.factories.PrefixEncoderFactory;
+import codes.encoders.EncoderFactory;
+import codes.encoders.PrefixEncoderFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

@@ -1,4 +1,4 @@
-package codes.factories;
+package codes.encoders;
 
 import java.io.IOException;
 

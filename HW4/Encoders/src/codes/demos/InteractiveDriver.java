@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 import codes.application.EncoderClient;
 import codes.application.EncoderController;
 import codes.application.PrefixEncoderController;
-import codes.factories.EncoderFactory;
-import codes.factories.PrefixEncoderFactory;
+import codes.encoders.EncoderFactory;
+import codes.encoders.PrefixEncoderFactory;
 
 /**
  * Driver class which runs an encoder client. Takes user inputs and runs commands via an

@@ -3,7 +3,7 @@ package factories;
 import java.io.IOException;
 
 import codes.encoders.Encoder;
-import codes.factories.EncoderFactory;
+import codes.encoders.EncoderFactory;
 import mocks.DummyEncoder;
 
 /**

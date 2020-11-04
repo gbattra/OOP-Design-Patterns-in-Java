@@ -3,7 +3,7 @@ package codes.application;
 import java.io.IOException;
 
 import codes.encoders.Encoder;
-import codes.factories.EncoderFactory;
+import codes.encoders.EncoderFactory;
 
 /**
  * Async controller for a PrefixEncoder object. Endpoints allow for creating new encoders,
