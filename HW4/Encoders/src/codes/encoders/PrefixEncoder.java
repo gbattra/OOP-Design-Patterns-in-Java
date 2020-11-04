@@ -155,21 +155,21 @@ public class PrefixEncoder implements Encoder<String, String> {
    * Takes a String sequence of symbols and the code set to encode them with. Returns a code tree
    * of each symbol's encoding.
    *
-   * @param sequence the sequence of symbols for which to build encodings.
+   * @param symbols the sequence of symbols for which to build encodings.
    * @param codes the code set to use for encoding
    * @return the code tree of the symbols
    * @throws IllegalArgumentException if sequence or codes is empty.
    */
   private CodeTree<String, String> symbolsToCodeTree(
-          String sequence,
+          String symbols,
           String codes) throws IllegalArgumentException {
-    if (sequence == null || sequence.isEmpty() || codes == null || codes.isEmpty()) {
+    if (symbols == null || symbols.isEmpty() || codes == null || codes.isEmpty()) {
       throw new IllegalArgumentException("Cannot generate code tree. Empty sequence or code set.");
     }
 
     codes = StringHelper.distinctCharacters(codes);
     Stack<Frequency<CodeNode<String, String>>> nodes =
-            FrequencyHelper.toStack(sequence.split(""), (c) -> new PrefixCodeLeaf(c));
+            FrequencyHelper.toStack(symbols.split(""), (c) -> new PrefixCodeLeaf(c));
     nodes.sort(this::compareFrequencies);
 
     while (nodes.size() > 1) {

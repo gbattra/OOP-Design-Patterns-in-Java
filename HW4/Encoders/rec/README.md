@@ -113,7 +113,9 @@ a full sentence) and returns just the very next symbol in the sequence.
 - `Map<K, S> toMap(Map<K, S> map, K encoding);` <br>
 
 Returns a map of each code->symbol mapping with the encodings furthest left in the tree on
-top of the map and the furthest right on bottom. Uses a helper method which has an
+top of the map and the furthest right on bottom. This map is used by the `toString()` override
+which puts each entry on a new line. This map can be used as the constructor argument to another
+`CodeNode`, which will build the tree from that map using the `add()` method. Uses a helper method which has an
 accumulator `map` that leaf nodes add to:
 ```
 public Map<String, String> toMap(Map<String, String> map, String encoding) {
@@ -122,11 +124,125 @@ public Map<String, String> toMap(Map<String, String> map, String encoding) {
 }
 ```
 
-// nodes and the code tree ADT
+### `CodeTree`
+The `CodeTree` object acts as an ADT around the `root` node of the tree itself. This ADT
+protects the state of the tree once it has been built. It does this by only exposing three methods
+to the user: `encode()`, `decode()`, and `toMap()`.
+- `K encode(S sequence);`<br>
+A wrapper around the `root` node's `encode()` method. The implementation of this method loops
+through the sequence one character at a time, encoding it and appending that encoding onto the\
+output `K`.
+```
+StringBuilder encoding = new StringBuilder();
+while (!sequence.isEmpty()) {
+  encoding.append(this.root.encode(sequence.substring(0, 1)));
+  sequence = sequence.substring(1);
+}
 
-// encoder model
-    - explain the 'load' and 'save' functionality
-    - and why you chose to make those model methods vs. external operations
+return encoding.toString();
+```
+
+- `S decode(K sequence);`<br>
+A wrapper around the `root` node's `next()` method. The implementation of this method is
+similar to encode, however, there are two steps: first, get the next symbol in the sequence,
+then encode that symbol again and subtract the size of that encoding from the front of the
+sequence before continuing the loop.
+
+```
+StringBuilder decoding = new StringBuilder();
+while (!sequence.isEmpty()) {
+  String next = this.root.next(sequence);
+  decoding.append(next);
+
+  String encoding = this.encode(next);
+  sequence = sequence.substring(encoding.length());
+}
+
+return decoding.toString();
+```
+
+### `Encoder`
+The `Encoder` object is most a wrapper around the `CodeTree` but it supports operations outside
+of just `encode()` and `decode()`, such as `load()` and `save()` methods which load the encoder
+from or save it to a file. These extra functionalities are separated into their own interfaces:
+`FileSavable` and `FileLoadable<T>`. I was torn on whether to implement the `load()` and `save()` methods
+within the model or outside. Ultimately, I decided to keep it in the model as only the model
+should have to know how to save itself. 
+
+The `PrefixEncoder` has three constructors:
+
+- `PrefixEncoder(String codes, String symbols);`<br>
+Builds the encoder using Huffman's algorithm.
+
+- `PrefixEncoder(Map<String, String> map);`<br>
+Builds the model from a map of the code tree.
+
+- `PrefixEncoder(String contents);`<br>
+Builds the encoder from a `String` representation of the code tree. This string matches
+the format: `code,symbol\n` for each code->symbol mapping. This constructor is used when
+loading an encoder from file contents.
+
+- `boolean save(String filename);`<br>
+- `boolean load(String filepath);` <br>
+To save the encoder, the model writes its `toString()` output to a file. As this ouput
+should match the format: `code,symbol\n` for each code->symbol mapping, it can be used
+to load the encoder back into memory.
+
+```
+FileWriter writer = new FileWriter(filename);
+writer.write(this.toString());
+writer.close();
+```
+
+Additionally, the algorithm for building an encoder lives in the `PrefixEncoder`
+implementation of the `Encoder` interface:
+
+```
+codes = StringHelper.distinctCharacters(codes);
+Stack<Frequency<CodeNode<String, String>>> nodes =
+        FrequencyHelper.toStack(symbols.split(""), (c) -> new PrefixCodeLeaf(c));
+nodes.sort(this::compareFrequencies);
+```
+
+Let's walk through this code:
+
+First, we convert the `String` of `symbols` to a "stack" of `Frequency<T>` objects. A
+frequency object is a temporary structure which ties a `symbol` to an `int` representing
+the number of times that symbol appeared in the original sequence. This list is then sorted so that the least-frequent symbols are on top and the most-frequent
+on bottom.
+
+The `Frequency<T>`is able to hold any type as its "value", so to make the tree-building processes smoother,
+I had each frequency object hold the leaf nodes for each symbol. As the algorithm loops,
+these leaf nodes are popped off the stack, joined under a shared group node and that group
+node put back in the list.
+
+```
+while (nodes.size() > 1) {
+  int frequency = 0;
+  List<CodeNode<String, String>> children = new ArrayList<>();
+  for (int i = 0; i < codes.length(); i++) {
+    if (nodes.empty()) {
+      break;
+    }
+
+    Frequency<CodeNode<String, String>> item = nodes.pop();
+    frequency += item.getFrequency();
+    children.add(item.getValue().setCode(String.valueOf(codes.charAt(i))));
+  }
+
+  nodes.add(new FrequencyEntry<>(frequency, new PrefixCodeGroup(children)));
+  nodes.sort(this::compareFrequencies);
+}
+
+return new PrefixCodeTree(nodes.get(0).getValue());
+```
+Until there is only one node in the stack, we iterate over the stack popping off _N_ nodes,
+where _N_ is the number of codes provided. For each node, its code is set as the code
+corresponding with the index used to get the node.
+
+Each node that was popped from the stack is collected into a list which is used as the
+`children` of a new `PrefixCodeGroup` node. This group node is reinserted back into the stack,
+which is again sorted to ensure proper order during each iteration.
 
 // encoder controller and factory
 
