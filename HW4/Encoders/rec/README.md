@@ -276,7 +276,7 @@ to those inputs. The `int` response value indicates to the driver running the cl
 the run was successful (`1`) or failed (`0`).
 
 I chose to implement the Command Pattern here. So for each controller method, there exists
-a `Command<T>` where `T` is `EncoderController`. The client maintains a map of inputs to
+a `Command<T>` where `T` is the `Controller`. The client maintains a map of inputs to
 the corresponding command. For example, if a user wanted to create a new encoder, they would
 enter _"new"_, which maps to a function: `s -> new NewCommand(s)`, returning a new instance
 of the `NewCommand` object. The client, once it has retrieved this command instance, blindly
@@ -352,7 +352,7 @@ command.
 - `encode`<br>
 To encode a message, enter `encode`. If an encoder has not yet been loaded, this command will
 not succeed, so be sure to call `new` or `load` before using `encode`. You will be prompted
-to enter the sequence to encode. If you enter a character not present in the encoder's code tree
+to enter the sequence to encode. If you enter a character not present in the encoder's code tree,
 the operation will also fail. If the sequence entered is valid, the program will output the
 encoded `String`. For example:
 ```
