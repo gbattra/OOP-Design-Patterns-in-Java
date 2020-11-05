@@ -36,7 +36,7 @@ This factory method returns a new instance of the called `CodeNode` object, copy
 its children and symbol, and assigning it the provided `code`. This allows the user to
 instantiate nodes that may not have a code at first (such as `root` nodes), and then later
 add a code without mutation side-effects. This functionality was useful in the implementation
-of Huffman's encoding algorithm, as it allowed for mering root nodes under a common node.
+of Huffman's encoding algorithm, as it allowed for merging root nodes under a common node.
 
 - `CodeNode add(S symbol, K encoding);`<br>
 
@@ -47,17 +47,17 @@ it will add the nodes it needs to reach the destination. If a node already exist
 provided encoding, it will throw an error.
 
 This operation allows the user to build the tree from a `Map<K, S>` or `String` which follows
-the pattern: `code,symbol\n` for each code->symbol mapping, which is explained further
+the pattern: `code,symbol\n` for each code->symbol mapping. This is explained further
 in the Encoder section.
 
 - `S decode(K encoding);`<br>
 
-Below is how the `PrefixCodeGroup` decodes an encoding. It selects the first
+Below is how the `PrefixCodeGroup` decodes an encoding. The node selects the first
 character in the encoding and uses it as the `code` by which to filter its children.
 ```
-char code = encoding.charAt(0);
+String code = sequence.substring(0,1);
 List<CodeNode<String, String>> filtered = this.children.stream()
-        .filter(c -> c.getCode().equals(String.valueOf(code)))
+        .filter(c -> c.getCode().equals(code))
         .collect(Collectors.toList());
 if (filtered.isEmpty()) {
   throw new IllegalArgumentException("No symbol found for provided encoding.");
@@ -101,7 +101,7 @@ throw new IllegalArgumentException("Provided symbol not found in code tree.");
 ```
 Since we can't know upfront where a symbol resides within a code tree without its encoding,
 we must try to traverse each node in the tree until we find it. As this typically throws
-`IllegalArgumentErrors` we must catch and ignore those exceptions, unless we have exhausted
+`IllegalArgumentErrors` we catch and ignore those exceptions, unless we have exhausted
 each potential node in the tree, at which point we throw.
 
 - `S next(K sequence);`<br>
@@ -125,12 +125,12 @@ public Map<String, String> toMap(Map<String, String> map, String encoding) {
 ```
 
 ### `CodeTree`
-The `CodeTree` object acts as an ADT around the `root` node of the tree itself. This ADT
+The `CodeTree` object is a wrapper around the `root` node of the tree itself. This ADT
 protects the state of the tree once it has been built. It does this by only exposing three methods
 to the user: `encode()`, `decode()`, and `toMap()`.
 - `K encode(S sequence);`<br>
 A wrapper around the `root` node's `encode()` method. The implementation of this method loops
-through the sequence one character at a time, encoding it and appending that encoding onto the\
+through the sequence one character at a time, encoding it and appending that encoding onto the
 output `K`.
 ```
 StringBuilder encoding = new StringBuilder();
@@ -144,7 +144,7 @@ return encoding.toString();
 
 - `S decode(K sequence);`<br>
 A wrapper around the `root` node's `next()` method. The implementation of this method is
-similar to encode, however, there are two steps: first, get the next symbol in the sequence,
+similar to encode, however, there are two steps: first, decode the next symbol in the sequence,
 then encode that symbol again and subtract the size of that encoding from the front of the
 sequence before continuing the loop.
 
@@ -162,7 +162,7 @@ return decoding.toString();
 ```
 
 ### `Encoder`
-The `Encoder<K, S>` object is most a wrapper around the `CodeTree` but it supports operations outside
+The `Encoder<K, S>` object is mostly a wrapper around the `CodeTree` but it supports operations outside
 of just `encode()` and `decode()`, such as `load()` and `save()` methods which load the encoder
 from or save it to a file. These extra functionalities are separated into their own interfaces:
 `FileSavable` and `FileLoadable<T>`. I was torn on whether to implement the `load()` and `save()` methods
@@ -182,20 +182,25 @@ Builds the encoder from a `String` representation of the code tree. This string 
 the format: `code,symbol\n` for each code->symbol mapping. This constructor is used when
 loading an encoder from file contents.
 
-- `boolean save(String filename);`<br>
-- `boolean load(String filepath);` <br>
+- `boolean save(String filename);` *&* `boolean load(String filepath);` <br>
 To save the encoder, the model writes its `toString()` output to a file. As this ouput
 should match the format: `code,symbol\n` for each code->symbol mapping, it can be used
 to load the encoder back into memory.
 
 ```
+// save()
 FileWriter writer = new FileWriter(filename);
 writer.write(this.toString());
 writer.close();
+
+// load()
+String contents = Files.readString(Paths.get(filename));
+Encoder<String,String> = new PrefixEncoder(contents);
 ```
 
-Additionally, the algorithm for building an encoder lives in the `PrefixEncoder`
-implementation of the `Encoder` interface:
+Additionally, the algorithm for building a new encoder lives in the `PrefixEncoder`
+implementation of the `Encoder` interface. Let's walk through this code, which is found
+in `PrefixEncoder::symbolsToCodeTree()`:
 
 ```
 codes = StringHelper.distinctCharacters(codes);
@@ -203,8 +208,6 @@ Stack<Frequency<CodeNode<String, String>>> nodes =
         FrequencyHelper.toStack(symbols.split(""), (c) -> new PrefixCodeLeaf(c));
 nodes.sort(this::compareFrequencies);
 ```
-
-Let's walk through this code:
 
 First, we convert the `String` of `symbols` to a "stack" of `Frequency<T>` objects. A
 frequency object is a temporary structure which ties a `symbol` to an `int` representing
@@ -236,9 +239,9 @@ while (nodes.size() > 1) {
 
 return new PrefixCodeTree(nodes.get(0).getValue());
 ```
-Until there is only one node in the stack, we iterate over the stack popping off _N_ nodes,
+While there is more than one node in the stack, it iterates over the stack popping off _N_ nodes,
 where _N_ is the number of codes provided. For each node, its code is set as the code
-corresponding with the index used to get the node.
+corresponding to the index used to get the node.
 
 Each node that was popped from the stack is collected into a list which is used as the
 `children` of a new `PrefixCodeGroup` node. This group node is reinserted back into the stack,
@@ -266,7 +269,7 @@ And of course, the controller exposes methods to `encode()` and `decode()` seque
 the output to the caller.
 
 ### `Client`
-Finally, we have the `EncoderClient`, which serves (unsurprisingly) as the client of the
+Finally, the `EncoderClient` serves (unsurprisingly) as the client of the
 encoder controller. The `Client` interface exposes just a single method: `int run();`. This
 spins up the client, which loops infinitely, reading user input and executing commands corresponding
 to those inputs. The `int` response value indicates to the driver running the client whether
@@ -343,7 +346,8 @@ To save an encoder, first set one up using the `new` command. Once complete, you
 which will prompt you to name the file where the encoder will be written. (**Note:** when this
 command finishes, you may not see the file at the root of the project directory until after you
 _stop_ the running program. I am not sure why this is.) Now there exists a file containing the
-`String` representation of our encoder and we can load it from that file using the `load` command.
+`String` representation of our encoder. You can load the encoder from that file using the `load`
+command.
 
 - `encode`<br>
 To encode a message, enter `encode`. If an encoder has not yet been loaded, this command will
@@ -359,7 +363,7 @@ Enter sequence:
 110011010101101111100110001011001011110000
 ```
 - `decode`<br>
-We can prove that this encoding is correct by copying it to the clipboard and entering
+You can prove that this encoding is correct by copying it to the clipboard and entering
 `decode`. Paste the encoding when prompted for the sequence. The program will output the decoded
 sequence.
 ```

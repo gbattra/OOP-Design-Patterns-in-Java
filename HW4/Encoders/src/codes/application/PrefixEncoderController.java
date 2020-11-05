@@ -9,17 +9,17 @@ import codes.encoders.EncoderFactory;
  * Async controller for a PrefixEncoder object. Endpoints allow for creating new encoders,
  * saving / loading encoders, and encoding / decoding sequences.
  */
-public class PrefixEncoderController implements EncoderController<String, String> {
-  private final EncoderFactory<String, String> factory;
+public class PrefixEncoderController<K, S> implements EncoderController<K, S> {
+  private final EncoderFactory<K, S> factory;
 
-  private Encoder<String, String> encoder;
+  private Encoder<K, S> encoder;
 
   /**
    * Constructor for the controller. Takes an encoder factory to support dependency injection.
    *
    * @param factory the factory which instantiates the encoder to use
    */
-  public PrefixEncoderController(EncoderFactory<String, String> factory) {
+  public PrefixEncoderController(EncoderFactory<K, S> factory) {
     this.factory = factory;
   }
 
@@ -30,7 +30,7 @@ public class PrefixEncoderController implements EncoderController<String, String
   }
 
   @Override
-  public boolean newEncoder(String codes, String symbols) throws IllegalArgumentException {
+  public boolean newEncoder(K codes, S symbols) throws IllegalArgumentException {
     this.encoder = this.factory.make(codes, symbols);
     return true;
   }
@@ -45,7 +45,7 @@ public class PrefixEncoderController implements EncoderController<String, String
   }
 
   @Override
-  public String encode(String sequence) throws IllegalArgumentException, IllegalStateException {
+  public K encode(S sequence) throws IllegalArgumentException, IllegalStateException {
     if (this.encoder == null) {
       throw new IllegalStateException("Encoder is not yet loaded.");
     }
@@ -53,7 +53,7 @@ public class PrefixEncoderController implements EncoderController<String, String
   }
 
   @Override
-  public String decode(String sequence) throws IllegalArgumentException, IllegalStateException {
+  public S decode(K sequence) throws IllegalArgumentException, IllegalStateException {
     if (this.encoder == null) {
       throw new IllegalStateException("Encoder is not yet loaded.");
     }
