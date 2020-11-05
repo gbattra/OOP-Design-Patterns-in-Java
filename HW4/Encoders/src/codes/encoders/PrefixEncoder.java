@@ -25,6 +25,7 @@ import codes.utils.StringHelper;
  */
 public class PrefixEncoder implements Encoder<String, String> {
   protected final CodeTree<String, String> tree;
+
   /**
    * Empty constructor for the encoder. Sets tree to empty tree.
    */

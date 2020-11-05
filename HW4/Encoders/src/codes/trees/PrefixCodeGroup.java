@@ -148,7 +148,7 @@ public class PrefixCodeGroup
       throw new IllegalArgumentException("Sequence does not map to a symbol. Empty sequence.");
     }
 
-    String code = sequence.substring(0,1);
+    String code = sequence.substring(0, 1);
     List<CodeNode<String, String>> filtered = this.children.stream()
             .filter(c -> c.getCode().equals(code))
             .collect(Collectors.toList());
