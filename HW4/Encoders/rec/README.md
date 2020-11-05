@@ -48,7 +48,7 @@ provided encoding, it will throw an error.
 
 This operation allows the user to build the tree from a `Map<K, S>` or `String` which follows
 the pattern: `code,symbol\n` for each code->symbol mapping. This is explained further
-in the Encoder section.
+in the [Encoder](#encoder) section.
 
 - `S decode(K encoding);`<br>
 
@@ -263,7 +263,7 @@ Instantiates a new encoder using the provided `codes` and `symbols` and sets the
 to the controller's `encoder` field.
 
 - `boolean saveEncoder(String filename);`<br>
-Saves the encoder by writing its `toString()` oupput to a file with the specified name.
+Saves the encoder by writing its `toString()` output to a file with the specified name.
 
 And of course, the controller exposes methods to `encode()` and `decode()` sequences, returning
 the output to the caller.
