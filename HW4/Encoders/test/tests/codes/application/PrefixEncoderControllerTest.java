@@ -3,8 +3,8 @@ package tests.codes.application;
 import org.junit.Before;
 import org.junit.Test;
 
+import codes.application.Controller;
 import codes.application.EncoderController;
-import codes.application.PrefixEncoderController;
 import factories.DummyEncoderFactory;
 
 import static org.junit.Assert.assertEquals;
@@ -32,7 +32,7 @@ public class PrefixEncoderControllerTest {
   @Test
   public void testValidLoadEncoder() {
     try {
-      EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+      Controller<String, String> controller = new EncoderController(this.factory);
       boolean success = controller.loadEncoder(this.filename);
       assertTrue(success);
       assertEquals(this.filename, this.log.toString());
@@ -44,7 +44,7 @@ public class PrefixEncoderControllerTest {
   @Test
   public void testNewEncoder() {
     try {
-      EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+      Controller<String, String> controller = new EncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
       assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
@@ -56,7 +56,7 @@ public class PrefixEncoderControllerTest {
   @Test
   public void testValidSaveEncoder() {
     try {
-      EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+      Controller<String, String> controller = new EncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
       assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
@@ -71,7 +71,7 @@ public class PrefixEncoderControllerTest {
 
   @Test
   public void testInvalidSaveEncoderNoEncoderLoaded() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+    Controller<String, String> controller = new EncoderController(this.factory);
     try {
       boolean success = controller.saveEncoder("");
       fail("Invalid saveEncoder() should have failed.");
@@ -82,7 +82,7 @@ public class PrefixEncoderControllerTest {
   @Test
   public void testValidEncode() {
     try {
-      EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+      Controller<String, String> controller = new EncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
       String encoding = controller.encode(this.symbolSequence);
@@ -94,7 +94,7 @@ public class PrefixEncoderControllerTest {
 
   @Test(expected = IllegalStateException.class)
   public void testInvalidEncodeNoEncoder() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+    Controller<String, String> controller = new EncoderController(this.factory);
     controller.encode(this.symbolSequence);
     fail("Invalid encode() should have failed.");
   }
@@ -102,7 +102,7 @@ public class PrefixEncoderControllerTest {
   @Test
   public void testValidDecode() {
     try {
-      EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+      Controller<String, String> controller = new EncoderController(this.factory);
       boolean success = controller.newEncoder(this.hexCodes, this.symbolSequence);
       assertTrue(success);
       assertEquals(this.hexCodes + this.symbolSequence, this.log.toString());
@@ -116,7 +116,7 @@ public class PrefixEncoderControllerTest {
 
   @Test(expected = IllegalStateException.class)
   public void testInvalidDecodeNoEncoder() {
-    EncoderController<String, String> controller = new PrefixEncoderController(this.factory);
+    Controller<String, String> controller = new EncoderController(this.factory);
     controller.decode(this.symbolSequence);
     fail("Invalid encode() should have failed.");
   }

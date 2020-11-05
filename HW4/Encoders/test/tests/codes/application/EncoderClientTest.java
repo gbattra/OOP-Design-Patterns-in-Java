@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.StringReader;
 
 import codes.application.EncoderClient;
-import codes.application.EncoderController;
+import codes.application.Controller;
 import mocks.DummyController;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class  EncoderClientTest {
   private StringBuilder stringBuilder;
-  private EncoderController<String, String> controller;
+  private Controller<String, String> controller;
 
   @Before
   public void setup() {

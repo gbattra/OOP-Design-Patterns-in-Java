@@ -2,7 +2,7 @@ package tests.codes.application.commands;
 
 import org.junit.Test;
 
-import codes.application.EncoderController;
+import codes.application.Controller;
 import codes.application.commands.Command;
 import codes.application.commands.LoadCommand;
 import mocks.DummyController;
@@ -20,8 +20,8 @@ public class LoadCommandTest {
       String filepath = "filepath";
       StringBuffer out = new StringBuffer();
       StringBuilder log = new StringBuilder();
-      EncoderController<String, String> controller = new DummyController(log);
-      Command<EncoderController<String, String>> loadCmd = new LoadCommand(filepath, out);
+      Controller<String, String> controller = new DummyController(log);
+      Command<Controller<String, String>> loadCmd = new LoadCommand(filepath, out);
       loadCmd.execute(controller);
       assertEquals("load-filepath", log.toString());
     } catch (Exception e) {

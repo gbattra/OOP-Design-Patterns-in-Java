@@ -2,52 +2,61 @@ package codes.application;
 
 import java.io.IOException;
 
+import codes.encoders.Encoder;
+import codes.encoders.EncoderFactory;
+
 /**
- * Interface for an encoder controller. Can load or save an encoder, encode or decode a sequence.
- *
- * @param <K> the type of the codes
- * @param <S> the type of the symbols
+ * Async controller for a PrefixEncoder object. Endpoints allow for creating new encoders,
+ * saving / loading encoders, and encoding / decoding sequences.
  */
-public interface EncoderController<K, S> {
-  /**
-   * Loads an encoder from the specified file.
-   *
-   * @param filepath the path to the file of the encoder
-   * @return was the load successful
-   */
-  boolean loadEncoder(String filepath) throws IllegalArgumentException, IOException;
+public class EncoderController<K, S> implements Controller<K, S> {
+  private final EncoderFactory<K, S> factory;
+
+  private Encoder<K, S> encoder;
 
   /**
-   * Creates a new encoder instance for the controller to work with.
+   * Constructor for the controller. Takes an encoder factory to support dependency injection.
    *
-   * @param codes the codes to use for encoding
-   * @param symbols the symbol set to encode
-   * @return was the operation successful
+   * @param factory the factory which instantiates the encoder to use
    */
-  boolean newEncoder(K codes, S symbols) throws IllegalArgumentException;
+  public EncoderController(EncoderFactory<K, S> factory) {
+    this.factory = factory;
+  }
 
-  /**
-   * Saves the encoder in use to the specified filepath.
-   *
-   * @param filename the filepath to save the encoder.
-   * @return was the save successful
-   */
-  boolean saveEncoder(String filename)
-          throws IllegalArgumentException, IllegalStateException, IOException;
+  @Override
+  public boolean loadEncoder(String filename) throws IllegalArgumentException, IOException {
+    this.encoder = this.factory.load(filename);
+    return true;
+  }
 
-  /**
-   * Encodes the provided sequence using the loaded encoder.
-   *
-   * @param sequence the sequence to encode
-   * @return the encoding of the sequence
-   */
-  K encode(S sequence) throws IllegalArgumentException, IllegalStateException;
+  @Override
+  public boolean newEncoder(K codes, S symbols) throws IllegalArgumentException {
+    this.encoder = this.factory.make(codes, symbols);
+    return true;
+  }
 
-  /**
-   * Decodes the provided encoding into the corresponding symbol sequence.
-   *
-   * @param sequence the encoding to decode
-   * @return the decoded sequence
-   */
-  S decode(K sequence) throws IllegalArgumentException, IllegalStateException;
+  @Override
+  public boolean saveEncoder(String filename)
+          throws IllegalArgumentException, IllegalStateException, IOException {
+    if (this.encoder == null) {
+      throw new IllegalStateException("Encoder is not yet loaded.");
+    }
+    return this.encoder.save(filename);
+  }
+
+  @Override
+  public K encode(S sequence) throws IllegalArgumentException, IllegalStateException {
+    if (this.encoder == null) {
+      throw new IllegalStateException("Encoder is not yet loaded.");
+    }
+    return this.encoder.encode(sequence);
+  }
+
+  @Override
+  public S decode(K sequence) throws IllegalArgumentException, IllegalStateException {
+    if (this.encoder == null) {
+      throw new IllegalStateException("Encoder is not yet loaded.");
+    }
+    return this.encoder.decode(sequence);
+  }
 }

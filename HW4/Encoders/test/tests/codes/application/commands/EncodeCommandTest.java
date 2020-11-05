@@ -2,7 +2,7 @@ package tests.codes.application.commands;
 
 import org.junit.Test;
 
-import codes.application.EncoderController;
+import codes.application.Controller;
 import codes.application.commands.Command;
 import codes.application.commands.EncodeCommand;
 import mocks.DummyController;
@@ -20,8 +20,8 @@ public class EncodeCommandTest {
       String sequence = "sequence";
       StringBuffer out = new StringBuffer();
       StringBuilder log = new StringBuilder();
-      EncoderController<String, String> controller = new DummyController(log);
-      Command<EncoderController<String, String>> encodeCmd = new EncodeCommand(sequence, out);
+      Controller<String, String> controller = new DummyController(log);
+      Command<Controller<String, String>> encodeCmd = new EncodeCommand(sequence, out);
       encodeCmd.execute(controller);
       assertEquals("encode-sequence", log.toString());
     } catch (Exception e) {

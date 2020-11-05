@@ -20,8 +20,8 @@ import codes.application.commands.SaveCommand;
  */
 public class EncoderClient implements Client {
   private final Map<String,
-                    Function<Scanner, Command<EncoderController<String, String>>>> commands;
-  private final EncoderController<String, String> controller;
+                    Function<Scanner, Command<Controller<String, String>>>> commands;
+  private final Controller<String, String> controller;
   private final Readable in;
   private final Appendable out;
   private final Scanner scanner;
@@ -35,7 +35,7 @@ public class EncoderClient implements Client {
    * @param out where the output from the client goes
    */
   public EncoderClient(
-          EncoderController<String, String> controller,
+          Controller<String, String> controller,
           Readable in,
           Appendable out) {
     this.controller = controller;
@@ -64,7 +64,7 @@ public class EncoderClient implements Client {
           break;
         }
 
-        Function<Scanner, Command<EncoderController<String, String>>> entry =
+        Function<Scanner, Command<Controller<String, String>>> entry =
                 commands.getOrDefault(next, null);
 
         if (entry == null) {
@@ -72,7 +72,7 @@ public class EncoderClient implements Client {
           continue;
         }
 
-        Command<EncoderController<String, String>> cmd = entry.apply(this.scanner);
+        Command<Controller<String, String>> cmd = entry.apply(this.scanner);
         cmd.execute(this.controller);
       } catch (Exception e) {
         status = 0;
@@ -89,7 +89,7 @@ public class EncoderClient implements Client {
    * @param scanner the scanner to read inputs from
    * @return the newCommand instance
    */
-  private Command<EncoderController<String, String>> newCommand(Scanner scanner) {
+  private Command<Controller<String, String>> newCommand(Scanner scanner) {
     try {
       this.out.append("Enter codes:\n");
       String codes = scanner.nextLine();
@@ -110,7 +110,7 @@ public class EncoderClient implements Client {
    * @param scanner the scanner to read inputs from
    * @return the new LoadCommand instance
    */
-  private Command<EncoderController<String, String>> loadCommand(Scanner scanner) {
+  private Command<Controller<String, String>> loadCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
       String filename = scanner.nextLine();
@@ -128,7 +128,7 @@ public class EncoderClient implements Client {
    * @param scanner the scanner to read inputs from
    * @return the new SaveCommand instance
    */
-  private Command<EncoderController<String, String>> saveCommand(Scanner scanner) {
+  private Command<Controller<String, String>> saveCommand(Scanner scanner) {
     try {
       this.out.append("Enter filename:\n");
       String filename = scanner.nextLine();
@@ -146,7 +146,7 @@ public class EncoderClient implements Client {
    * @param scanner the scanner to read inputs from
    * @return the new EncodeCommand instance
    */
-  private Command<EncoderController<String, String>> encodeCommand(Scanner scanner) {
+  private Command<Controller<String, String>> encodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");
       String sequence = scanner.nextLine();
@@ -164,7 +164,7 @@ public class EncoderClient implements Client {
    * @param scanner the scanner to read inputs from
    * @return the new DecodeCommand instance
    */
-  private Command<EncoderController<String, String>> decodeCommand(Scanner scanner) {
+  private Command<Controller<String, String>> decodeCommand(Scanner scanner) {
     try {
       this.out.append("Enter sequence:\n");
       String sequence = scanner.nextLine();

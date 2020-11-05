@@ -2,13 +2,13 @@ package codes.application.commands;
 
 import java.io.IOException;
 
-import codes.application.EncoderController;
+import codes.application.Controller;
 
 /**
  * New command for an encoder client. Tells the controller to create a new encoder
  * from the provided codes and symbols.
  */
-public class NewCommand implements Command<EncoderController<String, String>> {
+public class NewCommand implements Command<Controller<String, String>> {
   private final String codes;
   private final String symbols;
   private final Appendable out;
@@ -28,7 +28,7 @@ public class NewCommand implements Command<EncoderController<String, String>> {
   }
 
   @Override
-  public void execute(EncoderController<String, String> receiver) throws IOException {
+  public void execute(Controller<String, String> receiver) throws IOException {
     try {
       boolean success = receiver.newEncoder(this.codes, this.symbols);
       this.out.append(success ? "New encoder created.\n" : "Unable to create encoder.\n");

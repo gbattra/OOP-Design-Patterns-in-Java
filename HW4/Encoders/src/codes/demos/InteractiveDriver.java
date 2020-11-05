@@ -3,8 +3,8 @@ package codes.demos;
 import java.io.InputStreamReader;
 
 import codes.application.EncoderClient;
+import codes.application.Controller;
 import codes.application.EncoderController;
-import codes.application.PrefixEncoderController;
 import codes.encoders.EncoderFactory;
 import codes.encoders.PrefixEncoderFactory;
 
@@ -20,7 +20,7 @@ public class InteractiveDriver {
    */
   public static void main(String[] args) {
     EncoderFactory<String, String> factory = new PrefixEncoderFactory();
-    EncoderController<String, String> controller = new PrefixEncoderController(factory);
+    Controller<String, String> controller = new EncoderController(factory);
     Readable reader = new InputStreamReader(System.in);
     EncoderClient client = new EncoderClient(controller, reader, System.out);
     client.run();

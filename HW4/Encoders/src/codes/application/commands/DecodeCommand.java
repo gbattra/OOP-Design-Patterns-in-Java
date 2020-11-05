@@ -2,12 +2,12 @@ package codes.application.commands;
 
 import java.io.IOException;
 
-import codes.application.EncoderController;
+import codes.application.Controller;
 
 /**
  * A decode command for an encoder client. Calls the controller to decode a sequence.
  */
-public class DecodeCommand implements Command<EncoderController<String, String>> {
+public class DecodeCommand implements Command<Controller<String, String>> {
   private final String sequence;
   private final Appendable out;
 
@@ -24,7 +24,7 @@ public class DecodeCommand implements Command<EncoderController<String, String>>
   }
 
   @Override
-  public void execute(EncoderController<String, String> receiver) throws IOException {
+  public void execute(Controller<String, String> receiver) throws IOException {
     try {
       String decoding = receiver.decode(this.sequence);
       this.out.append(decoding).append("\n");

@@ -2,12 +2,12 @@ package mocks;
 
 import java.io.IOException;
 
-import codes.application.EncoderController;
+import codes.application.Controller;
 
 /**
  * A mock controller for testing.
  */
-public class DummyController implements EncoderController<String, String> {
+public class DummyController implements Controller<String, String> {
   private final StringBuilder log;
 
   /**
