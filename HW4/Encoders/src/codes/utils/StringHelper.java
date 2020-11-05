@@ -4,6 +4,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+/**
+ * A helper class for selecting the unique elements from a string.
+ */
 public class StringHelper {
   /**
    * Takes a string and returns another string consisting of the distinct characters in the

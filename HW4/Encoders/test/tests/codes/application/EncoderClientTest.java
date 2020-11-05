@@ -23,6 +23,7 @@ public class  EncoderClientTest {
     this.stringBuilder = new StringBuilder();
     this.controller = new DummyController(this.stringBuilder);
   }
+
   @Test
   public void testQuit() {
     StringBuffer out = new StringBuffer();
@@ -30,8 +31,8 @@ public class  EncoderClientTest {
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals(
-            "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n" +
-            "Quitting...\n", out.toString());
+            "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n"
+            + "Quitting...\n", out.toString());
   }
 
   @Test
@@ -41,10 +42,10 @@ public class  EncoderClientTest {
     EncoderClient client = new EncoderClient(this.controller, in, out);
     client.run();
     assertEquals(
-            "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n" +
-            "Command not found. Try again.\n" +
-            "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n" +
-            "Quitting...\n",
+            "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n"
+            + "Command not found. Try again.\n"
+            + "Enter: 'new', 'load', 'save', 'encode', or 'decode' ('q' or 'quit' to exit):\n"
+            + "Quitting...\n",
             out.toString());
   }
 
