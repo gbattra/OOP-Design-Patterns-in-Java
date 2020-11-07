@@ -50,7 +50,6 @@ public abstract class AbstractMazeConfiguration implements Configuration {
    * @param isWrappingMaze is this maze a wrapping maze?
    * @param isRoomMaze is this maze a room maze?
    * @param targetEdgeCount the desired target edge count after the maze is built
-   *                        (used for Kruskals)
    * @param randomSeed the random seed to use when building the maze
    * @throws IllegalArgumentException when values are negative or out of bounds
    */
@@ -108,7 +107,7 @@ public abstract class AbstractMazeConfiguration implements Configuration {
     Node start = this.generateStart();
     start.grow(this);
     if (this.isRoomMaze) {
-      this.applyKruskals();
+      this.tearDownWalls();
     }
 
     return this;
@@ -234,7 +233,7 @@ public abstract class AbstractMazeConfiguration implements Configuration {
     return this.perfectExitCount == this.exitCount;
   }
 
-  protected void applyKruskals() {
+  protected void tearDownWalls() {
     while (edges.size() > this.targetEdgeCount) {
       int index = this.random.nextInt(edges.size());
       Edge edge = this.edges.get(index);

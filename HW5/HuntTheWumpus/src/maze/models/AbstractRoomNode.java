@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import maze.enums.Direction;
-import maze.helpers.DirectionHelper;
 import maze.interfaces.Configuration;
 import maze.interfaces.Coordinates;
 import maze.interfaces.Node;
@@ -158,12 +157,12 @@ public abstract class AbstractRoomNode implements Node {
         configuration.addEdge(
                 this.getCoordinates(),
                 other.getCoordinates(),
-                DirectionHelper.oppositeOf(exit), exit);
+                Direction.oppositeOf(exit), exit);
       } else {
         // if has not been visited, instantiate new node and grow
         Node room = configuration.generateRoom(c);
         this.setNode(room, exit);
-        room.setNode(this, DirectionHelper.oppositeOf(exit));
+        room.setNode(this, Direction.oppositeOf(exit));
 
         // recursively call new node's grow to continue building out the maze
         configuration = room.grow(configuration);
