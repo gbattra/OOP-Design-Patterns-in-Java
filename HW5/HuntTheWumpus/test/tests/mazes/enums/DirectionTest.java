@@ -1,3 +1,5 @@
+package tests.mazes.enums;
+
 import org.junit.Test;
 
 import maze.enums.Direction;

@@ -1,3 +1,5 @@
+package tests.mazes.models;
+
 import org.junit.Before;
 import org.junit.Test;
 
