@@ -10,6 +10,6 @@ public class AlphabeticalSchedulingStrategy implements SchedulingStrategy {
   }
 
   private int compareAssignments(Assignment one, Assignment two) {
-    return one.toString().compareTo(two.toString());
+    return one.getDescription().compareTo(two.getDescription());
   }
 }

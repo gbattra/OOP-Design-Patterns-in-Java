@@ -19,6 +19,6 @@ public class AssignedSchedulingStrategy implements SchedulingStrategy {
     if (one.getStartDate().compareTo(two.getStartDate()) < 0) {
       return -1;
     }
-    return one.toString().compareTo(two.toString());
+    return one.getDescription().compareTo(two.getDescription());
   }
 }
