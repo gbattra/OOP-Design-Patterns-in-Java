@@ -19,7 +19,7 @@ public class AssignmentList {
 
   /**
    * Add a task to the task list.
-   * 
+   *
    * @param t the task
    */
   public void add(Assignment t) {
@@ -45,6 +45,12 @@ public class AssignmentList {
     return this.ordering;
   }
 
+  /**
+   * Schedules the list of assignments using the provided strategy.
+   *
+   * @param strategy the scheduling strategy to use
+   * @throws IllegalArgumentException if strategy is null
+   */
   public void scheduleAssignments(SchedulingStrategy strategy) throws IllegalArgumentException {
     if (strategy == null) {
       throw new IllegalArgumentException("Provided strategy is null.");
@@ -57,7 +63,7 @@ public class AssignmentList {
     StringBuffer sb = new StringBuffer("Ordered by ");
     sb.append(ordering);
     sb.append("\n");
-    for (int i = 0 ; i < tasks.size() ; i++) {
+    for (int i = 0; i < tasks.size(); i++) {
       sb.append(i + 1);
       sb.append(" -- ");
       sb.append(tasks.get(i));

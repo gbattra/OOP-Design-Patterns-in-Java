@@ -22,7 +22,7 @@ public class Assignment implements Comparable<Assignment> {
   
   /**
    * Constructor for a task that is due now.
-   * 
+   *
    * @param description the description
    */
   public Assignment(String description) {
@@ -54,7 +54,7 @@ public class Assignment implements Comparable<Assignment> {
 
   /**
    * Sets the start date.
-   * 
+   *
    * @param month the month
    * @param day   the day
    * @param year  the year
@@ -69,7 +69,7 @@ public class Assignment implements Comparable<Assignment> {
   
   /**
    * Sets the due date.
-   * 
+   *
    * @param month the month
    * @param day   the day
    * @param year  the year
