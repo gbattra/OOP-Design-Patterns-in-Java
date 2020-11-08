@@ -36,6 +36,15 @@ public class AssignmentList {
     return this.tasks.get(index);
   }
 
+  /**
+   * Getter for the ordering attribute.
+   *
+   * @return the ordering attribute
+   */
+  public String getOrdering() {
+    return this.ordering;
+  }
+
   public void scheduleAssignments(SchedulingStrategy strategy) throws IllegalArgumentException {
     if (strategy == null) {
       throw new IllegalArgumentException("Provided strategy is null.");

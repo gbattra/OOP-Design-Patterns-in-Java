@@ -1,8 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
+import assignments.AlphabeticalSchedulingStrategy;
 import assignments.AssignedSchedulingStrategy;
 import assignments.Assignment;
 import assignments.AssignmentList;
@@ -11,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class AssignedSchedulingStrategyTest {
+public class AlphabeticalSchedulingStrategyTest {
   private Assignment one;
   private Assignment two;
   private Assignment three;
@@ -33,11 +32,11 @@ public class AssignedSchedulingStrategyTest {
     this.assignmentList.add(this.one);
     this.assignmentList.add(this.two);
     this.assignmentList.add(this.three);
-    this.assignmentList.scheduleAssignments(new AssignedSchedulingStrategy());
-    assertEquals("assigned", this.assignmentList.getOrdering());
-    assertEquals(this.assignmentList.get(0), this.three);
-    assertEquals(this.assignmentList.get(1), this.two);
-    assertEquals(this.assignmentList.get(2), this.one);
+    this.assignmentList.scheduleAssignments(new AlphabeticalSchedulingStrategy());
+    assertEquals("alphabetical", this.assignmentList.getOrdering());
+    assertEquals(this.assignmentList.get(0), this.one);
+    assertEquals(this.assignmentList.get(1), this.three);
+    assertEquals(this.assignmentList.get(2), this.two);
   }
 
   @Test(expected = IllegalArgumentException.class)
