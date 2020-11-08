@@ -3,12 +3,14 @@ import org.junit.Test;
 
 import assignments.Assignment;
 import assignments.AssignmentList;
-import assignments.DeadlineSchedulingStrategy;
 import assignments.DifficultySchedulingStrategy;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for difficulty scheduling strategy.
+ */
 public class DifficultySchedulingStrategyTest {
   private Assignment one;
   private Assignment two;

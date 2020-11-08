@@ -1,16 +1,16 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import assignments.AssignedSchedulingStrategy;
 import assignments.Assignment;
 import assignments.AssignmentList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for assigned scheduling strategy.
+ */
 public class AssignedSchedulingStrategyTest {
   private Assignment one;
   private Assignment two;

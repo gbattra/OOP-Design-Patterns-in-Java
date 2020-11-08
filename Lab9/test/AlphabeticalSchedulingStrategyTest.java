@@ -2,14 +2,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import assignments.AlphabeticalSchedulingStrategy;
-import assignments.AssignedSchedulingStrategy;
 import assignments.Assignment;
 import assignments.AssignmentList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for alphabetical scheduling strategy.
+ */
 public class AlphabeticalSchedulingStrategyTest {
   private Assignment one;
   private Assignment two;

@@ -1,7 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import assignments.AlphabeticalSchedulingStrategy;
 import assignments.Assignment;
 import assignments.AssignmentList;
 import assignments.DeadlineSchedulingStrategy;
@@ -9,6 +8,9 @@ import assignments.DeadlineSchedulingStrategy;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for deadline scheduling strategy.
+ */
 public class DeadlineSchedulingStrategyTest {
   private Assignment one;
   private Assignment two;
