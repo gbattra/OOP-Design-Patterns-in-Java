@@ -12,20 +12,19 @@ public enum Direction {
   /**
    * Returns the direction opposite the one provided.
    *
-   * @param direction the reference direction
    * @return the opposite direction
    */
-  public static Direction oppositeOf(Direction direction) {
-    if (direction == Direction.NORTH) {
+  public Direction opposite() {
+    if (this == Direction.NORTH) {
       return Direction.SOUTH;
     }
-    if (direction == Direction.SOUTH) {
+    if (this == Direction.SOUTH) {
       return Direction.NORTH;
     }
-    if (direction == Direction.EAST) {
+    if (this == Direction.EAST) {
       return Direction.WEST;
     }
-    if (direction == Direction.WEST) {
+    if (this == Direction.WEST) {
       return Direction.EAST;
     }
     throw new IllegalArgumentException("Invalid direction provided.");

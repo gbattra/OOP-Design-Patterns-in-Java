@@ -157,12 +157,12 @@ public abstract class AbstractRoomNode implements Node {
         configuration.addEdge(
                 this.getCoordinates(),
                 other.getCoordinates(),
-                Direction.oppositeOf(exit), exit);
+                exit.opposite(), exit);
       } else {
         // if has not been visited, instantiate new node and grow
         Node room = configuration.generateRoom(c);
         this.setNode(room, exit);
-        room.setNode(this, Direction.oppositeOf(exit));
+        room.setNode(this, exit.opposite());
 
         // recursively call new node's grow to continue building out the maze
         configuration = room.grow(configuration);
