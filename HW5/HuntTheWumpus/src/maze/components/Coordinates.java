@@ -3,7 +3,7 @@ package maze.components;
 /**
  * Concrete representation of a coordinate set.
  */
-public class MazeCoordinates implements ICoordinates {
+public class Coordinates implements ICoordinates {
   private final int x;
   private final int y;
 
@@ -14,7 +14,7 @@ public class MazeCoordinates implements ICoordinates {
    * @param y the y coordinate
    * @throws IllegalArgumentException if x or y is negative
    */
-  public MazeCoordinates(int x, int y) throws IllegalArgumentException {
+  public Coordinates(int x, int y) throws IllegalArgumentException {
     if (x < 0 || y < 0) {
       throw new IllegalArgumentException("X and Y coordinates cannot be negative.");
     }

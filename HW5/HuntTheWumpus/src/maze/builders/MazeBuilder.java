@@ -9,19 +9,19 @@ import maze.components.IMaze;
 import maze.components.nodes.Node;
 import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.GoldRoomNode;
-import maze.components.Maze2d;
-import maze.components.MazeEdge;
+import maze.components.Maze;
+import maze.components.Edge;
 import maze.components.nodes.StandardRoomNode;
 import maze.components.nodes.ThiefRoomNode;
 import maze.config.IConfiguration;
 import maze.components.ICoordinates;
 import maze.utils.Direction;
-import maze.components.MazeCoordinates;
+import maze.components.Coordinates;
 
 /**
  * Builder class for the Maze2d class. Contains default configs to make customizing easier.
  */
-public class Maze2dBuilder implements IMazeBuilder {
+public class MazeBuilder implements IMazeBuilder {
   private final IConfiguration config;
 
   private Node[][] visited;
@@ -30,7 +30,7 @@ public class Maze2dBuilder implements IMazeBuilder {
   private int goldNodeCount;
   private int thiefNodeCount;
 
-  public Maze2dBuilder(IConfiguration configuration) {
+  public MazeBuilder(IConfiguration configuration) {
     this.config = configuration;
 
     this.visited = new Node[configuration.rowCount()][configuration.columnCount()];
@@ -60,7 +60,7 @@ public class Maze2dBuilder implements IMazeBuilder {
       this.tearDownWalls();
     }
 
-    return new Maze2d(
+    return new Maze(
             this.visited[this.config.start().getY()][this.config.start().getX()],
             this.visited[this.config.goal().getY()][this.config.goal().getX()]);
   }
@@ -89,7 +89,7 @@ public class Maze2dBuilder implements IMazeBuilder {
 
   @Override
   public void addEdge(ICoordinates one, ICoordinates two, Direction tail, Direction head) {
-    IEdge edge = new MazeEdge(one, two, tail, head);
+    IEdge edge = new Edge(one, two, tail, head);
     if (!this.edges.contains(edge)) {
       this.edges.add(edge);
     }
@@ -205,6 +205,6 @@ public class Maze2dBuilder implements IMazeBuilder {
       y = node.getCoordinates().getY();
     }
 
-    return new MazeCoordinates(x, y);
+    return new Coordinates(x, y);
   }
 }

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import htw.nodes.INode;
 import maze.components.ICoordinates;
-import maze.components.MazeCoordinates;
+import maze.components.Coordinates;
 import maze.utils.Direction;
 
 public class BatStrategy extends StandardStrategy implements INodeStrategy {
@@ -35,7 +35,7 @@ public class BatStrategy extends StandardStrategy implements INodeStrategy {
     if (this.random.nextDouble() <= 0.5) {
       int row = this.random.nextInt(this.rowCount);
       int column = this.random.nextInt(this.columnCount);
-      ICoordinates coordinates = new MazeCoordinates(column, row);
+      ICoordinates coordinates = new Coordinates(column, row);
       return ((INode) curr.get(coordinates)).enter(from);
     }
 

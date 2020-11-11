@@ -8,7 +8,7 @@ import htw.nodes.INode;
 import htw.strategies.StandardStrategy;
 import htw.strategies.INodeStrategy;
 import htw.strategies.WumpusStrategy;
-import maze.components.MazeCoordinates;
+import maze.components.Coordinates;
 import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
 import maze.utils.Direction;
@@ -29,12 +29,12 @@ public class CaveTest {
 
   @Before
   public void setup() {
-    this.north = new Cave(new MazeCoordinates(1, 0), this.strategy);
-    this.south = new Cave(new MazeCoordinates(1, 2), this.strategy);
-    this.east = new Cave(new MazeCoordinates(2, 1), this.strategy);
-    this.west = new Cave(new MazeCoordinates(0, 1), this.strategy);
+    this.north = new Cave(new Coordinates(1, 0), this.strategy);
+    this.south = new Cave(new Coordinates(1, 2), this.strategy);
+    this.east = new Cave(new Coordinates(2, 1), this.strategy);
+    this.west = new Cave(new Coordinates(0, 1), this.strategy);
 
-    this.cave = new Cave(new MazeCoordinates(1, 1), this.strategy);
+    this.cave = new Cave(new Coordinates(1, 1), this.strategy);
     this.cave.setNode(this.north, Direction.NORTH);
     this.cave.setNode(this.south, Direction.SOUTH);
     this.cave.setNode(this.east, Direction.EAST);
@@ -62,7 +62,7 @@ public class CaveTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidSetNode() {
-    Node node = new StandardRoomNode(new MazeCoordinates(0, 0));
+    Node node = new StandardRoomNode(new Coordinates(0, 0));
     this.cave.setNode(node, Direction.NORTH);
     fail("Invalid setNode() should have failed.");
   }

@@ -3,12 +3,14 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
+import htw.game.IPlayer;
+import htw.game.Player;
 import htw.nodes.Cave;
 import htw.nodes.INode;
 import htw.strategies.INodeStrategy;
 import htw.strategies.StandardStrategy;
 import htw.strategies.WumpusStrategy;
-import maze.components.MazeCoordinates;
+import maze.components.Coordinates;
 import maze.utils.Direction;
 
 import static org.junit.Assert.assertFalse;
@@ -25,13 +27,13 @@ public class WumpusCaveTest {
   @Before
   public void setup() {
     this.wumpus = new Cave(
-            new MazeCoordinates(1, 1),
+            new Coordinates(1, 1),
             new WumpusStrategy());
 
-    this.north = new Cave(new MazeCoordinates(1, 0), this.standard);
-    this.south = new Cave(new MazeCoordinates(1, 2), this.standard);
-    this.east = new Cave(new MazeCoordinates(2, 1), this.standard);
-    this.west = new Cave(new MazeCoordinates(0, 1), this.standard);
+    this.north = new Cave(new Coordinates(1, 0), this.standard);
+    this.south = new Cave(new Coordinates(1, 2), this.standard);
+    this.east = new Cave(new Coordinates(2, 1), this.standard);
+    this.west = new Cave(new Coordinates(0, 1), this.standard);
 
     this.wumpus.setNode(this.north, Direction.NORTH);
     this.wumpus.setNode(this.south, Direction.SOUTH);
@@ -48,5 +50,12 @@ public class WumpusCaveTest {
   public void testShoot() {
     assertTrue(this.wumpus.shoot(Direction.SOUTH, 0));
     assertFalse(this.wumpus.shoot(Direction.SOUTH, 1));
+  }
+
+  @Test
+  public void testReceivePlayer() {
+    IPlayer player = new Player("Joe", 10);
+    this.wumpus.receive(player);
+    assertFalse(player.isAlive());
   }
 }

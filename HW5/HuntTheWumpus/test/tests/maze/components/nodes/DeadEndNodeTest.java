@@ -5,8 +5,8 @@ import org.junit.Test;
 import maze.utils.Direction;
 import maze.components.nodes.Node;
 import maze.components.nodes.DeadEndNode;
-import maze.components.MazeCoordinates;
-import maze.components.MazePath;
+import maze.components.Coordinates;
+import maze.components.Path;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -30,17 +30,17 @@ public class DeadEndNodeTest {
     Node node = new DeadEndNode();
     assertEquals(0, node.getGoldCount());
     assertEquals(0, node.getThiefPenalty(), 0.00001);
-    assertEquals(new MazeCoordinates(0, 0), node.getCoordinates());
+    assertEquals(new Coordinates(0, 0), node.getCoordinates());
     assertEquals(new DeadEndNode(), node.getNode(Direction.EAST));
-    assertFalse(node.canReach(new MazeCoordinates(0, 0)));
+    assertFalse(node.canReach(new Coordinates(0, 0)));
     assertEquals(
-            new MazePath(new MazeCoordinates(0, 0)),
-            node.wealthiestPathTo(new MazeCoordinates(0, 0)));
+            new Path(new Coordinates(0, 0)),
+            node.wealthiestPathTo(new Coordinates(0, 0)));
     assertEquals(
-            new MazePath(new MazeCoordinates(0, 0)),
-            node.exploreTo(new MazeCoordinates(0, 0)));
+            new Path(new Coordinates(0, 0)),
+            node.exploreTo(new Coordinates(0, 0)));
     assertEquals("Dead End Node", node.toString());
-    assertEquals(node.get(new MazeCoordinates(0, 0)), new DeadEndNode());
+    assertEquals(node.get(new Coordinates(0, 0)), new DeadEndNode());
   }
 
   @Test

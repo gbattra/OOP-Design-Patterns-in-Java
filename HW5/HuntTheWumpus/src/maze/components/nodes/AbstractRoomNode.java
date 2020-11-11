@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import maze.components.ICoordinates;
-import maze.components.MazePath;
+import maze.components.Path;
 import maze.components.IPath;
 import maze.utils.Direction;
 
@@ -98,7 +98,7 @@ public abstract class AbstractRoomNode implements Node {
 
   @Override
   public Node get(ICoordinates coordinates) {
-    return this.getHelper(new MazePath(coordinates));
+    return this.getHelper(new Path(coordinates));
   }
 
   @Override
@@ -160,7 +160,7 @@ public abstract class AbstractRoomNode implements Node {
 
   @Override
   public boolean canReach(ICoordinates coordinates) throws IllegalArgumentException {
-    return this.canReachHelper(new MazePath(coordinates));
+    return this.canReachHelper(new Path(coordinates));
   }
 
   @Override
@@ -183,7 +183,7 @@ public abstract class AbstractRoomNode implements Node {
 
   @Override
   public IPath pathTo(ICoordinates coordinates) {
-    return this.pathToHelper(new MazePath(coordinates));
+    return this.pathToHelper(new Path(coordinates));
   }
 
   @Override
@@ -223,7 +223,7 @@ public abstract class AbstractRoomNode implements Node {
 
   @Override
   public IPath wealthiestPathTo(ICoordinates coordinates) throws IllegalArgumentException {
-    return this.wealthiestPathToHelper(new MazePath(coordinates));
+    return this.wealthiestPathToHelper(new Path(coordinates));
   }
 
   @Override
@@ -254,7 +254,7 @@ public abstract class AbstractRoomNode implements Node {
 
   @Override
   public IPath exploreTo(ICoordinates coordinates) {
-    return this.exploreHelper(new MazePath(coordinates));
+    return this.exploreHelper(new Path(coordinates));
   }
 
   @Override

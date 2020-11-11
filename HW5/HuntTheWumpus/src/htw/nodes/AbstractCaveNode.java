@@ -1,5 +1,6 @@
 package htw.nodes;
 
+import htw.game.IPlayer;
 import htw.strategies.INodeStrategy;
 import maze.components.ICoordinates;
 import maze.components.nodes.AbstractRoomNode;
@@ -54,5 +55,10 @@ public abstract class AbstractCaveNode extends AbstractRoomNode implements INode
       return this.strategy.shoot(direction, count, this);
     }
     return ((INode) this.getNode(direction)).shoot(direction, count - 1);
+  }
+
+  @Override
+  public void receive(IPlayer player) throws IllegalArgumentException {
+    this.strategy.receive(player);
   }
 }

@@ -2,7 +2,7 @@ package maze.builders;
 
 import maze.config.IConfiguration;
 import maze.components.ICoordinates;
-import maze.components.MazeCoordinates;
+import maze.components.Coordinates;
 import maze.config.PerfectMazeConfiguration;
 import maze.config.RoomMazeConfiguration;
 
@@ -47,7 +47,7 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
     if (column > this.columnCount - 1 || row > this.rowCount - 1) {
       throw new IllegalArgumentException("Column or row index is out of bounds.");
     }
-    this.start = new MazeCoordinates(column, row);
+    this.start = new Coordinates(column, row);
     return this;
   }
 
@@ -59,7 +59,7 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
     if (column > this.columnCount - 1 || row > this.rowCount - 1) {
       throw new IllegalArgumentException("Column or row index is out of bounds.");
     }
-    this.goal = new MazeCoordinates(column, row);
+    this.goal = new Coordinates(column, row);
     return this;
   }
 

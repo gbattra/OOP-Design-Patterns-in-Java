@@ -3,7 +3,7 @@ package maze.game;
 import maze.utils.Direction;
 import maze.components.IMaze;
 import maze.components.IPath;
-import maze.components.MazePath;
+import maze.components.Path;
 
 /**
  * Game manager object. Moves player and maze pointer in sync.
@@ -24,7 +24,7 @@ public class MazeGame implements IMazeGame {
   public MazeGame(IMazePlayer player, IMaze maze) {
     this.maze = maze;
     this.player = player;
-    this.path = new MazePath(maze.getGoal().getCoordinates());
+    this.path = new Path(maze.getGoal().getCoordinates());
   }
 
   @Override

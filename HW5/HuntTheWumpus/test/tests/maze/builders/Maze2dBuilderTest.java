@@ -9,8 +9,8 @@ import maze.components.IMaze;
 import maze.builders.IMazeBuilder;
 import maze.components.nodes.Node;
 import maze.components.nodes.GoldRoomNode;
-import maze.builders.Maze2dBuilder;
-import maze.components.MazeCoordinates;
+import maze.builders.MazeBuilder;
+import maze.components.Coordinates;
 import maze.config.PerfectMazeConfiguration;
 import maze.config.RoomMazeConfiguration;
 import maze.components.nodes.StandardRoomNode;
@@ -30,8 +30,8 @@ public class Maze2dBuilderTest {
 
   @Before
   public void setup() {
-    this.start = new MazeCoordinates(0,0);
-    this.exit = new MazeCoordinates(4,4);
+    this.start = new Coordinates(0,0);
+    this.exit = new Coordinates(4,4);
 
     this.configuration = new PerfectMazeConfiguration(
             5, 5, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
@@ -39,8 +39,8 @@ public class Maze2dBuilderTest {
 
   @Test
   public void testAddVisited() {
-    IMazeBuilder builder = new Maze2dBuilder(this.configuration);
-    ICoordinates coordinates = new MazeCoordinates(0,0);
+    IMazeBuilder builder = new MazeBuilder(this.configuration);
+    ICoordinates coordinates = new Coordinates(0,0);
     Node node = new GoldRoomNode(coordinates, 10);
     builder.addVisited(node);
     assertEquals(node, builder.visited()[coordinates.getY()][coordinates.getX()]);
@@ -50,26 +50,26 @@ public class Maze2dBuilderTest {
   public void testGenerateNode() {
     IConfiguration thiefConfig = new PerfectMazeConfiguration(
             5, 5, start, exit, 0.1, 1, 0.0, 10, true, 1);
-    IMazeBuilder builder = new Maze2dBuilder(thiefConfig);
-    Node thief = builder.generateRoom(new MazeCoordinates(0,0));
+    IMazeBuilder builder = new MazeBuilder(thiefConfig);
+    Node thief = builder.generateRoom(new Coordinates(0,0));
     assertTrue(thief instanceof ThiefRoomNode);
 
     IConfiguration goldConfig = new PerfectMazeConfiguration(
             5, 5, start, exit, 0.1, 0.0, 1, 10, true, 1);
-    builder = new Maze2dBuilder(goldConfig);
-    Node gold = builder.generateRoom(new MazeCoordinates(0,0));
+    builder = new MazeBuilder(goldConfig);
+    Node gold = builder.generateRoom(new Coordinates(0,0));
     assertTrue(gold instanceof GoldRoomNode);
 
     IConfiguration standardConfig = new PerfectMazeConfiguration(
             5, 5, start, exit, 0.1, 0.0, 0, 0, true, 1);
-    builder = new Maze2dBuilder(standardConfig);
-    Node standard = builder.generateRoom(new MazeCoordinates(0,0));
+    builder = new MazeBuilder(standardConfig);
+    Node standard = builder.generateRoom(new Coordinates(0,0));
     assertTrue(standard instanceof StandardRoomNode);
   }
 
   @Test
   public void testIsPerfect() {
-    IMazeBuilder builder = new Maze2dBuilder(this.configuration);
+    IMazeBuilder builder = new MazeBuilder(this.configuration);
     IMaze maze = builder.build();
     assertTrue(builder.isPerfect());
   }
@@ -79,7 +79,7 @@ public class Maze2dBuilderTest {
     int targetEdgeCount = 1;
     IConfiguration config = new RoomMazeConfiguration(
             5, 5, start, exit, 0.1, 0.1, 0.0, 10, false, targetEdgeCount, 1);
-    IMazeBuilder builder = new Maze2dBuilder(config);
+    IMazeBuilder builder = new MazeBuilder(config);
     builder.build();
     assertFalse(builder.isPerfect());
     assertEquals(targetEdgeCount, builder.edges().size());

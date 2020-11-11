@@ -6,8 +6,8 @@ import org.junit.Test;
 import maze.utils.Direction;
 import maze.components.IMaze;
 import maze.components.nodes.Node;
-import maze.components.Maze2d;
-import maze.components.MazeCoordinates;
+import maze.components.Maze;
+import maze.components.Coordinates;
 import maze.components.nodes.StandardRoomNode;
 
 import static org.junit.Assert.assertEquals;
@@ -23,9 +23,9 @@ public class Maze2dTest {
 
   @Before
   public void setup() {
-    this.start = new StandardRoomNode(new MazeCoordinates(0,0));
-    this.node = new StandardRoomNode(new MazeCoordinates(1,0));
-    this.goal = new StandardRoomNode(new MazeCoordinates(1,1));
+    this.start = new StandardRoomNode(new Coordinates(0,0));
+    this.node = new StandardRoomNode(new Coordinates(1,0));
+    this.goal = new StandardRoomNode(new Coordinates(1,1));
 
     start.setNode(node, Direction.SOUTH);
     node.setNode(goal, Direction.EAST);
@@ -34,7 +34,7 @@ public class Maze2dTest {
   @Test
   public void testConstructor() {
     try {
-      IMaze maze = new Maze2d(this.start, this.goal);
+      IMaze maze = new Maze(this.start, this.goal);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -42,7 +42,7 @@ public class Maze2dTest {
 
   @Test
   public void testGetters() {
-    IMaze maze = new Maze2d(this.start, this.goal);
+    IMaze maze = new Maze(this.start, this.goal);
     assertEquals(this.start, maze.getStart());
     assertEquals(this.goal, maze.getGoal());
     assertEquals(this.start, maze.getCurrent());
@@ -50,7 +50,7 @@ public class Maze2dTest {
 
   @Test
   public void testMove() {
-    IMaze maze = new Maze2d(this.start, this.goal);
+    IMaze maze = new Maze(this.start, this.goal);
     maze.move(Direction.SOUTH);
     assertEquals(this.node, maze.getCurrent());
   }

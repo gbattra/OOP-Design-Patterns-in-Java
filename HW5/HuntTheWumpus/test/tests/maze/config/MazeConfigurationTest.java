@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import maze.config.IConfiguration;
 import maze.components.ICoordinates;
-import maze.components.MazeCoordinates;
+import maze.components.Coordinates;
 import maze.config.PerfectMazeConfiguration;
 
 import static org.junit.Assert.assertEquals;
@@ -22,8 +22,8 @@ public class MazeConfigurationTest {
 
   @Before
   public void setup() {
-    start = new MazeCoordinates(0,0);
-    exit = new MazeCoordinates(4,4);
+    start = new Coordinates(0,0);
+    exit = new Coordinates(4,4);
   }
 
   @Test

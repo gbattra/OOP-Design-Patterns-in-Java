@@ -1,5 +1,6 @@
 package htw.nodes;
 
+import htw.game.IPlayer;
 import htw.strategies.INodeStrategy;
 import maze.components.nodes.DeadEndNode;
 import maze.utils.Direction;
@@ -18,5 +19,10 @@ public class DeadEnd extends DeadEndNode implements INode {
   @Override
   public void setStrategy(INodeStrategy strategy) throws IllegalStateException {
     throw new IllegalStateException("Cannot set strategy on a dead end node.");
+  }
+
+  @Override
+  public void receive(IPlayer player) throws IllegalStateException {
+    throw new IllegalStateException("Dead end node cannot receive() a player.");
   }
 }

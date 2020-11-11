@@ -9,7 +9,7 @@ import htw.nodes.INode;
 import htw.strategies.StandardStrategy;
 import htw.strategies.INodeStrategy;
 import htw.strategies.TunnelStrategy;
-import maze.components.MazeCoordinates;
+import maze.components.Coordinates;
 import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
@@ -23,8 +23,8 @@ public class TunnelTest {
 
   @Before
   public void setup() {
-    this.north = new Cave(new MazeCoordinates(1, 0), new StandardStrategy());
-    this.tunnel = new Cave(new MazeCoordinates(1, 1), this.strategy);
+    this.north = new Cave(new Coordinates(1, 0), new StandardStrategy());
+    this.tunnel = new Cave(new Coordinates(1, 1), this.strategy);
     this.tunnel.setNode(this.north, Direction.NORTH);
     this.north.setNode(this.tunnel, Direction.SOUTH);
   }

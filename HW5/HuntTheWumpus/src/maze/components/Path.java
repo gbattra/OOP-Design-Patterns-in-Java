@@ -11,7 +11,7 @@ import maze.components.nodes.Node;
  * the coordinates traversed, the gold looted or stolen at each node and a boolean indicating
  * whether or not the path reaches the target.
  */
-public class MazePath implements IPath {
+public class Path implements IPath {
   private final boolean reachesTarget;
   private final List<ICoordinates> coordinatesTraversed;
   private final ICoordinates target;
@@ -22,7 +22,7 @@ public class MazePath implements IPath {
    *
    * @param target the destination for the path
    */
-  public MazePath(ICoordinates target) {
+  public Path(ICoordinates target) {
     this.target = target;
     this.reachesTarget = false;
     this.coordinatesTraversed = new ArrayList<>();
@@ -38,7 +38,7 @@ public class MazePath implements IPath {
    * @param coordinatesTraversed the coordinates traversed by the path
    * @throws IllegalArgumentException if totalGold is negative
    */
-  private MazePath(
+  private Path(
           ICoordinates target,
           List<ICoordinates> coordinatesTraversed,
           int totalGold,
@@ -72,11 +72,11 @@ public class MazePath implements IPath {
   @Override
   public IPath loot(Node node) {
     if (this.coordinatesTraversed.contains(node.getCoordinates())) {
-      return new MazePath(
+      return new Path(
               this.target, this.coordinatesTraversed, this.totalGold, this.reachesTarget);
     }
 
-    return new MazePath(
+    return new Path(
             this.target,
             this.coordinatesTraversed,
             node.loot(this.totalGold),
@@ -88,7 +88,7 @@ public class MazePath implements IPath {
     List<ICoordinates> coordinatesCopy = new ArrayList<>(this.coordinatesTraversed);
     coordinatesCopy.add(coordinates);
 
-    return new MazePath(
+    return new Path(
             this.target,
             coordinatesCopy,
             this.totalGold,
@@ -97,7 +97,7 @@ public class MazePath implements IPath {
 
   @Override
   public IPath setReachesTarget(boolean doesReach) {
-    return new MazePath(
+    return new Path(
             this.target,
             this.coordinatesTraversed,
             this.totalGold,

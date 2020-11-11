@@ -1,8 +1,8 @@
 package maze.components.nodes;
 
 import maze.components.ICoordinates;
-import maze.components.MazeCoordinates;
-import maze.components.MazePath;
+import maze.components.Coordinates;
+import maze.components.Path;
 import maze.components.IPath;
 import maze.utils.Direction;
 
@@ -12,7 +12,7 @@ import maze.utils.Direction;
 public class DeadEndNode implements Node {
   @Override
   public Node get(ICoordinates coordinates) {
-    return this.getHelper(new MazePath(coordinates));
+    return this.getHelper(new Path(coordinates));
   }
 
   @Override
@@ -32,7 +32,7 @@ public class DeadEndNode implements Node {
 
   @Override
   public ICoordinates getCoordinates() {
-    return new MazeCoordinates(0, 0);
+    return new Coordinates(0, 0);
   }
 
   @Override
@@ -52,7 +52,7 @@ public class DeadEndNode implements Node {
 
   @Override
   public boolean canReach(ICoordinates coordinates) throws IllegalArgumentException {
-    return this.canReachHelper(new MazePath(coordinates));
+    return this.canReachHelper(new Path(coordinates));
   }
 
   @Override
@@ -62,7 +62,7 @@ public class DeadEndNode implements Node {
 
   @Override
   public IPath wealthiestPathTo(ICoordinates coordinates) throws IllegalArgumentException {
-    return new MazePath(coordinates);
+    return new Path(coordinates);
   }
 
   @Override
@@ -72,7 +72,7 @@ public class DeadEndNode implements Node {
 
   @Override
   public IPath exploreTo(ICoordinates coordinates) {
-    return this.exploreHelper(new MazePath(coordinates));
+    return this.exploreHelper(new Path(coordinates));
   }
 
   @Override
@@ -82,7 +82,7 @@ public class DeadEndNode implements Node {
 
   @Override
   public IPath pathTo(ICoordinates coordinates) {
-    return this.pathToHelper(new MazePath(coordinates));
+    return this.pathToHelper(new Path(coordinates));
   }
 
   @Override

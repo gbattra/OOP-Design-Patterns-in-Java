@@ -1,5 +1,6 @@
 package htw.strategies;
 
+import htw.game.IPlayer;
 import htw.nodes.INode;
 import maze.utils.Direction;
 
@@ -15,5 +16,13 @@ public class StandardStrategy implements INodeStrategy {
       return false;
     }
     return ((INode) curr.getNode(direction)).shoot(direction, count - 1);
+  }
+
+  @Override
+  public void receive(IPlayer player) throws IllegalArgumentException {
+    if (player == null) {
+      throw new IllegalArgumentException("Player cannot be null.");
+    }
+    // do nothing
   }
 }

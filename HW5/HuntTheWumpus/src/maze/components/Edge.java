@@ -7,7 +7,7 @@ import maze.utils.Direction;
  * respective directions relative to the center of the wall.
  *
  */
-public class MazeEdge implements IEdge {
+public class Edge implements IEdge {
   private final ICoordinates tail;
   private final ICoordinates head;
   private final Direction tailDirection;
@@ -21,7 +21,7 @@ public class MazeEdge implements IEdge {
    * @param tailDirection the tail direction
    * @param headDirection the head direction
    */
-  public MazeEdge(
+  public Edge(
           ICoordinates tail,
           ICoordinates head,
           Direction tailDirection,

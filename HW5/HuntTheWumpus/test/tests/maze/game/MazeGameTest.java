@@ -8,10 +8,10 @@ import maze.config.IConfiguration;
 import maze.game.IMazeGame;
 import maze.components.IMaze;
 import maze.game.IMazePlayer;
-import maze.builders.Maze2dBuilder;
+import maze.builders.MazeBuilder;
 import maze.builders.MazeConfigurationBuilder;
 import maze.game.MazeGame;
-import maze.components.MazePath;
+import maze.components.Path;
 import maze.game.MazePlayer;
 
 import static org.junit.Assert.assertEquals;
@@ -37,7 +37,7 @@ public class MazeGameTest {
             .setThiefFrequency(0)
             .setRandomSeed(1)
             .build();
-    this.maze = new Maze2dBuilder(configuration).build();
+    this.maze = new MazeBuilder(configuration).build();
     this.player = new MazePlayer("Joey");
     this.game = new MazeGame(this.player, this.maze);
   }
@@ -46,7 +46,7 @@ public class MazeGameTest {
   public void testGetters() {
     assertEquals(this.maze, this.game.getMaze());
     assertEquals(this.player, this.game.getPlayer());
-    assertEquals(new MazePath(this.maze.getGoal().getCoordinates()), this.game.getPath());
+    assertEquals(new Path(this.maze.getGoal().getCoordinates()), this.game.getPath());
     assertEquals(0, game.getScore());
   }
 

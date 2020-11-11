@@ -21,4 +21,9 @@ public class Player extends MazePlayer implements IPlayer {
   public int arrowCount() {
     return this.arrowCount;
   }
+
+  @Override
+  public void kill() {
+    this.alive = false;
+  }
 }

@@ -8,7 +8,7 @@ import maze.utils.Direction;
  * A maze ADT class which wraps Node functionality. Has start and goal node references. Also
  * has a pointer 'current' which can be moved using move().
  */
-public class Maze2d implements IMaze {
+public class Maze implements IMaze {
   private final Node start;
   private final Node goal;
 
@@ -21,7 +21,7 @@ public class Maze2d implements IMaze {
    * @param start the start node
    * @param goal the goal node
    */
-  public Maze2d(
+  public Maze(
           Node start,
           Node goal) {
     this.start = start;
