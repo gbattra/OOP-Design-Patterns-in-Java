@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.nodes.Cave;
-import htw.nodes.HTWNode;
+import htw.nodes.HtwNode;
 import htw.strategies.StandardStrategy;
-import htw.strategies.Strategy;
+import htw.strategies.HtwNodeStrategy;
 import maze.components.MazeCoordinates;
 import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
@@ -17,12 +17,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 public class CaveTest {
-  private Strategy strategy = new StandardStrategy();
-  private HTWNode north;
-  private HTWNode south;
-  private HTWNode east;
-  private HTWNode west;
-  private HTWNode cave;
+  private HtwNodeStrategy strategy = new StandardStrategy();
+  private HtwNode north;
+  private HtwNode south;
+  private HtwNode east;
+  private HtwNode west;
+  private HtwNode cave;
 
   @Before
   public void setup() {
@@ -30,11 +30,17 @@ public class CaveTest {
     this.south = new Cave(new MazeCoordinates(1, 2), this.strategy);
     this.east = new Cave(new MazeCoordinates(2, 1), this.strategy);
     this.west = new Cave(new MazeCoordinates(0, 1), this.strategy);
+
     this.cave = new Cave(new MazeCoordinates(1, 1), this.strategy);
     this.cave.setNode(this.north, Direction.NORTH);
     this.cave.setNode(this.south, Direction.SOUTH);
     this.cave.setNode(this.east, Direction.EAST);
     this.cave.setNode(this.west, Direction.WEST);
+
+    this.north.setNode(this.cave, Direction.NORTH.opposite());
+    this.south.setNode(this.cave, Direction.SOUTH.opposite());
+    this.east.setNode(this.cave, Direction.EAST.opposite());
+    this.west.setNode(this.cave, Direction.WEST.opposite());
   }
 
   @Test

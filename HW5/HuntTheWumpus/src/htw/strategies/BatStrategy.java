@@ -2,13 +2,13 @@ package htw.strategies;
 
 import java.util.Random;
 
-import htw.nodes.HTWNode;
+import htw.nodes.HtwNode;
 import maze.components.Coordinates;
 import maze.components.MazeCoordinates;
 import maze.utils.Direction;
 
-public class BatStrategy extends StandardStrategy implements Strategy {
-  private final Strategy parent;
+public class BatStrategy extends StandardStrategy implements HtwNodeStrategy {
+  private final HtwNodeStrategy parent;
   private final Random random;
   private final int rowCount;
   private final int columnCount;
@@ -17,7 +17,7 @@ public class BatStrategy extends StandardStrategy implements Strategy {
           int rowCount,
           int columnCount,
           Random random,
-          Strategy parent) {
+          HtwNodeStrategy parent) {
     if (rowCount < 0 || columnCount < 0) {
       throw new IllegalArgumentException("Row count and column count cannot be zero.");
     }
@@ -31,22 +31,22 @@ public class BatStrategy extends StandardStrategy implements Strategy {
   }
 
   @Override
-  public HTWNode enter(Direction from, HTWNode curr) {
+  public HtwNode enter(Direction from, HtwNode curr) {
     if (this.random.nextDouble() <= 0.5) {
       int row = this.random.nextInt(this.rowCount);
       int column = this.random.nextInt(this.columnCount);
       Coordinates coordinates = new MazeCoordinates(column, row);
-      return ((HTWNode) curr.get(coordinates)).enter(from);
+      return ((HtwNode) curr.get(coordinates)).enter(from);
     }
 
     return this.parent.enter(from, curr);
   }
 
   @Override
-  public boolean shoot(Direction direction, int count, HTWNode curr) {
+  public boolean shoot(Direction direction, int count, HtwNode curr) {
     if (count == 0) {
       return this.parent.shoot(direction, count, curr);
     }
-    return ((HTWNode) curr.getNode(direction)).shoot(direction, count - 1);
+    return ((HtwNode) curr.getNode(direction)).shoot(direction, count - 1);
   }
 }
