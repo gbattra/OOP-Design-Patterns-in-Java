@@ -42,7 +42,7 @@ public class DeadEndNode implements Node {
 
   @Override
   public void setNode(Node node, Direction dir) throws IllegalStateException {
-    throw new IllegalStateException("Cannot set node on a deadend node.");
+    // do nothing
   }
 
   @Override

@@ -12,6 +12,10 @@ import maze.utils.Direction;
 public class Tunnel extends AbstractRoomNode implements MazeNode {
   public Tunnel(Coordinates coordinates) {
     super(coordinates, 0, 0);
+    this.north = new DeadEnd();
+    this.south = new DeadEnd();
+    this.east = new DeadEnd();
+    this.west = new DeadEnd();
   }
 
   @Override
@@ -20,13 +24,14 @@ public class Tunnel extends AbstractRoomNode implements MazeNode {
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {
       Direction exit = exits.get(0);
+      exits.remove(0);
+
       if (exit.equals(from)) {
         continue;
       }
 
       try {
         MazeNode node = (MazeNode) this.getNode(exit);
-        exits.remove(0);
         return node.enter(from);
       } catch (Exception ignored) {
       }

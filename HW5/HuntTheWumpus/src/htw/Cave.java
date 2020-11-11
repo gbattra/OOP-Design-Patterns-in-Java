@@ -6,8 +6,13 @@ import maze.components.nodes.Node;
 import maze.utils.Direction;
 
 public class Cave extends AbstractRoomNode implements MazeNode {
+
   public Cave(Coordinates coordinates) {
     super(coordinates, 0, 0);
+    this.north = new DeadEnd();
+    this.south = new DeadEnd();
+    this.east = new DeadEnd();
+    this.west = new DeadEnd();
   }
 
   @Override
@@ -23,7 +28,7 @@ public class Cave extends AbstractRoomNode implements MazeNode {
   @Override
   public void setNode(Node node, Direction dir) throws IllegalArgumentException {
     if (!(node instanceof MazeNode)) {
-      throw new IllegalArgumentException("Provided node is not an instance of HTWNode.");
+      throw new IllegalArgumentException("Provided node is not an instance of MazeNode.");
     }
     super.setNode(node, dir);
   }
