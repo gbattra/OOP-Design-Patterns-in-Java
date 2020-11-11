@@ -9,9 +9,9 @@ import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
-public class Tunnel extends AbstractRoomNode implements HTWNode {
+public class Tunnel extends AbstractCaveNode implements HTWNode {
   public Tunnel(Coordinates coordinates) {
-    super(coordinates, 0, 0);
+    super(coordinates);
     this.north = new DeadEnd();
     this.south = new DeadEnd();
     this.east = new DeadEnd();
@@ -41,19 +41,6 @@ public class Tunnel extends AbstractRoomNode implements HTWNode {
   }
 
   @Override
-  public int loot(int gold) {
-    return 0;
-  }
-
-  @Override
-  public void setNode(Node node, Direction dir) throws IllegalArgumentException {
-    if (!(node instanceof HTWNode)) {
-      throw new IllegalArgumentException("Provided node is not an instance of HTWNode.");
-    }
-    super.setNode(node, dir);
-  }
-
-  @Override
   public HTWNode promote() {
     HTWNode promoted = new Cave(this.coordinates);
     promoted.setNode(this.north, Direction.NORTH);
@@ -67,5 +54,23 @@ public class Tunnel extends AbstractRoomNode implements HTWNode {
     this.west.setNode(promoted, Direction.EAST);
 
     return promoted;
+  }
+
+  @Override
+  public boolean shoot(Direction direction, int count) {
+    if (count < 0) {
+      throw new IllegalArgumentException("Count cannot be negative.");
+    }
+    boolean hit = false;
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      if (exit == direction.opposite()) {
+        continue;
+      }
+      hit |= ((HTWNode) this.getNode(exit)).shoot(exit, count);
+    }
+
+    return hit;
   }
 }

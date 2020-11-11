@@ -13,4 +13,9 @@ public class DeadEnd extends DeadEndNode implements HTWNode {
   public HTWNode promote() throws IllegalStateException {
     throw new IllegalStateException("Cannot promote a dead end node.");
   }
+
+  @Override
+  public boolean shoot(Direction direction, int count) {
+    return false;
+  }
 }

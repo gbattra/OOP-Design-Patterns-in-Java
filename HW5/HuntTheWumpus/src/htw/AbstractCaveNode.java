@@ -26,14 +26,4 @@ public abstract class AbstractCaveNode extends AbstractRoomNode implements HTWNo
     }
     super.setNode(node, dir);
   }
-
-  @Override
-  public HTWNode enter(Direction from) {
-    return this;
-  }
-
-  @Override
-  public HTWNode promote() {
-    return this;
-  }
 }

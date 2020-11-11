@@ -11,6 +11,7 @@ import maze.components.nodes.StandardRoomNode;
 import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 public class CaveTest {
@@ -58,5 +59,10 @@ public class CaveTest {
     Node node = new StandardRoomNode(new MazeCoordinates(0, 0));
     this.cave.setNode(node, Direction.NORTH);
     fail("Invalid setNode() should have failed.");
+  }
+
+  @Test
+  public void testShoot() {
+    assertFalse(this.cave.shoot(Direction.SOUTH, 1));
   }
 }
