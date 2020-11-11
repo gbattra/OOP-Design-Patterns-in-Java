@@ -1,0 +1,40 @@
+package tests.maze.game;
+
+import org.junit.Test;
+
+import maze.components.nodes.Node;
+import maze.game.Player;
+import maze.components.nodes.GoldRoomNode;
+import maze.components.MazeCoordinates;
+import maze.game.MazePlayer;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+/**
+ * Test for the MazePlayer.
+ */
+public class MazePlayerTest {
+  @Test
+  public void testValidConstructor() {
+    try {
+      Player player = new MazePlayer("Joe");
+    } catch (Exception e) {
+      fail("Valid constructor should not have failed.");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidConstructor() {
+    Player player = new MazePlayer("");
+  }
+
+  @Test
+  public void testGetters() {
+    Node node = new GoldRoomNode(new MazeCoordinates(0,0), 10);
+    Player player = new MazePlayer("Joe");
+    player = player.loot(node);
+    assertEquals(10, player.getGold());
+    assertEquals("Joe", player.getName());
+  }
+}
