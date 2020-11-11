@@ -32,6 +32,21 @@ public class Maze2dBuilder implements MazeBuilder {
   }
 
   @Override
+  public Node[][] visited() {
+    return this.visited;
+  }
+
+  @Override
+  public List<Edge> edges() {
+    return this.edges;
+  }
+
+  @Override
+  public boolean isPerfect() {
+    return this.config.perfectExitCount() == this.exitCount;
+  }
+
+  @Override
   public Maze build() {
     Node start = new StandardRoomNode(this.config.start());
     this.grow(start);
@@ -79,7 +94,8 @@ public class Maze2dBuilder implements MazeBuilder {
     }
   }
 
-  private Node generateRoom(Coordinates c) {
+  @Override
+  public Node generateRoom(Coordinates c) {
     this.exitCount++;
     boolean isThief = this.config.random().nextDouble() <= this.config.thiefFrequency();
     if (isThief) {
@@ -95,11 +111,13 @@ public class Maze2dBuilder implements MazeBuilder {
     return new StandardRoomNode(c, this.config.goal().equals(c));
   }
 
-  private void addVisited(Node node) {
+  @Override
+  public void addVisited(Node node) {
     this.visited[node.getCoordinates().getY()][node.getCoordinates().getX()] = node;
   }
 
-  private void addEdge(Coordinates one, Coordinates two, Direction tail, Direction head) {
+  @Override
+  public void addEdge(Coordinates one, Coordinates two, Direction tail, Direction head) {
     Edge edge = new MazeEdge(one, two, tail, head);
     if (!this.edges.contains(edge)) {
       this.edges.add(edge);
