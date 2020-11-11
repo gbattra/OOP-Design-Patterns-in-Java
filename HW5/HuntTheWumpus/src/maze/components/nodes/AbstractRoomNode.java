@@ -48,7 +48,7 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   /**
-   * Second constructor for RoomNode. Use to set isExit true.
+   * Second constructor for RoomNode. Use to set isGoal true.
    *
    * @param coordinates the coordinates where this cell resides in the maze
    * @param goldCount the amount of gold for the player
@@ -71,6 +71,9 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   @Override
+  public abstract int loot(int gold);
+
+  @Override
   public boolean isGoal() {
     return this.isGoal;
   }
@@ -89,9 +92,6 @@ public abstract class AbstractRoomNode implements Node {
   public Coordinates getCoordinates() {
     return this.coordinates;
   }
-
-  @Override
-  public abstract int loot(int gold);
 
   @Override
   public Node get(Coordinates coordinates) {
