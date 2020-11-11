@@ -102,6 +102,7 @@ public class Maze2dBuilder implements MazeBuilder {
     // get exit candidates
     List<Direction> exits = this.getPotentialExits(node);
 
+    int exitCount = 0;
     while (!exits.isEmpty()) {
       // randomly pick exit
       int exitIndex = exits.size() > 1 ? this.config.random().nextInt(exits.size()) : 0;
