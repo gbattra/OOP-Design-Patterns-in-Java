@@ -71,17 +71,6 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   @Override
-  public abstract boolean isGoldRoom();
-
-  @Override
-  public abstract boolean isThiefRoom();
-
-  @Override
-  public boolean isDeadEnd() {
-    return false;
-  }
-
-  @Override
   public boolean isGoal() {
     return this.isGoal;
   }
@@ -124,7 +113,7 @@ public abstract class AbstractRoomNode implements Node {
     Node target = new DeadEndNode();
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
-    while (exits.size() > 0 && target.isDeadEnd()) {
+    while (exits.size() > 0 && target instanceof DeadEndNode) {
       Node node = this.getNode(exits.get(0));
       exits.remove(0);
       target = node.getHelper(path);

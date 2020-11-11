@@ -33,14 +33,4 @@ public class StandardRoomNode extends AbstractRoomNode {
   public int loot(int gold) {
     return gold;
   }
-
-  @Override
-  public boolean isGoldRoom() {
-    return false;
-  }
-
-  @Override
-  public boolean isThiefRoom() {
-    return false;
-  }
 }

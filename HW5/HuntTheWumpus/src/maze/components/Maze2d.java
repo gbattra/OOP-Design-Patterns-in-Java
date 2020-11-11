@@ -1,5 +1,6 @@
 package maze.components;
 
+import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
@@ -46,7 +47,7 @@ public class Maze2d implements Maze {
   @Override
   public boolean move(Direction dir) {
     Node next = this.current.getNode(dir);
-    if (next.isDeadEnd()) {
+    if (next instanceof DeadEndNode) {
       return false;
     }
     this.current = next;

@@ -62,7 +62,6 @@ public class RoomNodeTest {
     Node node = new GoldRoomNode(new MazeCoordinates(0, 0), 10);
     assertEquals(10, node.getGoldCount());
     assertEquals(new MazeCoordinates(0, 0), node.getCoordinates());
-    assertFalse(node.isThiefRoom());
     assertEquals(0, node.getThiefPenalty(), 0.0001);
     assertEquals(new DeadEndNode(), node.getNode(Direction.EAST));
     assertEquals(new DeadEndNode(), node.getNode(Direction.NORTH));

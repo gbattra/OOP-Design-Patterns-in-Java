@@ -39,14 +39,4 @@ public class ThiefRoomNode extends AbstractRoomNode {
     gold *= 1 - this.getThiefPenalty();
     return gold;
   }
-
-  @Override
-  public boolean isThiefRoom() {
-    return true;
-  }
-
-  @Override
-  public boolean isGoldRoom() {
-    return false;
-  }
 }

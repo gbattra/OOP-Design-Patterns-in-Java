@@ -32,27 +32,6 @@ public interface Node {
   int getGoldCount();
 
   /**
-   * Some nodes have thieves which steal gold from whoever enters.
-   *
-   * @return true if this node contains a thief, false otherwise
-   */
-  boolean isThiefRoom();
-
-  /**
-   * Some nodes have gold in them for the player to collect.
-   *
-   * @return true if this node contains gold, false otherwise
-   */
-  boolean isGoldRoom();
-
-  /**
-   * Is this node a dead end.
-   *
-   * @return true if node is dead end
-   */
-  boolean isDeadEnd();
-
-  /**
    * Is this node the goal to the maze.
    *
    * @return true if maze goal, false otherwise

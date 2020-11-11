@@ -26,16 +26,6 @@ public class DeadEndNode implements Node {
   }
 
   @Override
-  public boolean isDeadEnd() {
-    return true;
-  }
-
-  @Override
-  public boolean isThiefRoom() {
-    return false;
-  }
-
-  @Override
   public double getThiefPenalty() {
     return 0;
   }
@@ -126,11 +116,6 @@ public class DeadEndNode implements Node {
 
   @Override
   public boolean isGoal() {
-    return false;
-  }
-
-  @Override
-  public boolean isGoldRoom() {
     return false;
   }
 }
