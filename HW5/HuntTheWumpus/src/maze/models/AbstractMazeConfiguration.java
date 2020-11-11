@@ -30,12 +30,6 @@ public abstract class AbstractMazeConfiguration implements Configuration {
   protected final int perfectExitCount;
   protected final int targetEdgeCount;
 
-  protected Node[][] visited;
-  protected List<Edge> edges;
-  protected int exitCount = 0;
-  protected int goldNodeCount;
-  protected int thiefNodeCount;
-
   /**
    * Constructor for the AbstractMazeConfiguration.
    *
@@ -98,19 +92,6 @@ public abstract class AbstractMazeConfiguration implements Configuration {
     this.isWrappingMaze = isWrappingMaze;
     this.randomSeed = randomSeed;
     this.random = randomSeed > 0 ? new Random(randomSeed) : new Random();
-    this.visited = new Node[rowCount][columnCount];
-    this.edges = new ArrayList<>();
-  }
-
-  @Override
-  public Configuration growMaze() {
-    Node start = this.generateStart();
-    start.grow(this);
-    if (this.isRoomMaze) {
-      this.tearDownWalls();
-    }
-
-    return this;
   }
 
   @Override
@@ -159,11 +140,6 @@ public abstract class AbstractMazeConfiguration implements Configuration {
   }
 
   @Override
-  public int exitCount() {
-    return this.exitCount;
-  }
-
-  @Override
   public boolean isRoomMaze() {
     return this.isRoomMaze;
   }
@@ -174,75 +150,17 @@ public abstract class AbstractMazeConfiguration implements Configuration {
   }
 
   @Override
-  public Node[][] visited() {
-    return this.visited;
-  }
-
-  @Override
-  public List<Edge> edges() {
-    return this.edges;
-  }
-
-  @Override
-  public Coordinates startCoordinates() {
+  public Coordinates start() {
     return this.start;
   }
 
   @Override
-  public Coordinates goalCoordinates() {
+  public Coordinates goal() {
     return this.goal;
   }
 
   @Override
-  public void addVisited(Node node) {
-    this.visited[node.getCoordinates().getY()][node.getCoordinates().getX()] = node;
-  }
-
-  @Override
-  public Node generateRoom(Coordinates c) {
-    this.exitCount++;
-    boolean isThief = this.random().nextDouble() <= this.thiefFrequency();
-    if (isThief) {
-      this.thiefNodeCount++;
-      return new ThiefRoomNode(c, this.thiefPenalty(), this.goal.equals(c));
-    }
-    boolean isGold = this.random().nextDouble() <= this.goldFrequency();
-    if (isGold) {
-      this.goldNodeCount++;
-      return new GoldRoomNode(c, this.goldAmount(), this.goal.equals(c));
-    }
-
-    return new StandardRoomNode(c, this.goal.equals(c));
-  }
-
-  @Override
-  public Node generateStart() {
-    return new StandardRoomNode(this.start);
-  }
-
-  @Override
-  public void addEdge(Coordinates one, Coordinates two, Direction tail, Direction head) {
-    Edge edge = new MazeEdge(one, two, tail, head);
-    if (!this.edges.contains(edge)) {
-      this.edges.add(edge);
-    }
-  }
-
-  @Override
-  public boolean isPerfect() {
-    return this.perfectExitCount == this.exitCount;
-  }
-
-  protected void tearDownWalls() {
-    while (edges.size() > this.targetEdgeCount) {
-      int index = this.random.nextInt(edges.size());
-      Edge edge = this.edges.get(index);
-      edges.remove(index);
-      this.exitCount++;
-      Node tail = this.visited[edge.getTail().getY()][edge.getTail().getX()];
-      Node head = this.visited[edge.getHead().getY()][edge.getHead().getX()];
-      tail.setNode(head, edge.getHeadDirection());
-      head.setNode(tail, edge.getTailDirection());
-    }
+  public int perfectExitCount() {
+    return this.perfectExitCount;
   }
 }

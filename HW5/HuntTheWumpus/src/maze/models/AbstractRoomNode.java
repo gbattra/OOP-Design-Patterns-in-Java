@@ -135,44 +135,6 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   @Override
-  public Configuration grow(Configuration configuration) {
-    // add this to the visited list
-    configuration.addVisited(this);
-
-    // get exit candidates
-    List<Direction> exits = this.getPotentialExits(configuration);
-
-    while (!exits.isEmpty()) {
-      // randomly pick exit
-      int exitIndex = exits.size() > 1 ? configuration.random().nextInt(exits.size()) : 0;
-      Direction exit = exits.get(exitIndex);
-      exits.remove(exitIndex);
-      Coordinates c = this.coordinatesAt(exit, configuration);
-
-      // check if node where exit points has been visited
-      Node other = configuration.visited()[c.getY()][c.getX()];
-
-      if (other != null) {
-        // if has been visited, add an edge
-        configuration.addEdge(
-                this.getCoordinates(),
-                other.getCoordinates(),
-                exit.opposite(), exit);
-      } else {
-        // if has not been visited, instantiate new node and grow
-        Node room = configuration.generateRoom(c);
-        this.setNode(room, exit);
-        room.setNode(this, exit.opposite());
-
-        // recursively call new node's grow to continue building out the maze
-        configuration = room.grow(configuration);
-      }
-    }
-
-    return configuration;
-  }
-
-  @Override
   public void setNode(Node node, Direction dir) throws IllegalArgumentException {
     if (dir  == Direction.NORTH) {
       this.north = node;
@@ -342,70 +304,5 @@ public abstract class AbstractRoomNode implements Node {
     }
 
     return false;
-  }
-
-  protected List<Direction> getPotentialExits(Configuration configuration) {
-    List<Direction> exits = new ArrayList<>(Arrays.asList(
-            Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST));
-    if ((this.coordinates.getX() == 0 && !configuration.isWrappingMaze())
-        || !(this.west.isDeadEnd())) {
-      exits.remove(Direction.WEST);
-    }
-    if ((this.coordinates.getX() == configuration.columnCount() - 1
-        && !configuration.isWrappingMaze())
-        || !(this.east.isDeadEnd())) {
-      exits.remove(Direction.EAST);
-    }
-    if ((this.coordinates.getY() == 0 && !configuration.isWrappingMaze())
-        || !(this.north.isDeadEnd())) {
-      exits.remove(Direction.NORTH);
-    }
-    if ((this.coordinates.getY() == configuration.rowCount() - 1
-        && !configuration.isWrappingMaze())
-        || !(this.south.isDeadEnd())) {
-      exits.remove(Direction.SOUTH);
-    }
-
-    return exits;
-  }
-
-  protected Coordinates coordinatesAt(
-          Direction dir, Configuration configuration) throws IllegalArgumentException {
-    int x = 0;
-    int y = 0;
-    if (dir == Direction.NORTH) {
-      if (this.coordinates.getY() == 0) {
-        y = configuration.rowCount() - 1;
-      } else {
-        y = this.coordinates.getY() - 1;
-      }
-      x = this.coordinates.getX();
-    }
-    if (dir == Direction.SOUTH) {
-      if (this.coordinates.getY() == configuration.rowCount() - 1) {
-        y = 0;
-      } else {
-        y = this.coordinates.getY() + 1;
-      }
-      x = this.coordinates.getX();
-    }
-    if (dir == Direction.WEST) {
-      if (this.coordinates.getX() == 0) {
-        x = configuration.columnCount() - 1;
-      } else {
-        x = this.coordinates.getX() - 1;
-      }
-      y = this.coordinates.getY();
-    }
-    if (dir == Direction.EAST) {
-      if (this.coordinates.getX() == configuration.columnCount() - 1) {
-        x = 0;
-      } else {
-        x = this.coordinates.getX() + 1;
-      }
-      y = this.coordinates.getY();
-    }
-
-    return new MazeCoordinates(x, y);
   }
 }

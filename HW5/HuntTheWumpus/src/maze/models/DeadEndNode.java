@@ -51,11 +51,6 @@ public class DeadEndNode implements Node {
   }
 
   @Override
-  public Configuration grow(Configuration configuration) {
-    return configuration;
-  }
-
-  @Override
   public void setNode(Node node, Direction dir) throws IllegalStateException {
     throw new IllegalStateException("Cannot set node on a deadend node.");
   }

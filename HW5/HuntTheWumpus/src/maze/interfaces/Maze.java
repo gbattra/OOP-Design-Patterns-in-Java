@@ -68,4 +68,13 @@ public interface Maze {
    * @return the queried node
    */
   Node get(Coordinates coordinates);
+
+  /**
+   * Determines if target coordinates can be reached from the cell.
+   *
+   * @param coordinates the target coordinates
+   * @return true if can reach target, false otherwise
+   * @throws IllegalArgumentException if coordinates are out of bounds
+   */
+  boolean canReach(Coordinates coordinates) throws IllegalArgumentException;
 }

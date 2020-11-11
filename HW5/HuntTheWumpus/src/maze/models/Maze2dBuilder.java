@@ -1,241 +1,185 @@
 package maze.models;
 
-import maze.interfaces.Builder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import maze.enums.Direction;
+import maze.interfaces.MazeBuilder;
 import maze.interfaces.Configuration;
 import maze.interfaces.Coordinates;
+import maze.interfaces.Edge;
 import maze.interfaces.Maze;
+import maze.interfaces.Node;
 
 /**
  * Builder class for the Maze2d class. Contains default configs to make customizing easier.
  */
-public class Maze2dBuilder implements Builder {
-  private int columnCount = 10;
-  private int rowCount = 10;
-  private int randomSeed = 0;
-  private double thiefPenalty = 0.1;
-  private double thiefFrequency = 0.2;
-  private double goldFrequency = 0.3;
-  private int goldAmount = 10;
-  private boolean isWrappingMaze = false;
-  private boolean isRoomMaze = false;
-  private int targetEdgeCount;
-  private Coordinates start;
-  private Coordinates goal;
+public class Maze2dBuilder implements MazeBuilder {
+  private final Configuration config;
 
-  @Override
-  public Builder setColumnCount(int columnCount) throws IllegalArgumentException {
-    if (columnCount <= 0 || columnCount > 65) {
-      throw new IllegalArgumentException("ColumnCount must be greater than zero but less than 65.");
-    }
-    this.columnCount = columnCount;
-    return this;
-  }
+  private Node[][] visited;
+  private List<Edge> edges;
+  private int exitCount = 0;
+  private int goldNodeCount;
+  private int thiefNodeCount;
 
-  @Override
-  public Builder setRowCount(int rowCount) throws IllegalArgumentException {
-    if (rowCount <= 0 || rowCount > 65) {
-      throw new IllegalArgumentException("RowCount must be greater than zero but less than 65.");
-    }
+  public Maze2dBuilder(Configuration configuration) {
+    this.config = configuration;
 
-    this.rowCount = rowCount;
-    return this;
-  }
-
-  @Override
-  public Builder setStart(int column, int row) throws IllegalArgumentException {
-    if (column < 0 || row < 0) {
-      throw new IllegalArgumentException("Column and row index cannot be negative.");
-    }
-    if (column > this.columnCount - 1 || row > this.rowCount - 1) {
-      throw new IllegalArgumentException("Column or row index is out of bounds.");
-    }
-    this.start = new MazeCoordinates(column, row);
-    return this;
-  }
-
-  @Override
-  public Builder setGoal(int column, int row) throws IllegalArgumentException {
-    if (column < 0 || row < 0) {
-      throw new IllegalArgumentException("Column and row index cannot be negative.");
-    }
-    if (column > this.columnCount - 1 || row > this.rowCount - 1) {
-      throw new IllegalArgumentException("Column or row index is out of bounds.");
-    }
-    this.goal = new MazeCoordinates(column, row);
-    return this;
-  }
-
-  @Override
-  public Builder setThiefPenalty(double thiefPenalty) throws IllegalArgumentException {
-    if (thiefPenalty < 0 || thiefPenalty > 1) {
-      throw new IllegalArgumentException("ThiefPenalty must be between 0 and 1 inclusive.");
-    }
-
-    this.thiefPenalty = thiefPenalty;
-    return this;
-  }
-
-  @Override
-  public Builder setThiefFrequency(double thiefFrequency) throws IllegalArgumentException {
-    if (thiefFrequency < 0 || thiefFrequency > 1) {
-      throw new IllegalArgumentException("ThiefFrequency must be between 0 and 1 inclusive.");
-    }
-
-    this.thiefFrequency = thiefFrequency;
-    return this;
-  }
-
-  @Override
-  public Builder setGoldFrequency(double goldFrequency) throws IllegalArgumentException {
-    if (goldFrequency < 0 || goldFrequency > 1) {
-      throw new IllegalArgumentException("GoldFrequency must be between 0 and 1 inclusive.");
-    }
-
-    this.goldFrequency = goldFrequency;
-    return this;
-  }
-
-  @Override
-  public Builder setGoldAmount(int goldAmount) throws IllegalArgumentException {
-    if (goldAmount < 0) {
-      throw new IllegalArgumentException("GoldAmount must not be negative.");
-    }
-
-    this.goldAmount = goldAmount;
-    return this;
-  }
-
-  @Override
-  public Builder setTargetEdgeCount(int targetEdgeCount) throws IllegalArgumentException {
-    if (targetEdgeCount < 0) {
-      throw new IllegalArgumentException("targetEdgeCount must not be negative.");
-    }
-    if (targetEdgeCount > (columnCount - 1) * (rowCount - 1)) {
-      throw new IllegalArgumentException(
-              "targetEdgeCount cannot be greater than perfect maze edge count.");
-    }
-
-    this.targetEdgeCount = targetEdgeCount;
-    return this;
-  }
-
-  @Override
-  public Builder setRandomSeed(int randomSeed) throws IllegalArgumentException {
-    if (randomSeed < 0) {
-      throw new IllegalArgumentException("Random seed must not be negative.");
-    }
-
-    this.randomSeed = randomSeed;
-    return this;
-  }
-
-  @Override
-  public Builder setIsWrappingMaze(boolean isWrappingMaze) {
-    this.isWrappingMaze = isWrappingMaze;
-    return this;
-  }
-
-  @Override
-  public Builder setIsRoomMaze(boolean isRoomMaze) {
-    this.isRoomMaze = isRoomMaze;
-    return this;
+    this.visited = new Node[configuration.rowCount()][configuration.columnCount()];
+    this.edges = new ArrayList<>();
   }
 
   @Override
   public Maze build() {
-    Configuration configuration = this.buildConfiguration();
-    configuration = configuration.growMaze();
-    return new Maze2d(
-            configuration.visited()[this.start.getY()][this.start.getX()],
-            configuration.visited()[this.goal.getY()][this.goal.getX()]);
-  }
-
-  @Override
-  public int getColumnCount() {
-    return this.columnCount;
-  }
-
-  @Override
-  public int getRowCount() {
-    return this.rowCount;
-  }
-
-  @Override
-  public Coordinates getStart() {
-    return this.start;
-  }
-
-  @Override
-  public Coordinates getGoal() {
-    return this.goal;
-  }
-
-  @Override
-  public double getThiefPenalty() {
-    return this.thiefPenalty;
-  }
-
-  @Override
-  public double getThiefFrequency() {
-    return this.thiefFrequency;
-  }
-
-  @Override
-  public double getGoldFrequency() {
-    return this.goldFrequency;
-  }
-
-  @Override
-  public int getGoldAmount() {
-    return this.goldAmount;
-  }
-
-  @Override
-  public int getTargetEdgeCount() {
-    return this.targetEdgeCount;
-  }
-
-  @Override
-  public int getRandomSeed() {
-    return this.randomSeed;
-  }
-
-  @Override
-  public boolean getIsWrappingMaze() {
-    return this.isWrappingMaze;
-  }
-
-  @Override
-  public boolean getIsRoomMaze() {
-    return this.isRoomMaze;
-  }
-
-  private Configuration buildConfiguration() {
-    if (isRoomMaze) {
-      return new RoomMazeConfiguration(
-              this.columnCount,
-              this.rowCount,
-              this.start,
-              this.goal,
-              this.thiefPenalty,
-              this.thiefFrequency,
-              this.goldFrequency,
-              this.goldAmount,
-              this.isWrappingMaze,
-              this.targetEdgeCount,
-              this.randomSeed);
-    } else {
-      return new PerfectMazeConfiguration(
-              this.columnCount,
-              this.rowCount,
-              this.start,
-              this.goal,
-              this.thiefPenalty,
-              this.thiefFrequency,
-              this.goldFrequency,
-              this.goldAmount,
-              this.isWrappingMaze,
-              this.randomSeed);
+    Node start = new StandardRoomNode(this.config.start());
+    this.grow(start);
+    if (this.config.isRoomMaze()) {
+      this.tearDownWalls();
     }
+
+    return new Maze2d(
+            this.visited[this.config.start().getY()][this.config.start().getX()],
+            this.visited[this.config.goal().getY()][this.config.goal().getX()]);
+  }
+
+  private void grow(Node node) {
+    // add this to the visited list
+    this.addVisited(node);
+
+    // get exit candidates
+    List<Direction> exits = this.getPotentialExits(node);
+
+    while (!exits.isEmpty()) {
+      // randomly pick exit
+      int exitIndex = exits.size() > 1 ? this.config.random().nextInt(exits.size()) : 0;
+      Direction exit = exits.get(exitIndex);
+      exits.remove(exitIndex);
+      Coordinates c = this.coordinatesAt(node, exit);
+
+      // check if node where exit points has been visited
+      Node other = this.visited[c.getY()][c.getX()];
+
+      if (other != null) {
+        // if has been visited, add an edge
+        this.addEdge(
+                node.getCoordinates(),
+                other.getCoordinates(),
+                exit.opposite(), exit);
+      } else {
+        // if has not been visited, instantiate new node and grow
+        Node room = this.generateRoom(c);
+        node.setNode(room, exit);
+        room.setNode(node, exit.opposite());
+
+        // recursively call new node's grow to continue building out the maze
+        this.grow(room);
+      }
+    }
+  }
+
+  private Node generateRoom(Coordinates c) {
+    this.exitCount++;
+    boolean isThief = this.config.random().nextDouble() <= this.config.thiefFrequency();
+    if (isThief) {
+      this.thiefNodeCount++;
+      return new ThiefRoomNode(c, this.config.thiefPenalty(), this.config.goal().equals(c));
+    }
+    boolean isGold = this.config.random().nextDouble() <= this.config.goldFrequency();
+    if (isGold) {
+      this.goldNodeCount++;
+      return new GoldRoomNode(c, this.config.goldAmount(), this.config.goal().equals(c));
+    }
+
+    return new StandardRoomNode(c, this.config.goal().equals(c));
+  }
+
+  private void addVisited(Node node) {
+    this.visited[node.getCoordinates().getY()][node.getCoordinates().getX()] = node;
+  }
+
+  private void addEdge(Coordinates one, Coordinates two, Direction tail, Direction head) {
+    Edge edge = new MazeEdge(one, two, tail, head);
+    if (!this.edges.contains(edge)) {
+      this.edges.add(edge);
+    }
+  }
+
+  private void tearDownWalls() {
+    while (edges.size() > this.config.targetEdgeCount()) {
+      int index = this.config.random().nextInt(edges.size());
+      Edge edge = this.edges.get(index);
+      edges.remove(index);
+      this.exitCount++;
+      Node tail = this.visited[edge.getTail().getY()][edge.getTail().getX()];
+      Node head = this.visited[edge.getHead().getY()][edge.getHead().getX()];
+      tail.setNode(head, edge.getHeadDirection());
+      head.setNode(tail, edge.getTailDirection());
+    }
+  }
+
+  private List<Direction> getPotentialExits(Node node) {
+    List<Direction> exits = new ArrayList<>(Arrays.asList(
+            Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST));
+    if ((node.getCoordinates().getX() == 0 && !this.config.isWrappingMaze())
+            || !(node.getNode(Direction.WEST) instanceof DeadEndNode)) {
+      exits.remove(Direction.WEST);
+    }
+    if ((node.getCoordinates().getX() == this.config.columnCount() - 1
+            && !this.config.isWrappingMaze())
+            || !(node.getNode(Direction.EAST) instanceof DeadEndNode)) {
+      exits.remove(Direction.EAST);
+    }
+    if ((node.getCoordinates().getY() == 0 && !this.config.isWrappingMaze())
+            || !(node.getNode(Direction.NORTH) instanceof DeadEndNode)) {
+      exits.remove(Direction.NORTH);
+    }
+    if ((node.getCoordinates().getY() == this.config.rowCount() - 1
+            && !this.config.isWrappingMaze())
+            || !(node.getNode(Direction.SOUTH) instanceof DeadEndNode)) {
+      exits.remove(Direction.SOUTH);
+    }
+
+    return exits;
+  }
+
+  private Coordinates coordinatesAt(Node node, Direction dir) throws IllegalArgumentException {
+    int x = 0;
+    int y = 0;
+    if (dir == Direction.NORTH) {
+      if (node.getCoordinates().getY() == 0) {
+        y = this.config.rowCount() - 1;
+      } else {
+        y = node.getCoordinates().getY() - 1;
+      }
+      x = node.getCoordinates().getX();
+    }
+    if (dir == Direction.SOUTH) {
+      if (node.getCoordinates().getY() == this.config.rowCount() - 1) {
+        y = 0;
+      } else {
+        y = node.getCoordinates().getY() + 1;
+      }
+      x = node.getCoordinates().getX();
+    }
+    if (dir == Direction.WEST) {
+      if (node.getCoordinates().getX() == 0) {
+        x = this.config.columnCount() - 1;
+      } else {
+        x = node.getCoordinates().getX() - 1;
+      }
+      y = node.getCoordinates().getY();
+    }
+    if (dir == Direction.EAST) {
+      if (node.getCoordinates().getX() == this.config.columnCount() - 1) {
+        x = 0;
+      } else {
+        x = node.getCoordinates().getX() + 1;
+      }
+      y = node.getCoordinates().getY();
+    }
+
+    return new MazeCoordinates(x, y);
   }
 }

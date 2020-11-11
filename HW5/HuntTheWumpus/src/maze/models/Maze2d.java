@@ -76,4 +76,9 @@ public class Maze2d implements Maze {
   public Node get(Coordinates coordinates) {
     return this.current.get(coordinates);
   }
+
+  @Override
+  public boolean canReach(Coordinates coordinates) throws IllegalArgumentException {
+    return this.current.canReach(coordinates);
+  }
 }

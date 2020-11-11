@@ -24,20 +24,6 @@ public interface Configuration {
   int rowCount();
 
   /**
-   * Getter for the maze start coordinates.
-   *
-   * @return the start coordinates
-   */
-  Coordinates startCoordinates();
-
-  /**
-   * Getter for the maze goal coordinates.
-   *
-   * @return the goal coordinates
-   */
-  Coordinates goalCoordinates();
-
-  /**
    * Getter for the thief penalty. Thief penalty determines percent of gold taken.
    *
    * @return the thief penalty
@@ -87,25 +73,11 @@ public interface Configuration {
   int targetEdgeCount();
 
   /**
-   * Returns the current number of room exits in the maze.
-   *
-   * @return the exit count
-   */
-  int exitCount();
-
-  /**
    * Is this a room maze.
    *
    * @return true if room maze
    */
   boolean isRoomMaze();
-
-  /**
-   * Computes the perfect room exit count and checks if existing room exit count is equal.
-   *
-   * @return true if maze has perfect exit count
-   */
-  boolean isPerfect();
 
   /**
    * Is this a wrapping maze.
@@ -115,56 +87,23 @@ public interface Configuration {
   boolean isWrappingMaze();
 
   /**
-   * Keeps track of which coordinates have been visited when building the maze.
-   * Indices are [rowCount][columnCount].
+   * Getter for the maze start coordinates.
    *
-   * @return the list tracking if a coordinate set has been visited
+   * @return the start coordinates
    */
-  Node[][] visited();
+  Coordinates start();
 
   /**
-   * Keeps track of the edges produced when building the maze.
+   * Getter for the maze goal coordinates.
    *
-   * @return the list of edges produced
+   * @return the goal coordinates
    */
-  List<Edge> edges();
+  Coordinates goal();
 
   /**
-   * Sets the node in the visited 2D array.
+   * Returns the perfect exit count for the configuration.
    *
-   * @param node the node to set
+   * @return int the perfect exit count
    */
-  void addVisited(Node node);
-
-  /**
-   * Generates a node for the specified coordinates using the maze configs.
-   *
-   * @param coordinates the coordinates at which the node will reside.
-   * @return the created node
-   */
-  Node generateRoom(Coordinates coordinates);
-
-  /**
-   * Generates the starting node for the maze.
-   *
-   * @return the starting node
-   */
-  Node generateStart();
-
-  /**
-   * Adds an edge at the specified coordinates.
-   *
-   * @param one the first coordinate
-   * @param two the second coordinate
-   * @param tail the edge direction respective to the tail
-   * @param head the edge direction respective to the head
-   */
-  void addEdge(Coordinates one, Coordinates two, Direction tail, Direction head);
-
-  /**
-   * Grows the maze using the configuration.
-   *
-   * @return the updated configuration
-   */
-  Configuration growMaze();
+  int perfectExitCount();
 }

@@ -4,7 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import maze.enums.Direction;
-import maze.interfaces.Builder;
+import maze.interfaces.ConfigurationBuilder;
+import maze.interfaces.MazeBuilder;
 import maze.interfaces.Configuration;
 import maze.interfaces.Coordinates;
 import maze.interfaces.Maze;
@@ -13,6 +14,7 @@ import maze.interfaces.Path;
 import maze.models.DeadEndNode;
 import maze.models.GoldRoomNode;
 import maze.models.Maze2dBuilder;
+import maze.models.MazeConfigurationBuilder;
 import maze.models.MazeCoordinates;
 import maze.models.PerfectMazeConfiguration;
 import maze.models.StandardRoomNode;
@@ -91,10 +93,10 @@ public class RoomNodeTest {
   public void testComplexGet() {
     Configuration configuration = new PerfectMazeConfiguration(
             50, 50, start, exit, 0.1, 0.2, 0.3, 10, false, 1);
-    Node start = new StandardRoomNode(new MazeCoordinates(0, 0));
-    configuration = start.grow(configuration);
-    Node gotten = start.get(new MazeCoordinates(49, 49));
-    assertEquals(configuration.visited()[49][49], gotten);
+    Maze maze = new Maze2dBuilder(configuration).build();
+    Coordinates coordinates = new MazeCoordinates(49, 49);
+    Node gotten = maze.get(coordinates);
+    assertEquals(coordinates, gotten.getCoordinates());
   }
 
   @Test
@@ -202,11 +204,9 @@ public class RoomNodeTest {
   public void testValidGrowSmall() {
     try {
       Configuration configuration = new PerfectMazeConfiguration(
-              2, 2, start, exit, 0.1, 0.2, 0.3, 10, false, 1);
-      Node start = new StandardRoomNode(new MazeCoordinates(0, 0));
-      configuration = start.grow(configuration);
-      assertTrue(start.canReach(new MazeCoordinates(1,1)));
-      assertTrue(configuration.isPerfect());
+              5, 5, start, exit, 0.1, 0.2, 0.3, 10, false, 1);
+      Maze maze = new Maze2dBuilder(configuration).build();
+      assertTrue(maze.canReach(new MazeCoordinates(1,1)));
     } catch (Exception e) {
       fail("Valid grow should not have failed.");
     }
@@ -217,10 +217,8 @@ public class RoomNodeTest {
     try {
       Configuration configuration = new PerfectMazeConfiguration(
               50, 50, start, exit, 0.1, 0.2, 0.3, 10, false, 1);
-      Node start = new StandardRoomNode(new MazeCoordinates(0, 0));
-      configuration = start.grow(configuration);
-      assertTrue(start.canReach(new MazeCoordinates(9,9)));
-      assertTrue(configuration.isPerfect());
+      Maze maze = new Maze2dBuilder(configuration).build();
+      assertTrue(maze.canReach(new MazeCoordinates(9,9)));
     } catch (Exception e) {
       fail("Valid grow should not have failed.");
     }
@@ -230,11 +228,9 @@ public class RoomNodeTest {
   public void testValidGrowSmallWrapping() {
     try {
       Configuration configuration = new PerfectMazeConfiguration(
-              2, 2, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
-      Node start = new StandardRoomNode(new MazeCoordinates(0, 0));
-      configuration = start.grow(configuration);
-      assertTrue(start.canReach(new MazeCoordinates(1,1)));
-      assertTrue(configuration.isPerfect());
+              5, 5, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
+      Maze maze = new Maze2dBuilder(configuration).build();
+      assertTrue(maze.canReach(new MazeCoordinates(1,1)));
     } catch (Exception e) {
       fail("Valid grow should not have failed.");
     }
@@ -243,7 +239,7 @@ public class RoomNodeTest {
   @Test
   public void testValidGrowMediumWrapping() {
     try {
-      Builder builder = new Maze2dBuilder()
+      Configuration configuration = new MazeConfigurationBuilder()
               .setColumnCount(50)
               .setRowCount(50)
               .setStart(0,0)
@@ -252,8 +248,9 @@ public class RoomNodeTest {
               .setThiefFrequency(0.1)
               .setIsWrappingMaze(true)
               .setIsRoomMaze(true)
-              .setTargetEdgeCount(35);
-      Maze wrappingMaze = builder.build();
+              .setTargetEdgeCount(35)
+              .build();
+      Maze wrappingMaze = new Maze2dBuilder(configuration).build();
       Node start = wrappingMaze.getStart();
       assertTrue(start.canReach(new MazeCoordinates(3,3)));
       assertTrue(start.exploreTo(new MazeCoordinates(49,49)).reachesTarget());

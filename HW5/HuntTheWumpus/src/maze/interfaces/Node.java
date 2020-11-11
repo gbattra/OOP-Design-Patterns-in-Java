@@ -156,17 +156,6 @@ public interface Node {
   Path pathToHelper(Path path);
 
   /**
-   * Implementation of a backtracking algorithm, with ability to create non-perfect mazes.
-   * Recursively grows the maze one node at a time. Randomly picks an exits, tries to grow
-   * in that direction. If it can't, it tries another exit until none remain, and the function
-   * returns to the calling node.
-   *
-   * @param configuration used to guide how the cells should construct themselves
-   * @return the updated configuration containing visited coordinates and edges produced
-   */
-  Configuration grow(Configuration configuration);
-
-  /**
    * Room adds to gold if GoldRoom, else if ThiefRoom steals some gold, else adds nothing.
    *
    * @param gold the gold to add to or steal from
