@@ -38,6 +38,9 @@ public abstract class AbstractRoomNode implements Node {
           Coordinates coordinates,
           int goldCount,
           double thiefPenalty) throws IllegalArgumentException {
+    if (coordinates == null) {
+      throw new IllegalArgumentException("Coordinates cannot be null.");
+    }
     if (goldCount < 0 || thiefPenalty < 0) {
       throw new IllegalArgumentException("Gold count and thief penalty cannot be negative.");
     }

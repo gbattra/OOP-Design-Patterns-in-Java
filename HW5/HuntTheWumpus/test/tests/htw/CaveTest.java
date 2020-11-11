@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.Cave;
-import htw.MazeNode;
+import htw.HTWNode;
 import maze.components.MazeCoordinates;
 import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
@@ -14,11 +14,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class CaveTest {
-  private MazeNode north;
-  private MazeNode south;
-  private MazeNode east;
-  private MazeNode west;
-  private MazeNode cave;
+  private HTWNode north;
+  private HTWNode south;
+  private HTWNode east;
+  private HTWNode west;
+  private HTWNode cave;
 
   @Before
   public void setup() {
@@ -35,7 +35,7 @@ public class CaveTest {
 
   @Test
   public void testPromote() {
-    MazeNode promoted = this.cave.promote();
+    HTWNode promoted = this.cave.promote();
     assertEquals(this.cave, promoted);
   }
 

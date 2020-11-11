@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import htw.Cave;
 import htw.DeadEnd;
-import htw.MazeNode;
+import htw.HTWNode;
 import htw.Tunnel;
 import maze.components.MazeCoordinates;
 import maze.utils.Direction;
@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class TunnelTest {
-  private MazeNode north;
-  private MazeNode tunnel;
+  private HTWNode north;
+  private HTWNode tunnel;
 
   @Before
   public void setup() {
@@ -27,14 +27,14 @@ public class TunnelTest {
 
   @Test
   public void testPromote() {
-    MazeNode promoted = this.tunnel.promote();
+    HTWNode promoted = this.tunnel.promote();
     assertEquals(this.north, promoted.getNode(Direction.NORTH));
     assertEquals(this.north.getNode(Direction.SOUTH), promoted);
   }
 
   @Test
   public void testValidEnter() {
-    MazeNode entered = this.tunnel.enter(Direction.SOUTH);
+    HTWNode entered = this.tunnel.enter(Direction.SOUTH);
     assertEquals(this.north, entered);
   }
 

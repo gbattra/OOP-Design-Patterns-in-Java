@@ -3,14 +3,14 @@ package htw;
 import maze.components.nodes.DeadEndNode;
 import maze.utils.Direction;
 
-public class DeadEnd extends DeadEndNode implements MazeNode {
+public class DeadEnd extends DeadEndNode implements HTWNode {
   @Override
-  public MazeNode enter(Direction from) throws IllegalStateException {
+  public HTWNode enter(Direction from) throws IllegalStateException {
     throw new IllegalStateException("Cannot enter a dead end node.");
   }
 
   @Override
-  public MazeNode promote() throws IllegalStateException {
+  public HTWNode promote() throws IllegalStateException {
     throw new IllegalStateException("Cannot promote a dead end node.");
   }
 }

@@ -6,8 +6,8 @@ import maze.components.Coordinates;
 import maze.components.MazeCoordinates;
 import maze.utils.Direction;
 
-public class BatCave extends Cave implements MazeNode {
-  private final MazeNode parent;
+public class BatCave extends Cave implements HTWNode {
+  private final HTWNode parent;
   private final Random random;
   private final int rowCount;
   private final int columnCount;
@@ -16,7 +16,7 @@ public class BatCave extends Cave implements MazeNode {
           int rowCount,
           int columnCount,
           Coordinates coordinates,
-          MazeNode parent) {
+          HTWNode parent) {
     super(coordinates);
     this.parent = parent;
     this.random = new Random();
@@ -25,12 +25,12 @@ public class BatCave extends Cave implements MazeNode {
   }
 
   @Override
-  public MazeNode enter(Direction from) {
+  public HTWNode enter(Direction from) {
     if (this.random.nextDouble() <= 0.5) {
       int row = this.random.nextInt(this.rowCount);
       int column = this.random.nextInt(this.columnCount);
       Coordinates coordinates = new MazeCoordinates(column, row);
-      return ((MazeNode) this.get(coordinates)).enter(from);
+      return ((HTWNode) this.get(coordinates)).enter(from);
     }
 
     return this.parent.enter(from);
