@@ -7,7 +7,7 @@ import maze.utils.Direction;
  * Represents a maze object. Mazes have a starting point and an exit, as well as a current node
  * at which the navigator/player is currently located.
  */
-public interface Maze {
+public interface IMaze {
   /**
    * Gets the starting node for the maze.
    *
@@ -43,7 +43,7 @@ public interface Maze {
    * @param coordinates the target coordinates
    * @return the path taken through the maze
    */
-  Path wealthiestPathTo(Coordinates coordinates);
+  IPath wealthiestPathTo(ICoordinates coordinates);
 
   /**
    * Traverses the maze to find a path reaching the specified coordinates.
@@ -51,7 +51,7 @@ public interface Maze {
    * @param coordinates the target coordinates
    * @return the path taken through the maze
    */
-  Path pathTo(Coordinates coordinates);
+  IPath pathTo(ICoordinates coordinates);
 
   /**
    * Traverses the entire maze, reaching every room within the maze and returning the path
@@ -60,7 +60,7 @@ public interface Maze {
    * @param coordinates the target coordinates
    * @return the path taken through the maze
    */
-  Path exploreTo(Coordinates coordinates);
+  IPath exploreTo(ICoordinates coordinates);
 
   /**
    * Gets the node at the specified coordinates.
@@ -68,7 +68,7 @@ public interface Maze {
    * @param coordinates the coordinates at which the desired node resides
    * @return the queried node
    */
-  Node get(Coordinates coordinates);
+  Node get(ICoordinates coordinates);
 
   /**
    * Determines if target coordinates can be reached from the cell.
@@ -77,5 +77,5 @@ public interface Maze {
    * @return true if can reach target, false otherwise
    * @throws IllegalArgumentException if coordinates are out of bounds
    */
-  boolean canReach(Coordinates coordinates) throws IllegalArgumentException;
+  boolean canReach(ICoordinates coordinates) throws IllegalArgumentException;
 }

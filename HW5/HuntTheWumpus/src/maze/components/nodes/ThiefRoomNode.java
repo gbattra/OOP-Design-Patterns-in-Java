@@ -1,6 +1,6 @@
 package maze.components.nodes;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 /**
  * Maze node which contains a thief that steals a percent of the player's gold if they enter.
@@ -14,7 +14,7 @@ public class ThiefRoomNode extends AbstractRoomNode {
    * @throws IllegalArgumentException when goldCount is negative
    */
   public ThiefRoomNode(
-          Coordinates coordinates,
+          ICoordinates coordinates,
           double thiefPenalty) throws IllegalArgumentException {
     super(coordinates, 0, thiefPenalty);
   }
@@ -28,7 +28,7 @@ public class ThiefRoomNode extends AbstractRoomNode {
    * @throws IllegalArgumentException when goldCount is negative
    */
   public ThiefRoomNode(
-          Coordinates coordinates,
+          ICoordinates coordinates,
           double thiefPenalty,
           boolean isGoal) throws IllegalArgumentException {
     super(coordinates, 0, thiefPenalty, isGoal);

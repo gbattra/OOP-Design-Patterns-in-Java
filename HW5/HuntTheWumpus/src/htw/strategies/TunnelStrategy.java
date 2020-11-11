@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import htw.nodes.HtwNode;
+import htw.nodes.INode;
 import maze.utils.Direction;
 
-public class TunnelStrategy extends StandardStrategy implements HtwNodeStrategy {
+public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
   @Override
-  public HtwNode enter(Direction from, HtwNode curr) {
+  public INode enter(Direction from, INode curr) {
       List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {
@@ -21,7 +21,7 @@ public class TunnelStrategy extends StandardStrategy implements HtwNodeStrategy 
       }
 
       try {
-        HtwNode node = (HtwNode) curr.getNode(exit);
+        INode node = (INode) curr.getNode(exit);
         return node.enter(from);
       } catch (Exception ignored) {
       }
@@ -31,7 +31,7 @@ public class TunnelStrategy extends StandardStrategy implements HtwNodeStrategy 
   }
 
   @Override
-  public boolean shoot(Direction direction, int count, HtwNode curr) {
+  public boolean shoot(Direction direction, int count, INode curr) {
     if (count < 0) {
       throw new IllegalArgumentException("Count cannot be negative.");
     }
@@ -42,7 +42,7 @@ public class TunnelStrategy extends StandardStrategy implements HtwNodeStrategy 
       if (exit == direction.opposite()) {
         continue;
       }
-      hit |= ((HtwNode) curr.getNode(exit)).shoot(exit, count);
+      hit |= ((INode) curr.getNode(exit)).shoot(exit, count);
     }
 
     return hit;

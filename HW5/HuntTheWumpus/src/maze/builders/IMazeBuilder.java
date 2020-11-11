@@ -2,22 +2,22 @@ package maze.builders;
 
 import java.util.List;
 
-import maze.components.Edge;
-import maze.components.Maze;
+import maze.components.IEdge;
+import maze.components.IMaze;
 import maze.components.nodes.Node;
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.utils.Direction;
 
 /**
  * Builder class to help setup a maze. It is recommended to use this class to build a maze.
  */
-public interface MazeBuilder {
+public interface IMazeBuilder {
   /**
    * Builds the maze using the setup configurations.
    *
    * @return the built maze
    */
-  Maze build();
+  IMaze build();
 
   /**
    * Keeps track of which coordinates have been visited when building the maze.
@@ -32,7 +32,7 @@ public interface MazeBuilder {
    *
    * @return the list of edges produced
    */
-  List<Edge> edges();
+  List<IEdge> edges();
 
   /**
    * Sets the node in the visited 2D array.
@@ -47,7 +47,7 @@ public interface MazeBuilder {
    * @param coordinates the coordinates at which the node will reside.
    * @return the created node
    */
-  Node generateRoom(Coordinates coordinates);
+  Node generateRoom(ICoordinates coordinates);
 
   /**
    * Adds an edge at the specified coordinates.
@@ -57,7 +57,7 @@ public interface MazeBuilder {
    * @param tail the edge direction respective to the tail
    * @param head the edge direction respective to the head
    */
-  void addEdge(Coordinates one, Coordinates two, Direction tail, Direction head);
+  void addEdge(ICoordinates one, ICoordinates two, Direction tail, Direction head);
 
   /**
    * Computes the perfect room exit count and checks if existing room exit count is equal.

@@ -3,7 +3,7 @@ package tests.maze.game;
 import org.junit.Test;
 
 import maze.components.nodes.Node;
-import maze.game.Player;
+import maze.game.IMazePlayer;
 import maze.components.nodes.GoldRoomNode;
 import maze.components.MazeCoordinates;
 import maze.game.MazePlayer;
@@ -18,7 +18,7 @@ public class MazePlayerTest {
   @Test
   public void testValidConstructor() {
     try {
-      Player player = new MazePlayer("Joe");
+      IMazePlayer player = new MazePlayer("Joe");
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -26,13 +26,13 @@ public class MazePlayerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    Player player = new MazePlayer("");
+    IMazePlayer player = new MazePlayer("");
   }
 
   @Test
   public void testGetters() {
     Node node = new GoldRoomNode(new MazeCoordinates(0,0), 10);
-    Player player = new MazePlayer("Joe");
+    IMazePlayer player = new MazePlayer("Joe");
     player = player.loot(node);
     assertEquals(10, player.getGold());
     assertEquals("Joe", player.getName());

@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import htw.nodes.Cave;
 import htw.nodes.DeadEnd;
-import htw.nodes.HtwNode;
+import htw.nodes.INode;
 import htw.strategies.StandardStrategy;
-import htw.strategies.HtwNodeStrategy;
+import htw.strategies.INodeStrategy;
 import htw.strategies.TunnelStrategy;
 import maze.components.MazeCoordinates;
 import maze.utils.Direction;
@@ -17,9 +17,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 public class TunnelTest {
-  private HtwNodeStrategy strategy = new TunnelStrategy();
-  private HtwNode north;
-  private HtwNode tunnel;
+  private INodeStrategy strategy = new TunnelStrategy();
+  private INode north;
+  private INode tunnel;
 
   @Before
   public void setup() {
@@ -31,14 +31,14 @@ public class TunnelTest {
 
   @Test
   public void testValidEnter() {
-    HtwNode entered = this.tunnel.enter(Direction.SOUTH);
+    INode entered = this.tunnel.enter(Direction.SOUTH);
     assertEquals(this.north, entered);
   }
 
   @Test(expected = IllegalStateException.class)
   public void testInvalidEnter() {
     this.tunnel.setNode(new DeadEnd(), Direction.NORTH);
-    HtwNode entered = this.tunnel.enter(Direction.SOUTH);
+    INode entered = this.tunnel.enter(Direction.SOUTH);
     fail("Invalid enter() should have failed.");
   }
 

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import maze.components.Edge;
-import maze.components.Maze;
+import maze.components.IEdge;
+import maze.components.IMaze;
 import maze.components.nodes.Node;
 import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.GoldRoomNode;
@@ -13,24 +13,24 @@ import maze.components.Maze2d;
 import maze.components.MazeEdge;
 import maze.components.nodes.StandardRoomNode;
 import maze.components.nodes.ThiefRoomNode;
-import maze.config.Configuration;
-import maze.components.Coordinates;
+import maze.config.IConfiguration;
+import maze.components.ICoordinates;
 import maze.utils.Direction;
 import maze.components.MazeCoordinates;
 
 /**
  * Builder class for the Maze2d class. Contains default configs to make customizing easier.
  */
-public class Maze2dBuilder implements MazeBuilder {
-  private final Configuration config;
+public class Maze2dBuilder implements IMazeBuilder {
+  private final IConfiguration config;
 
   private Node[][] visited;
-  private List<Edge> edges;
+  private List<IEdge> edges;
   private int exitCount = 0;
   private int goldNodeCount;
   private int thiefNodeCount;
 
-  public Maze2dBuilder(Configuration configuration) {
+  public Maze2dBuilder(IConfiguration configuration) {
     this.config = configuration;
 
     this.visited = new Node[configuration.rowCount()][configuration.columnCount()];
@@ -43,7 +43,7 @@ public class Maze2dBuilder implements MazeBuilder {
   }
 
   @Override
-  public List<Edge> edges() {
+  public List<IEdge> edges() {
     return this.edges;
   }
 
@@ -53,7 +53,7 @@ public class Maze2dBuilder implements MazeBuilder {
   }
 
   @Override
-  public Maze build() {
+  public IMaze build() {
     Node start = new StandardRoomNode(this.config.start());
     this.grow(start);
     if (this.config.isRoomMaze()) {
@@ -66,7 +66,7 @@ public class Maze2dBuilder implements MazeBuilder {
   }
 
   @Override
-  public Node generateRoom(Coordinates c) {
+  public Node generateRoom(ICoordinates c) {
     this.exitCount++;
     boolean isThief = this.config.random().nextDouble() <= this.config.thiefFrequency();
     if (isThief) {
@@ -88,8 +88,8 @@ public class Maze2dBuilder implements MazeBuilder {
   }
 
   @Override
-  public void addEdge(Coordinates one, Coordinates two, Direction tail, Direction head) {
-    Edge edge = new MazeEdge(one, two, tail, head);
+  public void addEdge(ICoordinates one, ICoordinates two, Direction tail, Direction head) {
+    IEdge edge = new MazeEdge(one, two, tail, head);
     if (!this.edges.contains(edge)) {
       this.edges.add(edge);
     }
@@ -108,7 +108,7 @@ public class Maze2dBuilder implements MazeBuilder {
       int exitIndex = exits.size() > 1 ? this.config.random().nextInt(exits.size()) : 0;
       Direction exit = exits.get(exitIndex);
       exits.remove(exitIndex);
-      Coordinates c = this.coordinatesAt(node, exit);
+      ICoordinates c = this.coordinatesAt(node, exit);
 
       // check if node where exit points has been visited
       Node other = this.visited[c.getY()][c.getX()];
@@ -134,7 +134,7 @@ public class Maze2dBuilder implements MazeBuilder {
   private void tearDownWalls() {
     while (edges.size() > this.config.targetEdgeCount()) {
       int index = this.config.random().nextInt(edges.size());
-      Edge edge = this.edges.get(index);
+      IEdge edge = this.edges.get(index);
       edges.remove(index);
       this.exitCount++;
       Node tail = this.visited[edge.getTail().getY()][edge.getTail().getX()];
@@ -169,7 +169,7 @@ public class Maze2dBuilder implements MazeBuilder {
     return exits;
   }
 
-  private Coordinates coordinatesAt(Node node, Direction dir) throws IllegalArgumentException {
+  private ICoordinates coordinatesAt(Node node, Direction dir) throws IllegalArgumentException {
     int x = 0;
     int y = 0;
     if (dir == Direction.NORTH) {

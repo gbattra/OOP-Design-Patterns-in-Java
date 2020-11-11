@@ -1,12 +1,12 @@
 package maze.builders;
 
-import maze.config.Configuration;
-import maze.components.Coordinates;
+import maze.config.IConfiguration;
+import maze.components.ICoordinates;
 import maze.components.MazeCoordinates;
 import maze.config.PerfectMazeConfiguration;
 import maze.config.RoomMazeConfiguration;
 
-public class MazeConfigurationBuilder implements ConfigurationBuilder {
+public class MazeConfigurationBuilder implements IConfigurationBuilder {
   private int columnCount = 10;
   private int rowCount = 10;
   private int randomSeed = 0;
@@ -17,11 +17,11 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   private boolean isWrappingMaze = false;
   private boolean isRoomMaze = false;
   private int targetEdgeCount;
-  private Coordinates start;
-  private Coordinates goal;
+  private ICoordinates start;
+  private ICoordinates goal;
 
   @Override
-  public ConfigurationBuilder setColumnCount(int columnCount) throws IllegalArgumentException {
+  public IConfigurationBuilder setColumnCount(int columnCount) throws IllegalArgumentException {
     if (columnCount <= 0 || columnCount > 65) {
       throw new IllegalArgumentException("ColumnCount must be greater than zero but less than 65.");
     }
@@ -30,7 +30,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setRowCount(int rowCount) throws IllegalArgumentException {
+  public IConfigurationBuilder setRowCount(int rowCount) throws IllegalArgumentException {
     if (rowCount <= 0 || rowCount > 65) {
       throw new IllegalArgumentException("RowCount must be greater than zero but less than 65.");
     }
@@ -40,7 +40,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setStart(int column, int row) throws IllegalArgumentException {
+  public IConfigurationBuilder setStart(int column, int row) throws IllegalArgumentException {
     if (column < 0 || row < 0) {
       throw new IllegalArgumentException("Column and row index cannot be negative.");
     }
@@ -52,7 +52,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setGoal(int column, int row) throws IllegalArgumentException {
+  public IConfigurationBuilder setGoal(int column, int row) throws IllegalArgumentException {
     if (column < 0 || row < 0) {
       throw new IllegalArgumentException("Column and row index cannot be negative.");
     }
@@ -64,7 +64,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setThiefPenalty(double thiefPenalty) throws IllegalArgumentException {
+  public IConfigurationBuilder setThiefPenalty(double thiefPenalty) throws IllegalArgumentException {
     if (thiefPenalty < 0 || thiefPenalty > 1) {
       throw new IllegalArgumentException("ThiefPenalty must be between 0 and 1 inclusive.");
     }
@@ -74,7 +74,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setThiefFrequency(double thiefFrequency) throws IllegalArgumentException {
+  public IConfigurationBuilder setThiefFrequency(double thiefFrequency) throws IllegalArgumentException {
     if (thiefFrequency < 0 || thiefFrequency > 1) {
       throw new IllegalArgumentException("ThiefFrequency must be between 0 and 1 inclusive.");
     }
@@ -84,7 +84,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setGoldFrequency(double goldFrequency) throws IllegalArgumentException {
+  public IConfigurationBuilder setGoldFrequency(double goldFrequency) throws IllegalArgumentException {
     if (goldFrequency < 0 || goldFrequency > 1) {
       throw new IllegalArgumentException("GoldFrequency must be between 0 and 1 inclusive.");
     }
@@ -94,7 +94,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setGoldAmount(int goldAmount) throws IllegalArgumentException {
+  public IConfigurationBuilder setGoldAmount(int goldAmount) throws IllegalArgumentException {
     if (goldAmount < 0) {
       throw new IllegalArgumentException("GoldAmount must not be negative.");
     }
@@ -104,7 +104,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setTargetEdgeCount(int targetEdgeCount) throws IllegalArgumentException {
+  public IConfigurationBuilder setTargetEdgeCount(int targetEdgeCount) throws IllegalArgumentException {
     if (targetEdgeCount < 0) {
       throw new IllegalArgumentException("targetEdgeCount must not be negative.");
     }
@@ -118,7 +118,7 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setRandomSeed(int randomSeed) throws IllegalArgumentException {
+  public IConfigurationBuilder setRandomSeed(int randomSeed) throws IllegalArgumentException {
     if (randomSeed < 0) {
       throw new IllegalArgumentException("Random seed must not be negative.");
     }
@@ -128,19 +128,19 @@ public class MazeConfigurationBuilder implements ConfigurationBuilder {
   }
 
   @Override
-  public ConfigurationBuilder setIsWrappingMaze(boolean isWrappingMaze) {
+  public IConfigurationBuilder setIsWrappingMaze(boolean isWrappingMaze) {
     this.isWrappingMaze = isWrappingMaze;
     return this;
   }
 
   @Override
-  public ConfigurationBuilder setIsRoomMaze(boolean isRoomMaze) {
+  public IConfigurationBuilder setIsRoomMaze(boolean isRoomMaze) {
     this.isRoomMaze = isRoomMaze;
     return this;
   }
 
   @Override
-  public Configuration build() {
+  public IConfiguration build() {
     if (isRoomMaze) {
       return new RoomMazeConfiguration(
               this.columnCount,

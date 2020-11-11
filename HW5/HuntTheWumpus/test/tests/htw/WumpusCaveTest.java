@@ -3,12 +3,9 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Random;
-
 import htw.nodes.Cave;
-import htw.nodes.HtwNode;
-import htw.strategies.BatStrategy;
-import htw.strategies.HtwNodeStrategy;
+import htw.nodes.INode;
+import htw.strategies.INodeStrategy;
 import htw.strategies.StandardStrategy;
 import htw.strategies.WumpusStrategy;
 import maze.components.MazeCoordinates;
@@ -18,12 +15,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WumpusCaveTest {
-  private HtwNodeStrategy standard = new StandardStrategy();
-  private HtwNode north;
-  private HtwNode south;
-  private HtwNode east;
-  private HtwNode west;
-  private HtwNode wumpus;
+  private INodeStrategy standard = new StandardStrategy();
+  private INode north;
+  private INode south;
+  private INode east;
+  private INode west;
+  private INode wumpus;
 
   @Before
   public void setup() {

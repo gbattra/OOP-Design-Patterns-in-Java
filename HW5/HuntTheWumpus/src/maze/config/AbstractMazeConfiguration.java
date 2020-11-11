@@ -2,17 +2,17 @@ package maze.config;
 
 import java.util.Random;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 /**
  * Abstract class holding basic configuration getter methods as well as some helper methods
  * for creating the start node and generating nodes as the maze is built.
  */
-public abstract class AbstractMazeConfiguration implements Configuration {
+public abstract class AbstractMazeConfiguration implements IConfiguration {
   protected final int columnCount;
   protected final int rowCount;
-  protected final Coordinates start;
-  protected final Coordinates goal;
+  protected final ICoordinates start;
+  protected final ICoordinates goal;
   protected final int randomSeed;
   protected final Random random;
   protected final double thiefPenalty;
@@ -44,8 +44,8 @@ public abstract class AbstractMazeConfiguration implements Configuration {
   public AbstractMazeConfiguration(
           int rowCount,
           int columnCount,
-          Coordinates start,
-          Coordinates goal,
+          ICoordinates start,
+          ICoordinates goal,
           double thiefPenalty,
           double thiefFrequency,
           double goldFrequency,
@@ -144,12 +144,12 @@ public abstract class AbstractMazeConfiguration implements Configuration {
   }
 
   @Override
-  public Coordinates start() {
+  public ICoordinates start() {
     return this.start;
   }
 
   @Override
-  public Coordinates goal() {
+  public ICoordinates goal() {
     return this.goal;
   }
 

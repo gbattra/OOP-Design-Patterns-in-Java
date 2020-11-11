@@ -7,9 +7,9 @@ import maze.utils.Direction;
  * respective directions relative to the center of the wall.
  *
  */
-public class MazeEdge implements Edge {
-  private final Coordinates tail;
-  private final Coordinates head;
+public class MazeEdge implements IEdge {
+  private final ICoordinates tail;
+  private final ICoordinates head;
   private final Direction tailDirection;
   private final Direction headDirection;
 
@@ -22,8 +22,8 @@ public class MazeEdge implements Edge {
    * @param headDirection the head direction
    */
   public MazeEdge(
-          Coordinates tail,
-          Coordinates head,
+          ICoordinates tail,
+          ICoordinates head,
           Direction tailDirection,
           Direction headDirection) {
     this.tail = tail;
@@ -33,12 +33,12 @@ public class MazeEdge implements Edge {
   }
 
   @Override
-  public Coordinates getTail() {
+  public ICoordinates getTail() {
     return this.tail;
   }
 
   @Override
-  public Coordinates getHead() {
+  public ICoordinates getHead() {
     return this.head;
   }
 
@@ -68,8 +68,8 @@ public class MazeEdge implements Edge {
       return true;
     }
 
-    if (obj instanceof Edge) {
-      Edge o = (Edge) obj;
+    if (obj instanceof IEdge) {
+      IEdge o = (IEdge) obj;
       return (o.getTail().equals(this.getTail()) || o.getTail().equals(this.getHead()))
               && (o.getHead().equals(this.getHead()) || o.getHead().equals(this.getTail()));
     }

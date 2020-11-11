@@ -1,8 +1,8 @@
 package maze.builders;
 
-import maze.config.Configuration;
+import maze.config.IConfiguration;
 
-public interface ConfigurationBuilder {
+public interface IConfigurationBuilder {
   /**
    * Sets the number of columns in the maze.
    *
@@ -10,7 +10,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if column count is negative or too big
    */
-  ConfigurationBuilder setColumnCount(int columnCount) throws IllegalArgumentException;
+  IConfigurationBuilder setColumnCount(int columnCount) throws IllegalArgumentException;
 
   /**
    * Sets the number of rows in the maze.
@@ -19,7 +19,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if row count is negative or too big
    */
-  ConfigurationBuilder setRowCount(int rowCount) throws IllegalArgumentException;
+  IConfigurationBuilder setRowCount(int rowCount) throws IllegalArgumentException;
 
   /**
    * Sets the start location in the maze.
@@ -29,7 +29,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if column or row are out of range or negative
    */
-  ConfigurationBuilder setStart(int column, int row) throws IllegalArgumentException;
+  IConfigurationBuilder setStart(int column, int row) throws IllegalArgumentException;
 
   /**
    * Sets the goal location in the maze.
@@ -39,7 +39,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if column or row are out of range or negative
    */
-  ConfigurationBuilder setGoal(int column, int row) throws IllegalArgumentException;
+  IConfigurationBuilder setGoal(int column, int row) throws IllegalArgumentException;
 
   /**
    * Sets the thief penalty on the configuration.
@@ -48,7 +48,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if thief penalty is negative or > 1
    */
-  ConfigurationBuilder setThiefPenalty(double thiefPenalty) throws IllegalArgumentException;
+  IConfigurationBuilder setThiefPenalty(double thiefPenalty) throws IllegalArgumentException;
 
   /**
    * Sets the frequency of thief nodes in the maze.
@@ -57,7 +57,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if thief freq is negative or > 1
    */
-  ConfigurationBuilder setThiefFrequency(double thiefFrequency) throws IllegalArgumentException;
+  IConfigurationBuilder setThiefFrequency(double thiefFrequency) throws IllegalArgumentException;
 
   /**
    * Sets the frequency of gold nodes in the maze.
@@ -66,7 +66,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if gold freq is negative or > 1
    */
-  ConfigurationBuilder setGoldFrequency(double goldFrequency) throws IllegalArgumentException;
+  IConfigurationBuilder setGoldFrequency(double goldFrequency) throws IllegalArgumentException;
 
   /**
    * Sets the amount of gold in a gold node.
@@ -75,7 +75,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if goldAmount is negative
    */
-  ConfigurationBuilder setGoldAmount(int goldAmount) throws IllegalArgumentException;
+  IConfigurationBuilder setGoldAmount(int goldAmount) throws IllegalArgumentException;
 
   /**
    * Sets the desired edge count after the maze is built.
@@ -84,7 +84,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if targetRoomCount is negative or too high
    */
-  ConfigurationBuilder setTargetEdgeCount(int targetRoomCount) throws IllegalArgumentException;
+  IConfigurationBuilder setTargetEdgeCount(int targetRoomCount) throws IllegalArgumentException;
 
   /**
    * Sets the random seed to use when generating the maze.
@@ -93,7 +93,7 @@ public interface ConfigurationBuilder {
    * @return the updated builder instance
    * @throws IllegalArgumentException if random seed is negative
    */
-  ConfigurationBuilder setRandomSeed(int randomSeed) throws IllegalArgumentException;
+  IConfigurationBuilder setRandomSeed(int randomSeed) throws IllegalArgumentException;
 
   /**
    * Sets the config as a wrapping maze if true.
@@ -101,7 +101,7 @@ public interface ConfigurationBuilder {
    * @param isWrappingMaze is this maze a wrapping maze
    * @return the updated builder instance
    */
-  ConfigurationBuilder setIsWrappingMaze(boolean isWrappingMaze);
+  IConfigurationBuilder setIsWrappingMaze(boolean isWrappingMaze);
 
   /**
    * Sets the config as a room maze if true.
@@ -109,12 +109,12 @@ public interface ConfigurationBuilder {
    * @param isRoomMaze is this maze a room maze.
    * @return the updated builder instance
    */
-  ConfigurationBuilder setIsRoomMaze(boolean isRoomMaze);
+  IConfigurationBuilder setIsRoomMaze(boolean isRoomMaze);
 
   /**
    * Builds the configurations.
    *
    * @return the built maze
    */
-  Configuration build();
+  IConfiguration build();
 }

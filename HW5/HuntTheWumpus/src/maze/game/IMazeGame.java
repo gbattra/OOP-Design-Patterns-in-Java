@@ -1,34 +1,34 @@
 package maze.game;
 
-import maze.components.Maze;
-import maze.components.Path;
+import maze.components.IMaze;
+import maze.components.IPath;
 import maze.utils.Direction;
 
 /**
  * Interface representing a game where a player traverses a maze and collects gold as they
  * reach the exit.
  */
-public interface Game {
+public interface IMazeGame {
   /**
    * Returns the player instance in the game.
    *
    * @return the player
    */
-  Player getPlayer();
+  IMazePlayer getPlayer();
 
   /**
    * Return the maze instance which the player is navigating.
    *
    * @return the maze instance
    */
-  Maze getMaze();
+  IMaze getMaze();
 
   /**
    * Gets path taken so far.
    *
    * @return the path object
    */
-  Path getPath();
+  IPath getPath();
 
   /**
    * Get the current score of the game (the player gold count).

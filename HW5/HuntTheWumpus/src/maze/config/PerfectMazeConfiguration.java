@@ -1,6 +1,6 @@
 package maze.config;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 /**
  * Configuration object for a perfect maze. Minimizes configuration constructor to prevent a bad
@@ -25,8 +25,8 @@ public class PerfectMazeConfiguration extends AbstractMazeConfiguration {
   public PerfectMazeConfiguration(
           int rowCount,
           int columnCount,
-          Coordinates start,
-          Coordinates goal,
+          ICoordinates start,
+          ICoordinates goal,
           double thiefPenalty,
           double thiefFrequency,
           double goldFrequency,

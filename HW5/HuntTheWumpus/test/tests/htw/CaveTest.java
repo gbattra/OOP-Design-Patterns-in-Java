@@ -4,10 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.nodes.Cave;
-import htw.nodes.HtwNode;
+import htw.nodes.INode;
 import htw.strategies.StandardStrategy;
-import htw.strategies.HtwNodeStrategy;
-import htw.strategies.TunnelStrategy;
+import htw.strategies.INodeStrategy;
 import htw.strategies.WumpusStrategy;
 import maze.components.MazeCoordinates;
 import maze.components.nodes.Node;
@@ -21,12 +20,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class CaveTest {
-  private HtwNodeStrategy strategy = new StandardStrategy();
-  private HtwNode north;
-  private HtwNode south;
-  private HtwNode east;
-  private HtwNode west;
-  private HtwNode cave;
+  private INodeStrategy strategy = new StandardStrategy();
+  private INode north;
+  private INode south;
+  private INode east;
+  private INode west;
+  private INode cave;
 
   @Before
   public void setup() {
@@ -76,8 +75,8 @@ public class CaveTest {
   @Test
   public void testSetStrategy() {
     assertFalse(this.cave.shoot(Direction.SOUTH, 1));
-    HtwNodeStrategy newStrat = new WumpusStrategy();
-    ((HtwNode) this.cave.getNode(Direction.SOUTH)).setStrategy(newStrat);
+    INodeStrategy newStrat = new WumpusStrategy();
+    ((INode) this.cave.getNode(Direction.SOUTH)).setStrategy(newStrat);
     assertTrue(this.cave.shoot(Direction.SOUTH, 1));
   }
 }

@@ -1,9 +1,9 @@
 package maze.components.nodes;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.components.MazeCoordinates;
 import maze.components.MazePath;
-import maze.components.Path;
+import maze.components.IPath;
 import maze.utils.Direction;
 
 /**
@@ -11,12 +11,12 @@ import maze.utils.Direction;
  */
 public class DeadEndNode implements Node {
   @Override
-  public Node get(Coordinates coordinates) {
+  public Node get(ICoordinates coordinates) {
     return this.getHelper(new MazePath(coordinates));
   }
 
   @Override
-  public Node getHelper(Path path) {
+  public Node getHelper(IPath path) {
     return this;
   }
 
@@ -31,7 +31,7 @@ public class DeadEndNode implements Node {
   }
 
   @Override
-  public Coordinates getCoordinates() {
+  public ICoordinates getCoordinates() {
     return new MazeCoordinates(0, 0);
   }
 
@@ -51,42 +51,42 @@ public class DeadEndNode implements Node {
   }
 
   @Override
-  public boolean canReach(Coordinates coordinates) throws IllegalArgumentException {
+  public boolean canReach(ICoordinates coordinates) throws IllegalArgumentException {
     return this.canReachHelper(new MazePath(coordinates));
   }
 
   @Override
-  public boolean canReachHelper(Path path) {
+  public boolean canReachHelper(IPath path) {
     return false;
   }
 
   @Override
-  public Path wealthiestPathTo(Coordinates coordinates) throws IllegalArgumentException {
+  public IPath wealthiestPathTo(ICoordinates coordinates) throws IllegalArgumentException {
     return new MazePath(coordinates);
   }
 
   @Override
-  public Path wealthiestPathToHelper(Path path) throws IllegalArgumentException {
+  public IPath wealthiestPathToHelper(IPath path) throws IllegalArgumentException {
     return path;
   }
 
   @Override
-  public Path exploreTo(Coordinates coordinates) {
+  public IPath exploreTo(ICoordinates coordinates) {
     return this.exploreHelper(new MazePath(coordinates));
   }
 
   @Override
-  public Path exploreHelper(Path path) {
+  public IPath exploreHelper(IPath path) {
     return path;
   }
 
   @Override
-  public Path pathTo(Coordinates coordinates) {
+  public IPath pathTo(ICoordinates coordinates) {
     return this.pathToHelper(new MazePath(coordinates));
   }
 
   @Override
-  public Path pathToHelper(Path path) {
+  public IPath pathToHelper(IPath path) {
     return path;
   }
 

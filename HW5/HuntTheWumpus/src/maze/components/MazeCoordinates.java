@@ -3,7 +3,7 @@ package maze.components;
 /**
  * Concrete representation of a coordinate set.
  */
-public class MazeCoordinates implements Coordinates {
+public class MazeCoordinates implements ICoordinates {
   private final int x;
   private final int y;
 
@@ -49,8 +49,8 @@ public class MazeCoordinates implements Coordinates {
       return true;
     }
 
-    if (other instanceof Coordinates) {
-      Coordinates o = (Coordinates) other;
+    if (other instanceof ICoordinates) {
+      ICoordinates o = (ICoordinates) other;
       return this.x == o.getX() && this.y == o.getY();
     }
 

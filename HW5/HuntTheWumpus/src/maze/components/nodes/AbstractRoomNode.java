@@ -6,9 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.components.MazePath;
-import maze.components.Path;
+import maze.components.IPath;
 import maze.utils.Direction;
 
 /**
@@ -21,7 +21,7 @@ public abstract class AbstractRoomNode implements Node {
   protected Node east = new DeadEndNode();
   protected Node west = new DeadEndNode();
 
-  protected final Coordinates coordinates;
+  protected final ICoordinates coordinates;
   protected final int goldCount;
   protected final boolean isGoal;
   protected final double thiefPenalty;
@@ -35,7 +35,7 @@ public abstract class AbstractRoomNode implements Node {
    * @throws IllegalArgumentException when goldCount is negative
    */
   public AbstractRoomNode(
-          Coordinates coordinates,
+          ICoordinates coordinates,
           int goldCount,
           double thiefPenalty) throws IllegalArgumentException {
     if (coordinates == null) {
@@ -60,7 +60,7 @@ public abstract class AbstractRoomNode implements Node {
    * @throws IllegalArgumentException when goldCount is negative
    */
   public AbstractRoomNode(
-          Coordinates coordinates,
+          ICoordinates coordinates,
           int goldCount,
           double thiefPenalty,
           boolean isGoal) throws IllegalArgumentException {
@@ -92,17 +92,17 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   @Override
-  public Coordinates getCoordinates() {
+  public ICoordinates getCoordinates() {
     return this.coordinates;
   }
 
   @Override
-  public Node get(Coordinates coordinates) {
+  public Node get(ICoordinates coordinates) {
     return this.getHelper(new MazePath(coordinates));
   }
 
   @Override
-  public Node getHelper(Path path) {
+  public Node getHelper(IPath path) {
     if (path.getCoordinatesTraversed().contains(this.coordinates)) {
       return new DeadEndNode();
     }
@@ -159,12 +159,12 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   @Override
-  public boolean canReach(Coordinates coordinates) throws IllegalArgumentException {
+  public boolean canReach(ICoordinates coordinates) throws IllegalArgumentException {
     return this.canReachHelper(new MazePath(coordinates));
   }
 
   @Override
-  public boolean canReachHelper(Path path) {
+  public boolean canReachHelper(IPath path) {
     if (path.getCoordinatesTraversed().contains(this.coordinates)) {
       return false;
     }
@@ -182,12 +182,12 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   @Override
-  public Path pathTo(Coordinates coordinates) {
+  public IPath pathTo(ICoordinates coordinates) {
     return this.pathToHelper(new MazePath(coordinates));
   }
 
   @Override
-  public Path pathToHelper(Path path) {
+  public IPath pathToHelper(IPath path) {
     if (path.getCoordinatesTraversed().contains(this.coordinates)) {
       return path;
     }
@@ -198,22 +198,22 @@ public abstract class AbstractRoomNode implements Node {
       return path.setReachesTarget(true);
     }
 
-    Path north = this.north.pathToHelper(path);
+    IPath north = this.north.pathToHelper(path);
     if (north.reachesTarget()) {
       return north;
     }
 
-    Path south = this.south.pathToHelper(path);
+    IPath south = this.south.pathToHelper(path);
     if (south.reachesTarget()) {
       return south;
     }
 
-    Path east = this.east.pathToHelper(path);
+    IPath east = this.east.pathToHelper(path);
     if (east.reachesTarget()) {
       return east;
     }
 
-    Path west = this.west.pathToHelper(path);
+    IPath west = this.west.pathToHelper(path);
     if (west.reachesTarget()) {
       return west;
     }
@@ -222,12 +222,12 @@ public abstract class AbstractRoomNode implements Node {
   }
 
   @Override
-  public Path wealthiestPathTo(Coordinates coordinates) throws IllegalArgumentException {
+  public IPath wealthiestPathTo(ICoordinates coordinates) throws IllegalArgumentException {
     return this.wealthiestPathToHelper(new MazePath(coordinates));
   }
 
   @Override
-  public Path wealthiestPathToHelper(Path path) throws IllegalArgumentException {
+  public IPath wealthiestPathToHelper(IPath path) throws IllegalArgumentException {
     if (path.getCoordinatesTraversed().contains(this.coordinates)) {
       return path;
     }
@@ -238,27 +238,27 @@ public abstract class AbstractRoomNode implements Node {
       return path;
     }
 
-    List<Path> paths = new ArrayList<>();
+    List<IPath> paths = new ArrayList<>();
     paths.add(this.north.wealthiestPathToHelper(path));
     paths.add(this.south.wealthiestPathToHelper(path));
     paths.add(this.east.wealthiestPathToHelper(path));
     paths.add(this.west.wealthiestPathToHelper(path));
 
-    paths = paths.stream().filter(Path::reachesTarget).collect(Collectors.toList());
+    paths = paths.stream().filter(IPath::reachesTarget).collect(Collectors.toList());
     if (paths.isEmpty()) {
       return path;
     }
 
-    return paths.stream().max(Comparator.comparingInt(Path::totalGold)).get();
+    return paths.stream().max(Comparator.comparingInt(IPath::totalGold)).get();
   }
 
   @Override
-  public Path exploreTo(Coordinates coordinates) {
+  public IPath exploreTo(ICoordinates coordinates) {
     return this.exploreHelper(new MazePath(coordinates));
   }
 
   @Override
-  public Path exploreHelper(Path path) {
+  public IPath exploreHelper(IPath path) {
     if (path.getCoordinatesTraversed().contains(this.coordinates)) {
       return path;
     }

@@ -1,6 +1,6 @@
 package maze.components.nodes;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 /**
  * Maze node which has gold for the player to pick up.
@@ -14,7 +14,7 @@ public class GoldRoomNode extends AbstractRoomNode {
    * @throws IllegalArgumentException when goldCount is negative
    */
   public GoldRoomNode(
-          Coordinates coordinates,
+          ICoordinates coordinates,
           int goldCount) throws IllegalArgumentException {
     super(coordinates, goldCount, 0.0);
   }
@@ -28,7 +28,7 @@ public class GoldRoomNode extends AbstractRoomNode {
    * @throws IllegalArgumentException when goldCount is negative
    */
   public GoldRoomNode(
-          Coordinates coordinates,
+          ICoordinates coordinates,
           int goldCount,
           boolean isGoal) throws IllegalArgumentException {
     super(coordinates, goldCount, 0.0, isGoal);

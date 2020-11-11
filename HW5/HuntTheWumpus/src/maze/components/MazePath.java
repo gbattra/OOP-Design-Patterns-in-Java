@@ -11,10 +11,10 @@ import maze.components.nodes.Node;
  * the coordinates traversed, the gold looted or stolen at each node and a boolean indicating
  * whether or not the path reaches the target.
  */
-public class MazePath implements Path {
+public class MazePath implements IPath {
   private final boolean reachesTarget;
-  private final List<Coordinates> coordinatesTraversed;
-  private final Coordinates target;
+  private final List<ICoordinates> coordinatesTraversed;
+  private final ICoordinates target;
   private final int totalGold;
 
   /**
@@ -22,7 +22,7 @@ public class MazePath implements Path {
    *
    * @param target the destination for the path
    */
-  public MazePath(Coordinates target) {
+  public MazePath(ICoordinates target) {
     this.target = target;
     this.reachesTarget = false;
     this.coordinatesTraversed = new ArrayList<>();
@@ -39,8 +39,8 @@ public class MazePath implements Path {
    * @throws IllegalArgumentException if totalGold is negative
    */
   private MazePath(
-          Coordinates target,
-          List<Coordinates> coordinatesTraversed,
+          ICoordinates target,
+          List<ICoordinates> coordinatesTraversed,
           int totalGold,
           boolean reachesTarget) throws IllegalArgumentException {
     this.target = target;
@@ -60,17 +60,17 @@ public class MazePath implements Path {
   }
 
   @Override
-  public Coordinates getTarget() {
+  public ICoordinates getTarget() {
     return this.target;
   }
 
   @Override
-  public List<Coordinates> getCoordinatesTraversed() {
+  public List<ICoordinates> getCoordinatesTraversed() {
     return this.coordinatesTraversed;
   }
 
   @Override
-  public Path loot(Node node) {
+  public IPath loot(Node node) {
     if (this.coordinatesTraversed.contains(node.getCoordinates())) {
       return new MazePath(
               this.target, this.coordinatesTraversed, this.totalGold, this.reachesTarget);
@@ -84,8 +84,8 @@ public class MazePath implements Path {
   }
 
   @Override
-  public Path addCoordinates(Coordinates coordinates) {
-    List<Coordinates> coordinatesCopy = new ArrayList<>(this.coordinatesTraversed);
+  public IPath addCoordinates(ICoordinates coordinates) {
+    List<ICoordinates> coordinatesCopy = new ArrayList<>(this.coordinatesTraversed);
     coordinatesCopy.add(coordinates);
 
     return new MazePath(
@@ -96,7 +96,7 @@ public class MazePath implements Path {
   }
 
   @Override
-  public Path setReachesTarget(boolean doesReach) {
+  public IPath setReachesTarget(boolean doesReach) {
     return new MazePath(
             this.target,
             this.coordinatesTraversed,
@@ -112,11 +112,11 @@ public class MazePath implements Path {
             this.reachesTarget,
             this.totalGold(),
             this.coordinatesTraversed
-                    .stream().map(Coordinates::toString).collect(Collectors.joining(",")));
+                    .stream().map(ICoordinates::toString).collect(Collectors.joining(",")));
   }
 
   @Override
-  public Path enter(Node node) {
+  public IPath enter(Node node) {
     return this
             .loot(node)
             .addCoordinates(node.getCoordinates())
@@ -135,8 +135,8 @@ public class MazePath implements Path {
       return true;
     }
 
-    if (obj instanceof Path) {
-      Path o = (Path) obj;
+    if (obj instanceof IPath) {
+      IPath o = (IPath) obj;
       return this.toString().equals(obj.toString());
     }
 

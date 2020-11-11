@@ -5,7 +5,7 @@ import maze.components.nodes.Node;
 /**
  * Interface for a player in a maze.
  */
-public interface Player {
+public interface IMazePlayer {
   /**
    * Getter for the player name.
    *
@@ -26,5 +26,5 @@ public interface Player {
    * @param node the node to enter
    * @return the updated player instance
    */
-  Player loot(Node node);
+  IMazePlayer loot(Node node);
 }

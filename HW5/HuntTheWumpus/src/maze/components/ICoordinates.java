@@ -3,7 +3,7 @@ package maze.components;
 /**
  * An object representing a 2D coordinate.
  */
-public interface Coordinates {
+public interface ICoordinates {
   /**
    * Getter for the X coordinate.
    *

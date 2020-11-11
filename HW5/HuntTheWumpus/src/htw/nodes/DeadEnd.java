@@ -1,12 +1,12 @@
 package htw.nodes;
 
-import htw.strategies.HtwNodeStrategy;
+import htw.strategies.INodeStrategy;
 import maze.components.nodes.DeadEndNode;
 import maze.utils.Direction;
 
-public class DeadEnd extends DeadEndNode implements HtwNode {
+public class DeadEnd extends DeadEndNode implements INode {
   @Override
-  public HtwNode enter(Direction from) throws IllegalStateException {
+  public INode enter(Direction from) throws IllegalStateException {
     throw new IllegalStateException("Cannot enter a dead end node.");
   }
 
@@ -16,7 +16,7 @@ public class DeadEnd extends DeadEndNode implements HtwNode {
   }
 
   @Override
-  public void setStrategy(HtwNodeStrategy strategy) throws IllegalStateException {
+  public void setStrategy(INodeStrategy strategy) throws IllegalStateException {
     throw new IllegalStateException("Cannot set strategy on a dead end node.");
   }
 }

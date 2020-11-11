@@ -8,7 +8,7 @@ import maze.components.nodes.Node;
  * Represents a possible path through a 2D maze. Tallies gold collected along the way, indicates
  * whether the path reaches its specified target, and holds the list of coordinates taken.
  */
-public interface Path {
+public interface IPath {
   /**
    * Does this path reach its target.
    *
@@ -28,14 +28,14 @@ public interface Path {
    *
    * @return the target coordinates
    */
-  Coordinates getTarget();
+  ICoordinates getTarget();
 
   /**
    * Getter for the list of coordinates traversed by this path.
    *
    * @return the list of coordinates
    */
-  List<Coordinates> getCoordinatesTraversed();
+  List<ICoordinates> getCoordinatesTraversed();
 
   /**
    * Adds a coordinate pair to their respective lists.
@@ -43,7 +43,7 @@ public interface Path {
    * @param coordinates the coordinates traversed
    * @return the path with updated directions
    */
-  Path addCoordinates(Coordinates coordinates);
+  IPath addCoordinates(ICoordinates coordinates);
 
   /**
    * Loots the provided node (either adds gold or gets robbed).
@@ -51,14 +51,14 @@ public interface Path {
    * @param node the node to add
    * @return a new updated Path instance
    */
-  Path loot(Node node);
+  IPath loot(Node node);
 
   /**
    * Enters the target node.
    *
    * @param node the target node
    */
-  Path enter(Node node);
+  IPath enter(Node node);
 
   /**
    * Use to set reachesTarget property on path object.
@@ -66,5 +66,5 @@ public interface Path {
    * @param doesReach true / false does this path reach the target
    * @return a new updated Path instance
    */
-  Path setReachesTarget(boolean doesReach);
+  IPath setReachesTarget(boolean doesReach);
 }

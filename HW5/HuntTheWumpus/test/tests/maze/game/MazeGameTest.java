@@ -4,10 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import maze.utils.Direction;
-import maze.config.Configuration;
-import maze.game.Game;
-import maze.components.Maze;
-import maze.game.Player;
+import maze.config.IConfiguration;
+import maze.game.IMazeGame;
+import maze.components.IMaze;
+import maze.game.IMazePlayer;
 import maze.builders.Maze2dBuilder;
 import maze.builders.MazeConfigurationBuilder;
 import maze.game.MazeGame;
@@ -22,13 +22,13 @@ import static org.junit.Assert.assertTrue;
  * Test for the MazeGame.
  */
 public class MazeGameTest {
-  private Player player;
-  private Maze maze;
-  private Game game;
+  private IMazePlayer player;
+  private IMaze maze;
+  private IMazeGame game;
 
   @Before
   public void setup() {
-    Configuration configuration = new MazeConfigurationBuilder()
+    IConfiguration configuration = new MazeConfigurationBuilder()
             .setColumnCount(2)
             .setRowCount(2)
             .setStart(0,0)

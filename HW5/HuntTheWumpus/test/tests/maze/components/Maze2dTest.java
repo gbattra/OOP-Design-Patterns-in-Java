@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import maze.utils.Direction;
-import maze.components.Maze;
+import maze.components.IMaze;
 import maze.components.nodes.Node;
 import maze.components.Maze2d;
 import maze.components.MazeCoordinates;
@@ -34,7 +34,7 @@ public class Maze2dTest {
   @Test
   public void testConstructor() {
     try {
-      Maze maze = new Maze2d(this.start, this.goal);
+      IMaze maze = new Maze2d(this.start, this.goal);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -42,7 +42,7 @@ public class Maze2dTest {
 
   @Test
   public void testGetters() {
-    Maze maze = new Maze2d(this.start, this.goal);
+    IMaze maze = new Maze2d(this.start, this.goal);
     assertEquals(this.start, maze.getStart());
     assertEquals(this.goal, maze.getGoal());
     assertEquals(this.start, maze.getCurrent());
@@ -50,7 +50,7 @@ public class Maze2dTest {
 
   @Test
   public void testMove() {
-    Maze maze = new Maze2d(this.start, this.goal);
+    IMaze maze = new Maze2d(this.start, this.goal);
     maze.move(Direction.SOUTH);
     assertEquals(this.node, maze.getCurrent());
   }

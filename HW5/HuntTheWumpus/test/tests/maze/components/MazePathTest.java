@@ -2,9 +2,9 @@ package tests.maze.components;
 
 import org.junit.Test;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.components.nodes.Node;
-import maze.components.Path;
+import maze.components.IPath;
 import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.GoldRoomNode;
 import maze.components.MazeCoordinates;
@@ -23,8 +23,8 @@ public class MazePathTest {
   @Test
   public void testValidConstructor() {
     try {
-      Coordinates target = new MazeCoordinates(1, 1);
-      Path path = new MazePath(target);
+      ICoordinates target = new MazeCoordinates(1, 1);
+      IPath path = new MazePath(target);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -32,16 +32,16 @@ public class MazePathTest {
 
   @Test
   public void testGetTarget() {
-    Coordinates target = new MazeCoordinates(1, 1);
-    Path path = new MazePath(target);
+    ICoordinates target = new MazeCoordinates(1, 1);
+    IPath path = new MazePath(target);
     assertEquals(target, path.getTarget());
   }
 
   @Test
   public void testAddNodes() {
-    Coordinates target = new MazeCoordinates(1, 1);
+    ICoordinates target = new MazeCoordinates(1, 1);
     Node node = new DeadEndNode();
-    Path path = new MazePath(target);
+    IPath path = new MazePath(target);
     assertEquals(0, path.getCoordinatesTraversed().size());
     path = path.addCoordinates(node.getCoordinates());
     assertEquals(1, path.getCoordinatesTraversed().size());
@@ -49,8 +49,8 @@ public class MazePathTest {
 
   @Test
   public void testSetReachesTarget() {
-    Coordinates target = new MazeCoordinates(1, 1);
-    Path path = new MazePath(target);
+    ICoordinates target = new MazeCoordinates(1, 1);
+    IPath path = new MazePath(target);
     assertFalse(path.reachesTarget());
     path = path.setReachesTarget(true);
     assertTrue(path.reachesTarget());
@@ -58,8 +58,8 @@ public class MazePathTest {
 
   @Test
   public void testTotalGold() {
-    Coordinates target = new MazeCoordinates(3, 3);
-    Path path = new MazePath(target);
+    ICoordinates target = new MazeCoordinates(3, 3);
+    IPath path = new MazePath(target);
     Node room1 = new GoldRoomNode(new MazeCoordinates(0,0), 10);
     Node thief1 = new ThiefRoomNode(new MazeCoordinates(1, 0), 0.1);
     Node room2 = new GoldRoomNode(new MazeCoordinates(2, 0), 10);

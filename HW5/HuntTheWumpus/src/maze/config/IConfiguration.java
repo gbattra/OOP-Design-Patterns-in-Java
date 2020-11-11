@@ -2,12 +2,12 @@ package maze.config;
 
 import java.util.Random;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 /**
  * A maze configuration which will be used by the maze builder and nodes to setup the maze.
  */
-public interface Configuration {
+public interface IConfiguration {
   /**
    * Getter for the maze column count.
    *
@@ -90,14 +90,14 @@ public interface Configuration {
    *
    * @return the start coordinates
    */
-  Coordinates start();
+  ICoordinates start();
 
   /**
    * Getter for the maze goal coordinates.
    *
    * @return the goal coordinates
    */
-  Coordinates goal();
+  ICoordinates goal();
 
   /**
    * Returns the perfect exit count for the configuration.

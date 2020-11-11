@@ -1,6 +1,6 @@
 package maze.config;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 /**
  * Configuration object for a room maze.
@@ -23,8 +23,8 @@ public class RoomMazeConfiguration extends AbstractMazeConfiguration {
   public RoomMazeConfiguration(
           int rowCount,
           int columnCount,
-          Coordinates start,
-          Coordinates goal,
+          ICoordinates start,
+          ICoordinates goal,
           double thiefPenalty,
           double thiefFrequency,
           double goldFrequency,

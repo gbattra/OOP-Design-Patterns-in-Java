@@ -1,19 +1,19 @@
 package htw.strategies;
 
-import htw.nodes.HtwNode;
+import htw.nodes.INode;
 import maze.utils.Direction;
 
-public class StandardStrategy implements HtwNodeStrategy {
+public class StandardStrategy implements INodeStrategy {
   @Override
-  public HtwNode enter(Direction from, HtwNode curr) {
+  public INode enter(Direction from, INode curr) {
     return curr;
   }
 
   @Override
-  public boolean shoot(Direction direction, int count, HtwNode curr) {
+  public boolean shoot(Direction direction, int count, INode curr) {
     if (count == 0) {
       return false;
     }
-    return ((HtwNode) curr.getNode(direction)).shoot(direction, count - 1);
+    return ((INode) curr.getNode(direction)).shoot(direction, count - 1);
   }
 }

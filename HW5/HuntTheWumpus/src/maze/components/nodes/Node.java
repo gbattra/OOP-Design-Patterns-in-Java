@@ -1,7 +1,7 @@
 package maze.components.nodes;
 
-import maze.components.Path;
-import maze.components.Coordinates;
+import maze.components.IPath;
+import maze.components.ICoordinates;
 import maze.utils.Direction;
 
 /**
@@ -14,7 +14,7 @@ public interface Node {
    * @param coordinates the coordinates at which the desired node resides
    * @return the queried node
    */
-  Node get(Coordinates coordinates);
+  Node get(ICoordinates coordinates);
 
   /**
    * Helper method for getting a node at a coordinate set.
@@ -22,7 +22,7 @@ public interface Node {
    * @param path the path object tracking the search through the maze
    * @return the queried node
    */
-  Node getHelper(Path path);
+  Node getHelper(IPath path);
 
   /**
    * Getter for the node's gold count.
@@ -50,7 +50,7 @@ public interface Node {
    *
    * @return the node's coordinates
    */
-  Coordinates getCoordinates();
+  ICoordinates getCoordinates();
 
   /**
    * Sets the provided node at the direction indicated. I.e. setNode(node, NORTH) sets this node's
@@ -78,7 +78,7 @@ public interface Node {
    * @return true if can reach target, false otherwise
    * @throws IllegalArgumentException if coordinates are out of bounds
    */
-  boolean canReach(Coordinates coordinates) throws IllegalArgumentException;
+  boolean canReach(ICoordinates coordinates) throws IllegalArgumentException;
 
   /**
    * Helper method for determining if target coordinates can be reached from the cell.
@@ -86,7 +86,7 @@ public interface Node {
    * @return true if can reach target, false otherwise
    * @throws IllegalArgumentException if coordinates are out of bounds
    */
-  boolean canReachHelper(Path path);
+  boolean canReachHelper(IPath path);
 
   /**
    * Traverses the maze to find the path to desired coordinates which yields the highest gold count.
@@ -94,7 +94,7 @@ public interface Node {
    * @param coordinates the target coordinates
    * @return the path taken through the maze
    */
-  Path wealthiestPathTo(Coordinates coordinates);
+  IPath wealthiestPathTo(ICoordinates coordinates);
 
   /**
    * Helper method for finding the wealthiest path through the maze.
@@ -102,7 +102,7 @@ public interface Node {
    * @param path the path object being built
    * @return the path taken through the maze
    */
-  Path wealthiestPathToHelper(Path path);
+  IPath wealthiestPathToHelper(IPath path);
 
   /**
    * Traverses the entire maze, reaching every room within the maze and returning the path
@@ -110,7 +110,7 @@ public interface Node {
    *
    * @return the path taken through the maze
    */
-  Path exploreTo(Coordinates coordinates);
+  IPath exploreTo(ICoordinates coordinates);
 
   /**
    * Helper method for explore() which builds a path object as it traverses the maze.
@@ -118,7 +118,7 @@ public interface Node {
    * @param path the path object used to track visited nodes
    * @return the path taken through the maze
    */
-  Path exploreHelper(Path path);
+  IPath exploreHelper(IPath path);
 
   /**
    * Traverses the maze to find a path reaching the specified coordinates.
@@ -126,7 +126,7 @@ public interface Node {
    * @param coordinates the target coordinates
    * @return the path taken through the maze
    */
-  Path pathTo(Coordinates coordinates);
+  IPath pathTo(ICoordinates coordinates);
 
   /**
    * Helper method for pathTo() which builds a path object as it traverses the maze.
@@ -134,7 +134,7 @@ public interface Node {
    * @param path the path object used to track visited tiles
    * @return the path taken through the maze
    */
-  Path pathToHelper(Path path);
+  IPath pathToHelper(IPath path);
 
   /**
    * Room adds to gold if GoldRoom, else if ThiefRoom steals some gold, else adds nothing.

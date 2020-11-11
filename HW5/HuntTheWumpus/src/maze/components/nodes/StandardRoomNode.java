@@ -1,6 +1,6 @@
 package maze.components.nodes;
 
-import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 /**
  * A standard maze node. No gold, no thief. Empty room basically.
@@ -12,7 +12,7 @@ public class StandardRoomNode extends AbstractRoomNode {
    * @param coordinates the coordinates where this cell resides in the maze
    * @throws IllegalArgumentException when goldCount is negative
    */
-  public StandardRoomNode(Coordinates coordinates) throws IllegalArgumentException {
+  public StandardRoomNode(ICoordinates coordinates) throws IllegalArgumentException {
     super(coordinates, 0, 0.0);
   }
 
@@ -24,7 +24,7 @@ public class StandardRoomNode extends AbstractRoomNode {
    * @throws IllegalArgumentException when goldCount is negative
    */
   public StandardRoomNode(
-          Coordinates coordinates,
+          ICoordinates coordinates,
           boolean isGoal) throws IllegalArgumentException {
     super(coordinates, 0, 0.0, isGoal);
   }

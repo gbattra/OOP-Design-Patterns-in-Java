@@ -4,11 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import maze.utils.Direction;
-import maze.config.Configuration;
-import maze.components.Coordinates;
-import maze.components.Maze;
+import maze.config.IConfiguration;
+import maze.components.ICoordinates;
+import maze.components.IMaze;
 import maze.components.nodes.Node;
-import maze.components.Path;
+import maze.components.IPath;
 import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.GoldRoomNode;
 import maze.builders.Maze2dBuilder;
@@ -27,8 +27,8 @@ import static org.junit.Assert.fail;
  * Test for the room node.
  */
 public class RoomNodeTest {
-  private Coordinates start;
-  private Coordinates exit;
+  private ICoordinates start;
+  private ICoordinates exit;
 
   @Before
   public void setup() {
@@ -88,10 +88,10 @@ public class RoomNodeTest {
 
   @Test
   public void testComplexGet() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             50, 50, start, exit, 0.1, 0.2, 0.3, 10, false, 1);
-    Maze maze = new Maze2dBuilder(configuration).build();
-    Coordinates coordinates = new MazeCoordinates(49, 49);
+    IMaze maze = new Maze2dBuilder(configuration).build();
+    ICoordinates coordinates = new MazeCoordinates(49, 49);
     Node gotten = maze.get(coordinates);
     assertEquals(coordinates, gotten.getCoordinates());
   }
@@ -132,7 +132,7 @@ public class RoomNodeTest {
     Node west = new ThiefRoomNode(new MazeCoordinates(1, 0), 0.1);
     south.setNode(west, Direction.WEST);
 
-    Path wealthiestPath = node.wealthiestPathTo(west.getCoordinates());
+    IPath wealthiestPath = node.wealthiestPathTo(west.getCoordinates());
     assertEquals(17, wealthiestPath.totalGold());
   }
 
@@ -148,7 +148,7 @@ public class RoomNodeTest {
     Node west = new GoldRoomNode(new MazeCoordinates(1, 0), 10);
     south.setNode(west, Direction.WEST);
     node.setNode(west, Direction.SOUTH);
-    Path wealthiestPath = node.wealthiestPathTo(west.getCoordinates());
+    IPath wealthiestPath = node.wealthiestPathTo(west.getCoordinates());
 
     assertEquals(20, wealthiestPath.totalGold());
     assertFalse(wealthiestPath.getCoordinatesTraversed().contains(south.getCoordinates()));
@@ -160,7 +160,7 @@ public class RoomNodeTest {
     Node node = new StandardRoomNode(new MazeCoordinates(0,0));
     Node east = new StandardRoomNode(new MazeCoordinates(0,1));
     node.setNode(east, Direction.EAST);
-    Path path = node.exploreTo(east.getCoordinates());
+    IPath path = node.exploreTo(east.getCoordinates());
     assertTrue(path.getCoordinatesTraversed().contains(east.getCoordinates()));
   }
 
@@ -177,7 +177,7 @@ public class RoomNodeTest {
     south.setNode(west, Direction.WEST);
     node.setNode(west, Direction.SOUTH);
 
-    Path path = node.exploreTo(west.getCoordinates());
+    IPath path = node.exploreTo(west.getCoordinates());
     assertTrue(path.getCoordinatesTraversed().contains(node.getCoordinates()));
     assertTrue(path.getCoordinatesTraversed().contains(south.getCoordinates()));
     assertTrue(path.getCoordinatesTraversed().contains(east.getCoordinates()));
@@ -193,16 +193,16 @@ public class RoomNodeTest {
     Node south = new StandardRoomNode(new MazeCoordinates(1, 1));
     east.setNode(south, Direction.SOUTH);
 
-    Path path = node.pathTo(south.getCoordinates());
+    IPath path = node.pathTo(south.getCoordinates());
     assertTrue(path.reachesTarget());
   }
 
   @Test
   public void testValidGrowSmall() {
     try {
-      Configuration configuration = new PerfectMazeConfiguration(
+      IConfiguration configuration = new PerfectMazeConfiguration(
               5, 5, start, exit, 0.1, 0.2, 0.3, 10, false, 1);
-      Maze maze = new Maze2dBuilder(configuration).build();
+      IMaze maze = new Maze2dBuilder(configuration).build();
       assertTrue(maze.canReach(new MazeCoordinates(1,1)));
     } catch (Exception e) {
       fail("Valid grow should not have failed.");
@@ -212,9 +212,9 @@ public class RoomNodeTest {
   @Test
   public void testValidGrowMedium() {
     try {
-      Configuration configuration = new PerfectMazeConfiguration(
+      IConfiguration configuration = new PerfectMazeConfiguration(
               50, 50, start, exit, 0.1, 0.2, 0.3, 10, false, 1);
-      Maze maze = new Maze2dBuilder(configuration).build();
+      IMaze maze = new Maze2dBuilder(configuration).build();
       assertTrue(maze.canReach(new MazeCoordinates(9,9)));
     } catch (Exception e) {
       fail("Valid grow should not have failed.");
@@ -224,9 +224,9 @@ public class RoomNodeTest {
   @Test
   public void testValidGrowSmallWrapping() {
     try {
-      Configuration configuration = new PerfectMazeConfiguration(
+      IConfiguration configuration = new PerfectMazeConfiguration(
               5, 5, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
-      Maze maze = new Maze2dBuilder(configuration).build();
+      IMaze maze = new Maze2dBuilder(configuration).build();
       assertTrue(maze.canReach(new MazeCoordinates(1,1)));
     } catch (Exception e) {
       fail("Valid grow should not have failed.");
@@ -236,7 +236,7 @@ public class RoomNodeTest {
   @Test
   public void testValidGrowMediumWrapping() {
     try {
-      Configuration configuration = new MazeConfigurationBuilder()
+      IConfiguration configuration = new MazeConfigurationBuilder()
               .setColumnCount(50)
               .setRowCount(50)
               .setStart(0,0)
@@ -247,7 +247,7 @@ public class RoomNodeTest {
               .setIsRoomMaze(true)
               .setTargetEdgeCount(35)
               .build();
-      Maze wrappingMaze = new Maze2dBuilder(configuration).build();
+      IMaze wrappingMaze = new Maze2dBuilder(configuration).build();
       Node start = wrappingMaze.getStart();
       assertTrue(start.canReach(new MazeCoordinates(3,3)));
       assertTrue(start.exploreTo(new MazeCoordinates(49,49)).reachesTarget());

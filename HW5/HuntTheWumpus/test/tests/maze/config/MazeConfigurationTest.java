@@ -3,8 +3,8 @@ package tests.maze.config;
 import org.junit.Before;
 import org.junit.Test;
 
-import maze.config.Configuration;
-import maze.components.Coordinates;
+import maze.config.IConfiguration;
+import maze.components.ICoordinates;
 import maze.components.MazeCoordinates;
 import maze.config.PerfectMazeConfiguration;
 
@@ -17,8 +17,8 @@ import static org.junit.Assert.fail;
  * Test for the MazeConfiguration.
  */
 public class MazeConfigurationTest {
-  private Coordinates start;
-  private Coordinates exit;
+  private ICoordinates start;
+  private ICoordinates exit;
 
   @Before
   public void setup() {
@@ -29,7 +29,7 @@ public class MazeConfigurationTest {
   @Test
   public void testValidConstructor() {
     try {
-      Configuration configuration = new PerfectMazeConfiguration(
+      IConfiguration configuration = new PerfectMazeConfiguration(
               5, 5, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -38,43 +38,43 @@ public class MazeConfigurationTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorNegativeRowCount() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             -5, 5, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorNegativeColCount() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             5, -5, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorNegativeGold() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             5,-5, start, exit, 0.1, 0.2, 0.3, -10, true, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorNegativeThiefFrequency() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             5, 5, start, exit, -0.1, 0.2, 0.3, 10, true, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorNegativeThiefPenalty() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             5, 5, start, exit, 0.1, -0.2, 0.3, 10, true, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructorNegativeGoldFrequency() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             5, 5, start, exit, 0.1, 0.2, -0.3, 10, true, 1);
   }
 
   @Test
   public void testGetters() {
-    Configuration configuration = new PerfectMazeConfiguration(
+    IConfiguration configuration = new PerfectMazeConfiguration(
             5, 5, start, exit, 0.1, 0.2, 0.3, 10, true, 1);
     assertEquals(5, configuration.rowCount());
     assertEquals(5, configuration.columnCount());

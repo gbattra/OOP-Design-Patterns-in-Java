@@ -6,7 +6,7 @@ import maze.components.nodes.Node;
  * A player in the game. Navigates a maze and loots the rooms for gold, or gets robbed
  * by thieves.
  */
-public class MazePlayer implements Player {
+public class MazePlayer implements IMazePlayer {
   private final String name;
   private final int goldCount;
 
@@ -49,7 +49,7 @@ public class MazePlayer implements Player {
   }
 
   @Override
-  public Player loot(Node node) {
+  public IMazePlayer loot(Node node) {
     return new MazePlayer(
             this.name,
             node.loot(this.goldCount));

@@ -8,7 +8,7 @@ import maze.utils.Direction;
  * A maze ADT class which wraps Node functionality. Has start and goal node references. Also
  * has a pointer 'current' which can be moved using move().
  */
-public class Maze2d implements Maze {
+public class Maze2d implements IMaze {
   private final Node start;
   private final Node goal;
 
@@ -56,27 +56,27 @@ public class Maze2d implements Maze {
   }
 
   @Override
-  public Path wealthiestPathTo(Coordinates coordinates) throws IllegalArgumentException {
+  public IPath wealthiestPathTo(ICoordinates coordinates) throws IllegalArgumentException {
     return this.current.wealthiestPathTo(coordinates);
   }
 
   @Override
-  public Path pathTo(Coordinates coordinates) throws IllegalArgumentException {
+  public IPath pathTo(ICoordinates coordinates) throws IllegalArgumentException {
     return this.current.pathTo(coordinates);
   }
 
   @Override
-  public Path exploreTo(Coordinates coordinates) {
+  public IPath exploreTo(ICoordinates coordinates) {
     return this.current.exploreTo(coordinates);
   }
 
   @Override
-  public Node get(Coordinates coordinates) {
+  public Node get(ICoordinates coordinates) {
     return this.current.get(coordinates);
   }
 
   @Override
-  public boolean canReach(Coordinates coordinates) throws IllegalArgumentException {
+  public boolean canReach(ICoordinates coordinates) throws IllegalArgumentException {
     return this.current.canReach(coordinates);
   }
 }

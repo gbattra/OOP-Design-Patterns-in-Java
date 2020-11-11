@@ -1,18 +1,18 @@
 package maze.game;
 
 import maze.utils.Direction;
-import maze.components.Maze;
-import maze.components.Path;
+import maze.components.IMaze;
+import maze.components.IPath;
 import maze.components.MazePath;
 
 /**
  * Game manager object. Moves player and maze pointer in sync.
  */
-public class MazeGame implements Game {
-  private final Maze maze;
+public class MazeGame implements IMazeGame {
+  private final IMaze maze;
 
-  private Player player;
-  private Path path;
+  private IMazePlayer player;
+  private IPath path;
   private boolean isOver = false;
 
   /**
@@ -21,24 +21,24 @@ public class MazeGame implements Game {
    * @param player the player in the game
    * @param maze the maze in the game
    */
-  public MazeGame(Player player, Maze maze) {
+  public MazeGame(IMazePlayer player, IMaze maze) {
     this.maze = maze;
     this.player = player;
     this.path = new MazePath(maze.getGoal().getCoordinates());
   }
 
   @Override
-  public Player getPlayer() {
+  public IMazePlayer getPlayer() {
     return this.player;
   }
 
   @Override
-  public Maze getMaze() {
+  public IMaze getMaze() {
     return this.maze;
   }
 
   @Override
-  public Path getPath() {
+  public IPath getPath() {
     return this.path;
   }
 
