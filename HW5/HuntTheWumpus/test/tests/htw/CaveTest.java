@@ -3,8 +3,10 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
-import htw.Cave;
-import htw.HTWNode;
+import htw.nodes.Cave;
+import htw.nodes.HTWNode;
+import htw.strategies.StandardStrategy;
+import htw.strategies.Strategy;
 import maze.components.MazeCoordinates;
 import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
@@ -15,6 +17,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 public class CaveTest {
+  private Strategy strategy = new StandardStrategy();
   private HTWNode north;
   private HTWNode south;
   private HTWNode east;
@@ -23,21 +26,15 @@ public class CaveTest {
 
   @Before
   public void setup() {
-    this.north = new Cave(new MazeCoordinates(1, 0));
-    this.south = new Cave(new MazeCoordinates(1, 2));
-    this.east = new Cave(new MazeCoordinates(2, 1));
-    this.west = new Cave(new MazeCoordinates(0, 1));
-    this.cave = new Cave(new MazeCoordinates(1, 1));
+    this.north = new Cave(new MazeCoordinates(1, 0), this.strategy);
+    this.south = new Cave(new MazeCoordinates(1, 2), this.strategy);
+    this.east = new Cave(new MazeCoordinates(2, 1), this.strategy);
+    this.west = new Cave(new MazeCoordinates(0, 1), this.strategy);
+    this.cave = new Cave(new MazeCoordinates(1, 1), this.strategy);
     this.cave.setNode(this.north, Direction.NORTH);
     this.cave.setNode(this.south, Direction.SOUTH);
     this.cave.setNode(this.east, Direction.EAST);
     this.cave.setNode(this.west, Direction.WEST);
-  }
-
-  @Test
-  public void testPromote() {
-    HTWNode promoted = this.cave.promote();
-    assertEquals(this.cave, promoted);
   }
 
   @Test
