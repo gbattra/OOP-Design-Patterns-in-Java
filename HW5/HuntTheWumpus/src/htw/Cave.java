@@ -11,11 +11,6 @@ public class Cave extends AbstractRoomNode implements MazeNode {
   }
 
   @Override
-  public MazeNode move(Direction dir) throws IllegalStateException {
-    return ((MazeNode) this.getNode(dir)).enter(dir.opposite());
-  }
-
-  @Override
   public MazeNode enter(Direction from) {
     return this;
   }

@@ -1,5 +1,9 @@
 package htw;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import maze.components.Coordinates;
 import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;
@@ -11,13 +15,24 @@ public class Tunnel extends AbstractRoomNode implements MazeNode {
   }
 
   @Override
-  public MazeNode move(Direction dir) throws IllegalStateException {
-    return ((MazeNode) this.getNode(dir)).enter(dir.opposite());
-  }
-
-  @Override
   public MazeNode enter(Direction from) {
-    return this;
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    while (exits.size() > 0) {
+      Direction exit = exits.get(0);
+      if (exit.equals(from)) {
+        continue;
+      }
+
+      try {
+        MazeNode node = (MazeNode) this.getNode(exit);
+        exits.remove(0);
+        return node.enter(from);
+      } catch (Exception ignored) {
+      }
+    }
+
+    throw new IllegalStateException("Could not enter tunnel. No valid exits found.");
   }
 
   @Override

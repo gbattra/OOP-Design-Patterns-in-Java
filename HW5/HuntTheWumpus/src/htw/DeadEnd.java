@@ -5,11 +5,6 @@ import maze.utils.Direction;
 
 public class DeadEnd extends DeadEndNode implements MazeNode {
   @Override
-  public MazeNode move(Direction dir) throws IllegalStateException {
-    throw new IllegalStateException("Cannot move from a dead end node.");
-  }
-
-  @Override
   public MazeNode enter(Direction from) throws IllegalStateException {
     throw new IllegalStateException("Cannot enter a dead end node.");
   }
