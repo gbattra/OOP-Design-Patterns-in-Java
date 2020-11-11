@@ -7,6 +7,8 @@ import htw.nodes.Cave;
 import htw.nodes.HtwNode;
 import htw.strategies.StandardStrategy;
 import htw.strategies.HtwNodeStrategy;
+import htw.strategies.TunnelStrategy;
+import htw.strategies.WumpusStrategy;
 import maze.components.MazeCoordinates;
 import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
@@ -14,6 +16,8 @@ import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class CaveTest {
@@ -67,5 +71,13 @@ public class CaveTest {
   @Test
   public void testShoot() {
     assertFalse(this.cave.shoot(Direction.SOUTH, 1));
+  }
+
+  @Test
+  public void testSetStrategy() {
+    assertFalse(this.cave.shoot(Direction.SOUTH, 1));
+    HtwNodeStrategy newStrat = new WumpusStrategy();
+    ((HtwNode) this.cave.getNode(Direction.SOUTH)).setStrategy(newStrat);
+    assertTrue(this.cave.shoot(Direction.SOUTH, 1));
   }
 }
