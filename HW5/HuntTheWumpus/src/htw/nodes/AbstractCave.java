@@ -7,10 +7,10 @@ import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
-public abstract class AbstractCaveNode extends AbstractRoomNode implements INode {
+public abstract class AbstractCave extends AbstractRoomNode implements INode {
   protected INodeStrategy strategy;
 
-  public AbstractCaveNode(ICoordinates coordinates, INodeStrategy strategy)
+  public AbstractCave(ICoordinates coordinates, INodeStrategy strategy)
           throws IllegalArgumentException {
     super(coordinates, 0, 0);
     if (strategy == null) {
