@@ -22,13 +22,13 @@ import maze.components.Coordinates;
  * Builder class for the Maze2d class. Contains default configs to make customizing easier.
  */
 public class MazeBuilder implements IMazeBuilder {
-  private final IConfiguration config;
+  protected final IConfiguration config;
 
-  private Node[][] visited;
-  private List<IEdge> edges;
-  private int exitCount = 0;
-  private int goldNodeCount;
-  private int thiefNodeCount;
+  protected Node[][] visited;
+  protected List<IEdge> edges;
+  protected int totalExitCount = 0;
+  protected int goldNodeCount;
+  protected int thiefNodeCount;
 
   public MazeBuilder(IConfiguration configuration) {
     this.config = configuration;
@@ -49,7 +49,7 @@ public class MazeBuilder implements IMazeBuilder {
 
   @Override
   public boolean isPerfect() {
-    return this.config.perfectExitCount() == this.exitCount;
+    return this.config.perfectExitCount() == this.totalExitCount;
   }
 
   @Override
@@ -67,7 +67,7 @@ public class MazeBuilder implements IMazeBuilder {
 
   @Override
   public Node generateRoom(ICoordinates c) {
-    this.exitCount++;
+    this.totalExitCount++;
     boolean isThief = this.config.random().nextDouble() <= this.config.thiefFrequency();
     if (isThief) {
       this.thiefNodeCount++;
@@ -95,14 +95,14 @@ public class MazeBuilder implements IMazeBuilder {
     }
   }
 
-  private void grow(Node node) {
+  protected void grow(Node node) {
     // add this to the visited list
     this.addVisited(node);
 
     // get exit candidates
     List<Direction> exits = this.getPotentialExits(node);
 
-    int exitCount = 0;
+    int nodeExitCount = 0;
     while (!exits.isEmpty()) {
       // randomly pick exit
       int exitIndex = exits.size() > 1 ? this.config.random().nextInt(exits.size()) : 0;
@@ -121,6 +121,11 @@ public class MazeBuilder implements IMazeBuilder {
                 exit.opposite(), exit);
       } else {
         // if has not been visited, instantiate new node and grow
+        nodeExitCount++;
+        if (nodeExitCount > 1) {
+          node = this.upgradeHallway(node);
+        }
+
         Node room = this.generateRoom(c);
         node.setNode(room, exit);
         room.setNode(node, exit.opposite());
@@ -131,12 +136,16 @@ public class MazeBuilder implements IMazeBuilder {
     }
   }
 
-  private void tearDownWalls() {
+  protected Node upgradeHallway(Node node) {
+    return node;
+  }
+
+  protected void tearDownWalls() {
     while (edges.size() > this.config.targetEdgeCount()) {
       int index = this.config.random().nextInt(edges.size());
       IEdge edge = this.edges.get(index);
       edges.remove(index);
-      this.exitCount++;
+      this.totalExitCount++;
       Node tail = this.visited[edge.getTail().getY()][edge.getTail().getX()];
       Node head = this.visited[edge.getHead().getY()][edge.getHead().getX()];
       tail.setNode(head, edge.getHeadDirection());
@@ -144,7 +153,7 @@ public class MazeBuilder implements IMazeBuilder {
     }
   }
 
-  private List<Direction> getPotentialExits(Node node) {
+  protected List<Direction> getPotentialExits(Node node) {
     List<Direction> exits = new ArrayList<>(Arrays.asList(
             Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST));
     if ((node.getCoordinates().getX() == 0 && !this.config.isWrappingMaze())
@@ -169,7 +178,7 @@ public class MazeBuilder implements IMazeBuilder {
     return exits;
   }
 
-  private ICoordinates coordinatesAt(Node node, Direction dir) throws IllegalArgumentException {
+  protected ICoordinates coordinatesAt(Node node, Direction dir) throws IllegalArgumentException {
     int x = 0;
     int y = 0;
     if (dir == Direction.NORTH) {

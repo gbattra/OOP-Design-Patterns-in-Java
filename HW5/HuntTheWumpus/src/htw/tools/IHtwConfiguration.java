@@ -1,9 +1,11 @@
 package htw.tools;
 
+import maze.config.IConfiguration;
+
 /**
  * Configuration object for building a hunt the wumpus maze.
  */
-public interface IHtwConfiguration {
+public interface IHtwConfiguration extends IConfiguration {
   /**
    * Getter for the bat frequency.
    *
