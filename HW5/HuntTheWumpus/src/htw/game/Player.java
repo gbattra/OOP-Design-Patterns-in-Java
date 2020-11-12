@@ -2,10 +2,19 @@ package htw.game;
 
 import maze.game.MazePlayer;
 
+/**
+ * Player in a HTW maze.
+ */
 public class Player extends MazePlayer implements IPlayer {
   private int arrowCount;
   private boolean alive;
 
+  /**
+   * Constructor for the player.
+   *
+   * @param name the player's name
+   * @param arrowCount the number of arrows the player starts with
+   */
   public Player(String name, int arrowCount) {
     super(name);
     this.alive = true;

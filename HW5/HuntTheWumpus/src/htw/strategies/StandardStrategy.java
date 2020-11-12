@@ -4,6 +4,10 @@ import htw.game.IPlayer;
 import htw.nodes.INode;
 import maze.utils.Direction;
 
+/**
+ * The base strategy for a cave in the maze. All other strategies extend this strategy and
+ * typically override only one or two of its methods.
+ */
 public class StandardStrategy implements INodeStrategy {
   @Override
   public INode enter(Direction from, INode curr) {

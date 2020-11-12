@@ -2,6 +2,9 @@ package htw.strategies;
 
 import htw.game.IPlayer;
 
+/**
+ * Strategy for a bottomless pit cave.
+ */
 public class PitStrategy extends StandardStrategy implements INodeStrategy {
   @Override
   public void receive(IPlayer player) throws IllegalArgumentException {

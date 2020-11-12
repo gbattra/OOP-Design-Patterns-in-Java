@@ -7,9 +7,20 @@ import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
+/**
+ * Abstract cave node in a Hunt the Wumpus maze. Mainly a wrapper around the strategy set
+ * on the node instance.
+ */
 public abstract class AbstractCave extends AbstractRoomNode implements INode {
   protected INodeStrategy strategy;
 
+  /**
+   * Main constructor for the abstract node. Takes a coordinate pair and a strategy.
+   *
+   * @param coordinates the coordinates where the node resides
+   * @param strategy the strategy used by the node
+   * @throws IllegalArgumentException if strategy or coordinates are null
+   */
   public AbstractCave(ICoordinates coordinates, INodeStrategy strategy)
           throws IllegalArgumentException {
     super(coordinates, 0, 0);

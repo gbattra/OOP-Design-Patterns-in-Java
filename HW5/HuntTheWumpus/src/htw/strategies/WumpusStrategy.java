@@ -4,6 +4,9 @@ import htw.game.IPlayer;
 import htw.nodes.INode;
 import maze.utils.Direction;
 
+/**
+ * Strategy for the cave with the wumpus. Receive() kills the player and shoot() returns true.
+ */
 public class WumpusStrategy extends StandardStrategy implements INodeStrategy {
   @Override
   public boolean shoot(Direction direction, int count, INode curr) {

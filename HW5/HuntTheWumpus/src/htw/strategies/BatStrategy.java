@@ -7,12 +7,24 @@ import maze.components.ICoordinates;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 
+/**
+ * Strategy used for a bat node. If enter() is called, there is a 50% chance that a different,
+ * random node in the maze will be entered instead.
+ */
 public class BatStrategy extends StandardStrategy implements INodeStrategy {
   private final INodeStrategy parent;
   private final Random random;
   private final int rowCount;
   private final int columnCount;
 
+  /**
+   * Constructor for the bat strategy.
+   *
+   * @param rowCount the number of rows in the maze (used for choosing random coordinates)
+   * @param columnCount the number of columns in the maze (used for choosing random coordinates)
+   * @param random the random instance to use when choosing coordinates
+   * @param parent the parent strategy to use when bats don't grab player
+   */
   public BatStrategy(
           int rowCount,
           int columnCount,
