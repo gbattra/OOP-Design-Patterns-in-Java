@@ -16,6 +16,9 @@ import maze.utils.Direction;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Tests for the bat cave.
+ */
 public class BatCaveTest {
   private INode bat;
   private INodeStrategy standard = new StandardStrategy();

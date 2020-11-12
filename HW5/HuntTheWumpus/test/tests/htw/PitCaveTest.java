@@ -11,7 +11,10 @@ import maze.components.Coordinates;
 
 import static org.junit.Assert.assertFalse;
 
-public class PitStrategyTest {
+/**
+ * Tests for the pit cave
+ */
+public class PitCaveTest {
   @Test
   public void testReceive() {
     IPlayer player = new Player("Joe", 10);

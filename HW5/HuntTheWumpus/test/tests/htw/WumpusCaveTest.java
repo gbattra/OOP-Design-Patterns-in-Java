@@ -16,6 +16,9 @@ import maze.utils.Direction;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Tests for the wumpus cave.
+ */
 public class WumpusCaveTest {
   private INodeStrategy standard = new StandardStrategy();
   private INode north;

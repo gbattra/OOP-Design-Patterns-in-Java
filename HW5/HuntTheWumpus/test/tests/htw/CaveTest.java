@@ -19,6 +19,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the cave.
+ */
 public class CaveTest {
   private INodeStrategy strategy = new StandardStrategy();
   private INode north;

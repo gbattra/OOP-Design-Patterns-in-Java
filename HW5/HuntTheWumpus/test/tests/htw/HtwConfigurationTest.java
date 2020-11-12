@@ -8,6 +8,9 @@ import maze.components.Coordinates;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the htw configuration.
+ */
 public class HtwConfigurationTest {
   @Test
   public void testValidConstructor() {

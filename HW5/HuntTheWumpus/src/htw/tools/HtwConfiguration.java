@@ -4,10 +4,27 @@ import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.config.AbstractMazeConfiguration;
 
+/**
+ * Configuration object used by the maze builder when building the maze.
+ */
 public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwConfiguration {
   private final double pitFrequency;
   private final double batFrequency;
 
+  /**
+   * Main constructor for the maze configuration.
+   *
+   * @param rowCount how many rows in the maze
+   * @param columnCount how many columns in the maze
+   * @param start what is the starting coordinates
+   * @param pitFrequency how frequently should a cave have a pit
+   * @param batFrequency how frequently should a cave have bats
+   * @param isRoomMaze is the maze a room maze
+   * @param isWrappingMaze is the maze wrapping
+   * @param targetEdgeCount the final number of edges in the maze
+   * @param randomSeed to control how a maze is built
+   * @throws IllegalArgumentException if bat frequency or pit frequency is negative
+   */
   public HtwConfiguration(
           int rowCount,
           int columnCount,
@@ -16,7 +33,7 @@ public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwC
           double batFrequency,
           boolean isRoomMaze,
           boolean isWrappingMaze,
-          int targetExitCount,
+          int targetEdgeCount,
           int randomSeed) throws IllegalArgumentException {
     super(rowCount,
             columnCount,
@@ -25,7 +42,7 @@ public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwC
             0, 0, 0, 0,
             isWrappingMaze,
             isRoomMaze,
-            targetExitCount,
+            targetEdgeCount,
             randomSeed);
     if (pitFrequency < 0 || batFrequency < 0) {
       throw new IllegalArgumentException("Pit and bat frequency must be non-negative.");

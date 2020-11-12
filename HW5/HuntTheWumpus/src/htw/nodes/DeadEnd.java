@@ -5,6 +5,10 @@ import htw.strategies.INodeStrategy;
 import maze.components.nodes.DeadEndNode;
 import maze.utils.Direction;
 
+/**
+ * Equivalent of an empty node in a linked list. Helps with recursive operations when traversing
+ * the maze.
+ */
 public class DeadEnd extends DeadEndNode implements INode {
   @Override
   public INode enter(Direction from) throws IllegalStateException {
