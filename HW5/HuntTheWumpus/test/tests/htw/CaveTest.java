@@ -77,7 +77,7 @@ public class CaveTest {
   }
 
   @Test
-  public void testShootHit() {
+  public void testShootHitTunnel() {
     INode wumpus = new Cave(new Coordinates(3, 0), new WumpusStrategy());
     INode eastOne = new Cave(new Coordinates(2, 1), new TunnelStrategy());
     INode eastTwo = new Cave(new Coordinates(3, 1), new TunnelStrategy());
@@ -90,6 +90,39 @@ public class CaveTest {
     wumpus.setNode(eastTwo, Direction.SOUTH);
 
     assertTrue(this.cave.shoot(Direction.EAST, 1));
+  }
+
+  @Test
+  public void testShootHitCaveMiss() {
+    INode wumpus = new Cave(new Coordinates(3, 0), new WumpusStrategy());
+    INode eastOne = new Cave(new Coordinates(2, 1), new TunnelStrategy());
+    INode eastTwo = new Cave(new Coordinates(3, 1), new StandardStrategy());
+
+    this.cave.setNode(eastOne, Direction.EAST);
+    eastOne.setNode(this.cave, Direction.WEST);
+    eastTwo.setNode(eastOne, Direction.WEST);
+    eastOne.setNode(eastTwo, Direction.EAST);
+    eastTwo.setNode(wumpus, Direction.NORTH);
+    wumpus.setNode(eastTwo, Direction.SOUTH);
+
+    assertFalse(this.cave.shoot(Direction.EAST, 1));
+    assertFalse(this.cave.shoot(Direction.EAST, 2));
+  }
+
+  @Test
+  public void testShootHitCaveStrike() {
+    INode wumpus = new Cave(new Coordinates(3, 0), new WumpusStrategy());
+    INode eastOne = new Cave(new Coordinates(2, 1), new TunnelStrategy());
+    INode eastTwo = new Cave(new Coordinates(3, 1), new StandardStrategy());
+
+    this.cave.setNode(eastOne, Direction.EAST);
+    eastOne.setNode(this.cave, Direction.WEST);
+    eastTwo.setNode(eastOne, Direction.WEST);
+    eastOne.setNode(eastTwo, Direction.EAST);
+    eastTwo.setNode(wumpus, Direction.EAST);
+    wumpus.setNode(eastTwo, Direction.WEST);
+
+    assertFalse(this.cave.shoot(Direction.EAST, 2));
   }
 
   @Test
