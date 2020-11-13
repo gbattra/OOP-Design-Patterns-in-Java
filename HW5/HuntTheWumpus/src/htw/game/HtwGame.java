@@ -3,12 +3,12 @@ package htw.game;
 import htw.level.IHtwMaze;
 import maze.utils.Direction;
 
-public class HtwGame implements IGame {
-  private final IPlayer player;
+public class HtwGame implements IHtwGame {
+  private final IHtwPlayer player;
   private final IHtwMaze maze;
 
   public HtwGame(
-          IPlayer player,
+          IHtwPlayer player,
           IHtwMaze maze) throws IllegalArgumentException {
     if (player == null || maze == null) {
       throw new IllegalArgumentException("Player and maze cannot be null.");

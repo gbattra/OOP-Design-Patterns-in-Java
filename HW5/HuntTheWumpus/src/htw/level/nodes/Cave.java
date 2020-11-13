@@ -1,13 +1,13 @@
 package htw.level.nodes;
 
-import htw.level.strategies.INodeStrategy;
+import htw.level.strategies.IHtwNodeStrategy;
 import maze.components.ICoordinates;
 
 /**
  * A cave node in a Hunt the Wumpus maze. Effectively the base node, which takes different
  * strategies to augment its functionality.
  */
-public class Cave extends AbstractCave implements INode {
+public class Cave extends AbstractCave implements IHtwNode {
   /**
    * Main constructor for the cave node. Takes a coordinate pair and a strategy.
    *
@@ -20,7 +20,7 @@ public class Cave extends AbstractCave implements INode {
   public Cave(
           Integer id,
           ICoordinates coordinates,
-          INodeStrategy strategy,
+          IHtwNodeStrategy strategy,
           Appendable logger)
           throws IllegalArgumentException {
     super(id, coordinates, strategy, logger);

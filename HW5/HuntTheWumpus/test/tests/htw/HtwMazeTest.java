@@ -3,12 +3,12 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
-import htw.game.IPlayer;
+import htw.game.IHtwPlayer;
 import htw.game.Player;
 import htw.level.HtwMaze;
 import htw.level.IHtwMaze;
 import htw.level.nodes.Cave;
-import htw.level.nodes.INode;
+import htw.level.nodes.IHtwNode;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.WumpusStrategy;
 import maze.components.Coordinates;
@@ -19,11 +19,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class HtwMazeTest {
-  private INode north;
-  private INode south;
-  private INode east;
-  private INode west;
-  private INode root;
+  private IHtwNode north;
+  private IHtwNode south;
+  private IHtwNode east;
+  private IHtwNode west;
+  private IHtwNode root;
   private IHtwMaze maze;
 
   @Before
@@ -50,7 +50,7 @@ public class HtwMazeTest {
   @Test
   public void testConstructor() {
     try {
-      INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
+      IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
       IHtwMaze maze = new HtwMaze(root, System.out);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -65,8 +65,8 @@ public class HtwMazeTest {
 
   @Test
   public void testInvalidMove() {
-    IPlayer player = new Player("Joe", 10);
-    INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
+    IHtwPlayer player = new Player("Joe", 10);
+    IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
     IHtwMaze maze = new HtwMaze(root, System.out);
     assertFalse(maze.move(Direction.EAST, player));
   }

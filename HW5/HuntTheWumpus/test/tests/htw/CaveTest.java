@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import htw.level.nodes.Cave;
 import htw.level.nodes.DeadEnd;
-import htw.level.nodes.INode;
-import htw.level.strategies.INodeStrategy;
+import htw.level.nodes.IHtwNode;
+import htw.level.strategies.IHtwNodeStrategy;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.TunnelStrategy;
 import htw.level.strategies.WumpusStrategy;
@@ -24,12 +24,12 @@ import static org.junit.Assert.fail;
  * Tests for the cave.
  */
 public class CaveTest {
-  private INodeStrategy strategy = new StandardStrategy();
-  private INode north;
-  private INode south;
-  private INode east;
-  private INode west;
-  private INode cave;
+  private IHtwNodeStrategy strategy = new StandardStrategy();
+  private IHtwNode north;
+  private IHtwNode south;
+  private IHtwNode east;
+  private IHtwNode west;
+  private IHtwNode cave;
 
   @Before
   public void setup() {
@@ -78,9 +78,9 @@ public class CaveTest {
 
   @Test
   public void testShootHitTunnel() {
-    INode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    INode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    INode eastTwo = new Cave(12, new Coordinates(3, 1), new TunnelStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new TunnelStrategy(), System.out);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -94,9 +94,9 @@ public class CaveTest {
 
   @Test
   public void testShootHitCaveMiss() {
-    INode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    INode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    INode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -111,9 +111,9 @@ public class CaveTest {
 
   @Test
   public void testShootHitCaveStrike() {
-    INode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    INode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    INode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -128,8 +128,8 @@ public class CaveTest {
   @Test
   public void testSetStrategy() {
     assertFalse(this.cave.shoot(Direction.SOUTH, 1));
-    INodeStrategy newStrat = new WumpusStrategy();
-    ((INode) this.cave.getNode(Direction.SOUTH)).setStrategy(newStrat);
+    IHtwNodeStrategy newStrat = new WumpusStrategy();
+    ((IHtwNode) this.cave.getNode(Direction.SOUTH)).setStrategy(newStrat);
     assertTrue(this.cave.shoot(Direction.SOUTH, 1));
   }
 
@@ -150,9 +150,9 @@ public class CaveTest {
 
   @Test
   public void testGet() {
-    INode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    INode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    INode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -161,7 +161,7 @@ public class CaveTest {
     eastTwo.setNode(wumpus, Direction.NORTH);
     wumpus.setNode(eastTwo, Direction.SOUTH);
 
-    INode retrieved = this.cave.get(10);
+    IHtwNode retrieved = this.cave.get(10);
     assertEquals(wumpus, retrieved);
   }
 

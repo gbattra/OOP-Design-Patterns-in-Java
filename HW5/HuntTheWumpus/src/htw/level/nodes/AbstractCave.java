@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import htw.game.IPlayer;
-import htw.level.strategies.INodeStrategy;
+import htw.game.IHtwPlayer;
+import htw.level.strategies.IHtwNodeStrategy;
 import maze.components.ICoordinates;
 import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;
@@ -15,8 +15,8 @@ import maze.utils.Direction;
  * Abstract cave node in a Hunt the Wumpus maze. Mainly a wrapper around the strategy set
  * on the node instance.
  */
-public abstract class AbstractCave extends AbstractRoomNode implements INode {
-  protected INodeStrategy strategy;
+public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode {
+  protected IHtwNodeStrategy strategy;
   protected Integer id;
   protected Appendable logger;
 
@@ -32,7 +32,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
   public AbstractCave(
           Integer id,
           ICoordinates coordinates,
-          INodeStrategy strategy,
+          IHtwNodeStrategy strategy,
           Appendable logger)
           throws IllegalArgumentException {
     super(coordinates, 0, 0);
@@ -68,7 +68,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
   }
 
   @Override
-  public INode get(int id) throws IllegalArgumentException {
+  public IHtwNode get(int id) throws IllegalArgumentException {
     if (id <= 0) {
       throw new IllegalArgumentException("Id must be greater than zero.");
     }
@@ -77,7 +77,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
   }
 
   @Override
-  public INode getHelper(List<ICoordinates> traversed, int id) throws IllegalArgumentException {
+  public IHtwNode getHelper(List<ICoordinates> traversed, int id) throws IllegalArgumentException {
     if (traversed.contains(this.coordinates)) {
       throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
     }
@@ -92,7 +92,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {
       try {
-        INode node = (INode) this.getNode(exits.get(0));
+        IHtwNode node = (IHtwNode) this.getNode(exits.get(0));
         exits.remove(0);
         return node.getHelper(traversed, id);
       } catch (Exception ignored) {
@@ -104,19 +104,19 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
 
   @Override
   public void setNode(Node node, Direction dir) throws IllegalArgumentException {
-    if (!(node instanceof INode)) {
+    if (!(node instanceof IHtwNode)) {
       throw new IllegalArgumentException("Provided node is not an instance of MazeNode.");
     }
     super.setNode(node, dir);
   }
 
   @Override
-  public INode enter(Direction from) {
+  public IHtwNode enter(Direction from) {
     return this.strategy.enter(from, this);
   }
 
   @Override
-  public void setStrategy(INodeStrategy strategy) {
+  public void setStrategy(IHtwNodeStrategy strategy) {
     this.strategy = strategy;
   }
 
@@ -128,11 +128,11 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
     if (count == 0) {
       return this.strategy.shoot(direction, count, this);
     }
-    return ((INode) this.getNode(direction)).shoot(direction, count - 1);
+    return ((IHtwNode) this.getNode(direction)).shoot(direction, count - 1);
   }
 
   @Override
-  public void receive(IPlayer player) throws IllegalArgumentException {
+  public void receive(IHtwPlayer player) throws IllegalArgumentException {
     this.strategy.receive(player);
   }
 

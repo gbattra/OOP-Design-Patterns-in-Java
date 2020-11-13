@@ -3,11 +3,11 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
-import htw.game.IPlayer;
+import htw.game.IHtwPlayer;
 import htw.game.Player;
 import htw.level.nodes.Cave;
-import htw.level.nodes.INode;
-import htw.level.strategies.INodeStrategy;
+import htw.level.nodes.IHtwNode;
+import htw.level.strategies.IHtwNodeStrategy;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.WumpusStrategy;
 import maze.components.Coordinates;
@@ -21,12 +21,12 @@ import static org.junit.Assert.assertTrue;
  * Tests for the wumpus cave.
  */
 public class WumpusCaveTest {
-  private INodeStrategy standard = new StandardStrategy();
-  private INode north;
-  private INode south;
-  private INode east;
-  private INode west;
-  private INode wumpus;
+  private IHtwNodeStrategy standard = new StandardStrategy();
+  private IHtwNode north;
+  private IHtwNode south;
+  private IHtwNode east;
+  private IHtwNode west;
+  private IHtwNode wumpus;
 
   @Before
   public void setup() {
@@ -59,7 +59,7 @@ public class WumpusCaveTest {
 
   @Test
   public void testReceivePlayer() {
-    IPlayer player = new Player("Joe", 10);
+    IHtwPlayer player = new Player("Joe", 10);
     this.wumpus.receive(player);
     assertFalse(player.isAlive());
   }

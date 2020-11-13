@@ -1,24 +1,24 @@
 package htw.level.strategies;
 
-import htw.game.IPlayer;
-import htw.level.nodes.INode;
+import htw.game.IHtwPlayer;
+import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
 
 /**
  * Strategy for the cave with the wumpus. Receive() kills the player and shoot() returns true.
  */
-public class WumpusStrategy extends StandardStrategy implements INodeStrategy {
+public class WumpusStrategy extends StandardStrategy implements IHtwNodeStrategy {
   @Override
-  public boolean shoot(Direction direction, int count, INode curr) {
+  public boolean shoot(Direction direction, int count, IHtwNode curr) {
     if (count == 0) {
       return true;
     }
 
-    return ((INode) curr.getNode(direction)).shoot(direction, count - 1);
+    return ((IHtwNode) curr.getNode(direction)).shoot(direction, count - 1);
   }
 
   @Override
-  public void receive(IPlayer player) {
+  public void receive(IHtwPlayer player) {
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }
@@ -27,7 +27,7 @@ public class WumpusStrategy extends StandardStrategy implements INodeStrategy {
   }
 
   @Override
-  public boolean smelly(INode node) {
+  public boolean smelly(IHtwNode node) {
     return true;
   }
 

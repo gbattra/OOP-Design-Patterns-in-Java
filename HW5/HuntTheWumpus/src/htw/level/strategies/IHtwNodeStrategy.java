@@ -1,13 +1,13 @@
 package htw.level.strategies;
 
-import htw.game.IPlayer;
-import htw.level.nodes.INode;
+import htw.game.IHtwPlayer;
+import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
 
 /**
  * Interface for a strategy used by a node in a Hunt the Wumpus cave.
  */
-public interface INodeStrategy {
+public interface IHtwNodeStrategy {
 
   /**
    * Functionality for entering the node.
@@ -16,7 +16,7 @@ public interface INodeStrategy {
    * @param curr the node itself
    * @return the node entered
    */
-  INode enter(Direction from, INode curr);
+  IHtwNode enter(Direction from, IHtwNode curr);
 
   /**
    * Shoots an arrow in the specified direction and traverses the specified number of caves.
@@ -26,16 +26,16 @@ public interface INodeStrategy {
    * @param curr the node itself
    * @return true if the wumpus is struck
    */
-  boolean shoot(Direction direction, int count, INode curr);
+  boolean shoot(Direction direction, int count, IHtwNode curr);
 
   /**
    * Receives a player and modifies/interacts with it. I.e. a wumpus strategy will kill the player.
    *
    * @param player the player to interact with
    */
-  void receive(IPlayer player);
+  void receive(IHtwPlayer player);
 
-  boolean smelly(INode curr);
+  boolean smelly(IHtwNode curr);
 
-  boolean drafty(INode curr);
+  boolean drafty(IHtwNode curr);
 }

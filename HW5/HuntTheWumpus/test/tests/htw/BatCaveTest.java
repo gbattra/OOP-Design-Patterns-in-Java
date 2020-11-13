@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.util.Random;
 
 import htw.level.nodes.Cave;
-import htw.level.nodes.INode;
+import htw.level.nodes.IHtwNode;
 import htw.level.strategies.BatStrategy;
-import htw.level.strategies.INodeStrategy;
+import htw.level.strategies.IHtwNodeStrategy;
 import htw.level.strategies.StandardStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
@@ -20,12 +20,12 @@ import static org.junit.Assert.assertNotEquals;
  * Tests for the bat cave.
  */
 public class BatCaveTest {
-  private INode bat;
-  private INodeStrategy standard = new StandardStrategy();
-  private INode north;
-  private INode south;
-  private INode east;
-  private INode west;
+  private IHtwNode bat;
+  private IHtwNodeStrategy standard = new StandardStrategy();
+  private IHtwNode north;
+  private IHtwNode south;
+  private IHtwNode east;
+  private IHtwNode west;
 
   @Before
   public void setup() {
@@ -53,9 +53,9 @@ public class BatCaveTest {
 
   @Test
   public void testEnter() {
-    INode cave = new Cave(6, new Coordinates(0, 0), this.standard, System.out);
+    IHtwNode cave = new Cave(6, new Coordinates(0, 0), this.standard, System.out);
     this.north.setNode(cave, Direction.EAST);
-    INode node = this.bat.enter(Direction.SOUTH);
+    IHtwNode node = this.bat.enter(Direction.SOUTH);
     assertEquals(this.bat, node);
 
     node = this.bat.enter(Direction.SOUTH);

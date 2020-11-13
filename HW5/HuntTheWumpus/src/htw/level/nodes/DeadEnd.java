@@ -2,8 +2,8 @@ package htw.level.nodes;
 
 import java.util.List;
 
-import htw.game.IPlayer;
-import htw.level.strategies.INodeStrategy;
+import htw.game.IHtwPlayer;
+import htw.level.strategies.IHtwNodeStrategy;
 import maze.components.ICoordinates;
 import maze.components.nodes.DeadEndNode;
 import maze.utils.Direction;
@@ -12,24 +12,24 @@ import maze.utils.Direction;
  * Equivalent of an empty node in a linked list. Helps with recursive operations when traversing
  * the maze.
  */
-public class DeadEnd extends DeadEndNode implements INode {
+public class DeadEnd extends DeadEndNode implements IHtwNode {
   @Override
   public Direction directionTo(int id) throws IllegalArgumentException {
     throw new IllegalArgumentException("Cannot find direction to node from dead end.");
   }
 
   @Override
-  public INode get(int id) throws IllegalArgumentException {
+  public IHtwNode get(int id) throws IllegalArgumentException {
     throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
   }
 
   @Override
-  public INode getHelper(List<ICoordinates> traversed, int id) throws IllegalArgumentException {
+  public IHtwNode getHelper(List<ICoordinates> traversed, int id) throws IllegalArgumentException {
     throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
   }
 
   @Override
-  public INode enter(Direction from) throws IllegalStateException {
+  public IHtwNode enter(Direction from) throws IllegalStateException {
     throw new IllegalStateException("Cannot enter a dead end node.");
   }
 
@@ -39,12 +39,12 @@ public class DeadEnd extends DeadEndNode implements INode {
   }
 
   @Override
-  public void setStrategy(INodeStrategy strategy) throws IllegalStateException {
+  public void setStrategy(IHtwNodeStrategy strategy) throws IllegalStateException {
     throw new IllegalStateException("Cannot set strategy on a dead end node.");
   }
 
   @Override
-  public void receive(IPlayer player) throws IllegalStateException {
+  public void receive(IHtwPlayer player) throws IllegalStateException {
     throw new IllegalStateException("Dead end node cannot receive() a player.");
   }
 

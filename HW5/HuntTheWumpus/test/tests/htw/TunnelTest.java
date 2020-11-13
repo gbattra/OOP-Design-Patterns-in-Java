@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import htw.level.nodes.Cave;
 import htw.level.nodes.DeadEnd;
-import htw.level.nodes.INode;
-import htw.level.strategies.INodeStrategy;
+import htw.level.nodes.IHtwNode;
+import htw.level.strategies.IHtwNodeStrategy;
 import htw.level.strategies.PitStrategy;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.TunnelStrategy;
@@ -23,9 +23,9 @@ import static org.junit.Assert.fail;
  * Tests for the tunnel.
  */
 public class TunnelTest {
-  private INodeStrategy strategy = new TunnelStrategy();
-  private INode north;
-  private INode tunnel;
+  private IHtwNodeStrategy strategy = new TunnelStrategy();
+  private IHtwNode north;
+  private IHtwNode tunnel;
 
   @Before
   public void setup() {
@@ -37,14 +37,14 @@ public class TunnelTest {
 
   @Test
   public void testValidEnter() {
-    INode entered = this.tunnel.enter(Direction.SOUTH);
+    IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
     assertEquals(this.north, entered);
   }
 
   @Test(expected = IllegalStateException.class)
   public void testInvalidEnter() {
     this.tunnel.setNode(new DeadEnd(), Direction.NORTH);
-    INode entered = this.tunnel.enter(Direction.SOUTH);
+    IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
     fail("Invalid enter() should have failed.");
   }
 

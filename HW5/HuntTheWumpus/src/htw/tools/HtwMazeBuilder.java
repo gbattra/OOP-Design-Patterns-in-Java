@@ -2,9 +2,9 @@ package htw.tools;
 
 import htw.level.HtwMaze;
 import htw.level.nodes.Cave;
-import htw.level.nodes.INode;
+import htw.level.nodes.IHtwNode;
 import htw.level.strategies.BatStrategy;
-import htw.level.strategies.INodeStrategy;
+import htw.level.strategies.IHtwNodeStrategy;
 import htw.level.strategies.PitStrategy;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.TunnelStrategy;
@@ -33,14 +33,14 @@ public class HtwMazeBuilder
 
   @Override
   protected Node upgradeHallway(Node node) {
-    ((INode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
+    ((IHtwNode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
     return node;
   }
 
   @Override
   public IMaze build() {
 
-    INode start = new Cave(
+    IHtwNode start = new Cave(
             this.currentId,
             this.config.start(),
             new TunnelStrategy(),
@@ -57,13 +57,13 @@ public class HtwMazeBuilder
     return new HtwMaze(start, System.out);
   }
 
-  private INodeStrategy generateStrategy(IHtwConfiguration config) {
+  private IHtwNodeStrategy generateStrategy(IHtwConfiguration config) {
     double next = config.random().nextDouble();
     boolean isPit = next <= config.getPitFrequency();
     boolean isBat = next <= config.getBatFrequency();
     boolean isWumpus = next <= (double) (1 / (this.config.rowCount() * this.config.columnCount()));
 
-    INodeStrategy strategy = new StandardStrategy();
+    IHtwNodeStrategy strategy = new StandardStrategy();
     if (isPit) {
       strategy = new PitStrategy();
     }
@@ -82,10 +82,10 @@ public class HtwMazeBuilder
     return strategy;
   }
 
-  private void setWumpus(INode node) {
+  private void setWumpus(IHtwNode node) {
     Coordinates coordinates = new Coordinates(
             this.config.random().nextInt(this.config.columnCount()),
             this.config.random().nextInt(this.config.rowCount()));
-    ((INode) node.get(coordinates)).enter(Direction.SOUTH).setStrategy(new WumpusStrategy());
+    ((IHtwNode) node.get(coordinates)).enter(Direction.SOUTH).setStrategy(new WumpusStrategy());
   }
 }

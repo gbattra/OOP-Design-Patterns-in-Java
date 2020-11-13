@@ -2,8 +2,8 @@ package htw.level.nodes;
 
 import java.util.List;
 
-import htw.game.IPlayer;
-import htw.level.strategies.INodeStrategy;
+import htw.game.IHtwPlayer;
+import htw.level.strategies.IHtwNodeStrategy;
 import maze.components.ICoordinates;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
@@ -11,7 +11,7 @@ import maze.utils.Direction;
 /**
  * Interface for a node in a Hunt the Wumpus maze.
  */
-public interface INode extends Node {
+public interface IHtwNode extends Node {
   /**
    * Getter for the node's ID.
    *
@@ -33,7 +33,7 @@ public interface INode extends Node {
    * @param id the id of the target node
    * @return the target node
    */
-  INode get(int id);
+  IHtwNode get(int id);
 
   /**
    * Helper for getting a node by its id.
@@ -42,7 +42,7 @@ public interface INode extends Node {
    * @param id the target id
    * @return the target node
    */
-  INode getHelper(List<ICoordinates> traversed, int id);
+  IHtwNode getHelper(List<ICoordinates> traversed, int id);
 
   /**
    * Attempts to enter the node from the specified direction. Depending on the node's strategy
@@ -52,7 +52,7 @@ public interface INode extends Node {
    * @param from the direction from which the node was entered
    * @return the entered node
    */
-  INode enter(Direction from);
+  IHtwNode enter(Direction from);
 
   /**
    * Shoots an arrow in the specified direction. Each node traversed by the arrow decrements the
@@ -69,7 +69,7 @@ public interface INode extends Node {
    *
    * @param strategy the strategy to set
    */
-  void setStrategy(INodeStrategy strategy);
+  void setStrategy(IHtwNodeStrategy strategy);
 
   /**
    * Takes a player object and interacts with it using the node's strategy. I.e. a wumpus strategy
@@ -77,7 +77,7 @@ public interface INode extends Node {
    *
    * @param player the player to receive
    */
-  void receive(IPlayer player);
+  void receive(IHtwPlayer player);
 
   boolean smelly();
 

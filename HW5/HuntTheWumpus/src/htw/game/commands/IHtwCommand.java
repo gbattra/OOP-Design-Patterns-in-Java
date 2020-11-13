@@ -1,5 +1,5 @@
 package htw.game.commands;
 
-public interface ICommand<T> {
+public interface IHtwCommand<T> {
   void execute(T receiver);
 }

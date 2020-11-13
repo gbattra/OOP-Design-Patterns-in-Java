@@ -1,14 +1,14 @@
 package htw.level.strategies;
 
-import htw.game.IPlayer;
-import htw.level.nodes.INode;
+import htw.game.IHtwPlayer;
+import htw.level.nodes.IHtwNode;
 
 /**
  * Strategy for a bottomless pit cave.
  */
-public class PitStrategy extends StandardStrategy implements INodeStrategy {
+public class PitStrategy extends StandardStrategy implements IHtwNodeStrategy {
   @Override
-  public void receive(IPlayer player) throws IllegalArgumentException {
+  public void receive(IHtwPlayer player) throws IllegalArgumentException {
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }
@@ -16,7 +16,7 @@ public class PitStrategy extends StandardStrategy implements INodeStrategy {
   }
 
   @Override
-  public boolean drafty(INode curr) {
+  public boolean drafty(IHtwNode curr) {
     return true;
   }
 

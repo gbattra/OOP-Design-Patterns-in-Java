@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import htw.game.Player;
 import htw.level.nodes.DeadEnd;
-import htw.level.nodes.INode;
+import htw.level.nodes.IHtwNode;
 import htw.level.strategies.StandardStrategy;
 import maze.utils.Direction;
 
@@ -18,46 +18,46 @@ import static org.junit.Assert.fail;
 public class DeadEndTest {
   @Test(expected = IllegalStateException.class)
   public void testEnter() {
-    INode deadend = new DeadEnd();
+    IHtwNode deadend = new DeadEnd();
     deadend.enter(Direction.NORTH);
     fail("Dead end node enter() should have failed.");
   }
 
   @Test
   public void testShoot() {
-    INode deadend = new DeadEnd();
+    IHtwNode deadend = new DeadEnd();
     assertFalse(deadend.shoot(Direction.SOUTH, 1));
   }
 
   @Test(expected = IllegalStateException.class)
   public void testSetStrategy() {
-    INode deadend = new DeadEnd();
+    IHtwNode deadend = new DeadEnd();
     deadend.setStrategy(new StandardStrategy());
     fail("Dead end node setStrategy() should have failed.");
   }
 
   @Test(expected = IllegalStateException.class)
   public void testReceive() {
-    INode deadend = new DeadEnd();
+    IHtwNode deadend = new DeadEnd();
     deadend.receive(new Player("Joe", 10));
     fail("Dead end node receive() should have failed.");
   }
 
   @Test
   public void testToString() {
-    INode deadend = new DeadEnd();
+    IHtwNode deadend = new DeadEnd();
     assertEquals("Dead End", deadend.toString());
   }
 
   @Test
   public void testSmelly() {
-    INode deadend = new DeadEnd();
+    IHtwNode deadend = new DeadEnd();
     assertFalse(deadend.smelly());
   }
 
   @Test
   public void testDrafty() {
-    INode deadend = new DeadEnd();
+    IHtwNode deadend = new DeadEnd();
     assertFalse(deadend.drafty());
   }
 }

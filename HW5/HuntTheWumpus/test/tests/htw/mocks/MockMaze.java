@@ -1,6 +1,6 @@
 package tests.htw.mocks;
 
-import htw.game.IPlayer;
+import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 import maze.utils.Direction;
 
@@ -12,14 +12,14 @@ public class MockMaze implements IHtwMaze {
   }
 
   @Override
-  public boolean move(Direction direction, IPlayer player) {
+  public boolean move(Direction direction, IHtwPlayer player) {
     this.log.append(
             String.format("moved - %s - %s", direction.toString(), player.getName()));
     return true;
   }
 
   @Override
-  public boolean move(Integer id, IPlayer player) {
+  public boolean move(Integer id, IHtwPlayer player) {
     this.log.append(
             String.format("moved - %s - %s", id, player.getName()));
     return true;

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import htw.level.nodes.INode;
+import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
 
 /**
  * Strategy for a tunnel node. A tunnel has only two exits.
  */
-public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
+public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy {
   /**
    * When a player enters the tunnel, the player is moved through the tunnel to the next node in
    * the maze. The `from` param in enter() ensures the tunnel does not return the player to the
@@ -21,7 +21,7 @@ public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
    * @return the node where the tunnel leads
    */
   @Override
-  public INode enter(Direction from, INode curr) {
+  public IHtwNode enter(Direction from, IHtwNode curr) {
       List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {
@@ -33,7 +33,7 @@ public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
       }
 
       try {
-        INode node = (INode) curr.getNode(exit);
+        IHtwNode node = (IHtwNode) curr.getNode(exit);
         return node.enter(from);
       } catch (Exception ignored) {
       }
@@ -51,7 +51,7 @@ public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
    * @return true if the wumpus is struck
    */
   @Override
-  public boolean shoot(Direction direction, int count, INode curr) {
+  public boolean shoot(Direction direction, int count, IHtwNode curr) {
     if (count < 0) {
       throw new IllegalArgumentException("Count cannot be negative.");
     }
@@ -62,31 +62,31 @@ public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
       if (exit == direction.opposite()) {
         continue;
       }
-      hit |= ((INode) curr.getNode(exit)).shoot(exit, count);
+      hit |= ((IHtwNode) curr.getNode(exit)).shoot(exit, count);
     }
 
     return hit;
   }
 
   @Override
-  public boolean smelly(INode curr) {
+  public boolean smelly(IHtwNode curr) {
     boolean smelly = false;
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     for (Direction exit : exits) {
-      smelly |= ((INode) curr.getNode(exit)).smelly();
+      smelly |= ((IHtwNode) curr.getNode(exit)).smelly();
     }
 
     return smelly;
   }
 
   @Override
-  public boolean drafty(INode curr) {
+  public boolean drafty(IHtwNode curr) {
     boolean drafty = false;
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     for (Direction exit : exits) {
-      drafty |= ((INode) curr.getNode(exit)).drafty();
+      drafty |= ((IHtwNode) curr.getNode(exit)).drafty();
     }
 
     return drafty;

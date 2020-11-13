@@ -5,7 +5,7 @@ import maze.game.MazePlayer;
 /**
  * Player in a HTW maze.
  */
-public class Player extends MazePlayer implements IPlayer {
+public class Player extends MazePlayer implements IHtwPlayer {
   private int arrowCount;
   private boolean alive;
 
