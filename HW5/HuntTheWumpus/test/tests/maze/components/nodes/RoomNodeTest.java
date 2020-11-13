@@ -3,20 +3,20 @@ package tests.maze.components.nodes;
 import org.junit.Before;
 import org.junit.Test;
 
-import maze.utils.Direction;
-import maze.config.IConfiguration;
+import maze.MazeBuilder;
+import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.IMaze;
-import maze.components.nodes.Node;
 import maze.components.IPath;
 import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.GoldRoomNode;
-import maze.MazeBuilder;
-import maze.config.MazeConfigurationBuilder;
-import maze.components.Coordinates;
-import maze.config.PerfectMazeConfiguration;
+import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
 import maze.components.nodes.ThiefRoomNode;
+import maze.config.IConfiguration;
+import maze.config.MazeConfigurationBuilder;
+import maze.config.PerfectMazeConfiguration;
+import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

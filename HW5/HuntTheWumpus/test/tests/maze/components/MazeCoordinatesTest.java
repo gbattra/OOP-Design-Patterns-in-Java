@@ -2,8 +2,8 @@ package tests.maze.components;
 
 import org.junit.Test;
 
-import maze.components.ICoordinates;
 import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

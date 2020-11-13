@@ -6,12 +6,8 @@ import java.util.List;
 
 import htw.game.IPlayer;
 import htw.maze.strategies.INodeStrategy;
-import maze.components.Coordinates;
 import maze.components.ICoordinates;
-import maze.components.IPath;
-import maze.components.Path;
 import maze.components.nodes.AbstractRoomNode;
-import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
@@ -22,6 +18,7 @@ import maze.utils.Direction;
 public abstract class AbstractCave extends AbstractRoomNode implements INode {
   protected INodeStrategy strategy;
   protected Integer id;
+  protected Appendable logger;
 
   /**
    * Main constructor for the abstract node. Takes a coordinate pair and a strategy.
@@ -29,13 +26,18 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
    * @param id the node's id
    * @param coordinates the coordinates where the node resides
    * @param strategy the strategy used by the node
+   * @param logger the logger for event output
    * @throws IllegalArgumentException if strategy or coordinates are null
    */
-  public AbstractCave(Integer id, ICoordinates coordinates, INodeStrategy strategy)
+  public AbstractCave(
+          Integer id,
+          ICoordinates coordinates,
+          INodeStrategy strategy,
+          Appendable logger)
           throws IllegalArgumentException {
     super(coordinates, 0, 0);
-    if (strategy == null) {
-      throw new IllegalArgumentException("Strategy cannot be null.");
+    if (strategy == null || logger == null) {
+      throw new IllegalArgumentException("Strategy and logger cannot be null.");
     }
     this.strategy = strategy;
     this.id = id;

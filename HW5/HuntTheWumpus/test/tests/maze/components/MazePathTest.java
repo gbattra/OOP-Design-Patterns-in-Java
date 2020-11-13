@@ -2,13 +2,13 @@ package tests.maze.components;
 
 import org.junit.Test;
 
+import maze.components.Coordinates;
 import maze.components.ICoordinates;
-import maze.components.nodes.Node;
 import maze.components.IPath;
+import maze.components.Path;
 import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.GoldRoomNode;
-import maze.components.Coordinates;
-import maze.components.Path;
+import maze.components.nodes.Node;
 import maze.components.nodes.ThiefRoomNode;
 
 import static org.junit.Assert.assertEquals;

@@ -26,7 +26,7 @@ public class HtwMazeBuilder extends MazeBuilder {
 
   @Override
   public IMaze build() {
-    INode start = new Cave(this.currentId, this.config.start(), new TunnelStrategy());
+    INode start = new Cave(this.currentId, this.config.start(), new TunnelStrategy(), System.out);
     this.grow(start);
 
     if (this.config.isRoomMaze()) {
@@ -44,7 +44,7 @@ public class HtwMazeBuilder extends MazeBuilder {
   @Override
   public Node generateRoom(ICoordinates c) {
     this.currentId++;
-    return new Cave(this.currentId, c, new TunnelStrategy());
+    return new Cave(this.currentId, c, new TunnelStrategy(), System.out);
   }
 
   @Override

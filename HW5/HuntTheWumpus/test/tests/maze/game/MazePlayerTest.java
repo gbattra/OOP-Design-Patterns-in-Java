@@ -2,10 +2,10 @@ package tests.maze.game;
 
 import org.junit.Test;
 
+import maze.components.Coordinates;
+import maze.components.nodes.GoldRoomNode;
 import maze.components.nodes.Node;
 import maze.game.IMazePlayer;
-import maze.components.nodes.GoldRoomNode;
-import maze.components.Coordinates;
 import maze.game.MazePlayer;
 
 import static org.junit.Assert.assertEquals;

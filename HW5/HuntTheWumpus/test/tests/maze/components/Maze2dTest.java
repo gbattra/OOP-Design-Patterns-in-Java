@@ -3,12 +3,12 @@ package tests.maze.components;
 import org.junit.Before;
 import org.junit.Test;
 
-import maze.utils.Direction;
-import maze.components.IMaze;
-import maze.components.nodes.Node;
-import maze.components.Maze;
 import maze.components.Coordinates;
+import maze.components.IMaze;
+import maze.components.Maze;
+import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
+import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

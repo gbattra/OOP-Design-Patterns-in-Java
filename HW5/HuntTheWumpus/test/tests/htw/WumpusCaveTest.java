@@ -33,12 +33,12 @@ public class WumpusCaveTest {
     this.wumpus = new Cave(
             1,
             new Coordinates(1, 1),
-            new WumpusStrategy());
+            new WumpusStrategy(), System.out);
 
-    this.north = new Cave(2, new Coordinates(1, 0), this.standard);
-    this.south = new Cave(3, new Coordinates(1, 2), this.standard);
-    this.east = new Cave(4, new Coordinates(2, 1), this.standard);
-    this.west = new Cave(5, new Coordinates(0, 1), this.standard);
+    this.north = new Cave(2, new Coordinates(1, 0), this.standard, System.out);
+    this.south = new Cave(3, new Coordinates(1, 2), this.standard, System.out);
+    this.east = new Cave(4, new Coordinates(2, 1), this.standard, System.out);
+    this.west = new Cave(5, new Coordinates(0, 1), this.standard, System.out);
 
     this.wumpus.setNode(this.north, Direction.NORTH);
     this.wumpus.setNode(this.south, Direction.SOUTH);

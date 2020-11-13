@@ -2,10 +2,10 @@ package maze;
 
 import java.util.List;
 
+import maze.components.ICoordinates;
 import maze.components.IEdge;
 import maze.components.IMaze;
 import maze.components.nodes.Node;
-import maze.components.ICoordinates;
 import maze.utils.Direction;
 
 /**

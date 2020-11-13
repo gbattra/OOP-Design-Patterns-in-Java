@@ -1,9 +1,9 @@
 package maze.components.nodes;
 
-import maze.components.ICoordinates;
 import maze.components.Coordinates;
-import maze.components.Path;
+import maze.components.ICoordinates;
 import maze.components.IPath;
+import maze.components.Path;
 import maze.utils.Direction;
 
 /**

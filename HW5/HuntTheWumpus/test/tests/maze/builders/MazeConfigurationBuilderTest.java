@@ -5,7 +5,6 @@ import org.junit.Test;
 import maze.config.IConfigurationBuilder;
 import maze.config.MazeConfigurationBuilder;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class MazeConfigurationBuilderTest {

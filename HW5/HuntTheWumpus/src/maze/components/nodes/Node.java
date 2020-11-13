@@ -1,7 +1,7 @@
 package maze.components.nodes;
 
-import maze.components.IPath;
 import maze.components.ICoordinates;
+import maze.components.IPath;
 import maze.utils.Direction;
 
 /**

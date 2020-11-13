@@ -32,12 +32,13 @@ public class BatCaveTest {
     this.bat = new Cave(
             1,
             new Coordinates(1, 1),
-            new BatStrategy(2, 2, new Random(1), new StandardStrategy()));
+            new BatStrategy(2, 2, new Random(1), new StandardStrategy()),
+            System.out);
 
-    this.north = new Cave(2, new Coordinates(1, 0), this.standard);
-    this.south = new Cave(3, new Coordinates(1, 2), this.standard);
-    this.east = new Cave(4, new Coordinates(2, 1), this.standard);
-    this.west = new Cave(5, new Coordinates(0, 1), this.standard);
+    this.north = new Cave(2, new Coordinates(1, 0), this.standard, System.out);
+    this.south = new Cave(3, new Coordinates(1, 2), this.standard, System.out);
+    this.east = new Cave(4, new Coordinates(2, 1), this.standard, System.out);
+    this.west = new Cave(5, new Coordinates(0, 1), this.standard, System.out);
 
     this.bat.setNode(this.north, Direction.NORTH);
     this.bat.setNode(this.south, Direction.SOUTH);
@@ -52,7 +53,7 @@ public class BatCaveTest {
 
   @Test
   public void testEnter() {
-    INode cave = new Cave(6, new Coordinates(0, 0), this.standard);
+    INode cave = new Cave(6, new Coordinates(0, 0), this.standard, System.out);
     this.north.setNode(cave, Direction.EAST);
     INode node = this.bat.enter(Direction.SOUTH);
     assertEquals(this.bat, node);

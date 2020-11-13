@@ -3,9 +3,9 @@ package tests.maze.config;
 import org.junit.Before;
 import org.junit.Test;
 
-import maze.config.IConfiguration;
-import maze.components.ICoordinates;
 import maze.components.Coordinates;
+import maze.components.ICoordinates;
+import maze.config.IConfiguration;
 import maze.config.PerfectMazeConfiguration;
 
 import static org.junit.Assert.assertEquals;

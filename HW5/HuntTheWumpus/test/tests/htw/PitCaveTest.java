@@ -22,7 +22,7 @@ public class PitCaveTest {
 
   @Before
   public void setup() {
-    this.pit = new Cave(1, new Coordinates(0, 0), new PitStrategy());
+    this.pit = new Cave(1, new Coordinates(0, 0), new PitStrategy(), System.out);
   }
 
   @Test

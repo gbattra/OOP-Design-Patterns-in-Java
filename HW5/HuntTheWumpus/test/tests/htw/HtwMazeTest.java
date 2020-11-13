@@ -28,12 +28,12 @@ public class HtwMazeTest {
 
   @Before
   public void setup() {
-    this.north = new Cave(1, new Coordinates(1, 0), new StandardStrategy());
-    this.south = new Cave(2, new Coordinates(1, 2), new StandardStrategy());
-    this.east = new Cave(3, new Coordinates(2, 1), new StandardStrategy());
-    this.west = new Cave(4, new Coordinates(0, 1), new StandardStrategy());
+    this.north = new Cave(1, new Coordinates(1, 0), new StandardStrategy(), System.out);
+    this.south = new Cave(2, new Coordinates(1, 2), new StandardStrategy(), System.out);
+    this.east = new Cave(3, new Coordinates(2, 1), new StandardStrategy(), System.out);
+    this.west = new Cave(4, new Coordinates(0, 1), new StandardStrategy(), System.out);
 
-    this.root = new Cave(5, new Coordinates(1, 1), new StandardStrategy());
+    this.root = new Cave(5, new Coordinates(1, 1), new StandardStrategy(), System.out);
     this.root.setNode(this.north, Direction.NORTH);
     this.root.setNode(this.south, Direction.SOUTH);
     this.root.setNode(this.east, Direction.EAST);
@@ -50,7 +50,7 @@ public class HtwMazeTest {
   @Test
   public void testConstructor() {
     try {
-      INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy());
+      INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
       IHtwMaze maze = new HtwMaze(root);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -66,7 +66,7 @@ public class HtwMazeTest {
   @Test
   public void testInvalidMove() {
     IPlayer player = new Player("Joe", 10);
-    INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy());
+    INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
     IHtwMaze maze = new HtwMaze(root);
     assertFalse(maze.move(Direction.EAST, player));
   }
@@ -74,7 +74,7 @@ public class HtwMazeTest {
   @Test
   public void testMoveById() {
     assertFalse(this.maze.shoot(Direction.EAST, 1));
-    this.root.setNode(new Cave(15, new Coordinates(2, 1), new WumpusStrategy()), Direction.EAST);
+    this.root.setNode(new Cave(15, new Coordinates(2, 1), new WumpusStrategy(), System.out), Direction.EAST);
     assertTrue(this.maze.shoot(Direction.EAST, 1));
   }
 }

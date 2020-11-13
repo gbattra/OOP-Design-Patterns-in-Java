@@ -18,27 +18,17 @@ public class HtwGame implements IGame {
   }
 
   @Override
-  public boolean hasNext() {
-    return this.player.isAlive() && this.player.arrowCount() > 0;
+  public boolean move(Direction direction) {
+    return this.maze.move(direction, this.player);
   }
 
   @Override
-  public IRound next() {
-    return new Round();
+  public boolean move(int id) {
+    return this.maze.move(id, this.player);
   }
 
   @Override
-  public boolean move(Direction direction, IRound round) {
-    return false;
-  }
-
-  @Override
-  public boolean move(int id, IRound round) {
-    return false;
-  }
-
-  @Override
-  public boolean shoot(Direction direction, IRound round) {
-    return false;
+  public boolean shoot(Direction direction, int count) {
+    return this.maze.shoot(direction, count);
   }
 }

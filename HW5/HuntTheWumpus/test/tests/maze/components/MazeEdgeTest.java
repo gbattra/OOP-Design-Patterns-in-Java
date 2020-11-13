@@ -2,11 +2,11 @@ package tests.maze.components;
 
 import org.junit.Test;
 
-import maze.utils.Direction;
-import maze.components.ICoordinates;
-import maze.components.IEdge;
 import maze.components.Coordinates;
 import maze.components.Edge;
+import maze.components.ICoordinates;
+import maze.components.IEdge;
+import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

@@ -1,7 +1,7 @@
 package maze.config;
 
-import maze.components.ICoordinates;
 import maze.components.Coordinates;
+import maze.components.ICoordinates;
 
 public class MazeConfigurationBuilder implements IConfigurationBuilder {
   protected int columnCount = 10;

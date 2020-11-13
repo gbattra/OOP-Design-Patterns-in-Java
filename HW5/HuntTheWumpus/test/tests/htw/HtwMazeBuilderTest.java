@@ -43,6 +43,6 @@ public class HtwMazeBuilderTest {
   public void testGenerateRoom() {
     Coordinates coordinates = new Coordinates(1, 1);
     IMazeBuilder builder = new HtwMazeBuilder(this.configBuilder.build());
-    assertEquals(new Cave(1, coordinates, new TunnelStrategy()), builder.generateRoom(coordinates));
+    assertEquals(new Cave(1, coordinates, new TunnelStrategy(), System.out), builder.generateRoom(coordinates));
   }
 }

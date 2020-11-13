@@ -1,9 +1,9 @@
 package maze.game;
 
-import maze.utils.Direction;
 import maze.components.IMaze;
 import maze.components.IPath;
 import maze.components.Path;
+import maze.utils.Direction;
 
 /**
  * Game manager object. Moves player and maze pointer in sync.

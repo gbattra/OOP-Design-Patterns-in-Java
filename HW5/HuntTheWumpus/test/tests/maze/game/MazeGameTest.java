@@ -3,16 +3,16 @@ package tests.maze.game;
 import org.junit.Before;
 import org.junit.Test;
 
-import maze.utils.Direction;
-import maze.config.IConfiguration;
-import maze.game.IMazeGame;
-import maze.components.IMaze;
-import maze.game.IMazePlayer;
 import maze.MazeBuilder;
-import maze.config.MazeConfigurationBuilder;
-import maze.game.MazeGame;
+import maze.components.IMaze;
 import maze.components.Path;
+import maze.config.IConfiguration;
+import maze.config.MazeConfigurationBuilder;
+import maze.game.IMazeGame;
+import maze.game.IMazePlayer;
+import maze.game.MazeGame;
 import maze.game.MazePlayer;
+import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

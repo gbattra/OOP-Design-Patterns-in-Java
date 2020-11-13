@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import maze.components.ICoordinates;
-import maze.components.Path;
 import maze.components.IPath;
+import maze.components.Path;
 import maze.utils.Direction;
 
 /**

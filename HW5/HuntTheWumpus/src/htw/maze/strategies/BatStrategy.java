@@ -3,8 +3,8 @@ package htw.maze.strategies;
 import java.util.Random;
 
 import htw.maze.nodes.INode;
-import maze.components.ICoordinates;
 import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.utils.Direction;
 
 /**
