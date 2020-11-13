@@ -1,6 +1,7 @@
 package htw.game;
 
 import htw.maze.IHtwMaze;
+import maze.utils.Direction;
 
 public class HtwGame implements IGame {
   private final IPlayer player;
@@ -24,5 +25,20 @@ public class HtwGame implements IGame {
   @Override
   public IRound next() {
     return new Round();
+  }
+
+  @Override
+  public boolean move(Direction direction, IRound round) {
+    return false;
+  }
+
+  @Override
+  public boolean move(int id, IRound round) {
+    return false;
+  }
+
+  @Override
+  public boolean shoot(Direction direction, IRound round) {
+    return false;
   }
 }

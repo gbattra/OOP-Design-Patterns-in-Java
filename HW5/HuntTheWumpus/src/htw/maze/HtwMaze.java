@@ -35,5 +35,10 @@ public class HtwMaze implements IHtwMaze {
       return false;
     }
   }
+
+  @Override
+  public boolean shoot(Direction direction, int count) {
+    return this.root.shoot(direction, count);
+  }
 }
 
