@@ -1,9 +1,11 @@
 package htw.game;
 
+import maze.game.IMazePlayer;
+
 /**
  * Interface for a player in the HTW maze game.
  */
-public interface IPlayer {
+public interface IPlayer extends IMazePlayer {
   /**
    * The number of arrows the player starts with.
    *

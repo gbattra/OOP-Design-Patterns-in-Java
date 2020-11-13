@@ -7,21 +7,21 @@ import maze.utils.Direction;
 public class MockMaze implements IHtwMaze {
   private final StringBuilder log;
 
-  public MockMaze() {
-    this.log = new StringBuilder();
+  public MockMaze(StringBuilder log) {
+    this.log = log;
   }
 
   @Override
   public boolean move(Direction direction, IPlayer player) {
     this.log.append(
-            String.format("moved - %s - %s", direction.toString(), player.toString()));
+            String.format("moved - %s - %s", direction.toString(), player.getName()));
     return true;
   }
 
   @Override
   public boolean move(Integer id, IPlayer player) {
     this.log.append(
-            String.format("moved - %s - %s", id, player.toString()));
+            String.format("moved - %s - %s", id, player.getName()));
     return true;
   }
 

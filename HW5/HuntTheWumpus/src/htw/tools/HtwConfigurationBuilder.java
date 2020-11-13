@@ -4,9 +4,9 @@ import maze.config.MazeConfigurationBuilder;
 
 public class HtwConfigurationBuilder
         extends MazeConfigurationBuilder implements IHtwConfigurationBuilder {
-  protected double pitFrequency;
-  protected double batFrequency;
-  protected Appendable logger;
+  protected double pitFrequency = 0.2;
+  protected double batFrequency = 0.3;
+  protected Appendable logger = System.out;
 
   @Override
   public IHtwConfigurationBuilder setPitFrequency(double pitFrequency) {
