@@ -1,7 +1,7 @@
-package htw.nodes;
+package htw.maze.nodes;
 
 import htw.game.IPlayer;
-import htw.strategies.INodeStrategy;
+import htw.maze.strategies.INodeStrategy;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
@@ -9,6 +9,13 @@ import maze.utils.Direction;
  * Interface for a node in a Hunt the Wumpus maze.
  */
 public interface INode extends Node {
+  /**
+   * Getter for the node's ID.
+   *
+   * @return the node's id
+   */
+  Integer getId();
+
   /**
    * Attempts to enter the node from the specified direction. Depending on the node's strategy
    * this may either return the called node, or (in the case of bats), return another random

@@ -3,9 +3,9 @@ package tests.htw;
 import org.junit.Test;
 
 import htw.game.Player;
-import htw.nodes.DeadEnd;
-import htw.nodes.INode;
-import htw.strategies.StandardStrategy;
+import htw.maze.nodes.DeadEnd;
+import htw.maze.nodes.INode;
+import htw.maze.strategies.StandardStrategy;
 import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;

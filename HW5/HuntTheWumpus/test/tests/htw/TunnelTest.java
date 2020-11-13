@@ -3,14 +3,14 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
-import htw.nodes.Cave;
-import htw.nodes.DeadEnd;
-import htw.nodes.INode;
-import htw.strategies.PitStrategy;
-import htw.strategies.StandardStrategy;
-import htw.strategies.INodeStrategy;
-import htw.strategies.TunnelStrategy;
-import htw.strategies.WumpusStrategy;
+import htw.maze.nodes.Cave;
+import htw.maze.nodes.DeadEnd;
+import htw.maze.nodes.INode;
+import htw.maze.strategies.PitStrategy;
+import htw.maze.strategies.StandardStrategy;
+import htw.maze.strategies.INodeStrategy;
+import htw.maze.strategies.TunnelStrategy;
+import htw.maze.strategies.WumpusStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 
@@ -29,8 +29,8 @@ public class TunnelTest {
 
   @Before
   public void setup() {
-    this.north = new Cave(new Coordinates(1, 0), new StandardStrategy());
-    this.tunnel = new Cave(new Coordinates(1, 1), this.strategy);
+    this.north = new Cave(1, new Coordinates(1, 0), new StandardStrategy());
+    this.tunnel = new Cave(1, new Coordinates(1, 1), this.strategy);
     this.tunnel.setNode(this.north, Direction.NORTH);
     this.north.setNode(this.tunnel, Direction.SOUTH);
   }
@@ -60,7 +60,7 @@ public class TunnelTest {
 
   @Test
   public void testDratyTrue() {
-    this.tunnel.setNode(new Cave(new Coordinates(2, 1), new PitStrategy()), Direction.EAST);
+    this.tunnel.setNode(new Cave(1, new Coordinates(2, 1), new PitStrategy()), Direction.EAST);
     assertTrue(this.tunnel.drafty());
   }
 
@@ -71,7 +71,7 @@ public class TunnelTest {
 
   @Test
   public void testSmellyTrue() {
-    this.tunnel.setNode(new Cave(new Coordinates(2, 1), new WumpusStrategy()), Direction.EAST);
+    this.tunnel.setNode(new Cave(1, new Coordinates(2, 1), new WumpusStrategy()), Direction.EAST);
     assertTrue(this.tunnel.smelly());
   }
 

@@ -1,7 +1,7 @@
-package htw.nodes;
+package htw.maze.nodes;
 
 import htw.game.IPlayer;
-import htw.strategies.INodeStrategy;
+import htw.maze.strategies.INodeStrategy;
 import maze.components.nodes.DeadEndNode;
 import maze.utils.Direction;
 
@@ -43,5 +43,10 @@ public class DeadEnd extends DeadEndNode implements INode {
   @Override
   public boolean smelly() {
     return false;
+  }
+
+  @Override
+  public Integer getId() {
+    return 0;
   }
 }

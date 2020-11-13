@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import htw.game.IPlayer;
 import htw.game.Player;
-import htw.nodes.Cave;
-import htw.nodes.INode;
-import htw.strategies.PitStrategy;
+import htw.maze.nodes.Cave;
+import htw.maze.nodes.INode;
+import htw.maze.strategies.PitStrategy;
 import maze.components.Coordinates;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +22,7 @@ public class PitCaveTest {
 
   @Before
   public void setup() {
-    this.pit = new Cave(new Coordinates(0, 0), new PitStrategy());
+    this.pit = new Cave(1, new Coordinates(0, 0), new PitStrategy());
   }
 
   @Test

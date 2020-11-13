@@ -2,24 +2,15 @@ package tests.htw;
 
 import org.junit.Test;
 
-import htw.nodes.Cave;
-import htw.nodes.INode;
-import htw.strategies.StandardStrategy;
-import htw.strategies.TunnelStrategy;
+import htw.maze.nodes.Cave;
+import htw.maze.strategies.TunnelStrategy;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
-import htw.tools.IHtwConfiguration;
 import htw.tools.IHtwConfigurationBuilder;
 import maze.IMazeBuilder;
-import maze.MazeBuilder;
 import maze.components.Coordinates;
-import maze.components.IMaze;
-import maze.components.nodes.Node;
-import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -52,6 +43,6 @@ public class HtwMazeBuilderTest {
   public void testGenerateRoom() {
     Coordinates coordinates = new Coordinates(1, 1);
     IMazeBuilder builder = new HtwMazeBuilder(this.configBuilder.build());
-    assertEquals(new Cave(coordinates, new TunnelStrategy()), builder.generateRoom(coordinates));
+    assertEquals(new Cave(1, coordinates, new TunnelStrategy()), builder.generateRoom(coordinates));
   }
 }

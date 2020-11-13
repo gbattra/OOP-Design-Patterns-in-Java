@@ -5,11 +5,11 @@ import org.junit.Test;
 
 import htw.game.IPlayer;
 import htw.game.Player;
-import htw.nodes.Cave;
-import htw.nodes.INode;
-import htw.strategies.INodeStrategy;
-import htw.strategies.StandardStrategy;
-import htw.strategies.WumpusStrategy;
+import htw.maze.nodes.Cave;
+import htw.maze.nodes.INode;
+import htw.maze.strategies.INodeStrategy;
+import htw.maze.strategies.StandardStrategy;
+import htw.maze.strategies.WumpusStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 
@@ -31,13 +31,14 @@ public class WumpusCaveTest {
   @Before
   public void setup() {
     this.wumpus = new Cave(
+            1,
             new Coordinates(1, 1),
             new WumpusStrategy());
 
-    this.north = new Cave(new Coordinates(1, 0), this.standard);
-    this.south = new Cave(new Coordinates(1, 2), this.standard);
-    this.east = new Cave(new Coordinates(2, 1), this.standard);
-    this.west = new Cave(new Coordinates(0, 1), this.standard);
+    this.north = new Cave(2, new Coordinates(1, 0), this.standard);
+    this.south = new Cave(3, new Coordinates(1, 2), this.standard);
+    this.east = new Cave(4, new Coordinates(2, 1), this.standard);
+    this.west = new Cave(5, new Coordinates(0, 1), this.standard);
 
     this.wumpus.setNode(this.north, Direction.NORTH);
     this.wumpus.setNode(this.south, Direction.SOUTH);

@@ -1,10 +1,10 @@
-package htw.strategies;
+package htw.maze.strategies;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import htw.nodes.INode;
+import htw.maze.nodes.INode;
 import maze.utils.Direction;
 
 /**

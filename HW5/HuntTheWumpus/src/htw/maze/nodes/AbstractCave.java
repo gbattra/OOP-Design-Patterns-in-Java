@@ -1,7 +1,7 @@
-package htw.nodes;
+package htw.maze.nodes;
 
 import htw.game.IPlayer;
-import htw.strategies.INodeStrategy;
+import htw.maze.strategies.INodeStrategy;
 import maze.components.ICoordinates;
 import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;
@@ -13,25 +13,33 @@ import maze.utils.Direction;
  */
 public abstract class AbstractCave extends AbstractRoomNode implements INode {
   protected INodeStrategy strategy;
+  protected Integer id;
 
   /**
    * Main constructor for the abstract node. Takes a coordinate pair and a strategy.
    *
+   * @param id the node's id
    * @param coordinates the coordinates where the node resides
    * @param strategy the strategy used by the node
    * @throws IllegalArgumentException if strategy or coordinates are null
    */
-  public AbstractCave(ICoordinates coordinates, INodeStrategy strategy)
+  public AbstractCave(Integer id, ICoordinates coordinates, INodeStrategy strategy)
           throws IllegalArgumentException {
     super(coordinates, 0, 0);
     if (strategy == null) {
       throw new IllegalArgumentException("Strategy cannot be null.");
     }
     this.strategy = strategy;
+    this.id = id;
     this.north = new DeadEnd();
     this.south = new DeadEnd();
     this.east = new DeadEnd();
     this.west = new DeadEnd();
+  }
+
+  @Override
+  public Integer getId() {
+    return this.id;
   }
 
   @Override

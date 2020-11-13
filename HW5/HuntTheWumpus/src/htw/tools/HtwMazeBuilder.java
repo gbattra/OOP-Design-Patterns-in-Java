@@ -1,13 +1,13 @@
 package htw.tools;
 
-import htw.nodes.Cave;
-import htw.nodes.INode;
-import htw.strategies.BatStrategy;
-import htw.strategies.INodeStrategy;
-import htw.strategies.PitStrategy;
-import htw.strategies.StandardStrategy;
-import htw.strategies.TunnelStrategy;
-import htw.strategies.WumpusStrategy;
+import htw.maze.nodes.Cave;
+import htw.maze.nodes.INode;
+import htw.maze.strategies.BatStrategy;
+import htw.maze.strategies.INodeStrategy;
+import htw.maze.strategies.PitStrategy;
+import htw.maze.strategies.StandardStrategy;
+import htw.maze.strategies.TunnelStrategy;
+import htw.maze.strategies.WumpusStrategy;
 import maze.MazeBuilder;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
@@ -18,6 +18,7 @@ import maze.utils.Direction;
 
 public class HtwMazeBuilder extends MazeBuilder {
   private boolean wumpusSet;
+  private int currentId = 1;
 
   public HtwMazeBuilder(IHtwConfiguration configuration) {
     super(configuration);
@@ -25,7 +26,7 @@ public class HtwMazeBuilder extends MazeBuilder {
 
   @Override
   public IMaze build() {
-    INode start = new Cave(this.config.start(), new TunnelStrategy());
+    INode start = new Cave(this.currentId, this.config.start(), new TunnelStrategy());
     this.grow(start);
 
     if (this.config.isRoomMaze()) {
@@ -42,7 +43,8 @@ public class HtwMazeBuilder extends MazeBuilder {
 
   @Override
   public Node generateRoom(ICoordinates c) {
-    return new Cave(c, new TunnelStrategy());
+    this.currentId++;
+    return new Cave(this.currentId, c, new TunnelStrategy());
   }
 
   @Override

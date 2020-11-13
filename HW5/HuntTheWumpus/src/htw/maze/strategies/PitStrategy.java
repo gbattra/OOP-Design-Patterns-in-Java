@@ -1,7 +1,7 @@
-package htw.strategies;
+package htw.maze.strategies;
 
 import htw.game.IPlayer;
-import htw.nodes.INode;
+import htw.maze.nodes.INode;
 
 /**
  * Strategy for a bottomless pit cave.
