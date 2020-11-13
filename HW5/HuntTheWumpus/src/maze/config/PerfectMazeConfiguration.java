@@ -43,7 +43,18 @@ public class PerfectMazeConfiguration extends AbstractMazeConfiguration {
           goldAmount,
           isWrappingMaze,
           false,
-          (rowCount - 1) * (columnCount - 1),
+          perfectEdgeCount(rowCount, columnCount),
           randomSeed);
+  }
+
+  /**
+   * Public helper method to quickly compute the perfect edge count given the row and column count.
+   *
+   * @param rowCount the row count for the maze
+   * @param columnCount the column count for the maze
+   * @return the perfect edge count
+   */
+  public static int perfectEdgeCount(int rowCount, int columnCount) {
+    return (rowCount - 1) * (columnCount - 1);
   }
 }

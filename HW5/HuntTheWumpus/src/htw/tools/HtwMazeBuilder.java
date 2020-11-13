@@ -1,7 +1,5 @@
 package htw.tools;
 
-import java.util.List;
-
 import htw.nodes.Cave;
 import htw.nodes.INode;
 import htw.strategies.BatStrategy;
@@ -10,7 +8,7 @@ import htw.strategies.PitStrategy;
 import htw.strategies.StandardStrategy;
 import htw.strategies.TunnelStrategy;
 import htw.strategies.WumpusStrategy;
-import maze.builders.MazeBuilder;
+import maze.MazeBuilder;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.IMaze;
@@ -29,10 +27,14 @@ public class HtwMazeBuilder extends MazeBuilder {
   public IMaze build() {
     INode start = new Cave(this.config.start(), new TunnelStrategy());
     this.grow(start);
+
     if (this.config.isRoomMaze()) {
       this.tearDownWalls();
     }
-    this.setWumpus(start);
+    if (!this.wumpusSet) {
+      this.setWumpus(start);
+    }
+
     return new Maze(
             this.visited[this.config.start().getY()][this.config.start().getX()],
             this.visited[this.config.goal().getY()][this.config.goal().getX()]);
@@ -54,11 +56,13 @@ public class HtwMazeBuilder extends MazeBuilder {
     boolean isPit = next <= config.getPitFrequency();
     boolean isBat = next <= config.getBatFrequency();
     boolean isWumpus = next <= (double) (1 / (this.config.rowCount() * this.config.columnCount()));
+
     INodeStrategy strategy = new StandardStrategy();
     if (isPit) {
       strategy = new PitStrategy();
     }
     if (isWumpus) {
+      this.wumpusSet = true;
       strategy = new WumpusStrategy();
     }
     if (isBat) {

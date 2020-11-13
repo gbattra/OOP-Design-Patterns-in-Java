@@ -67,4 +67,9 @@ public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
 
     return hit;
   }
+
+  @Override
+  public String toString() {
+    return "Tunnel";
+  }
 }

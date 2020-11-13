@@ -25,4 +25,9 @@ public class WumpusStrategy extends StandardStrategy implements INodeStrategy {
 
     player.kill();
   }
+
+  @Override
+  public String toString() {
+    return "Wumpus";
+  }
 }

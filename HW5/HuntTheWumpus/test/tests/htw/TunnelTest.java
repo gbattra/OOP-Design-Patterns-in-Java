@@ -49,4 +49,9 @@ public class TunnelTest {
   public void testValidShoot() {
     assertFalse(this.tunnel.shoot(Direction.NORTH, 1));
   }
+
+  @Test
+  public void testToString() {
+    assertEquals("(1, 1) - Tunnel", this.tunnel.toString());
+  }
 }

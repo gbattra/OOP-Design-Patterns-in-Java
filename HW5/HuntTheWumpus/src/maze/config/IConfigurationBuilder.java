@@ -1,6 +1,4 @@
-package maze.builders;
-
-import maze.config.IConfiguration;
+package maze.config;
 
 public interface IConfigurationBuilder {
   /**

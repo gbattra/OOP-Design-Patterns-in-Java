@@ -8,6 +8,7 @@ import htw.nodes.INode;
 import htw.strategies.StandardStrategy;
 import maze.utils.Direction;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
@@ -40,5 +41,11 @@ public class DeadEndTest {
     INode deadend = new DeadEnd();
     deadend.receive(new Player("Joe", 10));
     fail("Dead end node receive() should have failed.");
+  }
+
+  @Test
+  public void testToString() {
+    INode deadend = new DeadEnd();
+    assertEquals("Dead End", deadend.toString());
   }
 }

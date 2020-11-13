@@ -13,4 +13,9 @@ public class PitStrategy extends StandardStrategy implements INodeStrategy {
     }
     player.kill();
   }
+
+  @Override
+  public String toString() {
+    return "Pit";
+  }
 }

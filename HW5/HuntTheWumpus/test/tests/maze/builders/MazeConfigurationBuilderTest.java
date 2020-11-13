@@ -2,8 +2,8 @@ package tests.maze.builders;
 
 import org.junit.Test;
 
-import maze.builders.IConfigurationBuilder;
-import maze.builders.MazeConfigurationBuilder;
+import maze.config.IConfigurationBuilder;
+import maze.config.MazeConfigurationBuilder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

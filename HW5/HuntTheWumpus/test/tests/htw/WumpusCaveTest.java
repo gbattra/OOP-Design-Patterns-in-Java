@@ -13,6 +13,7 @@ import htw.strategies.WumpusStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -60,5 +61,10 @@ public class WumpusCaveTest {
     IPlayer player = new Player("Joe", 10);
     this.wumpus.receive(player);
     assertFalse(player.isAlive());
+  }
+
+  @Test
+  public void testToString() {
+    assertEquals("(1, 1) - Wumpus", this.wumpus.toString());
   }
 }

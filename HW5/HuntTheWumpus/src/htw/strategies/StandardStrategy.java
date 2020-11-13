@@ -29,4 +29,9 @@ public class StandardStrategy implements INodeStrategy {
     }
     // do nothing
   }
+
+  @Override
+  public String toString() {
+    return "Standard";
+  }
 }

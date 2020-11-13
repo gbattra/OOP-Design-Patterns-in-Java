@@ -82,4 +82,9 @@ public class CaveTest {
     ((INode) this.cave.getNode(Direction.SOUTH)).setStrategy(newStrat);
     assertTrue(this.cave.shoot(Direction.SOUTH, 1));
   }
+
+  @Test
+  public void testToString() {
+    assertEquals("(1, 1) - Standard", this.cave.toString());
+  }
 }

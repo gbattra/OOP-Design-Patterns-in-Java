@@ -9,6 +9,7 @@ import htw.nodes.INode;
 import htw.strategies.PitStrategy;
 import maze.components.Coordinates;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 /**
@@ -21,5 +22,11 @@ public class PitCaveTest {
     INode pit = new Cave(new Coordinates(0, 0), new PitStrategy());
     pit.receive(player);
     assertFalse(player.isAlive());
+  }
+
+  @Test
+  public void testToString() {
+    INode pit = new Cave(new Coordinates(0, 0), new PitStrategy());
+    assertEquals("(0, 0) - Pit", pit.toString());
   }
 }

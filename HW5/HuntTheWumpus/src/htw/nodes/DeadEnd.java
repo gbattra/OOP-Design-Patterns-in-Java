@@ -29,4 +29,9 @@ public class DeadEnd extends DeadEndNode implements INode {
   public void receive(IPlayer player) throws IllegalStateException {
     throw new IllegalStateException("Dead end node cannot receive() a player.");
   }
+
+  @Override
+  public String toString() {
+    return "Dead End";
+  }
 }

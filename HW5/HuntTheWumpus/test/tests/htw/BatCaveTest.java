@@ -59,4 +59,9 @@ public class BatCaveTest {
     node = this.bat.enter(Direction.SOUTH);
     assertNotEquals(this.bat, node);
   }
+
+  @Test
+  public void testToString() {
+    assertEquals("(1, 1) - Bat(Standard)", this.bat.toString());
+  }
 }

@@ -61,4 +61,9 @@ public class BatStrategy extends StandardStrategy implements INodeStrategy {
     }
     return ((INode) curr.getNode(direction)).shoot(direction, count - 1);
   }
+
+  @Override
+  public String toString() {
+    return "Bat(" + this.parent.toString() + ")";
+  }
 }

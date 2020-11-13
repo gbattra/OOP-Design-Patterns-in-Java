@@ -1,4 +1,4 @@
-package maze.builders;
+package maze;
 
 import java.util.List;
 

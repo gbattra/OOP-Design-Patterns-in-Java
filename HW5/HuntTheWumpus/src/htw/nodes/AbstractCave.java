@@ -72,4 +72,12 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
   public void receive(IPlayer player) throws IllegalArgumentException {
     this.strategy.receive(player);
   }
+
+  @Override
+  public String toString() {
+    return String.format(
+            "%s - %s",
+            this.coordinates.toString(),
+            this.strategy.toString());
+  }
 }

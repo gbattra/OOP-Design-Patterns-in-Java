@@ -1,4 +1,4 @@
-package maze.builders;
+package maze;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,11 @@ public class MazeBuilder implements IMazeBuilder {
   protected int goldNodeCount;
   protected int thiefNodeCount;
 
-  public MazeBuilder(IConfiguration configuration) {
+  public MazeBuilder(IConfiguration configuration) throws IllegalArgumentException {
+    if (configuration == null) {
+      throw new IllegalArgumentException("Configuration cannot be null.");
+    }
+
     this.config = configuration;
 
     this.visited = new Node[configuration.rowCount()][configuration.columnCount()];

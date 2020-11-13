@@ -1,24 +1,21 @@
-package maze.builders;
+package maze.config;
 
-import maze.config.IConfiguration;
 import maze.components.ICoordinates;
 import maze.components.Coordinates;
-import maze.config.PerfectMazeConfiguration;
-import maze.config.RoomMazeConfiguration;
 
 public class MazeConfigurationBuilder implements IConfigurationBuilder {
-  private int columnCount = 10;
-  private int rowCount = 10;
-  private int randomSeed = 0;
-  private double thiefPenalty = 0.1;
-  private double thiefFrequency = 0.2;
-  private double goldFrequency = 0.3;
-  private int goldAmount = 10;
-  private boolean isWrappingMaze = false;
-  private boolean isRoomMaze = false;
-  private int targetEdgeCount;
-  private ICoordinates start;
-  private ICoordinates goal;
+  protected int columnCount = 10;
+  protected int rowCount = 10;
+  protected int randomSeed = 0;
+  protected double thiefPenalty = 0.1;
+  protected double thiefFrequency = 0.2;
+  protected double goldFrequency = 0.3;
+  protected int goldAmount = 10;
+  protected boolean isWrappingMaze = false;
+  protected boolean isRoomMaze = false;
+  protected int targetEdgeCount;
+  protected ICoordinates start;
+  protected ICoordinates goal;
 
   @Override
   public IConfigurationBuilder setColumnCount(int columnCount) throws IllegalArgumentException {
