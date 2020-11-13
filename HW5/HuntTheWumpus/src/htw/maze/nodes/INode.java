@@ -20,6 +20,14 @@ public interface INode extends Node {
   Integer id();
 
   /**
+   * Gets the direction from this node to the node with the target id.
+   *
+   * @param id the target id
+   * @return the direction to that node
+   */
+  Direction directionTo(int id);
+
+  /**
    * Get an node by its id.
    *
    * @param id the id of the target node

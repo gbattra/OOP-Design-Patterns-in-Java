@@ -18,7 +18,12 @@ public class HtwMaze implements IHtwMaze {
 
   @Override
   public boolean move(Integer id, IPlayer player) {
-    return false;
+    try {
+      this.current = this.current.get(id).enter(this.current.directionTo(id).opposite());
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   @Override

@@ -14,6 +14,11 @@ import maze.utils.Direction;
  */
 public class DeadEnd extends DeadEndNode implements INode {
   @Override
+  public Direction directionTo(int id) throws IllegalArgumentException {
+    throw new IllegalArgumentException("Cannot find direction to node from dead end.");
+  }
+
+  @Override
   public INode get(int id) throws IllegalArgumentException {
     throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
   }

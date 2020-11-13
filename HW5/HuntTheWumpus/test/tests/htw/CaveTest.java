@@ -4,12 +4,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.maze.nodes.Cave;
+import htw.maze.nodes.DeadEnd;
 import htw.maze.nodes.INode;
 import htw.maze.strategies.StandardStrategy;
 import htw.maze.strategies.INodeStrategy;
 import htw.maze.strategies.TunnelStrategy;
 import htw.maze.strategies.WumpusStrategy;
 import maze.components.Coordinates;
+import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
 import maze.utils.Direction;
@@ -173,5 +175,17 @@ public class CaveTest {
   @Test(expected = IllegalArgumentException.class)
   public void testGetNotFound() {
     this.cave.get(11);
+  }
+
+  @Test
+  public void testDirectionTo() {
+    assertEquals(Direction.NORTH, this.cave.directionTo(1));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidDirectionTo() {
+    this.cave.setNode(new DeadEnd(), Direction.NORTH);
+    this.cave.directionTo(1);
+    fail("Invalid directionTo() should have failed.");
   }
 }

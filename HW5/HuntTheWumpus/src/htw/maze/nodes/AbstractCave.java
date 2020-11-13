@@ -51,6 +51,21 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
   }
 
   @Override
+  public Direction directionTo(int id) {
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      try {
+        this.get(id);
+        return exit;
+      } catch (Exception ignored) {
+      }
+    }
+
+    throw new IllegalArgumentException(String.format("Cannot find node with id %s", id));
+  }
+
+  @Override
   public INode get(int id) throws IllegalArgumentException {
     if (id <= 0) {
       throw new IllegalArgumentException("Id must be greater than zero.");
