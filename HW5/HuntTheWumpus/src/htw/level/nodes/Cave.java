@@ -1,6 +1,6 @@
-package htw.maze.nodes;
+package htw.level.nodes;
 
-import htw.maze.strategies.INodeStrategy;
+import htw.level.strategies.INodeStrategy;
 import maze.components.ICoordinates;
 
 /**

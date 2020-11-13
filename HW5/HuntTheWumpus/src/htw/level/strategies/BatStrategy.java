@@ -1,8 +1,8 @@
-package htw.maze.strategies;
+package htw.level.strategies;
 
 import java.util.Random;
 
-import htw.maze.nodes.INode;
+import htw.level.nodes.INode;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.utils.Direction;

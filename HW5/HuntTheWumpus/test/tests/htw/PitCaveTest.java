@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import htw.game.IPlayer;
 import htw.game.Player;
-import htw.maze.nodes.Cave;
-import htw.maze.nodes.INode;
-import htw.maze.strategies.PitStrategy;
+import htw.level.nodes.Cave;
+import htw.level.nodes.INode;
+import htw.level.strategies.PitStrategy;
 import maze.components.Coordinates;
 
 import static org.junit.Assert.assertEquals;

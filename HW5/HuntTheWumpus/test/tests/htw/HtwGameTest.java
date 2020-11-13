@@ -7,7 +7,7 @@ import htw.game.HtwGame;
 import htw.game.IGame;
 import htw.game.IPlayer;
 import htw.game.Player;
-import htw.maze.IHtwMaze;
+import htw.level.IHtwMaze;
 import maze.utils.Direction;
 import tests.htw.mocks.MockMaze;
 

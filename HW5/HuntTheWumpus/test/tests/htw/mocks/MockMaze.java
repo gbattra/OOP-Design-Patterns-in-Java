@@ -1,7 +1,7 @@
 package tests.htw.mocks;
 
 import htw.game.IPlayer;
-import htw.maze.IHtwMaze;
+import htw.level.IHtwMaze;
 import maze.utils.Direction;
 
 public class MockMaze implements IHtwMaze {

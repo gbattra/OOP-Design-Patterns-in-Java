@@ -3,14 +3,14 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
-import htw.maze.nodes.Cave;
-import htw.maze.nodes.DeadEnd;
-import htw.maze.nodes.INode;
-import htw.maze.strategies.INodeStrategy;
-import htw.maze.strategies.PitStrategy;
-import htw.maze.strategies.StandardStrategy;
-import htw.maze.strategies.TunnelStrategy;
-import htw.maze.strategies.WumpusStrategy;
+import htw.level.nodes.Cave;
+import htw.level.nodes.DeadEnd;
+import htw.level.nodes.INode;
+import htw.level.strategies.INodeStrategy;
+import htw.level.strategies.PitStrategy;
+import htw.level.strategies.StandardStrategy;
+import htw.level.strategies.TunnelStrategy;
+import htw.level.strategies.WumpusStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 

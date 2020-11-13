@@ -1,15 +1,14 @@
 package htw.tools;
 
-import htw.maze.HtwMaze;
-import htw.maze.IHtwMaze;
-import htw.maze.nodes.Cave;
-import htw.maze.nodes.INode;
-import htw.maze.strategies.BatStrategy;
-import htw.maze.strategies.INodeStrategy;
-import htw.maze.strategies.PitStrategy;
-import htw.maze.strategies.StandardStrategy;
-import htw.maze.strategies.TunnelStrategy;
-import htw.maze.strategies.WumpusStrategy;
+import htw.level.HtwMaze;
+import htw.level.nodes.Cave;
+import htw.level.nodes.INode;
+import htw.level.strategies.BatStrategy;
+import htw.level.strategies.INodeStrategy;
+import htw.level.strategies.PitStrategy;
+import htw.level.strategies.StandardStrategy;
+import htw.level.strategies.TunnelStrategy;
+import htw.level.strategies.WumpusStrategy;
 import maze.MazeBuilder;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;

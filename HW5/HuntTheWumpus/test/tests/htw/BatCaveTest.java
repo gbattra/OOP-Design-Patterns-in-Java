@@ -5,11 +5,11 @@ import org.junit.Test;
 
 import java.util.Random;
 
-import htw.maze.nodes.Cave;
-import htw.maze.nodes.INode;
-import htw.maze.strategies.BatStrategy;
-import htw.maze.strategies.INodeStrategy;
-import htw.maze.strategies.StandardStrategy;
+import htw.level.nodes.Cave;
+import htw.level.nodes.INode;
+import htw.level.strategies.BatStrategy;
+import htw.level.strategies.INodeStrategy;
+import htw.level.strategies.StandardStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 

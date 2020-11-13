@@ -1,9 +1,9 @@
-package htw.maze.nodes;
+package htw.level.nodes;
 
 import java.util.List;
 
 import htw.game.IPlayer;
-import htw.maze.strategies.INodeStrategy;
+import htw.level.strategies.INodeStrategy;
 import maze.components.ICoordinates;
 import maze.components.nodes.Node;
 import maze.utils.Direction;

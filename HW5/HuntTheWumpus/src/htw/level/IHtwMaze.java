@@ -1,4 +1,4 @@
-package htw.maze;
+package htw.level;
 
 import htw.game.IPlayer;
 import maze.utils.Direction;

@@ -1,6 +1,6 @@
 package htw.game;
 
-import htw.maze.IHtwMaze;
+import htw.level.IHtwMaze;
 import maze.utils.Direction;
 
 public class HtwGame implements IGame {

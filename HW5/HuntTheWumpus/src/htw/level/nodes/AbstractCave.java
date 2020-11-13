@@ -1,11 +1,11 @@
-package htw.maze.nodes;
+package htw.level.nodes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import htw.game.IPlayer;
-import htw.maze.strategies.INodeStrategy;
+import htw.level.strategies.INodeStrategy;
 import maze.components.ICoordinates;
 import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;

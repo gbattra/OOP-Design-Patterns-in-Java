@@ -2,8 +2,8 @@ package tests.htw;
 
 import org.junit.Test;
 
-import htw.maze.nodes.Cave;
-import htw.maze.strategies.TunnelStrategy;
+import htw.level.nodes.Cave;
+import htw.level.strategies.TunnelStrategy;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
 import htw.tools.IHtwConfigurationBuilder;

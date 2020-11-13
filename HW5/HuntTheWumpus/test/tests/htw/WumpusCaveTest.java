@@ -5,11 +5,11 @@ import org.junit.Test;
 
 import htw.game.IPlayer;
 import htw.game.Player;
-import htw.maze.nodes.Cave;
-import htw.maze.nodes.INode;
-import htw.maze.strategies.INodeStrategy;
-import htw.maze.strategies.StandardStrategy;
-import htw.maze.strategies.WumpusStrategy;
+import htw.level.nodes.Cave;
+import htw.level.nodes.INode;
+import htw.level.strategies.INodeStrategy;
+import htw.level.strategies.StandardStrategy;
+import htw.level.strategies.WumpusStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 

@@ -1,7 +1,7 @@
-package htw.maze;
+package htw.level;
 
 import htw.game.IPlayer;
-import htw.maze.nodes.INode;
+import htw.level.nodes.INode;
 import maze.components.Maze;
 import maze.utils.Direction;
 

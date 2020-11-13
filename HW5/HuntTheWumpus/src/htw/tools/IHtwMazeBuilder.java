@@ -1,6 +1,6 @@
 package htw.tools;
 
-import htw.maze.IHtwMaze;
+import htw.level.IHtwMaze;
 
 public interface IHtwMazeBuilder {
   IHtwMaze build();
