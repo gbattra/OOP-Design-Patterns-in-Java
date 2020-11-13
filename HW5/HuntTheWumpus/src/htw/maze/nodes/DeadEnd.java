@@ -1,7 +1,10 @@
 package htw.maze.nodes;
 
+import java.util.List;
+
 import htw.game.IPlayer;
 import htw.maze.strategies.INodeStrategy;
+import maze.components.ICoordinates;
 import maze.components.nodes.DeadEndNode;
 import maze.utils.Direction;
 
@@ -10,6 +13,16 @@ import maze.utils.Direction;
  * the maze.
  */
 public class DeadEnd extends DeadEndNode implements INode {
+  @Override
+  public INode get(int id) throws IllegalArgumentException {
+    throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
+  }
+
+  @Override
+  public INode getHelper(List<ICoordinates> traversed, int id) throws IllegalArgumentException {
+    throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
+  }
+
   @Override
   public INode enter(Direction from) throws IllegalStateException {
     throw new IllegalStateException("Cannot enter a dead end node.");
@@ -46,7 +59,7 @@ public class DeadEnd extends DeadEndNode implements INode {
   }
 
   @Override
-  public Integer getId() {
+  public Integer id() {
     return 0;
   }
 }

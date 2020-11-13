@@ -1,9 +1,17 @@
 package htw.maze.nodes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import htw.game.IPlayer;
 import htw.maze.strategies.INodeStrategy;
+import maze.components.Coordinates;
 import maze.components.ICoordinates;
+import maze.components.IPath;
+import maze.components.Path;
 import maze.components.nodes.AbstractRoomNode;
+import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
@@ -38,13 +46,43 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
   }
 
   @Override
-  public Integer getId() {
+  public Integer id() {
     return this.id;
   }
 
   @Override
-  public int loot(int gold) {
-    return 0;
+  public INode get(int id) throws IllegalArgumentException {
+    if (id <= 0) {
+      throw new IllegalArgumentException("Id must be greater than zero.");
+    }
+    List<ICoordinates> traversed = new ArrayList<>();
+    return this.getHelper(traversed, id);
+  }
+
+  @Override
+  public INode getHelper(List<ICoordinates> traversed, int id) throws IllegalArgumentException {
+    if (traversed.contains(this.coordinates)) {
+      throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
+    }
+
+    traversed.add(this.coordinates);
+
+    if (this.id == id) {
+      return this;
+    }
+
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    while (exits.size() > 0) {
+      try {
+        INode node = (INode) this.getNode(exits.get(0));
+        exits.remove(0);
+        return node.getHelper(traversed, id);
+      } catch (Exception ignored) {
+      }
+    }
+
+    throw new IllegalArgumentException(String.format("Cannot find target node: %s", id));
   }
 
   @Override
@@ -97,5 +135,10 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
             "%s - %s",
             this.coordinates.toString(),
             this.strategy.toString());
+  }
+
+  @Override
+  public int loot(int gold) {
+    return 0;
   }
 }

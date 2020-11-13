@@ -147,4 +147,31 @@ public class CaveTest {
   public void testDrafty() {
     assertFalse(this.cave.drafty());
   }
+
+  @Test
+  public void testGet() {
+    INode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy());
+    INode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy());
+    INode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy());
+
+    this.cave.setNode(eastOne, Direction.EAST);
+    eastOne.setNode(this.cave, Direction.WEST);
+    eastTwo.setNode(eastOne, Direction.WEST);
+    eastOne.setNode(eastTwo, Direction.EAST);
+    eastTwo.setNode(wumpus, Direction.NORTH);
+    wumpus.setNode(eastTwo, Direction.SOUTH);
+
+    INode retrieved = this.cave.get(10);
+    assertEquals(wumpus, retrieved);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidGet() {
+    this.cave.get(0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetNotFound() {
+    this.cave.get(11);
+  }
 }
