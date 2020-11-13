@@ -35,7 +35,7 @@ public class Coordinates implements ICoordinates {
 
   @Override
   public String toString() {
-    return String.format("(%s, %s)", this.y, this.x);
+    return String.format("(%s, %s)", this.x, this.y);
   }
 
   @Override

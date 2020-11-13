@@ -14,6 +14,7 @@ import maze.IMazeBuilder;
 import maze.MazeBuilder;
 import maze.components.Coordinates;
 import maze.components.IMaze;
+import maze.components.nodes.Node;
 import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
@@ -43,14 +44,14 @@ public class HtwMazeBuilderTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    IMazeBuilder builder = new MazeBuilder(null);
+    IMazeBuilder builder = new HtwMazeBuilder(null);
     fail("Invalid constructor should have failed.");
   }
 
   @Test
   public void testGenerateRoom() {
     Coordinates coordinates = new Coordinates(1, 1);
-    IMazeBuilder builder = new MazeBuilder(this.configBuilder.build());
+    IMazeBuilder builder = new HtwMazeBuilder(this.configBuilder.build());
     assertEquals(new Cave(coordinates, new TunnelStrategy()), builder.generateRoom(coordinates));
   }
 }

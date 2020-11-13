@@ -7,6 +7,7 @@ import htw.nodes.Cave;
 import htw.nodes.INode;
 import htw.strategies.StandardStrategy;
 import htw.strategies.INodeStrategy;
+import htw.strategies.TunnelStrategy;
 import htw.strategies.WumpusStrategy;
 import maze.components.Coordinates;
 import maze.components.nodes.Node;
@@ -71,8 +72,24 @@ public class CaveTest {
   }
 
   @Test
-  public void testShoot() {
+  public void testShootMiss() {
     assertFalse(this.cave.shoot(Direction.SOUTH, 1));
+  }
+
+  @Test
+  public void testShootHit() {
+    INode wumpus = new Cave(new Coordinates(3, 0), new WumpusStrategy());
+    INode eastOne = new Cave(new Coordinates(2, 1), new TunnelStrategy());
+    INode eastTwo = new Cave(new Coordinates(3, 1), new TunnelStrategy());
+
+    this.cave.setNode(eastOne, Direction.EAST);
+    eastOne.setNode(this.cave, Direction.WEST);
+    eastTwo.setNode(eastOne, Direction.WEST);
+    eastOne.setNode(eastTwo, Direction.EAST);
+    eastTwo.setNode(wumpus, Direction.NORTH);
+    wumpus.setNode(eastTwo, Direction.SOUTH);
+
+    assertTrue(this.cave.shoot(Direction.EAST, 1));
   }
 
   @Test

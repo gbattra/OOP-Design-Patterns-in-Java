@@ -43,7 +43,7 @@ public class MazeCoordinatesTest {
   @Test
   public void testToString() {
     ICoordinates coordinates = new Coordinates(2, 3);
-    assertEquals("(3, 2)", coordinates.toString());
+    assertEquals("(2, 3)", coordinates.toString());
   }
 
   @Test
