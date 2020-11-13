@@ -44,14 +44,14 @@ public class HtwMazeTest {
     this.east.setNode(this.root, Direction.EAST.opposite());
     this.west.setNode(this.root, Direction.WEST.opposite());
 
-    this.maze = new HtwMaze(root);
+    this.maze = new HtwMaze(root, System.out);
   }
 
   @Test
   public void testConstructor() {
     try {
       INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
-      IHtwMaze maze = new HtwMaze(root);
+      IHtwMaze maze = new HtwMaze(root, System.out);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -59,7 +59,7 @@ public class HtwMazeTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    IHtwMaze maze = new HtwMaze(null);
+    IHtwMaze maze = new HtwMaze(null, System.out);
     fail("Invalid constructor should have failed.");
   }
 
@@ -67,7 +67,7 @@ public class HtwMazeTest {
   public void testInvalidMove() {
     IPlayer player = new Player("Joe", 10);
     INode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
-    IHtwMaze maze = new HtwMaze(root);
+    IHtwMaze maze = new HtwMaze(root, System.out);
     assertFalse(maze.move(Direction.EAST, player));
   }
 

@@ -6,6 +6,7 @@ public class HtwConfigurationBuilder
         extends MazeConfigurationBuilder implements IHtwConfigurationBuilder {
   protected double pitFrequency;
   protected double batFrequency;
+  protected Appendable logger;
 
   @Override
   public IHtwConfigurationBuilder setPitFrequency(double pitFrequency) {
@@ -20,6 +21,12 @@ public class HtwConfigurationBuilder
   }
 
   @Override
+  public IHtwConfigurationBuilder setLogger(Appendable logger) {
+    this.logger = logger;
+    return this;
+  }
+
+  @Override
   public IHtwConfiguration build() {
     return new HtwConfiguration(
             this.rowCount,
@@ -30,6 +37,7 @@ public class HtwConfigurationBuilder
             this.isRoomMaze,
             this.isWrappingMaze,
             this.targetEdgeCount,
-            this.randomSeed);
+            this.randomSeed,
+            this.logger);
   }
 }

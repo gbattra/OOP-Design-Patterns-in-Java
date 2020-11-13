@@ -1,5 +1,7 @@
 package htw.tools;
 
+import htw.maze.HtwMaze;
+import htw.maze.IHtwMaze;
 import htw.maze.nodes.Cave;
 import htw.maze.nodes.INode;
 import htw.maze.strategies.BatStrategy;
@@ -12,33 +14,16 @@ import maze.MazeBuilder;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.IMaze;
-import maze.components.Maze;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
-public class HtwMazeBuilder extends MazeBuilder {
+public class HtwMazeBuilder
+        extends MazeBuilder {
   private boolean wumpusSet;
   private int currentId = 1;
 
   public HtwMazeBuilder(IHtwConfiguration configuration) {
     super(configuration);
-  }
-
-  @Override
-  public IMaze build() {
-    INode start = new Cave(this.currentId, this.config.start(), new TunnelStrategy(), System.out);
-    this.grow(start);
-
-    if (this.config.isRoomMaze()) {
-      this.tearDownWalls();
-    }
-    if (!this.wumpusSet) {
-      this.setWumpus(start);
-    }
-
-    return new Maze(
-            this.visited[this.config.start().getY()][this.config.start().getX()],
-            this.visited[this.config.goal().getY()][this.config.goal().getX()]);
   }
 
   @Override
@@ -51,6 +36,26 @@ public class HtwMazeBuilder extends MazeBuilder {
   protected Node upgradeHallway(Node node) {
     ((INode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
     return node;
+  }
+
+  @Override
+  public IMaze build() {
+
+    INode start = new Cave(
+            this.currentId,
+            this.config.start(),
+            new TunnelStrategy(),
+            ((IHtwConfiguration) this.config).getLogger());
+    this.grow(start);
+
+    if (this.config.isRoomMaze()) {
+      this.tearDownWalls();
+    }
+    if (!this.wumpusSet) {
+      this.setWumpus(start);
+    }
+
+    return new HtwMaze(start, System.out);
   }
 
   private INodeStrategy generateStrategy(IHtwConfiguration config) {

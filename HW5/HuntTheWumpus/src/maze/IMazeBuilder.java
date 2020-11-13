@@ -6,6 +6,7 @@ import maze.components.ICoordinates;
 import maze.components.IEdge;
 import maze.components.IMaze;
 import maze.components.nodes.Node;
+import maze.config.IConfiguration;
 import maze.utils.Direction;
 
 /**

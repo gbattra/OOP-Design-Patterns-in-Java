@@ -2,18 +2,23 @@ package htw.maze;
 
 import htw.game.IPlayer;
 import htw.maze.nodes.INode;
+import maze.components.Maze;
 import maze.utils.Direction;
 
-public class HtwMaze implements IHtwMaze {
+public class HtwMaze extends Maze implements IHtwMaze {
   private final INode root;
+  private final Appendable logger;
+
   private INode current;
 
-  public HtwMaze(INode root) throws IllegalArgumentException {
-    if (root == null) {
-      throw new IllegalArgumentException("Root cannot be null.");
+  public HtwMaze(INode root, Appendable logger) throws IllegalArgumentException {
+    super(root, root);
+    if (root == null || logger == null) {
+      throw new IllegalArgumentException("Root and logger cannot be null.");
     }
     this.root = root;
     this.current = root;
+    this.logger = logger;
   }
 
   @Override

@@ -17,7 +17,7 @@ public class HtwConfigurationTest {
   public void testValidConstructor() {
     try {
       IHtwConfiguration config = new HtwConfiguration(
-              5,5, new Coordinates(0, 0), 0.1, 0.2, true, false, 3, 1);
+              5,5, new Coordinates(0, 0), 0.1, 0.2, true, false, 3, 1, System.out);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -26,13 +26,13 @@ public class HtwConfigurationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
     IHtwConfiguration config = new HtwConfiguration(
-            5,5, new Coordinates(0, 0), -0.1, -0.2, true, false, 3, 1);
+            5,5, new Coordinates(0, 0), -0.1, -0.2, true, false, 3, 1, System.out);
   }
 
   @Test
   public void testGetters() {
     IHtwConfiguration config = new HtwConfiguration(
-            5,5, new Coordinates(0, 0), 0.1, 0.2, true, false, 3, 1);
+            5,5, new Coordinates(0, 0), 0.1, 0.2, true, false, 3, 1, System.out);
     assertEquals(0.1, config.getPitFrequency(), 0.001);
     assertEquals(0.2, config.getBatFrequency(), 0.001);
   }

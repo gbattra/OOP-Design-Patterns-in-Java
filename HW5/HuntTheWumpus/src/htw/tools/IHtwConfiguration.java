@@ -19,4 +19,11 @@ public interface IHtwConfiguration extends IConfiguration {
    * @return the pit frequency
    */
   double getPitFrequency();
+
+  /**
+   * Returns the logger for the game.
+   *
+   * @return appendable out object
+   */
+  Appendable getLogger();
 }
