@@ -34,4 +34,14 @@ public class DeadEnd extends DeadEndNode implements INode {
   public String toString() {
     return "Dead End";
   }
+
+  @Override
+  public boolean drafty() {
+    return false;
+  }
+
+  @Override
+  public boolean smelly() {
+    return false;
+  }
 }

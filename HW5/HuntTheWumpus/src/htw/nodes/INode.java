@@ -43,4 +43,8 @@ public interface INode extends Node {
    * @param player the player to receive
    */
   void receive(IPlayer player);
+
+  boolean smelly();
+
+  boolean drafty();
 }

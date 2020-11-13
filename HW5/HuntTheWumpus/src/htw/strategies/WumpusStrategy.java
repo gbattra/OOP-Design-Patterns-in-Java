@@ -27,6 +27,11 @@ public class WumpusStrategy extends StandardStrategy implements INodeStrategy {
   }
 
   @Override
+  public boolean smelly(INode node) {
+    return true;
+  }
+
+  @Override
   public String toString() {
     return "Wumpus";
   }

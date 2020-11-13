@@ -1,6 +1,5 @@
 package htw.tools;
 
-import maze.config.IConfigurationBuilder;
 import maze.config.MazeConfigurationBuilder;
 
 public class HtwConfigurationBuilder

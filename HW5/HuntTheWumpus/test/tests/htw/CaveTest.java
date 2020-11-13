@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import htw.nodes.Cave;
 import htw.nodes.INode;
+import htw.strategies.PitStrategy;
 import htw.strategies.StandardStrategy;
 import htw.strategies.INodeStrategy;
 import htw.strategies.TunnelStrategy;
@@ -136,5 +137,15 @@ public class CaveTest {
   @Test
   public void testToString() {
     assertEquals("(1, 1) - Standard", this.cave.toString());
+  }
+
+  @Test
+  public void testSmelly() {
+    assertFalse(this.cave.smelly());
+  }
+
+  @Test
+  public void testDrafty() {
+    assertFalse(this.cave.drafty());
   }
 }

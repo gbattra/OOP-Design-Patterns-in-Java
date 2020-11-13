@@ -31,6 +31,16 @@ public class StandardStrategy implements INodeStrategy {
   }
 
   @Override
+  public boolean smelly(INode curr) {
+    return false;
+  }
+
+  @Override
+  public boolean drafty(INode curr) {
+    return false;
+  }
+
+  @Override
   public String toString() {
     return "Standard";
   }

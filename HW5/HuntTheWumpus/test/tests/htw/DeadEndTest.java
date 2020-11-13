@@ -48,4 +48,16 @@ public class DeadEndTest {
     INode deadend = new DeadEnd();
     assertEquals("Dead End", deadend.toString());
   }
+
+  @Test
+  public void testSmelly() {
+    INode deadend = new DeadEnd();
+    assertFalse(deadend.smelly());
+  }
+
+  @Test
+  public void testDrafty() {
+    INode deadend = new DeadEnd();
+    assertFalse(deadend.drafty());
+  }
 }

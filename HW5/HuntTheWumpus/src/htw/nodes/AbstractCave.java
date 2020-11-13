@@ -74,6 +74,16 @@ public abstract class AbstractCave extends AbstractRoomNode implements INode {
   }
 
   @Override
+  public boolean smelly() {
+    return this.strategy.smelly(this);
+  }
+
+  @Override
+  public boolean drafty() {
+    return this.strategy.drafty(this);
+  }
+
+  @Override
   public String toString() {
     return String.format(
             "%s - %s",

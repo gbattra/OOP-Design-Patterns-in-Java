@@ -69,6 +69,30 @@ public class TunnelStrategy extends StandardStrategy implements INodeStrategy {
   }
 
   @Override
+  public boolean smelly(INode curr) {
+    boolean smelly = false;
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      smelly |= ((INode) curr.getNode(exit)).smelly();
+    }
+
+    return smelly;
+  }
+
+  @Override
+  public boolean drafty(INode curr) {
+    boolean drafty = false;
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      drafty |= ((INode) curr.getNode(exit)).drafty();
+    }
+
+    return drafty;
+  }
+
+  @Override
   public String toString() {
     return "Tunnel";
   }

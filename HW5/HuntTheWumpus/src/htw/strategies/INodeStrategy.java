@@ -8,6 +8,7 @@ import maze.utils.Direction;
  * Interface for a strategy used by a node in a Hunt the Wumpus cave.
  */
 public interface INodeStrategy {
+
   /**
    * Functionality for entering the node.
    *
@@ -33,4 +34,8 @@ public interface INodeStrategy {
    * @param player the player to interact with
    */
   void receive(IPlayer player);
+
+  boolean smelly(INode curr);
+
+  boolean drafty(INode curr);
 }

@@ -1,5 +1,6 @@
 package tests.htw;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import htw.game.IPlayer;
@@ -11,22 +12,33 @@ import maze.components.Coordinates;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for the pit cave
  */
 public class PitCaveTest {
+  private INode pit;
+
+  @Before
+  public void setup() {
+    this.pit = new Cave(new Coordinates(0, 0), new PitStrategy());
+  }
+
   @Test
   public void testReceive() {
     IPlayer player = new Player("Joe", 10);
-    INode pit = new Cave(new Coordinates(0, 0), new PitStrategy());
-    pit.receive(player);
+    this.pit.receive(player);
     assertFalse(player.isAlive());
   }
 
   @Test
   public void testToString() {
-    INode pit = new Cave(new Coordinates(0, 0), new PitStrategy());
-    assertEquals("(0, 0) - Pit", pit.toString());
+    assertEquals("(0, 0) - Pit", this.pit.toString());
+  }
+
+  @Test
+  public void testDrafty() {
+    assertTrue(this.pit.drafty());
   }
 }

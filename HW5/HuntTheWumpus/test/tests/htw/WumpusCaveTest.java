@@ -67,4 +67,9 @@ public class WumpusCaveTest {
   public void testToString() {
     assertEquals("(1, 1) - Wumpus", this.wumpus.toString());
   }
+
+  @Test
+  public void testSmelly() {
+    assertTrue(this.wumpus.smelly());
+  }
 }

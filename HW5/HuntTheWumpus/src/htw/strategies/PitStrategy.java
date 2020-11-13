@@ -1,6 +1,7 @@
 package htw.strategies;
 
 import htw.game.IPlayer;
+import htw.nodes.INode;
 
 /**
  * Strategy for a bottomless pit cave.
@@ -12,6 +13,11 @@ public class PitStrategy extends StandardStrategy implements INodeStrategy {
       throw new IllegalArgumentException("Player cannot be null.");
     }
     player.kill();
+  }
+
+  @Override
+  public boolean drafty(INode curr) {
+    return true;
   }
 
   @Override

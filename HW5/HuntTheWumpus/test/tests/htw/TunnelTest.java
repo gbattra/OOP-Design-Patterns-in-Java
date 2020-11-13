@@ -6,14 +6,17 @@ import org.junit.Test;
 import htw.nodes.Cave;
 import htw.nodes.DeadEnd;
 import htw.nodes.INode;
+import htw.strategies.PitStrategy;
 import htw.strategies.StandardStrategy;
 import htw.strategies.INodeStrategy;
 import htw.strategies.TunnelStrategy;
+import htw.strategies.WumpusStrategy;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
@@ -53,5 +56,27 @@ public class TunnelTest {
   @Test
   public void testToString() {
     assertEquals("(1, 1) - Tunnel", this.tunnel.toString());
+  }
+
+  @Test
+  public void testDratyTrue() {
+    this.tunnel.setNode(new Cave(new Coordinates(2, 1), new PitStrategy()), Direction.EAST);
+    assertTrue(this.tunnel.drafty());
+  }
+
+  @Test
+  public void testDratyFalse() {
+    assertFalse(this.tunnel.drafty());
+  }
+
+  @Test
+  public void testSmellyTrue() {
+    this.tunnel.setNode(new Cave(new Coordinates(2, 1), new WumpusStrategy()), Direction.EAST);
+    assertTrue(this.tunnel.smelly());
+  }
+
+  @Test
+  public void testSmellyFalse() {
+    assertFalse(this.tunnel.smelly());
   }
 }
