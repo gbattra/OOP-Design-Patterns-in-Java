@@ -7,10 +7,10 @@ import htw.game.commands.ICommand;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 
-public class MockStandardMazeCommand implements ICommand<IHtwConfigurationBuilder> {
+public class MockStandardConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   private final StringBuilder log;
 
-  public MockStandardMazeCommand(StringBuilder log) {
+  public MockStandardConfigCommand(StringBuilder log) {
     this.log = log;
   }
 

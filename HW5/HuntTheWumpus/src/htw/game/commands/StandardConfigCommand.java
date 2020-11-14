@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import htw.tools.IHtwConfigurationBuilder;
 
-public class StandardMazeCommand implements ICommand<IHtwConfigurationBuilder> {
+public class StandardConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   @Override
   public IHtwConfigurationBuilder execute(IHtwConfigurationBuilder receiver)
           throws IllegalArgumentException, IOException {

@@ -3,26 +3,19 @@ package htw.game.commands;
 import java.io.IOException;
 import java.util.Scanner;
 
-import htw.game.HtwGame;
-import htw.game.IHtwGame;
-import htw.game.IHtwPlayer;
-import htw.game.HtwPlayer;
-import htw.level.IHtwMaze;
-import htw.tools.HtwConfiguration;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
 import htw.tools.IHtwConfiguration;
 import htw.tools.IHtwConfigurationBuilder;
 import htw.tools.IHtwMazeBuilder;
-import maze.components.IMaze;
 
-public class NewMazeCommand implements ICommand<IHtwMazeBuilder> {
+public class NewConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   private final Appendable out;
   private final Scanner in;
   private final ICommand<IHtwConfigurationBuilder> customCmd;
   private final ICommand<IHtwConfigurationBuilder> standardCmd;
 
-  public NewMazeCommand(
+  public NewConfigCommand(
           Scanner in,
           Appendable out,
           ICommand<IHtwConfigurationBuilder> customCmd,
@@ -38,16 +31,13 @@ public class NewMazeCommand implements ICommand<IHtwMazeBuilder> {
   }
 
   @Override
-  public IHtwMazeBuilder execute(IHtwMazeBuilder receiver) throws IllegalArgumentException, IOException {
+  public IHtwConfigurationBuilder execute(IHtwConfigurationBuilder receiver) throws IllegalArgumentException, IOException {
     this.out.append("Maze type ('standard' or 'custom'): ");
     String gameType = this.in.next();
-    IHtwConfiguration configuration;
     if (gameType.equalsIgnoreCase("standard")) {
-      configuration = this.standardCmd.execute(new HtwConfigurationBuilder()).build();
+      return this.standardCmd.execute(new HtwConfigurationBuilder());
     } else {
-      configuration = this.customCmd.execute(new HtwConfigurationBuilder()).build();
+      return this.customCmd.execute(new HtwConfigurationBuilder());
     }
-
-    return new HtwMazeBuilder(configuration);
   }
 }
