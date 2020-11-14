@@ -1,6 +1,8 @@
 package htw.level;
 
 import htw.game.IHtwPlayer;
+import htw.tools.IHtwConfiguration;
+import maze.components.IMaze;
 import maze.utils.Direction;
 
 public interface IHtwMaze {

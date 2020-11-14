@@ -2,6 +2,8 @@ package htw.level;
 
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
+import htw.tools.HtwMazeBuilder;
+import htw.tools.IHtwConfiguration;
 import maze.components.Maze;
 import maze.utils.Direction;
 
@@ -45,5 +47,7 @@ public class HtwMaze extends Maze implements IHtwMaze {
   public boolean shoot(Direction direction, int count) {
     return this.root.shoot(direction, count);
   }
+
+
 }
 

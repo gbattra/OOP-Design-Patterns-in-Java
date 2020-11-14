@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.game.IHtwPlayer;
-import htw.game.Player;
+import htw.game.HtwPlayer;
 import htw.level.nodes.Cave;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.PitStrategy;
@@ -27,7 +27,7 @@ public class PitCaveTest {
 
   @Test
   public void testReceive() {
-    IHtwPlayer player = new Player("Joe", 10);
+    IHtwPlayer player = new HtwPlayer("Joe", 10);
     this.pit.receive(player);
     assertFalse(player.isAlive());
   }

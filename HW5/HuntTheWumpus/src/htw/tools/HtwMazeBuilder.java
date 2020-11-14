@@ -17,7 +17,7 @@ import maze.components.nodes.Node;
 import maze.utils.Direction;
 
 public class HtwMazeBuilder
-        extends MazeBuilder {
+        extends MazeBuilder implements IHtwMazeBuilder {
   private boolean wumpusSet;
   private int currentId = 1;
 

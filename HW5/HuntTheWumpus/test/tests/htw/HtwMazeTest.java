@@ -4,16 +4,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.game.IHtwPlayer;
-import htw.game.Player;
+import htw.game.HtwPlayer;
 import htw.level.HtwMaze;
 import htw.level.IHtwMaze;
 import htw.level.nodes.Cave;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.WumpusStrategy;
+import htw.tools.HtwConfiguration;
+import htw.tools.HtwConfigurationBuilder;
+import htw.tools.HtwMazeBuilder;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -65,7 +69,7 @@ public class HtwMazeTest {
 
   @Test
   public void testInvalidMove() {
-    IHtwPlayer player = new Player("Joe", 10);
+    IHtwPlayer player = new HtwPlayer("Joe", 10);
     IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
     IHtwMaze maze = new HtwMaze(root, System.out);
     assertFalse(maze.move(Direction.EAST, player));

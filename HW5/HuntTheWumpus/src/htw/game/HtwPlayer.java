@@ -5,7 +5,7 @@ import maze.game.MazePlayer;
 /**
  * Player in a HTW maze.
  */
-public class Player extends MazePlayer implements IHtwPlayer {
+public class HtwPlayer extends MazePlayer implements IHtwPlayer {
   private int arrowCount;
   private boolean alive;
 
@@ -15,7 +15,7 @@ public class Player extends MazePlayer implements IHtwPlayer {
    * @param name the player's name
    * @param arrowCount the number of arrows the player starts with
    */
-  public Player(String name, int arrowCount) {
+  public HtwPlayer(String name, int arrowCount) {
     super(name);
     this.alive = true;
     this.arrowCount = Math.max(0, arrowCount);

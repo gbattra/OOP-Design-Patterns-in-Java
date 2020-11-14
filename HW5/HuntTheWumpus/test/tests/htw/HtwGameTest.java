@@ -6,7 +6,7 @@ import org.junit.Test;
 import htw.game.HtwGame;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
-import htw.game.Player;
+import htw.game.HtwPlayer;
 import htw.level.IHtwMaze;
 import maze.utils.Direction;
 import tests.htw.mocks.MockMaze;
@@ -23,7 +23,7 @@ public class HtwGameTest {
   @Before
   public void setup() {
     this.log = new StringBuilder();
-    this.player = new Player("Joe", 10);
+    this.player = new HtwPlayer("Joe", 10);
     this.maze = new MockMaze(this.log);
     this.game = new HtwGame(this.player, this.maze);
   }

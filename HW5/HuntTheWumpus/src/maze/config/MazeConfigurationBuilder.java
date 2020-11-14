@@ -14,14 +14,15 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
   protected boolean isWrappingMaze = false;
   protected boolean isRoomMaze = false;
   protected int targetEdgeCount;
-  protected ICoordinates start;
-  protected ICoordinates goal;
+  protected ICoordinates start = new Coordinates(0, 0);
+  protected ICoordinates goal = new Coordinates(rowCount, columnCount);
 
   @Override
   public IConfigurationBuilder setColumnCount(int columnCount) throws IllegalArgumentException {
     if (columnCount <= 0 || columnCount > 65) {
       throw new IllegalArgumentException("ColumnCount must be greater than zero but less than 65.");
     }
+    this.goal = new Coordinates(columnCount, this.goal.getY());
     this.columnCount = columnCount;
     return this;
   }
@@ -31,7 +32,7 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
     if (rowCount <= 0 || rowCount > 65) {
       throw new IllegalArgumentException("RowCount must be greater than zero but less than 65.");
     }
-
+    this.goal = new Coordinates(this.goal.getX(), rowCount);
     this.rowCount = rowCount;
     return this;
   }

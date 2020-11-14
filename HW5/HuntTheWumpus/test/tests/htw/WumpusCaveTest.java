@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.game.IHtwPlayer;
-import htw.game.Player;
+import htw.game.HtwPlayer;
 import htw.level.nodes.Cave;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.IHtwNodeStrategy;
@@ -59,7 +59,7 @@ public class WumpusCaveTest {
 
   @Test
   public void testReceivePlayer() {
-    IHtwPlayer player = new Player("Joe", 10);
+    IHtwPlayer player = new HtwPlayer("Joe", 10);
     this.wumpus.receive(player);
     assertFalse(player.isAlive());
   }

@@ -2,6 +2,7 @@ package tests.htw.mocks;
 
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
+import htw.tools.IHtwConfiguration;
 import maze.utils.Direction;
 
 public class MockMaze implements IHtwMaze {

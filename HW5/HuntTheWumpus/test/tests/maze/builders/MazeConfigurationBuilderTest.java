@@ -2,9 +2,14 @@ package tests.maze.builders;
 
 import org.junit.Test;
 
+import maze.components.Coordinates;
+import maze.components.IMaze;
+import maze.config.IConfiguration;
 import maze.config.IConfigurationBuilder;
 import maze.config.MazeConfigurationBuilder;
+import maze.config.PerfectMazeConfiguration;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class MazeConfigurationBuilderTest {
@@ -18,6 +23,15 @@ public class MazeConfigurationBuilderTest {
   public void testInvalidSetRowCountZero() {
     IConfigurationBuilder builder = new MazeConfigurationBuilder().setRowCount(0);
     fail("Invalid setter should have failed.");
+  }
+
+  @Test
+  public void testGoalChange() {
+    IConfigurationBuilder builder = new MazeConfigurationBuilder()
+                                                .setRowCount(14)
+                                                .setColumnCount(14);
+    IConfiguration config = builder.build();
+    assertEquals(new Coordinates(14, 14), config.goal());
   }
 
   @Test(expected = IllegalArgumentException.class)

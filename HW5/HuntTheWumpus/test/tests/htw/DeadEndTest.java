@@ -2,7 +2,7 @@ package tests.htw;
 
 import org.junit.Test;
 
-import htw.game.Player;
+import htw.game.HtwPlayer;
 import htw.level.nodes.DeadEnd;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.StandardStrategy;
@@ -39,7 +39,7 @@ public class DeadEndTest {
   @Test(expected = IllegalStateException.class)
   public void testReceive() {
     IHtwNode deadend = new DeadEnd();
-    deadend.receive(new Player("Joe", 10));
+    deadend.receive(new HtwPlayer("Joe", 10));
     fail("Dead end node receive() should have failed.");
   }
 
