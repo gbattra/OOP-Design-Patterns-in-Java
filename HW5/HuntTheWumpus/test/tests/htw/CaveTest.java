@@ -186,4 +186,9 @@ public class CaveTest {
     this.cave.directionTo(1);
     fail("Invalid directionTo() should have failed.");
   }
+
+  @Test
+  public void testCanEnter() {
+    assertTrue(this.cave.canEnter());
+  }
 }

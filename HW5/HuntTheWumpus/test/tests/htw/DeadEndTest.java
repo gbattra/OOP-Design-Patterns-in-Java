@@ -60,4 +60,9 @@ public class DeadEndTest {
     IHtwNode deadend = new DeadEnd();
     assertFalse(deadend.drafty());
   }
+
+  @Test
+  public void testCanEnter() {
+    assertFalse(new DeadEnd().canEnter());
+  }
 }

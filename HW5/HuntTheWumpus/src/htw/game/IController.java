@@ -1,5 +1,5 @@
 package htw.game;
 
-public interface IHtwController {
+public interface IController {
   int run();
 }

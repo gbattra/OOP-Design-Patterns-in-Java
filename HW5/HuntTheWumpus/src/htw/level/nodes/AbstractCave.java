@@ -53,6 +53,11 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
+  public boolean canEnter() {
+    return true;
+  }
+
+  @Override
   public Direction directionTo(int id) {
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));

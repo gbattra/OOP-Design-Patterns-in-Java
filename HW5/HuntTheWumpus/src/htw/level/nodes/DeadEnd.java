@@ -67,4 +67,9 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   public Integer id() {
     return 0;
   }
+
+  @Override
+  public boolean canEnter() {
+    return false;
+  }
 }

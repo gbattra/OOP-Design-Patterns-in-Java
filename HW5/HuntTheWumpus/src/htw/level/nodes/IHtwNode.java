@@ -20,6 +20,13 @@ public interface IHtwNode extends Node {
   Integer id();
 
   /**
+   * Can the player can enter this node in the maze from their current position.
+   *
+   * @return true if can enter from current position
+   */
+  boolean canEnter();
+
+  /**
    * Gets the direction from this node to the node with the target id.
    *
    * @param id the target id
