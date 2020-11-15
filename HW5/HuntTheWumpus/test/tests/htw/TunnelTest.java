@@ -71,22 +71,22 @@ public class TunnelTest {
   @Test
   public void testDratyTrue() {
     this.tunnel.setNode(new Cave(1, new Coordinates(2, 1), new PitStrategy(), System.out), Direction.EAST);
-    assertTrue(this.tunnel.drafty());
+    assertTrue(this.tunnel.drafty(Direction.WEST));
   }
 
   @Test
   public void testDratyFalse() {
-    assertFalse(this.tunnel.drafty());
+    assertFalse(this.tunnel.drafty(Direction.SOUTH));
   }
 
   @Test
   public void testSmellyTrue() {
     this.tunnel.setNode(new Cave(1, new Coordinates(2, 1), new WumpusStrategy(), System.out), Direction.EAST);
-    assertTrue(this.tunnel.smelly());
+    assertTrue(this.tunnel.smelly(Direction.WEST));
   }
 
   @Test
   public void testSmellyFalse() {
-    assertFalse(this.tunnel.smelly());
+    assertFalse(this.tunnel.smelly(Direction.SOUTH));
   }
 }

@@ -145,13 +145,13 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
-  public boolean smelly() {
-    return this.strategy.smelly(this);
+  public boolean smelly(Direction from) {
+    return this.strategy.smelly(from, this);
   }
 
   @Override
-  public boolean drafty() {
-    return this.strategy.drafty(this);
+  public boolean drafty(Direction from) {
+    return this.strategy.drafty(from, this);
   }
 
   @Override

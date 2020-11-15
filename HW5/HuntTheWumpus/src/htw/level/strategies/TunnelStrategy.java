@@ -70,24 +70,30 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
   }
 
   @Override
-  public boolean smelly(IHtwNode curr) {
+  public boolean smelly(Direction from, IHtwNode curr) {
     boolean smelly = false;
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     for (Direction exit : exits) {
-      smelly |= ((IHtwNode) curr.getNode(exit)).smelly();
+      if (exit.equals(from)) {
+        continue;
+      }
+      smelly |= ((IHtwNode) curr.getNode(exit)).smelly(exit.opposite());
     }
 
     return smelly;
   }
 
   @Override
-  public boolean drafty(IHtwNode curr) {
+  public boolean drafty(Direction from, IHtwNode curr) {
     boolean drafty = false;
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     for (Direction exit : exits) {
-      drafty |= ((IHtwNode) curr.getNode(exit)).drafty();
+      if (exit.equals(from)) {
+        continue;
+      }
+      drafty |= ((IHtwNode) curr.getNode(exit)).drafty(exit.opposite());
     }
 
     return drafty;

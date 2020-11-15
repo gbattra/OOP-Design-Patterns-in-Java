@@ -1,6 +1,9 @@
 package htw.level.strategies;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
@@ -29,16 +32,31 @@ public class StandardStrategy implements IHtwNodeStrategy {
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }
-    // do nothing
+
+    boolean drafty = false;
+    boolean smelly = false;
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      IHtwNode node = (IHtwNode) curr.getNode(exit);
+      drafty |= node.drafty(exit.opposite());
+      smelly |= node.smelly(exit.opposite());
+    }
+    if (drafty) {
+      curr.logger().append("\n").append("You feel a draft.");
+    }
+    if (smelly) {
+      curr.logger().append("\n").append("You smell a Wumpus.");
+    }
   }
 
   @Override
-  public boolean smelly(IHtwNode curr) {
+  public boolean smelly(Direction from, IHtwNode curr) {
     return false;
   }
 
   @Override
-  public boolean drafty(IHtwNode curr) {
+  public boolean drafty(Direction from, IHtwNode curr) {
     return false;
   }
 

@@ -62,13 +62,13 @@ public class DeadEndTest {
   @Test
   public void testSmelly() {
     IHtwNode deadend = new DeadEnd();
-    assertFalse(deadend.smelly());
+    assertFalse(deadend.smelly(Direction.SOUTH));
   }
 
   @Test
   public void testDrafty() {
     IHtwNode deadend = new DeadEnd();
-    assertFalse(deadend.drafty());
+    assertFalse(deadend.drafty(Direction.SOUTH));
   }
 
   @Test

@@ -64,12 +64,12 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
-  public boolean drafty() {
+  public boolean drafty(Direction from) {
     return false;
   }
 
   @Override
-  public boolean smelly() {
+  public boolean smelly(Direction from) {
     return false;
   }
 

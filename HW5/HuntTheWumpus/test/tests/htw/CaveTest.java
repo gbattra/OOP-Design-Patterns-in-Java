@@ -6,10 +6,13 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import htw.game.HtwPlayer;
+import htw.game.IHtwPlayer;
 import htw.level.nodes.Cave;
 import htw.level.nodes.DeadEnd;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.IHtwNodeStrategy;
+import htw.level.strategies.PitStrategy;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.TunnelStrategy;
 import htw.level.strategies.WumpusStrategy;
@@ -33,15 +36,17 @@ public class CaveTest {
   private IHtwNode east;
   private IHtwNode west;
   private IHtwNode cave;
+  private Appendable log;
 
   @Before
   public void setup() {
-    this.north = new Cave(1, new Coordinates(1, 0), this.strategy, System.out);
-    this.south = new Cave(2, new Coordinates(1, 2), this.strategy, System.out);
-    this.east = new Cave(3, new Coordinates(2, 1), this.strategy, System.out);
-    this.west = new Cave(4, new Coordinates(0, 1), this.strategy, System.out);
+    this.log = new StringBuilder();
+    this.north = new Cave(1, new Coordinates(1, 0), this.strategy, log);
+    this.south = new Cave(2, new Coordinates(1, 2), this.strategy, log);
+    this.east = new Cave(3, new Coordinates(2, 1), this.strategy, log);
+    this.west = new Cave(4, new Coordinates(0, 1), this.strategy, log);
 
-    this.cave = new Cave(5, new Coordinates(1, 1), this.strategy, System.out);
+    this.cave = new Cave(5, new Coordinates(1, 1), this.strategy, log);
     this.cave.setNode(this.north, Direction.NORTH);
     this.cave.setNode(this.south, Direction.SOUTH);
     this.cave.setNode(this.east, Direction.EAST);
@@ -85,9 +90,9 @@ public class CaveTest {
 
   @Test
   public void testShootHitTunnel() {
-    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new TunnelStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), log);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), log);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new TunnelStrategy(), log);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -101,9 +106,9 @@ public class CaveTest {
 
   @Test
   public void testShootHitCaveMiss() {
-    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), log);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), log);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), log);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -118,9 +123,9 @@ public class CaveTest {
 
   @Test
   public void testShootHitCaveStrike() {
-    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), log);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), log);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), log);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -147,19 +152,19 @@ public class CaveTest {
 
   @Test
   public void testSmelly() {
-    assertFalse(this.cave.smelly());
+    assertFalse(this.cave.smelly(Direction.SOUTH));
   }
 
   @Test
   public void testDrafty() {
-    assertFalse(this.cave.drafty());
+    assertFalse(this.cave.drafty(Direction.SOUTH));
   }
 
   @Test
   public void testGet() {
-    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), System.out);
-    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), System.out);
-    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), System.out);
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), log);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), log);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new StandardStrategy(), log);
 
     this.cave.setNode(eastOne, Direction.EAST);
     eastOne.setNode(this.cave, Direction.WEST);
@@ -170,6 +175,30 @@ public class CaveTest {
 
     IHtwNode retrieved = this.cave.get(10);
     assertEquals(wumpus, retrieved);
+  }
+
+  @Test
+  public void testReceive() {
+    IHtwNode wumpus = new Cave(10, new Coordinates(3, 0), new WumpusStrategy(), log);
+    IHtwNode eastOne = new Cave(11, new Coordinates(2, 1), new TunnelStrategy(), log);
+    IHtwNode eastTwo = new Cave(12, new Coordinates(3, 1), new TunnelStrategy(), log);
+    IHtwNode pit = new Cave(16, new Coordinates(1, 0), new PitStrategy(), log);
+    this.cave.setNode(pit, Direction.WEST);
+    pit.setNode(this.cave, Direction.EAST);
+    this.cave.setNode(eastOne, Direction.EAST);
+    eastOne.setNode(this.cave, Direction.WEST);
+    eastTwo.setNode(eastOne, Direction.WEST);
+    eastOne.setNode(eastTwo, Direction.EAST);
+    eastTwo.setNode(wumpus, Direction.NORTH);
+    wumpus.setNode(eastTwo, Direction.SOUTH);
+
+    IHtwPlayer player = new HtwPlayer("Joe", 10);
+    try {
+      this.cave.receive(player);
+      assertEquals("\nYou feel a draft.\nYou smell a Wumpus.", log.toString());
+    } catch (Exception e) {
+      fail("Valid enter() should not have failed.");
+    }
   }
 
   @Test(expected = IllegalArgumentException.class)

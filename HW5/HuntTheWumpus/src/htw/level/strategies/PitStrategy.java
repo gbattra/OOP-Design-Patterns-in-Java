@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
+import maze.utils.Direction;
 
 /**
  * Strategy for a bottomless pit cave.
@@ -20,7 +21,7 @@ public class PitStrategy extends StandardStrategy implements IHtwNodeStrategy {
   }
 
   @Override
-  public boolean drafty(IHtwNode curr) {
+  public boolean drafty(Direction from, IHtwNode curr) {
     return true;
   }
 

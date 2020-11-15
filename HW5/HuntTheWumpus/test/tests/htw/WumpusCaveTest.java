@@ -79,6 +79,6 @@ public class WumpusCaveTest {
 
   @Test
   public void testSmelly() {
-    assertTrue(this.wumpus.smelly());
+    assertTrue(this.wumpus.smelly(Direction.WEST));
   }
 }

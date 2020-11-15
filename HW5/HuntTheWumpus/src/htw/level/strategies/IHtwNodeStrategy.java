@@ -38,7 +38,7 @@ public interface IHtwNodeStrategy {
    */
   void receive(IHtwPlayer player, IHtwNode curr) throws IOException;
 
-  boolean smelly(IHtwNode curr);
+  boolean smelly(Direction from, IHtwNode curr);
 
-  boolean drafty(IHtwNode curr);
+  boolean drafty(Direction from, IHtwNode curr);
 }

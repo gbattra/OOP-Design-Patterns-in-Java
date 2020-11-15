@@ -9,6 +9,7 @@ import htw.level.nodes.Cave;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.PitStrategy;
 import maze.components.Coordinates;
+import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -47,6 +48,6 @@ public class PitCaveTest {
 
   @Test
   public void testDrafty() {
-    assertTrue(this.pit.drafty());
+    assertTrue(this.pit.drafty(Direction.SOUTH));
   }
 }

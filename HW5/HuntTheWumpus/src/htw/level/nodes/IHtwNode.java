@@ -101,7 +101,7 @@ public interface IHtwNode extends Node {
    */
   void receive(IHtwPlayer player) throws IOException;
 
-  boolean smelly();
+  boolean smelly(Direction from);
 
-  boolean drafty();
+  boolean drafty(Direction from);
 }

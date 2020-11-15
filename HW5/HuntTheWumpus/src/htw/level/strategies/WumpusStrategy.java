@@ -29,7 +29,7 @@ public class WumpusStrategy extends StandardStrategy implements IHtwNodeStrategy
   }
 
   @Override
-  public boolean smelly(IHtwNode node) {
+  public boolean smelly(Direction from, IHtwNode node) {
     return true;
   }
 
