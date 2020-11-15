@@ -140,8 +140,8 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
-  public void receive(IHtwPlayer player) throws IllegalArgumentException {
-    this.strategy.receive(player);
+  public void receive(IHtwPlayer player) throws IllegalArgumentException, IOException {
+    this.strategy.receive(player, this);
   }
 
   @Override

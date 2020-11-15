@@ -1,5 +1,7 @@
 package htw.level.strategies;
 
+import java.io.IOException;
+
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
@@ -18,11 +20,11 @@ public class WumpusStrategy extends StandardStrategy implements IHtwNodeStrategy
   }
 
   @Override
-  public void receive(IHtwPlayer player) {
+  public void receive(IHtwPlayer player, IHtwNode curr) throws IOException {
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }
-
+    curr.logger().append("\n").append("Chomp chomp! You've been eaten by the Wumpus!");
     player.kill();
   }
 

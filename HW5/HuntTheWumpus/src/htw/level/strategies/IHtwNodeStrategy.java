@@ -34,8 +34,9 @@ public interface IHtwNodeStrategy {
    * Receives a player and modifies/interacts with it. I.e. a wumpus strategy will kill the player.
    *
    * @param player the player to interact with
+   * @param curr the node itself
    */
-  void receive(IHtwPlayer player);
+  void receive(IHtwPlayer player, IHtwNode curr) throws IOException;
 
   boolean smelly(IHtwNode curr);
 

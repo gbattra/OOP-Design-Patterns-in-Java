@@ -13,6 +13,7 @@ import maze.components.Coordinates;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for the pit cave
@@ -27,9 +28,13 @@ public class PitCaveTest {
 
   @Test
   public void testReceive() {
-    IHtwPlayer player = new HtwPlayer("Joe", 10);
-    this.pit.receive(player);
-    assertFalse(player.isAlive());
+    try {
+      IHtwPlayer player = new HtwPlayer("Joe", 10);
+      this.pit.receive(player);
+      assertFalse(player.isAlive());
+    } catch (Exception e) {
+      fail("Valid receive() should not have failed.");
+    }
   }
 
   @Test

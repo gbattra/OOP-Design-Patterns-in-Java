@@ -99,7 +99,7 @@ public interface IHtwNode extends Node {
    *
    * @param player the player to receive
    */
-  void receive(IHtwPlayer player);
+  void receive(IHtwPlayer player) throws IOException;
 
   boolean smelly();
 

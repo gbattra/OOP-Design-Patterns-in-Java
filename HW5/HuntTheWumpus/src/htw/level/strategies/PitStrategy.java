@@ -1,5 +1,7 @@
 package htw.level.strategies;
 
+import java.io.IOException;
+
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
 
@@ -8,10 +10,12 @@ import htw.level.nodes.IHtwNode;
  */
 public class PitStrategy extends StandardStrategy implements IHtwNodeStrategy {
   @Override
-  public void receive(IHtwPlayer player) throws IllegalArgumentException {
+  public void receive(IHtwPlayer player, IHtwNode curr)
+          throws IllegalArgumentException, IOException {
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }
+    curr.logger().append("\n").append("'Ahhhhhhhh', you shout as you fall into a bottomless pit!");
     player.kill();
   }
 

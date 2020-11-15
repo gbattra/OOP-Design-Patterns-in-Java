@@ -42,11 +42,15 @@ public class DeadEndTest {
     fail("Dead end node setStrategy() should have failed.");
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void testReceive() {
-    IHtwNode deadend = new DeadEnd();
-    deadend.receive(new HtwPlayer("Joe", 10));
-    fail("Dead end node receive() should have failed.");
+    try {
+      IHtwNode deadend = new DeadEnd();
+      deadend.receive(new HtwPlayer("Joe", 10));
+      fail("Dead end node receive() should have failed.");
+    } catch (Exception e) {
+      // do nothing
+    }
   }
 
   @Test
