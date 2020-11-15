@@ -11,14 +11,14 @@ public interface IHtwConfiguration extends IConfiguration {
    *
    * @return the bat frequency
    */
-  double getBatFrequency();
+  double batFrequency();
 
   /**
    * Getter for the pit frequency.
    *
    * @return the pit frequency
    */
-  double getPitFrequency();
+  double pitFrequency();
 
   /**
    * Returns the logger for the game.

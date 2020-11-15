@@ -61,12 +61,12 @@ public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwC
   }
 
   @Override
-  public double getBatFrequency() {
+  public double batFrequency() {
     return this.batFrequency;
   }
 
   @Override
-  public double getPitFrequency() {
+  public double pitFrequency() {
     return this.pitFrequency;
   }
 }

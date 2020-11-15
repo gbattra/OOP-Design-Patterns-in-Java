@@ -14,7 +14,6 @@ import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.IMaze;
 import maze.components.nodes.Node;
-import maze.utils.Direction;
 
 public class HtwMazeBuilder
         extends MazeBuilder implements IHtwMazeBuilder {
@@ -59,8 +58,8 @@ public class HtwMazeBuilder
 
   private IHtwNodeStrategy generateStrategy(IHtwConfiguration config) {
     double next = config.random().nextDouble();
-    boolean isPit = next <= config.getPitFrequency();
-    boolean isBat = next <= config.getBatFrequency();
+    boolean isPit = next <= config.pitFrequency();
+    boolean isBat = next <= config.batFrequency();
     boolean isWumpus = next <= (double) (1 / (this.config.rowCount() * this.config.columnCount()));
 
     IHtwNodeStrategy strategy = new StandardStrategy();
