@@ -30,6 +30,15 @@ public class HtwMaze extends Maze implements IHtwMaze {
   public boolean move(Integer id, IHtwPlayer player) {
     try {
       this.current = this.current.get(id).enter(this.current.directionTo(id).opposite());
+      List<IHtwNode> neighbors = this.current.neighbors();
+      this.logger.append("\n").append(
+              String.format(
+                      "You are in cave %s with tunnels to node(s) %s",
+                      this.current.id().toString(),
+                      neighbors
+                              .stream()
+                              .map(n -> n.id().toString())
+                              .collect(Collectors.joining(", "))));
       return true;
     } catch (Exception e) {
       return false;

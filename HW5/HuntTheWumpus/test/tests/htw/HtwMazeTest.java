@@ -29,15 +29,17 @@ public class HtwMazeTest {
   private IHtwNode west;
   private IHtwNode root;
   private IHtwMaze maze;
+  private StringBuilder log;
 
   @Before
   public void setup() {
-    this.north = new Cave(1, new Coordinates(1, 0), new StandardStrategy(), System.out);
-    this.south = new Cave(2, new Coordinates(1, 2), new StandardStrategy(), System.out);
-    this.east = new Cave(3, new Coordinates(2, 1), new StandardStrategy(), System.out);
-    this.west = new Cave(4, new Coordinates(0, 1), new StandardStrategy(), System.out);
+    this.log = new StringBuilder();
+    this.north = new Cave(1, new Coordinates(1, 0), new StandardStrategy(), log);
+    this.south = new Cave(2, new Coordinates(1, 2), new StandardStrategy(), log);
+    this.east = new Cave(3, new Coordinates(2, 1), new StandardStrategy(), log);
+    this.west = new Cave(4, new Coordinates(0, 1), new StandardStrategy(), log);
 
-    this.root = new Cave(5, new Coordinates(1, 1), new StandardStrategy(), System.out);
+    this.root = new Cave(5, new Coordinates(1, 1), new StandardStrategy(), log);
     this.root.setNode(this.north, Direction.NORTH);
     this.root.setNode(this.south, Direction.SOUTH);
     this.root.setNode(this.east, Direction.EAST);
@@ -48,14 +50,14 @@ public class HtwMazeTest {
     this.east.setNode(this.root, Direction.EAST.opposite());
     this.west.setNode(this.root, Direction.WEST.opposite());
 
-    this.maze = new HtwMaze(root, System.out);
+    this.maze = new HtwMaze(root, log);
   }
 
   @Test
   public void testConstructor() {
     try {
-      IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
-      IHtwMaze maze = new HtwMaze(root, System.out);
+      IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), log);
+      IHtwMaze maze = new HtwMaze(root, log);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -63,22 +65,39 @@ public class HtwMazeTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    IHtwMaze maze = new HtwMaze(null, System.out);
+    IHtwMaze maze = new HtwMaze(null, log);
     fail("Invalid constructor should have failed.");
   }
 
   @Test
   public void testInvalidMove() {
     IHtwPlayer player = new HtwPlayer("Joe", 10);
-    IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), System.out);
-    IHtwMaze maze = new HtwMaze(root, System.out);
+    IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), log);
+    IHtwMaze maze = new HtwMaze(root, log);
     assertFalse(maze.move(Direction.EAST, player));
   }
 
   @Test
+  public void testMoveByDir() {
+    IHtwPlayer player = new HtwPlayer("Joe", 10);
+    IHtwMaze maze = new HtwMaze(root, log);
+    assertTrue(maze.move(Direction.EAST, player));
+    assertEquals("\nYou are in cave (2, 1) with tunnels to the WEST", log.toString());
+  }
+
+  @Test
   public void testMoveById() {
+    IHtwPlayer player = new HtwPlayer("Joe", 10);
+    IHtwMaze maze = new HtwMaze(root, log);
+    assertTrue(maze.move(3, player));
+    assertEquals("\nYou are in cave 3 with tunnels to node(s) 5", log.toString());
+  }
+
+  @Test
+  public void testShootById() {
     assertFalse(this.maze.shoot(Direction.EAST, 1));
-    this.root.setNode(new Cave(15, new Coordinates(2, 1), new WumpusStrategy(), System.out), Direction.EAST);
+    this.root.setNode(
+            new Cave(15, new Coordinates(2, 1), new WumpusStrategy(), log), Direction.EAST);
     assertTrue(this.maze.shoot(Direction.EAST, 1));
   }
 }
