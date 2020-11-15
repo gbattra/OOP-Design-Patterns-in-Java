@@ -20,22 +20,23 @@ public class NewGameCommand implements ICommand<IHtwGame> {
   private final Appendable out;
   private final ICommand<IHtwConfigurationBuilder> configCmd;
 
-  public NewGameCommand(Scanner in, Appendable out) {
+  public NewGameCommand(
+          Scanner in,
+          Appendable out,
+          ICommand<IHtwConfigurationBuilder> configCmd)
+          throws IllegalArgumentException {
     if (in == null || out == null) {
       throw new IllegalArgumentException("Params cannot be null.");
     }
     this.in = in;
     this.out = out;
-    this.configCmd = new NewConfigCommand(
-            in, out,
-            new CustomConfigCommand(in, out),
-            new StandardConfigCommand());
+    this.configCmd = configCmd;
   }
 
   @Override
   public IHtwGame execute(IHtwGame receiver) throws IllegalArgumentException, IOException {
     this.out.append("Player name (first only): ");
-    String name = this.in.nextLine().split(" ")[0];
+    String name = this.in.next();
     this.out.append("Starting arrow count: ");
     int arrowCount = this.in.nextInt();
     IHtwPlayer player = new HtwPlayer(name, arrowCount);

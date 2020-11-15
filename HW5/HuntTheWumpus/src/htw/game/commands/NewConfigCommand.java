@@ -35,9 +35,9 @@ public class NewConfigCommand implements ICommand<IHtwConfigurationBuilder> {
     this.out.append("Maze type ('standard' or 'custom'): ");
     String gameType = this.in.next();
     if (gameType.equalsIgnoreCase("standard")) {
-      return this.standardCmd.execute(new HtwConfigurationBuilder());
+      return this.standardCmd.execute(new HtwConfigurationBuilder()).setLogger(this.out);
     } else {
-      return this.customCmd.execute(new HtwConfigurationBuilder());
+      return this.customCmd.execute(new HtwConfigurationBuilder()).setLogger(this.out);
     }
   }
 }
