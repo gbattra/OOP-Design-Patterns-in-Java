@@ -7,7 +7,7 @@ import htw.game.commands.strategies.IActionStrategy;
 import maze.utils.Direction;
 
 public interface IHtwGame {
-  boolean start(IActionStrategy strategy);
+  String status(IActionStrategy strategy);
   boolean move(Direction direction);
   boolean move(int id);
   boolean shoot(Direction direction, int count);

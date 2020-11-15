@@ -1,11 +1,13 @@
 package htw.game.commands.strategies;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import htw.game.IHtwGame;
 import htw.level.nodes.IHtwNode;
+import maze.utils.Direction;
 
 public class ActionByIdStrategy implements IActionStrategy {
   @Override
@@ -23,13 +25,14 @@ public class ActionByIdStrategy implements IActionStrategy {
 
   @Override
   public String status(IHtwNode curr) {
-    List<IHtwNode> neighbors = curr.neighbors();
+    Map<Direction, Integer> neighbors = curr.neighbors();
     return String.format(
             "You are in cave %s with tunnels to node(s) %s",
             curr.id().toString(),
             neighbors
+                    .values()
                     .stream()
-                    .map(n -> n.id().toString())
+                    .map(Object::toString)
                     .collect(Collectors.joining(", ")));
   }
 }

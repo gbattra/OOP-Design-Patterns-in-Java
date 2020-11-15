@@ -52,6 +52,6 @@ public class HtwMazeBuilderTest {
   @Test
   public void testBuild() {
     IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(this.configBuilder.build()).build();
-    assertTrue(maze.shoot(2, 1));
+    assertTrue(maze.shoot(3, 1));
   }
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import htw.game.HtwPlayer;
 import htw.game.IHtwPlayer;
@@ -233,10 +234,10 @@ public class CaveTest {
 
   @Test
   public void testNeighbors() {
-    List<IHtwNode> neighbors = this.cave.neighbors();
-    assertEquals(this.north, neighbors.get(0));
-    assertEquals(this.south, neighbors.get(1));
-    assertEquals(this.east, neighbors.get(2));
-    assertEquals(this.west, neighbors.get(3));
+    Map<Direction, Integer> neighbors = this.cave.neighbors();
+    assertEquals(this.north.id(), neighbors.get(Direction.NORTH));
+    assertEquals(this.south.id(), neighbors.get(Direction.SOUTH));
+    assertEquals(this.east.id(), neighbors.get(Direction.EAST));
+    assertEquals(this.west.id(), neighbors.get(Direction.WEST));
   }
 }

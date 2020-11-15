@@ -1,9 +1,12 @@
 package htw.level.strategies;
 
 import java.io.IOException;
+import java.util.List;
 
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
+import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.utils.Direction;
 
 /**
@@ -41,4 +44,6 @@ public interface IHtwNodeStrategy {
   boolean smelly(Direction from, IHtwNode curr);
 
   boolean drafty(Direction from, IHtwNode curr);
+
+  IHtwNode getNext(List<ICoordinates> traversed, IHtwNode curr);
 }

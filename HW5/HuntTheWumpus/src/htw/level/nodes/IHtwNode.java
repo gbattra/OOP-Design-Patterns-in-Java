@@ -2,9 +2,11 @@ package htw.level.nodes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import htw.game.IHtwPlayer;
 import htw.level.strategies.IHtwNodeStrategy;
+import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
@@ -18,7 +20,7 @@ public interface IHtwNode extends Node {
    *
    * @return the node's neighbors
    */
-  List<IHtwNode> neighbors();
+  Map<Direction, Integer> neighbors();
 
   /**
    * Getter for the node's ID.
@@ -104,4 +106,6 @@ public interface IHtwNode extends Node {
   boolean smelly(Direction from);
 
   boolean drafty(Direction from);
+
+  IHtwNode getNext(List<ICoordinates> traversed);
 }

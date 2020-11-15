@@ -29,7 +29,7 @@ public class HtwMazeBuilder
     IHtwNode start = new Cave(
             this.currentId,
             this.config.start(),
-            new TunnelStrategy(),
+            new StandardStrategy(),
             ((IHtwConfiguration) this.config).getLogger());
     this.grow(start);
 

@@ -22,14 +22,8 @@ public class HtwGame implements IHtwGame {
   }
 
   @Override
-  public boolean start(IActionStrategy strategy) {
-    try {
-      String status = this.maze.status(strategy);
-      this.logger.append(status);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+  public String status(IActionStrategy strategy) {
+    return this.maze.status(strategy);
   }
 
   @Override

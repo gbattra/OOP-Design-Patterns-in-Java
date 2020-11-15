@@ -1,6 +1,7 @@
 package htw.level.nodes;
 
 import java.util.List;
+import java.util.Map;
 
 import htw.game.IHtwPlayer;
 import htw.level.strategies.IHtwNodeStrategy;
@@ -39,7 +40,7 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
-  public List<IHtwNode> neighbors() {
+  public Map<Direction, Integer> neighbors() {
     throw new IllegalStateException("Dead end node has no neighbors.");
   }
 
@@ -56,6 +57,11 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   @Override
   public Appendable logger() {
     throw new IllegalStateException("Dead end node has no logger.");
+  }
+
+  @Override
+  public IHtwNode getNext(List<ICoordinates> traversed) {
+    throw new IllegalStateException("No next nodes from a dead end node.");
   }
 
   @Override

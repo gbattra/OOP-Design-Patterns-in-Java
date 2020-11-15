@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import htw.level.nodes.IHtwNode;
+import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.utils.Direction;
 
 /**
@@ -97,6 +99,27 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
     }
 
     return drafty;
+  }
+
+  @Override
+  public IHtwNode getNext(List<ICoordinates> traversed, IHtwNode curr) {
+    if (traversed.contains(curr.getCoordinates())) {
+      throw new IllegalStateException("Already traversed this node when finding next.");
+    }
+
+    traversed.add(curr.getCoordinates());
+
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      try {
+        return ((IHtwNode) curr.getNode(exit)).getNext(traversed);
+      } catch (Exception ignored) {
+
+      }
+    }
+
+    throw new IllegalStateException("No available nodes to enter.");
   }
 
   @Override

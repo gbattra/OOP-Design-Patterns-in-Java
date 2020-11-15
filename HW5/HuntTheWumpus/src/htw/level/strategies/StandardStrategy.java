@@ -7,6 +7,8 @@ import java.util.List;
 
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
+import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.utils.Direction;
 
 /**
@@ -58,6 +60,14 @@ public class StandardStrategy implements IHtwNodeStrategy {
   @Override
   public boolean drafty(Direction from, IHtwNode curr) {
     return false;
+  }
+
+  @Override
+  public IHtwNode getNext(List<ICoordinates> traversed, IHtwNode curr) {
+    if (traversed.contains(curr.getCoordinates())) {
+      throw new IllegalStateException("Already traversed this node when finding next.");
+    }
+    return curr;
   }
 
   @Override

@@ -1,6 +1,7 @@
 package htw.game.commands.strategies;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -24,13 +25,14 @@ public class ActionByDirStrategy implements IActionStrategy {
 
   @Override
   public String status(IHtwNode curr) {
-    List<IHtwNode> neighbors = curr.neighbors();
+    Map<Direction, Integer> neighbors = curr.neighbors();
     return String.format(
             "You are in cave %s with tunnels to the %s",
             curr.getCoordinates().toString(),
             neighbors
+                    .keySet()
                     .stream()
-                    .map(n -> n.directionTo(curr.id()).opposite().toString())
+                    .map(Enum::toString)
                     .collect(Collectors.joining(", ")));
   }
 }

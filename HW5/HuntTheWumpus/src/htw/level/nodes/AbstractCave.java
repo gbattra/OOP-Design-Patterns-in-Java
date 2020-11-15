@@ -3,10 +3,14 @@ package htw.level.nodes;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import htw.game.IHtwPlayer;
 import htw.level.strategies.IHtwNodeStrategy;
+import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.nodes.AbstractRoomNode;
 import maze.components.nodes.Node;
@@ -61,18 +65,17 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
 
   @Override
   public Direction directionTo(int id) {
-    List<Direction> exits = new ArrayList<>(
-            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
-    for (Direction exit : exits) {
-      try {
-        if (((IHtwNode) this.getNode(exit)).id() == id) {
-          return exit;
-        }
-      } catch (Exception ignored) {
-      }
+    Map<Direction, Integer> neighbors = this.neighbors();
+    List<Map.Entry<Direction, Integer>> target =
+            neighbors.entrySet()
+                    .stream().filter(e -> e.getValue() == id)
+                    .collect(Collectors.toList());
+    if (target.isEmpty()) {
+      throw new IllegalArgumentException(
+              String.format("Current node has no neighbor with id: %s", id));
     }
 
-    throw new IllegalArgumentException(String.format("Cannot find node with id %s", id));
+    return target.get(0).getKey();
   }
 
   @Override
@@ -164,19 +167,27 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
-  public List<IHtwNode> neighbors() {
+  public Map<Direction, Integer> neighbors() {
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
-    List<IHtwNode> neighbors = new ArrayList<>();
+    Map<Direction, Integer> neighbors = new HashMap<>();
     for (Direction exit: exits) {
       try {
-        IHtwNode node = ((IHtwNode) this.getNode(exit)).enter(exit.opposite());
-        neighbors.add(node);
+        List<ICoordinates> traversed = new ArrayList<>();
+        traversed.add(this.coordinates);
+        IHtwNode node = ((IHtwNode) this.getNode(exit)).getNext(traversed);
+        neighbors.put(exit, node.id());
       } catch (Exception ignored) {
+        // do nothing
       }
     }
 
     return neighbors;
+  }
+
+  @Override
+  public IHtwNode getNext(List<ICoordinates> traversed) {
+    return this.strategy.getNext(traversed, this);
   }
 
   @Override

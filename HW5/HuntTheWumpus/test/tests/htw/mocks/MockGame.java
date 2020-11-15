@@ -12,9 +12,8 @@ public class MockGame implements IHtwGame {
   }
 
   @Override
-  public boolean start(IActionStrategy strategy) {
-    this.log.append("start");
-    return false;
+  public String status(IActionStrategy strategy) {
+    return "start";
   }
 
   @Override

@@ -30,21 +30,4 @@ public class HtwControllerTest {
     IController controller = new HtwController(
             null, null, null);
   }
-
-  @Test
-  public void testQuit() {
-    StringBuilder log = new StringBuilder();
-    IController controller = new HtwController(
-            new Scanner("greg 10 standard q "), log, new ActionByDirStrategy());
-    controller.run();
-    assertTrue(log.toString().startsWith(
-            "Player name (first only): "
-            + "Starting arrow count: "
-            + "Maze type ('standard' or 'custom'): "
-            + "\nStarting game..."
-            + "\nQuit -> 'q' / 'quit'"
-            + "\nRestart -> 'restart'"
-            + "\n\n'shoot' or 'move'? "
-            + "Quitting..."));
-  }
 }

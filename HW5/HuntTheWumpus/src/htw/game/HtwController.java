@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 import htw.game.commands.CustomConfigCommand;
 import htw.game.commands.ICommand;
@@ -58,8 +57,6 @@ public class HtwController implements IController {
       this.out.append("\n").append("Quit -> 'q' / 'quit'");
       this.out.append("\n").append("Restart -> 'restart'");
       this.out.append("\n");
-
-      this.game.start(strategy);
     } catch (Exception e)  {
       return 0;
     }
@@ -67,7 +64,8 @@ public class HtwController implements IController {
     int status = 1;
     while (true) {
       try {
-        this.out.append("\n").append("'shoot' or 'move'? ");
+        this.out.append("\n").append(this.game.status(strategy));
+        this.out.append("'shoot' or 'move'? ");
         String next = this.scanner.next();
         if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
           this.out.append("Quitting...");
