@@ -43,10 +43,10 @@ public class StandardStrategy implements IHtwNodeStrategy {
       smelly |= node.smelly(exit.opposite());
     }
     if (drafty) {
-      curr.logger().append("\n").append("You feel a draft.");
+      curr.logger().append("You feel a draft.");
     }
     if (smelly) {
-      curr.logger().append("\n").append("You smell a Wumpus.");
+      curr.logger().append(drafty ? "\nYou smell a Wumpus." : "You smell a Wumpus.");
     }
   }
 

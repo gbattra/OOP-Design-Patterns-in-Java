@@ -16,7 +16,7 @@ public class PitStrategy extends StandardStrategy implements IHtwNodeStrategy {
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }
-    curr.logger().append("\n").append("'Ahhhhhhhh', you shout as you fall into a bottomless pit!");
+    curr.logger().append("'Ahhhhhhhh', you shout as you fall into a bottomless pit!");
     player.kill();
   }
 

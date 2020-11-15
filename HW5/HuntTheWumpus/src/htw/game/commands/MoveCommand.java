@@ -26,7 +26,7 @@ public class MoveCommand implements ICommand<IHtwGame> {
 
   @Override
   public IHtwGame execute(IHtwGame receiver) throws IllegalArgumentException, IOException {
-    this.out.append("\n").append("Move to: ");
+    this.out.append("Move to: ");
     this.strategy.move(this.in, receiver);
     return receiver;
   }

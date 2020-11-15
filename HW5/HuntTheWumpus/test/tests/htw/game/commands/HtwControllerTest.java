@@ -38,14 +38,14 @@ public class HtwControllerTest {
             new Scanner("greg 10 standard q "), log, new ActionByDirStrategy());
     controller.run();
     assertTrue(log.toString().startsWith(
-            "\nPlayer name (first only): "
-            + "\nStarting arrow count: "
-            + "\nMaze type ('standard' or 'custom'): "
+            "Player name (first only): "
+            + "Starting arrow count: "
+            + "Maze type ('standard' or 'custom'): "
             + "\nStarting game..."
             + "\nQuit -> 'q' / 'quit'"
             + "\nRestart -> 'restart'"
-            + "\n'shoot' or 'move'? "
-            + "\nQuitting..."));
+            + "\n\n'shoot' or 'move'? "
+            + "Quitting..."));
   }
 
   @Test
@@ -55,20 +55,20 @@ public class HtwControllerTest {
             new Scanner("greg 10 custom 5 5 false false 0.2 0.3 q "), log, new ActionByDirStrategy());
     controller.run();
     assertTrue(log.toString().startsWith(
-            "\nPlayer name (first only): "
-            + "\nStarting arrow count: "
-            + "\nMaze type ('standard' or 'custom'): "
-            + "\nRow count: "
-            + "\nColumn count: "
-            + "\nIs room maze ('true' / 'false'): "
-            + "\nIs wrapping maze ('true' / 'false'): "
-            + "\nPit frequency (double): "
-            + "\nBat frequency (double): "
+            "Player name (first only): "
+            + "Starting arrow count: "
+            + "Maze type ('standard' or 'custom'): "
+            + "Row count: "
+            + "Column count: "
+            + "Is room maze ('true' / 'false'): "
+            + "Is wrapping maze ('true' / 'false'): "
+            + "Pit frequency (double): "
+            + "Bat frequency (double): "
             + "\nStarting game..."
             + "\nQuit -> 'q' / 'quit'"
             + "\nRestart -> 'restart'"
-            + "\n'shoot' or 'move'? "
-            + "\nQuitting..."));
+            + "\n\n'shoot' or 'move'? "
+            + "Quitting..."));
   }
 
   @Test
@@ -78,14 +78,14 @@ public class HtwControllerTest {
             new Scanner("greg 10 standard q "), log, new ActionByDirStrategy());
     controller.run();
     assertTrue(log.toString().startsWith(
-            "\nPlayer name (first only): "
-            + "\nStarting arrow count: "
-            + "\nMaze type ('standard' or 'custom'): "
+            "Player name (first only): "
+            + "Starting arrow count: "
+            + "Maze type ('standard' or 'custom'): "
             + "\nStarting game..."
             + "\nQuit -> 'q' / 'quit'"
             + "\nRestart -> 'restart'"
-            + "\n'shoot' or 'move'? "
-            + "\nQuitting..."));
+            + "\n\n'shoot' or 'move'? "
+            + "Quitting..."));
   }
 
   @Test
@@ -94,15 +94,16 @@ public class HtwControllerTest {
     IController controller = new HtwController(
             new Scanner("greg 10 standard shoot"), log, new ActionByDirStrategy());
     controller.run();
-    assertTrue(log.toString().startsWith(
-            "\nPlayer name (first only): "
-                    + "\nStarting arrow count: "
-                    + "\nMaze type ('standard' or 'custom'): "
-                    + "\nStarting game..."
-                    + "\nQuit -> 'q' / 'quit'"
-                    + "\nRestart -> 'restart'"
-                    + "\n'shoot' or 'move'? "
-                    + "\nDirection and count: "));
+    String logStr = log.toString();
+    assertTrue(logStr.startsWith(
+            "Player name (first only): "
+            + "Starting arrow count: "
+            + "Maze type ('standard' or 'custom'): "
+            + "\nStarting game..."
+            + "\nQuit -> 'q' / 'quit'"
+            + "\nRestart -> 'restart'"
+            + "\n\n'shoot' or 'move'? "
+            + "Direction and count: "));
   }
 
   @Test
@@ -112,13 +113,13 @@ public class HtwControllerTest {
             new Scanner("greg 10 standard move"), log, new ActionByDirStrategy());
     controller.run();
     assertTrue(log.toString().startsWith(
-            "\nPlayer name (first only): "
-                    + "\nStarting arrow count: "
-                    + "\nMaze type ('standard' or 'custom'): "
-                    + "\nStarting game..."
-                    + "\nQuit -> 'q' / 'quit'"
-                    + "\nRestart -> 'restart'"
-                    + "\n'shoot' or 'move'? "
-                    + "\nMove to: "));
+            "Player name (first only): "
+            + "Starting arrow count: "
+            + "Maze type ('standard' or 'custom'): "
+            + "\nStarting game..."
+            + "\nQuit -> 'q' / 'quit'"
+            + "\nRestart -> 'restart'"
+            + "\n\n'shoot' or 'move'? "
+            + "Move to: "));
   }
 }

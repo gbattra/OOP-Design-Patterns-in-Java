@@ -1,5 +1,6 @@
 package htw.level;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,11 +28,11 @@ public class HtwMaze extends Maze implements IHtwMaze {
   }
 
   @Override
-  public boolean move(Integer id, IHtwPlayer player) {
+  public boolean move(Integer id, IHtwPlayer player) throws IOException {
     try {
       this.current = this.current.get(id).enter(this.current.directionTo(id).opposite());
       List<IHtwNode> neighbors = this.current.neighbors();
-      this.logger.append("\n").append(
+      this.logger.append(
               String.format(
                       "You are in cave %s with tunnels to node(s) %s",
                       this.current.id().toString(),
@@ -41,16 +42,17 @@ public class HtwMaze extends Maze implements IHtwMaze {
                               .collect(Collectors.joining(", "))));
       return true;
     } catch (Exception e) {
+      this.logger.append("Cannot move to ").append(id.toString()).append(".");
       return false;
     }
   }
 
   @Override
-  public boolean move(Direction direction, IHtwPlayer player) {
+  public boolean move(Direction direction, IHtwPlayer player) throws IOException {
     try {
       this.current = ((IHtwNode) this.current.getNode(direction)).enter(direction.opposite());
       List<IHtwNode> neighbors = this.current.neighbors();
-      this.logger.append("\n").append(
+      this.logger.append(
               String.format(
                       "You are in cave %s with tunnels to the %s",
                       this.current.getCoordinates().toString(),
@@ -60,6 +62,7 @@ public class HtwMaze extends Maze implements IHtwMaze {
                               .collect(Collectors.joining(", "))));
       return true;
     } catch (Exception e) {
+      this.logger.append("Cannot move to the ").append(direction.toString()).append(".");
       return false;
     }
   }

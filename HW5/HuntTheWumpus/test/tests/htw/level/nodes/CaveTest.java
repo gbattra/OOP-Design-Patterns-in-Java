@@ -195,7 +195,7 @@ public class CaveTest {
     IHtwPlayer player = new HtwPlayer("Joe", 10);
     try {
       this.cave.receive(player);
-      assertEquals("\nYou feel a draft.\nYou smell a Wumpus.", log.toString());
+      assertEquals("You feel a draft.\nYou smell a Wumpus.", log.toString());
     } catch (Exception e) {
       fail("Valid enter() should not have failed.");
     }

@@ -40,7 +40,7 @@ public class HtwMazeBuilder
       this.setWumpus(start);
     }
 
-    return new HtwMaze(start, System.out);
+    return new HtwMaze(start, ((IHtwConfiguration) this.config).getLogger());
   }
 
   @Override

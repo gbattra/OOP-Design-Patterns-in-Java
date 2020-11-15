@@ -30,12 +30,12 @@ public class CustomConfigCommandTest {
       assertFalse(config.isRoomMaze());
       assertFalse(config.isWrappingMaze());
       assertEquals(
-              "\nRow count: "
-              + "\nColumn count: "
-              + "\nIs room maze ('true' / 'false'): "
-              + "\nIs wrapping maze ('true' / 'false'): "
-              + "\nPit frequency (double): "
-              + "\nBat frequency (double): ",
+              "Row count: "
+              + "Column count: "
+              + "Is room maze ('true' / 'false'): "
+              + "Is wrapping maze ('true' / 'false'): "
+              + "Pit frequency (double): "
+              + "Bat frequency (double): ",
               log.toString());
     } catch (Exception e) {
       fail("Valid execute should not have failed.");
@@ -57,13 +57,13 @@ public class CustomConfigCommandTest {
       assertTrue(config.isWrappingMaze());
 
       assertEquals(
-              "\nRow count: "
-              + "\nColumn count: "
-              + "\nIs room maze ('true' / 'false'): "
-              + "\nTarget edge count: "
-              + "\nIs wrapping maze ('true' / 'false'): "
-              + "\nPit frequency (double): "
-              + "\nBat frequency (double): ",
+              "Row count: "
+              + "Column count: "
+              + "Is room maze ('true' / 'false'): "
+              + "Target edge count: "
+              + "Is wrapping maze ('true' / 'false'): "
+              + "Pit frequency (double): "
+              + "Bat frequency (double): ",
               log.toString());
     } catch (Exception e) {
       fail("Valid execute should not have failed.");

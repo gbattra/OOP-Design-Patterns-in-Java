@@ -32,7 +32,7 @@ public class NewConfigCommand implements ICommand<IHtwConfigurationBuilder> {
 
   @Override
   public IHtwConfigurationBuilder execute(IHtwConfigurationBuilder receiver) throws IllegalArgumentException, IOException {
-    this.out.append("\n").append("Maze type ('standard' or 'custom'): ");
+    this.out.append("Maze type ('standard' or 'custom'): ");
     String gameType = this.in.next();
     if (gameType.equalsIgnoreCase("standard")) {
       return this.standardCmd.execute(new HtwConfigurationBuilder().setLogger(this.out));

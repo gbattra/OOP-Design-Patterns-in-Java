@@ -22,19 +22,27 @@ public class HtwGame implements IHtwGame {
 
   @Override
   public boolean move(Direction direction) {
-    return this.maze.move(direction, this.player);
+    try {
+      return this.maze.move(direction, this.player);
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   @Override
   public boolean move(int id) {
-    return this.maze.move(id, this.player);
+    try {
+      return this.maze.move(id, this.player);
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   @Override
   public boolean shoot(Direction direction, int count) {
     try {
       boolean hit = this.maze.shoot(direction, count);
-      this.logger.append("\n").append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
+      this.logger.append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
       return hit;
     } catch (Exception e) {
       return false;
@@ -45,7 +53,7 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(int id, int count) {
     try {
       boolean hit = this.maze.shoot(id, count);
-      this.logger.append("\n").append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
+      this.logger.append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
       return hit;
     } catch (Exception e) {
       return false;
