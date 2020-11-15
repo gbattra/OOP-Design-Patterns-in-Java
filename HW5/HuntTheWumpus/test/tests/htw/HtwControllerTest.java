@@ -38,15 +38,38 @@ public class HtwControllerTest {
             new Scanner("greg 10 standard q "), log, new ActionByDirStrategy());
     controller.run();
     assertEquals(
-            "Player name (first only):\n"
-            + "Starting arrow count:\n"
-            + "Configuring maze...\n"
-            + "Maze type ('standard' or 'custom'):\n"
-            + "Starting game...\n"
-            + "Quit -> 'q' / 'quit'\n"
-            + "Restart -> 'restart'\n"
-            + "'shoot' or 'move'?\n"
-            + "Quitting...\n",
+            "\nPlayer name (first only): "
+            + "\nStarting arrow count: "
+            + "\nMaze type ('standard' or 'custom'): "
+            + "\nStarting game..."
+            + "\nQuit -> 'q' / 'quit'"
+            + "\nRestart -> 'restart'"
+            + "\n'shoot' or 'move'? "
+            + "\nQuitting...",
+            log.toString());
+  }
+
+  @Test
+  public void testCustomNonRoomNonWrapping() {
+    StringBuilder log = new StringBuilder();
+    IController controller = new HtwController(
+            new Scanner("greg 10 custom 5 5 false false 0.2 0.3 q "), log, new ActionByDirStrategy());
+    controller.run();
+    assertEquals(
+            "\nPlayer name (first only): "
+            + "\nStarting arrow count: "
+            + "\nMaze type ('standard' or 'custom'): "
+            + "\nRow count: "
+            + "\nColumn count: "
+            + "\nIs room maze ('true' / 'false'): "
+            + "\nIs wrapping maze ('true' / 'false'): "
+            + "\nPit frequency (double): "
+            + "\nBat frequency (double): "
+            + "\nStarting game..."
+            + "\nQuit -> 'q' / 'quit'"
+            + "\nRestart -> 'restart'"
+            + "\n'shoot' or 'move'? "
+            + "\nQuitting...",
             log.toString());
   }
 
@@ -57,17 +80,16 @@ public class HtwControllerTest {
             new Scanner("greg 10 standard shoot n 1 q "), log, new ActionByDirStrategy());
     controller.run();
     assertEquals(
-            "Player name (first only):\n"
-            + "Starting arrow count:\n"
-            + "Configuring maze...\n"
-            + "Maze type ('standard' or 'custom'):\n"
-            + "Starting game...\n"
-            + "Quit -> 'q' / 'quit'\n"
-            + "Restart -> 'restart'\n"
-            + "'shoot' or 'move'?\n"
-            + "Direction and count:\n"
-            + "'shoot' or 'move'?\n"
-            + "Quitting...\n",
+            "\nPlayer name (first only): "
+            + "\nStarting arrow count: "
+            + "\nMaze type ('standard' or 'custom'): "
+            + "\nStarting game..."
+            + "\nQuit -> 'q' / 'quit'"
+            + "\nRestart -> 'restart'"
+            + "\n'shoot' or 'move'? "
+            + "\nDirection and count: "
+            + "\n'shoot' or 'move'? "
+            + "\nQuitting...",
             log.toString());
   }
 }

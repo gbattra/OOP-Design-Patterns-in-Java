@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import htw.game.IHtwGame;
+import htw.tools.IHtwConfiguration;
 import htw.tools.IHtwConfigurationBuilder;
 
 public class CustomConfigCommand implements ICommand<IHtwConfigurationBuilder> {
@@ -25,6 +26,18 @@ public class CustomConfigCommand implements ICommand<IHtwConfigurationBuilder> {
     if (receiver == null) {
       throw new IllegalArgumentException("Receiver cannot be null.");
     }
+    this.out.append("\n").append("Row count: ");
+    receiver = (IHtwConfigurationBuilder) receiver.setRowCount(this.in.nextInt());
+    this.out.append("\n").append("Column count: ");
+    receiver = (IHtwConfigurationBuilder) receiver.setColumnCount(this.in.nextInt());
+    this.out.append("\n").append("Is room maze ('true' / 'false'): ");
+    receiver = (IHtwConfigurationBuilder) receiver.setIsRoomMaze(this.in.nextBoolean());
+    this.out.append("\n").append("Is wrapping maze ('true' / 'false'): ");
+    receiver = (IHtwConfigurationBuilder) receiver.setIsWrappingMaze(this.in.nextBoolean());
+    this.out.append("\n").append("Pit frequency (double): ");
+    receiver = receiver.setPitFrequency(this.in.nextDouble());
+    this.out.append("\n").append("Bat frequency (double): ");
+    receiver = receiver.setBatFrequency(this.in.nextDouble());
     return receiver;
   }
 }

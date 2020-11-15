@@ -234,30 +234,6 @@ public class RoomNodeTest {
   }
 
   @Test
-  public void testValidGrowMediumWrapping() {
-    try {
-      IConfiguration configuration = new MazeConfigurationBuilder()
-              .setColumnCount(50)
-              .setRowCount(50)
-              .setStart(0,0)
-              .setGoal(3,3)
-              .setGoldFrequency(0.2)
-              .setThiefFrequency(0.1)
-              .setIsWrappingMaze(true)
-              .setIsRoomMaze(true)
-              .setTargetEdgeCount(35)
-              .build();
-      IMaze wrappingMaze = new MazeBuilder(configuration).build();
-      Node start = wrappingMaze.getStart();
-      assertTrue(start.canReach(new Coordinates(3,3)));
-      assertTrue(start.exploreTo(new Coordinates(49,49)).reachesTarget());
-      assertTrue(start.pathTo(new Coordinates(49,49)).reachesTarget());
-    } catch (Exception e) {
-      fail("Valid grow should not have failed.");
-    }
-  }
-
-  @Test
   public void testLoot() {
     Node node = new StandardRoomNode(new Coordinates(0,0));
     Node thief = new ThiefRoomNode(new Coordinates(0,0), 0.1);

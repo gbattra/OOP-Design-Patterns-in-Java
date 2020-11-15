@@ -54,9 +54,9 @@ public class HtwController implements IController {
       ICommand<IHtwGame> cmd = entry.apply(this.scanner);
       this.game = cmd.execute(this.game);
 
-      this.out.append("Starting game...\n");
-      this.out.append("Quit -> 'q' / 'quit'\n");
-      this.out.append("Restart -> 'restart'\n");
+      this.out.append("\n").append("Starting game...");
+      this.out.append("\n").append("Quit -> 'q' / 'quit'");
+      this.out.append("\n").append("Restart -> 'restart'");
 
 //      this.game.start();
     } catch (Exception e)  {
@@ -66,16 +66,16 @@ public class HtwController implements IController {
     int status = 1;
     while (true) {
       try {
-        this.out.append("'shoot' or 'move'?\n");
+        this.out.append("\n").append("'shoot' or 'move'? ");
         String next = this.scanner.next();
         if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
-          this.out.append("Quitting...\n");
+          this.out.append("\n").append("Quitting...");
           break;
         }
 
         Function<Scanner, ICommand<IHtwGame>> entry = commands.get(next);
         if (entry == null) {
-          this.out.append("Command not found. Try again.\n");
+          this.out.append("\n").append("Command not found. Try again.");
           continue;
         }
 
