@@ -24,7 +24,13 @@ public class MockGame implements IHtwGame {
 
   @Override
   public boolean shoot(Direction direction, int count) {
-    this.log.append("shoot - ").append(direction.toString()).append(count);
+    this.log.append("shoot - ").append(direction.toString()).append(" - ").append(count);
+    return false;
+  }
+
+  @Override
+  public boolean shoot(int id, int count) {
+    this.log.append("shoot - ").append(id).append(" - ").append(count);
     return false;
   }
 }

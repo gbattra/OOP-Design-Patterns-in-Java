@@ -55,8 +55,14 @@ public class HtwGameTest {
   }
 
   @Test
-  public void testShoot() {
+  public void testShootDir() {
     this.game.shoot(Direction.EAST, 1);
     assertEquals("shoot - EAST - 1", this.log.toString());
   }
+  @Test
+  public void testShootId() {
+    this.game.shoot(12, 1);
+    assertEquals("shoot - 12 - 1", this.log.toString());
+  }
+
 }

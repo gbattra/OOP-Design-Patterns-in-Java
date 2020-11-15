@@ -9,4 +9,5 @@ public interface IHtwMaze {
   boolean move(Direction direction, IHtwPlayer player);
   boolean move(Integer id, IHtwPlayer player);
   boolean shoot(Direction direction, int count);
+  boolean shoot(int id, int count);
 }

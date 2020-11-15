@@ -48,6 +48,9 @@ public class HtwMaze extends Maze implements IHtwMaze {
     return this.root.shoot(direction, count);
   }
 
-
+  @Override
+  public boolean shoot(int id, int count) {
+    return this.root.shoot(this.root.directionTo(id), count);
+  }
 }
 

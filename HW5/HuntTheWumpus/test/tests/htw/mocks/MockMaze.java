@@ -31,4 +31,10 @@ public class MockMaze implements IHtwMaze {
     this.log.append(String.format("shoot - %s - %s", direction.toString(), count));
     return false;
   }
+
+  @Override
+  public boolean shoot(int id, int count) {
+    this.log.append(String.format("shoot - %s - %s", id, count));
+    return false;
+  }
 }

@@ -31,4 +31,9 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(Direction direction, int count) {
     return this.maze.shoot(direction, count);
   }
+
+  @Override
+  public boolean shoot(int id, int count) {
+    return this.maze.shoot(id, count);
+  }
 }

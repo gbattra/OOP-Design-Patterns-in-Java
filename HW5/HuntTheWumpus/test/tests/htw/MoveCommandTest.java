@@ -15,7 +15,7 @@ import tests.htw.mocks.MockGame;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class MoveByStrategy {
+public class MoveCommandTest {
   @Test
   public void testMoveById() {
     StringBuilder log = new StringBuilder();
