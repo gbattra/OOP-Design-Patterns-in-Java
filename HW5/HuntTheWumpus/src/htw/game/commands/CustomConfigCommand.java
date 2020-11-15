@@ -25,6 +25,6 @@ public class CustomConfigCommand implements ICommand<IHtwConfigurationBuilder> {
     if (receiver == null) {
       throw new IllegalArgumentException("Receiver cannot be null.");
     }
-    return null;
+    return receiver;
   }
 }

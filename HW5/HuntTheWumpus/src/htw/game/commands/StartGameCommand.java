@@ -37,7 +37,7 @@ public class StartGameCommand implements ICommand<IHtwGame> {
     this.out.append("Starting arrow count:\n");
     int arrowCount = this.in.nextInt();
     IHtwPlayer player = new HtwPlayer(name, arrowCount);
-    this.out.append("Configure maze:\n");
+    this.out.append("Configuring maze...\n");
     IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(
             this.configCmd.execute(new HtwConfigurationBuilder())
             .build())

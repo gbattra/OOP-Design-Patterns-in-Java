@@ -178,6 +178,9 @@ public class CaveTest {
   @Test
   public void testDirectionTo() {
     assertEquals(Direction.NORTH, this.cave.directionTo(1));
+    assertEquals(Direction.SOUTH, this.cave.directionTo(2));
+    assertEquals(Direction.EAST, this.cave.directionTo(3));
+    assertEquals(Direction.WEST, this.cave.directionTo(4));
   }
 
   @Test(expected = IllegalArgumentException.class)

@@ -63,8 +63,9 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     for (Direction exit : exits) {
       try {
-        this.get(id);
-        return exit;
+        if (((IHtwNode) this.getNode(exit)).id() == id) {
+          return exit;
+        }
       } catch (Exception ignored) {
       }
     }

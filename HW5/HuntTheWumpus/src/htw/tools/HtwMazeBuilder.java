@@ -86,6 +86,6 @@ public class HtwMazeBuilder
     Coordinates coordinates = new Coordinates(
             this.config.random().nextInt(this.config.columnCount()),
             this.config.random().nextInt(this.config.rowCount()));
-    ((IHtwNode) node.get(coordinates)).enter(Direction.SOUTH).setStrategy(new WumpusStrategy());
+    ((IHtwNode) node.get(coordinates)).enter(null).setStrategy(new WumpusStrategy());
   }
 }
