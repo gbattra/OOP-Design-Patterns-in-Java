@@ -32,9 +32,9 @@ public class StartGameCommand implements ICommand<IHtwGame> {
 
   @Override
   public IHtwGame execute(IHtwGame receiver) throws IllegalArgumentException, IOException {
-    this.out.append("Player name (first only): ");
+    this.out.append("Player name (first only):\n");
     String name = this.in.next();
-    this.out.append("Starting arrow count: ");
+    this.out.append("Starting arrow count:\n");
     int arrowCount = this.in.nextInt();
     IHtwPlayer player = new HtwPlayer(name, arrowCount);
     this.out.append("Configure maze:\n");

@@ -34,7 +34,7 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
 
       try {
         IHtwNode node = (IHtwNode) curr.getNode(exit);
-        return node.enter(from);
+        return node.enter(exit.opposite());
       } catch (Exception ignored) {
       }
     }

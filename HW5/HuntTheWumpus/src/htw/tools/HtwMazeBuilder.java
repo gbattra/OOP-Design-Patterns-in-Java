@@ -26,20 +26,7 @@ public class HtwMazeBuilder
   }
 
   @Override
-  public Node generateRoom(ICoordinates c) {
-    this.currentId++;
-    return new Cave(this.currentId, c, new TunnelStrategy(), System.out);
-  }
-
-  @Override
-  protected Node upgradeHallway(Node node) {
-    ((IHtwNode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
-    return node;
-  }
-
-  @Override
   public IMaze build() {
-
     IHtwNode start = new Cave(
             this.currentId,
             this.config.start(),
@@ -55,6 +42,19 @@ public class HtwMazeBuilder
     }
 
     return new HtwMaze(start, System.out);
+  }
+
+  @Override
+  public Node generateRoom(ICoordinates c) {
+    this.currentId++;
+    this.totalExitCount++;
+    return new Cave(this.currentId, c, new TunnelStrategy(), System.out);
+  }
+
+  @Override
+  protected Node upgradeHallway(Node node) {
+    ((IHtwNode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
+    return node;
   }
 
   private IHtwNodeStrategy generateStrategy(IHtwConfiguration config) {

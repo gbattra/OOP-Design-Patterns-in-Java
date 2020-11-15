@@ -26,7 +26,7 @@ public class ShootCommand implements ICommand<IHtwGame> {
 
   @Override
   public IHtwGame execute(IHtwGame receiver) throws IllegalArgumentException, IOException {
-    this.out.append("Move to: ");
+    this.out.append("Direction and count:\n");
     this.strategy.shoot(this.in, receiver);
     return receiver;
   }

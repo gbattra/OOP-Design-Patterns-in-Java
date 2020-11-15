@@ -1,6 +1,7 @@
 package htw.game;
 
 import java.util.Iterator;
+import java.util.List;
 
 import maze.utils.Direction;
 

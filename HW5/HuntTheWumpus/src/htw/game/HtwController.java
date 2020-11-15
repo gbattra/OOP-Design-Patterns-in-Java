@@ -24,7 +24,12 @@ public class HtwController implements IController {
   private IHtwGame game;
   private boolean started;
 
-  public HtwController(Scanner scanner, Appendable out, IActionStrategy strategy) {
+  public HtwController(Scanner scanner, Appendable out, IActionStrategy strategy)
+          throws IllegalArgumentException {
+    if (scanner == null || out == null || strategy == null) {
+      throw new IllegalArgumentException("Params cannot be null.");
+    }
+
     this.scanner = scanner;
     this.out = out;
     this.strategy = strategy;
@@ -45,26 +50,29 @@ public class HtwController implements IController {
   @Override
   public int run() {
     try {
-      this.out.append("Press ENTER to begin, or type 'q' or 'quit' to exit.\n");
-      String next = this.scanner.nextLine();
-      if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
-        this.out.append("Quitting...\n");
-        return 1;
-      }
-
-      this.out.append("Starting new game. You may restart at any time by entering 'restart'.\n");
       Function<Scanner, ICommand<IHtwGame>> entry = commands.get("restart");
       ICommand<IHtwGame> cmd = entry.apply(this.scanner);
       this.game = cmd.execute(this.game);
-    } catch (Exception e) {
+
+      this.out.append("Starting game...\n");
+      this.out.append("Quit -> 'q' / 'quit'\n");
+      this.out.append("Restart -> 'restart'\n");
+
+//      this.game.start();
+    } catch (Exception e)  {
       return 0;
     }
 
     int status = 1;
     while (true) {
       try {
-        this.out.append("Shoot or move (S, M)? ");
+        this.out.append("'shoot' or 'move'?\n");
         String next = this.scanner.next();
+        if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
+          this.out.append("Quitting...\n");
+          break;
+        }
+
         Function<Scanner, ICommand<IHtwGame>> entry = commands.get(next);
         if (entry == null) {
           this.out.append("Command not found. Try again.\n");
