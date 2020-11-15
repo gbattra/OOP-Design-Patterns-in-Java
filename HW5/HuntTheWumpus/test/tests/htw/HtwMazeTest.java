@@ -98,6 +98,14 @@ public class HtwMazeTest {
     assertFalse(this.maze.shoot(Direction.EAST, 1));
     this.root.setNode(
             new Cave(15, new Coordinates(2, 1), new WumpusStrategy(), log), Direction.EAST);
+    assertTrue(this.maze.shoot(15, 1));
+  }
+
+  @Test
+  public void testShootByDir() {
+    assertFalse(this.maze.shoot(Direction.EAST, 1));
+    this.root.setNode(
+            new Cave(15, new Coordinates(2, 1), new WumpusStrategy(), log), Direction.EAST);
     assertTrue(this.maze.shoot(Direction.EAST, 1));
   }
 }

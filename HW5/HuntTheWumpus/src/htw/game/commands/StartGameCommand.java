@@ -41,6 +41,6 @@ public class StartGameCommand implements ICommand<IHtwGame> {
             this.configCmd.execute(new HtwConfigurationBuilder())
             .build())
             .build();
-    return new HtwGame(player, maze);
+    return new HtwGame(player, maze, this.out);
   }
 }

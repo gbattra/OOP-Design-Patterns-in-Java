@@ -25,13 +25,13 @@ public class HtwGameTest {
     this.log = new StringBuilder();
     this.player = new HtwPlayer("Joe", 10);
     this.maze = new MockMaze(this.log);
-    this.game = new HtwGame(this.player, this.maze);
+    this.game = new HtwGame(this.player, this.maze, this.log);
   }
 
   @Test
   public void testConstructor() {
     try {
-      IHtwGame game = new HtwGame(this.player, this.maze);
+      IHtwGame game = new HtwGame(this.player, this.maze, this.log);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -39,7 +39,7 @@ public class HtwGameTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    IHtwGame game = new HtwGame(null, null);
+    IHtwGame game = new HtwGame(null, null, null);
   }
 
   @Test
@@ -57,12 +57,12 @@ public class HtwGameTest {
   @Test
   public void testShootDir() {
     this.game.shoot(Direction.EAST, 1);
-    assertEquals("shoot - EAST - 1", this.log.toString());
+    assertEquals("shoot - EAST - 1\nMiss...", this.log.toString());
   }
   @Test
   public void testShootId() {
     this.game.shoot(12, 1);
-    assertEquals("shoot - 12 - 1", this.log.toString());
+    assertEquals("shoot - 12 - 1\nMiss...", this.log.toString());
   }
 
 }
