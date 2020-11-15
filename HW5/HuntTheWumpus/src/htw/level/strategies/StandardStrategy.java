@@ -1,5 +1,7 @@
 package htw.level.strategies;
 
+import java.io.IOException;
+
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
@@ -10,7 +12,7 @@ import maze.utils.Direction;
  */
 public class StandardStrategy implements IHtwNodeStrategy {
   @Override
-  public IHtwNode enter(Direction from, IHtwNode curr) {
+  public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
     return curr;
   }
 

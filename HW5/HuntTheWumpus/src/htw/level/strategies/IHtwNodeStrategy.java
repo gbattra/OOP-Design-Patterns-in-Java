@@ -1,5 +1,7 @@
 package htw.level.strategies;
 
+import java.io.IOException;
+
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
@@ -16,7 +18,7 @@ public interface IHtwNodeStrategy {
    * @param curr the node itself
    * @return the node entered
    */
-  IHtwNode enter(Direction from, IHtwNode curr);
+  IHtwNode enter(Direction from, IHtwNode curr) throws IOException;
 
   /**
    * Shoots an arrow in the specified direction and traverses the specified number of caves.

@@ -1,5 +1,6 @@
 package htw.level.strategies;
 
+import java.io.IOException;
 import java.util.Random;
 
 import htw.level.nodes.IHtwNode;
@@ -43,7 +44,7 @@ public class BatStrategy extends StandardStrategy implements IHtwNodeStrategy {
   }
 
   @Override
-  public IHtwNode enter(Direction from, IHtwNode curr) {
+  public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
     if (this.random.nextDouble() <= 0.5) {
       int row = this.random.nextInt(this.rowCount);
       int column = this.random.nextInt(this.columnCount);

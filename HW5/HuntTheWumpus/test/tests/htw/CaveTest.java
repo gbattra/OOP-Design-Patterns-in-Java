@@ -3,6 +3,9 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.List;
+
 import htw.level.nodes.Cave;
 import htw.level.nodes.DeadEnd;
 import htw.level.nodes.IHtwNode;
@@ -52,7 +55,11 @@ public class CaveTest {
 
   @Test
   public void testEnter() {
-    assertEquals(this.cave, this.cave.enter(Direction.NORTH));
+    try {
+      assertEquals(this.cave, this.cave.enter(Direction.NORTH));
+    } catch (IOException e) {
+      fail("Valid enter should not have failed.");
+    }
   }
 
   @Test
@@ -193,5 +200,14 @@ public class CaveTest {
   @Test
   public void testCanEnter() {
     assertTrue(this.cave.canEnter());
+  }
+
+  @Test
+  public void testNeighbors() {
+    List<IHtwNode> neighbors = this.cave.neighbors();
+    assertEquals(this.north, neighbors.get(0));
+    assertEquals(this.south, neighbors.get(1));
+    assertEquals(this.east, neighbors.get(2));
+    assertEquals(this.west, neighbors.get(3));
   }
 }

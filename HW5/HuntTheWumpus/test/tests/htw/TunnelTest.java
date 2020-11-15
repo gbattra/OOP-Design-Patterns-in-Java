@@ -3,6 +3,8 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import htw.level.nodes.Cave;
 import htw.level.nodes.DeadEnd;
 import htw.level.nodes.IHtwNode;
@@ -37,15 +39,23 @@ public class TunnelTest {
 
   @Test
   public void testValidEnter() {
-    IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
-    assertEquals(this.north, entered);
+    try {
+      IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
+      assertEquals(this.north, entered);
+    } catch (Exception e) {
+      fail("Valid enter() should not have failed.");
+    }
   }
 
   @Test(expected = IllegalStateException.class)
   public void testInvalidEnter() {
-    this.tunnel.setNode(new DeadEnd(), Direction.NORTH);
-    IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
-    fail("Invalid enter() should have failed.");
+    try {
+      this.tunnel.setNode(new DeadEnd(), Direction.NORTH);
+      IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
+      fail("Invalid enter() should have failed.");
+    } catch (IOException e) {
+      // do nothing
+    }
   }
 
   @Test

@@ -15,6 +15,7 @@ import maze.utils.Direction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for the bat cave.
@@ -53,13 +54,17 @@ public class BatCaveTest {
 
   @Test
   public void testEnter() {
-    IHtwNode cave = new Cave(6, new Coordinates(0, 0), this.standard, System.out);
-    this.north.setNode(cave, Direction.EAST);
-    IHtwNode node = this.bat.enter(Direction.SOUTH);
-    assertEquals(this.bat, node);
+    try {
+      IHtwNode cave = new Cave(6, new Coordinates(0, 0), this.standard, System.out);
+      this.north.setNode(cave, Direction.EAST);
+      IHtwNode node = this.bat.enter(Direction.SOUTH);
+      assertEquals(this.bat, node);
 
-    node = this.bat.enter(Direction.SOUTH);
-    assertNotEquals(this.bat, node);
+      node = this.bat.enter(Direction.SOUTH);
+      assertNotEquals(this.bat, node);
+    } catch (Exception e) {
+      fail("Valid enter() should not have failed.");
+    }
   }
 
   @Test

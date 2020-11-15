@@ -1,5 +1,6 @@
 package htw.level.nodes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +41,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
       throw new IllegalArgumentException("Strategy and logger cannot be null.");
     }
     this.strategy = strategy;
+    this.logger = logger;
     this.id = id;
     this.north = new DeadEnd();
     this.south = new DeadEnd();
@@ -117,7 +119,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
-  public IHtwNode enter(Direction from) {
+  public IHtwNode enter(Direction from) throws IOException {
     return this.strategy.enter(from, this);
   }
 
@@ -150,6 +152,22 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   @Override
   public boolean drafty() {
     return this.strategy.drafty(this);
+  }
+
+  @Override
+  public List<IHtwNode> neighbors() {
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    List<IHtwNode> neighbors = new ArrayList<>();
+    for (Direction exit: exits) {
+      try {
+        IHtwNode node = ((IHtwNode) this.getNode(exit)).enter(exit.opposite());
+        neighbors.add(node);
+      } catch (Exception ignored) {
+      }
+    }
+
+    return neighbors;
   }
 
   @Override

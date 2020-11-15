@@ -1,5 +1,6 @@
 package htw.level.strategies;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +22,7 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
    * @return the node where the tunnel leads
    */
   @Override
-  public IHtwNode enter(Direction from, IHtwNode curr) {
+  public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
       List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {

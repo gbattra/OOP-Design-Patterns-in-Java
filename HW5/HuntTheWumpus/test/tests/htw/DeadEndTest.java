@@ -2,6 +2,8 @@ package tests.htw;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import htw.game.HtwPlayer;
 import htw.level.nodes.DeadEnd;
 import htw.level.nodes.IHtwNode;
@@ -18,9 +20,13 @@ import static org.junit.Assert.fail;
 public class DeadEndTest {
   @Test(expected = IllegalStateException.class)
   public void testEnter() {
-    IHtwNode deadend = new DeadEnd();
-    deadend.enter(Direction.NORTH);
-    fail("Dead end node enter() should have failed.");
+    try {
+      IHtwNode deadend = new DeadEnd();
+      deadend.enter(Direction.NORTH);
+      fail("Dead end node enter() should have failed.");
+    } catch (IOException e) {
+      // do nothing
+    }
   }
 
   @Test
@@ -64,5 +70,10 @@ public class DeadEndTest {
   @Test
   public void testCanEnter() {
     assertFalse(new DeadEnd().canEnter());
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testNeighbors() {
+    new DeadEnd().neighbors();
   }
 }

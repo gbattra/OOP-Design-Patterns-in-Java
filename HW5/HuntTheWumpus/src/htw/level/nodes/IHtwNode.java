@@ -1,5 +1,6 @@
 package htw.level.nodes;
 
+import java.io.IOException;
 import java.util.List;
 
 import htw.game.IHtwPlayer;
@@ -12,6 +13,13 @@ import maze.utils.Direction;
  * Interface for a node in a Hunt the Wumpus maze.
  */
 public interface IHtwNode extends Node {
+  /**
+   * Gets the nodes at each valid exit for this node.
+   *
+   * @return the node's neighbors
+   */
+  List<IHtwNode> neighbors();
+
   /**
    * Getter for the node's ID.
    *
@@ -59,7 +67,7 @@ public interface IHtwNode extends Node {
    * @param from the direction from which the node was entered
    * @return the entered node
    */
-  IHtwNode enter(Direction from);
+  IHtwNode enter(Direction from) throws IOException;
 
   /**
    * Shoots an arrow in the specified direction. Each node traversed by the arrow decrements the

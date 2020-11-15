@@ -39,6 +39,11 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
+  public List<IHtwNode> neighbors() {
+    throw new IllegalStateException("Dead end node has no neighbors.");
+  }
+
+  @Override
   public void setStrategy(IHtwNodeStrategy strategy) throws IllegalStateException {
     throw new IllegalStateException("Cannot set strategy on a dead end node.");
   }
