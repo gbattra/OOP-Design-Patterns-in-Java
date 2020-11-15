@@ -22,6 +22,11 @@ public class HtwGame implements IHtwGame {
   }
 
   @Override
+  public boolean isOver() {
+    return this.player.arrowCount() == 0 || !this.player.isAlive();
+  }
+
+  @Override
   public String status(IActionStrategy strategy) {
     return this.maze.status(strategy);
   }
@@ -49,6 +54,8 @@ public class HtwGame implements IHtwGame {
     try {
       boolean hit = this.maze.shoot(direction, count);
       this.logger.append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
+      this.player.decrementArrowCount();
+      this.logger.append("\nYou have " + this.player.arrowCount() + " remaining arrows.");
       return hit;
     } catch (Exception e) {
       return false;
@@ -60,6 +67,8 @@ public class HtwGame implements IHtwGame {
     try {
       boolean hit = this.maze.shoot(id, count);
       this.logger.append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
+      this.player.decrementArrowCount();
+      this.logger.append("\nYou have " + this.player.arrowCount() + " remaining arrows.");
       return hit;
     } catch (Exception e) {
       return false;

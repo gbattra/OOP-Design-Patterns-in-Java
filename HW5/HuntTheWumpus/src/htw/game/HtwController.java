@@ -62,10 +62,10 @@ public class HtwController implements IController {
     }
 
     int status = 1;
-    while (true) {
+    while (!this.game.isOver()) {
       try {
         this.out.append("\n").append(this.game.status(strategy));
-        this.out.append("'shoot' or 'move'? ");
+        this.out.append("\n'shoot' or 'move'? ");
         String next = this.scanner.next();
         if (next.equalsIgnoreCase("q") || next.equalsIgnoreCase("quit")) {
           this.out.append("Quitting...");

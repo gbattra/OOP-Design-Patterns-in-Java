@@ -17,6 +17,11 @@ public class MockGame implements IHtwGame {
   }
 
   @Override
+  public boolean isOver() {
+    return false;
+  }
+
+  @Override
   public boolean move(Direction direction) {
     this.log.append("move - ").append(direction);
     return false;

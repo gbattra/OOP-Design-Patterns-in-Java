@@ -24,4 +24,6 @@ public interface IHtwPlayer extends IMazePlayer {
    * Sets isAlive to false.
    */
   void kill();
+
+  void decrementArrowCount();
 }
