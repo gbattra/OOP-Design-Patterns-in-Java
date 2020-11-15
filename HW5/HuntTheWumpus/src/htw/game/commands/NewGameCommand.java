@@ -10,10 +10,7 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
-import htw.tools.IHtwConfiguration;
 import htw.tools.IHtwConfigurationBuilder;
-import htw.tools.IHtwMazeBuilder;
-import maze.game.IMazeGame;
 
 public class NewGameCommand implements ICommand<IHtwGame> {
   private final Scanner in;

@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import htw.game.IHtwGame;
-import htw.game.commands.strategies.IMoveStrategy;
+import htw.game.commands.strategies.IActionStrategy;
 
 public class MoveCommand implements ICommand<IHtwGame> {
   private final Scanner in;
   private final Appendable out;
-  private final IMoveStrategy strategy;
+  private final IActionStrategy strategy;
 
   public MoveCommand(
           Scanner in,
           Appendable out,
-          IMoveStrategy strategy) throws IllegalArgumentException {
+          IActionStrategy strategy) throws IllegalArgumentException {
     if (in == null || out == null || strategy == null) {
       throw new IllegalArgumentException("Params cannot be null.");
     }

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import htw.game.IHtwGame;
 
-public interface IShootStrategy {
+public interface IActionStrategy {
   void shoot(Scanner in, IHtwGame game);
+  void move(Scanner in, IHtwGame game);
 }

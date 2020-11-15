@@ -8,8 +8,8 @@ import java.util.Scanner;
 import htw.game.IHtwGame;
 import htw.game.commands.ICommand;
 import htw.game.commands.MoveCommand;
-import htw.game.commands.strategies.MoveByDirStrategy;
-import htw.game.commands.strategies.MoveByIdStrategy;
+import htw.game.commands.strategies.ActionByDirStrategy;
+import htw.game.commands.strategies.ActionByIdStrategy;
 import tests.htw.mocks.MockGame;
 
 import static org.junit.Assert.assertEquals;
@@ -21,7 +21,7 @@ public class MoveCommandTest {
     StringBuilder log = new StringBuilder();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> moveCmd = new MoveCommand(
-            new Scanner("1"), System.out, new MoveByIdStrategy());
+            new Scanner("1"), System.out, new ActionByIdStrategy());
     try {
       moveCmd.execute(game);
       assertEquals("move - 1", log.toString());
@@ -35,7 +35,7 @@ public class MoveCommandTest {
     StringBuilder log = new StringBuilder();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> moveCmd = new MoveCommand(
-            new Scanner("e"), System.out, new MoveByDirStrategy());
+            new Scanner("e"), System.out, new ActionByDirStrategy());
     try {
       moveCmd.execute(game);
       assertEquals("move - EAST", log.toString());
