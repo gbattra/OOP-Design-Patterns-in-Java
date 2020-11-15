@@ -1,5 +1,6 @@
 package htw.game;
 
+import htw.game.commands.strategies.IActionStrategy;
 import htw.level.IHtwMaze;
 import maze.utils.Direction;
 
@@ -18,6 +19,17 @@ public class HtwGame implements IHtwGame {
     this.player = player;
     this.maze = maze;
     this.logger = logger;
+  }
+
+  @Override
+  public boolean start(IActionStrategy strategy) {
+    try {
+      String status = this.maze.status(strategy);
+      this.logger.append(status);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
   }
 
   @Override

@@ -80,6 +80,10 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
     if (id <= 0) {
       throw new IllegalArgumentException("Id must be greater than zero.");
     }
+    if (this.id == id) {
+      return this;
+    }
+    
     List<ICoordinates> traversed = new ArrayList<>();
     return this.getHelper(traversed, id);
   }

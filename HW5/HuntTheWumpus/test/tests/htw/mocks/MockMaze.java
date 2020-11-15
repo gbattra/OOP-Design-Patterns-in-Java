@@ -1,6 +1,7 @@
 package tests.htw.mocks;
 
 import htw.game.IHtwPlayer;
+import htw.game.commands.strategies.IActionStrategy;
 import htw.level.IHtwMaze;
 import htw.tools.IHtwConfiguration;
 import maze.utils.Direction;
@@ -10,6 +11,11 @@ public class MockMaze implements IHtwMaze {
 
   public MockMaze(StringBuilder log) {
     this.log = log;
+  }
+
+  @Override
+  public String status(IActionStrategy strategy) {
+    return "status";
   }
 
   @Override

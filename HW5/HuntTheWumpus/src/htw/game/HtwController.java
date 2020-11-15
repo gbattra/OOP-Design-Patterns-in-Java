@@ -59,7 +59,7 @@ public class HtwController implements IController {
       this.out.append("\n").append("Restart -> 'restart'");
       this.out.append("\n");
 
-//      this.game.start();
+      this.game.start(strategy);
     } catch (Exception e)  {
       return 0;
     }

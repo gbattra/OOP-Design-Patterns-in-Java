@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import htw.game.IHtwPlayer;
+import htw.game.commands.strategies.IActionStrategy;
 import htw.level.nodes.IHtwNode;
-import htw.tools.HtwMazeBuilder;
-import htw.tools.IHtwConfiguration;
 import maze.components.Maze;
 import maze.utils.Direction;
 
@@ -28,18 +27,14 @@ public class HtwMaze extends Maze implements IHtwMaze {
   }
 
   @Override
+  public String status(IActionStrategy strategy) {
+    return strategy.status(this.current);
+  }
+
+  @Override
   public boolean move(Integer id, IHtwPlayer player) throws IOException {
     try {
       this.current = this.current.get(id).enter(this.current.directionTo(id).opposite());
-      List<IHtwNode> neighbors = this.current.neighbors();
-      this.logger.append(
-              String.format(
-                      "You are in cave %s with tunnels to node(s) %s",
-                      this.current.id().toString(),
-                      neighbors
-                              .stream()
-                              .map(n -> n.id().toString())
-                              .collect(Collectors.joining(", "))));
       return true;
     } catch (Exception e) {
       this.logger.append("Cannot move to ").append(id.toString()).append(".");
@@ -51,15 +46,6 @@ public class HtwMaze extends Maze implements IHtwMaze {
   public boolean move(Direction direction, IHtwPlayer player) throws IOException {
     try {
       this.current = ((IHtwNode) this.current.getNode(direction)).enter(direction.opposite());
-      List<IHtwNode> neighbors = this.current.neighbors();
-      this.logger.append(
-              String.format(
-                      "You are in cave %s with tunnels to the %s",
-                      this.current.getCoordinates().toString(),
-                      neighbors
-                              .stream()
-                              .map(n -> n.directionTo(this.current.id()).opposite().toString())
-                              .collect(Collectors.joining(", "))));
       return true;
     } catch (Exception e) {
       this.logger.append("Cannot move to the ").append(direction.toString()).append(".");

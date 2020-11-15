@@ -1,6 +1,7 @@
 package tests.htw.mocks;
 
 import htw.game.IHtwGame;
+import htw.game.commands.strategies.IActionStrategy;
 import maze.utils.Direction;
 
 public class MockGame implements IHtwGame {
@@ -8,6 +9,12 @@ public class MockGame implements IHtwGame {
 
   public MockGame(StringBuilder log) {
     this.log = log;
+  }
+
+  @Override
+  public boolean start(IActionStrategy strategy) {
+    this.log.append("start");
+    return false;
   }
 
   @Override
