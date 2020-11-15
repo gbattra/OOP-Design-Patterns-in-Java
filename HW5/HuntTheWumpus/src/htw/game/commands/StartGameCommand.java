@@ -12,12 +12,12 @@ import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 
-public class NewGameCommand implements ICommand<IHtwGame> {
+public class StartGameCommand implements ICommand<IHtwGame> {
   private final Scanner in;
   private final Appendable out;
   private final ICommand<IHtwConfigurationBuilder> configCmd;
 
-  public NewGameCommand(
+  public StartGameCommand(
           Scanner in,
           Appendable out,
           ICommand<IHtwConfigurationBuilder> configCmd)

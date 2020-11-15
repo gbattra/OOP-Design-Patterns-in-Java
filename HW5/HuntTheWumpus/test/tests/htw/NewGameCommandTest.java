@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import htw.game.IHtwGame;
 import htw.game.commands.ICommand;
-import htw.game.commands.NewGameCommand;
+import htw.game.commands.StartGameCommand;
 import htw.tools.IHtwConfigurationBuilder;
 import tests.htw.mocks.MockNewConfigCommand;
 
@@ -19,7 +19,7 @@ public class NewGameCommandTest {
     try {
       StringBuilder log = new StringBuilder();
       ICommand<IHtwConfigurationBuilder> configCmd = new MockNewConfigCommand(log);
-      ICommand<IHtwGame> gameCommand = new NewGameCommand(
+      ICommand<IHtwGame> gameCommand = new StartGameCommand(
               new Scanner("Greg 10"), System.out, configCmd);
       gameCommand.execute(null);
       assertEquals("config - execute", log.toString());
