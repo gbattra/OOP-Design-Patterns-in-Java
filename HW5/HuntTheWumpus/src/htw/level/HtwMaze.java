@@ -1,5 +1,8 @@
 package htw.level;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import htw.game.IHtwPlayer;
 import htw.level.nodes.IHtwNode;
 import htw.tools.HtwMazeBuilder;
@@ -37,6 +40,15 @@ public class HtwMaze extends Maze implements IHtwMaze {
   public boolean move(Direction direction, IHtwPlayer player) {
     try {
       this.current = ((IHtwNode) this.current.getNode(direction)).enter(direction.opposite());
+      List<IHtwNode> neighbors = this.current.neighbors();
+      this.logger.append("\n").append(
+              String.format(
+                      "You are in cave %s with tunnels to the %s",
+                      this.current.getCoordinates().toString(),
+                      neighbors
+                              .stream()
+                              .map(n -> n.directionTo(this.current.id()).opposite().toString())
+                              .collect(Collectors.joining(", "))));
       return true;
     } catch (Exception e) {
       return false;

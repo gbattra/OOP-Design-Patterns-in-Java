@@ -28,6 +28,13 @@ public interface IHtwNode extends Node {
   Integer id();
 
   /**
+   * Getter for the node's logger.
+   *
+   * @return the node's logger
+   */
+  Appendable logger();
+
+  /**
    * Can the player can enter this node in the maze from their current position.
    *
    * @return true if can enter from current position

@@ -54,6 +54,11 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
+  public Appendable logger() {
+    throw new IllegalStateException("Dead end node has no logger.");
+  }
+
+  @Override
   public String toString() {
     return "Dead End";
   }

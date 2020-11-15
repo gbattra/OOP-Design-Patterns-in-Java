@@ -155,6 +155,11 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
+  public Appendable logger() {
+    return this.logger;
+  }
+
+  @Override
   public List<IHtwNode> neighbors() {
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
