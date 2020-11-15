@@ -1,4 +1,4 @@
-package tests.htw;
+package tests.htw.level.nodes;
 
 import org.junit.Before;
 import org.junit.Test;

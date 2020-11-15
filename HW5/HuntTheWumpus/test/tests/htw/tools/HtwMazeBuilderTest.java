@@ -1,4 +1,4 @@
-package tests.htw;
+package tests.htw.tools;
 
 import org.junit.Test;
 

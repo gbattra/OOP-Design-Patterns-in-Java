@@ -1,4 +1,4 @@
-package tests.htw;
+package tests.htw.game.commands;
 
 import org.junit.Test;
 

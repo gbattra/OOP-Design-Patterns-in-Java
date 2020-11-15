@@ -1,4 +1,4 @@
-package tests.htw;
+package tests.htw.game.commands;
 
 import org.junit.Test;
 
@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import htw.game.IHtwGame;
 import htw.game.commands.ICommand;
-import htw.game.commands.MoveCommand;
+import htw.game.commands.ShootCommand;
 import htw.game.commands.strategies.ActionByDirStrategy;
 import htw.game.commands.strategies.ActionByIdStrategy;
 import tests.htw.mocks.MockGame;
@@ -15,16 +15,16 @@ import tests.htw.mocks.MockGame;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class MoveCommandTest {
+public class ShootCommandTest {
   @Test
   public void testMoveById() {
     StringBuilder log = new StringBuilder();
     IHtwGame game = new MockGame(log);
-    ICommand<IHtwGame> moveCmd = new MoveCommand(
-            new Scanner("1"), System.out, new ActionByIdStrategy());
+    ICommand<IHtwGame> shootCmd = new ShootCommand(
+            new Scanner("1 1"), System.out, new ActionByIdStrategy());
     try {
-      moveCmd.execute(game);
-      assertEquals("move - 1", log.toString());
+      shootCmd.execute(game);
+      assertEquals("shoot - 1 - 1", log.toString());
     } catch (IOException e) {
       fail("Valid move() should not have failed.");
     }
@@ -34,11 +34,11 @@ public class MoveCommandTest {
   public void testMoveByDir() {
     StringBuilder log = new StringBuilder();
     IHtwGame game = new MockGame(log);
-    ICommand<IHtwGame> moveCmd = new MoveCommand(
-            new Scanner("e"), System.out, new ActionByDirStrategy());
+    ICommand<IHtwGame> shootCmd = new ShootCommand(
+            new Scanner("e 1"), System.out, new ActionByDirStrategy());
     try {
-      moveCmd.execute(game);
-      assertEquals("move - EAST", log.toString());
+      shootCmd.execute(game);
+      assertEquals("shoot - EAST - 1", log.toString());
     } catch (IOException e) {
       fail("Valid move() should not have failed.");
     }
