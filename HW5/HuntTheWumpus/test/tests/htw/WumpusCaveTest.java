@@ -28,18 +28,20 @@ public class WumpusCaveTest {
   private IHtwNode east;
   private IHtwNode west;
   private IHtwNode wumpus;
+  private Appendable log;
 
   @Before
   public void setup() {
+    this.log = new StringBuilder();
     this.wumpus = new Cave(
             1,
             new Coordinates(1, 1),
-            new WumpusStrategy(), System.out);
+            new WumpusStrategy(), log);
 
-    this.north = new Cave(2, new Coordinates(1, 0), this.standard, System.out);
-    this.south = new Cave(3, new Coordinates(1, 2), this.standard, System.out);
-    this.east = new Cave(4, new Coordinates(2, 1), this.standard, System.out);
-    this.west = new Cave(5, new Coordinates(0, 1), this.standard, System.out);
+    this.north = new Cave(2, new Coordinates(1, 0), this.standard, log);
+    this.south = new Cave(3, new Coordinates(1, 2), this.standard, log);
+    this.east = new Cave(4, new Coordinates(2, 1), this.standard, log);
+    this.west = new Cave(5, new Coordinates(0, 1), this.standard, log);
 
     this.wumpus.setNode(this.north, Direction.NORTH);
     this.wumpus.setNode(this.south, Direction.SOUTH);
@@ -64,6 +66,7 @@ public class WumpusCaveTest {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       this.wumpus.receive(player);
       assertFalse(player.isAlive());
+      assertEquals("\nChomp chomp! You've been eaten by the Wumpus!", this.log.toString());
     } catch (Exception e) {
       fail("Valid receive() should not have failed.");
     }

@@ -20,10 +20,12 @@ import static org.junit.Assert.fail;
  */
 public class PitCaveTest {
   private IHtwNode pit;
+  private Appendable out;
 
   @Before
   public void setup() {
-    this.pit = new Cave(1, new Coordinates(0, 0), new PitStrategy(), System.out);
+    this.out = new StringBuilder();
+    this.pit = new Cave(1, new Coordinates(0, 0), new PitStrategy(), this.out);
   }
 
   @Test
@@ -32,6 +34,7 @@ public class PitCaveTest {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       this.pit.receive(player);
       assertFalse(player.isAlive());
+      assertEquals("\n'Ahhhhhhhh', you shout as you fall into a bottomless pit!", this.out.toString());
     } catch (Exception e) {
       fail("Valid receive() should not have failed.");
     }
