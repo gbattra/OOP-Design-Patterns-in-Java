@@ -9,6 +9,8 @@ public class HtwGame implements IHtwGame {
   private final IHtwMaze maze;
   private final Appendable logger;
 
+  private boolean wumpusSlain = false;
+
   public HtwGame(
           IHtwPlayer player,
           IHtwMaze maze,
@@ -23,7 +25,7 @@ public class HtwGame implements IHtwGame {
 
   @Override
   public boolean isOver() {
-    return this.player.arrowCount() == 0 || !this.player.isAlive();
+    return this.player.arrowCount() == 0 || !this.player.isAlive() || this.wumpusSlain;
   }
 
   @Override
@@ -53,9 +55,14 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(Direction direction, int count) {
     try {
       boolean hit = this.maze.shoot(direction, count);
-      this.logger.append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
       this.player.decrementArrowCount();
-      this.logger.append("\nYou have " + this.player.arrowCount() + " remaining arrows.");
+      if (hit) {
+        this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
+        this.wumpusSlain = true;
+      } else {
+        this.logger.append("Miss... You have " + this.player.arrowCount() + " remaining arrows.");
+      }
+
       return hit;
     } catch (Exception e) {
       return false;
@@ -66,9 +73,14 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(int id, int count) {
     try {
       boolean hit = this.maze.shoot(id, count);
-      this.logger.append(hit ? "Nice shot! You've slain the Wumpus!" : "Miss...");
       this.player.decrementArrowCount();
-      this.logger.append("\nYou have " + this.player.arrowCount() + " remaining arrows.");
+      if (hit) {
+        this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
+        this.wumpusSlain = true;
+      } else {
+        this.logger.append("Miss... You have " + this.player.arrowCount() + " remaining arrows.");
+      }
+
       return hit;
     } catch (Exception e) {
       return false;

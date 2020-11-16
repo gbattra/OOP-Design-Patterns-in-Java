@@ -57,12 +57,12 @@ public class HtwGameTest {
   @Test
   public void testShootDir() {
     this.game.shoot(Direction.EAST, 1);
-    assertEquals("shoot - EAST - 1Miss...\nYou have 9 remaining arrows.", this.log.toString());
+    assertEquals("shoot - EAST - 1Miss... You have 9 remaining arrows.", this.log.toString());
   }
   @Test
   public void testShootId() {
     this.game.shoot(12, 1);
-    assertEquals("shoot - 12 - 1Miss...\nYou have 9 remaining arrows.", this.log.toString());
+    assertEquals("shoot - 12 - 1Miss... You have 9 remaining arrows.", this.log.toString());
   }
 
 }

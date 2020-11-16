@@ -66,7 +66,7 @@ public class WumpusCaveTest {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       this.wumpus.receive(player);
       assertFalse(player.isAlive());
-      assertEquals("Chomp chomp! You've been eaten by the Wumpus!", this.log.toString());
+      assertEquals("Chomp chomp! You've been eaten by the Wumpus!\n", this.log.toString());
     } catch (Exception e) {
       fail("Valid receive() should not have failed.");
     }
