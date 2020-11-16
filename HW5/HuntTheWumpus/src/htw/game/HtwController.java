@@ -8,7 +8,7 @@ import htw.game.commands.ICommand;
 import htw.game.commands.factories.ICommandMapFactory;
 import htw.game.commands.strategies.IActionStrategy;
 
-public class HtwController implements IController {
+public class HtwController implements Runnable {
   private final Map<String, Function<Scanner, ICommand<IHtwGame>>> commands;
   private final Scanner scanner;
   private final Appendable out;
@@ -34,7 +34,7 @@ public class HtwController implements IController {
   }
 
   @Override
-  public int run() {
+  public void run() {
     // initialize the game
     try {
       Function<Scanner, ICommand<IHtwGame>> entry = commands.get("restart");
@@ -46,11 +46,10 @@ public class HtwController implements IController {
       this.out.append("\n").append("Restart -> 'restart'");
       this.out.append("\n");
     } catch (Exception e)  {
-      return 0;
+      return;
     }
 
     // run the game
-    int status = 1;
     while (!this.game.isOver()) {
       try {
         this.out.append("\n").append(this.game.status(strategy));
@@ -70,10 +69,8 @@ public class HtwController implements IController {
         ICommand<IHtwGame> cmd = entry.apply(this.scanner);
         this.game = cmd.execute(this.game);
       } catch (Exception e) {
-        status = 0;
         break;
       }
     }
-    return status;
   }
 }

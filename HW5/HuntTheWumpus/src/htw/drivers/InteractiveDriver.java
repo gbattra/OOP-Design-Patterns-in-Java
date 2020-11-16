@@ -3,7 +3,6 @@ package htw.drivers;
 import java.util.Scanner;
 
 import htw.game.HtwController;
-import htw.game.IController;
 import htw.game.commands.factories.HtwCommandMapFactory;
 import htw.game.commands.strategies.ActionByDirStrategy;
 import htw.game.commands.strategies.ActionByIdStrategy;
@@ -18,7 +17,7 @@ public class InteractiveDriver {
       strategy = new ActionByIdStrategy();
     }
 
-    IController controller = new HtwController(
+    Runnable controller = new HtwController(
             new Scanner(System.in),
             System.out,
             strategy,

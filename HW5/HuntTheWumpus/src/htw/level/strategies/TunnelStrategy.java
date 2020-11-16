@@ -101,9 +101,9 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
   }
 
   @Override
-  public IHtwNode getNext(List<ICoordinates> traversed, IHtwNode curr) {
+  public IHtwNode adjacent(List<ICoordinates> traversed, IHtwNode curr) {
     if (traversed.contains(curr.getCoordinates())) {
-      throw new IllegalStateException("Already traversed this node when finding next.");
+      throw new IllegalStateException("Already traversed this node when finding adjacent.");
     }
 
     traversed.add(curr.getCoordinates());
@@ -112,7 +112,7 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     for (Direction exit : exits) {
       try {
-        return ((IHtwNode) curr.getNode(exit)).getNext(traversed);
+        return ((IHtwNode) curr.getNode(exit)).adjacent(traversed);
       } catch (Exception ignored) {
 
       }

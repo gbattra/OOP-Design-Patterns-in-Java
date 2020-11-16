@@ -44,5 +44,5 @@ public interface IHtwNodeStrategy {
 
   boolean drafty(Direction from, IHtwNode curr);
 
-  IHtwNode getNext(List<ICoordinates> traversed, IHtwNode curr);
+  IHtwNode adjacent(List<ICoordinates> traversed, IHtwNode curr);
 }

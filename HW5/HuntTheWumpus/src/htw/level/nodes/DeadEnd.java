@@ -60,7 +60,7 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
-  public IHtwNode getNext(List<ICoordinates> traversed) {
+  public IHtwNode adjacent(List<ICoordinates> traversed) {
     throw new IllegalStateException("No next nodes from a dead end node.");
   }
 

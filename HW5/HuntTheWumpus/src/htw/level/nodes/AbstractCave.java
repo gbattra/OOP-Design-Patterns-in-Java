@@ -174,7 +174,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
       try {
         List<ICoordinates> traversed = new ArrayList<>();
         traversed.add(this.coordinates);
-        IHtwNode node = ((IHtwNode) this.getNode(exit)).getNext(traversed);
+        IHtwNode node = ((IHtwNode) this.getNode(exit)).adjacent(traversed);
         neighbors.put(exit, node.id());
       } catch (Exception ignored) {
         // do nothing
@@ -185,8 +185,8 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
-  public IHtwNode getNext(List<ICoordinates> traversed) {
-    return this.strategy.getNext(traversed, this);
+  public IHtwNode adjacent(List<ICoordinates> traversed) {
+    return this.strategy.adjacent(traversed, this);
   }
 
   @Override

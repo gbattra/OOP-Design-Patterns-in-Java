@@ -106,5 +106,5 @@ public interface IHtwNode extends Node {
 
   boolean drafty(Direction from);
 
-  IHtwNode getNext(List<ICoordinates> traversed);
+  IHtwNode adjacent(List<ICoordinates> traversed);
 }

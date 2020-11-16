@@ -66,9 +66,9 @@ public class StandardStrategy implements IHtwNodeStrategy {
   }
 
   @Override
-  public IHtwNode getNext(List<ICoordinates> traversed, IHtwNode curr) {
+  public IHtwNode adjacent(List<ICoordinates> traversed, IHtwNode curr) {
     if (traversed.contains(curr.getCoordinates())) {
-      throw new IllegalStateException("Already traversed this node when finding next.");
+      throw new IllegalStateException("Already traversed this node when finding adjacent.");
     }
     return curr;
   }
