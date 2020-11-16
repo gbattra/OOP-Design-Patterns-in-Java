@@ -18,7 +18,7 @@ import static org.junit.Assert.fail;
 public class ShootCommandTest {
   @Test
   public void testMoveById() {
-    StringBuilder log = new StringBuilder();
+    StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> shootCmd = new ShootCommand(
             new Scanner("1 1"), System.out, new ActionByIdStrategy());
@@ -32,7 +32,7 @@ public class ShootCommandTest {
 
   @Test
   public void testMoveByDir() {
-    StringBuilder log = new StringBuilder();
+    StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> shootCmd = new ShootCommand(
             new Scanner("e 1"), System.out, new ActionByDirStrategy());

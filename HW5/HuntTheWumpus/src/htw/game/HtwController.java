@@ -12,7 +12,10 @@ import htw.game.commands.NewConfigCommand;
 import htw.game.commands.StartGameCommand;
 import htw.game.commands.ShootCommand;
 import htw.game.commands.StandardConfigCommand;
+import htw.game.commands.factories.ICommandMapFactory;
 import htw.game.commands.strategies.IActionStrategy;
+import maze.components.IMaze;
+import maze.game.IMazeGame;
 
 public class HtwController implements IController {
   private final Map<String, Function<Scanner, ICommand<IHtwGame>>> commands;
@@ -23,7 +26,11 @@ public class HtwController implements IController {
   private IHtwGame game;
   private boolean started;
 
-  public HtwController(Scanner scanner, Appendable out, IActionStrategy strategy)
+  public HtwController(
+          Scanner scanner,
+          Appendable out,
+          IActionStrategy strategy,
+          ICommandMapFactory<IHtwGame> factory)
           throws IllegalArgumentException {
     if (scanner == null || out == null || strategy == null) {
       throw new IllegalArgumentException("Params cannot be null.");
@@ -32,22 +39,12 @@ public class HtwController implements IController {
     this.scanner = scanner;
     this.out = out;
     this.strategy = strategy;
-    this.commands = new HashMap<>() {{
-      put("restart", s -> new StartGameCommand(
-              s,
-              out,
-              new NewConfigCommand(
-                      s,
-                      out,
-                      new CustomConfigCommand(s, out),
-                      new StandardConfigCommand())));
-      put("move", s -> new MoveCommand(s, out, strategy));
-      put("shoot", s -> new ShootCommand(s, out, strategy));
-    }};
+    this.commands = factory.create(out, strategy);
   }
 
   @Override
   public int run() {
+    // initialize the game
     try {
       Function<Scanner, ICommand<IHtwGame>> entry = commands.get("restart");
       ICommand<IHtwGame> cmd = entry.apply(this.scanner);
@@ -61,6 +58,7 @@ public class HtwController implements IController {
       return 0;
     }
 
+    // run the game
     int status = 1;
     while (!this.game.isOver()) {
       try {

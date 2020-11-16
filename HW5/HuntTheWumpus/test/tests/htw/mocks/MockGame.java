@@ -5,15 +5,15 @@ import htw.game.commands.strategies.IActionStrategy;
 import maze.utils.Direction;
 
 public class MockGame implements IHtwGame {
-  private final StringBuilder log;
+  private final StringBuffer log;
 
-  public MockGame(StringBuilder log) {
+  public MockGame(StringBuffer log) {
     this.log = log;
   }
 
   @Override
   public String status(IActionStrategy strategy) {
-    return "start";
+    return "status - status";
   }
 
   @Override
