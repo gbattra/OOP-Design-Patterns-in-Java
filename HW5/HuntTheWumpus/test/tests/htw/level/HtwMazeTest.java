@@ -3,8 +3,8 @@ package tests.htw.level;
 import org.junit.Before;
 import org.junit.Test;
 
-import htw.game.IHtwPlayer;
 import htw.game.HtwPlayer;
+import htw.game.IHtwPlayer;
 import htw.game.commands.strategies.ActionByDirStrategy;
 import htw.game.commands.strategies.ActionByIdStrategy;
 import htw.level.HtwMaze;
@@ -13,9 +13,6 @@ import htw.level.nodes.Cave;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.StandardStrategy;
 import htw.level.strategies.WumpusStrategy;
-import htw.tools.HtwConfiguration;
-import htw.tools.HtwConfigurationBuilder;
-import htw.tools.HtwMazeBuilder;
 import maze.components.Coordinates;
 import maze.utils.Direction;
 

@@ -14,7 +14,6 @@ import htw.game.commands.ShootCommand;
 import htw.game.commands.StandardConfigCommand;
 import htw.game.commands.StartGameCommand;
 import htw.game.commands.strategies.IActionStrategy;
-import maze.game.IMazeGame;
 
 public class HtwCommandMapFactory implements ICommandMapFactory<IHtwGame> {
   @Override

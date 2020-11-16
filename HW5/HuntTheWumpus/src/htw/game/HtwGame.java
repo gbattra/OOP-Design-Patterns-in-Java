@@ -63,7 +63,7 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(Direction direction, int count) {
     try {
       boolean hit = this.maze.shoot(direction, count);
-      this.player.decrementArrowCount(count);
+      this.player.decrementArrowCount();
       if (hit) {
         this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
         this.wumpusSlain = true;
@@ -81,7 +81,7 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(int id, int count) {
     try {
       boolean hit = this.maze.shoot(id, count);
-      this.player.decrementArrowCount(count);
+      this.player.decrementArrowCount();
       if (hit) {
         this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
         this.wumpusSlain = true;

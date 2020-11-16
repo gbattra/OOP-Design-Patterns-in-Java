@@ -7,7 +7,6 @@ import java.util.Scanner;
 import htw.game.commands.ICommand;
 import htw.game.commands.NewConfigCommand;
 import htw.tools.IHtwConfigurationBuilder;
-import htw.tools.IHtwMazeBuilder;
 import tests.htw.mocks.MockCustomConfigCommand;
 import tests.htw.mocks.MockStandardConfigCommand;
 

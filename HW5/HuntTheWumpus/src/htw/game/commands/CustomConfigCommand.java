@@ -3,8 +3,6 @@ package htw.game.commands;
 import java.io.IOException;
 import java.util.Scanner;
 
-import htw.game.IHtwGame;
-import htw.tools.IHtwConfiguration;
 import htw.tools.IHtwConfigurationBuilder;
 
 public class CustomConfigCommand implements ICommand<IHtwConfigurationBuilder> {

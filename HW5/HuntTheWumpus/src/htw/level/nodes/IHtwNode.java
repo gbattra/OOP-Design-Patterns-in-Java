@@ -6,7 +6,6 @@ import java.util.Map;
 
 import htw.game.IHtwPlayer;
 import htw.level.strategies.IHtwNodeStrategy;
-import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.nodes.Node;
 import maze.utils.Direction;

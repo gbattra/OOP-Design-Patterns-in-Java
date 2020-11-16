@@ -31,7 +31,7 @@ public class PlayerTest {
   @Test
   public void testDecrement() {
     IHtwPlayer player = new HtwPlayer("Joe", 2);
-    player.decrementArrowCount(1);
+    player.decrementArrowCount();
     assertEquals(1, player.arrowCount());
   }
 }

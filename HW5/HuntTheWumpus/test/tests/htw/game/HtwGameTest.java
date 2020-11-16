@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import htw.game.HtwGame;
+import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
-import htw.game.HtwPlayer;
 import htw.level.IHtwMaze;
 import maze.utils.Direction;
 import tests.htw.mocks.MockMaze;
@@ -68,7 +68,8 @@ public class HtwGameTest {
 
   @Test
   public void voidTestShootGameOver() {
-    this.game.shoot(12, 2);
+    this.game.shoot(12, 1);
+    this.game.shoot(12, 1);
     assertTrue(this.game.isOver());
   }
 }

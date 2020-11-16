@@ -37,7 +37,7 @@ public class HtwPlayer extends MazePlayer implements IHtwPlayer {
   }
 
   @Override
-  public void decrementArrowCount(int count) {
-    this.arrowCount -= count;
+  public void decrementArrowCount() {
+    this.arrowCount--;
   }
 }

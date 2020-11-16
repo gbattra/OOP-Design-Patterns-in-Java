@@ -1,21 +1,12 @@
 package htw.game;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
-import htw.game.commands.CustomConfigCommand;
 import htw.game.commands.ICommand;
-import htw.game.commands.MoveCommand;
-import htw.game.commands.NewConfigCommand;
-import htw.game.commands.StartGameCommand;
-import htw.game.commands.ShootCommand;
-import htw.game.commands.StandardConfigCommand;
 import htw.game.commands.factories.ICommandMapFactory;
 import htw.game.commands.strategies.IActionStrategy;
-import maze.components.IMaze;
-import maze.game.IMazeGame;
 
 public class HtwController implements IController {
   private final Map<String, Function<Scanner, ICommand<IHtwGame>>> commands;

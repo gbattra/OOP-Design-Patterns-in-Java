@@ -2,7 +2,6 @@ package tests.htw.mocks;
 
 import java.io.IOException;
 
-import htw.game.IHtwGame;
 import htw.game.commands.ICommand;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.IHtwConfigurationBuilder;

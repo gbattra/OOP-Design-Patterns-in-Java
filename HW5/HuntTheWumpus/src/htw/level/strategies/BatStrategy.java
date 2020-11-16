@@ -46,7 +46,7 @@ public class BatStrategy extends StandardStrategy implements IHtwNodeStrategy {
   @Override
   public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
     if (this.random.nextDouble() <= 0.5) {
-      curr.logger().append("Snatch! You're grabbed by superbats and dropped in another cave!\n");
+      curr.logger().append("Snatch! You are grabbed by superbats and dropped in another cave!\n");
       int row = this.random.nextInt(this.rowCount);
       int column = this.random.nextInt(this.columnCount);
       ICoordinates coordinates = new Coordinates(column, row);

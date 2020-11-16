@@ -14,7 +14,6 @@ import maze.components.nodes.Node;
 import maze.components.nodes.StandardRoomNode;
 import maze.components.nodes.ThiefRoomNode;
 import maze.config.IConfiguration;
-import maze.config.MazeConfigurationBuilder;
 import maze.config.PerfectMazeConfiguration;
 import maze.utils.Direction;
 

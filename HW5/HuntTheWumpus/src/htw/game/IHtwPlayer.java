@@ -25,5 +25,5 @@ public interface IHtwPlayer extends IMazePlayer {
    */
   void kill();
 
-  void decrementArrowCount(int count);
+  void decrementArrowCount();
 }

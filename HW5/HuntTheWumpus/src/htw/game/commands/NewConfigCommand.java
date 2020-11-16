@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import htw.tools.HtwConfigurationBuilder;
-import htw.tools.HtwMazeBuilder;
-import htw.tools.IHtwConfiguration;
 import htw.tools.IHtwConfigurationBuilder;
-import htw.tools.IHtwMazeBuilder;
 
 public class NewConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   private final Appendable out;

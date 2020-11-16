@@ -5,7 +5,6 @@ import java.io.IOException;
 import htw.game.IHtwPlayer;
 import htw.game.commands.strategies.IActionStrategy;
 import htw.level.IHtwMaze;
-import htw.tools.IHtwConfiguration;
 import maze.utils.Direction;
 
 public class MockMaze implements IHtwMaze {

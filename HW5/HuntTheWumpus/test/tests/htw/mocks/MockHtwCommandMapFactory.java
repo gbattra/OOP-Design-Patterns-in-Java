@@ -6,13 +6,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import htw.game.IHtwGame;
-import htw.game.commands.CustomConfigCommand;
 import htw.game.commands.ICommand;
-import htw.game.commands.MoveCommand;
-import htw.game.commands.NewConfigCommand;
-import htw.game.commands.ShootCommand;
-import htw.game.commands.StandardConfigCommand;
-import htw.game.commands.StartGameCommand;
 import htw.game.commands.factories.ICommandMapFactory;
 import htw.game.commands.strategies.IActionStrategy;
 

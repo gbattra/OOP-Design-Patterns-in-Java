@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import htw.level.nodes.IHtwNode;
-import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.utils.Direction;
 

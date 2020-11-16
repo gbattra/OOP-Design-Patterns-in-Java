@@ -3,8 +3,8 @@ package tests.htw.level.nodes;
 import org.junit.Before;
 import org.junit.Test;
 
-import htw.game.IHtwPlayer;
 import htw.game.HtwPlayer;
+import htw.game.IHtwPlayer;
 import htw.level.nodes.Cave;
 import htw.level.nodes.IHtwNode;
 import htw.level.strategies.IHtwNodeStrategy;

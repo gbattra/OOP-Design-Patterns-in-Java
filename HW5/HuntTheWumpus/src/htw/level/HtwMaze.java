@@ -1,8 +1,6 @@
 package htw.level;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import htw.game.IHtwPlayer;
 import htw.game.commands.strategies.IActionStrategy;
