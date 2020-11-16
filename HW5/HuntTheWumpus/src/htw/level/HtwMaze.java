@@ -34,7 +34,8 @@ public class HtwMaze extends Maze implements IHtwMaze {
   @Override
   public boolean move(Integer id, IHtwPlayer player) throws IOException {
     try {
-      this.current = this.root.get(id);
+      Direction dir = this.current.directionTo(id);
+      this.current = ((IHtwNode) this.current.getNode(dir)).enter(dir.opposite());
       this.current.receive(player);
       return true;
     } catch (Exception e) {
@@ -62,7 +63,6 @@ public class HtwMaze extends Maze implements IHtwMaze {
 
   @Override
   public boolean shoot(int id, int count) {
-    return this.current.shoot(this.root.directionTo(id), count);
+    return this.current.shoot(this.current.directionTo(id), count);
   }
 }
-

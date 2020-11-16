@@ -12,6 +12,7 @@ import maze.utils.Direction;
 import tests.htw.mocks.MockMaze;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class HtwGameTest {
@@ -23,7 +24,7 @@ public class HtwGameTest {
   @Before
   public void setup() {
     this.log = new StringBuilder();
-    this.player = new HtwPlayer("Joe", 10);
+    this.player = new HtwPlayer("Joe", 2);
     this.maze = new MockMaze(this.log);
     this.game = new HtwGame(this.player, this.maze, this.log);
   }
@@ -57,12 +58,17 @@ public class HtwGameTest {
   @Test
   public void testShootDir() {
     this.game.shoot(Direction.EAST, 1);
-    assertEquals("shoot - EAST - 1Miss... You have 9 remaining arrows.", this.log.toString());
+    assertEquals("shoot - EAST - 1Miss... You have 1 remaining arrows.", this.log.toString());
   }
   @Test
   public void testShootId() {
     this.game.shoot(12, 1);
-    assertEquals("shoot - 12 - 1Miss... You have 9 remaining arrows.", this.log.toString());
+    assertEquals("shoot - 12 - 1Miss... You have 1 remaining arrows.", this.log.toString());
   }
 
+  @Test
+  public void voidTestShootGameOver() {
+    this.game.shoot(12, 2);
+    assertTrue(this.game.isOver());
+  }
 }
