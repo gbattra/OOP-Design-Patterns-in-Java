@@ -35,7 +35,7 @@ public class PitCaveTest {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       this.pit.receive(player);
       assertFalse(player.isAlive());
-      assertEquals("'Ahhhhhhhh', you shout as you fall into a bottomless pit!", this.out.toString());
+      assertEquals("'Ahhhhhhhh', you shout as you fall into a bottomless pit!\n", this.out.toString());
     } catch (Exception e) {
       fail("Valid receive() should not have failed.");
     }

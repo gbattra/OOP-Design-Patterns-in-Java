@@ -18,6 +18,7 @@ import maze.utils.Direction;
 public class StandardStrategy implements IHtwNodeStrategy {
   @Override
   public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
+    curr.logger().append("You enter the cave and...\n");
     return curr;
   }
 
@@ -45,10 +46,13 @@ public class StandardStrategy implements IHtwNodeStrategy {
       smelly |= node.smelly(exit.opposite());
     }
     if (drafty) {
-      curr.logger().append("You feel a draft.");
+      curr.logger().append("You feel a draft\n");
     }
     if (smelly) {
-      curr.logger().append(drafty ? "\nYou smell a Wumpus." : "You smell a Wumpus.");
+      curr.logger().append("You smell a Wumpus\n");
+    }
+    if (!drafty && !smelly) {
+      curr.logger().append("The cave is empty\n");
     }
   }
 

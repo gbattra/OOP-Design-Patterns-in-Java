@@ -24,7 +24,7 @@ public class WumpusStrategy extends StandardStrategy implements IHtwNodeStrategy
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }
-    curr.logger().append("Chomp chomp! You've been eaten by the Wumpus!\n");
+    curr.logger().append("Chomp chomp! You are eaten by the Wumpus!\n");
     player.kill();
   }
 

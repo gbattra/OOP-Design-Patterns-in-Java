@@ -18,7 +18,7 @@ public class HtwPlayer extends MazePlayer implements IHtwPlayer {
   public HtwPlayer(String name, int arrowCount) {
     super(name);
     this.alive = true;
-    this.arrowCount = Math.max(0, arrowCount);
+    this.arrowCount = Math.max(1, arrowCount);
   }
 
   @Override
