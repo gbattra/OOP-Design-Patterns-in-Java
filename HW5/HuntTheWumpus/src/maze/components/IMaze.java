@@ -1,5 +1,7 @@
 package maze.components;
 
+import java.io.IOException;
+
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
@@ -35,7 +37,7 @@ public interface IMaze {
    * @param dir the direction to move
    * @return true if move was made, false if move cannot be made (i.e. dead end node at dir)
    */
-  boolean move(Direction dir);
+  boolean move(Direction dir) throws IOException;
 
   /**
    * Traverses the maze to find the path to desired coordinates which yields the highest gold count.

@@ -51,7 +51,7 @@ public interface IMazeGame {
    * @param direction the direction to move
    * @return true if move was successful, false if dead end direction
    */
-  boolean movePlayer(Direction direction);
+  boolean move(Direction direction);
 
   /**
    * Starts the game by placing the player in the starting node of the maze.

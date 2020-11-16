@@ -52,15 +52,15 @@ public class MazeGameTest {
 
   @Test
   public void testMovePlayer() {
-    assertTrue(this.game.movePlayer(Direction.SOUTH));
-    assertFalse(this.game.movePlayer(Direction.WEST));
+    assertTrue(this.game.move(Direction.SOUTH));
+    assertFalse(this.game.move(Direction.WEST));
     assertEquals(10, game.getScore());
   }
 
   @Test
   public void testGameOver() {
-    this.game.movePlayer(Direction.SOUTH);
-    this.game.movePlayer(Direction.EAST);
+    this.game.move(Direction.SOUTH);
+    this.game.move(Direction.EAST);
     assertTrue(this.game.isOver());
   }
 }

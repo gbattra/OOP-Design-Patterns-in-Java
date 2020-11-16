@@ -50,8 +50,12 @@ public class Maze2dTest {
 
   @Test
   public void testMove() {
-    IMaze maze = new Maze(this.start, this.goal);
-    maze.move(Direction.SOUTH);
-    assertEquals(this.node, maze.getCurrent());
+    try {
+      IMaze maze = new Maze(this.start, this.goal);
+      maze.move(Direction.SOUTH);
+      assertEquals(this.node, maze.getCurrent());
+    } catch (Exception e) {
+      fail("Valid move() should not have failed.");
+    }
   }
 }

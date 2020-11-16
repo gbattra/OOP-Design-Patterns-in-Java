@@ -46,13 +46,13 @@ public class HtwGameTest {
   @Test
   public void testMoveId() {
     this.game.move(1);
-    assertEquals("moved - 1 - Joe", this.log.toString());
+    assertEquals("moved - 1receive - Joe", this.log.toString());
   }
 
   @Test
   public void testMoveDir() {
     this.game.move(Direction.EAST);
-    assertEquals("moved - EAST - Joe", this.log.toString());
+    assertEquals("moved - EASTreceive - Joe", this.log.toString());
   }
 
   @Test

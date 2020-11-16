@@ -1,5 +1,7 @@
 package maze.components;
 
+import java.io.IOException;
+
 import maze.components.nodes.DeadEndNode;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
@@ -45,7 +47,7 @@ public class Maze implements IMaze {
   }
 
   @Override
-  public boolean move(Direction dir) {
+  public boolean move(Direction dir) throws IOException {
     Node next = this.current.getNode(dir);
     if (next instanceof DeadEndNode) {
       return false;

@@ -36,7 +36,11 @@ public class HtwGame implements IHtwGame {
   @Override
   public boolean move(Direction direction) {
     try {
-      return this.maze.move(direction, this.player);
+      boolean move = this.maze.move(direction);
+      if (move) {
+        this.maze.receive(this.player);
+      }
+      return move;
     } catch (Exception e) {
       return false;
     }
@@ -45,7 +49,11 @@ public class HtwGame implements IHtwGame {
   @Override
   public boolean move(int id) {
     try {
-      return this.maze.move(id, this.player);
+      boolean move = this.maze.move(id);
+      if (move) {
+        this.maze.receive(this.player);
+      }
+      return move;
     } catch (Exception e) {
       return false;
     }

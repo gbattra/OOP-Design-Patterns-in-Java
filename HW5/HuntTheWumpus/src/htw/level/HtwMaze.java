@@ -32,11 +32,15 @@ public class HtwMaze extends Maze implements IHtwMaze {
   }
 
   @Override
-  public boolean move(Integer id, IHtwPlayer player) throws IOException {
+  public void receive(IHtwPlayer player) throws IOException {
+    this.current.receive(player);
+  }
+
+  @Override
+  public boolean move(Integer id) throws IOException {
     try {
       Direction dir = this.current.directionTo(id);
       this.current = ((IHtwNode) this.current.getNode(dir)).enter(dir.opposite());
-      this.current.receive(player);
       return true;
     } catch (Exception e) {
       this.logger.append("Cannot move to ").append(id.toString()).append(".");
@@ -45,10 +49,9 @@ public class HtwMaze extends Maze implements IHtwMaze {
   }
 
   @Override
-  public boolean move(Direction direction, IHtwPlayer player) throws IOException {
+  public boolean move(Direction direction) throws IOException {
     try {
       this.current = ((IHtwNode) this.current.getNode(direction)).enter(direction.opposite());
-      this.current.receive(player);
       return true;
     } catch (Exception e) {
       this.logger.append("Cannot move to the ").append(direction.toString()).append(".");

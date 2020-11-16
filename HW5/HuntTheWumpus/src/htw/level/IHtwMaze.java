@@ -8,8 +8,9 @@ import maze.utils.Direction;
 
 public interface IHtwMaze {
   String status(IActionStrategy strategy);
-  boolean move(Direction direction, IHtwPlayer player) throws IOException;
-  boolean move(Integer id, IHtwPlayer player) throws IOException;
+  void receive(IHtwPlayer player) throws IOException;
+  boolean move(Direction direction) throws IOException;
+  boolean move(Integer id) throws IOException;
   boolean shoot(Direction direction, int count);
   boolean shoot(int id, int count);
 }

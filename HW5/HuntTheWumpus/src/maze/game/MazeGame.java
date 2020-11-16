@@ -1,5 +1,7 @@
 package maze.game;
 
+import java.io.IOException;
+
 import maze.components.IMaze;
 import maze.components.IPath;
 import maze.components.Path;
@@ -53,16 +55,20 @@ public class MazeGame implements IMazeGame {
   }
 
   @Override
-  public boolean movePlayer(Direction direction) {
-    boolean moved = maze.move(direction);
-    if (moved && !path.getCoordinatesTraversed().contains(maze.getCurrent().getCoordinates())) {
-      path.enter(maze.getCurrent());
-      this.player = player.loot(maze.getCurrent());
+  public boolean move(Direction direction) {
+    try {
+      boolean moved = maze.move(direction);
+      if (moved && !path.getCoordinatesTraversed().contains(maze.getCurrent().getCoordinates())) {
+        path.enter(maze.getCurrent());
+        this.player = player.loot(maze.getCurrent());
+      }
+
+      this.isOver |= maze.getCurrent().isGoal();
+
+      return moved;
+    } catch (IOException e) {
+      return false;
     }
-
-    this.isOver |= maze.getCurrent().isGoal();
-
-    return moved;
   }
 
   @Override

@@ -1,5 +1,7 @@
 package tests.htw.mocks;
 
+import java.io.IOException;
+
 import htw.game.IHtwPlayer;
 import htw.game.commands.strategies.IActionStrategy;
 import htw.level.IHtwMaze;
@@ -19,16 +21,21 @@ public class MockMaze implements IHtwMaze {
   }
 
   @Override
-  public boolean move(Direction direction, IHtwPlayer player) {
+  public boolean move(Direction direction) {
     this.log.append(
-            String.format("moved - %s - %s", direction.toString(), player.getName()));
+            String.format("moved - %s", direction.toString()));
     return true;
   }
 
   @Override
-  public boolean move(Integer id, IHtwPlayer player) {
+  public void receive(IHtwPlayer player) throws IOException {
+    this.log.append(String.format("receive - %s", player.getName()));
+  }
+
+  @Override
+  public boolean move(Integer id) {
     this.log.append(
-            String.format("moved - %s - %s", id, player.getName()));
+            String.format("moved - %s", id));
     return true;
   }
 
