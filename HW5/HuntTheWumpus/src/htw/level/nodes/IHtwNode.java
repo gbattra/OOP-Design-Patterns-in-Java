@@ -26,7 +26,7 @@ public interface IHtwNode extends Node {
    *
    * @return the node's id
    */
-  Integer id();
+  Integer getId();
 
   /**
    * Getter for the node's logger.

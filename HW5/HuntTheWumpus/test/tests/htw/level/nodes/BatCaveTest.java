@@ -24,9 +24,6 @@ public class BatCaveTest {
   private IHtwNode bat;
   private IHtwNodeStrategy standard = new StandardStrategy();
   private IHtwNode north;
-  private IHtwNode south;
-  private IHtwNode east;
-  private IHtwNode west;
 
   @Before
   public void setup() {
@@ -37,19 +34,19 @@ public class BatCaveTest {
             System.out);
 
     this.north = new Cave(2, new Coordinates(1, 0), this.standard, System.out);
-    this.south = new Cave(3, new Coordinates(1, 2), this.standard, System.out);
-    this.east = new Cave(4, new Coordinates(2, 1), this.standard, System.out);
-    this.west = new Cave(5, new Coordinates(0, 1), this.standard, System.out);
+    IHtwNode south = new Cave(3, new Coordinates(1, 2), this.standard, System.out);
+    IHtwNode east = new Cave(4, new Coordinates(2, 1), this.standard, System.out);
+    IHtwNode west = new Cave(5, new Coordinates(0, 1), this.standard, System.out);
 
     this.bat.setNode(this.north, Direction.NORTH);
-    this.bat.setNode(this.south, Direction.SOUTH);
-    this.bat.setNode(this.east, Direction.EAST);
-    this.bat.setNode(this.west, Direction.WEST);
+    this.bat.setNode(south, Direction.SOUTH);
+    this.bat.setNode(east, Direction.EAST);
+    this.bat.setNode(west, Direction.WEST);
 
     this.north.setNode(this.bat, Direction.NORTH.opposite());
-    this.south.setNode(this.bat, Direction.SOUTH.opposite());
-    this.east.setNode(this.bat, Direction.EAST.opposite());
-    this.west.setNode(this.bat, Direction.WEST.opposite());
+    south.setNode(this.bat, Direction.SOUTH.opposite());
+    east.setNode(this.bat, Direction.EAST.opposite());
+    west.setNode(this.bat, Direction.WEST.opposite());
   }
 
   @Test

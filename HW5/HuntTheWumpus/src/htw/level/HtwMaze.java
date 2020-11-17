@@ -12,7 +12,6 @@ import maze.utils.Direction;
  * The maze object in the Hunt the Wumpus game.
  */
 public class HtwMaze extends Maze implements IHtwMaze {
-  private final IHtwNode root;
   private final Appendable logger;
 
   private IHtwNode current;
@@ -29,7 +28,6 @@ public class HtwMaze extends Maze implements IHtwMaze {
     if (root == null || logger == null) {
       throw new IllegalArgumentException("Root and logger cannot be null.");
     }
-    this.root = root;
     this.current = root;
     this.logger = logger;
   }

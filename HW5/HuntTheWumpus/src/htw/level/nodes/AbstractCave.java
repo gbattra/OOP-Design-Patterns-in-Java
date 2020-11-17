@@ -53,7 +53,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
-  public Integer id() {
+  public Integer getId() {
     return this.id;
   }
 
@@ -176,7 +176,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
         List<ICoordinates> traversed = new ArrayList<>();
         traversed.add(this.coordinates);
         IHtwNode node = ((IHtwNode) this.getNode(exit)).adjacent(traversed);
-        neighbors.put(exit, node.id());
+        neighbors.put(exit, node.getId());
       } catch (Exception ignored) {
         // do nothing
       }

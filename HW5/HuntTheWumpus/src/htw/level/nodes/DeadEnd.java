@@ -80,7 +80,7 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
-  public Integer id() {
+  public Integer getId() {
     return 0;
   }
 

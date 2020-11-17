@@ -5,8 +5,8 @@ import java.util.Scanner;
 import htw.game.HtwController;
 import htw.game.commands.factories.HtwCommandMapFactory;
 import htw.game.commands.strategies.DirActionStrategy;
-import htw.game.commands.strategies.IdActionStrategy;
 import htw.game.commands.strategies.IActionStrategy;
+import htw.game.commands.strategies.IdActionStrategy;
 
 /**
  * Interactive demo driver.

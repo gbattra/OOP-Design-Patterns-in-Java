@@ -37,16 +37,16 @@ public enum Direction {
    * @return the corresponding direction
    */
   public static Direction stringToDirection(String input) {
-    if (input.toLowerCase().equals("n") || input.toLowerCase().equals("north")) {
+    if (input.equalsIgnoreCase("n") || input.equalsIgnoreCase("north")) {
       return Direction.NORTH;
     }
-    if (input.toLowerCase().equals("s") || input.toLowerCase().equals("south")) {
+    if (input.equalsIgnoreCase("s") || input.equalsIgnoreCase("south")) {
       return Direction.SOUTH;
     }
-    if (input.toLowerCase().equals("e") || input.toLowerCase().equals("east")) {
+    if (input.equalsIgnoreCase("e") || input.equalsIgnoreCase("east")) {
       return Direction.EAST;
     }
-    if (input.toLowerCase().equals("w") || input.toLowerCase().equals("west")) {
+    if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("west")) {
       return Direction.WEST;
     }
     throw new IllegalArgumentException("Input direction not valid.");

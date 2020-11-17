@@ -1,7 +1,5 @@
 package htw.game;
 
-import java.io.IOException;
-
 import htw.game.commands.strategies.IActionStrategy;
 import maze.utils.Direction;
 

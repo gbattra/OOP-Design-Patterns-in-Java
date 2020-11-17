@@ -23,10 +23,6 @@ import static org.junit.Assert.fail;
  */
 public class WumpusCaveTest {
   private IHtwNodeStrategy standard = new StandardStrategy();
-  private IHtwNode north;
-  private IHtwNode south;
-  private IHtwNode east;
-  private IHtwNode west;
   private IHtwNode wumpus;
   private Appendable log;
 
@@ -38,20 +34,20 @@ public class WumpusCaveTest {
             new Coordinates(1, 1),
             new WumpusStrategy(), log);
 
-    this.north = new Cave(2, new Coordinates(1, 0), this.standard, log);
-    this.south = new Cave(3, new Coordinates(1, 2), this.standard, log);
-    this.east = new Cave(4, new Coordinates(2, 1), this.standard, log);
-    this.west = new Cave(5, new Coordinates(0, 1), this.standard, log);
+    IHtwNode north = new Cave(2, new Coordinates(1, 0), this.standard, log);
+    IHtwNode south = new Cave(3, new Coordinates(1, 2), this.standard, log);
+    IHtwNode east = new Cave(4, new Coordinates(2, 1), this.standard, log);
+    IHtwNode west = new Cave(5, new Coordinates(0, 1), this.standard, log);
 
-    this.wumpus.setNode(this.north, Direction.NORTH);
-    this.wumpus.setNode(this.south, Direction.SOUTH);
-    this.wumpus.setNode(this.east, Direction.EAST);
-    this.wumpus.setNode(this.west, Direction.WEST);
+    this.wumpus.setNode(north, Direction.NORTH);
+    this.wumpus.setNode(south, Direction.SOUTH);
+    this.wumpus.setNode(east, Direction.EAST);
+    this.wumpus.setNode(west, Direction.WEST);
 
-    this.north.setNode(this.wumpus, Direction.NORTH.opposite());
-    this.south.setNode(this.wumpus, Direction.SOUTH.opposite());
-    this.east.setNode(this.wumpus, Direction.EAST.opposite());
-    this.west.setNode(this.wumpus, Direction.WEST.opposite());
+    north.setNode(this.wumpus, Direction.NORTH.opposite());
+    south.setNode(this.wumpus, Direction.SOUTH.opposite());
+    east.setNode(this.wumpus, Direction.EAST.opposite());
+    west.setNode(this.wumpus, Direction.WEST.opposite());
   }
 
   @Test

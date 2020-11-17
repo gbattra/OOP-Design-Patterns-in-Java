@@ -11,7 +11,6 @@ import htw.game.commands.strategies.IActionStrategy;
  */
 public class ShootCommand implements ICommand<IHtwGame> {
   private final Scanner in;
-  private final Appendable out;
   private final IActionStrategy strategy;
 
   /**
@@ -30,7 +29,6 @@ public class ShootCommand implements ICommand<IHtwGame> {
     }
 
     this.in = in;
-    this.out = out;
     this.strategy = strategy;
   }
 

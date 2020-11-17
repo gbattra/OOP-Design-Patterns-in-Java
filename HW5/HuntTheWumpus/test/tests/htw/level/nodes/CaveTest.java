@@ -234,9 +234,9 @@ public class CaveTest {
   @Test
   public void testNeighbors() {
     Map<Direction, Integer> neighbors = this.cave.neighbors();
-    assertEquals(this.north.id(), neighbors.get(Direction.NORTH));
-    assertEquals(this.south.id(), neighbors.get(Direction.SOUTH));
-    assertEquals(this.east.id(), neighbors.get(Direction.EAST));
-    assertEquals(this.west.id(), neighbors.get(Direction.WEST));
+    assertEquals(this.north.getId(), neighbors.get(Direction.NORTH));
+    assertEquals(this.south.getId(), neighbors.get(Direction.SOUTH));
+    assertEquals(this.east.getId(), neighbors.get(Direction.EAST));
+    assertEquals(this.west.getId(), neighbors.get(Direction.WEST));
   }
 }

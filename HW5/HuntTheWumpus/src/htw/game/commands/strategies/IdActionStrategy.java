@@ -30,7 +30,7 @@ public class IdActionStrategy implements IActionStrategy {
     Map<Direction, Integer> neighbors = curr.neighbors();
     return String.format(
             "You are in cave %s with tunnels to node(s) %s",
-            curr.id().toString(),
+            curr.getId().toString(),
             neighbors
                     .values()
                     .stream()
