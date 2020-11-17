@@ -14,7 +14,15 @@ import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
 import htw.tools.IHtwConfiguration;
 
+/**
+ * Wumpus slain demo driver.
+ */
 public class WumpusSlainDemo {
+  /**
+   * Main driver method.
+   *
+   * @param args args for running the program
+   */
   public static void main(String[] args) {
     IHtwConfiguration configuration = (IHtwConfiguration) new HtwConfigurationBuilder()
             .setBatFrequency(0.5)

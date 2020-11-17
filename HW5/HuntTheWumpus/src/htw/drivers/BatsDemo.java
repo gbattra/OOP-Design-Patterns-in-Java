@@ -9,13 +9,20 @@ import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
 import htw.game.commands.factories.HtwCommandMapFactory;
 import htw.game.commands.strategies.DirActionStrategy;
-import htw.game.commands.strategies.IdActionStrategy;
 import htw.level.IHtwMaze;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
 import htw.tools.IHtwConfiguration;
 
+/**
+ * Bats demo driver.
+ */
 public class BatsDemo {
+  /**
+   * Main driver method.
+   *
+   * @param args args for running the program
+   */
   public static void main(String[] args) {
     IHtwConfiguration configuration = (IHtwConfiguration) new HtwConfigurationBuilder()
                                                               .setBatFrequency(0.5)
