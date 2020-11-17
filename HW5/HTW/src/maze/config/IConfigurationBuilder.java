@@ -1,5 +1,8 @@
 package maze.config;
 
+/**
+ * Builder for a maze configuration.
+ */
 public interface IConfigurationBuilder {
   /**
    * Sets the number of columns in the maze.

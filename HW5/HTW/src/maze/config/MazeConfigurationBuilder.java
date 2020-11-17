@@ -3,6 +3,9 @@ package maze.config;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
 
+/**
+ * Builder class for a maze configuration.
+ */
 public class MazeConfigurationBuilder implements IConfigurationBuilder {
   protected int columnCount = 10;
   protected int rowCount = 10;
