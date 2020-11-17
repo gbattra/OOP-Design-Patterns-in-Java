@@ -62,7 +62,8 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
   }
 
   @Override
-  public IConfigurationBuilder setThiefPenalty(double thiefPenalty) throws IllegalArgumentException {
+  public IConfigurationBuilder setThiefPenalty(double thiefPenalty)
+          throws IllegalArgumentException {
     if (thiefPenalty < 0 || thiefPenalty > 1) {
       throw new IllegalArgumentException("ThiefPenalty must be between 0 and 1 inclusive.");
     }
@@ -72,7 +73,8 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
   }
 
   @Override
-  public IConfigurationBuilder setThiefFrequency(double thiefFrequency) throws IllegalArgumentException {
+  public IConfigurationBuilder setThiefFrequency(double thiefFrequency)
+          throws IllegalArgumentException {
     if (thiefFrequency < 0 || thiefFrequency > 1) {
       throw new IllegalArgumentException("ThiefFrequency must be between 0 and 1 inclusive.");
     }
@@ -82,7 +84,8 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
   }
 
   @Override
-  public IConfigurationBuilder setGoldFrequency(double goldFrequency) throws IllegalArgumentException {
+  public IConfigurationBuilder setGoldFrequency(double goldFrequency)
+          throws IllegalArgumentException {
     if (goldFrequency < 0 || goldFrequency > 1) {
       throw new IllegalArgumentException("GoldFrequency must be between 0 and 1 inclusive.");
     }
@@ -102,7 +105,8 @@ public class MazeConfigurationBuilder implements IConfigurationBuilder {
   }
 
   @Override
-  public IConfigurationBuilder setTargetEdgeCount(int targetEdgeCount) throws IllegalArgumentException {
+  public IConfigurationBuilder setTargetEdgeCount(int targetEdgeCount)
+          throws IllegalArgumentException {
     if (targetEdgeCount < 0) {
       throw new IllegalArgumentException("targetEdgeCount must not be negative.");
     }

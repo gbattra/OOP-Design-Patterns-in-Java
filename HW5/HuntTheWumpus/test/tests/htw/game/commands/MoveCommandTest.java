@@ -15,6 +15,9 @@ import tests.htw.mocks.MockGame;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for MoveCommandTest.
+ */
 public class MoveCommandTest {
   @Test
   public void testMoveById() {

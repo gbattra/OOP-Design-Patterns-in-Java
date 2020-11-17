@@ -41,7 +41,7 @@ public interface IHtwNodeStrategy {
   void receive(IHtwPlayer player, IHtwNode curr) throws IOException;
 
   /**
-   * Does the node contain a smell?
+   * Does the node contain a smell.
    *
    * @param from from which direction is this node being smelled (used for tunnel strategies)
    * @param curr the node to smell
@@ -50,7 +50,7 @@ public interface IHtwNodeStrategy {
   boolean smelly(Direction from, IHtwNode curr);
 
   /**
-   * Does the node contain a draft?
+   * Does the node contain a draft.
    *
    * @param from from which direction is this node being sensed (used for tunnel strategies)
    * @param curr the node to sense

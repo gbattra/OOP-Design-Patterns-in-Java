@@ -8,6 +8,9 @@ import htw.game.IHtwPlayer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for Player.
+ */
 public class PlayerTest {
   @Test
   public void testConstructor() {

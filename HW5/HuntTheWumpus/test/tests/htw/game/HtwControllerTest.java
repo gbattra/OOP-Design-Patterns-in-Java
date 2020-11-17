@@ -11,8 +11,10 @@ import tests.htw.mocks.MockHtwCommandMapFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for HtwController.
+ */
 public class HtwControllerTest {
-
   @Test
   public void testConstructor() {
     try {

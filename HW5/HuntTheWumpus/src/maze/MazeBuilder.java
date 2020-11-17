@@ -31,6 +31,12 @@ public class MazeBuilder implements IMazeBuilder {
   protected int goldNodeCount;
   protected int thiefNodeCount;
 
+  /**
+   * Constructor for the maze builder.
+   *
+   * @param configuration config to use when building the maze
+   * @throws IllegalArgumentException if config is null
+   */
   public MazeBuilder(IConfiguration configuration) throws IllegalArgumentException {
     if (configuration == null) {
       throw new IllegalArgumentException("Configuration cannot be null.");

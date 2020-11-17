@@ -7,9 +7,17 @@ import htw.game.commands.strategies.IActionStrategy;
 import htw.level.IHtwMaze;
 import maze.utils.Direction;
 
+/**
+ * Mock class for HtwMaze.
+ */
 public class MockMaze implements IHtwMaze {
   private final StringBuilder log;
 
+  /**
+   * Constructor for mock.
+   *
+   * @param log log used for testing assertions
+   */
   public MockMaze(StringBuilder log) {
     this.log = log;
   }

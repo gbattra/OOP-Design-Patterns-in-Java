@@ -30,7 +30,8 @@ public class StandardStrategy implements IHtwNodeStrategy {
   }
 
   @Override
-  public void receive(IHtwPlayer player, IHtwNode curr) throws IllegalArgumentException, IOException {
+  public void receive(IHtwPlayer player, IHtwNode curr)
+          throws IllegalArgumentException, IOException {
     if (player == null) {
       throw new IllegalArgumentException("Player cannot be null.");
     }

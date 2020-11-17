@@ -15,6 +15,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for HtwGame.
+ */
 public class HtwGameTest {
   private IHtwMaze maze;
   private IHtwPlayer player;

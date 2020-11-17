@@ -13,6 +13,9 @@ import tests.htw.mocks.MockNewConfigCommand;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for NewGameCommand.
+ */
 public class NewGameCommandTest {
   @Test
   public void testNewGameCommand() {

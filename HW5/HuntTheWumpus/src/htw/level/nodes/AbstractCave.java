@@ -110,6 +110,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
         exits.remove(0);
         return node.getHelper(traversed, id);
       } catch (Exception ignored) {
+        // do nothing
       }
     }
 
@@ -170,7 +171,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
     List<Direction> exits = new ArrayList<>(
             Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     Map<Direction, Integer> neighbors = new HashMap<>();
-    for (Direction exit: exits) {
+    for (Direction exit : exits) {
       try {
         List<ICoordinates> traversed = new ArrayList<>();
         traversed.add(this.coordinates);

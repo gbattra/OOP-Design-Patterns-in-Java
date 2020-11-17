@@ -103,7 +103,7 @@ public interface IHtwNode extends Node {
   void receive(IHtwPlayer player) throws IOException;
 
   /**
-   * Does the node contain a smell?
+   * Does the node contain a smell.
    *
    * @param from from which direction is this node being smelled (used for tunnel nodes)
    * @return true for the node with the Wumpus.
@@ -111,7 +111,7 @@ public interface IHtwNode extends Node {
   boolean smelly(Direction from);
 
   /**
-   * Does the node contain a draft?
+   * Does the node contain a draft.
    *
    * @param from from which direction is this node being sensed (used for tunnel nodes)
    * @return true for the node with a bottomless pit.

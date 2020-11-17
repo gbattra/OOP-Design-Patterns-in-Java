@@ -13,6 +13,9 @@ import tests.htw.mocks.MockStandardConfigCommand;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for NewConfigCommand.
+ */
 public class NewConfigCommandTest {
   @Test
   public void testCustom() {

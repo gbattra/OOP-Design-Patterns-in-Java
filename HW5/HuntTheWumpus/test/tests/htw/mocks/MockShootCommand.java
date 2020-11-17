@@ -6,10 +6,19 @@ import java.util.Scanner;
 import htw.game.IHtwGame;
 import htw.game.commands.ICommand;
 
+/**
+ * Mock shoot command.
+ */
 public class MockShootCommand implements ICommand<IHtwGame> {
   private final StringBuffer log;
   private final Scanner scanner;
 
+  /**
+   * Constructor for mock.
+   *
+   * @param scanner for reading inputs
+   * @param log log used for testing assertions
+   */
   public MockShootCommand(Scanner scanner, StringBuffer log) {
     this.log = log;
     this.scanner = scanner;

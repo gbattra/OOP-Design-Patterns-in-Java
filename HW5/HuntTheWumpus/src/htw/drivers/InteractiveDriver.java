@@ -8,7 +8,15 @@ import htw.game.commands.strategies.DirActionStrategy;
 import htw.game.commands.strategies.IdActionStrategy;
 import htw.game.commands.strategies.IActionStrategy;
 
+/**
+ * Interactive demo driver.
+ */
 public class InteractiveDriver {
+  /**
+   * Main driver method.
+   *
+   * @param args args for running the program
+   */
   public static void main(String[] args) {
     System.out.print("Controller mode ([dir], 'id'): ");
     String type = new Scanner(System.in).nextLine().split(" ")[0];

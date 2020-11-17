@@ -10,6 +10,9 @@ import htw.tools.IHtwConfigurationBuilder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for StandardConfig.
+ */
 public class StandardConfigCommandTest {
   @Test
   public void testExecute() {

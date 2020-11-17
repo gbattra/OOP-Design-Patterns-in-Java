@@ -6,9 +6,17 @@ import htw.game.commands.ICommand;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 
+/**
+ * Mock new config command.
+ */
 public class MockNewConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   private final StringBuilder log;
 
+  /**
+   * Constructor for mock.
+   *
+   * @param log log used for testing assertions
+   */
   public MockNewConfigCommand(StringBuilder log) {
     this.log = log;
   }

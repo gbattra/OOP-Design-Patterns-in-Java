@@ -4,9 +4,17 @@ import htw.game.IHtwGame;
 import htw.game.commands.strategies.IActionStrategy;
 import maze.utils.Direction;
 
+/**
+ * Mock class for HtwGame.
+ */
 public class MockGame implements IHtwGame {
   private final StringBuffer log;
 
+  /**
+   * Constructor for mock.
+   *
+   * @param log log used for testing assertions
+   */
   public MockGame(StringBuffer log) {
     this.log = log;
   }

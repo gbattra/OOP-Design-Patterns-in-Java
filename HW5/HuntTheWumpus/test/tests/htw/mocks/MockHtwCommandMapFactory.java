@@ -10,10 +10,19 @@ import htw.game.commands.ICommand;
 import htw.game.commands.factories.ICommandMapFactory;
 import htw.game.commands.strategies.IActionStrategy;
 
+/**
+ * Mock class for HtwCommandMapFactory.
+ */
 public class MockHtwCommandMapFactory implements ICommandMapFactory<IHtwGame> {
   private final StringBuffer log;
   private final Scanner scanner;
 
+  /**
+   * Constructor for mock.
+   *
+   * @param scanner for reading inputs
+   * @param log log used for testing assertions
+   */
   public MockHtwCommandMapFactory(Scanner scanner, StringBuffer log) {
     this.log = log;
     this.scanner = scanner;

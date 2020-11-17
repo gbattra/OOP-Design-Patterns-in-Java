@@ -24,8 +24,8 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
    */
   @Override
   public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
-      List<Direction> exits = new ArrayList<>(
-            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    List<Direction> exits = new ArrayList<>(
+          Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {
       Direction exit = exits.get(0);
       exits.remove(0);
@@ -38,6 +38,7 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
         IHtwNode node = (IHtwNode) curr.getNode(exit);
         return node.enter(exit.opposite());
       } catch (Exception ignored) {
+        // do nothing
       }
     }
 
@@ -114,7 +115,7 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
       try {
         return ((IHtwNode) curr.getNode(exit)).adjacent(traversed);
       } catch (Exception ignored) {
-
+        // do nothing
       }
     }
 
