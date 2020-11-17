@@ -258,6 +258,16 @@ shoot n 4
 shoot 16 4
 ```
 
+**NOTE**: Sometimes you may get the following output:
+```
+Snatch! You are grabbed by superbats and dropped in another cave!
+Snatch! You are grabbed by superbats and dropped in another cave!
+Close one! You dodge the claws of the superbats.
+```
+This is not a bug. The first cave of bats grab and drop you in another cave of bats.
+These bats also grab and drop you in a cave with more bats. But this time you
+successfully dodged the bats.
+
 ### Bats Demo
 In this demo, the player moves and is grabbed by super bats, which (fortune would have it)
 drop the player in another cave with superbats. This time, however, the player successfully
