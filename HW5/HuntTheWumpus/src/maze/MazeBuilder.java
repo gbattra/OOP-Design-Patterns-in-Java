@@ -27,6 +27,7 @@ public class MazeBuilder implements IMazeBuilder {
   protected Node[][] visited;
   protected List<IEdge> edges;
   protected int totalExitCount = 0;
+  protected int currExitCount = 0;
   protected int goldNodeCount;
   protected int thiefNodeCount;
 
@@ -106,7 +107,7 @@ public class MazeBuilder implements IMazeBuilder {
     // get exit candidates
     List<Direction> exits = this.getPotentialExits(node);
 
-    int nodeExitCount = 0;
+    this.currExitCount = 0;
     while (!exits.isEmpty()) {
       // randomly pick exit
       int exitIndex = exits.size() > 1 ? this.config.random().nextInt(exits.size()) : 0;
@@ -124,24 +125,19 @@ public class MazeBuilder implements IMazeBuilder {
                 other.getCoordinates(),
                 exit.opposite(), exit);
       } else {
-        // if has not been visited, instantiate new node and grow
-        nodeExitCount++;
-        if (nodeExitCount > 1) {
-          node = this.upgradeHallway(node);
-        }
-
-        Node room = this.generateRoom(c);
-        node.setNode(room, exit);
-        room.setNode(node, exit.opposite());
-
-        // recursively call new node's grow to continue building out the maze
-        this.grow(room);
+        this.spawnAndGrow(node, exit);
       }
     }
   }
 
-  protected Node upgradeHallway(Node node) {
-    return node;
+  protected void spawnAndGrow(Node node, Direction exit) {
+    // if has not been visited, instantiate new node and grow
+    Node room = this.generateRoom(this.coordinatesAt(node, exit));
+    node.setNode(room, exit);
+    room.setNode(node, exit.opposite());
+
+    // recursively call new node's grow to continue building out the maze
+    this.grow(room);
   }
 
   protected void tearDownWalls() {

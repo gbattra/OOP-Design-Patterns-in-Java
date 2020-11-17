@@ -14,6 +14,7 @@ import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.components.IMaze;
 import maze.components.nodes.Node;
+import maze.utils.Direction;
 
 public class HtwMazeBuilder
         extends MazeBuilder implements IHtwMazeBuilder {
@@ -51,9 +52,12 @@ public class HtwMazeBuilder
   }
 
   @Override
-  protected Node upgradeHallway(Node node) {
-    ((IHtwNode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
-    return node;
+  protected void spawnAndGrow(Node node, Direction exit) {
+    if (this.currExitCount > 1) {
+      ((IHtwNode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
+    }
+
+    super.spawnAndGrow(node, exit);
   }
 
   private IHtwNodeStrategy generateStrategy(IHtwConfiguration config) {

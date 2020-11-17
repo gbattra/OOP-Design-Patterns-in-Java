@@ -36,17 +36,8 @@ public class HtwController implements Runnable {
   @Override
   public void run() {
     // initialize the game
-    try {
-      Function<Scanner, ICommand<IHtwGame>> entry = commands.get("restart");
-      ICommand<IHtwGame> cmd = entry.apply(this.scanner);
-      this.game = cmd.execute(this.game);
-
-      this.out.append("\n").append("Starting game...");
-      this.out.append("\n").append("Quit -> 'q' / 'quit'");
-      this.out.append("\n").append("Restart -> 'restart'");
-      this.out.append("\n");
-    } catch (Exception e)  {
-      return;
+    if (this.game == null) {
+      this.init();
     }
 
     // run the game
@@ -71,6 +62,21 @@ public class HtwController implements Runnable {
       } catch (Exception e) {
         break;
       }
+    }
+  }
+
+  private void init() {
+    try {
+      Function<Scanner, ICommand<IHtwGame>> entry = commands.get("restart");
+      ICommand<IHtwGame> cmd = entry.apply(this.scanner);
+      this.game = cmd.execute(this.game);
+
+      this.out.append("\n").append("Starting game...");
+      this.out.append("\n").append("Quit -> 'q' / 'quit'");
+      this.out.append("\n").append("Restart -> 'restart'");
+      this.out.append("\n");
+    } catch (Exception e)  {
+      throw new IllegalStateException("Failed to initialize game.");
     }
   }
 }

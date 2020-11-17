@@ -196,9 +196,4 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
             this.coordinates.toString(),
             this.strategy.toString());
   }
-
-  @Override
-  public int loot(int gold) {
-    return 0;
-  }
 }
