@@ -15,6 +15,9 @@ import htw.game.commands.StandardConfigCommand;
 import htw.game.commands.StartGameCommand;
 import htw.game.commands.strategies.IActionStrategy;
 
+/**
+ * Implementation of a command map factory.
+ */
 public class HtwCommandMapFactory implements ICommandMapFactory<IHtwGame> {
   @Override
   public Map<String, Function<Scanner, ICommand<IHtwGame>>> create(

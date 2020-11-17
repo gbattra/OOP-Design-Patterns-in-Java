@@ -4,6 +4,9 @@ import htw.game.commands.strategies.IActionStrategy;
 import htw.level.IHtwMaze;
 import maze.utils.Direction;
 
+/**
+ * Implementation of a Hunt the Wumpus game.
+ */
 public class HtwGame implements IHtwGame {
   private final IHtwPlayer player;
   private final IHtwMaze maze;
@@ -11,6 +14,14 @@ public class HtwGame implements IHtwGame {
 
   private boolean wumpusSlain = false;
 
+  /**
+   * Constructor for the game.
+   *
+   * @param player the player instance for the game
+   * @param maze the maze to use in the game
+   * @param logger the logger for game output
+   * @throws IllegalArgumentException if params are null
+   */
   public HtwGame(
           IHtwPlayer player,
           IHtwMaze maze,

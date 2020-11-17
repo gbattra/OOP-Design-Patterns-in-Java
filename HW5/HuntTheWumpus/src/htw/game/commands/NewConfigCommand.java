@@ -6,12 +6,24 @@ import java.util.Scanner;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 
+/**
+ * Command for creating a new configuration for the maze.
+ */
 public class NewConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   private final Appendable out;
   private final Scanner in;
   private final ICommand<IHtwConfigurationBuilder> customCmd;
   private final ICommand<IHtwConfigurationBuilder> standardCmd;
 
+  /**
+   * Constructor for the command.
+   *
+   * @param in scanner for reading inputs
+   * @param out appendable for writing out logs
+   * @param customCmd command for building a custom config
+   * @param standardCmd command for building a standard config
+   * @throws IllegalArgumentException if params are null
+   */
   public NewConfigCommand(
           Scanner in,
           Appendable out,

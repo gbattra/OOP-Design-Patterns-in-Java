@@ -12,11 +12,22 @@ import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 
+/**
+ * Command for initiliazing the game.
+ */
 public class StartGameCommand implements ICommand<IHtwGame> {
   private final Scanner in;
   private final Appendable out;
   private final ICommand<IHtwConfigurationBuilder> configCmd;
 
+  /**
+   * Constructor for the command.
+   *
+   * @param in scanner for reading inputs
+   * @param out appendable for writing out logs
+   * @param configCmd nested command for building the maze config
+   * @throws IllegalArgumentException if params are null
+   */
   public StartGameCommand(
           Scanner in,
           Appendable out,

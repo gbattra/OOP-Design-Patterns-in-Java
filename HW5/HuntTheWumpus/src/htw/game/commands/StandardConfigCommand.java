@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import htw.tools.IHtwConfigurationBuilder;
 
+/**
+ * Command for a standard maze for the Hunt the Wumpus game.
+ */
 public class StandardConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   @Override
   public IHtwConfigurationBuilder execute(IHtwConfigurationBuilder receiver)

@@ -8,6 +8,9 @@ import htw.game.commands.ICommand;
 import htw.game.commands.factories.ICommandMapFactory;
 import htw.game.commands.strategies.IActionStrategy;
 
+/**
+ * Controller for a Hunt the Wumpus game.
+ */
 public class HtwController implements Runnable {
   private final Map<String, Function<Scanner, ICommand<IHtwGame>>> commands;
   private final Scanner scanner;
@@ -15,8 +18,16 @@ public class HtwController implements Runnable {
   private final IActionStrategy strategy;
 
   private IHtwGame game;
-  private boolean started;
 
+  /**
+   * Constructor for the controller.
+   *
+   * @param scanner reads user inputs
+   * @param out writes logs to this appendable
+   * @param strategy the strategy / controller mode to use
+   * @param factory generates the command map for the controller
+   * @throws IllegalArgumentException if params are null
+   */
   public HtwController(
           Scanner scanner,
           Appendable out,

@@ -8,6 +8,9 @@ import htw.game.IHtwGame;
 import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
 
+/**
+ * Controller takes actions using node id's as input.
+ */
 public class IdActionStrategy implements IActionStrategy {
   @Override
   public void move(Scanner in, IHtwGame game) {

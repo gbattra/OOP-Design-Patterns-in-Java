@@ -5,10 +5,20 @@ import java.util.Scanner;
 
 import htw.tools.IHtwConfigurationBuilder;
 
+/**
+ * Command for setting up a custom maze config.
+ */
 public class CustomConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   private final Appendable out;
   private final Scanner in;
 
+  /**
+   * Constructor for the command.
+   *
+   * @param in scanner for reading inputs
+   * @param out appendable for writing out logs
+   * @throws IllegalArgumentException if params are null
+   */
   public CustomConfigCommand(Scanner in, Appendable out) throws IllegalArgumentException {
     if (in == null || out == null) {
       throw new IllegalArgumentException("In and out cannot be null.");
