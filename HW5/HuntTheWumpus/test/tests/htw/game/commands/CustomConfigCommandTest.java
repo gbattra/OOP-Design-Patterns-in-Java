@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
  */
 public class CustomConfigCommandTest {
   @Test
-  public void testExecuteNonRoomNonWrapping() {
+  public void testExecute() {
     try {
       StringBuilder log = new StringBuilder();
       ICommand<IHtwConfigurationBuilder> cmd = new CustomConfigCommand(
@@ -35,36 +35,6 @@ public class CustomConfigCommandTest {
       assertEquals(
               "Row count: "
               + "Column count: "
-              + "Is room maze ('true' / 'false'): "
-              + "Is wrapping maze ('true' / 'false'): "
-              + "Pit frequency (double): "
-              + "Bat frequency (double): ",
-              log.toString());
-    } catch (Exception e) {
-      fail("Valid execute should not have failed.");
-    }
-  }
-
-  @Test
-  public void testExecuteRoomWrapping() {
-    try {
-      StringBuilder log = new StringBuilder();
-      ICommand<IHtwConfigurationBuilder> cmd = new CustomConfigCommand(
-              new Scanner("5 5 true 4 true 0.2 0.3 "), log);
-      IHtwConfiguration config = cmd.execute(new HtwConfigurationBuilder()).build();
-      assertEquals(5, config.rowCount());
-      assertEquals(5, config.columnCount());
-      assertEquals(0.2, config.pitFrequency(), 0.001);
-      assertEquals(0.3, config.batFrequency(), 0.001);
-      assertTrue(config.isRoomMaze());
-      assertTrue(config.isWrappingMaze());
-
-      assertEquals(
-              "Row count: "
-              + "Column count: "
-              + "Is room maze ('true' / 'false'): "
-              + "Target edge count: "
-              + "Is wrapping maze ('true' / 'false'): "
               + "Pit frequency (double): "
               + "Bat frequency (double): ",
               log.toString());

@@ -40,17 +40,6 @@ public class CustomConfigCommand implements ICommand<IHtwConfigurationBuilder> {
     this.out.append("Column count: ");
     receiver = (IHtwConfigurationBuilder) receiver.setColumnCount(this.in.nextInt());
 
-    this.out.append("Is room maze ('true' / 'false'): ");
-    boolean isRoom = this.in.nextBoolean();
-    receiver = (IHtwConfigurationBuilder) receiver.setIsRoomMaze(isRoom);
-    if (isRoom) {
-      this.out.append("Target edge count: ");
-      receiver = (IHtwConfigurationBuilder) receiver.setTargetEdgeCount(this.in.nextInt());
-    }
-
-    this.out.append("Is wrapping maze ('true' / 'false'): ");
-    receiver = (IHtwConfigurationBuilder) receiver.setIsWrappingMaze(this.in.nextBoolean());
-
     this.out.append("Pit frequency (double): ");
     receiver = receiver.setPitFrequency(this.in.nextDouble());
 
