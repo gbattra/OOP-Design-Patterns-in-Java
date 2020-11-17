@@ -44,6 +44,34 @@ public class HtwController implements Runnable {
     this.commands = factory.create(out, strategy);
   }
 
+  /**
+   * Secondary constructor for the controller. Allows setting the game manually.
+   *
+   * @param scanner reads user inputs
+   * @param out writes logs to this appendable
+   * @param strategy the strategy / controller mode to use
+   * @param factory generates the command map for the controller
+   * @param game the game instance to use
+   * @throws IllegalArgumentException if params are null
+   */
+  public HtwController(
+          Scanner scanner,
+          Appendable out,
+          IActionStrategy strategy,
+          ICommandMapFactory<IHtwGame> factory,
+          IHtwGame game)
+          throws IllegalArgumentException {
+    if (scanner == null || out == null || strategy == null || game == null) {
+      throw new IllegalArgumentException("Params cannot be null.");
+    }
+
+    this.scanner = scanner;
+    this.out = out;
+    this.strategy = strategy;
+    this.commands = factory.create(out, strategy);
+    this.game = game;
+  }
+
   @Override
   public void run() {
     // initialize the game

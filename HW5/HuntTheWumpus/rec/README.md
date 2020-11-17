@@ -257,3 +257,17 @@ move 13
 shoot n 4
 shoot 16 4
 ```
+
+### Bats Demo
+In this demo, the player moves and is grabbed by super bats, which (fortune would have it)
+drop the player in another cave with superbats. This time, however, the player successfully
+dodges the superbats and enters the cave.
+
+### Pit Demo
+In this demo, the player moves two caves and falls into a bottomless pit.
+
+### Wumpus Eats Demo
+In this demo, the player is eaten by the Wumpus.
+
+### Wumpus Slain Demo
+In this demo, the player shoots and kills the Wumpus.

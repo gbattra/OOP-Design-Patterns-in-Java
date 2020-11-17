@@ -27,7 +27,6 @@ public class MazeBuilder implements IMazeBuilder {
   protected Node[][] visited;
   protected List<IEdge> edges;
   protected int totalExitCount = 0;
-  protected int currExitCount = 0;
   protected int goldNodeCount;
   protected int thiefNodeCount;
 
@@ -113,7 +112,7 @@ public class MazeBuilder implements IMazeBuilder {
     // get exit candidates
     List<Direction> exits = this.getPotentialExits(node);
 
-    this.currExitCount = 0;
+    int currExitCount = 0;
     while (!exits.isEmpty()) {
       // randomly pick exit
       int exitIndex = exits.size() > 1 ? this.config.random().nextInt(exits.size()) : 0;
@@ -131,12 +130,13 @@ public class MazeBuilder implements IMazeBuilder {
                 other.getCoordinates(),
                 exit.opposite(), exit);
       } else {
-        this.spawnAndGrow(node, exit);
+        currExitCount++;
+        this.spawnAndGrow(node, exit, currExitCount);
       }
     }
   }
 
-  protected void spawnAndGrow(Node node, Direction exit) {
+  protected void spawnAndGrow(Node node, Direction exit, int currExitCount) {
     // if has not been visited, instantiate new node and grow
     Node room = this.generateRoom(this.coordinatesAt(node, exit));
     node.setNode(room, exit);

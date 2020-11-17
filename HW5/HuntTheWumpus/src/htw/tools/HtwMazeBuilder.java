@@ -59,12 +59,12 @@ public class HtwMazeBuilder extends MazeBuilder {
   }
 
   @Override
-  protected void spawnAndGrow(Node node, Direction exit) {
-    if (this.currExitCount > 1) {
+  protected void spawnAndGrow(Node node, Direction exit, int currExitCount) {
+    if (currExitCount > 1) {
       ((IHtwNode) node).setStrategy(this.generateStrategy((IHtwConfiguration) this.config));
     }
 
-    super.spawnAndGrow(node, exit);
+    super.spawnAndGrow(node, exit, currExitCount);
   }
 
   /**
