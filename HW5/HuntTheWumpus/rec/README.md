@@ -198,9 +198,10 @@ return new HashMap<>() {{
     }};
 ```
 - `StartGameCommand`<br>
-This command sets up a new Hunt the Wumpus game. In addition to a `Scanner` and `Appendable`
-reference, it takes as constructor args two other `ICommand<T>` instances. Each responsible
-for generating the configuration for the maze to be generated.
+This command sets up a new Hunt the Wumpus game, promting the user for player and maze
+configuration. In addition to a `Scanner` and `Appendable` reference, it takes as
+constructor args another `ICommand<T>` instance responsible for generating the
+configuration for the maze to be generated.
 
 - `MoveCommand`<br>
 Moves the player given user input. Takes an `IActionStrategy` which allows different modes
@@ -212,6 +213,39 @@ which allows different modes of shooting: by `Direction` or by node `id`.
 
 # Demo
 
-### Automatic Runs
-
 ### Interactive Demo
+The interactive demo driver consists of the follow `main()` method:
+```
+System.out.print("Controller type ([dir], 'id'): ");
+String type = new Scanner(System.in).nextLine().split(" ")[0];
+IActionStrategy strategy = new ActionByDirStrategy();
+if (type.equalsIgnoreCase("id")) {
+  strategy = new ActionByIdStrategy();
+}
+
+Runnable controller = new HtwController(
+        new Scanner(System.in),
+        System.out,
+        strategy,
+        new HtwCommandMapFactory());
+controller.run();
+```
+The initial block is simply asking the user which `mode` they would prefer when playing the game:
+`standard` means moving and shooting using the Cardinal directions, `id` means using the
+adjacent node `id`s. This should be extracted from the `String[] args` param, but for ease
+of use I have the driver prompting for this input.
+
+All that's left from there is to instantiate the controller and `run()` it.
+
+### Controls
+- **move** -> `move <dir>` or `move <id>`
+- **shoot** -> `shoot <dir> <count>` or `shoot <id> <count>`
+
+i.e.:
+```
+move e
+move 13
+
+shoot n 4
+shoot 16 4
+```

@@ -8,7 +8,7 @@ import htw.game.IHtwGame;
 import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
 
-public class ActionByIdStrategy implements IActionStrategy {
+public class IdActionStrategy implements IActionStrategy {
   @Override
   public void move(Scanner in, IHtwGame game) {
     int id = in.nextInt();

@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Scanner;
 
 import htw.game.HtwController;
-import htw.game.commands.strategies.ActionByDirStrategy;
+import htw.game.commands.strategies.DirActionStrategy;
 import tests.htw.mocks.MockHtwCommandMapFactory;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class HtwControllerTest {
       Runnable controller = new HtwController(
               new Scanner(""),
               log,
-              new ActionByDirStrategy(),
+              new DirActionStrategy(),
               new MockHtwCommandMapFactory(new Scanner(""), log));
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
@@ -41,7 +41,7 @@ public class HtwControllerTest {
       Runnable controller = new HtwController(
               scanner,
               log,
-              new ActionByDirStrategy(),
+              new DirActionStrategy(),
               new MockHtwCommandMapFactory(scanner, log));
       controller.run();
       assertEquals(
@@ -67,7 +67,7 @@ public class HtwControllerTest {
       Runnable controller = new HtwController(
               scanner,
               log,
-              new ActionByDirStrategy(),
+              new DirActionStrategy(),
               new MockHtwCommandMapFactory(scanner, log));
       controller.run();
       assertEquals(

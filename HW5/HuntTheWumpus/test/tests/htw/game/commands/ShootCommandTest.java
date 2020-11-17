@@ -8,8 +8,8 @@ import java.util.Scanner;
 import htw.game.IHtwGame;
 import htw.game.commands.ICommand;
 import htw.game.commands.ShootCommand;
-import htw.game.commands.strategies.ActionByDirStrategy;
-import htw.game.commands.strategies.ActionByIdStrategy;
+import htw.game.commands.strategies.DirActionStrategy;
+import htw.game.commands.strategies.IdActionStrategy;
 import tests.htw.mocks.MockGame;
 
 import static org.junit.Assert.assertEquals;
@@ -21,7 +21,7 @@ public class ShootCommandTest {
     StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> shootCmd = new ShootCommand(
-            new Scanner("1 1"), System.out, new ActionByIdStrategy());
+            new Scanner("1 1"), System.out, new IdActionStrategy());
     try {
       shootCmd.execute(game);
       assertEquals("shoot - 1 - 1", log.toString());
@@ -35,7 +35,7 @@ public class ShootCommandTest {
     StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> shootCmd = new ShootCommand(
-            new Scanner("e 1"), System.out, new ActionByDirStrategy());
+            new Scanner("e 1"), System.out, new DirActionStrategy());
     try {
       shootCmd.execute(game);
       assertEquals("shoot - EAST - 1", log.toString());

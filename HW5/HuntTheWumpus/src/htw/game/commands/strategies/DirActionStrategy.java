@@ -8,7 +8,7 @@ import htw.game.IHtwGame;
 import htw.level.nodes.IHtwNode;
 import maze.utils.Direction;
 
-public class ActionByDirStrategy implements IActionStrategy {
+public class DirActionStrategy implements IActionStrategy {
   @Override
   public void move(Scanner in, IHtwGame game) {
     Direction dir = Direction.stringToDirection(in.next());

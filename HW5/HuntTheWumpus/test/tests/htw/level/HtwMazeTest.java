@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import htw.game.HtwPlayer;
 import htw.game.IHtwPlayer;
-import htw.game.commands.strategies.ActionByDirStrategy;
-import htw.game.commands.strategies.ActionByIdStrategy;
+import htw.game.commands.strategies.DirActionStrategy;
+import htw.game.commands.strategies.IdActionStrategy;
 import htw.level.HtwMaze;
 import htw.level.IHtwMaze;
 import htw.level.nodes.Cave;
@@ -88,7 +88,7 @@ public class HtwMazeTest {
       assertTrue(maze.move(Direction.EAST));
       assertEquals(
               "You are in cave (2, 1) with tunnels to the WEST",
-              maze.status(new ActionByDirStrategy()));
+              maze.status(new DirActionStrategy()));
     } catch (Exception e) {
       fail("Invalid move should have return false, not thrown.");
     }
@@ -102,7 +102,7 @@ public class HtwMazeTest {
       assertTrue(maze.move(3));
       assertEquals(
               "You are in cave 3 with tunnels to node(s) 5",
-              maze.status(new ActionByIdStrategy()));
+              maze.status(new IdActionStrategy()));
     } catch (Exception e) {
       fail("Invalid move should have return false, not thrown.");
     }
