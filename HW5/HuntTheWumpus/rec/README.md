@@ -122,6 +122,14 @@ number of caves to traverse (the `count` arg). If `count == 0`, the current stra
 This method operates on the `IHtwPlayer` instance. A `Wumpus` or `Pit` strategy will `kill()`
 the players while other strategies do nothing.
 
+- `smelly()` & `drafty()`<br>
+These methods are used to provide sensor data to the player. `Wumpus` strategies will return `true`
+for `smell()` while `Pit` strategies will return `true` for `drafty()`.
+
+- `adjacent(List<ICoordinates> coords)`<br>
+Returns a `Map` of `Direction -> node id` pairs for all caves connected
+directly to this node.
+
 ### `IHtwMaze`
 An `IHtwMaze` object acts as an ADT around the root `Node` of the maze itself. This protects the
 state of the maze. It exposes methods to `shoot()` and `move()` either by `Direction` or node `id`.

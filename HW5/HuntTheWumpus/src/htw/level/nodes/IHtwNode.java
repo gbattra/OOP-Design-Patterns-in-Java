@@ -102,9 +102,28 @@ public interface IHtwNode extends Node {
    */
   void receive(IHtwPlayer player) throws IOException;
 
+  /**
+   * Does the node contain a smell?
+   *
+   * @param from from which direction is this node being smelled (used for tunnel nodes)
+   * @return true for the node with the Wumpus.
+   */
   boolean smelly(Direction from);
 
+  /**
+   * Does the node contain a draft?
+   *
+   * @param from from which direction is this node being sensed (used for tunnel nodes)
+   * @return true for the node with a bottomless pit.
+   */
   boolean drafty(Direction from);
 
+  /**
+   * Returns a `Map` of `Direction -> node id` pairs for all caves connected
+   * directly to this node.
+   *
+   * @param traversed nodes traversed so far (used by tunnel nodes)
+   * @return this node if it is not a tunnel
+   */
   IHtwNode adjacent(List<ICoordinates> traversed);
 }

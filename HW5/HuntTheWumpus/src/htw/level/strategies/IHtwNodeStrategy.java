@@ -40,9 +40,31 @@ public interface IHtwNodeStrategy {
    */
   void receive(IHtwPlayer player, IHtwNode curr) throws IOException;
 
+  /**
+   * Does the node contain a smell?
+   *
+   * @param from from which direction is this node being smelled (used for tunnel strategies)
+   * @param curr the node to smell
+   * @return true for the node with the Wumpus.
+   */
   boolean smelly(Direction from, IHtwNode curr);
 
+  /**
+   * Does the node contain a draft?
+   *
+   * @param from from which direction is this node being sensed (used for tunnel strategies)
+   * @param curr the node to sense
+   * @return true for the node with a bottomless pit.
+   */
   boolean drafty(Direction from, IHtwNode curr);
 
+  /**
+   * Returns a `Map` of `Direction -> node id` pairs for all caves connected
+   * directly to this node.
+   *
+   * @param traversed nodes traversed so far (used by tunnel strategies)
+   * @param curr the node being traversed currently
+   * @return this node if it is not a tunnel
+   */
   IHtwNode adjacent(List<ICoordinates> traversed, IHtwNode curr);
 }

@@ -16,11 +16,18 @@ import maze.components.IMaze;
 import maze.components.nodes.Node;
 import maze.utils.Direction;
 
-public class HtwMazeBuilder
-        extends MazeBuilder implements IHtwMazeBuilder {
+/**
+ * Builder for an HtwMaze.
+ */
+public class HtwMazeBuilder extends MazeBuilder {
   private boolean wumpusSet;
   private int currentId = 1;
 
+  /**
+   * Constructor for the builder.
+   *
+   * @param configuration the configuration to use when building the maze.
+   */
   public HtwMazeBuilder(IHtwConfiguration configuration) {
     super(configuration);
   }
@@ -60,6 +67,12 @@ public class HtwMazeBuilder
     super.spawnAndGrow(node, exit);
   }
 
+  /**
+   * Generates a cave strategy using the provided configuration.
+   *
+   * @param config the config to guide strategy instantiation
+   * @return the new strategy instance
+   */
   private IHtwNodeStrategy generateStrategy(IHtwConfiguration config) {
     double next = config.random().nextDouble();
     boolean isPit = next <= config.pitFrequency();
@@ -85,6 +98,11 @@ public class HtwMazeBuilder
     return strategy;
   }
 
+  /**
+   * Updates the node's strategy to Wumpus, making it the node where lives the beast.
+   *
+   * @param node the node to set as Wumpus
+   */
   private void setWumpus(IHtwNode node) {
     Coordinates coordinates = new Coordinates(
             this.config.random().nextInt(this.config.columnCount()),

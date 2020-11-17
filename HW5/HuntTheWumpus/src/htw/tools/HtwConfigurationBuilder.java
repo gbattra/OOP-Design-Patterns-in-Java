@@ -2,6 +2,9 @@ package htw.tools;
 
 import maze.config.MazeConfigurationBuilder;
 
+/**
+ * Builder for a config object for an HtwMaze.
+ */
 public class HtwConfigurationBuilder
         extends MazeConfigurationBuilder implements IHtwConfigurationBuilder {
   protected double pitFrequency = 0.2;

@@ -8,12 +8,22 @@ import htw.level.nodes.IHtwNode;
 import maze.components.Maze;
 import maze.utils.Direction;
 
+/**
+ * The maze object in the Hunt the Wumpus game.
+ */
 public class HtwMaze extends Maze implements IHtwMaze {
   private final IHtwNode root;
   private final Appendable logger;
 
   private IHtwNode current;
 
+  /**
+   * Constructor for the maze.
+   *
+   * @param root the root node of the maze
+   * @param logger the logger for the maze
+   * @throws IllegalArgumentException if params are null
+   */
   public HtwMaze(IHtwNode root, Appendable logger) throws IllegalArgumentException {
     super(root, root);
     if (root == null || logger == null) {
