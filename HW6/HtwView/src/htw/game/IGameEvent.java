@@ -3,5 +3,5 @@ package htw.game;
 import htw.view.IView;
 import visitors.IVisitable;
 
-public interface IRound extends IVisitable<IView> {
+public interface IGameEvent extends IVisitable<IView> {
 }
