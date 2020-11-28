@@ -44,26 +44,16 @@ public class HtwMaze extends Maze implements IHtwMaze {
 
   @Override
   public boolean move(Integer id, IRound round) throws IOException {
-    try {
-      Direction dir = this.current.directionTo(id);
-      this.current = ((IHtwNode) this.current.getNode(dir)).enter(dir.opposite(), round);
-      return true;
-    } catch (Exception e) {
-      this.logger.append("Cannot move to ").append(id.toString()).append(".");
-      return false;
-    }
+    Direction dir = this.current.directionTo(id);
+    this.current = ((IHtwNode) this.current.getNode(dir)).enter(dir.opposite(), round);
+    return true;
   }
 
   @Override
   public boolean move(Direction direction, IRound round) throws IOException {
-    try {
-      this.current =
-              ((IHtwNode) this.current.getNode(direction)).enter(direction.opposite(), round);
-      return true;
-    } catch (Exception e) {
-      this.logger.append("Cannot move to the ").append(direction.toString()).append(".");
-      return false;
-    }
+    this.current =
+            ((IHtwNode) this.current.getNode(direction)).enter(direction.opposite(), round);
+    return true;
   }
 
   @Override

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import htw.game.IRound;
+import htw.game.events.MoveEvent;
 import maze.components.ICoordinates;
 import maze.Direction;
 
@@ -25,6 +26,8 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
    */
   @Override
   public IHtwNode enter(Direction from, IHtwNode curr, IRound round) throws IOException {
+    round.addEvent(new MoveEvent(curr.getCoordinates()));
+
     List<Direction> exits = new ArrayList<>(
           Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {
