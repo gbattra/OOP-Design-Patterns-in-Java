@@ -2,6 +2,7 @@ package htw.game;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import htw.game.commands.IActionStrategy;
@@ -12,7 +13,7 @@ import htw.game.commands.ICommandMapFactory;
  * Controller for a Hunt the Wumpus game.
  */
 public class HtwController implements Runnable {
-  private final Map<String, Function<Scanner, ICommand<IHtwGame>>> commands;
+  private final Map<String, BiFunction<Scanner, IRound, ICommand<IHtwGame>>> commands;
   private final Scanner scanner;
   private final Appendable out;
   private final IActionStrategy strategy;
@@ -80,8 +81,9 @@ public class HtwController implements Runnable {
     }
 
     // run the game
-    while (!this.game.isOver()) {
+    while (!this.game.hasNext()) {
       try {
+        IRound round = this.game.next();
         this.out.append("\n").append(this.game.status(strategy));
         this.out.append("\n'shoot' or 'move'? ");
         String next = this.scanner.next();
@@ -90,13 +92,13 @@ public class HtwController implements Runnable {
           break;
         }
 
-        Function<Scanner, ICommand<IHtwGame>> entry = commands.get(next);
+        BiFunction<Scanner, IRound, ICommand<IHtwGame>> entry = commands.get(next);
         if (entry == null) {
           this.out.append("Command not found. Try again.");
           continue;
         }
 
-        ICommand<IHtwGame> cmd = entry.apply(this.scanner);
+        ICommand<IHtwGame> cmd = entry.apply(this.scanner, round);
         this.game = cmd.execute(this.game);
       } catch (Exception e) {
         break;
@@ -106,8 +108,9 @@ public class HtwController implements Runnable {
 
   private void init() {
     try {
-      Function<Scanner, ICommand<IHtwGame>> entry = commands.get("restart");
-      ICommand<IHtwGame> cmd = entry.apply(this.scanner);
+      IRound round = new Round();
+      BiFunction<Scanner, IRound, ICommand<IHtwGame>> entry = commands.get("restart");
+      ICommand<IHtwGame> cmd = entry.apply(this.scanner, round);
       this.game = cmd.execute(this.game);
 
       this.out.append("\n").append("Starting game...");
