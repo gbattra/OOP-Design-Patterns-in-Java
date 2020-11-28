@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Random;
 
 import htw.game.IRound;
+import htw.game.events.AlertEvent;
+import htw.game.events.MoveEvent;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.Direction;
@@ -45,15 +47,19 @@ public class BatStrategy extends StandardStrategy implements IHtwNodeStrategy {
 
   @Override
   public IHtwNode enter(Direction from, IHtwNode curr, IRound round) throws IOException {
+    round.addEvent(
+            new MoveEvent(curr.getCoordinates()));
+
     if (this.random.nextDouble() <= 0.5) {
-      curr.logger().append("Snatch! You are grabbed by superbats and dropped in another cave!\n");
+      round.addEvent(
+              new AlertEvent("Snatch! You are grabbed by superbats and dropped in another cave!"));
       int row = this.random.nextInt(this.rowCount);
       int column = this.random.nextInt(this.columnCount);
       ICoordinates coordinates = new Coordinates(column, row);
       return ((IHtwNode) curr.get(coordinates)).enter(from, round);
     }
 
-    curr.logger().append("Close one! You dodge the claws of the superbats.\n");
+    round.addEvent(new AlertEvent("Close one! You dodge the claws of the Superbats."));
     return this.parent.enter(from, curr, round);
   }
 

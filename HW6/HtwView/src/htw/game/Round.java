@@ -3,11 +3,11 @@ package htw.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import htw.game.events.IGameEvent;
 import htw.view.IView;
 
 public class Round implements IRound {
   private final int number;
-
   private final List<IGameEvent> events = new ArrayList<>();
 
   public Round(int number) throws IllegalArgumentException {

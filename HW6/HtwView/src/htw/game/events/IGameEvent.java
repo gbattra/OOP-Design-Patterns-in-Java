@@ -1,4 +1,4 @@
-package htw.game;
+package htw.game.events;
 
 import htw.view.IView;
 import visitors.IVisitable;

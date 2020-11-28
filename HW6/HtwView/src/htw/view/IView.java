@@ -1,6 +1,8 @@
 package htw.view;
 
-import htw.game.IGameEvent;
+import htw.game.IHtwGame;
+import htw.game.events.IGameEvent;
+import maze.components.ICoordinates;
 import visitors.IVisitor;
 
 /**
@@ -12,7 +14,21 @@ public interface IView extends IVisitor {
    * Instructs view to render a game restart event. Typically this would involve resetting the
    * GUI to reflect the new maze, initial player position, etc.
    *
-   * @param e the game event to render
+   * @param game the game to render
    */
-   void renderRestart(IGameEvent e);
+   void renderRestart(IHtwGame game);
+
+  /**
+   * Instructs view to render a move event.
+   *
+   * @param c the coordinates to which the player has moved
+   */
+   void renderMove(ICoordinates c);
+
+  /**
+   * Renders and alert in the view.
+   *
+   * @param message the alert message to render
+   */
+  void renderAlert(String message);
 }

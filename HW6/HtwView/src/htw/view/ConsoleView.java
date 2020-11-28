@@ -1,6 +1,8 @@
 package htw.view;
 
-import htw.game.IGameEvent;
+import htw.game.IHtwGame;
+import htw.game.events.IGameEvent;
+import maze.components.ICoordinates;
 import visitors.IVisitable;
 import visitors.IVisitor;
 
@@ -10,6 +12,16 @@ public class ConsoleView implements IView {
   }
 
   @Override
-  public void renderRestart(IGameEvent e) {
+  public void renderRestart(IHtwGame game) {
+  }
+
+  @Override
+  public void renderMove(ICoordinates coordinates) {
+
+  }
+
+  @Override
+  public void renderAlert(String message) {
+
   }
 }
