@@ -45,7 +45,7 @@ public class HtwGame implements IHtwGame {
   }
 
   @Override
-  public boolean move(Direction direction) {
+  public boolean move(Direction direction, IRound round) {
     try {
       boolean move = this.maze.move(direction);
       if (move) {

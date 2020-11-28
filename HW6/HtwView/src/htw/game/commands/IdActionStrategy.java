@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import htw.game.IHtwGame;
+import htw.game.IRound;
 import htw.level.IHtwNode;
 import maze.Direction;
 
@@ -13,13 +14,13 @@ import maze.Direction;
  */
 public class IdActionStrategy implements IActionStrategy {
   @Override
-  public void move(Scanner in, IHtwGame game) {
+  public void move(Scanner in, IHtwGame game, IRound round) {
     int id = in.nextInt();
     game.move(id);
   }
 
   @Override
-  public void shoot(Scanner in, IHtwGame game) {
+  public void shoot(Scanner in, IHtwGame game, IRound round) {
     int id = in.nextInt();
     int count = in.nextInt();
     game.shoot(id, count);

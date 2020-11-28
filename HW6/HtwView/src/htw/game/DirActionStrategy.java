@@ -13,13 +13,13 @@ import maze.Direction;
  */
 public class DirActionStrategy implements IActionStrategy {
   @Override
-  public void move(Scanner in, IHtwGame game) {
+  public void move(Scanner in, IHtwGame game, IRound round) {
     Direction dir = Direction.stringToDirection(in.next());
-    game.move(dir);
+    game.move(dir, round);
   }
 
   @Override
-  public void shoot(Scanner in, IHtwGame game) {
+  public void shoot(Scanner in, IHtwGame game, IRound round) {
     Direction dir = Direction.stringToDirection(in.next());
     int count = in.nextInt();
     game.shoot(dir, count);

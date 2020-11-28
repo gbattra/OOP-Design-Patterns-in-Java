@@ -7,6 +7,7 @@ import htw.game.HtwGame;
 import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import htw.level.IHtwMaze;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
@@ -17,6 +18,7 @@ import htw.tools.IHtwConfigurationBuilder;
  */
 public class StartGameCommand implements ICommand<IHtwGame> {
   private final Scanner in;
+  private final IRound round;
   private final Appendable out;
   private final ICommand<IHtwConfigurationBuilder> configCmd;
 
@@ -24,12 +26,14 @@ public class StartGameCommand implements ICommand<IHtwGame> {
    * Constructor for the command.
    *
    * @param in scanner for reading inputs
+   * @param round round object to store events
    * @param out appendable for writing out logs
    * @param configCmd nested command for building the maze config
    * @throws IllegalArgumentException if params are null
    */
   public StartGameCommand(
           Scanner in,
+          IRound round,
           Appendable out,
           ICommand<IHtwConfigurationBuilder> configCmd)
           throws IllegalArgumentException {
@@ -37,6 +41,7 @@ public class StartGameCommand implements ICommand<IHtwGame> {
       throw new IllegalArgumentException("Params cannot be null.");
     }
     this.in = in;
+    this.round = round;
     this.out = out;
     this.configCmd = configCmd;
   }

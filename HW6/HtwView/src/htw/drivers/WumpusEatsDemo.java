@@ -7,7 +7,7 @@ import htw.game.HtwGame;
 import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
-import htw.game.HtwCommandMapFactory;
+import htw.game.commands.HtwCommandMapFactory;
 import htw.game.DirActionStrategy;
 import htw.level.IHtwMaze;
 import htw.tools.HtwConfigurationBuilder;

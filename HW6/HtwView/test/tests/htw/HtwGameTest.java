@@ -7,6 +7,7 @@ import htw.game.HtwGame;
 import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
+import htw.game.Round;
 import htw.level.IHtwMaze;
 import maze.Direction;
 import tests.htw.mocks.MockMaze;
@@ -54,7 +55,7 @@ public class HtwGameTest {
 
   @Test
   public void testMoveDir() {
-    this.game.move(Direction.EAST);
+    this.game.move(Direction.EAST, new Round());
     assertEquals("moved - EASTreceive - Joe", this.log.toString());
   }
 

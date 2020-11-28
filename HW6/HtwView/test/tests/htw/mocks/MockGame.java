@@ -1,6 +1,8 @@
 package tests.htw.mocks;
 
 import htw.game.IHtwGame;
+import htw.game.IRound;
+import htw.game.Round;
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
 
@@ -30,7 +32,7 @@ public class MockGame implements IHtwGame {
   }
 
   @Override
-  public boolean move(Direction direction) {
+  public boolean move(Direction direction, IRound round) {
     this.log.append("move - ").append(direction);
     return false;
   }
@@ -51,5 +53,15 @@ public class MockGame implements IHtwGame {
   public boolean shoot(int id, int count) {
     this.log.append("shoot - ").append(id).append(" - ").append(count);
     return false;
+  }
+
+  @Override
+  public boolean hasNext() {
+    return false;
+  }
+
+  @Override
+  public IRound next() {
+    return new Round();
   }
 }

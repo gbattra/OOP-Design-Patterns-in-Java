@@ -28,9 +28,10 @@ public interface IHtwGame extends Iterator<IRound> {
    * Moves the player to the cave at the specified direction.
    *
    * @param direction the direction to move
+   * @param round round object to store events
    * @return true if move was successful
    */
-  boolean move(Direction direction);
+  boolean move(Direction direction, IRound round);
 
   /**
    * Moves the player to the cave with the specified id.

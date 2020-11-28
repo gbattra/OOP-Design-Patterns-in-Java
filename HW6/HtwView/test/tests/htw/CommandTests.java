@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import htw.game.IHtwGame;
+import htw.game.Round;
 import htw.game.commands.CustomConfigCommand;
 import htw.game.commands.ICommand;
 import htw.game.commands.MoveCommand;
@@ -61,7 +62,7 @@ public class CommandTests {
       StringBuilder log = new StringBuilder();
       ICommand<IHtwConfigurationBuilder> configCmd = new MockNewConfigCommand(log);
       ICommand<IHtwGame> gameCommand = new StartGameCommand(
-              new Scanner("Greg 10"), System.out, configCmd);
+              new Scanner("Greg 10"), new Round(), System.out, configCmd);
       gameCommand.execute(null);
       assertEquals("config - execute", log.toString());
     } catch (Exception e) {
@@ -85,7 +86,7 @@ public class CommandTests {
     StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> shootCmd = new ShootCommand(
-            new Scanner("1 1"), System.out, new IdActionStrategy());
+            new Scanner("1 1"), new Round(), System.out, new IdActionStrategy());
     try {
       shootCmd.execute(game);
       assertEquals("shoot - 1 - 1", log.toString());
@@ -99,7 +100,7 @@ public class CommandTests {
     StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> shootCmd = new ShootCommand(
-            new Scanner("e 1"), System.out, new DirActionStrategy());
+            new Scanner("e 1"), new Round(), System.out, new DirActionStrategy());
     try {
       shootCmd.execute(game);
       assertEquals("shoot - EAST - 1", log.toString());
@@ -131,7 +132,7 @@ public class CommandTests {
     StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> moveCmd = new MoveCommand(
-            new Scanner("1"), System.out, new IdActionStrategy());
+            new Scanner("1"), new Round(), System.out, new IdActionStrategy());
     try {
       moveCmd.execute(game);
       assertEquals("move - 1", log.toString());
@@ -145,7 +146,7 @@ public class CommandTests {
     StringBuffer log = new StringBuffer();
     IHtwGame game = new MockGame(log);
     ICommand<IHtwGame> moveCmd = new MoveCommand(
-            new Scanner("e"), System.out, new DirActionStrategy());
+            new Scanner("e"), new Round(), System.out, new DirActionStrategy());
     try {
       moveCmd.execute(game);
       assertEquals("move - EAST", log.toString());
