@@ -5,7 +5,7 @@ package visitors;
  *
  * @param <T> the type of the visitor which much extend IVisitor
  */
-public interface IVisitable<T extends IVisitor> {
+public interface IVisitable<T> {
   /**
    * The entrypoint to the visitable object.
    *

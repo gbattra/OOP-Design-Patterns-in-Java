@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import htw.game.events.IGameEvent;
-import htw.view.IView;
+import visitors.IRoundVisitor;
 
 public class Round implements IRound {
   private final int number;
@@ -19,8 +19,13 @@ public class Round implements IRound {
   }
 
   @Override
-  public void receive(IView visitor) {
-    visitor.visit(this);
+  public void receive(IRoundVisitor visitor) {
+    visitor.visitRound(this);
+  }
+
+  @Override
+  public List<IGameEvent> getGameEvents() {
+    return this.events;
   }
 
   @Override

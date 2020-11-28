@@ -1,6 +1,6 @@
 package htw.game.events;
 
-import htw.view.IView;
+import visitors.IGameEventVisitor;
 
 public class AlertEvent implements IGameEvent {
   private final String message;
@@ -14,7 +14,7 @@ public class AlertEvent implements IGameEvent {
     this.message = message;
   }
   @Override
-  public void receive(IView visitor) {
-    visitor.handleAlert(this.message);
+  public void receive(IGameEventVisitor visitor) {
+    visitor.alert(this.message);
   }
 }

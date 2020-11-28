@@ -1,7 +1,7 @@
 package htw.game.events;
 
-import htw.view.IView;
 import maze.components.ICoordinates;
+import visitors.IGameEventVisitor;
 
 public class MoveEvent implements IGameEvent {
   private final ICoordinates coordinates;
@@ -15,7 +15,7 @@ public class MoveEvent implements IGameEvent {
   }
 
   @Override
-  public void receive(IView visitor) {
-    visitor.handleMove(this.coordinates);
+  public void receive(IGameEventVisitor visitor) {
+    visitor.move(this.coordinates);
   }
 }

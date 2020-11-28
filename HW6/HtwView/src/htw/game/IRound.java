@@ -1,9 +1,12 @@
 package htw.game;
 
+import java.util.List;
+
 import htw.game.events.IGameEvent;
-import htw.view.IView;
+import visitors.IRoundVisitor;
 import visitors.IVisitable;
 
-public interface IRound extends IVisitable<IView> {
+public interface IRound extends IVisitable<IRoundVisitor> {
   void addEvent(IGameEvent e) throws IllegalArgumentException;
+  List<IGameEvent> getGameEvents();
 }

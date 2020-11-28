@@ -1,26 +1,30 @@
 package htw.view;
 
 import htw.game.IHtwGame;
+import htw.game.IRound;
+import htw.game.events.IGameEvent;
 import maze.components.ICoordinates;
-import visitors.IVisitable;
-import visitors.IVisitor;
 
 public class ConsoleView implements IView {
   @Override
-  public <R extends IVisitor, T extends IVisitable<R>> void visit(T receiver) {
+  public void visitRound(IRound round) {
+    for (IGameEvent event : round.getGameEvents()) {
+      event.receive(this);
+    }
   }
 
   @Override
-  public void handleRestart(IHtwGame game) {
-  }
-
-  @Override
-  public void handleMove(ICoordinates coordinates) {
+  public void restart(IHtwGame game) {
 
   }
 
   @Override
-  public void handleAlert(String message) {
+  public void move(ICoordinates coordinates) {
+
+  }
+
+  @Override
+  public void alert(String message) {
 
   }
 }

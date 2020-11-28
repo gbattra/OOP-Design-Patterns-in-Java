@@ -1,7 +1,7 @@
 package htw.game.events;
 
 import htw.game.IHtwGame;
-import htw.view.IView;
+import visitors.IGameEventVisitor;
 
 public class RestartEvent implements IGameEvent {
   public final IHtwGame game;
@@ -14,7 +14,7 @@ public class RestartEvent implements IGameEvent {
     this.game = game;
   }
   @Override
-  public void receive(IView visitor) {
-    visitor.handleRestart(this.game);
+  public void receive(IGameEventVisitor visitor) {
+    visitor.restart(this.game);
   }
 }
