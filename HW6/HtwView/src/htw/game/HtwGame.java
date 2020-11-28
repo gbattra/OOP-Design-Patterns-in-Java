@@ -1,5 +1,7 @@
 package htw.game;
 
+import java.util.List;
+
 import htw.game.commands.IActionStrategy;
 import htw.level.IHtwMaze;
 import maze.Direction;
@@ -8,35 +10,38 @@ import maze.Direction;
  * Implementation of a Hunt the Wumpus game.
  */
 public class HtwGame implements IHtwGame {
-  private final IHtwPlayer player;
+  private final List<IHtwPlayer> players;
   private final IHtwMaze maze;
   private final Appendable logger;
 
   private boolean wumpusSlain = false;
+  private int roundNumber = -1;
 
   /**
    * Constructor for the game.
    *
-   * @param player the player instance for the game
+   * @param players the players of the game
    * @param maze the maze to use in the game
    * @param logger the logger for game output
    * @throws IllegalArgumentException if params are null
    */
   public HtwGame(
-          IHtwPlayer player,
+          List<IHtwPlayer> players,
           IHtwMaze maze,
           Appendable logger) throws IllegalArgumentException {
-    if (player == null || maze == null || logger == null) {
+    if (players == null || maze == null || logger == null) {
       throw new IllegalArgumentException("Player and maze cannot be null.");
     }
-    this.player = player;
+    this.players = players;
     this.maze = maze;
     this.logger = logger;
   }
 
   @Override
   public boolean isOver() {
-    return this.player.arrowCount() == 0 || !this.player.isAlive() || this.wumpusSlain;
+    return this.players.stream().allMatch(p -> p.arrowCount() == 0)
+        || this.players.stream().noneMatch(IHtwPlayer::isAlive)
+        || this.wumpusSlain;
   }
 
   @Override
@@ -49,7 +54,7 @@ public class HtwGame implements IHtwGame {
     try {
       boolean move = this.maze.move(direction);
       if (move) {
-        this.maze.receive(this.player);
+        this.maze.receive(this.activePlayer());
       }
       return move;
     } catch (Exception e) {
@@ -62,7 +67,7 @@ public class HtwGame implements IHtwGame {
     try {
       boolean move = this.maze.move(id);
       if (move) {
-        this.maze.receive(this.player);
+        this.maze.receive(this.activePlayer());
       }
       return move;
     } catch (Exception e) {
@@ -74,12 +79,12 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(Direction direction, int count) {
     try {
       boolean hit = this.maze.shoot(direction, count);
-      this.player.decrementArrowCount();
+      this.activePlayer().decrementArrowCount();
       if (hit) {
         this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
         this.wumpusSlain = true;
       } else {
-        this.logger.append("Miss... You have " + this.player.arrowCount() + " remaining arrows.");
+        this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
       }
 
       return hit;
@@ -92,12 +97,12 @@ public class HtwGame implements IHtwGame {
   public boolean shoot(int id, int count) {
     try {
       boolean hit = this.maze.shoot(id, count);
-      this.player.decrementArrowCount();
+      this.activePlayer().decrementArrowCount();
       if (hit) {
         this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
         this.wumpusSlain = true;
       } else {
-        this.logger.append("Miss... You have " + this.player.arrowCount() + " remaining arrows.");
+        this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
       }
 
       return hit;
@@ -113,6 +118,11 @@ public class HtwGame implements IHtwGame {
 
   @Override
   public IRound next() {
-    return new Round();
+    this.roundNumber++;
+    return new Round(this.roundNumber);
+  }
+
+  private IHtwPlayer activePlayer() {
+    return this.players.get(this.roundNumber % this.players.size());
   }
 }

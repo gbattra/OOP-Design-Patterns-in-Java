@@ -108,7 +108,7 @@ public class HtwController implements Runnable {
 
   private void init() {
     try {
-      IRound round = new Round();
+      IRound round = new Round(0);
       BiFunction<Scanner, IRound, ICommand<IHtwGame>> entry = commands.get("restart");
       ICommand<IHtwGame> cmd = entry.apply(this.scanner, round);
       this.game = cmd.execute(this.game);

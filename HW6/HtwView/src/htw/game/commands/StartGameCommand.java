@@ -1,6 +1,9 @@
 package htw.game.commands;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import htw.game.HtwGame;
@@ -57,6 +60,7 @@ public class StartGameCommand implements ICommand<IHtwGame> {
             this.configCmd.execute(new HtwConfigurationBuilder())
             .build())
             .build();
-    return new HtwGame(player, maze, this.out);
+    List<IHtwPlayer> players = new ArrayList<>(Collections.singletonList(player));
+    return new HtwGame(players, maze, this.out);
   }
 }

@@ -62,6 +62,6 @@ public class MockGame implements IHtwGame {
 
   @Override
   public IRound next() {
-    return new Round();
+    return new Round(0);
   }
 }
