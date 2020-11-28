@@ -15,6 +15,6 @@ public class RestartEvent implements IGameEvent {
   }
   @Override
   public void receive(IView visitor) {
-    visitor.renderRestart(this.game);
+    visitor.handleRestart(this.game);
   }
 }

@@ -15,6 +15,6 @@ public class AlertEvent implements IGameEvent {
   }
   @Override
   public void receive(IView visitor) {
-    visitor.renderAlert(this.message);
+    visitor.handleAlert(this.message);
   }
 }

@@ -16,19 +16,19 @@ public interface IView extends IVisitor {
    *
    * @param game the game to render
    */
-   void renderRestart(IHtwGame game);
+   void handleRestart(IHtwGame game);
 
   /**
    * Instructs view to render a move event.
    *
    * @param c the coordinates to which the player has moved
    */
-   void renderMove(ICoordinates c);
+   void handleMove(ICoordinates c);
 
   /**
    * Renders and alert in the view.
    *
    * @param message the alert message to render
    */
-  void renderAlert(String message);
+  void handleAlert(String message);
 }

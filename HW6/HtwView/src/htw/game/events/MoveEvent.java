@@ -16,6 +16,6 @@ public class MoveEvent implements IGameEvent {
 
   @Override
   public void receive(IView visitor) {
-    visitor.renderMove(this.coordinates);
+    visitor.handleMove(this.coordinates);
   }
 }
