@@ -1,5 +1,6 @@
 package htw.game;
 
+import java.io.IOException;
 import java.util.List;
 
 import htw.game.commands.IActionStrategy;
@@ -50,22 +51,18 @@ public class HtwGame implements IHtwGame {
   }
 
   @Override
-  public boolean move(Direction direction, IRound round) {
-    try {
-      boolean move = this.maze.move(direction);
-      if (move) {
-        this.maze.receive(this.activePlayer());
-      }
-      return move;
-    } catch (Exception e) {
-      return false;
+  public boolean move(Direction direction, IRound round) throws IOException {
+    boolean move = this.maze.move(direction, round);
+    if (move) {
+      this.maze.receive(this.activePlayer());
     }
+    return move;
   }
 
   @Override
-  public boolean move(int id) {
+  public boolean move(int id, IRound round) {
     try {
-      boolean move = this.maze.move(id);
+      boolean move = this.maze.move(id, round);
       if (move) {
         this.maze.receive(this.activePlayer());
       }

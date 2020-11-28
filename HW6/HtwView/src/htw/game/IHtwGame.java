@@ -1,5 +1,6 @@
 package htw.game;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import htw.game.commands.IActionStrategy;
@@ -31,15 +32,16 @@ public interface IHtwGame extends Iterator<IRound> {
    * @param round round object to store events
    * @return true if move was successful
    */
-  boolean move(Direction direction, IRound round);
+  boolean move(Direction direction, IRound round) throws IOException;
 
   /**
    * Moves the player to the cave with the specified id.
    *
    * @param id the node to move toward
+   * @param round round object to store events
    * @return true if move was successful
    */
-  boolean move(int id);
+  boolean move(int id, IRound round);
 
   /**
    * Shoots an arrow to the specified direction.

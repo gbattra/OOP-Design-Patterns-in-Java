@@ -38,7 +38,7 @@ public class MockGame implements IHtwGame {
   }
 
   @Override
-  public boolean move(int id) {
+  public boolean move(int id, IRound round) {
     this.log.append("move - ").append(id);
     return false;
   }

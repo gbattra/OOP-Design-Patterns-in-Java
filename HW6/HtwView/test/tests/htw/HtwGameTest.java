@@ -53,14 +53,22 @@ public class HtwGameTest {
 
   @Test
   public void testMoveId() {
-    this.game.move(1);
-    assertEquals("moved - 1receive - Joe", this.log.toString());
+    try {
+      this.game.move(1, new Round(0));
+      assertEquals("moved - 1receive - Joe", this.log.toString());
+    } catch (Exception e) {
+      fail("Valid move() should not have failed.");
+    }
   }
 
   @Test
   public void testMoveDir() {
-    this.game.move(Direction.EAST, new Round(0));
-    assertEquals("moved - EASTreceive - Joe", this.log.toString());
+    try {
+      this.game.move(Direction.EAST, new Round(0));
+      assertEquals("moved - EASTreceive - Joe", this.log.toString());
+    } catch (Exception e) {
+      fail("Valid move() should not have failed.");
+    }
   }
 
   @Test

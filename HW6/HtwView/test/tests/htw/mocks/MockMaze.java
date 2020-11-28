@@ -3,6 +3,7 @@ package tests.htw.mocks;
 import java.io.IOException;
 
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import htw.game.commands.IActionStrategy;
 import htw.level.IHtwMaze;
 import maze.Direction;
@@ -28,14 +29,14 @@ public class MockMaze implements IHtwMaze {
   }
 
   @Override
-  public boolean move(Direction direction) {
+  public boolean move(Direction direction, IRound round) {
     this.log.append(
             String.format("moved - %s", direction.toString()));
     return true;
   }
 
   @Override
-  public boolean move(Integer id) {
+  public boolean move(Integer id, IRound round) {
     this.log.append(
             String.format("moved - %s", id));
     return true;

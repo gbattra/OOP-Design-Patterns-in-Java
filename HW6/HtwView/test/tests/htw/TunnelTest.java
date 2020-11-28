@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import htw.game.Round;
 import htw.level.Cave;
 import htw.level.DeadEnd;
 import htw.level.IHtwNode;
@@ -40,7 +41,7 @@ public class TunnelTest {
   @Test
   public void testValidEnter() {
     try {
-      IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
+      IHtwNode entered = this.tunnel.enter(Direction.SOUTH, new Round(0));
       assertEquals(this.north, entered);
     } catch (Exception e) {
       fail("Valid enter() should not have failed.");
@@ -51,7 +52,7 @@ public class TunnelTest {
   public void testInvalidEnter() {
     try {
       this.tunnel.setNode(new DeadEnd(), Direction.NORTH);
-      IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
+      IHtwNode entered = this.tunnel.enter(Direction.SOUTH, new Round(0));
       fail("Invalid enter() should have failed.");
     } catch (IOException e) {
       // do nothing

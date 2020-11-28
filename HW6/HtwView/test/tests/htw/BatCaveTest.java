@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.Random;
 
+import htw.game.Round;
 import htw.level.Cave;
 import htw.level.IHtwNode;
 import htw.level.BatStrategy;
@@ -54,10 +55,10 @@ public class BatCaveTest {
     try {
       IHtwNode cave = new Cave(6, new Coordinates(0, 0), this.standard, System.out);
       this.north.setNode(cave, Direction.EAST);
-      IHtwNode node = this.bat.enter(Direction.SOUTH);
+      IHtwNode node = this.bat.enter(Direction.SOUTH, new Round(0));
       assertEquals(this.bat, node);
 
-      node = this.bat.enter(Direction.SOUTH);
+      node = this.bat.enter(Direction.SOUTH, new Round(0));
       assertNotEquals(this.bat, node);
     } catch (Exception e) {
       fail("Valid enter() should not have failed.");

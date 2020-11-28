@@ -1,5 +1,6 @@
 package htw.game.commands;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import htw.game.IHtwGame;
@@ -26,7 +27,7 @@ public interface IActionStrategy {
    * @param round object for tracking in-game events
    * @param game the game model to call
    */
-  void move(Scanner in, IHtwGame game, IRound round);
+  void move(Scanner in, IHtwGame game, IRound round) throws IOException;
 
   /**
    * Prints the game status to out.

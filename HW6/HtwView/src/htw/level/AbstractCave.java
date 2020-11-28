@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import maze.components.ICoordinates;
 import maze.components.AbstractRoomNode;
 import maze.components.Node;
@@ -125,8 +126,8 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
-  public IHtwNode enter(Direction from) throws IOException {
-    return this.strategy.enter(from, this);
+  public IHtwNode enter(Direction from, IRound round) throws IOException {
+    return this.strategy.enter(from, this, round);
   }
 
   @Override

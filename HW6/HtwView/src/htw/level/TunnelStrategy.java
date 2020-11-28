@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import htw.game.IRound;
 import maze.components.ICoordinates;
 import maze.Direction;
 
@@ -18,11 +19,12 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
    * node from which they entered.
    *
    * @param from the direction from which the node is entered
+   * @param round object for capturing in-game events
    * @param curr the node itself
    * @return the node where the tunnel leads
    */
   @Override
-  public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
+  public IHtwNode enter(Direction from, IHtwNode curr, IRound round) throws IOException {
     List<Direction> exits = new ArrayList<>(
           Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
     while (exits.size() > 0) {
@@ -35,7 +37,7 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
 
       try {
         IHtwNode node = (IHtwNode) curr.getNode(exit);
-        return node.enter(exit.opposite());
+        return node.enter(exit.opposite(), round);
       } catch (Exception ignored) {
         // do nothing
       }

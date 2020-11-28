@@ -1,5 +1,6 @@
 package htw.game;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ import maze.Direction;
  */
 public class DirActionStrategy implements IActionStrategy {
   @Override
-  public void move(Scanner in, IHtwGame game, IRound round) {
+  public void move(Scanner in, IHtwGame game, IRound round) throws IOException {
     Direction dir = Direction.stringToDirection(in.next());
     game.move(dir, round);
   }

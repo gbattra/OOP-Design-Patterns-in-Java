@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import htw.game.HtwPlayer;
+import htw.game.Round;
 import htw.level.DeadEnd;
 import htw.level.IHtwNode;
 import htw.level.StandardStrategy;
@@ -22,7 +23,7 @@ public class DeadEndTest {
   public void testEnter() {
     try {
       IHtwNode deadend = new DeadEnd();
-      deadend.enter(Direction.NORTH);
+      deadend.enter(Direction.NORTH, new Round(0));
       fail("Dead end node enter() should have failed.");
     } catch (IOException e) {
       // do nothing

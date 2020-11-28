@@ -16,7 +16,7 @@ public class IdActionStrategy implements IActionStrategy {
   @Override
   public void move(Scanner in, IHtwGame game, IRound round) {
     int id = in.nextInt();
-    game.move(id);
+    game.move(id, round);
   }
 
   @Override

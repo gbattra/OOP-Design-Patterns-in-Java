@@ -3,6 +3,7 @@ package htw.level;
 import java.io.IOException;
 
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
 
@@ -30,19 +31,21 @@ public interface IHtwMaze {
    * Moves the current pointer to the cave at the specified direction.
    *
    * @param direction the direction to move
+   * @param round object for capturing in-game events
    * @return true if move was successful
    * @throws IOException if writes to out fail
    */
-  boolean move(Direction direction) throws IOException;
+  boolean move(Direction direction, IRound round) throws IOException;
 
   /**
    * Moves the current pointer to the cave with the specified id.
    *
    * @param id the node to move toward
+   * @param round object for capturing in-game events
    * @return true if move was successful
    * @throws IOException if writes to out fail
    */
-  boolean move(Integer id) throws IOException;
+  boolean move(Integer id, IRound round) throws IOException;
 
   /**
    * Shoots an arrow to the specified direction.

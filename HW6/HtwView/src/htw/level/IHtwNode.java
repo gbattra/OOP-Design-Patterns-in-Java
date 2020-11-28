@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import maze.components.ICoordinates;
 import maze.components.Node;
 import maze.Direction;
@@ -72,9 +73,10 @@ public interface IHtwNode extends Node {
    * node in the maze.
    *
    * @param from the direction from which the node was entered
+   * @param round object for capturing in-game events
    * @return the entered node
    */
-  IHtwNode enter(Direction from) throws IOException;
+  IHtwNode enter(Direction from, IRound round) throws IOException;
 
   /**
    * Shoots an arrow in the specified direction. Each node traversed by the arrow decrements the

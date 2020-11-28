@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import maze.components.ICoordinates;
 import maze.Direction;
 
@@ -16,10 +17,11 @@ public interface IHtwNodeStrategy {
    * Functionality for entering the node.
    *
    * @param from the direction from which the node is entered
+   * @param round object for capturing in-game events
    * @param curr the node itself
    * @return the node entered
    */
-  IHtwNode enter(Direction from, IHtwNode curr) throws IOException;
+  IHtwNode enter(Direction from, IHtwNode curr, IRound round) throws IOException;
 
   /**
    * Shoots an arrow in the specified direction and traverses the specified number of caves.

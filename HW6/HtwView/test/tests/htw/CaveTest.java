@@ -8,6 +8,7 @@ import java.util.Map;
 
 import htw.game.HtwPlayer;
 import htw.game.IHtwPlayer;
+import htw.game.Round;
 import htw.level.Cave;
 import htw.level.DeadEnd;
 import htw.level.IHtwNode;
@@ -61,7 +62,7 @@ public class CaveTest {
   @Test
   public void testEnter() {
     try {
-      assertEquals(this.cave, this.cave.enter(Direction.NORTH));
+      assertEquals(this.cave, this.cave.enter(Direction.NORTH, new Round(0)));
     } catch (IOException e) {
       fail("Valid enter should not have failed.");
     }

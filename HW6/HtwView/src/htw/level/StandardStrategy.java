@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import maze.components.ICoordinates;
 import maze.Direction;
 
@@ -15,7 +16,7 @@ import maze.Direction;
  */
 public class StandardStrategy implements IHtwNodeStrategy {
   @Override
-  public IHtwNode enter(Direction from, IHtwNode curr) throws IOException {
+  public IHtwNode enter(Direction from, IHtwNode curr, IRound round) throws IOException {
     curr.logger().append("You enter the cave and...\n");
     return curr;
   }

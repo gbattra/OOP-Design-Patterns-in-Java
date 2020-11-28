@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import htw.game.IHtwPlayer;
+import htw.game.IRound;
 import maze.components.ICoordinates;
 import maze.components.DeadEndNode;
 import maze.Direction;
@@ -29,7 +30,7 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
-  public IHtwNode enter(Direction from) throws IllegalStateException {
+  public IHtwNode enter(Direction from, IRound round) throws IllegalStateException {
     throw new IllegalStateException("Cannot enter a dead end node.");
   }
 
