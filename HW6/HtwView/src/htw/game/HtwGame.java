@@ -105,4 +105,14 @@ public class HtwGame implements IHtwGame {
       return false;
     }
   }
+
+  @Override
+  public boolean hasNext() {
+    return !this.isOver();
+  }
+
+  @Override
+  public IRound next() {
+    return new Round();
+  }
 }

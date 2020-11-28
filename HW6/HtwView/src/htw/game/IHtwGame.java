@@ -1,12 +1,14 @@
 package htw.game;
 
+import java.util.Iterator;
+
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
 
 /**
  * Interface for an instance of a Hunt the Wumpus game.
  */
-public interface IHtwGame {
+public interface IHtwGame extends Iterator<IRound> {
   /**
    * Computes a string representation of the game state.
    *
