@@ -1,10 +1,10 @@
 package document;
 
-import document.element.TextElementVisitor;
 import java.util.ArrayList;
 import java.util.List;
 
 import document.element.TextElement;
+import document.element.TextElementVisitor;
 
 /**
  * Concrete implementation of a Document.
@@ -31,10 +31,10 @@ public class Document {
   /**
    * Counts the words in the doc.
    *
-   * @param visitor the visitor doing the counting
    * @return the number of words in the doc
    */
-  public int countWords(TextElementVisitor<Integer> visitor) {
+  public int countWords() {
+    TextElementVisitor<Integer> visitor = new WordCountVisitor();
     int count = 0;
     for (TextElement element : this.content) {
       count += element.accept(visitor);

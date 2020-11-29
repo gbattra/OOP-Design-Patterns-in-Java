@@ -1,5 +1,8 @@
 package document.element;
 
+/**
+ * Heading concrete implementation.
+ */
 public class Heading extends BasicText {
 
   /** The level of this heading. */
