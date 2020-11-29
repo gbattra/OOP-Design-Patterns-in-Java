@@ -28,8 +28,9 @@ public interface IActionStrategy {
   /**
    * Prints the game status to out.
    *
+   * @param playerNumber the no. of the active player in the game
    * @param curr the node to assess
    * @return a string representation of the node state
    */
-  String status(IHtwNode curr);
+  String status(int playerNumber, IHtwNode curr);
 }

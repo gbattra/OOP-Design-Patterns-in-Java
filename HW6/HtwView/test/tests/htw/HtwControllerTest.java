@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Scanner;
 
 import htw.game.HtwController;
-import htw.game.DirActionStrategy;
+import htw.game.commands.DirActionStrategy;
 import tests.htw.mocks.MockHtwCommandMapFactory;
 
 import static org.junit.Assert.assertEquals;

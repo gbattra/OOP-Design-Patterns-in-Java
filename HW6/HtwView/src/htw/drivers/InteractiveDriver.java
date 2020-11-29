@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import htw.game.HtwController;
 import htw.game.HtwCommandMapFactory;
-import htw.game.DirActionStrategy;
+import htw.game.commands.DirActionStrategy;
 import htw.game.commands.IActionStrategy;
 import htw.game.commands.IdActionStrategy;
 

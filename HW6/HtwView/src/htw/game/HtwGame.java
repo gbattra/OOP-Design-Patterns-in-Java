@@ -114,7 +114,22 @@ public class HtwGame implements IHtwGame {
     }
   }
 
+  @Override
+  public boolean hasNext() {
+    return !this.isOver();
+  }
+
+  @Override
+  public Integer next() {
+    this.round++;
+    return this.round;
+  }
+
   private IHtwPlayer activePlayer() {
-    return this.players.get(this.round % this.players.size());
+    return this.players.get(this.activePlayerNumber());
+  }
+
+  private int activePlayerNumber() {
+    return this.round % this.players.size();
   }
 }

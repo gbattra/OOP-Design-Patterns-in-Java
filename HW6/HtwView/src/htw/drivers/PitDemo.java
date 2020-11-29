@@ -11,7 +11,7 @@ import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
 import htw.game.HtwCommandMapFactory;
-import htw.game.DirActionStrategy;
+import htw.game.commands.DirActionStrategy;
 import htw.level.IHtwMaze;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;

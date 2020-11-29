@@ -1,9 +1,10 @@
-package htw.game;
+package htw.game.commands;
 
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import htw.game.IHtwGame;
 import htw.game.commands.IActionStrategy;
 import htw.level.IHtwNode;
 import maze.Direction;
@@ -26,10 +27,11 @@ public class DirActionStrategy implements IActionStrategy {
   }
 
   @Override
-  public String status(IHtwNode curr) {
+  public String status(int playerNumber, IHtwNode curr) {
     Map<Direction, Integer> neighbors = curr.neighbors();
     return String.format(
-            "You are in cave %s with tunnels to the %s",
+            "Player %s: You are in cave %s with tunnels to the %s",
+            playerNumber,
             curr.getCoordinates().toString(),
             neighbors
                     .keySet()

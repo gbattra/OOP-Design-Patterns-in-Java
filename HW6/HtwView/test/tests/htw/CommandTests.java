@@ -13,7 +13,7 @@ import htw.game.commands.NewConfigCommand;
 import htw.game.commands.ShootCommand;
 import htw.game.commands.StandardConfigCommand;
 import htw.game.commands.StartGameCommand;
-import htw.game.DirActionStrategy;
+import htw.game.commands.DirActionStrategy;
 import htw.game.commands.IdActionStrategy;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.IHtwConfiguration;

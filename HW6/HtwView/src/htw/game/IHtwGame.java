@@ -8,7 +8,7 @@ import maze.Direction;
 /**
  * Interface for an instance of a Hunt the Wumpus game.
  */
-public interface IHtwGame {
+public interface IHtwGame extends Iterator<Integer> {
   /**
    * Computes a string representation of the game state.
    *

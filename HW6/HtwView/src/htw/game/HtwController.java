@@ -80,8 +80,9 @@ public class HtwController implements Runnable {
     }
 
     // run the game
-    while (!this.game.isOver()) {
+    while (!this.game.hasNext()) {
       try {
+        int round = this.game.next();
         this.out.append("\n").append(this.game.status(strategy));
         this.out.append("\n'shoot' or 'move'? ");
         String next = this.scanner.next();

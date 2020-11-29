@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import htw.game.HtwPlayer;
 import htw.game.IHtwPlayer;
-import htw.game.DirActionStrategy;
+import htw.game.commands.DirActionStrategy;
 import htw.game.commands.IdActionStrategy;
 import htw.level.HtwMaze;
 import htw.level.IHtwMaze;

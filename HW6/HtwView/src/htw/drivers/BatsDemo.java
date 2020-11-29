@@ -1,7 +1,6 @@
 package htw.drivers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +11,7 @@ import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
 import htw.game.HtwCommandMapFactory;
-import htw.game.DirActionStrategy;
+import htw.game.commands.DirActionStrategy;
 import htw.level.IHtwMaze;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
