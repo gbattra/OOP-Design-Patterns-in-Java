@@ -8,47 +8,50 @@ import document.element.ItalicText;
 import document.element.Paragraph;
 import document.element.TextElementVisitor;
 
-public class BasicStringVisitor implements TextElementVisitor<Void> {
+public class HtmlStringVisitor implements TextElementVisitor<Void> {
   private final StringBuilder stringBuilder = new StringBuilder();
 
   @Override
   public Void visitBasicText(BasicText current) {
-    stringBuilder.append(current.getText()).append(" ");
+    stringBuilder.append(current.getText()).append("\n");
     return null;
   }
 
   @Override
   public Void visitBoldText(BoldText current) {
-    stringBuilder.append(current.getText()).append(" ");
+    stringBuilder.append("<b>").append(current.getText()).append("</b>").append("\n");
     return null;
   }
 
   @Override
   public Void visitHeading(Heading current) {
-    stringBuilder.append(current.getText()).append(" ");
+    String startTag = String.format("<h%s>", current.getLevel());
+    String endTag = String.format("</h%s>", current.getLevel());
+    stringBuilder.append(startTag).append(current.getText()).append(endTag).append("\n");
     return null;
   }
 
   @Override
   public Void visitHyperText(HyperText current) {
-    stringBuilder.append(current.getText()).append(" ");
+    String tag = String.format("<a href=\"%s\">", current.getUrl());
+    stringBuilder.append(tag).append(current.getText()).append("</a>").append("\n");
     return null;
   }
 
   @Override
   public Void visitItalicText(ItalicText current) {
-    stringBuilder.append(current.getText()).append(" ");
+    stringBuilder.append("<i>").append(current.getText()).append("</i>").append("\n");
     return null;
   }
 
   @Override
   public Void visitParagraph(Paragraph current) {
-    stringBuilder.append(current.getText()).append(" ");
+    stringBuilder.append("<p>").append(current.getText()).append("</p>").append("\n");
     return null;
   }
 
   @Override
   public String toString() {
-    return this.stringBuilder.toString().trim();
+    return this.stringBuilder.toString();
   }
 }
