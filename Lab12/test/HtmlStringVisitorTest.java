@@ -13,6 +13,9 @@ import document.element.TextElementVisitor;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for a HtmlStringVisitor.
+ */
 public class HtmlStringVisitorTest {
   private Document document = new Document();
   private final String fourWordText = "This has four words.";

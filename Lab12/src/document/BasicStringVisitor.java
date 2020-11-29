@@ -8,6 +8,9 @@ import document.element.ItalicText;
 import document.element.Paragraph;
 import document.element.TextElementVisitor;
 
+/**
+ * Concrete implementation of a BasicStringVisitor.
+ */
 public class BasicStringVisitor implements TextElementVisitor<Void> {
   private final StringBuilder stringBuilder = new StringBuilder();
 

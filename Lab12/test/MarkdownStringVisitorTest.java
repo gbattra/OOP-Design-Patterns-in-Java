@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import document.Document;
-import document.HtmlStringVisitor;
 import document.MarkdownStringVisitor;
 import document.element.BasicText;
 import document.element.BoldText;
@@ -14,6 +13,10 @@ import document.element.TextElementVisitor;
 
 import static org.junit.Assert.assertEquals;
 
+
+/**
+ * Tests for a MarkdownStringVisitor.
+ */
 public class MarkdownStringVisitorTest {
   private Document document = new Document();
   private final String fourWordText = "This has four words.";

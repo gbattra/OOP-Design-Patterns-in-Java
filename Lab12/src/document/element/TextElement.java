@@ -12,6 +12,12 @@ public interface TextElement {
    */
   String getText();
 
-  // accept method goes here...=
+  /**
+   * Accepts a visitor object.
+   *
+   * @param visitor the visitor to accept
+   * @param <R> the return type of the function
+   * @return instance of type R
+   */
   <R> R accept(TextElementVisitor<R> visitor);
 }

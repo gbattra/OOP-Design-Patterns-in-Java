@@ -8,6 +8,9 @@ import document.element.ItalicText;
 import document.element.Paragraph;
 import document.element.TextElementVisitor;
 
+/**
+ * Concrete implementation of a WordCountVisitor.
+ */
 public class WordCountVisitor implements TextElementVisitor<Integer> {
   @Override
   public Integer visitBasicText(BasicText current) {
