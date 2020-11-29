@@ -1,6 +1,9 @@
 package htw.game.commands;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import htw.game.HtwGame;
@@ -48,10 +51,11 @@ public class StartGameCommand implements ICommand<IHtwGame> {
     this.out.append("Starting arrow count: ");
     int arrowCount = this.in.nextInt();
     IHtwPlayer player = new HtwPlayer(name, arrowCount);
+    List<IHtwPlayer> players = new ArrayList<>(Collections.singletonList(player));
     IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(
             this.configCmd.execute(new HtwConfigurationBuilder())
             .build())
             .build();
-    return new HtwGame(player, maze, this.out);
+    return new HtwGame(players, maze, this.out);
   }
 }

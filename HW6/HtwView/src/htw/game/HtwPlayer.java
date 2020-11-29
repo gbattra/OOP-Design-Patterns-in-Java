@@ -1,5 +1,6 @@
 package htw.game;
 
+import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.game.MazePlayer;
 
@@ -9,7 +10,8 @@ import maze.game.MazePlayer;
 public class HtwPlayer extends MazePlayer implements IHtwPlayer {
   private int arrowCount;
   private boolean alive;
-  private ICoordinates currentPosition;
+
+  private ICoordinates currentPosition = new Coordinates(0, 0);
 
   /**
    * Constructor for the player.

@@ -28,10 +28,12 @@ public class HtwMazeTest {
   private IHtwNode root;
   private IHtwMaze maze;
   private StringBuilder log;
+  private IHtwPlayer player;
 
   @Before
   public void setup() {
     this.log = new StringBuilder();
+
     IHtwNode north = new Cave(1, new Coordinates(1, 0), new StandardStrategy(), log);
     IHtwNode south = new Cave(2, new Coordinates(1, 2), new StandardStrategy(), log);
     IHtwNode east = new Cave(3, new Coordinates(2, 1), new StandardStrategy(), log);
@@ -49,6 +51,9 @@ public class HtwMazeTest {
     west.setNode(root, Direction.WEST.opposite());
 
     this.maze = new HtwMaze(root, log);
+    this.player = new HtwPlayer("Joe", 10);
+
+    this.player.setCurrentPosition(this.root.getCoordinates());
   }
 
   @Test
@@ -73,7 +78,7 @@ public class HtwMazeTest {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), log);
       IHtwMaze maze = new HtwMaze(root, log);
-      assertFalse(maze.move(Direction.EAST));
+      assertFalse(maze.move(player, Direction.EAST));
     } catch (Exception e) {
       fail("Invalid move should have return false, not thrown.");
     }
@@ -83,11 +88,13 @@ public class HtwMazeTest {
   public void testMoveByDir() {
     try {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
+      player.setCurrentPosition(this.root.getCoordinates());
       IHtwMaze maze = new HtwMaze(root, log);
-      assertTrue(maze.move(Direction.EAST));
+      assertTrue(maze.move(player, Direction.EAST));
       assertEquals(
               "You are in cave (2, 1) with tunnels to the WEST",
-              maze.status(new DirActionStrategy()));
+              maze.status(player, new DirActionStrategy()));
+      assertEquals(new Coordinates(2, 1), player.currentPosition());
     } catch (Exception e) {
       fail("Invalid move should have return false, not thrown.");
     }
@@ -97,11 +104,13 @@ public class HtwMazeTest {
   public void testMoveById() {
     try {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
+      player.setCurrentPosition(this.root.getCoordinates());
       IHtwMaze maze = new HtwMaze(root, log);
-      assertTrue(maze.move(3));
+      assertTrue(maze.move(player, 3));
       assertEquals(
               "You are in cave 3 with tunnels to node(s) 5",
-              maze.status(new IdActionStrategy()));
+              maze.status(player, new IdActionStrategy()));
+      assertEquals(new Coordinates(2, 1), player.currentPosition());
     } catch (Exception e) {
       fail("Invalid move should have return false, not thrown.");
     }
@@ -109,17 +118,17 @@ public class HtwMazeTest {
 
   @Test
   public void testShootById() {
-    assertFalse(this.maze.shoot(Direction.EAST, 1));
+    assertFalse(this.maze.shoot(player, Direction.EAST, 1));
     this.root.setNode(
             new Cave(15, new Coordinates(2, 1), new WumpusStrategy(), log), Direction.EAST);
-    assertTrue(this.maze.shoot(15, 1));
+    assertTrue(this.maze.shoot(player, 15, 1));
   }
 
   @Test
   public void testShootByDir() {
-    assertFalse(this.maze.shoot(Direction.EAST, 1));
+    assertFalse(this.maze.shoot(player, Direction.EAST, 1));
     this.root.setNode(
             new Cave(15, new Coordinates(2, 1), new WumpusStrategy(), log), Direction.EAST);
-    assertTrue(this.maze.shoot(Direction.EAST, 1));
+    assertTrue(this.maze.shoot(player, Direction.EAST, 1));
   }
 }

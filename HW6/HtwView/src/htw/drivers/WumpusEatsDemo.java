@@ -1,5 +1,8 @@
 package htw.drivers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import htw.game.HtwController;
@@ -31,7 +34,8 @@ public class WumpusEatsDemo {
                                                               .setRandomSeed(2).build();
     IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(configuration).build();
     IHtwPlayer player = new HtwPlayer("Joe", 10);
-    IHtwGame game = new HtwGame(player, maze, System.out);
+    List<IHtwPlayer> players = new ArrayList<>(Collections.singletonList(player));
+    IHtwGame game = new HtwGame(players, maze, System.out);
     Runnable controller = new HtwController(
             new Scanner("move s move e move n q"),
             System.out,

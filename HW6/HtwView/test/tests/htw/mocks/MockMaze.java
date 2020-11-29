@@ -23,19 +23,19 @@ public class MockMaze implements IHtwMaze {
   }
 
   @Override
-  public String status(IActionStrategy strategy) {
+  public String status(IHtwPlayer player, IActionStrategy strategy) {
     return "status";
   }
 
   @Override
-  public boolean move(Direction direction) {
+  public boolean move(IHtwPlayer player, Direction direction) {
     this.log.append(
             String.format("moved - %s", direction.toString()));
     return true;
   }
 
   @Override
-  public boolean move(Integer id) {
+  public boolean move(IHtwPlayer player, Integer id) {
     this.log.append(
             String.format("moved - %s", id));
     return true;
@@ -47,13 +47,13 @@ public class MockMaze implements IHtwMaze {
   }
 
   @Override
-  public boolean shoot(Direction direction, int count) {
+  public boolean shoot(IHtwPlayer player, Direction direction, int count) {
     this.log.append(String.format("shoot - %s - %s", direction.toString(), count));
     return false;
   }
 
   @Override
-  public boolean shoot(int id, int count) {
+  public boolean shoot(IHtwPlayer player, int id, int count) {
     this.log.append(String.format("shoot - %s - %s", id, count));
     return false;
   }

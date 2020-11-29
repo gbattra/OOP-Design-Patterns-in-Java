@@ -3,6 +3,10 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import htw.game.HtwGame;
 import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
@@ -29,13 +33,15 @@ public class HtwGameTest {
     this.log = new StringBuilder();
     this.player = new HtwPlayer("Joe", 2);
     this.maze = new MockMaze(this.log);
-    this.game = new HtwGame(this.player, this.maze, this.log);
+    List<IHtwPlayer> players = new ArrayList<>(Collections.singletonList(player));
+    this.game = new HtwGame(players, this.maze, this.log);
   }
 
   @Test
   public void testConstructor() {
     try {
-      IHtwGame game = new HtwGame(this.player, this.maze, this.log);
+      List<IHtwPlayer> players = new ArrayList<>(Collections.singletonList(player));
+      IHtwGame game = new HtwGame(players, this.maze, this.log);
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }

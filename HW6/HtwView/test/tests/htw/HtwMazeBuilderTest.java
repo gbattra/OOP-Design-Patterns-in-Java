@@ -2,6 +2,7 @@ package tests.htw;
 
 import org.junit.Test;
 
+import htw.game.HtwPlayer;
 import htw.level.IHtwMaze;
 import htw.level.Cave;
 import htw.level.TunnelStrategy;
@@ -59,6 +60,6 @@ public class HtwMazeBuilderTest {
   @Test
   public void testBuild() {
     IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(this.configBuilder.build()).build();
-    assertTrue(maze.shoot(3, 1));
+    assertTrue(maze.shoot(new HtwPlayer("Joe", 10), 3, 1));
   }
 }
