@@ -43,7 +43,7 @@ public class MarkdownStringVisitorTest {
     TextElement element = new Heading(fourWordText, 1);
     document.add(element);
     document.toText(sut);
-    assertEquals("#" + fourWordText + "\n", sut.toString());
+    assertEquals("# " + fourWordText + "\n", sut.toString());
   }
 
   @Test
@@ -91,7 +91,7 @@ public class MarkdownStringVisitorTest {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(fourWordText + "\n");
     stringBuilder.append("**" + fourWordText + "**\n");
-    stringBuilder.append("#" + fourWordText + "\n");
+    stringBuilder.append("# " + fourWordText + "\n");
     stringBuilder.append("[" + fourWordText + "](www.website.com)\n");
     stringBuilder.append("*" + fourWordText + "*\n");
     stringBuilder.append(fourWordText + "\n");

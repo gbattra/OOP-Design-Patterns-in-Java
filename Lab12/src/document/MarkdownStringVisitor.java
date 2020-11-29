@@ -28,7 +28,8 @@ public class MarkdownStringVisitor implements TextElementVisitor<Void> {
 
   @Override
   public Void visitHeading(Heading current) {
-    stringBuilder.append("#".repeat(current.getLevel())).append(current.getText()).append("\n");
+    stringBuilder.append("#".repeat(current.getLevel())).append(" ")
+                                                        .append(current.getText()).append("\n");
     return null;
   }
 
