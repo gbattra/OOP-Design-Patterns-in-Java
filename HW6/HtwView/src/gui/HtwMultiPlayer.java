@@ -1,4 +1,6 @@
-package htw.game;
+package gui;
+
+import htw.game.HtwPlayer;
 
 public class HtwMultiPlayer extends HtwPlayer {
   private final int number;

@@ -12,7 +12,7 @@ import htw.game.commands.ICommandMapFactory;
 /**
  * Controller for a Hunt the Wumpus game.
  */
-public class HtwController implements Runnable {
+public class ConsoleController implements Runnable {
   private final Map<String, Function<Scanner, ICommand<IHtwGame>>> commands;
   private final Scanner scanner;
   private final Appendable out;
@@ -29,7 +29,7 @@ public class HtwController implements Runnable {
    * @param factory generates the command map for the controller
    * @throws IllegalArgumentException if params are null
    */
-  public HtwController(
+  public ConsoleController(
           Scanner scanner,
           Appendable out,
           IActionStrategy strategy,
@@ -55,7 +55,7 @@ public class HtwController implements Runnable {
    * @param game the game instance to use
    * @throws IllegalArgumentException if params are null
    */
-  public HtwController(
+  public ConsoleController(
           Scanner scanner,
           Appendable out,
           IActionStrategy strategy,
@@ -83,7 +83,7 @@ public class HtwController implements Runnable {
     // run the game
     while (this.game.hasNext()) {
       try {
-        int round = this.game.next();
+        this.game.next();
         this.out.append("\n").append(this.game.status(strategy));
         this.out.append("\n'shoot' or 'move'? ");
         String next = this.scanner.next();

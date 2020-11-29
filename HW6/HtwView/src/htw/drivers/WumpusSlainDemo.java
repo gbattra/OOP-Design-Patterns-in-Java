@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import htw.game.HtwController;
+import htw.game.ConsoleController;
 import htw.game.HtwGame;
 import htw.game.HtwPlayer;
 import htw.game.IHtwGame;
@@ -36,7 +36,7 @@ public class WumpusSlainDemo {
     IHtwPlayer player = new HtwPlayer("Joe", 10);
     List<IHtwPlayer> players = new ArrayList<>(Collections.singletonList(player));
     IHtwGame game = new HtwGame(players, maze, System.out);
-    Runnable controller = new HtwController(
+    Runnable controller = new ConsoleController(
             new Scanner("move s move e shoot n 1 q"),
             System.out,
             new DirActionStrategy(),

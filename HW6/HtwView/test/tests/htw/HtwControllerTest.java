@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.Scanner;
 
-import htw.game.HtwController;
+import htw.game.ConsoleController;
 import htw.game.commands.DirActionStrategy;
 import tests.htw.mocks.MockHtwCommandMapFactory;
 
@@ -19,7 +19,7 @@ public class HtwControllerTest {
   public void testConstructor() {
     try {
       StringBuffer log = new StringBuffer();
-      Runnable controller = new HtwController(
+      Runnable controller = new ConsoleController(
               new Scanner(""),
               log,
               new DirActionStrategy(),
@@ -31,7 +31,7 @@ public class HtwControllerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    Runnable controller = new HtwController(
+    Runnable controller = new ConsoleController(
             null, null, null, null);
   }
 
@@ -40,7 +40,7 @@ public class HtwControllerTest {
     try {
       Scanner scanner = new Scanner("greg 10 standard q");
       StringBuffer log = new StringBuffer();
-      Runnable controller = new HtwController(
+      Runnable controller = new ConsoleController(
               scanner,
               log,
               new DirActionStrategy(),
@@ -66,7 +66,7 @@ public class HtwControllerTest {
     try {
       Scanner scanner = new Scanner("greg 10 standard move e shoot e 1 q");
       StringBuffer log = new StringBuffer();
-      Runnable controller = new HtwController(
+      Runnable controller = new ConsoleController(
               scanner,
               log,
               new DirActionStrategy(),
