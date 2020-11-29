@@ -1,5 +1,7 @@
 package htw.game;
 
+import java.util.Iterator;
+
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
 
