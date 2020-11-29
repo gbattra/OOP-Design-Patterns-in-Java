@@ -1,5 +1,6 @@
 package htw.game;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -80,7 +81,7 @@ public class HtwController implements Runnable {
     }
 
     // run the game
-    while (!this.game.hasNext()) {
+    while (this.game.hasNext()) {
       try {
         int round = this.game.next();
         this.out.append("\n").append(this.game.status(strategy));
@@ -99,8 +100,12 @@ public class HtwController implements Runnable {
 
         ICommand<IHtwGame> cmd = entry.apply(this.scanner);
         this.game = cmd.execute(this.game);
-      } catch (Exception e) {
-        break;
+      } catch (IllegalStateException | IllegalArgumentException | IOException e) {
+        try {
+          this.out.append(e.getMessage());
+        } catch (IOException ex) {
+          break;
+        }
       }
     }
   }

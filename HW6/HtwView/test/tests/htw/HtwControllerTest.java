@@ -48,14 +48,14 @@ public class HtwControllerTest {
       controller.run();
       assertEquals(
               "execute - start - greg - 10 - standard"
-              + "\nStarting game..."
-              + "\nQuit -> 'q' / 'quit'"
-              + "\nRestart -> 'restart'"
-              + "\n"
-              + "\nstatus - status"
-              + "\n'shoot' or 'move'? "
-              + "Quitting...",
-              log.toString());
+            + "\nStarting game..."
+            + "\nQuit -> 'q' / 'quit'"
+            + "\nRestart -> 'restart'"
+            + "\n"
+            + "\nstatus - status"
+            + "\n'shoot' or 'move'? "
+            + "Quitting...",
+            log.toString());
     } catch (Exception e) {
       fail("Valid quit() should not have failed.");
     }
@@ -74,19 +74,19 @@ public class HtwControllerTest {
       controller.run();
       assertEquals(
               "execute - start - greg - 10 - standard"
-                      + "\nStarting game..."
-                      + "\nQuit -> 'q' / 'quit'"
-                      + "\nRestart -> 'restart'"
-                      + "\n"
-                      + "\nstatus - status"
-                      + "\n'shoot' or 'move'? "
-                      + "execute - move - e"
-                      + "\nstatus - status"
-                      + "\n'shoot' or 'move'? "
-                      + "execute - shoot - e - 1"
-                      + "\nstatus - status"
-                      + "\n'shoot' or 'move'? "
-                      + "Quitting...",
+            + "\nStarting game..."
+            + "\nQuit -> 'q' / 'quit'"
+            + "\nRestart -> 'restart'"
+            + "\n"
+            + "\nstatus - status"
+            + "\n'shoot' or 'move'? "
+            + "execute - move - e"
+            + "\nstatus - status"
+            + "\n'shoot' or 'move'? "
+            + "execute - shoot - e - 1"
+            + "\nstatus - status"
+            + "\n'shoot' or 'move'? "
+            + "Quitting...",
               log.toString());
     } catch (Exception e) {
       fail("Valid quit() should not have failed.");

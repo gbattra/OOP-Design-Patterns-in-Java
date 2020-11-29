@@ -92,7 +92,7 @@ public class HtwMazeTest {
       IHtwMaze maze = new HtwMaze(root, log);
       assertTrue(maze.move(player, Direction.EAST));
       assertEquals(
-              "You are in cave (2, 1) with tunnels to the WEST",
+              "Player 1: You are in cave (2, 1) with tunnels to the WEST",
               maze.status(player, new DirActionStrategy()));
       assertEquals(new Coordinates(2, 1), player.currentPosition());
     } catch (Exception e) {
@@ -108,7 +108,7 @@ public class HtwMazeTest {
       IHtwMaze maze = new HtwMaze(root, log);
       assertTrue(maze.move(player, 3));
       assertEquals(
-              "You are in cave 3 with tunnels to node(s) 5",
+              "Player 1: You are in cave 3 with tunnels to node(s) 5",
               maze.status(player, new IdActionStrategy()));
       assertEquals(new Coordinates(2, 1), player.currentPosition());
     } catch (Exception e) {

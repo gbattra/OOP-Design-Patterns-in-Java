@@ -10,6 +10,8 @@ import maze.Direction;
 public class MockGame implements IHtwGame {
   private final StringBuffer log;
 
+  private int round = -1;
+
   /**
    * Constructor for mock.
    *
@@ -51,5 +53,16 @@ public class MockGame implements IHtwGame {
   public boolean shoot(int id, int count) {
     this.log.append("shoot - ").append(id).append(" - ").append(count);
     return false;
+  }
+
+  @Override
+  public Integer next() {
+    this.round++;
+    return round;
+  }
+
+  @Override
+  public boolean hasNext() {
+    return true;
   }
 }

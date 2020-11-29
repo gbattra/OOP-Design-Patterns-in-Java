@@ -126,10 +126,6 @@ public class HtwGame implements IHtwGame {
   }
 
   private IHtwPlayer activePlayer() {
-    return this.players.get(this.activePlayerNumber());
-  }
-
-  private int activePlayerNumber() {
-    return this.round % this.players.size();
+    return this.players.get(this.round % this.players.size());
   }
 }

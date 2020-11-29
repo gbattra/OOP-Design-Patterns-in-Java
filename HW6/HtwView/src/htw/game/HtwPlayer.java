@@ -36,6 +36,11 @@ public class HtwPlayer extends MazePlayer implements IHtwPlayer {
   }
 
   @Override
+  public int number() {
+    return 1;
+  }
+
+  @Override
   public boolean isAlive() {
     return this.alive;
   }

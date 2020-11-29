@@ -8,6 +8,13 @@ import maze.game.IMazePlayer;
  */
 public interface IHtwPlayer extends IMazePlayer {
   /**
+   * Gets the player number.
+   *
+   * @return the player number
+   */
+  int number();
+
+  /**
    * Gets the player's current coordinates.
    *
    * @return the coordinates of the node where the player is located

@@ -32,7 +32,7 @@ public class HtwMaze extends Maze implements IHtwMaze {
 
   @Override
   public String status(IHtwPlayer player, IActionStrategy strategy) {
-    return strategy.status((IHtwNode) this.root.get(player.currentPosition()));
+    return strategy.status(player.number(), (IHtwNode) this.root.get(player.currentPosition()));
   }
 
   @Override
