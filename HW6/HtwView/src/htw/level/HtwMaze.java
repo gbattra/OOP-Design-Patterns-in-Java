@@ -12,8 +12,7 @@ import maze.Direction;
  */
 public class HtwMaze extends Maze implements IHtwMaze {
   private final Appendable logger;
-
-  private IHtwNode current;
+  private final IHtwNode root;
 
   /**
    * Constructor for the maze.
@@ -27,25 +26,27 @@ public class HtwMaze extends Maze implements IHtwMaze {
     if (root == null || logger == null) {
       throw new IllegalArgumentException("Root and logger cannot be null.");
     }
-    this.current = root;
+    this.root = root;
     this.logger = logger;
   }
 
   @Override
-  public String status(IActionStrategy strategy) {
-    return strategy.status(this.current);
+  public String status(IHtwPlayer player, IActionStrategy strategy) {
+    return strategy.status((IHtwNode) this.root.get(player.currentPosition()));
   }
 
   @Override
   public void receive(IHtwPlayer player) throws IOException {
-    this.current.receive(player);
+    ((IHtwNode) this.root.get(player.currentPosition())).receive(player);
   }
 
   @Override
-  public boolean move(Integer id) throws IOException {
+  public boolean move(IHtwPlayer player, Integer id) throws IOException {
     try {
-      Direction dir = this.current.directionTo(id);
-      this.current = ((IHtwNode) this.current.getNode(dir)).enter(dir.opposite());
+      Direction dir = ((IHtwNode) this.root.get(player.currentPosition())).directionTo(id);
+      IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition())
+              .getNode(dir)).enter(dir.opposite());
+      player.setCurrentPosition(current.getCoordinates());
       return true;
     } catch (Exception e) {
       this.logger.append("Cannot move to ").append(id.toString()).append(".");
@@ -54,9 +55,11 @@ public class HtwMaze extends Maze implements IHtwMaze {
   }
 
   @Override
-  public boolean move(Direction direction) throws IOException {
+  public boolean move(IHtwPlayer player, Direction direction) throws IOException {
     try {
-      this.current = ((IHtwNode) this.current.getNode(direction)).enter(direction.opposite());
+      IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition())
+              .getNode(direction)).enter(direction.opposite());
+      player.setCurrentPosition(current.getCoordinates());
       return true;
     } catch (Exception e) {
       this.logger.append("Cannot move to the ").append(direction.toString()).append(".");
@@ -65,12 +68,13 @@ public class HtwMaze extends Maze implements IHtwMaze {
   }
 
   @Override
-  public boolean shoot(Direction direction, int count) {
-    return this.current.shoot(direction, count);
+  public boolean shoot(IHtwPlayer player, Direction direction, int count) {
+    return ((IHtwNode) this.root.get(player.currentPosition())).shoot(direction, count);
   }
 
   @Override
-  public boolean shoot(int id, int count) {
-    return this.current.shoot(this.current.directionTo(id), count);
+  public boolean shoot(IHtwPlayer player, int id, int count) {
+    IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition()));
+    return current.shoot(current.directionTo(id), count);
   }
 }

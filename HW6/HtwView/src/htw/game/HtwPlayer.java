@@ -1,5 +1,6 @@
 package htw.game;
 
+import maze.components.ICoordinates;
 import maze.game.MazePlayer;
 
 /**
@@ -8,6 +9,7 @@ import maze.game.MazePlayer;
 public class HtwPlayer extends MazePlayer implements IHtwPlayer {
   private int arrowCount;
   private boolean alive;
+  private ICoordinates currentPosition;
 
   /**
    * Constructor for the player.
@@ -19,6 +21,16 @@ public class HtwPlayer extends MazePlayer implements IHtwPlayer {
     super(name);
     this.alive = true;
     this.arrowCount = Math.max(1, arrowCount);
+  }
+
+  @Override
+  public void setCurrentPosition(ICoordinates coordinates) {
+    this.currentPosition = coordinates;
+  }
+
+  @Override
+  public ICoordinates currentPosition() {
+    return this.currentPosition;
   }
 
   @Override
