@@ -22,6 +22,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   protected IHtwNodeStrategy strategy;
   protected Integer id;
   protected Appendable logger;
+  protected boolean visited;
 
   /**
    * Main constructor for the abstract node. Takes a coordinate pair and a strategy.
@@ -126,6 +127,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
 
   @Override
   public IHtwNode enter(Direction from) throws IOException {
+    this.visited = true;
     return this.strategy.enter(from, this);
   }
 
