@@ -3,7 +3,8 @@ import org.junit.Test;
 import document.Document;
 
 public class MarkdownStringVisitorTest {
-  private Document document;
+  private Document document = new Document();
+  private final String fourWordText = "This has four words.";
 
   @Test
   public void testBasicText() {
