@@ -27,7 +27,7 @@ public class MarkdownStringVisitorTest {
     TextElement element = new BasicText(fourWordText);
     document.add(element);
     document.toText(sut);
-    assertEquals(fourWordText + "\n", sut.toString());
+    assertEquals(fourWordText, sut.toString());
   }
 
   @Test
@@ -35,7 +35,7 @@ public class MarkdownStringVisitorTest {
     TextElement element = new BoldText(fourWordText);
     document.add(element);
     document.toText(sut);
-    assertEquals("**" + fourWordText + "**\n", sut.toString());
+    assertEquals("**" + fourWordText + "**", sut.toString());
   }
 
   @Test
@@ -43,7 +43,7 @@ public class MarkdownStringVisitorTest {
     TextElement element = new Heading(fourWordText, 1);
     document.add(element);
     document.toText(sut);
-    assertEquals("# " + fourWordText + "\n", sut.toString());
+    assertEquals("# " + fourWordText, sut.toString());
   }
 
   @Test
@@ -51,7 +51,7 @@ public class MarkdownStringVisitorTest {
     TextElement element = new HyperText(fourWordText, "www.website.com");
     document.add(element);
     document.toText(sut);
-    assertEquals("[" + fourWordText + "](www.website.com)\n", sut.toString());
+    assertEquals("[" + fourWordText + "](www.website.com)", sut.toString());
   }
 
   @Test
@@ -59,7 +59,7 @@ public class MarkdownStringVisitorTest {
     TextElement element = new ItalicText(fourWordText);
     document.add(element);
     document.toText(sut);
-    assertEquals("*" + fourWordText + "*\n", sut.toString());
+    assertEquals("*" + fourWordText + "*", sut.toString());
   }
 
   @Test
@@ -68,7 +68,7 @@ public class MarkdownStringVisitorTest {
     paragraph.add(new BasicText(fourWordText));
     document.add(paragraph);
     document.toText(sut);
-    assertEquals(fourWordText + "\n", sut.toString());
+    assertEquals(fourWordText, sut.toString());
   }
 
   @Test
@@ -94,7 +94,7 @@ public class MarkdownStringVisitorTest {
     stringBuilder.append("# " + fourWordText + "\n");
     stringBuilder.append("[" + fourWordText + "](www.website.com)\n");
     stringBuilder.append("*" + fourWordText + "*\n");
-    stringBuilder.append(fourWordText + "\n");
+    stringBuilder.append(fourWordText);
 
     document.toText(sut);
     assertEquals(stringBuilder.toString(), sut.toString());

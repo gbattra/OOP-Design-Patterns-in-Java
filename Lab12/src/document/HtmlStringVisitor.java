@@ -6,6 +6,7 @@ import document.element.Heading;
 import document.element.HyperText;
 import document.element.ItalicText;
 import document.element.Paragraph;
+import document.element.TextElement;
 import document.element.TextElementVisitor;
 
 /**
@@ -49,7 +50,11 @@ public class HtmlStringVisitor implements TextElementVisitor<Void> {
 
   @Override
   public Void visitParagraph(Paragraph current) {
-    stringBuilder.append("<p>").append(current.getText()).append("</p>").append("\n");
+    stringBuilder.append("<p>");
+    for (TextElement element : current.getContent()) {
+      element.accept(this);
+    }
+    stringBuilder.append("</p>").append("\n");
     return null;
   }
 

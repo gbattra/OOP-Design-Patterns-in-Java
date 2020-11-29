@@ -26,7 +26,7 @@ public class HtmlStringVisitorTest {
     TextElement element = new BasicText(fourWordText);
     document.add(element);
     document.toText(sut);
-    assertEquals(fourWordText + "\n", sut.toString());
+    assertEquals(fourWordText, sut.toString());
   }
 
   @Test
@@ -34,7 +34,7 @@ public class HtmlStringVisitorTest {
     TextElement element = new BoldText(fourWordText);
     document.add(element);
     document.toText(sut);
-    assertEquals("<b>" + fourWordText + "</b>\n", sut.toString());
+    assertEquals("<b>" + fourWordText + "</b>", sut.toString());
   }
 
   @Test
@@ -42,7 +42,7 @@ public class HtmlStringVisitorTest {
     TextElement element = new Heading(fourWordText, 1);
     document.add(element);
     document.toText(sut);
-    assertEquals("<h1>" + fourWordText + "</h1>\n", sut.toString());
+    assertEquals("<h1>" + fourWordText + "</h1>", sut.toString());
   }
 
   @Test
@@ -50,7 +50,7 @@ public class HtmlStringVisitorTest {
     TextElement element = new HyperText(fourWordText, "www.website.com");
     document.add(element);
     document.toText(sut);
-    assertEquals("<a href=\"www.website.com\">" + fourWordText + "</a>\n", sut.toString());
+    assertEquals("<a href=\"www.website.com\">" + fourWordText + "</a>", sut.toString());
   }
 
   @Test
@@ -58,7 +58,7 @@ public class HtmlStringVisitorTest {
     TextElement element = new ItalicText(fourWordText);
     document.add(element);
     document.toText(sut);
-    assertEquals("<i>" + fourWordText + "</i>\n", sut.toString());
+    assertEquals("<i>" + fourWordText + "</i>", sut.toString());
   }
 
   @Test
@@ -67,7 +67,7 @@ public class HtmlStringVisitorTest {
     paragraph.add(new BasicText(fourWordText));
     document.add(paragraph);
     document.toText(sut);
-    assertEquals("<p>" + fourWordText + "</p>\n", sut.toString());
+    assertEquals("<p>" + fourWordText + "\n</p>", sut.toString());
   }
 
   @Test
@@ -93,7 +93,7 @@ public class HtmlStringVisitorTest {
     stringBuilder.append("<h1>" + fourWordText + "</h1>\n");
     stringBuilder.append("<a href=\"www.website.com\">" + fourWordText + "</a>\n");
     stringBuilder.append("<i>" + fourWordText + "</i>\n");
-    stringBuilder.append("<p>" + fourWordText + "</p>\n");
+    stringBuilder.append("<p>" + fourWordText + "\n</p>");
 
     document.toText(sut);
     assertEquals(stringBuilder.toString(), sut.toString());

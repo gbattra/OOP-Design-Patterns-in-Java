@@ -6,6 +6,7 @@ import document.element.Heading;
 import document.element.HyperText;
 import document.element.ItalicText;
 import document.element.Paragraph;
+import document.element.TextElement;
 import document.element.TextElementVisitor;
 
 /**
@@ -49,7 +50,10 @@ public class MarkdownStringVisitor implements TextElementVisitor<Void> {
 
   @Override
   public Void visitParagraph(Paragraph current) {
-    stringBuilder.append(current.getText()).append("\n");
+    for (TextElement element : current.getContent()) {
+      element.accept(this);
+    }
+    stringBuilder.append("\n");
     return null;
   }
 
