@@ -14,10 +14,6 @@ public class ButtonBar extends JPanel {
       throw new IllegalArgumentException(
               "Cannot instantiate ButtonBar. Features are null.");
     }
-
-    this.setSize(200, 50);
-    this.setLocation(200, 200);
-
     this.quitBtn = new JButton("Quit");
     this.quitBtn.addActionListener(l -> features.onQuit());
     this.add(this.quitBtn);
@@ -25,7 +21,5 @@ public class ButtonBar extends JPanel {
     this.restartBtn = new JButton("Restart");
     this.restartBtn.addActionListener(l -> features.onRestart());
     this.add(this.restartBtn);
-
-    this.setVisible(true);
   }
 }

@@ -1,4 +1,4 @@
 package gui;
 
-public interface IGuiController extends IGuiFeatures {
+public interface IGuiController extends IContainerFeatures {
 }
