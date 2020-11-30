@@ -2,11 +2,10 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 import javax.swing.*;
 
-public class Container extends JFrame implements IButtonBarFeatures, Appendable {
+public class Container extends JFrame implements IButtonBarFeatures {
   private static final int WIDTH = 750;
   private static final int HEIGHT = 750;
   private static final int BTN_BAR_HEIGHT = 50;
@@ -65,27 +64,5 @@ public class Container extends JFrame implements IButtonBarFeatures, Appendable 
       this.features.onRestart(
               sameMaze, multiplayer, rowCount, colCount, pitFrequency, batFrequency);
     }
-  }
-
-  @Override
-  public Appendable append(CharSequence csq) throws IOException {
-    for (Character c : csq.toString().toCharArray()) {
-      this.append(c);
-    }
-    return this;
-  }
-
-  @Override
-  public Appendable append(CharSequence csq, int start, int end) throws IOException {
-    for (int i = start; i < end; i++) {
-      this.append(csq.charAt(i));
-    }
-    return this;
-  }
-
-  @Override
-  public Appendable append(char c) throws IOException {
-    // append char to logger view
-    return this;
   }
 }

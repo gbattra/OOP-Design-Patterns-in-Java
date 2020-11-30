@@ -1,5 +1,5 @@
 package gui;
 
-public interface IView extends IContainerFeatures {
+public interface IView extends IContainerFeatures, Appendable {
 
 }
