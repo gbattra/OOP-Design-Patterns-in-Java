@@ -9,6 +9,7 @@ public class StartMenu extends JPanel {
       throw new IllegalArgumentException("Cannot instantiate StartMenu. Features are null.");
     }
 
-    this.add(new JLabel(caption));
+
+
   }
 }

@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatures, Appendable {
+  private static final int WIDTH = 750;
+  private static final int HEIGHT = 750;
+
   private final IContainerFeatures features;
 
   private final JPanel wrapper;
@@ -20,22 +23,26 @@ public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatur
     }
 
     this.features = features;
-    this.setSize(1000, 1000);
+    this.setSize(WIDTH, HEIGHT);
     this.setLocation(0, 0);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     this.wrapper = new JPanel();
-    this.wrapper.setSize(1000, 1000);
+    this.wrapper.setSize(WIDTH, HEIGHT);
     this.wrapper.setLocation(0, 0);
+    this.wrapper.setBackground(Color.BLACK);
 
     this.buttonBar = new ButtonBar("ButtonBar", this);
-    this.buttonBar.setSize(200, 50);
+    this.buttonBar.setSize(WIDTH, 50);
     this.buttonBar.setLocation(0, 0);
+    this.buttonBar.setBackground(Color.BLUE);
     this.add(this.buttonBar);
 
     this.startMenu = new StartMenu("StartMenu", this);
-    this.startMenu.setSize(200, 400);
+    this.startMenu.setSize(WIDTH, 400);
     this.startMenu.setLocation(0, 50);
+    this.startMenu.setBackground(Color.RED);
+    this.startMenu.setVisible(false);
     this.add(this.startMenu);
 
     this.add(this.wrapper);
