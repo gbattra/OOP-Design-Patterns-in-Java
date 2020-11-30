@@ -12,4 +12,15 @@ public class GuiView implements IView {
     this.controller = controller;
     this.container = new Container("Container", this);
   }
+
+  @Override
+  public void onRestart(
+          boolean sameMaze,
+          boolean multiPlayer,
+          int rowCount,
+          int columnCount,
+          double batFreq,
+          double pitFreq) {
+
+  }
 }

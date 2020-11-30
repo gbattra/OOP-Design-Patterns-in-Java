@@ -5,6 +5,7 @@ import org.junit.Test;
 import gui.ButtonBar;
 import gui.Container;
 import gui.GuiController;
+import gui.GuiView;
 import gui.IView;
 import gui.IGuiController;
 
@@ -14,7 +15,8 @@ public class ButtonBarTest {
   @Test
   public void testValidConstructor() {
     IGuiController controller = new GuiController();
-    Container container = new Container("Container", controller);
+    IView view = new GuiView(controller);
+    Container container = new Container("Container", view);
     ButtonBar buttonBar = new ButtonBar("ButtonBar", container);
   }
 

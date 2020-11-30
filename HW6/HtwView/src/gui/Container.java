@@ -54,6 +54,17 @@ public class Container extends JFrame implements IButtonBarFeatures, Appendable 
   public void onRestart() {
     int result = JOptionPane.showConfirmDialog(
             null, this.startMenu, "Configure", JOptionPane.OK_CANCEL_OPTION);
+    if (result == JOptionPane.OK_OPTION) {
+      boolean sameMaze = this.startMenu.useSameMaze.isSelected();
+      boolean multiplayer = this.startMenu.isMultiplayer.isSelected();
+      int rowCount = Integer.parseInt(this.startMenu.rowCount.getText());
+      int colCount = Integer.parseInt(this.startMenu.columnCount.getText());
+      double pitFrequency = Double.parseDouble(this.startMenu.pitFrequency.getText());
+      double batFrequency = Double.parseDouble(this.startMenu.batFrequency.getText());
+
+      this.features.onRestart(
+              sameMaze, multiplayer, rowCount, colCount, pitFrequency, batFrequency);
+    }
   }
 
   @Override

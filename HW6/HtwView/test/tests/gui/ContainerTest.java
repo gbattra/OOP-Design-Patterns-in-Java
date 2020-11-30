@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import gui.Container;
 import gui.GuiController;
+import gui.GuiView;
 import gui.IGuiController;
+import gui.IView;
 
 import static org.junit.Assert.fail;
 
@@ -12,7 +14,8 @@ public class ContainerTest {
   @Test
   public void testValidConstructor() {
     IGuiController controller = new GuiController();
-    Container container = new Container("Container", controller);
+    IView view = new GuiView(controller);
+    Container container = new Container("Container", view);
   }
 
   @Test(expected = IllegalArgumentException.class)

@@ -90,7 +90,7 @@ public class StartMenu extends JPanel {
     if (this.pitFrequency.getValue() == null) {
       return;
     }
-    int value = Integer.parseInt(this.pitFrequency.getText());
+    double value = Double.parseDouble(this.pitFrequency.getText());
     if (value > 1.0) {
       this.pitFrequency.setValue(1.0);
     }
@@ -100,7 +100,7 @@ public class StartMenu extends JPanel {
     if (this.batFrequency.getValue() == null) {
       return;
     }
-    int value = Integer.parseInt(this.batFrequency.getText());
+    double value = Double.parseDouble(this.batFrequency.getText());
     if (value > 1.0) {
       this.batFrequency.setValue(1.0);
     }
