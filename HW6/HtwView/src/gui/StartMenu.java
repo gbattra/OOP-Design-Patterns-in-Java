@@ -30,21 +30,25 @@ public class StartMenu extends JPanel {
     JLabel rowCountLabel = new JLabel("Row Count: ");
     this.rowCount = new JFormattedTextField(new NumberFormatter());
     this.rowCount.setColumns(10);
+    this.rowCount.setValue(10);
     this.rowCount.addPropertyChangeListener(l -> this.handleRowCountChange());
 
     JLabel columnCountLabel = new JLabel("Column count: ");
     this.columnCount = new JFormattedTextField(new NumberFormatter());
     this.columnCount.setColumns(10);
+    this.columnCount.setValue(10);
     this.columnCount.addPropertyChangeListener(l -> this.handleColumnCountChange());
 
     JLabel batFrequencyLabel = new JLabel("Bat frequency (0.0 - 1.0): ");
     this.batFrequency = new JFormattedTextField(new NumberFormatter());
     this.batFrequency.setColumns(10);
+    this.batFrequency.setValue(0.3);
     this.batFrequency.addPropertyChangeListener(l -> this.handleBatFrequencyChange());
 
     JLabel pitFrequencyLabel = new JLabel("Pit frequency (0.0 - 1.0): ");
     this.pitFrequency = new JFormattedTextField(new NumberFormatter());
     this.pitFrequency.setColumns(10);
+    this.pitFrequency.setValue(0.2);
     this.batFrequency.addPropertyChangeListener(l -> this.handlePitFrequencyChange());
 
     this.add(useSameMazeLabel);
@@ -70,7 +74,7 @@ public class StartMenu extends JPanel {
     if (this.rowCount.getValue() == null) {
       return;
     }
-    int value = Integer.parseInt(this.rowCount.getText());
+    int value = ((Number) this.rowCount.getValue()).intValue();
     if (value > ROW_COUNT_LIMIT) {
       this.rowCount.setValue(ROW_COUNT_LIMIT);
     }
@@ -80,7 +84,7 @@ public class StartMenu extends JPanel {
     if (this.columnCount.getValue() == null) {
       return;
     }
-    int value = Integer.parseInt(this.columnCount.getText());
+    int value = ((Number) this.columnCount.getValue()).intValue();
     if (value > COL_COUNT_LIMIT) {
       this.columnCount.setValue(ROW_COUNT_LIMIT);
     }
@@ -90,7 +94,7 @@ public class StartMenu extends JPanel {
     if (this.pitFrequency.getValue() == null) {
       return;
     }
-    double value = Double.parseDouble(this.pitFrequency.getText());
+    double value = ((Number) this.pitFrequency.getValue()).doubleValue();
     if (value > 1.0) {
       this.pitFrequency.setValue(1.0);
     }
@@ -100,7 +104,7 @@ public class StartMenu extends JPanel {
     if (this.batFrequency.getValue() == null) {
       return;
     }
-    double value = Double.parseDouble(this.batFrequency.getText());
+    double value = ((Number) this.batFrequency.getValue()).doubleValue();
     if (value > 1.0) {
       this.batFrequency.setValue(1.0);
     }
