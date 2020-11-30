@@ -6,9 +6,11 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatures, Appendable {
+public class Container extends JFrame implements IButtonBarFeatures, Appendable {
   private static final int WIDTH = 750;
   private static final int HEIGHT = 750;
+  private static final int BTN_BAR_HEIGHT = 50;
+  private static final int START_MENU_HEIGHT = 400;
 
   private final IContainerFeatures features;
 
@@ -33,17 +35,11 @@ public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatur
     this.wrapper.setBackground(Color.BLACK);
 
     this.buttonBar = new ButtonBar("ButtonBar", this);
-    this.buttonBar.setSize(WIDTH, 50);
+    this.buttonBar.setSize(WIDTH, BTN_BAR_HEIGHT);
     this.buttonBar.setLocation(0, 0);
-    this.buttonBar.setBackground(Color.BLUE);
     this.add(this.buttonBar);
 
-    this.startMenu = new StartMenu("StartMenu", this);
-    this.startMenu.setSize(WIDTH, 400);
-    this.startMenu.setLocation(0, 50);
-    this.startMenu.setBackground(Color.RED);
-    this.startMenu.setVisible(false);
-    this.add(this.startMenu);
+    this.startMenu = new StartMenu("StartMenu");
 
     this.add(this.wrapper);
     this.setVisible(true);
@@ -56,14 +52,8 @@ public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatur
 
   @Override
   public void onRestart() {
-    System.out.print("Restarting");
-    this.startMenu.setVisible(true);
-  }
-
-  @Override
-  public void onSubmit() {
-    System.out.print("STARTING NEW GAME");
-    this.startMenu.setVisible(false);
+    int result = JOptionPane.showConfirmDialog(
+            null, this.startMenu, "Configure", JOptionPane.OK_CANCEL_OPTION);
   }
 
   @Override
