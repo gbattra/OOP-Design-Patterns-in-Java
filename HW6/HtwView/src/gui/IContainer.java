@@ -2,5 +2,5 @@ package gui;
 
 import javax.swing.*;
 
-public interface IContainer {
+public interface IContainer extends Appendable {
 }
