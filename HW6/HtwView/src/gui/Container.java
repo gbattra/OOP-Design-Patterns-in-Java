@@ -9,6 +9,7 @@ import javax.swing.*;
 public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatures, Appendable {
   private final IContainerFeatures features;
 
+  private final JPanel wrapper;
   private final ButtonBar buttonBar;
   private final StartMenu startMenu;
 
@@ -19,12 +20,13 @@ public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatur
     }
 
     this.features = features;
-
-    this.setSize(500, 300);
-    this.setLocation(200, 200);
+    this.setSize(1000, 1000);
+    this.setLocation(0, 0);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    this.setLayout(new FlowLayout());
+    this.wrapper = new JPanel();
+    this.wrapper.setSize(1000, 1000);
+    this.wrapper.setLocation(0, 0);
 
     this.buttonBar = new ButtonBar("ButtonBar", this);
     this.buttonBar.setSize(200, 50);
@@ -34,10 +36,9 @@ public class Container extends JFrame implements IMenuFeatures, IButtonBarFeatur
     this.startMenu = new StartMenu("StartMenu", this);
     this.startMenu.setSize(200, 400);
     this.startMenu.setLocation(0, 50);
-    this.startMenu.setVisible(false);
     this.add(this.startMenu);
 
-    this.pack();
+    this.add(this.wrapper);
     this.setVisible(true);
   }
 
