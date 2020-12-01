@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -8,16 +9,20 @@ import javax.swing.*;
 import htw.game.IHtwPlayer;
 
 public class PlayerBar extends JPanel {
+  public final List<PlayerView> playerViews;
+
   public PlayerBar() {
     super();
 
     this.setBackground(Color.GREEN);
     this.setLayout(new GridLayout(0, 2));
 
+    this.playerViews = new ArrayList<>();
     for (int i = 0; i < 2; i++) {
       PlayerView playerView = new PlayerView();
       playerView.setSize(LayoutConfigs.WIDTH / 2, LayoutConfigs.LARGE);
       playerView.setLocation((LayoutConfigs.WIDTH / 2) * i, 0);
+      this.playerViews.add(playerView);
       this.add(playerView);
     }
   }
@@ -29,11 +34,7 @@ public class PlayerBar extends JPanel {
     }
 
     for (int i = 0; i < players.size(); i++) {
-      PlayerView playerView = new PlayerView();
-      int width = LayoutConfigs.WIDTH / players.size();
-      playerView.setSize(width, LayoutConfigs.LARGE);
-      playerView.setLocation(width * i, 0);
-      players.get(i).receive(playerView);
+      players.get(i).receive(this.playerViews.get(i));
     }
   }
 }

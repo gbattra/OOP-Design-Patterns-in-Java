@@ -50,6 +50,7 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
 
   @Override
   public Void visitGame(List<IHtwPlayer> players, IHtwMaze maze) {
+    this.playerBar.populate(players);
     return null;
   }
 
