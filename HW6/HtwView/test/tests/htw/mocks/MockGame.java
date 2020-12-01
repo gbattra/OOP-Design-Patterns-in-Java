@@ -1,5 +1,6 @@
 package tests.htw.mocks;
 
+import gui.IHtwGameVisitor;
 import htw.game.IHtwGame;
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
@@ -53,6 +54,11 @@ public class MockGame implements IHtwGame {
   public boolean shoot(int id, int count) {
     this.log.append("shoot - ").append(id).append(" - ").append(count);
     return false;
+  }
+
+  @Override
+  public <R> R receive(IHtwGameVisitor<R> visitor) {
+    return null;
   }
 
   @Override

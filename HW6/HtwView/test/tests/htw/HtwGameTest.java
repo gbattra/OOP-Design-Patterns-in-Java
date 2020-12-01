@@ -82,4 +82,10 @@ public class HtwGameTest {
     this.game.shoot(12, 1);
     assertTrue(this.game.isOver());
   }
+
+  @Test
+  public void testNext() {
+    assertEquals(0, (int) this.game.next());
+    assertEquals(1, (int) this.game.next());
+  }
 }

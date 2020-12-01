@@ -7,8 +7,15 @@ import htw.game.IHtwGame;
 public class GuiView implements IView {
   private final Container container;
 
+  private IViewFeatures features;
+
   public GuiView() {
     this.container = new Container("Container", this);
+  }
+
+  @Override
+  public void setFeatures(IViewFeatures features) {
+    this.features = features;
   }
 
   @Override

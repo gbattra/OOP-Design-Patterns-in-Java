@@ -59,5 +59,12 @@ public interface IHtwGame extends Iterator<Integer> {
    */
   boolean shoot(int id, int count);
 
+  /**
+   * Receives a visitor which may care about some of its attributes.
+   *
+   * @param visitor the visitor to receive
+   * @param <R> the return type of the function
+   * @return R
+   */
   <R> R receive(IHtwGameVisitor<R> visitor);
 }
