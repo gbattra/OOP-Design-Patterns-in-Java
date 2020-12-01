@@ -28,7 +28,7 @@ public class StartMenu extends JPanel {
   public final JFormattedTextField batFrequency;
   public final JFormattedTextField pitFrequency;
 
-  public StartMenu(String caption) {
+  public StartMenu() {
     super();
 
     this.setLayout(new GridLayout(0, 1));

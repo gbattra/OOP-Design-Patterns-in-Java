@@ -16,12 +16,12 @@ public class ButtonBarTest {
   public void testValidConstructor() {
     IView view = new GuiView();
     Container container = new Container("Container", view);
-    ButtonBar buttonBar = new ButtonBar("ButtonBar", container);
+    ButtonBar buttonBar = new ButtonBar(container);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    ButtonBar buttonBar = new ButtonBar("", null);
+    ButtonBar buttonBar = new ButtonBar(null);
     fail("Invalid constructor should have failed.");
   }
 }

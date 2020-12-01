@@ -1,5 +1,6 @@
 package htw.game;
 
+import gui.IHtwPlayerVisitor;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.game.MazePlayer;
@@ -58,5 +59,10 @@ public class HtwPlayer extends MazePlayer implements IHtwPlayer {
   @Override
   public void decrementArrowCount() {
     this.arrowCount--;
+  }
+
+  @Override
+  public <R> R receive(IHtwPlayerVisitor<R> visitor) {
+    return visitor.visitPlayer(this.number(), this.arrowCount, this.isAlive());
   }
 }

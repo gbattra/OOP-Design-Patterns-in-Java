@@ -11,12 +11,12 @@ import static org.junit.Assert.assertTrue;
 public class StartMenuTest {
   @Test
   public void testValidConstructor() {
-    StartMenu menu = new StartMenu("StartMenu");
+    StartMenu menu = new StartMenu();
   }
 
   @Test
   public void testValueConstraints() {
-    StartMenu menu = new StartMenu("StartMenu");
+    StartMenu menu = new StartMenu();
     menu.rowCount.setValue(26);
     menu.columnCount.setValue(26);
     assertFalse(menu.isRoomMaze.isSelected());

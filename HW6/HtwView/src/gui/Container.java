@@ -12,9 +12,9 @@ import htw.level.IHtwMaze;
 public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVisitor<Void> {
   private final IContainerFeatures features;
 
-  private final JPanel wrapper;
   private final ButtonBar buttonBar;
   private final StartMenu startMenu;
+  private final PlayerBar playerBar;
 
   public Container(String caption, IContainerFeatures features) {
     super(caption);
@@ -23,22 +23,28 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
     }
 
     this.features = features;
+
     this.setSize(LayoutConfigs.WIDTH, LayoutConfigs.HEIGHT);
     this.setLocation(0, 0);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    this.startMenu = new StartMenu("StartMenu");
+    this.startMenu = new StartMenu();
 
-    this.wrapper = new JPanel();
-    this.wrapper.setSize(LayoutConfigs.WIDTH, LayoutConfigs.HEIGHT);
-    this.wrapper.setLocation(0, 0);
-
-    this.buttonBar = new ButtonBar("ButtonBar", this);
+    this.buttonBar = new ButtonBar(this);
     this.buttonBar.setSize(LayoutConfigs.WIDTH, LayoutConfigs.SMALL);
     this.buttonBar.setLocation(0, 0);
-    this.wrapper.add(this.buttonBar);
+    this.add(this.buttonBar);
 
-    this.add(this.wrapper);
+    this.playerBar = new PlayerBar();
+    this.playerBar.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
+    this.playerBar.setLocation(0, this.buttonBar.getY() + this.buttonBar.getHeight());
+    this.add(this.playerBar);
+
+    JPanel buffer = new JPanel();
+    buffer.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
+    buffer.setLocation(0, this.playerBar.getY() + this.playerBar.getHeight());
+    this.add(buffer);
+
     this.setVisible(true);
   }
 

@@ -1,5 +1,6 @@
 package htw.game;
 
+import gui.IHtwPlayerVisitor;
 import maze.components.ICoordinates;
 import maze.game.IMazePlayer;
 
@@ -51,4 +52,6 @@ public interface IHtwPlayer extends IMazePlayer {
    * Decrements the arrow count by one.
    */
   void decrementArrowCount();
+
+  <R> R receive(IHtwPlayerVisitor<R> visitor);
 }
