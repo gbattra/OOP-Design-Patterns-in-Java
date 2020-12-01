@@ -11,8 +11,10 @@ public class StartMenu extends JPanel {
 
   public final JCheckBox useSameMaze;
   public final JCheckBox isMultiplayer;
+  public final JCheckBox isRoomMaze;
   public final JFormattedTextField rowCount;
   public final JFormattedTextField columnCount;
+  public final JFormattedTextField finalRoomCount;
   public final JFormattedTextField batFrequency;
   public final JFormattedTextField pitFrequency;
 
@@ -51,6 +53,17 @@ public class StartMenu extends JPanel {
     this.pitFrequency.setValue(0.2);
     this.batFrequency.addPropertyChangeListener(l -> this.handlePitFrequencyChange());
 
+
+    JLabel isRoomMazeLabel = new JLabel("Is room maze? ");
+    this.isRoomMaze = new JCheckBox();
+    this.isRoomMaze.addItemListener(l -> this.handleIsRoomMazeChange());
+
+    JLabel finalRoomCountLabel = new JLabel("Final Room Count: ");
+    this.finalRoomCount = new JFormattedTextField(new NumberFormatter());
+    this.finalRoomCount.setColumns(10);
+    this.finalRoomCount.setValue(10);
+    this.finalRoomCount.setEnabled(false);
+
     this.add(useSameMazeLabel);
     this.add(this.useSameMaze);
 
@@ -63,11 +76,21 @@ public class StartMenu extends JPanel {
     this.add(columnCountLabel);
     this.add(this.columnCount);
 
+    this.add(isRoomMazeLabel);
+    this.add(this.isRoomMaze);
+
+    this.add(finalRoomCountLabel);
+    this.add(this.finalRoomCount);
+
     this.add(batFrequencyLabel);
     this.add(this.batFrequency);
 
     this.add(pitFrequencyLabel);
     this.add(this.pitFrequency);
+  }
+
+  private void handleIsRoomMazeChange() {
+    this.finalRoomCount.setEnabled(this.isRoomMaze.isSelected());
   }
 
   private void handleRowCountChange() {

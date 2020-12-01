@@ -3,6 +3,7 @@ package tests.gui.mocks;
 import java.io.IOException;
 
 import gui.IView;
+import gui.RestartRequest;
 
 public class MockGuiView implements IView {
   private StringBuilder log;
@@ -12,22 +13,16 @@ public class MockGuiView implements IView {
   }
 
   @Override
-  public void onRestart(
-          boolean sameMaze,
-          boolean multiPlayer,
-          int rowCount,
-          int columnCount,
-          double batFreq,
-          double pitFreq) {
+  public void onRestart(RestartRequest restartRequest) {
     this.log.append(
             String.format(
                     "%s - %s - %s - %s - %s - %s",
-                    sameMaze,
-                    multiPlayer,
-                    rowCount,
-                    columnCount,
-                    batFreq,
-                    pitFreq));
+                    restartRequest.useSameMaze,
+                    restartRequest.isMultiplayer,
+                    restartRequest.rowCount,
+                    restartRequest.columnCount,
+                    restartRequest.pitFrequency,
+                    restartRequest.batFrequency));
   }
 
   @Override

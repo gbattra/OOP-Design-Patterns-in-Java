@@ -62,7 +62,15 @@ public class Container extends JFrame implements IButtonBarFeatures {
       double batFrequency = Double.parseDouble(this.startMenu.batFrequency.getText());
 
       this.features.onRestart(
-              sameMaze, multiplayer, rowCount, colCount, pitFrequency, batFrequency);
+              new RestartRequest(
+                      sameMaze,
+                      multiplayer,
+                      false,
+                      0,
+                      rowCount,
+                      colCount,
+                      pitFrequency,
+                      batFrequency));
     }
   }
 }
