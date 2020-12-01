@@ -32,7 +32,7 @@ public class GuiController implements IGuiController {
             Arrays.asList(
                     new HtwMultiPlayer("Joe", 1, 10),
                     new HtwMultiPlayer("Sarah", 2, 10)));
-    IHtwGame game = new HtwGame(players, maze, this.view);
+    IHtwGame game = new HtwGame(players, maze, view);
     this.view.populate(game);
   }
 }

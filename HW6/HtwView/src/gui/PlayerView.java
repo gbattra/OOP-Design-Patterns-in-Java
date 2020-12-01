@@ -20,14 +20,14 @@ public class PlayerView extends JPanel implements IHtwPlayerVisitor<Void> {
                     BorderFactory.createLineBorder(Color.BLACK),
                     new EmptyBorder(10, 10, 10, 10)));
 
-    this.playerLabel = new JLabel("PLAYER X");
+    this.playerLabel = new JLabel();
     this.playerLabel.setFont(headerFont);
     this.add(this.playerLabel);
 
-    this.arrowCountLabel = new JLabel(String.format("Arrows: %s", 10));
+    this.arrowCountLabel = new JLabel();
     this.add(arrowCountLabel);
 
-    this.isAliveLabel = new JLabel("ALIVE");
+    this.isAliveLabel = new JLabel();
     this.add(this.isAliveLabel);
   }
 

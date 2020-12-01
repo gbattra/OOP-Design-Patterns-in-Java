@@ -15,6 +15,7 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
   private final ButtonBar buttonBar;
   private final StartMenu startMenu;
   private final PlayerBar playerBar;
+  private final MazeView mazeView;
 
   public Container(String caption, IContainerFeatures features) {
     super(caption);
@@ -39,6 +40,11 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
     this.playerBar.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
     this.playerBar.setLocation(0, this.buttonBar.getY() + this.buttonBar.getHeight());
     this.add(this.playerBar);
+
+    this.mazeView = new MazeView();
+    this.mazeView.setSize(LayoutConfigs.WIDTH, LayoutConfigs.MAZE_HEIGHT);
+    this.mazeView.setLocation(0, this.playerBar.getY() + this.playerBar.getHeight());
+    this.add(this.mazeView);
 
     JPanel buffer = new JPanel();
     buffer.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
