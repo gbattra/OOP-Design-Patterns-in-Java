@@ -2,6 +2,7 @@ package htw.game;
 
 import java.util.Iterator;
 
+import gui.IHtwGameVisitor;
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
 
@@ -57,4 +58,6 @@ public interface IHtwGame extends Iterator<Integer> {
    * @return true if the Wumpus was hit
    */
   boolean shoot(int id, int count);
+
+  <R> R receive(IHtwGameVisitor<R> visitor);
 }

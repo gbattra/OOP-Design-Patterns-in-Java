@@ -15,8 +15,7 @@ import static org.junit.Assert.fail;
 public class ContainerTest {
   @Test
   public void testValidConstructor() {
-    IGuiController controller = new GuiController();
-    IView view = new GuiView(controller);
+    IView view = new GuiView();
     Container container = new Container("Container", view);
   }
 

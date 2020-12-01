@@ -2,14 +2,17 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 import javax.swing.*;
 
-public class Container extends JFrame implements IButtonBarFeatures {
+import htw.game.IHtwPlayer;
+import htw.level.IHtwMaze;
+
+public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVisitor<Void> {
   private static final int WIDTH = 750;
   private static final int HEIGHT = 750;
   private static final int BTN_BAR_HEIGHT = 50;
-  private static final int START_MENU_HEIGHT = 400;
 
   private final IContainerFeatures features;
 
@@ -42,6 +45,11 @@ public class Container extends JFrame implements IButtonBarFeatures {
 
     this.add(this.wrapper);
     this.setVisible(true);
+  }
+
+  @Override
+  public Void visitGame(List<IHtwPlayer> players, IHtwMaze maze) {
+    return null;
   }
 
   @Override

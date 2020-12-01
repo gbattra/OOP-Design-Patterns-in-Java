@@ -2,6 +2,7 @@ package htw.game;
 
 import java.util.List;
 
+import gui.IHtwGameVisitor;
 import htw.game.commands.IActionStrategy;
 import htw.level.IHtwMaze;
 import maze.Direction;
@@ -123,6 +124,11 @@ public class HtwGame implements IHtwGame {
   public Integer next() {
     this.round++;
     return this.round;
+  }
+
+  @Override
+  public <R> R receive(IHtwGameVisitor<R> visitor) {
+    return visitor.visitGame(this.players, this.maze);
   }
 
   private IHtwPlayer activePlayer() {

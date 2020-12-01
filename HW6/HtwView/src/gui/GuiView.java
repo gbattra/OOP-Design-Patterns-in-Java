@@ -2,17 +2,18 @@ package gui;
 
 import java.io.IOException;
 
+import htw.game.IHtwGame;
+
 public class GuiView implements IView {
-  private final IGuiController controller;
   private final Container container;
 
-  public GuiView(IGuiController controller) {
-    if (controller == null) {
-      throw new IllegalArgumentException("Cannot instantiate GuiView. Controller is null.");
-    }
-
-    this.controller = controller;
+  public GuiView() {
     this.container = new Container("Container", this);
+  }
+
+  @Override
+  public void populate(IHtwGame game) {
+    game.receive(this.container);
   }
 
   @Override
