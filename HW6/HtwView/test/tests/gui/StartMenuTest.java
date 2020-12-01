@@ -17,11 +17,7 @@ public class StartMenuTest {
     StartMenu menu = new StartMenu("StartMenu");
     menu.rowCount.setValue(26);
     menu.columnCount.setValue(26);
-    menu.batFrequency.setValue(1.5);
-    menu.pitFrequency.setValue(1.5);
-    assertEquals(25, Integer.parseInt(menu.rowCount.getText()));
-    assertEquals(25, Integer.parseInt(menu.columnCount.getText()));
-    assertEquals(1.0, Double.parseDouble(menu.batFrequency.getText()), 0.0001);
-    assertEquals(1.0, Double.parseDouble(menu.pitFrequency.getText()), 0.0001);
+    assertEquals(25, ((Number) menu.rowCount.getValue()).intValue());
+    assertEquals(25, ((Number) menu.columnCount.getValue()).intValue());
   }
 }
