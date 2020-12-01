@@ -1,0 +1,34 @@
+package tests.gui;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+
+import gui.HtwMultiPlayer;
+import gui.PlayerBar;
+import gui.PlayerView;
+import htw.game.IHtwPlayer;
+
+import static org.junit.Assert.assertEquals;
+
+public class PlayerBarTest {
+  @Test
+  public void testPopulate() {
+    IHtwPlayer playerOne = new HtwMultiPlayer("Joe", 1, 6);
+    playerOne.kill();
+    IHtwPlayer playerTwo = new HtwMultiPlayer("Sally", 2, 3);
+    PlayerBar playerBar = new PlayerBar();
+    playerBar.populate(Arrays.asList(playerOne, playerTwo));
+
+    PlayerView playerOneView = playerBar.playerViews.get(0);
+    assertEquals("PLAYER 1", playerOneView.playerLabel.getText());
+    assertEquals("Arrows: 6", playerOneView.arrowCountLabel.getText());
+    assertEquals("DEAD", playerOneView.isAliveLabel.getText());
+
+
+    PlayerView playerTwoView = playerBar.playerViews.get(1);
+    assertEquals("PLAYER 2", playerOneView.playerLabel.getText());
+    assertEquals("Arrows: 3", playerOneView.arrowCountLabel.getText());
+    assertEquals("ALIVE", playerOneView.isAliveLabel.getText());
+  }
+}

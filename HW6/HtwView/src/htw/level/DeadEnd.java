@@ -3,6 +3,7 @@ package htw.level;
 import java.util.List;
 import java.util.Map;
 
+import gui.IHtwNodeVisitor;
 import htw.game.IHtwPlayer;
 import maze.components.ICoordinates;
 import maze.components.DeadEndNode;
@@ -86,5 +87,10 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   @Override
   public boolean canEnter() {
     return false;
+  }
+
+  @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor) {
+    throw new IllegalArgumentException("Dead End node cannot be visited");
   }
 }
