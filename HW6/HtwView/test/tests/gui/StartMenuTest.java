@@ -20,9 +20,9 @@ public class StartMenuTest {
     menu.rowCount.setValue(26);
     menu.columnCount.setValue(26);
     assertFalse(menu.isRoomMaze.isSelected());
-    assertFalse(menu.finalRoomCount.isEnabled());
+    assertFalse(menu.finalEdgeCount.isEnabled());
     menu.isRoomMaze.setSelected(true);
-    assertTrue(menu.finalRoomCount.isEnabled());
+    assertTrue(menu.finalEdgeCount.isEnabled());
     assertEquals(25, ((Number) menu.rowCount.getValue()).intValue());
     assertEquals(25, ((Number) menu.columnCount.getValue()).intValue());
   }

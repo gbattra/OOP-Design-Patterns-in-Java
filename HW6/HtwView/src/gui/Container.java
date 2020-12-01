@@ -56,17 +56,19 @@ public class Container extends JFrame implements IButtonBarFeatures {
     if (result == JOptionPane.OK_OPTION) {
       boolean sameMaze = this.startMenu.useSameMaze.isSelected();
       boolean multiplayer = this.startMenu.isMultiplayer.isSelected();
-      int rowCount = Integer.parseInt(this.startMenu.rowCount.getText());
-      int colCount = Integer.parseInt(this.startMenu.columnCount.getText());
-      double pitFrequency = Double.parseDouble(this.startMenu.pitFrequency.getText());
-      double batFrequency = Double.parseDouble(this.startMenu.batFrequency.getText());
+      int rowCount = ((Number) this.startMenu.rowCount.getValue()).intValue();
+      int colCount = ((Number) this.startMenu.columnCount.getValue()).intValue();
+      boolean isRoomMaze = this.startMenu.isRoomMaze.isSelected();
+      int finalEdgeCount = ((Number) this.startMenu.finalEdgeCount.getValue()).intValue();
+      double pitFrequency = ((Number) this.startMenu.pitFrequency.getValue()).doubleValue();
+      double batFrequency = ((Number) this.startMenu.batFrequency.getValue()).doubleValue();
 
       this.features.onRestart(
               new RestartRequest(
                       sameMaze,
                       multiplayer,
-                      false,
-                      0,
+                      isRoomMaze,
+                      finalEdgeCount,
                       rowCount,
                       colCount,
                       pitFrequency,

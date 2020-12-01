@@ -5,6 +5,11 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 
+/**
+ * JPanel object holding the form for configuring a new game. I chose to use `public` access
+ * modifiers here as the properties are immutable through the use of `final`, and little would be
+ * gained from providing getters.
+ */
 public class StartMenu extends JPanel {
   private static final int ROW_COUNT_LIMIT = 25;
   private static final int COL_COUNT_LIMIT = 25;
@@ -14,7 +19,7 @@ public class StartMenu extends JPanel {
   public final JCheckBox isRoomMaze;
   public final JFormattedTextField rowCount;
   public final JFormattedTextField columnCount;
-  public final JFormattedTextField finalRoomCount;
+  public final JFormattedTextField finalEdgeCount;
   public final JFormattedTextField batFrequency;
   public final JFormattedTextField pitFrequency;
 
@@ -53,16 +58,15 @@ public class StartMenu extends JPanel {
     this.pitFrequency.setValue(0.2);
     this.batFrequency.addPropertyChangeListener(l -> this.handlePitFrequencyChange());
 
-
     JLabel isRoomMazeLabel = new JLabel("Is room maze? ");
     this.isRoomMaze = new JCheckBox();
     this.isRoomMaze.addItemListener(l -> this.handleIsRoomMazeChange());
 
-    JLabel finalRoomCountLabel = new JLabel("Final Room Count: ");
-    this.finalRoomCount = new JFormattedTextField(new NumberFormatter());
-    this.finalRoomCount.setColumns(10);
-    this.finalRoomCount.setValue(10);
-    this.finalRoomCount.setEnabled(false);
+    JLabel finalEdgeCountLabel = new JLabel("Final Edge Count: ");
+    this.finalEdgeCount = new JFormattedTextField(new NumberFormatter());
+    this.finalEdgeCount.setColumns(10);
+    this.finalEdgeCount.setValue(10);
+    this.finalEdgeCount.setEnabled(false);
 
     this.add(useSameMazeLabel);
     this.add(this.useSameMaze);
@@ -79,8 +83,8 @@ public class StartMenu extends JPanel {
     this.add(isRoomMazeLabel);
     this.add(this.isRoomMaze);
 
-    this.add(finalRoomCountLabel);
-    this.add(this.finalRoomCount);
+    this.add(finalEdgeCountLabel);
+    this.add(this.finalEdgeCount);
 
     this.add(batFrequencyLabel);
     this.add(this.batFrequency);
@@ -90,7 +94,7 @@ public class StartMenu extends JPanel {
   }
 
   private void handleIsRoomMazeChange() {
-    this.finalRoomCount.setEnabled(this.isRoomMaze.isSelected());
+    this.finalEdgeCount.setEnabled(this.isRoomMaze.isSelected());
   }
 
   private void handleRowCountChange() {

@@ -32,6 +32,6 @@ public class ContainerTest {
     IView mock = new MockGuiView(log);
     Container container = new Container("", mock);
     container.onRestart();
-    assertEquals("false - false - 10 - 10 - 0.2 - 0.3", log.toString());
+    assertEquals("false - false - 10 - 10 - false - 10 - 0.2 - 0.3", log.toString());
   }
 }
