@@ -12,7 +12,7 @@ public class PlayerViewTest {
     PlayerView playerView = new PlayerView();
     playerView.visitPlayer(1, 6, false);
     assertEquals("PLAYER 1", playerView.playerLabel.getText());
-    assertEquals("6", playerView.arrowCountLabel.getText());
+    assertEquals("Arrows: 6", playerView.arrowCountLabel.getText());
     assertEquals("DEAD", playerView.isAliveLabel.getText());
   }
 }
