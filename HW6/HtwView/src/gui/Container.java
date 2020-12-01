@@ -10,10 +10,6 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 
 public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVisitor<Void> {
-  private static final int WIDTH = 750;
-  private static final int HEIGHT = 750;
-  private static final int BTN_BAR_HEIGHT = 50;
-
   private final IContainerFeatures features;
 
   private final JPanel wrapper;
@@ -27,21 +23,20 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
     }
 
     this.features = features;
-    this.setSize(WIDTH, HEIGHT);
+    this.setSize(LayoutConfigs.WIDTH, LayoutConfigs.HEIGHT);
     this.setLocation(0, 0);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    this.startMenu = new StartMenu("StartMenu");
+
     this.wrapper = new JPanel();
-    this.wrapper.setSize(WIDTH, HEIGHT);
+    this.wrapper.setSize(LayoutConfigs.WIDTH, LayoutConfigs.HEIGHT);
     this.wrapper.setLocation(0, 0);
-    this.wrapper.setBackground(Color.BLACK);
 
     this.buttonBar = new ButtonBar("ButtonBar", this);
-    this.buttonBar.setSize(WIDTH, BTN_BAR_HEIGHT);
+    this.buttonBar.setSize(LayoutConfigs.WIDTH, LayoutConfigs.SMALL);
     this.buttonBar.setLocation(0, 0);
-    this.add(this.buttonBar);
-
-    this.startMenu = new StartMenu("StartMenu");
+    this.wrapper.add(this.buttonBar);
 
     this.add(this.wrapper);
     this.setVisible(true);
@@ -64,6 +59,7 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
     if (result == JOptionPane.OK_OPTION) {
       boolean sameMaze = this.startMenu.useSameMaze.isSelected();
       boolean multiplayer = this.startMenu.isMultiplayer.isSelected();
+      int arrowCount = ((Number) this.startMenu.arrowCount.getValue()).intValue();
       int rowCount = ((Number) this.startMenu.rowCount.getValue()).intValue();
       int colCount = ((Number) this.startMenu.columnCount.getValue()).intValue();
       boolean isRoomMaze = this.startMenu.isRoomMaze.isSelected();
@@ -76,6 +72,7 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
                       sameMaze,
                       multiplayer,
                       isRoomMaze,
+                      arrowCount,
                       finalEdgeCount,
                       rowCount,
                       colCount,

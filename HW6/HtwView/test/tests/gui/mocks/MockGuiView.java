@@ -28,9 +28,10 @@ public class MockGuiView implements IView {
   public void onRestart(RestartRequest restartRequest) {
     this.log.append(
             String.format(
-                    "%s - %s - %s - %s - %s - %s - %s - %s",
+                    "%s - %s - %s - %s - %s - %s - %s - %s - %s",
                     restartRequest.useSameMaze,
                     restartRequest.isMultiplayer,
+                    restartRequest.arrowCount,
                     restartRequest.rowCount,
                     restartRequest.columnCount,
                     restartRequest.isRoomMaze,

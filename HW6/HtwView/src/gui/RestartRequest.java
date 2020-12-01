@@ -11,6 +11,7 @@ public class RestartRequest {
   public final boolean useSameMaze;
   public final boolean isMultiplayer;
   public final boolean isRoomMaze;
+  public final int arrowCount;
   public final int finalEdgeCount;
   public final int rowCount;
   public final int columnCount;
@@ -21,6 +22,7 @@ public class RestartRequest {
           boolean useSameMaze,
           boolean isMultiplayer,
           boolean isRoomMaze,
+          int arrowCount,
           int finalRoomCount,
           int rowCount,
           int columnCount,
@@ -29,6 +31,7 @@ public class RestartRequest {
     this.useSameMaze = useSameMaze;
     this.isMultiplayer = isMultiplayer;
     this.isRoomMaze = isRoomMaze;
+    this.arrowCount = arrowCount;
     this.finalEdgeCount = finalRoomCount;
     this.rowCount = rowCount;
     this.columnCount = columnCount;

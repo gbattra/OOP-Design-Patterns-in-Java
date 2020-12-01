@@ -17,8 +17,6 @@ public class ButtonBar extends JPanel {
               "Cannot instantiate ButtonBar. Features are null.");
     }
 
-    this.setBackground(Color.BLUE);
-
     this.quitBtn = new JButton("Quit");
     this.quitBtn.addActionListener(l -> features.onQuit());
     this.add(this.quitBtn);

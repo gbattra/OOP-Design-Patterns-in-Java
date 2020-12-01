@@ -21,6 +21,7 @@ public class StartMenu extends JPanel {
   public final JCheckBox useSameMaze;
   public final JCheckBox isMultiplayer;
   public final JCheckBox isRoomMaze;
+  public final JFormattedTextField arrowCount;
   public final JFormattedTextField rowCount;
   public final JFormattedTextField columnCount;
   public final JFormattedTextField finalEdgeCount;
@@ -38,13 +39,20 @@ public class StartMenu extends JPanel {
     JLabel isMultiplayerLabel = new JLabel("Multiplayer mode? ");
     this.isMultiplayer = new JCheckBox();
 
-    JLabel rowCountLabel = new JLabel("Row Count: ");
+    JLabel arrowCountLabel = new JLabel("Arrow count: ");
+    this.arrowCount = new JFormattedTextField(new NumberFormatter());
+    this.arrowCount.setColumns(10);
+    this.arrowCount.setValue(10);
+
+    JLabel rowCountLabel = new JLabel(
+            String.format("Row Count (max %s): ", ROW_COUNT_LIMIT));
     this.rowCount = new JFormattedTextField(new NumberFormatter());
     this.rowCount.setColumns(10);
     this.rowCount.setValue(DEF_ROW_COUNT);
     this.rowCount.addPropertyChangeListener(l -> this.handleRowCountChange());
 
-    JLabel columnCountLabel = new JLabel("Column count: ");
+    JLabel columnCountLabel = new JLabel(
+            String.format("Column count (max %s): ", COL_COUNT_LIMIT));
     this.columnCount = new JFormattedTextField(new NumberFormatter());
     this.columnCount.setColumns(10);
     this.columnCount.setValue(DEF_COL_COUNT);
@@ -77,6 +85,9 @@ public class StartMenu extends JPanel {
 
     this.add(isMultiplayerLabel);
     this.add(this.isMultiplayer);
+
+    this.add(arrowCountLabel);
+    this.add(this.arrowCount);
 
     this.add(rowCountLabel);
     this.add(this.rowCount);
