@@ -20,6 +20,15 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
 
   @Override
   public Void visitPlayer(IHtwPlayer player) {
+    NodeView nodeView =
+            this.nodeViews[player.currentPosition().getY()][player.currentPosition().getX()];
+    if (nodeView == null) {
+      throw new IllegalStateException(
+              "NodeGrid failed to update. No node present at player position.");
+    }
+
+    nodeView.setVisible(true);
+    nodeView.setOccupied(true, player.number());
     return null;
   }
 
