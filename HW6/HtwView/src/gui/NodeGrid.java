@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import htw.game.IHtwPlayer;
 import htw.level.IHtwNode;
+import maze.components.Coordinates;
 
 public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMazeVisitor<Void> {
   private NodeView[][] nodeViews;
@@ -28,7 +29,9 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
     for (int r = 0; r < dimension.height; r++) {
       for (int w = 0; w < dimension.width; w++) {
         NodeView nodeView = new NodeView();
-
+        ((IHtwNode) root.get(new Coordinates(w, r))).receive(nodeView);
+        this.nodeViews[r][w] = nodeView;
+        this.add(nodeView);
       }
     }
 
