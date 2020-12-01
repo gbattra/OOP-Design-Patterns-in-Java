@@ -5,6 +5,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import htw.game.IHtwPlayer;
+
 public class PlayerView extends JPanel implements IHtwPlayerVisitor<Void> {
   public final JLabel playerLabel;
   public final JLabel arrowCountLabel;
@@ -32,10 +34,10 @@ public class PlayerView extends JPanel implements IHtwPlayerVisitor<Void> {
   }
 
   @Override
-  public Void visitPlayer(int playerId, int arrowCount, boolean isAlive) {
-    this.playerLabel.setText(String.format("PLAYER %s", playerId));
-    this.arrowCountLabel.setText(String.format("Arrows: %s", arrowCount));
-    this.isAliveLabel.setText(isAlive ? "ALIVE" : "DEAD");
+  public Void visitPlayer(IHtwPlayer player) {
+    this.playerLabel.setText(String.format("PLAYER %s", player.number()));
+    this.arrowCountLabel.setText(String.format("Arrows: %s", player.arrowCount()));
+    this.isAliveLabel.setText(player.isAlive() ? "ALIVE" : "DEAD");
     return null;
   }
 }

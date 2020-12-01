@@ -63,6 +63,6 @@ public class HtwPlayer extends MazePlayer implements IHtwPlayer {
 
   @Override
   public <R> R receive(IHtwPlayerVisitor<R> visitor) {
-    return visitor.visitPlayer(this.number(), this.arrowCount, this.isAlive());
+    return visitor.visitPlayer(this);
   }
 }

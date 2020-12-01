@@ -1,8 +1,12 @@
 package gui;
 
 import java.awt.*;
+import java.util.List;
 
 import javax.swing.*;
+
+import htw.game.IHtwPlayer;
+import htw.level.IHtwMaze;
 
 public class MazeView extends JScrollPane {
   private final NodeGrid nodeGrid;
@@ -16,5 +20,12 @@ public class MazeView extends JScrollPane {
     this.nodeGrid.setLocation(0, 0);
     this.nodeGrid.setBackground(Color.PINK);
     this.add(this.nodeGrid);
+  }
+
+  public void populate(List<IHtwPlayer> players, IHtwMaze maze) {
+
+    for (IHtwPlayer player : players) {
+      player.receive(this.nodeGrid);
+    }
   }
 }
