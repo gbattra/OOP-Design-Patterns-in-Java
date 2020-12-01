@@ -13,6 +13,10 @@ import javax.swing.text.NumberFormatter;
 public class StartMenu extends JPanel {
   private static final int ROW_COUNT_LIMIT = 25;
   private static final int COL_COUNT_LIMIT = 25;
+  private static final int DEF_ROW_COUNT = 10;
+  private static final int DEF_COL_COUNT = 10;
+  private static final double DEF_BAT_FREQ = 0.3;
+  private static final double DEF_PIT_FREQ = 0.2;
 
   public final JCheckBox useSameMaze;
   public final JCheckBox isMultiplayer;
@@ -37,25 +41,25 @@ public class StartMenu extends JPanel {
     JLabel rowCountLabel = new JLabel("Row Count: ");
     this.rowCount = new JFormattedTextField(new NumberFormatter());
     this.rowCount.setColumns(10);
-    this.rowCount.setValue(10);
+    this.rowCount.setValue(DEF_ROW_COUNT);
     this.rowCount.addPropertyChangeListener(l -> this.handleRowCountChange());
 
     JLabel columnCountLabel = new JLabel("Column count: ");
     this.columnCount = new JFormattedTextField(new NumberFormatter());
     this.columnCount.setColumns(10);
-    this.columnCount.setValue(10);
+    this.columnCount.setValue(DEF_COL_COUNT);
     this.columnCount.addPropertyChangeListener(l -> this.handleColumnCountChange());
 
     JLabel batFrequencyLabel = new JLabel("Bat frequency (0.0 - 1.0): ");
     this.batFrequency = new JFormattedTextField(new NumberFormatter());
     this.batFrequency.setColumns(10);
-    this.batFrequency.setValue(0.3);
+    this.batFrequency.setValue(DEF_BAT_FREQ);
     this.batFrequency.addPropertyChangeListener(l -> this.handleBatFrequencyChange());
 
     JLabel pitFrequencyLabel = new JLabel("Pit frequency (0.0 - 1.0): ");
     this.pitFrequency = new JFormattedTextField(new NumberFormatter());
     this.pitFrequency.setColumns(10);
-    this.pitFrequency.setValue(0.2);
+    this.pitFrequency.setValue(DEF_PIT_FREQ);
     this.batFrequency.addPropertyChangeListener(l -> this.handlePitFrequencyChange());
 
     JLabel isRoomMazeLabel = new JLabel("Is room maze? ");
@@ -65,7 +69,7 @@ public class StartMenu extends JPanel {
     JLabel finalEdgeCountLabel = new JLabel("Final Edge Count: ");
     this.finalEdgeCount = new JFormattedTextField(new NumberFormatter());
     this.finalEdgeCount.setColumns(10);
-    this.finalEdgeCount.setValue(10);
+    this.finalEdgeCount.setValue((DEF_ROW_COUNT * DEF_COL_COUNT) - 1);
     this.finalEdgeCount.setEnabled(false);
 
     this.add(useSameMazeLabel);
