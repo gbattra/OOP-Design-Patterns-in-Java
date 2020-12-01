@@ -23,7 +23,7 @@ public class MazeView extends JScrollPane {
   }
 
   public void populate(List<IHtwPlayer> players, IHtwMaze maze) {
-
+    maze.receive(this.nodeGrid);
     for (IHtwPlayer player : players) {
       player.receive(this.nodeGrid);
     }

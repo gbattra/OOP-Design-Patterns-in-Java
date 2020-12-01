@@ -1,7 +1,9 @@
 package htw.level;
 
+import java.awt.*;
 import java.io.IOException;
 
+import gui.IHtwMazeVisitor;
 import htw.game.IHtwPlayer;
 import htw.game.commands.IActionStrategy;
 import maze.components.Maze;
@@ -13,6 +15,7 @@ import maze.Direction;
 public class HtwMaze extends Maze implements IHtwMaze {
   private final Appendable logger;
   private final IHtwNode root;
+  private final Dimension dimension;
 
   /**
    * Constructor for the maze.
@@ -21,13 +24,17 @@ public class HtwMaze extends Maze implements IHtwMaze {
    * @param logger the logger for the maze
    * @throws IllegalArgumentException if params are null
    */
-  public HtwMaze(IHtwNode root, Appendable logger) throws IllegalArgumentException {
+  public HtwMaze(
+          IHtwNode root,
+          Appendable logger,
+          Dimension dimension) throws IllegalArgumentException {
     super(root, root);
-    if (root == null || logger == null) {
-      throw new IllegalArgumentException("Root and logger cannot be null.");
+    if (root == null || logger == null || dimension == null) {
+      throw new IllegalArgumentException("Root, logger and dimension cannot be null.");
     }
     this.root = root;
     this.logger = logger;
+    this.dimension = dimension;
   }
 
   @Override
@@ -76,5 +83,10 @@ public class HtwMaze extends Maze implements IHtwMaze {
   public boolean shoot(IHtwPlayer player, int id, int count) {
     IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition()));
     return current.shoot(current.directionTo(id), count);
+  }
+
+  @Override
+  public <R> R receive(IHtwMazeVisitor<R> visitor) {
+    return visitor.visitMaze(this.root, this.dimension);
   }
 }

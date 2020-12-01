@@ -2,6 +2,7 @@ package tests.htw.mocks;
 
 import java.io.IOException;
 
+import gui.IHtwMazeVisitor;
 import htw.game.IHtwPlayer;
 import htw.game.commands.IActionStrategy;
 import htw.level.IHtwMaze;
@@ -56,5 +57,10 @@ public class MockMaze implements IHtwMaze {
   public boolean shoot(IHtwPlayer player, int id, int count) {
     this.log.append(String.format("shoot - %s - %s", id, count));
     return false;
+  }
+
+  @Override
+  public <R> R receive(IHtwMazeVisitor<R> visitor) {
+    return null;
   }
 }

@@ -15,7 +15,6 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
     super();
 
     this.setLayout(new GridLayout(10, 10));
-
   }
 
   @Override
@@ -28,7 +27,7 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
     }
 
     nodeView.setVisible(true);
-    nodeView.setOccupied(true, player.number());
+    nodeView.setOccupied(player.number());
     return null;
   }
 

@@ -3,6 +3,8 @@ package tests.htw;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
+
 import htw.game.HtwPlayer;
 import htw.game.IHtwPlayer;
 import htw.game.commands.DirActionStrategy;
@@ -50,7 +52,7 @@ public class HtwMazeTest {
     east.setNode(root, Direction.EAST.opposite());
     west.setNode(root, Direction.WEST.opposite());
 
-    this.maze = new HtwMaze(root, log);
+    this.maze = new HtwMaze(root, log, new Dimension(2, 2));
     this.player = new HtwPlayer("Joe", 10);
 
     this.player.setCurrentPosition(this.root.getCoordinates());
@@ -60,7 +62,7 @@ public class HtwMazeTest {
   public void testConstructor() {
     try {
       IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), log);
-      IHtwMaze maze = new HtwMaze(root, log);
+      IHtwMaze maze = new HtwMaze(root, log, new Dimension(2, 2));
     } catch (Exception e) {
       fail("Valid constructor should not have failed.");
     }
@@ -68,7 +70,7 @@ public class HtwMazeTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    IHtwMaze maze = new HtwMaze(null, log);
+    IHtwMaze maze = new HtwMaze(null, log, new Dimension(2, 2));
     fail("Invalid constructor should have failed.");
   }
 
@@ -77,7 +79,7 @@ public class HtwMazeTest {
     try {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), log);
-      IHtwMaze maze = new HtwMaze(root, log);
+      IHtwMaze maze = new HtwMaze(root, log, new Dimension(2, 2));
       assertFalse(maze.move(player, Direction.EAST));
     } catch (Exception e) {
       fail("Invalid move should have return false, not thrown.");
@@ -89,7 +91,7 @@ public class HtwMazeTest {
     try {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       player.setCurrentPosition(this.root.getCoordinates());
-      IHtwMaze maze = new HtwMaze(root, log);
+      IHtwMaze maze = new HtwMaze(root, log, new Dimension(2, 2));
       assertTrue(maze.move(player, Direction.EAST));
       assertEquals(
               "Player 1: You are in cave (2, 1) with tunnels to the WEST",
@@ -105,7 +107,7 @@ public class HtwMazeTest {
     try {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       player.setCurrentPosition(this.root.getCoordinates());
-      IHtwMaze maze = new HtwMaze(root, log);
+      IHtwMaze maze = new HtwMaze(root, log, new Dimension(2, 2));
       assertTrue(maze.move(player, 3));
       assertEquals(
               "Player 1: You are in cave 3 with tunnels to node(s) 5",

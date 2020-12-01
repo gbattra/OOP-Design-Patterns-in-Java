@@ -1,5 +1,7 @@
 package htw.tools;
 
+import java.awt.*;
+
 import htw.level.HtwMaze;
 import htw.level.Cave;
 import htw.level.IHtwNode;
@@ -48,7 +50,8 @@ public class HtwMazeBuilder extends MazeBuilder {
       this.setWumpus(start);
     }
 
-    return new HtwMaze(start, ((IHtwConfiguration) this.config).getLogger());
+    Dimension dimension = new Dimension(this.config.columnCount(), this.config.rowCount());
+    return new HtwMaze(start, ((IHtwConfiguration) this.config).getLogger(), dimension);
   }
 
   @Override

@@ -2,6 +2,7 @@ package htw.level;
 
 import java.io.IOException;
 
+import gui.IHtwMazeVisitor;
 import htw.game.IHtwPlayer;
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
@@ -68,4 +69,13 @@ public interface IHtwMaze {
    * @throws IOException if writes to out fail
    */
   boolean shoot(IHtwPlayer player, int id, int count);
+
+  /**
+   * Visitor function for the maze.
+   *
+   * @param visitor the visitor of the maze
+   * @param <R> the return type
+   * @return R
+   */
+  <R> R receive(IHtwMazeVisitor<R> visitor);
 }
