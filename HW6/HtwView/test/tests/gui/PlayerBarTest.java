@@ -25,7 +25,6 @@ public class PlayerBarTest {
     assertEquals("Arrows: 6", playerOneView.arrowCountLabel.getText());
     assertEquals("DEAD", playerOneView.isAliveLabel.getText());
 
-
     PlayerView playerTwoView = playerBar.playerViews.get(1);
     assertEquals("PLAYER 2", playerTwoView.playerLabel.getText());
     assertEquals("Arrows: 3", playerTwoView.arrowCountLabel.getText());

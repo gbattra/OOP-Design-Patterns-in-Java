@@ -15,10 +15,16 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
     super();
 
     this.setLayout(new GridLayout(10, 10));
+    this.nodeViews = new NodeView[1][1];
   }
 
   @Override
   public Void visitPlayer(IHtwPlayer player) {
+    if (nodeViews.length < player.currentPosition().getY()
+      || nodeViews[0].length < player.currentPosition().getX()) {
+      throw new IllegalStateException("Player position is out of range of node grid.");
+    }
+
     NodeView nodeView =
             this.nodeViews[player.currentPosition().getY()][player.currentPosition().getX()];
     if (nodeView == null) {
@@ -33,6 +39,7 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
 
   @Override
   public Void visitMaze(IHtwNode root, Dimension dimension) {
+    this.nodeViews = new NodeView[dimension.height][dimension.width];
     this.setLayout(new GridLayout(dimension.height, dimension.width));
     for (int r = 0; r < dimension.height; r++) {
       for (int w = 0; w < dimension.width; w++) {
