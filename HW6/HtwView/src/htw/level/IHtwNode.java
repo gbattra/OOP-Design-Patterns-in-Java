@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import gui.IHtwNodeVisitor;
 import htw.game.IHtwPlayer;
 import maze.components.ICoordinates;
 import maze.components.Node;
@@ -125,4 +126,13 @@ public interface IHtwNode extends Node {
    * @return this node if it is not a tunnel
    */
   IHtwNode adjacent(List<ICoordinates> traversed);
+
+  /**
+   * Visitor function allowing a visitor to access the state of this node.
+   *
+   * @param visitor the object doing the visiting
+   * @param <R> the return type for the function
+   * @return R
+   */
+  <R> R receive(IHtwNodeVisitor<R> visitor);
 }

@@ -2,6 +2,7 @@ package htw.level;
 
 import java.io.IOException;
 
+import gui.IHtwNodeVisitor;
 import htw.game.IHtwPlayer;
 import maze.Direction;
 
@@ -22,6 +23,11 @@ public class PitStrategy extends StandardStrategy implements IHtwNodeStrategy {
   @Override
   public boolean drafty(Direction from, IHtwNode curr) {
     return true;
+  }
+
+  @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitPitCave(curr);
   }
 
   @Override

@@ -3,6 +3,7 @@ package htw.level;
 import java.io.IOException;
 import java.util.List;
 
+import gui.IHtwNodeVisitor;
 import htw.game.IHtwPlayer;
 import maze.components.ICoordinates;
 import maze.Direction;
@@ -66,4 +67,14 @@ public interface IHtwNodeStrategy {
    * @return this node if it is not a tunnel
    */
   IHtwNode adjacent(List<ICoordinates> traversed, IHtwNode curr);
+
+  /**
+   * Visitor function allowing a visitor to access the state of this node.
+   *
+   * @param visitor the object doing the visiting
+   * @param curr the node being visited
+   * @param <R> the return type for the function
+   * @return R
+   */
+  <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr);
 }

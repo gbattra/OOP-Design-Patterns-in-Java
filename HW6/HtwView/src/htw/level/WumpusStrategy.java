@@ -2,6 +2,7 @@ package htw.level;
 
 import java.io.IOException;
 
+import gui.IHtwNodeVisitor;
 import htw.game.IHtwPlayer;
 import maze.Direction;
 
@@ -30,6 +31,11 @@ public class WumpusStrategy extends StandardStrategy implements IHtwNodeStrategy
   @Override
   public boolean smelly(Direction from, IHtwNode node) {
     return true;
+  }
+
+  @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitWumpus(curr);
   }
 
   @Override

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import gui.IHtwNodeVisitor;
 import maze.components.ICoordinates;
 import maze.Direction;
 
@@ -119,6 +120,11 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
     }
 
     throw new IllegalStateException("No available nodes to enter.");
+  }
+
+  @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitTunnel(curr);
   }
 
   @Override

@@ -3,6 +3,7 @@ package htw.level;
 import java.io.IOException;
 import java.util.Random;
 
+import gui.IHtwNodeVisitor;
 import maze.components.Coordinates;
 import maze.components.ICoordinates;
 import maze.Direction;
@@ -67,5 +68,10 @@ public class BatStrategy extends StandardStrategy implements IHtwNodeStrategy {
   @Override
   public String toString() {
     return "Bat(" + this.parent.toString() + ")";
+  }
+
+  @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitBatCave(curr);
   }
 }

@@ -14,6 +14,7 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
     super();
 
     this.setLayout(new GridLayout(10, 10));
+
   }
 
   @Override
@@ -26,6 +27,7 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
     this.setLayout(new GridLayout(dimension.height, dimension.width));
     for (int r = 0; r < dimension.height; r++) {
       for (int w = 0; w < dimension.width; w++) {
+        NodeView nodeView = new NodeView();
 
       }
     }

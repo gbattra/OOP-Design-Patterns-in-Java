@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import gui.IHtwNodeVisitor;
 import htw.game.IHtwPlayer;
 import maze.components.ICoordinates;
 import maze.Direction;
@@ -71,6 +72,11 @@ public class StandardStrategy implements IHtwNodeStrategy {
       throw new IllegalStateException("Already traversed this node when finding adjacent.");
     }
     return curr;
+  }
+
+  @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitStandardCave(curr);
   }
 
   @Override

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import gui.IHtwNodeVisitor;
 import htw.game.IHtwPlayer;
 import maze.components.ICoordinates;
 import maze.components.AbstractRoomNode;
@@ -202,5 +203,10 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   @Override
   public int loot(int gold) {
     return 0;
+  }
+
+  @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor) {
+    return null;
   }
 }
