@@ -8,6 +8,7 @@ import javax.swing.*;
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 import htw.level.IHtwNode;
+import maze.components.Coordinates;
 
 public class MazeView extends JPanel implements IHtwMazeVisitor<Void> {
   private JPanel nodeGrid;
@@ -22,7 +23,7 @@ public class MazeView extends JPanel implements IHtwMazeVisitor<Void> {
     this.nodeGrid.setLayout(new GridLayout(10, 10));
     for (int r = 0; r < dimension.height; r++) {
       for (int c = 0; c < dimension.width; c++) {
-        NodeView nodeView = new NodeView();
+        NodeView nodeView = new NodeView((IHtwNode) root.get(new Coordinates(c, r)));
         if ((c + r) % 2 == 0) {
           nodeView.setBackground(Color.BLACK);
         }

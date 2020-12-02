@@ -33,7 +33,8 @@ public class ContainerTest {
   public void testRestart() {
     StringBuilder log = new StringBuilder();
     IView mock = new MockGuiView(log);
-    Container container = new Container("", mock, null, null);
+    Container container = new Container(
+            "", mock, new ArrayList<>(), new MockMaze(new StringBuilder()));
     container.onRestart();
     assertEquals("false - false - 10 - 10 - 10 - false - 99 - 0.2 - 0.3", log.toString());
   }

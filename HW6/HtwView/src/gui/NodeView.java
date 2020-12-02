@@ -12,7 +12,7 @@ import htw.level.IHtwNode;
 public class NodeView extends JPanel implements IHtwNodeVisitor<Void> {
   private final List<PlayerIcon> playerIcons;
 
-  public NodeView() {
+  public NodeView(IHtwNode node) {
     super();
     this.setLayout(new GridLayout(1, 1));
     this.setSize(LayoutConfigs.NODE_SIZE, LayoutConfigs.NODE_SIZE);
