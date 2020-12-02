@@ -10,7 +10,8 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 import htw.level.IHtwNode;
 
-public class Container extends JFrame implements IButtonBarFeatures, IHtwMazeVisitor<Void> {
+public class Container extends JFrame
+        implements IButtonBarFeatures, IMazeViewFeatures, IHtwMazeVisitor<Void> {
   private final IContainerFeatures features;
 
   public final ButtonBar buttonBar;
@@ -62,7 +63,7 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwMazeVis
 
   @Override
   public Void visitMaze(IHtwNode root, Dimension dimension) {
-    this.mazeView = new MazeView(root, dimension);
+    this.mazeView = new MazeView(root, dimension, this);
     this.mazeView.setLocation(0, this.playerBar.getY() + this.playerBar.getHeight());
     this.mazeView.setSize(LayoutConfigs.WIDTH, LayoutConfigs.MAZE_HEIGHT);
     this.add(this.mazeView);
@@ -101,5 +102,10 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwMazeVis
                       pitFrequency,
                       batFrequency));
     }
+  }
+
+  @Override
+  public void onShoot(int id, int shootCount) {
+    System.out.printf("Shoot %s", shootCount);
   }
 }

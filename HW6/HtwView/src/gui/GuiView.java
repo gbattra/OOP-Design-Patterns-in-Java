@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import htw.game.IHtwGame;

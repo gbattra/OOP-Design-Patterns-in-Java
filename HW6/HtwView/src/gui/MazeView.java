@@ -1,20 +1,24 @@
 package gui;
 
 import java.awt.*;
-import java.util.List;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 
 import htw.game.IHtwPlayer;
 import htw.level.IHtwNode;
 import maze.components.Coordinates;
 
-public class MazeView extends JPanel implements IHtwPlayerVisitor<Void> {
+public class MazeView extends JPanel implements INodeViewFeatures, IHtwPlayerVisitor<Void> {
   private JPanel nodeGrid;
   private NodeView[][] nodeViews;
 
-  public MazeView(IHtwNode root, Dimension dimension) {
+  private final IMazeViewFeatures features;
+
+  public MazeView(IHtwNode root, Dimension dimension, IMazeViewFeatures features) {
     super();
+    this.features = features;
+
     this.setLayout(new BorderLayout());
     this.setBackground(Color.YELLOW);
 
@@ -25,7 +29,7 @@ public class MazeView extends JPanel implements IHtwPlayerVisitor<Void> {
     this.nodeViews = new NodeView[dimension.height][dimension.width];
     for (int r = 0; r < dimension.height; r++) {
       for (int c = 0; c < dimension.width; c++) {
-        NodeView nodeView = new NodeView((IHtwNode) root.get(new Coordinates(c, r)));
+        NodeView nodeView = new NodeView((IHtwNode) root.get(new Coordinates(c, r)), this);
         this.nodeGrid.add(nodeView);
         this.nodeViews[r][c] = nodeView;
       }
@@ -51,5 +55,29 @@ public class MazeView extends JPanel implements IHtwPlayerVisitor<Void> {
 
     nodeView.setOccupied(player.number());
     return null;
+  }
+
+  @Override
+  public void onRightClick(int id) {
+    JPanel shootForm = new JPanel();
+    JLabel shootLabel = new JLabel("Shoot count: ");
+    JFormattedTextField shootField = new JFormattedTextField(new NumberFormatter());
+    shootField.setColumns(10);
+    shootField.setValue(1);
+
+    shootForm.add(shootLabel);
+    shootForm.add(shootField);
+
+    int result = JOptionPane.showConfirmDialog(
+            null, shootForm, "Shoot", JOptionPane.OK_CANCEL_OPTION);
+    if (result == JOptionPane.OK_OPTION) {
+      int shootCount = ((Number) shootField.getValue()).intValue();
+      this.features.onShoot(id, shootCount);
+    }
+  }
+
+  @Override
+  public void onLeftClick(int id) {
+    System.out.print("Left clicked");
   }
 }
