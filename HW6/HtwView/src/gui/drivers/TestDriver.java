@@ -10,6 +10,6 @@ public class TestDriver {
     IView view = new GuiView();
     IGuiController controller = new GuiController(view);
     view.setFeatures(controller);
-    controller.start();
+    controller.startNew();
   }
 }

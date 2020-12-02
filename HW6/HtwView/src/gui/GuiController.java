@@ -1,23 +1,18 @@
 package gui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
-import htw.HtwMultiPlayer;
-import htw.game.HtwGame;
 import htw.game.IHtwGame;
-import htw.game.IHtwPlayer;
-import htw.level.IHtwMaze;
 import htw.tools.HtwConfigurationBuilder;
-import htw.tools.HtwMazeBuilder;
-import htw.tools.IHtwConfiguration;
+import htw.tools.HtwGameBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 
 public class GuiController implements IGuiController {
   private final IView view;
   private final Random random = new Random();
+
+  private IHtwGame game;
+  private IHtwConfigurationBuilder configurationBuilder;
 
   public GuiController(IView view) throws IllegalArgumentException {
     if (view == null) {
@@ -29,17 +24,34 @@ public class GuiController implements IGuiController {
   }
 
   @Override
-  public void start() {
-    IHtwConfiguration configuration = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
+  public void startNew() {
+    configurationBuilder = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
             .setLogger(view)
-            .setRandomSeed(this.random.nextInt()))
-            .build();
-    IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(configuration).build();
-    List<IHtwPlayer> players = new ArrayList<>(
-            Arrays.asList(
-                    new HtwMultiPlayer("Joe", 1, 10),
-                    new HtwMultiPlayer("Sarah", 2, 10)));
-    IHtwGame game = new HtwGame(players, maze, view);
+            .setRandomSeed(this.random.nextInt()));
+    game = new HtwGameBuilder(configurationBuilder.build()).build();
+    game.start();
+    this.view.populate(game);
+  }
+
+  @Override
+  public void restart(RestartRequest restartRequest) {
+    if (restartRequest.useSameMaze) {
+      game = new HtwGameBuilder(configurationBuilder.build()).build();
+      game.start();
+      this.view.populate(game);
+      return;
+    }
+
+    configurationBuilder.setBatFrequency(restartRequest.batFrequency)
+                        .setPitFrequency(restartRequest.pitFrequency)
+                        .setArrowCount(restartRequest.arrowCount)
+                        .setNumPlayers(restartRequest.isMultiplayer ? 2 : 1)
+                        .setIsRoomMaze(restartRequest.isRoomMaze)
+                        .setTargetEdgeCount(restartRequest.finalEdgeCount)
+                        .setRowCount(restartRequest.rowCount)
+                        .setColumnCount(restartRequest.columnCount);
+
+    game = new HtwGameBuilder(configurationBuilder.build()).build();
     game.start();
     this.view.populate(game);
   }

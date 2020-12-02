@@ -7,6 +7,22 @@ import maze.config.IConfigurationBuilder;
  */
 public interface IHtwConfigurationBuilder extends IConfigurationBuilder {
   /**
+   * Set the starting arrow count for players.
+   *
+   * @param arrowCount the starting arrow count
+   * @return updated builder instance
+   */
+  IHtwConfigurationBuilder setArrowCount(int arrowCount);
+
+  /**
+   * Set the number of players in the game.
+   *
+   * @param numplayers the number of players in the game
+   * @return the updated builder instance
+   */
+  IHtwConfigurationBuilder setNumPlayers(int numplayers);
+
+  /**
    * The frequency of pits in the maze.
    *
    * @param pitFrequency value between 0 and 1

@@ -4,9 +4,9 @@ package gui;
  * A plain-old Java object holding the input values from the restart menu form.
  */
 public class RestartRequest {
-  /** As this object
-   * serves as a way of condensing form entries into a single object, I chose to leave the access
-   * modifiers on the properties public and maintain immutability through the use of `final`.
+  /** As this object serves as a way of condensing form entries into a single object, I chose
+   * to leave the access modifiers on the properties public and maintain immutability through
+   * the use of `final`.
    */
   public final boolean useSameMaze;
   public final boolean isMultiplayer;

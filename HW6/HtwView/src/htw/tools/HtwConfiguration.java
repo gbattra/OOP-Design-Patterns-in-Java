@@ -10,6 +10,8 @@ import maze.config.AbstractMazeConfiguration;
 public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwConfiguration {
   private final double pitFrequency;
   private final double batFrequency;
+  private final int numPlayers;
+  private final int arrowCount;
   private final Appendable logger;
 
   /**
@@ -25,6 +27,8 @@ public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwC
    * @param targetEdgeCount the final number of edges in the maze
    * @param randomSeed to control how a maze is built
    * @param logger the logger for the game
+   * @param arrowCount number of arrows to start with
+   * @param numPlayers number of players in the game
    * @throws IllegalArgumentException if bat frequency or pit frequency is negative
    */
   public HtwConfiguration(
@@ -37,7 +41,9 @@ public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwC
           boolean isWrappingMaze,
           int targetEdgeCount,
           int randomSeed,
-          Appendable logger) throws IllegalArgumentException {
+          Appendable logger,
+          int arrowCount,
+          int numPlayers) throws IllegalArgumentException {
     super(rowCount,
             columnCount,
             start,
@@ -53,6 +59,18 @@ public class HtwConfiguration extends AbstractMazeConfiguration implements IHtwC
     this.pitFrequency = pitFrequency;
     this.batFrequency = batFrequency;
     this.logger = logger;
+    this.arrowCount = arrowCount;
+    this.numPlayers = numPlayers;
+  }
+
+  @Override
+  public int numPlayers() {
+    return this.numPlayers;
+  }
+
+  @Override
+  public int arrowCount() {
+    return this.arrowCount;
   }
 
   @Override

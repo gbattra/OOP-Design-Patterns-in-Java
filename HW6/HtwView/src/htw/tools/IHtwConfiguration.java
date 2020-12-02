@@ -21,6 +21,20 @@ public interface IHtwConfiguration extends IConfiguration {
   double pitFrequency();
 
   /**
+   * Getter for the arrow count.
+   *
+   * @return the arrow count
+   */
+  int arrowCount();
+
+  /**
+   * Getter for the number of players in the game.
+   *
+   * @return the number of players
+   */
+  int numPlayers();
+
+  /**
    * Returns the logger for the game.
    *
    * @return appendable out object

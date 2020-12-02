@@ -9,6 +9,8 @@ public class HtwConfigurationBuilder
         extends MazeConfigurationBuilder implements IHtwConfigurationBuilder {
   protected double pitFrequency = 0.2;
   protected double batFrequency = 0.3;
+  protected int arrowCount = 10;
+  protected int numPlayers = 1;
   protected Appendable logger = System.out;
 
   @Override
@@ -30,6 +32,18 @@ public class HtwConfigurationBuilder
   }
 
   @Override
+  public IHtwConfigurationBuilder setNumPlayers(int numplayers) {
+    this.numPlayers = numplayers;
+    return this;
+  }
+
+  @Override
+  public IHtwConfigurationBuilder setArrowCount(int arrowCount) {
+    this.arrowCount = arrowCount;
+    return this;
+  }
+
+  @Override
   public IHtwConfiguration build() {
     return new HtwConfiguration(
             this.rowCount,
@@ -41,6 +55,8 @@ public class HtwConfigurationBuilder
             this.isWrappingMaze,
             this.targetEdgeCount,
             this.randomSeed,
-            this.logger);
+            this.logger,
+            this.arrowCount,
+            this.numPlayers);
   }
 }
