@@ -14,8 +14,7 @@ public class NodeView extends JPanel implements IHtwNodeVisitor<Void> {
 
   public NodeView() {
     super();
-    this.setLayout(new BorderLayout());
-
+    this.setLayout(new GridLayout(1, 1));
     this.setSize(LayoutConfigs.NODE_SIZE, LayoutConfigs.NODE_SIZE);
     this.setBackground(Color.PINK);
     this.setBorder(
