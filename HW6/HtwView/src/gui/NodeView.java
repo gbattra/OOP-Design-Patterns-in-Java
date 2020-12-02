@@ -25,6 +25,10 @@ public class NodeView extends JPanel implements IHtwNodeVisitor<Void> {
     this.playerIcons = new ArrayList<>();
     this.playerIcons.add(new PlayerIcon(Color.MAGENTA));
     this.playerIcons.add(new PlayerIcon(Color.BLACK));
+
+    if (node.visited()) {
+      this.setBackground(Color.BLACK);
+    }
   }
 
   public void setOccupied(int playerId) {

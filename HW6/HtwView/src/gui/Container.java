@@ -13,9 +13,9 @@ import htw.level.IHtwNode;
 public class Container extends JFrame implements IButtonBarFeatures, IHtwMazeVisitor<Void> {
   private final IContainerFeatures features;
 
-  private final ButtonBar buttonBar;
-  private final StartMenu startMenu;
-  private final PlayerBar playerBar;
+  public final ButtonBar buttonBar;
+  public final StartMenu startMenu;
+  public final PlayerBar playerBar;
   private MazeView mazeView;
 
   public Container(
@@ -48,6 +48,9 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwMazeVis
     this.add(this.playerBar);
 
     maze.receive(this);
+    for (IHtwPlayer player : players) {
+      player.receive(this.mazeView);
+    }
 
     JPanel buffer = new JPanel();
     buffer.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
