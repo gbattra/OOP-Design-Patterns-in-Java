@@ -12,23 +12,16 @@ import htw.level.IHtwNode;
 public class MazeView extends JPanel implements IHtwMazeVisitor<Void> {
   private JPanel nodeGrid;
 
-  public MazeView() {
+  public MazeView(IHtwNode root, Dimension dimension) {
     super();
     this.setLayout(new BorderLayout());
     this.setBackground(Color.YELLOW);
 
-    JPanel gridWrapper = new JPanel();
-    gridWrapper.setLocation(0, 0);
-    gridWrapper.setBackground(Color.BLUE);
-    gridWrapper.setSize(
-            LayoutConfigs.NODE_SIZE * 10,
-            LayoutConfigs.NODE_SIZE * 10);
-
     this.nodeGrid = new JPanel();
     this.nodeGrid.setSize(LayoutConfigs.NODE_SIZE * 10, LayoutConfigs.NODE_SIZE * 10);
     this.nodeGrid.setLayout(new GridLayout(10, 10));
-    for (int r = 0; r < 10; r++) {
-      for (int c = 0; c < 10; c++) {
+    for (int r = 0; r < dimension.height; r++) {
+      for (int c = 0; c < dimension.width; c++) {
         NodeView nodeView = new NodeView();
         if ((c + r) % 2 == 0) {
           nodeView.setBackground(Color.BLACK);
@@ -36,7 +29,9 @@ public class MazeView extends JPanel implements IHtwMazeVisitor<Void> {
         this.nodeGrid.add(nodeView);
       }
     }
-    this.add(this.nodeGrid);
+
+    JScrollPane scrollPane = new JScrollPane(this.nodeGrid);
+    this.add(scrollPane);
   }
 
   public void populate(List<IHtwPlayer> players, IHtwMaze maze) {

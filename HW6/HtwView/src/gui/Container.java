@@ -8,16 +8,21 @@ import javax.swing.*;
 
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
+import htw.level.IHtwNode;
 
-public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVisitor<Void> {
+public class Container extends JFrame implements IButtonBarFeatures, IHtwMazeVisitor<Void> {
   private final IContainerFeatures features;
 
   private final ButtonBar buttonBar;
   private final StartMenu startMenu;
   private final PlayerBar playerBar;
-  private final MazeView mazeView;
+  private MazeView mazeView;
 
-  public Container(String caption, IContainerFeatures features) {
+  public Container(
+          String caption,
+          IContainerFeatures features,
+          List<IHtwPlayer> players,
+          IHtwMaze maze) {
     super(caption);
     if (features == null) {
       throw new IllegalArgumentException("Cannot instantiate Container. Features are null.");
@@ -37,15 +42,12 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
     this.buttonBar.setLocation(0, 0);
     this.add(this.buttonBar);
 
-    this.playerBar = new PlayerBar();
+    this.playerBar = new PlayerBar(players);
     this.playerBar.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
     this.playerBar.setLocation(0, this.buttonBar.getY() + this.buttonBar.getHeight());
     this.add(this.playerBar);
 
-    this.mazeView = new MazeView();
-    this.mazeView.setLocation(0, this.playerBar.getY() + this.playerBar.getHeight());
-    this.mazeView.setSize(LayoutConfigs.WIDTH, LayoutConfigs.MAZE_HEIGHT);
-    this.add(this.mazeView);
+    maze.receive(this);
 
     JPanel buffer = new JPanel();
     buffer.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
@@ -56,9 +58,11 @@ public class Container extends JFrame implements IButtonBarFeatures, IHtwGameVis
   }
 
   @Override
-  public Void visitGame(List<IHtwPlayer> players, IHtwMaze maze) {
-    this.playerBar.populate(players);
-    this.mazeView.populate(players, maze);
+  public Void visitMaze(IHtwNode root, Dimension dimension) {
+    this.mazeView = new MazeView(root, dimension);
+    this.mazeView.setLocation(0, this.playerBar.getY() + this.playerBar.getHeight());
+    this.mazeView.setSize(LayoutConfigs.WIDTH, LayoutConfigs.MAZE_HEIGHT);
+    this.add(this.mazeView);
     return null;
   }
 

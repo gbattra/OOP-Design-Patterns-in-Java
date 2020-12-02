@@ -1,17 +1,16 @@
 package gui;
 
 import java.io.IOException;
+import java.util.List;
 
 import htw.game.IHtwGame;
+import htw.game.IHtwPlayer;
+import htw.level.IHtwMaze;
 
-public class GuiView implements IView {
-  private final Container container;
+public class GuiView implements IView, IHtwGameVisitor<Void> {
+  private Container container;
 
   private IViewFeatures features;
-
-  public GuiView() {
-    this.container = new Container("Container", this);
-  }
 
   @Override
   public void setFeatures(IViewFeatures features) {
@@ -20,7 +19,13 @@ public class GuiView implements IView {
 
   @Override
   public void populate(IHtwGame game) {
-    game.receive(this.container);
+    game.receive(this);
+  }
+
+  @Override
+  public Void visitGame(List<IHtwPlayer> players, IHtwMaze maze) {
+    this.container = new Container("Container", this, players, maze);
+    return null;
   }
 
   @Override

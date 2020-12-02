@@ -17,8 +17,7 @@ public class PlayerBarTest {
     IHtwPlayer playerOne = new HtwMultiPlayer("Joe", 1, 6);
     playerOne.kill();
     IHtwPlayer playerTwo = new HtwMultiPlayer("Sally", 2, 3);
-    PlayerBar playerBar = new PlayerBar();
-    playerBar.populate(Arrays.asList(playerOne, playerTwo));
+    PlayerBar playerBar = new PlayerBar(Arrays.asList(playerOne, playerTwo));
 
     PlayerView playerOneView = playerBar.playerViews.get(0);
     assertEquals("PLAYER 1", playerOneView.playerLabel.getText());
