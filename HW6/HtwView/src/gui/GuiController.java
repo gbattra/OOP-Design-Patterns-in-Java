@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.util.Random;
 
 import htw.game.IHtwGame;
@@ -25,36 +26,54 @@ public class GuiController implements IGuiController {
 
   @Override
   public void startNew() {
-    configurationBuilder = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
-            .setLogger(view)
-            .setNumPlayers(2)
-            .setRandomSeed(this.random.nextInt(1000)));
-    game = new HtwGameBuilder(configurationBuilder.build()).build();
-    game.start();
-    this.view.populate(game);
+    try {
+      configurationBuilder = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
+              .setLogger(view)
+              .setNumPlayers(2)
+              .setRandomSeed(this.random.nextInt(1000)));
+      game = new HtwGameBuilder(configurationBuilder.build()).build();
+      game.start();
+      this.view.populate(game);
+    } catch (IllegalArgumentException | IllegalStateException e) {
+      // have view populate alert
+    }
   }
 
   @Override
   public void restart(RestartRequest restartRequest) {
-    if (restartRequest.useSameMaze) {
+    try {
+      if (restartRequest.useSameMaze) {
+        game = new HtwGameBuilder(configurationBuilder.build()).build();
+        game.start();
+        this.view.populate(game);
+        return;
+      }
+
+      configurationBuilder.setBatFrequency(restartRequest.batFrequency)
+                          .setPitFrequency(restartRequest.pitFrequency)
+                          .setArrowCount(restartRequest.arrowCount)
+                          .setNumPlayers(restartRequest.isMultiplayer ? 2 : 1)
+                          .setIsRoomMaze(restartRequest.isRoomMaze)
+                          .setTargetEdgeCount(restartRequest.finalEdgeCount)
+                          .setRowCount(restartRequest.rowCount)
+                          .setColumnCount(restartRequest.columnCount)
+                          .setRandomSeed(this.random.nextInt(1000));
+
       game = new HtwGameBuilder(configurationBuilder.build()).build();
       game.start();
       this.view.populate(game);
-      return;
+    } catch (IllegalArgumentException | IllegalStateException e) {
+      // have view populate alert
     }
+  }
 
-    configurationBuilder.setBatFrequency(restartRequest.batFrequency)
-                        .setPitFrequency(restartRequest.pitFrequency)
-                        .setArrowCount(restartRequest.arrowCount)
-                        .setNumPlayers(restartRequest.isMultiplayer ? 2 : 1)
-                        .setIsRoomMaze(restartRequest.isRoomMaze)
-                        .setTargetEdgeCount(restartRequest.finalEdgeCount)
-                        .setRowCount(restartRequest.rowCount)
-                        .setColumnCount(restartRequest.columnCount)
-                        .setRandomSeed(this.random.nextInt(1000));
-
-    game = new HtwGameBuilder(configurationBuilder.build()).build();
-    game.start();
-    this.view.populate(game);
+  @Override
+  public void onMove(int id) {
+    try {
+      game.move(id);
+      this.view.populate(game);
+    } catch (IllegalArgumentException | IllegalStateException | IOException e) {
+      // have view populate alert
+    }
   }
 }

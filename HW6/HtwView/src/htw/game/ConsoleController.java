@@ -81,9 +81,8 @@ public class ConsoleController implements Runnable {
     }
 
     // run the game
-    while (this.game.hasNext()) {
+    while (!this.game.isOver()) {
       try {
-        this.game.next();
         this.out.append("\n").append(this.game.status(strategy));
         this.out.append("\n'shoot' or 'move'? ");
         String next = this.scanner.next();

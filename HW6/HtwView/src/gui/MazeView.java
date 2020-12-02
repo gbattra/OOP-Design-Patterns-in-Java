@@ -78,6 +78,6 @@ public class MazeView extends JPanel implements INodeViewFeatures, IHtwPlayerVis
 
   @Override
   public void onLeftClick(int id) {
-    System.out.print("Left clicked");
+    this.features.onMove(id);
   }
 }

@@ -1,5 +1,6 @@
 package htw.game;
 
+import java.io.IOException;
 import java.util.List;
 
 import gui.IHtwGameVisitor;
@@ -50,6 +51,7 @@ public class HtwGame implements IHtwGame {
 
   @Override
   public void start() {
+    this.round++;
     for (IHtwPlayer player : players) {
       player.setCurrentPosition(maze.randomCoordinates());
     }
@@ -61,76 +63,53 @@ public class HtwGame implements IHtwGame {
   }
 
   @Override
-  public boolean move(Direction direction) {
-    try {
-      boolean move = this.maze.move(this.activePlayer(), direction);
-      if (move) {
-        this.maze.receive(this.activePlayer());
-      }
-      return move;
-    } catch (Exception e) {
-      return false;
+  public boolean move(Direction direction) throws IOException {
+    boolean move = this.maze.move(this.activePlayer(), direction);
+    if (move) {
+      this.maze.receive(this.activePlayer());
     }
-  }
-
-  @Override
-  public boolean move(int id) {
-    try {
-      boolean move = this.maze.move(this.activePlayer(), id);
-      if (move) {
-        this.maze.receive(this.activePlayer());
-      }
-      return move;
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
-  @Override
-  public boolean shoot(Direction direction, int count) {
-    try {
-      boolean hit = this.maze.shoot(this.activePlayer(), direction, count);
-      this.activePlayer().decrementArrowCount();
-      if (hit) {
-        this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
-        this.wumpusSlain = true;
-      } else {
-        this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
-      }
-
-      return hit;
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
-  @Override
-  public boolean shoot(int id, int count) {
-    try {
-      boolean hit = this.maze.shoot(this.activePlayer(), id, count);
-      this.activePlayer().decrementArrowCount();
-      if (hit) {
-        this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
-        this.wumpusSlain = true;
-      } else {
-        this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
-      }
-
-      return hit;
-    } catch (Exception e) {
-      return false;
-    }
-  }
-
-  @Override
-  public boolean hasNext() {
-    return !this.isOver();
-  }
-
-  @Override
-  public Integer next() {
     this.round++;
-    return this.round;
+    return move;
+  }
+
+  @Override
+  public boolean move(int id) throws IOException {
+    boolean move = this.maze.move(this.activePlayer(), id);
+    if (move) {
+      this.maze.receive(this.activePlayer());
+    }
+    this.round++;
+    return move;
+  }
+
+  @Override
+  public boolean shoot(Direction direction, int count) throws IOException {
+    boolean hit = this.maze.shoot(this.activePlayer(), direction, count);
+    this.activePlayer().decrementArrowCount();
+    if (hit) {
+      this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
+      this.wumpusSlain = true;
+    } else {
+      this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
+    }
+    this.round++;
+
+    return hit;
+  }
+
+  @Override
+  public boolean shoot(int id, int count) throws IOException {
+    boolean hit = this.maze.shoot(this.activePlayer(), id, count);
+    this.activePlayer().decrementArrowCount();
+    if (hit) {
+      this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
+      this.wumpusSlain = true;
+    } else {
+      this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
+    }
+    this.round++;
+
+    return hit;
   }
 
   @Override
@@ -139,6 +118,10 @@ public class HtwGame implements IHtwGame {
   }
 
   private IHtwPlayer activePlayer() {
+    if (this.isOver()) {
+      return this.players.get(this.round % this.players.size());
+    }
+    
     return this.players.get(
             this.round %
             this.players.stream().filter(p -> p.isAlive() && p.arrowCount() > 0).toArray().length);

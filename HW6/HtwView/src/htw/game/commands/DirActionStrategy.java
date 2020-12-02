@@ -1,5 +1,6 @@
 package htw.game.commands;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -9,18 +10,19 @@ import htw.game.commands.IActionStrategy;
 import htw.level.IHtwNode;
 import maze.Direction;
 
+
 /**
  * Controller takes actions using cardinal directions as input.
  */
 public class DirActionStrategy implements IActionStrategy {
   @Override
-  public void move(Scanner in, IHtwGame game) {
+  public void move(Scanner in, IHtwGame game) throws IOException {
     Direction dir = Direction.stringToDirection(in.next());
     game.move(dir);
   }
 
   @Override
-  public void shoot(Scanner in, IHtwGame game) {
+  public void shoot(Scanner in, IHtwGame game) throws IOException {
     Direction dir = Direction.stringToDirection(in.next());
     int count = in.nextInt();
     game.shoot(dir, count);

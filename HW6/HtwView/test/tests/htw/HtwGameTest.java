@@ -54,38 +54,53 @@ public class HtwGameTest {
 
   @Test
   public void testMoveId() {
-    this.game.move(1);
-    assertEquals("moved - 1receive - Joe", this.log.toString());
+    try {
+      this.game.move(1);
+      assertEquals("moved - 1receive - Joe", this.log.toString());
+    } catch (Exception e) {
+      fail();
+    }
   }
 
   @Test
   public void testMoveDir() {
-    this.game.move(Direction.EAST);
-    assertEquals("moved - EASTreceive - Joe", this.log.toString());
+    try {
+      this.game.move(Direction.EAST);
+      assertEquals("moved - EASTreceive - Joe", this.log.toString());
+    } catch (Exception e) {
+      fail();
+    }
   }
 
   @Test
   public void testShootDir() {
-    this.game.shoot(Direction.EAST, 1);
-    assertEquals("shoot - EAST - 1Miss... You have 1 remaining arrows.", this.log.toString());
+    try {
+      this.game.shoot(Direction.EAST, 1);
+      assertEquals("shoot - EAST - 1Miss... You have 1 remaining arrows.", this.log.toString());
+    } catch (Exception e) {
+      fail();
+    }
   }
 
   @Test
   public void testShootId() {
-    this.game.shoot(12, 1);
-    assertEquals("shoot - 12 - 1Miss... You have 1 remaining arrows.", this.log.toString());
+    try {
+      this.game.shoot(12, 1);
+      assertEquals("shoot - 12 - 1Miss... You have 1 remaining arrows.", this.log.toString());
+    } catch (Exception e) {
+      fail();
+    }
   }
 
   @Test
   public void voidTestShootGameOver() {
-    this.game.shoot(12, 1);
-    this.game.shoot(12, 1);
-    assertTrue(this.game.isOver());
-  }
-
-  @Test
-  public void testNext() {
-    assertEquals(0, (int) this.game.next());
-    assertEquals(1, (int) this.game.next());
+    try {
+      this.game.start();
+      this.game.shoot(12, 1);
+      this.game.shoot(12, 1);
+      assertTrue(this.game.isOver());
+    } catch (Exception e) {
+      fail();
+    }
   }
 }

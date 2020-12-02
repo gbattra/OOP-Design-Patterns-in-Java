@@ -108,4 +108,9 @@ public class Container extends JFrame
   public void onShoot(int id, int shootCount) {
     System.out.printf("Shoot %s", shootCount);
   }
+
+  @Override
+  public void onMove(int id) {
+    this.features.onMove(id);
+  }
 }

@@ -36,6 +36,6 @@ public class ContainerTest {
     Container container = new Container(
             "", mock, new ArrayList<>(), new MockMaze(new StringBuilder()));
     container.onRestart();
-    assertEquals("false - false - 10 - 10 - 10 - false - 99 - 0.2 - 0.3", log.toString());
+    assertEquals("false - true - 10 - 10 - 10 - false - 81 - 0.2 - 0.3", log.toString());
   }
 }

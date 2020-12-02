@@ -41,6 +41,11 @@ public class MockGuiView implements IView {
   }
 
   @Override
+  public void onMove(int id) {
+
+  }
+
+  @Override
   public Appendable append(char c) throws IOException {
     return null;
   }

@@ -1,5 +1,6 @@
 package htw.game.commands;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -14,13 +15,13 @@ import maze.Direction;
  */
 public class IdActionStrategy implements IActionStrategy {
   @Override
-  public void move(Scanner in, IHtwGame game) {
+  public void move(Scanner in, IHtwGame game) throws IOException {
     int id = in.nextInt();
     game.move(id);
   }
 
   @Override
-  public void shoot(Scanner in, IHtwGame game) {
+  public void shoot(Scanner in, IHtwGame game) throws IOException {
     int id = in.nextInt();
     int count = in.nextInt();
     game.shoot(id, count);

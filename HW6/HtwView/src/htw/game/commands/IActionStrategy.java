@@ -1,5 +1,6 @@
 package htw.game.commands;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import htw.game.IHtwGame;
@@ -15,7 +16,7 @@ public interface IActionStrategy {
    * @param in where to read input
    * @param game the game model to call
    */
-  void shoot(Scanner in, IHtwGame game);
+  void shoot(Scanner in, IHtwGame game) throws IOException;
 
   /**
    * Moves player using user input.
@@ -23,7 +24,7 @@ public interface IActionStrategy {
    * @param in where to read input
    * @param game the game model to call
    */
-  void move(Scanner in, IHtwGame game);
+  void move(Scanner in, IHtwGame game) throws IOException;
 
   /**
    * Prints the game status to out.

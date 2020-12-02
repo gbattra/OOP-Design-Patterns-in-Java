@@ -62,17 +62,6 @@ public class MockGame implements IHtwGame {
   }
 
   @Override
-  public Integer next() {
-    this.round++;
-    return round;
-  }
-
-  @Override
-  public boolean hasNext() {
-    return true;
-  }
-
-  @Override
   public void start() {
 
   }

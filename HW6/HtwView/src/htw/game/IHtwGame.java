@@ -1,5 +1,6 @@
 package htw.game;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import gui.IHtwGameVisitor;
@@ -9,7 +10,7 @@ import maze.Direction;
 /**
  * Interface for an instance of a Hunt the Wumpus game.
  */
-public interface IHtwGame extends Iterator<Integer> {
+public interface IHtwGame {
   /**
    * Starts the game. Sets player position to random coordinates.
    */
@@ -36,7 +37,7 @@ public interface IHtwGame extends Iterator<Integer> {
    * @param direction the direction to move
    * @return true if move was successful
    */
-  boolean move(Direction direction);
+  boolean move(Direction direction) throws IOException;
 
   /**
    * Moves the player to the cave with the specified id.
@@ -44,7 +45,7 @@ public interface IHtwGame extends Iterator<Integer> {
    * @param id the node to move toward
    * @return true if move was successful
    */
-  boolean move(int id);
+  boolean move(int id) throws IOException;
 
   /**
    * Shoots an arrow to the specified direction.
@@ -53,7 +54,7 @@ public interface IHtwGame extends Iterator<Integer> {
    * @param count how many caves to traverse
    * @return true if the Wumpus was hit
    */
-  boolean shoot(Direction direction, int count);
+  boolean shoot(Direction direction, int count) throws IOException;
 
   /**
    * Shoots an arrow to the cave with the specified id.
@@ -62,7 +63,7 @@ public interface IHtwGame extends Iterator<Integer> {
    * @param count how many caves to traverse
    * @return true if the Wumpus was hit
    */
-  boolean shoot(int id, int count);
+  boolean shoot(int id, int count) throws IOException;
 
   /**
    * Receives a visitor which may care about some of its attributes.

@@ -33,6 +33,11 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   }
 
   @Override
+  public void onMove(int id) {
+    this.features.onMove(id);
+  }
+
+  @Override
   public Appendable append(CharSequence csq) throws IOException {
     for (Character c : csq.toString().toCharArray()) {
       this.append(c);
