@@ -24,7 +24,7 @@ public class NodeViewTest {
     IHtwNode cave = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), new StringBuffer());
     IView view = new GuiView();
     Container container =
-            new Container("", view, new ArrayList<>(), new MockMaze(new StringBuilder()));
+            new Container(view, new ArrayList<>(), new MockMaze(new StringBuilder()));
     MazeView mazeView = new MazeView(cave, new Dimension(1, 1), container);
     NodeView nodeView = new NodeView(cave, mazeView);
     nodeView.setOccupied(0);

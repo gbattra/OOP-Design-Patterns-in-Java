@@ -19,13 +19,12 @@ public class ContainerTest {
   @Test
   public void testValidConstructor() {
     IView view = new GuiView();
-    Container container = new Container(
-            "Container", view, new ArrayList<>(), new MockMaze(new StringBuilder()));
+    Container container = new Container(view, new ArrayList<>(), new MockMaze(new StringBuilder()));
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    Container container = new Container("", null, null, null);
+    Container container = new Container(null, null, null);
     fail("Invalid constructor should have failed.");
   }
 
@@ -33,8 +32,7 @@ public class ContainerTest {
   public void testRestart() {
     StringBuilder log = new StringBuilder();
     IView mock = new MockGuiView(log);
-    Container container = new Container(
-            "", mock, new ArrayList<>(), new MockMaze(new StringBuilder()));
+    Container container = new Container(mock, new ArrayList<>(), new MockMaze(new StringBuilder()));
     container.onRestart();
     assertEquals("false - true - 10 - 10 - 10 - false - 81 - 0.2 - 0.3", log.toString());
   }

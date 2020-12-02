@@ -25,6 +25,11 @@ public class MockGuiView implements IView {
   }
 
   @Override
+  public void onQuit() {
+
+  }
+
+  @Override
   public void onRestart(RestartRequest restartRequest) {
     this.log.append(
             String.format(

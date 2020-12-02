@@ -10,21 +10,20 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 import htw.level.IHtwNode;
 
-public class Container extends JFrame
-        implements IButtonBarFeatures, IMazeViewFeatures, IHtwMazeVisitor<Void> {
+public class Container
+        extends JPanel implements IButtonBarFeatures, IMazeViewFeatures, IHtwMazeVisitor<Void> {
   private final IContainerFeatures features;
 
-  public final ButtonBar buttonBar;
-  public final StartMenu startMenu;
-  public final PlayerBar playerBar;
-  private MazeView mazeView;
+  public ButtonBar buttonBar;
+  public StartMenu startMenu;
+  public PlayerBar playerBar;
+  public MazeView mazeView;
 
   public Container(
-          String caption,
           IContainerFeatures features,
           List<IHtwPlayer> players,
           IHtwMaze maze) {
-    super(caption);
+    super();
     if (features == null) {
       throw new IllegalArgumentException("Cannot instantiate Container. Features are null.");
     }
@@ -33,8 +32,8 @@ public class Container extends JFrame
 
     this.setSize(LayoutConfigs.WIDTH, LayoutConfigs.HEIGHT);
     this.setLocation(0, 0);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
+    this.setBackground(Color.BLACK);
 
     this.startMenu = new StartMenu();
 
@@ -57,8 +56,6 @@ public class Container extends JFrame
     buffer.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
     buffer.setLocation(0, this.playerBar.getY() + this.playerBar.getHeight());
     this.add(buffer);
-
-    this.setVisible(true);
   }
 
   @Override
@@ -72,7 +69,7 @@ public class Container extends JFrame
 
   @Override
   public void onQuit() {
-    this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    features.onQuit();
   }
 
   @Override

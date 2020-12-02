@@ -1,15 +1,29 @@
 package gui;
 
+import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.List;
+
+import javax.swing.*;
 
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 
 public class GuiView implements IView, IHtwGameVisitor<Void> {
+  private JFrame frame;
   private Container container;
   private IViewFeatures features;
+
+  public GuiView() {
+    frame = new JFrame("Hunt the Wumpus");
+    frame.setSize(LayoutConfigs.WIDTH, LayoutConfigs.HEIGHT);
+    frame.setLocation(0, 0);
+    frame.setLayout(new BorderLayout());
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setVisible(true);
+  }
 
   @Override
   public void setFeatures(IViewFeatures features) {
@@ -23,7 +37,14 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
 
   @Override
   public Void visitGame(List<IHtwPlayer> players, IHtwMaze maze) {
-    this.container = new Container("Container", this, players, maze);
+    if (this.container != null) {
+      frame.remove(this.container);
+    }
+
+    this.container = new Container(this, players, maze);
+    frame.add(this.container);
+    frame.revalidate();
+    frame.repaint();
     return null;
   }
 
@@ -35,6 +56,11 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   @Override
   public void onMove(int id) {
     this.features.onMove(id);
+  }
+
+  @Override
+  public void onQuit() {
+    frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
   }
 
   @Override

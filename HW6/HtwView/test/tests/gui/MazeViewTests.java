@@ -27,7 +27,7 @@ public class MazeViewTests {
       IHtwConfiguration config = new HtwConfigurationBuilder().build();
       IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(config).build();
       IHtwPlayer player = new HtwMultiPlayer("Joe", 1, 10);
-      Container container = new Container("", view, Arrays.asList(player), maze);
+      Container container = new Container(view, Arrays.asList(player), maze);
     } catch (Exception e) {
       fail("Valid populate should not have failed.");
     }
@@ -40,6 +40,6 @@ public class MazeViewTests {
     IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(config).build();
     IHtwPlayer player = new HtwMultiPlayer("Joe", 1, 10);
     player.setCurrentPosition(new Coordinates(1000, 1000));
-    Container container = new Container("", view, Arrays.asList(player), maze);
+    Container container = new Container(view, Arrays.asList(player), maze);
   }
 }

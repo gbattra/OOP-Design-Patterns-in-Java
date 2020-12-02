@@ -2,6 +2,7 @@ package htw.level;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 import gui.IHtwMazeVisitor;
@@ -56,29 +57,29 @@ public class HtwMaze extends Maze implements IHtwMaze {
 
   @Override
   public boolean move(IHtwPlayer player, Integer id) throws IOException {
-    try {
-      Direction dir = ((IHtwNode) this.root.get(player.currentPosition())).directionTo(id);
-      IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition())
-              .getNode(dir)).enter(dir.opposite());
-      player.setCurrentPosition(current.getCoordinates());
-      return true;
-    } catch (Exception e) {
-      this.logger.append("Cannot move to ").append(id.toString()).append(".");
-      return false;
+    for (Direction dir : Arrays.asList(
+            Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST)) {
+      IHtwNode node = (IHtwNode) this.root.get(player.currentPosition()).getNode(dir);
+      if (node.getId().equals(id)) {
+        IHtwNode current = node.enter(dir.opposite());
+        player.setCurrentPosition(current.getCoordinates());
+        return true;
+      }
     }
+
+    Direction dir = ((IHtwNode) this.root.get(player.currentPosition())).directionTo(id);
+    IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition())
+            .getNode(dir)).enter(dir.opposite());
+    player.setCurrentPosition(current.getCoordinates());
+    return true;
   }
 
   @Override
   public boolean move(IHtwPlayer player, Direction direction) throws IOException {
-    try {
-      IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition())
-              .getNode(direction)).enter(direction.opposite());
-      player.setCurrentPosition(current.getCoordinates());
-      return true;
-    } catch (Exception e) {
-      this.logger.append("Cannot move to the ").append(direction.toString()).append(".");
-      return false;
-    }
+    IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition())
+            .getNode(direction)).enter(direction.opposite());
+    player.setCurrentPosition(current.getCoordinates());
+    return true;
   }
 
   @Override

@@ -80,9 +80,10 @@ public class HtwMazeTest {
       IHtwPlayer player = new HtwPlayer("Joe", 10);
       IHtwNode root = new Cave(1, new Coordinates(0, 0), new StandardStrategy(), log);
       IHtwMaze maze = new HtwMaze(root, log, new Dimension(2, 2), 1);
-      assertFalse(maze.move(player, Direction.EAST));
+      maze.move(player, Direction.EAST);
+      fail();
     } catch (Exception e) {
-      fail("Invalid move should have return false, not thrown.");
+      // do nothing
     }
   }
 

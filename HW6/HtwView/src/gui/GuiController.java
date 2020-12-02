@@ -70,10 +70,11 @@ public class GuiController implements IGuiController {
   @Override
   public void onMove(int id) {
     try {
-      game.move(id);
+      boolean move = game.move(id);
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException | IOException e) {
       // have view populate alert
+      int x= 0;
     }
   }
 }
