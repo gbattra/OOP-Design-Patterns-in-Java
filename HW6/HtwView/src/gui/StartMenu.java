@@ -38,6 +38,7 @@ public class StartMenu extends JPanel {
 
     JLabel isMultiplayerLabel = new JLabel("Multiplayer mode? ");
     this.isMultiplayer = new JCheckBox();
+    this.isMultiplayer.setSelected(true);
 
     JLabel arrowCountLabel = new JLabel("Arrow count: ");
     this.arrowCount = new JFormattedTextField(new NumberFormatter());
@@ -77,7 +78,7 @@ public class StartMenu extends JPanel {
     JLabel finalEdgeCountLabel = new JLabel("Final Edge Count: ");
     this.finalEdgeCount = new JFormattedTextField(new NumberFormatter());
     this.finalEdgeCount.setColumns(10);
-    this.finalEdgeCount.setValue((DEF_ROW_COUNT * DEF_COL_COUNT) - 1);
+    this.finalEdgeCount.setValue((DEF_ROW_COUNT - 1) * (DEF_COL_COUNT - 1));
     this.finalEdgeCount.setEnabled(false);
 
     this.add(useSameMazeLabel);

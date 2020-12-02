@@ -27,7 +27,8 @@ public class GuiController implements IGuiController {
   public void startNew() {
     configurationBuilder = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
             .setLogger(view)
-            .setRandomSeed(this.random.nextInt()));
+            .setNumPlayers(2)
+            .setRandomSeed(this.random.nextInt(1000)));
     game = new HtwGameBuilder(configurationBuilder.build()).build();
     game.start();
     this.view.populate(game);
@@ -49,7 +50,8 @@ public class GuiController implements IGuiController {
                         .setIsRoomMaze(restartRequest.isRoomMaze)
                         .setTargetEdgeCount(restartRequest.finalEdgeCount)
                         .setRowCount(restartRequest.rowCount)
-                        .setColumnCount(restartRequest.columnCount);
+                        .setColumnCount(restartRequest.columnCount)
+                        .setRandomSeed(this.random.nextInt(1000));
 
     game = new HtwGameBuilder(configurationBuilder.build()).build();
     game.start();

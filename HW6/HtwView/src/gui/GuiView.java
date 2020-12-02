@@ -30,6 +30,7 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
 
   @Override
   public void onRestart(RestartRequest restartRequest) {
+    this.features.restart(restartRequest);
   }
 
   @Override
