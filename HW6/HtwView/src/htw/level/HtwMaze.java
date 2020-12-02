@@ -2,10 +2,13 @@ package htw.level;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Random;
 
 import gui.IHtwMazeVisitor;
 import htw.game.IHtwPlayer;
 import htw.game.commands.IActionStrategy;
+import maze.components.Coordinates;
+import maze.components.ICoordinates;
 import maze.components.Maze;
 import maze.Direction;
 
@@ -16,18 +19,21 @@ public class HtwMaze extends Maze implements IHtwMaze {
   private final Appendable logger;
   private final IHtwNode root;
   private final Dimension dimension;
+  private final Random random;
 
   /**
    * Constructor for the maze.
    *
    * @param root the root node of the maze
    * @param logger the logger for the maze
+   * @param randomSeed the random seed for the maze
    * @throws IllegalArgumentException if params are null
    */
   public HtwMaze(
           IHtwNode root,
           Appendable logger,
-          Dimension dimension) throws IllegalArgumentException {
+          Dimension dimension,
+          int randomSeed) throws IllegalArgumentException {
     super(root, root);
     if (root == null || logger == null || dimension == null) {
       throw new IllegalArgumentException("Root, logger and dimension cannot be null.");
@@ -35,6 +41,7 @@ public class HtwMaze extends Maze implements IHtwMaze {
     this.root = root;
     this.logger = logger;
     this.dimension = dimension;
+    this.random = new Random(randomSeed);
   }
 
   @Override
@@ -88,5 +95,12 @@ public class HtwMaze extends Maze implements IHtwMaze {
   @Override
   public <R> R receive(IHtwMazeVisitor<R> visitor) {
     return visitor.visitMaze(this.root, this.dimension);
+  }
+
+  @Override
+  public ICoordinates randomCoordinates() {
+    int x = this.random.nextInt(this.dimension.width);
+    int y = this.random.nextInt(this.dimension.height);
+    return new Coordinates(x, y);
   }
 }

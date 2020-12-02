@@ -49,7 +49,6 @@ public class MazeView extends JPanel implements IHtwPlayerVisitor<Void> {
               "NodeGrid failed to update. No node present at player position.");
     }
 
-    nodeView.setVisible(true);
     nodeView.setOccupied(player.number());
     return null;
   }

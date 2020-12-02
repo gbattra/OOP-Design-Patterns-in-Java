@@ -7,6 +7,7 @@ import htw.game.IHtwPlayer;
 import htw.game.commands.IActionStrategy;
 import htw.level.IHtwMaze;
 import maze.Direction;
+import maze.components.ICoordinates;
 
 /**
  * Mock class for HtwMaze.
@@ -61,6 +62,11 @@ public class MockMaze implements IHtwMaze {
 
   @Override
   public <R> R receive(IHtwMazeVisitor<R> visitor) {
+    return null;
+  }
+
+  @Override
+  public ICoordinates randomCoordinates() {
     return null;
   }
 }

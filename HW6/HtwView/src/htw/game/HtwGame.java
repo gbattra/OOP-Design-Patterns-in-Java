@@ -49,6 +49,13 @@ public class HtwGame implements IHtwGame {
   }
 
   @Override
+  public void start() {
+    for (IHtwPlayer player : players) {
+      player.setCurrentPosition(maze.randomCoordinates());
+    }
+  }
+
+  @Override
   public String status(IActionStrategy strategy) {
     return this.maze.status(this.activePlayer(), strategy);
   }

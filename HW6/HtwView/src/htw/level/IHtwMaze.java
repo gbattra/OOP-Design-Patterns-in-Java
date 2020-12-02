@@ -6,11 +6,19 @@ import gui.IHtwMazeVisitor;
 import htw.game.IHtwPlayer;
 import htw.game.commands.IActionStrategy;
 import maze.Direction;
+import maze.components.ICoordinates;
 
 /**
  * Interface for an HtwMaze.
  */
 public interface IHtwMaze {
+  /**
+   * Returns a random coordinate pair within the maze.
+   *
+   * @return a coordinate pair
+   */
+  ICoordinates randomCoordinates();
+
   /**
    * Returns a string representation of the maze state.
    *

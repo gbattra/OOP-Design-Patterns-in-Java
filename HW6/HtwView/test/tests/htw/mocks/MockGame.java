@@ -71,4 +71,9 @@ public class MockGame implements IHtwGame {
   public boolean hasNext() {
     return true;
   }
+
+  @Override
+  public void start() {
+
+  }
 }

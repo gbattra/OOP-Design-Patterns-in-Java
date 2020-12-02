@@ -35,7 +35,7 @@ public class NodeView extends JPanel implements IHtwNodeVisitor<Void> {
     if (playerId < 1) {
       throw new IllegalArgumentException("Invalid player ID provided.");
     }
-
+    this.setBackground(Color.BLACK);
     this.add(new JLabel(this.playerIcons.get(playerId - 1)));
   }
 

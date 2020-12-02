@@ -11,6 +11,11 @@ import maze.Direction;
  */
 public interface IHtwGame extends Iterator<Integer> {
   /**
+   * Starts the game. Sets player position to random coordinates.
+   */
+  void start();
+
+  /**
    * Computes a string representation of the game state.
    *
    * @param strategy a strategy for how to compute the game state
