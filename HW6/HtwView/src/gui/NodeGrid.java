@@ -13,8 +13,12 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
 
   public NodeGrid() {
     super();
-
-    this.setLayout(new GridLayout(10, 10));
+    this.setLayout(new GridBagLayout());
+    for (int i = 0; i < 10; i++) {
+      for (int d = 0; d < 10; d++) {
+        this.add(new NodeView());
+      }
+    }
     this.nodeViews = new NodeView[1][1];
   }
 
@@ -40,12 +44,11 @@ public class NodeGrid extends JPanel implements IHtwPlayerVisitor<Void>, IHtwMaz
   @Override
   public Void visitMaze(IHtwNode root, Dimension dimension) {
     this.nodeViews = new NodeView[dimension.height][dimension.width];
-    this.setLayout(new GridLayout(dimension.height, dimension.width));
     for (int r = 0; r < dimension.height; r++) {
-      for (int w = 0; w < dimension.width; w++) {
+      for (int c = 0; c < dimension.width; c++) {
         NodeView nodeView = new NodeView();
-        ((IHtwNode) root.get(new Coordinates(w, r))).receive(nodeView);
-        this.nodeViews[r][w] = nodeView;
+        ((IHtwNode) root.get(new Coordinates(c, r))).receive(nodeView);
+        this.nodeViews[r][c] = nodeView;
         this.add(nodeView);
       }
     }

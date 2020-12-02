@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import htw.level.IHtwNode;
 
@@ -13,6 +14,14 @@ public class NodeView extends JPanel implements IHtwNodeVisitor<Void> {
 
   public NodeView() {
     super();
+    this.setLayout(new BorderLayout());
+
+    this.setSize(LayoutConfigs.NODE_SIZE, LayoutConfigs.NODE_SIZE);
+    this.setBackground(Color.PINK);
+    this.setBorder(
+            BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(Color.BLACK),
+                    new EmptyBorder(10, 10, 10, 10)));
 
     this.playerIcons = new ArrayList<>();
     this.playerIcons.add(new PlayerIcon(Color.MAGENTA));
@@ -20,7 +29,11 @@ public class NodeView extends JPanel implements IHtwNodeVisitor<Void> {
   }
 
   public void setOccupied(int playerId) {
-    this.add(new JLabel(this.playerIcons.get(playerId)));
+    if (playerId < 1) {
+      throw new IllegalArgumentException("Invalid player ID provided.");
+    }
+
+    this.add(new JLabel(this.playerIcons.get(playerId - 1)));
   }
 
   @Override

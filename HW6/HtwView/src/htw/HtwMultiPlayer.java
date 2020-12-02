@@ -1,4 +1,4 @@
-package gui;
+package htw;
 
 import htw.game.HtwPlayer;
 

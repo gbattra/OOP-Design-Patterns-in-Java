@@ -2,7 +2,7 @@ package tests.gui;
 
 import org.junit.Test;
 
-import gui.HtwMultiPlayer;
+import htw.HtwMultiPlayer;
 import htw.game.IHtwPlayer;
 
 import static org.junit.Assert.assertEquals;

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import gui.HtwMultiPlayer;
+import htw.HtwMultiPlayer;
 import gui.PlayerBar;
 import gui.PlayerView;
 import htw.game.IHtwPlayer;

@@ -8,17 +8,16 @@ import javax.swing.*;
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 
-public class MazeView extends JScrollPane {
+public class MazeView extends JPanel {
   private final NodeGrid nodeGrid;
 
   public MazeView() {
     super();
-    this.setLayout(new ScrollPaneLayout());
     this.setBackground(Color.YELLOW);
-
+    this.setLayout(new GridLayout(1, 1));
     this.nodeGrid = new NodeGrid();
+    this.nodeGrid.setBackground(Color.BLUE);
     this.nodeGrid.setLocation(0, 0);
-    this.nodeGrid.setBackground(Color.PINK);
     this.add(this.nodeGrid);
   }
 

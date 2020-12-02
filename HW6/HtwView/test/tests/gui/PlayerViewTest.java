@@ -2,7 +2,7 @@ package tests.gui;
 
 import org.junit.Test;
 
-import gui.HtwMultiPlayer;
+import htw.HtwMultiPlayer;
 import gui.PlayerView;
 import htw.game.IHtwPlayer;
 

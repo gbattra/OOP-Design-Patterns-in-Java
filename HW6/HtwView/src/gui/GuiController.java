@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import htw.HtwMultiPlayer;
 import htw.game.HtwGame;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
