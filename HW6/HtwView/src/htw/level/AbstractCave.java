@@ -23,7 +23,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   protected IHtwNodeStrategy strategy;
   protected Integer id;
   protected Appendable logger;
-  protected boolean visited;
+  protected boolean visited = false;
 
   /**
    * Main constructor for the abstract node. Takes a coordinate pair and a strategy.
@@ -208,5 +208,10 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   @Override
   public <R> R receive(IHtwNodeVisitor<R> visitor) {
     return null;
+  }
+
+  @Override
+  public boolean visited() {
+    return this.visited;
   }
 }

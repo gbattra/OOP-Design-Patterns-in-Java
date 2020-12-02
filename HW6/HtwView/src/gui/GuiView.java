@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import htw.game.IHtwGame;
@@ -9,7 +10,6 @@ import htw.level.IHtwMaze;
 
 public class GuiView implements IView, IHtwGameVisitor<Void> {
   private Container container;
-
   private IViewFeatures features;
 
   @Override
@@ -30,7 +30,6 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
 
   @Override
   public void onRestart(RestartRequest restartRequest) {
-
   }
 
   @Override

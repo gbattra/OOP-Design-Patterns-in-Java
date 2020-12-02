@@ -93,4 +93,9 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   public <R> R receive(IHtwNodeVisitor<R> visitor) {
     throw new IllegalArgumentException("Dead End node cannot be visited");
   }
+
+  @Override
+  public boolean visited() {
+    return false;
+  }
 }

@@ -135,4 +135,11 @@ public interface IHtwNode extends Node {
    * @return R
    */
   <R> R receive(IHtwNodeVisitor<R> visitor);
+
+  /**
+   * Getter function for the node's visited property.
+   *
+   * @return whether the node has been visited
+   */
+  boolean visited();
 }
