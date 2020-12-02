@@ -207,6 +207,7 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
 
   @Override
   public <R> R receive(IHtwNodeVisitor<R> visitor) {
+    this.strategy.receive(visitor, this);
     return null;
   }
 

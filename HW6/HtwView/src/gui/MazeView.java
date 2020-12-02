@@ -29,7 +29,8 @@ public class MazeView extends JPanel implements INodeViewFeatures, IHtwPlayerVis
     this.nodeViews = new NodeView[dimension.height][dimension.width];
     for (int r = 0; r < dimension.height; r++) {
       for (int c = 0; c < dimension.width; c++) {
-        NodeView nodeView = new NodeView((IHtwNode) root.get(new Coordinates(c, r)), this);
+        IHtwNode node = (IHtwNode) root.get(new Coordinates(c, r));
+        NodeView nodeView = new NodeView(node, this);
         this.nodeGrid.add(nodeView);
         this.nodeViews[r][c] = nodeView;
       }

@@ -22,7 +22,6 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
       throw new IllegalArgumentException("Cannot instantiate NodeView. Features or node is null.");
     }
     this.features = features;
-    this.nodeId = node.getId();
 
     this.setLayout(new GridLayout(1, 1));
     this.setSize(LayoutConfigs.NODE_SIZE, LayoutConfigs.NODE_SIZE);
@@ -40,38 +39,45 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
     if (node.visited()) {
       this.setBackground(Color.BLACK);
     }
+    this.nodeId = node.getId();
+    node.receive(this);
   }
 
   public void setOccupied(int playerId) {
     if (playerId < 1) {
       throw new IllegalArgumentException("Invalid player ID provided.");
     }
-    this.setBackground(Color.BLACK);
+    this.setBackground(Color.RED);
     this.add(new JLabel(this.playerIcons.get(playerId - 1)));
   }
 
   @Override
   public Void visitBatCave(IHtwNode node) {
+    this.add(new JLabel("BAT"));
     return null;
   }
 
   @Override
   public Void visitPitCave(IHtwNode node) {
+    this.add(new JLabel("PIT"));
     return null;
   }
 
   @Override
   public Void visitWumpus(IHtwNode node) {
+    this.add(new JLabel("WUMPUS"));
     return null;
   }
 
   @Override
   public Void visitTunnel(IHtwNode node) {
+    this.add(new JLabel("TUNNEL"));
     return null;
   }
 
   @Override
   public Void visitStandardCave(IHtwNode node) {
+    this.add(new JLabel("CAVE"));
     return null;
   }
 
