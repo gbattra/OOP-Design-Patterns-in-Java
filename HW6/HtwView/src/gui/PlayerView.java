@@ -36,6 +36,8 @@ public class PlayerView extends JPanel implements IHtwPlayerVisitor<Void> {
   @Override
   public Void visitPlayer(IHtwPlayer player) {
     this.playerLabel.setText(String.format("PLAYER %s", player.number()));
+    this.setBackground(
+            player.isAlive() ? PlayerConfigs.COLORS.get(player.number() - 1) : Color.GRAY);
     this.arrowCountLabel.setText(String.format("Arrows: %s", player.arrowCount()));
     this.isAliveLabel.setText(player.isAlive() ? "ALIVE" : "DEAD");
     return null;

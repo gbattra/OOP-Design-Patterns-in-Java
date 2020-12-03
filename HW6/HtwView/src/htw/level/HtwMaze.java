@@ -89,6 +89,15 @@ public class HtwMaze extends Maze implements IHtwMaze {
 
   @Override
   public boolean shoot(IHtwPlayer player, int id, int count) {
+    for (Direction dir : Arrays.asList(
+            Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST)) {
+      IHtwNode node = (IHtwNode) this.root.get(player.currentPosition()).getNode(dir);
+      if (node.getId().equals(id)) {
+        IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition()));
+        return current.shoot(dir, count);
+      }
+    }
+
     IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition()));
     return current.shoot(current.directionTo(id), count);
   }

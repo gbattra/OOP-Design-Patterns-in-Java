@@ -59,8 +59,8 @@ public interface IHtwNodeStrategy {
   boolean drafty(Direction from, IHtwNode curr);
 
   /**
-   * Returns a `Map` of `Direction -> node id` pairs for all caves connected
-   * directly to this node.
+   * Helper for the neighbors function. If the called node is anything but a tunnel, it will
+   * return itself as an "adjacent" node to the node doing the calling.
    *
    * @param traversed nodes traversed so far (used by tunnel strategies)
    * @param curr the node being traversed currently

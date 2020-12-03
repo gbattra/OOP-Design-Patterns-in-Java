@@ -60,6 +60,6 @@ public class HtwMazeBuilderTest {
   @Test
   public void testBuild() {
     IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(this.configBuilder.build()).build();
-    assertTrue(maze.shoot(new HtwPlayer("Joe", 10), 3, 1));
+    assertTrue(maze.shoot(new HtwPlayer("Joe", 10), 2, 1));
   }
 }
