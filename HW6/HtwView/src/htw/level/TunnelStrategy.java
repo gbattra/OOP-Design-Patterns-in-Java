@@ -42,7 +42,7 @@ public class TunnelStrategy extends StandardStrategy implements IHtwNodeStrategy
       }
     }
 
-    throw new IllegalStateException("Could not enter tunnel. No valid exits found.");
+    return curr;
   }
 
   /**

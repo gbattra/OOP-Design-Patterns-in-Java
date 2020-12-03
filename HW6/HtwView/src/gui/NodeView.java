@@ -25,6 +25,8 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
   private final INodeViewFeatures features;
   private final int nodeId;
 
+  private JLabel graphics;
+
   public NodeView(IHtwNode node, INodeViewFeatures features) {
     super();
     if (features == null || node == null) {
@@ -32,25 +34,15 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
     }
     this.features = features;
 
-    this.setLayout(new GridLayout(1, 1));
-    this.setSize(LayoutConfigs.NODE_SIZE, LayoutConfigs.NODE_SIZE);
-//    this.setBackground(Color.PINK);
-    this.setBorder(
-            BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(Color.BLACK),
-                    new EmptyBorder(10, 10, 10, 10)));
     this.addMouseListener(this);
 
     this.playerIcons = new ArrayList<>();
     this.playerIcons.add(new PlayerIcon(Color.MAGENTA));
     this.playerIcons.add(new PlayerIcon(Color.BLACK));
 
-    if (node.visited()) {
-//      this.setBackground(Color.BLACK);
-    }
-
-    JLabel graphics = this.drawGraphics(node);
-    this.add(graphics);
+    this.graphics = this.drawGraphics(node);
+    this.graphics.setVisible(node.visited());
+    this.add(this.graphics);
 
     this.nodeId = node.getId();
     node.receive(this);
@@ -60,8 +52,9 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
     if (playerId < 1) {
       throw new IllegalArgumentException("Invalid player ID provided.");
     }
+
     this.setBackground(Color.RED);
-    this.add(new JLabel(this.playerIcons.get(playerId - 1)));
+    this.graphics.setVisible(true);
   }
 
   @Override
