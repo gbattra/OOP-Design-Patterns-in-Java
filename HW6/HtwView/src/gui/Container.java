@@ -18,6 +18,7 @@ public class Container
   public StartMenu startMenu;
   public PlayerBar playerBar;
   public MazeView mazeView;
+  public TextArea logger;
 
   public Container(
           IContainerFeatures features,
@@ -51,6 +52,18 @@ public class Container
     for (IHtwPlayer player : players) {
       player.receive(this.mazeView);
     }
+
+    JPanel loggerView = new JPanel();
+    loggerView.setBackground(Color.orange);
+    loggerView.setLayout(new GridLayout(1, 1));
+    loggerView.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE * 2);
+    loggerView.setLocation(0, this.mazeView.getY() + this.mazeView.getHeight());
+
+    this.logger = new TextArea();
+    this.logger.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE * 2);
+    loggerView.add(this.logger);
+
+    this.add(loggerView);
 
     JPanel buffer = new JPanel();
     buffer.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);

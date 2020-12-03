@@ -12,6 +12,8 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 
 public class GuiView implements IView, IHtwGameVisitor<Void> {
+  private StringBuilder log = new StringBuilder();
+
   private JFrame frame;
   private Container container;
   private IViewFeatures features;
@@ -42,6 +44,8 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
     }
 
     this.container = new Container(this, players, maze);
+    this.container.logger.setText(this.log.toString());
+
     frame.add(this.container);
     frame.revalidate();
     frame.repaint();
@@ -81,7 +85,8 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
 
   @Override
   public Appendable append(char c) throws IOException {
-    // append char to logger view
+    this.log.append(c);
+    this.container.logger.setText(this.log.toString());
     return this;
   }
 }

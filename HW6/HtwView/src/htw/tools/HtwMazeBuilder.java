@@ -62,7 +62,11 @@ public class HtwMazeBuilder extends MazeBuilder {
   public Node generateRoom(ICoordinates c) {
     this.currentId++;
     this.totalExitCount++;
-    return new Cave(this.currentId, c, new TunnelStrategy(), System.out);
+    return new Cave(
+            this.currentId,
+            c,
+            new TunnelStrategy(),
+            ((IHtwConfiguration) this.config).getLogger());
   }
 
   @Override
