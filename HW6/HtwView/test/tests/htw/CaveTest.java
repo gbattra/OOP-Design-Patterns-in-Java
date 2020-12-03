@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import htw.game.HtwPlayer;
@@ -238,5 +240,12 @@ public class CaveTest {
     assertEquals(this.south.getId(), neighbors.get(Direction.SOUTH));
     assertEquals(this.east.getId(), neighbors.get(Direction.EAST));
     assertEquals(this.west.getId(), neighbors.get(Direction.WEST));
+  }
+
+  @Test
+  public void testExits() {
+    this.cave.setNode(new DeadEnd(), Direction.EAST);
+    List<Direction> expected = Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.WEST);
+    assertEquals(expected, this.cave.exits());
   }
 }

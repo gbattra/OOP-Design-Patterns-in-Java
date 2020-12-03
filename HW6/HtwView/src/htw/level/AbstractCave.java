@@ -215,4 +215,17 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   public boolean visited() {
     return this.visited;
   }
+
+  @Override
+  public List<Direction> exits() {
+    List<Direction> exits = new ArrayList<>();
+    for (Direction direction : Arrays.asList(
+            Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST)) {
+      if (((IHtwNode) this.getNode(direction)).canEnter()) {
+        exits.add(direction);
+      }
+    }
+
+    return exits;
+  }
 }

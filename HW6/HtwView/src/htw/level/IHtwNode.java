@@ -142,4 +142,11 @@ public interface IHtwNode extends Node {
    * @return whether the node has been visited
    */
   boolean visited();
+
+  /**
+   * Gets a list of exit dirs in order: NSEW.
+   *
+   * @return the list of directions for the exits
+   */
+  List<Direction> exits();
 }

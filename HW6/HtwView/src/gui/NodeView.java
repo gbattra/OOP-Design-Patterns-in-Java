@@ -3,13 +3,22 @@ package gui;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import htw.level.IHtwNode;
+import maze.Direction;
 
 public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<Void> {
   private final List<PlayerIcon> playerIcons;
@@ -25,7 +34,7 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
 
     this.setLayout(new GridLayout(1, 1));
     this.setSize(LayoutConfigs.NODE_SIZE, LayoutConfigs.NODE_SIZE);
-    this.setBackground(Color.PINK);
+//    this.setBackground(Color.PINK);
     this.setBorder(
             BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(Color.BLACK),
@@ -37,8 +46,12 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
     this.playerIcons.add(new PlayerIcon(Color.BLACK));
 
     if (node.visited()) {
-      this.setBackground(Color.BLACK);
+//      this.setBackground(Color.BLACK);
     }
+
+    JLabel graphics = this.drawGraphics(node);
+    this.add(graphics);
+
     this.nodeId = node.getId();
     node.receive(this);
   }
@@ -53,31 +66,31 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
 
   @Override
   public Void visitBatCave(IHtwNode node) {
-    this.add(new JLabel("BAT"));
+//    this.add(new JLabel("BAT"));
     return null;
   }
 
   @Override
   public Void visitPitCave(IHtwNode node) {
-    this.add(new JLabel("PIT"));
+//    this.add(new JLabel("PIT"));
     return null;
   }
 
   @Override
   public Void visitWumpus(IHtwNode node) {
-    this.add(new JLabel("WUMPUS"));
+//    this.add(new JLabel("WUMPUS"));
     return null;
   }
 
   @Override
   public Void visitTunnel(IHtwNode node) {
-    this.add(new JLabel("TUNNEL"));
+//    this.add(new JLabel("TUNNEL"));
     return null;
   }
 
   @Override
   public Void visitStandardCave(IHtwNode node) {
-    this.add(new JLabel("CAVE"));
+//    this.add(new JLabel("CAVE"));
     return null;
   }
 
@@ -108,5 +121,18 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
   @Override
   public void mouseExited(MouseEvent e) {
 
+  }
+
+  private JLabel drawGraphics(IHtwNode node) {
+    List<Direction> exits = node.exits();
+    String bgIconPath = exits.stream().map(
+            d -> d.toString().substring(0, 1)).collect(Collectors.joining(""));
+    try {
+      URL path = this.getClass().getResource("/images/" + bgIconPath + ".png");
+      BufferedImage image = ImageIO.read(path);
+      return new JLabel(new ImageIcon(image));
+    } catch (Exception ignored) {
+      return new JLabel();
+    }
   }
 }

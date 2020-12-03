@@ -98,4 +98,9 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   public boolean visited() {
     return false;
   }
+
+  @Override
+  public List<Direction> exits() {
+    throw new IllegalStateException("Dead end node has no exits");
+  }
 }
