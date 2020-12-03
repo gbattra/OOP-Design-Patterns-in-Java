@@ -47,17 +47,6 @@ public class TunnelTest {
     }
   }
 
-  @Test(expected = IllegalStateException.class)
-  public void testInvalidEnter() {
-    try {
-      this.tunnel.setNode(new DeadEnd(), Direction.NORTH);
-      IHtwNode entered = this.tunnel.enter(Direction.SOUTH);
-      fail("Invalid enter() should have failed.");
-    } catch (IOException e) {
-      // do nothing
-    }
-  }
-
   @Test
   public void testValidShoot() {
     assertFalse(this.tunnel.shoot(Direction.NORTH, 1));

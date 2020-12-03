@@ -97,7 +97,18 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
 
   @Override
   public Void visitStandardCave(IHtwNode node) {
-
+    try {
+      if (node.hasDraftyNeighbor()) {
+        URL path = this.getClass().getResource("/images/breeze.png");
+        this.nodeImage = ImageHelper.overlay(this.nodeImage, path, 0);
+      }
+      if (node.hasSmellyNeighbor()) {
+        URL path = this.getClass().getResource("/images/stench.png");
+        this.nodeImage = ImageHelper.overlay(this.nodeImage, path, 0);
+      }
+    } catch (IOException ignored) {
+      return null;
+    }
     return null;
   }
 

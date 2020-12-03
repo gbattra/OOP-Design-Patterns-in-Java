@@ -103,4 +103,14 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   public List<Direction> exits() {
     throw new IllegalStateException("Dead end node has no exits");
   }
+
+  @Override
+  public boolean hasSmellyNeighbor() {
+    return false;
+  }
+
+  @Override
+  public boolean hasDraftyNeighbor() {
+    return false;
+  }
 }
