@@ -6,22 +6,18 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import htw.level.IHtwNode;
 import maze.Direction;
 
 public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<Void> {
-  private final List<PlayerIcon> playerIcons;
   private final INodeViewFeatures features;
   private final int nodeId;
 
@@ -38,10 +34,6 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
 
     this.addMouseListener(this);
 
-    this.playerIcons = new ArrayList<>();
-    this.playerIcons.add(new PlayerIcon(Color.MAGENTA));
-    this.playerIcons.add(new PlayerIcon(Color.BLACK));
-
     this.graphics = this.drawGraphics(node);
 //    this.graphics.setVisible(node.visited());
 
@@ -53,8 +45,17 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
       throw new IllegalArgumentException("Invalid player ID provided.");
     }
 
-    this.setBackground(Color.RED);
-    this.graphics.setVisible(true);
+    try  {
+      this.remove(this.graphics);
+      URL path = this.getClass().getResource("/images/player.png");
+      this.nodeImage = ImageHelper.overlay(this.nodeImage, path, 15);
+      this.setBackground(PlayerConfigs.COLORS.get(playerId - 1));
+      this.graphics = new JLabel(new ImageIcon(this.nodeImage));
+      this.add(this.graphics);
+      this.graphics.setVisible(true);
+    } catch (IOException ignored) {
+      int x= 0;
+    }
   }
 
   @Override
