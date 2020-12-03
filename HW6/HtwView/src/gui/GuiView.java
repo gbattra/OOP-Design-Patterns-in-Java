@@ -34,6 +34,10 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
 
   @Override
   public void populate(IHtwGame game) {
+    if (game.isOver()) {
+      JOptionPane.showMessageDialog(null, "GAME OVER!");
+      return;
+    }
     game.receive(this);
   }
 
@@ -45,6 +49,8 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
 
     this.container = new Container(this, players, maze);
     this.container.logger.setText(this.log.toString());
+    this.container.logger.setCaretPosition(
+            this.container.logger.getCaretPosition() + this.log.length());
 
     frame.add(this.container);
     frame.revalidate();
@@ -87,6 +93,8 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   public Appendable append(char c) throws IOException {
     this.log.append(c);
     this.container.logger.setText(this.log.toString());
+    this.container.logger.setCaretPosition(
+            this.container.logger.getCaretPosition() + this.log.length());
     return this;
   }
 }

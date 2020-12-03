@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
