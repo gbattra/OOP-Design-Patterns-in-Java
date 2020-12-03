@@ -36,15 +36,8 @@ public class StandardStrategy implements IHtwNodeStrategy {
       throw new IllegalArgumentException("Player cannot be null.");
     }
 
-    boolean drafty = false;
-    boolean smelly = false;
-    List<Direction> exits = new ArrayList<>(
-            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
-    for (Direction exit : exits) {
-      IHtwNode node = (IHtwNode) curr.getNode(exit);
-      drafty |= node.drafty(exit.opposite());
-      smelly |= node.smelly(exit.opposite());
-    }
+    boolean drafty = curr.hasDraftyNeighbor();
+    boolean smelly = curr.hasSmellyNeighbor();
     if (drafty) {
       curr.logger().append("You feel a draft\n");
     }

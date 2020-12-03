@@ -228,4 +228,28 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
 
     return exits;
   }
+
+  @Override
+  public boolean hasDraftyNeighbor() {
+    boolean drafty = false;
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      IHtwNode node = (IHtwNode) this.getNode(exit);
+      drafty |= node.drafty(exit.opposite());
+    }
+    return drafty;
+  }
+
+  @Override
+  public boolean hasSmellyNeighbor() {
+    boolean smelly = false;
+    List<Direction> exits = new ArrayList<>(
+            Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST));
+    for (Direction exit : exits) {
+      IHtwNode node = (IHtwNode) this.getNode(exit);
+      smelly |= node.smelly(exit.opposite());
+    }
+    return smelly;
+  }
 }

@@ -149,4 +149,7 @@ public interface IHtwNode extends Node {
    * @return the list of directions for the exits
    */
   List<Direction> exits();
+
+  boolean hasDraftyNeighbor();
+  boolean hasSmellyNeighbor();
 }
