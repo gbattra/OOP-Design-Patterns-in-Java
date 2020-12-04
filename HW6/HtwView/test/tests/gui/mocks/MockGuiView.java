@@ -6,6 +6,7 @@ import gui.IView;
 import gui.IViewFeatures;
 import gui.RestartRequest;
 import htw.game.IHtwGame;
+import maze.Direction;
 
 public class MockGuiView implements IView {
   private StringBuilder log;
@@ -52,6 +53,11 @@ public class MockGuiView implements IView {
 
   @Override
   public void onMove(int id) {
+
+  }
+
+  @Override
+  public void onMove(Direction dir) {
 
   }
 

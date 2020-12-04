@@ -10,6 +10,7 @@ import javax.swing.*;
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
+import maze.Direction;
 
 public class GuiView implements IView, IHtwGameVisitor<Void> {
   private StringBuilder log = new StringBuilder();
@@ -34,11 +35,10 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
 
   @Override
   public void populate(IHtwGame game) {
+    game.receive(this);
     if (game.isOver()) {
       JOptionPane.showMessageDialog(null, "GAME OVER!");
-      return;
     }
-    game.receive(this);
   }
 
   @Override
@@ -55,6 +55,10 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
     frame.add(this.container);
     frame.revalidate();
     frame.repaint();
+
+    this.container.setFocusable(true);
+    this.container.requestFocus();
+
     return null;
   }
 
@@ -66,6 +70,11 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   @Override
   public void onMove(int id) {
     this.features.onMove(id);
+  }
+
+  @Override
+  public void onMove(Direction dir) {
+    this.features.onMove(dir);
   }
 
   @Override

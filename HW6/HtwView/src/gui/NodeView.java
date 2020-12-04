@@ -35,7 +35,7 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
     this.addMouseListener(this);
 
     this.graphics = this.drawGraphics(node);
-//    this.graphics.setVisible(node.visited());
+    this.graphics.setVisible(node.visited());
 
     this.add(graphics);
   }

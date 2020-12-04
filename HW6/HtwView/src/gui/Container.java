@@ -1,7 +1,10 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
+import java.security.Key;
 import java.util.List;
 
 import javax.swing.*;
@@ -10,16 +13,20 @@ import javax.swing.text.DefaultCaret;
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 import htw.level.IHtwNode;
+import maze.Direction;
 
 public class Container
-        extends JPanel implements IButtonBarFeatures, IMazeViewFeatures, IHtwMazeVisitor<Void> {
-  private final IContainerFeatures features;
-
+        extends JPanel
+        implements IButtonBarFeatures, IMazeViewFeatures, IHtwMazeVisitor<Void>, KeyListener {
   public ButtonBar buttonBar;
   public StartMenu startMenu;
   public PlayerBar playerBar;
   public MazeView mazeView;
   public TextArea logger;
+
+  private final IContainerFeatures features;
+
+  private boolean locked = false;
 
   public Container(
           IContainerFeatures features,
@@ -37,6 +44,7 @@ public class Container
     this.setLocation(0, 0);
     this.setLayout(new BorderLayout());
     this.setBackground(Color.BLACK);
+    this.addKeyListener(this);
 
     this.startMenu = new StartMenu();
 
@@ -83,7 +91,8 @@ public class Container
   public Void visitMaze(IHtwNode root, Dimension dimension) {
     this.mazeView = new MazeView(root, dimension, this);
     this.mazeView.setLocation(0, this.playerBar.getY() + this.playerBar.getHeight());
-    this.mazeView.setSize(LayoutConfigs.WIDTH, LayoutConfigs.MAZE_HEIGHT);
+    this.mazeView.setSize(
+            LayoutConfigs.WIDTH - LayoutConfigs.SCROLLBAR_OFFSET, LayoutConfigs.MAZE_HEIGHT);
     this.add(this.mazeView);
     return null;
   }
@@ -130,5 +139,31 @@ public class Container
   @Override
   public void onMove(int id) {
     this.features.onMove(id);
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+    if (this.locked) {
+      return;
+    }
+
+    this.locked = true;
+    if (e.getKeyCode() == KeyEvent.VK_UP) {
+      this.features.onMove(Direction.NORTH);
+    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+      this.features.onMove(Direction.SOUTH);
+    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+      this.features.onMove(Direction.EAST);
+    } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+      this.features.onMove(Direction.WEST);
+    }
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e) {
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
   }
 }

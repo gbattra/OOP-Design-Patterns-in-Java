@@ -8,4 +8,5 @@ public class LayoutConfigs {
   public static final int LARGE = 100;
   public static final int MAZE_HEIGHT = 600;
   public static final int NODE_SIZE = 100;
+  public static final int SCROLLBAR_OFFSET = 15;
 }

@@ -7,6 +7,7 @@ import htw.game.IHtwGame;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwGameBuilder;
 import htw.tools.IHtwConfigurationBuilder;
+import maze.Direction;
 
 public class GuiController implements IGuiController {
   private final IView view;
@@ -63,6 +64,16 @@ public class GuiController implements IGuiController {
       game.start();
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException e) {
+      // have view populate alert
+    }
+  }
+
+  @Override
+  public void onMove(Direction direction) {
+    try {
+      boolean move = game.move(direction);
+      this.view.populate(game);
+    } catch (IllegalArgumentException | IllegalStateException | IOException e) {
       // have view populate alert
     }
   }
