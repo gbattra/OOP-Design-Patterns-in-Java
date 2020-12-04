@@ -16,7 +16,7 @@ public class StartMenu extends JPanel {
   private static final int DEF_ROW_COUNT = 10;
   private static final int DEF_COL_COUNT = 10;
   private static final double DEF_BAT_FREQ = 0.3;
-  private static final double DEF_PIT_FREQ = 0.2;
+  private static final double DEF_PIT_FREQ = 0.4;
 
   public final JCheckBox useSameMaze;
   public final JCheckBox isMultiplayer;
