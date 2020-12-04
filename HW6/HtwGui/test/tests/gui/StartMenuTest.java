@@ -8,6 +8,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Tests for StartMenu.
+ */
 public class StartMenuTest {
   @Test
   public void testValueConstraints() {

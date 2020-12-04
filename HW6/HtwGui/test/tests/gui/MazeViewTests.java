@@ -17,6 +17,9 @@ import maze.components.Coordinates;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for MazeView.
+ */
 public class MazeViewTests {
   @Test
   public void testValidPopulate() {

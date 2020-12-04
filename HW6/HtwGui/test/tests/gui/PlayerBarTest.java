@@ -11,6 +11,9 @@ import htw.game.IHtwPlayer;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for PlayerBar.
+ */
 public class PlayerBarTest {
   @Test
   public void testPopulate() {

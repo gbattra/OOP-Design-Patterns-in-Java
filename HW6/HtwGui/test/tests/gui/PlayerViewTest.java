@@ -8,6 +8,9 @@ import htw.game.IHtwPlayer;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for PlayerView.
+ */
 public class PlayerViewTest {
   @Test
   public void testPlayerView() {

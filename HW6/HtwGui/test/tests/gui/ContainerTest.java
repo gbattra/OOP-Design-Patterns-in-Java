@@ -13,6 +13,9 @@ import htw.tools.HtwMazeBuilder;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the Container.
+ */
 public class ContainerTest {
   @Test
   public void testValidConstructor() {

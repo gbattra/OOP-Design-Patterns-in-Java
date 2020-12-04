@@ -14,6 +14,9 @@ import htw.tools.HtwMazeBuilder;
 
 import static org.junit.Assert.fail;
 
+/**
+ * Tests for the button bar view.
+ */
 public class ButtonBarTest {
   @Test
   public void testValidConstructor() {

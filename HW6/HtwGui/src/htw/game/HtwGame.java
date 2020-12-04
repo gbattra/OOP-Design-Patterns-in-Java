@@ -119,6 +119,11 @@ public class HtwGame implements IHtwGame {
     return visitor.visitGame(this.players, this.maze, this.activePlayer().number());
   }
 
+  /**
+   * Gets the active player number.
+   *
+   * @return the number of the player whose turn it is
+   */
   private IHtwPlayer activePlayer() {
     if (this.isOver()) {
       return this.players.get(this.round % this.players.size());

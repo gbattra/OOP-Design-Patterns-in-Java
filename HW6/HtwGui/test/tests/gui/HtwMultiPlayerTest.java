@@ -7,6 +7,9 @@ import htw.game.IHtwPlayer;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for HtwMultiPlayer.
+ */
 public class HtwMultiPlayerTest {
   @Test
   public void testNumber() {

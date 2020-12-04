@@ -18,6 +18,9 @@ import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwMazeBuilder;
 import maze.components.Coordinates;
 
+/**
+ * Tests for NodeView.
+ */
 public class NodeViewTest {
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidSetOccupied() {
