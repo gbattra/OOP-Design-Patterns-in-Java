@@ -74,7 +74,7 @@ public class GuiController implements IGuiController {
       boolean move = game.move(direction);
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException | IOException e) {
-      // have view populate alert
+      this.view.alert(e.getMessage());
     }
   }
 
@@ -84,7 +84,7 @@ public class GuiController implements IGuiController {
       boolean move = game.move(id);
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException | IOException e) {
-      // have view populate alert
+      this.view.alert(e.getMessage());
     }
   }
 
@@ -94,7 +94,7 @@ public class GuiController implements IGuiController {
       boolean shoot = game.shoot(id, count);
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException | IOException e) {
-      // have view populate alert
+      this.view.alert(e.getMessage());
     }
   }
 }

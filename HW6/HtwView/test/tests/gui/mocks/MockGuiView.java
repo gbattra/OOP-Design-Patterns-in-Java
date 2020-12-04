@@ -16,6 +16,11 @@ public class MockGuiView implements IView {
   }
 
   @Override
+  public void alert(String message) {
+
+  }
+
+  @Override
   public void populate(IHtwGame game) {
 
   }

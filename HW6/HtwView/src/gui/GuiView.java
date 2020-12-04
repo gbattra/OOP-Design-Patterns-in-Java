@@ -88,6 +88,11 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   }
 
   @Override
+  public void alert(String message) {
+    JOptionPane.showMessageDialog(null, message);
+  }
+
+  @Override
   public Appendable append(CharSequence csq) throws IOException {
     for (Character c : csq.toString().toCharArray()) {
       this.append(c);
