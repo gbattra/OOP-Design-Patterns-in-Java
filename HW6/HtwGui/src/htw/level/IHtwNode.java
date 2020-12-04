@@ -103,6 +103,15 @@ public interface IHtwNode extends Node {
   void receive(IHtwPlayer player) throws IOException;
 
   /**
+   * Visitor function allowing a visitor to access the state of this node.
+   *
+   * @param visitor the object doing the visiting
+   * @param <R> the return type for the function
+   * @return R
+   */
+  <R> R receive(IHtwNodeVisitor<R> visitor);
+
+  /**
    * Does the node contain a smell.
    *
    * @param from from which direction is this node being smelled (used for tunnel nodes)
@@ -128,15 +137,6 @@ public interface IHtwNode extends Node {
   IHtwNode adjacent(List<ICoordinates> traversed);
 
   /**
-   * Visitor function allowing a visitor to access the state of this node.
-   *
-   * @param visitor the object doing the visiting
-   * @param <R> the return type for the function
-   * @return R
-   */
-  <R> R receive(IHtwNodeVisitor<R> visitor);
-
-  /**
    * Getter function for the node's visited property.
    *
    * @return whether the node has been visited
@@ -150,6 +150,17 @@ public interface IHtwNode extends Node {
    */
   List<Direction> exits();
 
+  /**
+   * Does this node have a neighbor with a draft.
+   *
+   * @return true if a neighbor has a draft
+   */
   boolean hasDraftyNeighbor();
+
+  /**
+   * Does this node have a neighbor with a smell.
+   *
+   * @return true if a neighbor has a smell
+   */
   boolean hasSmellyNeighbor();
 }

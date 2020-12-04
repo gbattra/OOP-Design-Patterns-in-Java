@@ -1,6 +1,6 @@
 package htw.level;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
@@ -56,6 +56,11 @@ public class HtwMaze extends Maze implements IHtwMaze {
   }
 
   @Override
+  public <R> R receive(IHtwMazeVisitor<R> visitor) {
+    return visitor.visitMaze(this.root, this.dimension);
+  }
+
+  @Override
   public boolean move(IHtwPlayer player, Integer id) throws IOException {
     for (Direction dir : Arrays.asList(
             Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST)) {
@@ -100,11 +105,6 @@ public class HtwMaze extends Maze implements IHtwMaze {
 
     IHtwNode current = ((IHtwNode) this.root.get(player.currentPosition()));
     return current.shoot(current.directionTo(id), count);
-  }
-
-  @Override
-  public <R> R receive(IHtwMazeVisitor<R> visitor) {
-    return visitor.visitMaze(this.root, this.dimension);
   }
 
   @Override

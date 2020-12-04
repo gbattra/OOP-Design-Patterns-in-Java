@@ -21,13 +21,13 @@ public class PitStrategy extends StandardStrategy implements IHtwNodeStrategy {
   }
 
   @Override
-  public boolean drafty(Direction from, IHtwNode curr) {
-    return true;
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitPitCave(curr);
   }
 
   @Override
-  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
-    return visitor.visitPitCave(curr);
+  public boolean drafty(Direction from, IHtwNode curr) {
+    return true;
   }
 
   @Override

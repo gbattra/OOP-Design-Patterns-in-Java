@@ -48,6 +48,11 @@ public class StandardStrategy implements IHtwNodeStrategy {
   }
 
   @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitStandardCave(curr);
+  }
+
+  @Override
   public boolean smelly(Direction from, IHtwNode curr) {
     return false;
   }
@@ -63,11 +68,6 @@ public class StandardStrategy implements IHtwNodeStrategy {
       throw new IllegalStateException("Already traversed this node when finding adjacent.");
     }
     return curr;
-  }
-
-  @Override
-  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
-    return visitor.visitStandardCave(curr);
   }
 
   @Override

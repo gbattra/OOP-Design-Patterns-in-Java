@@ -55,6 +55,11 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   }
 
   @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor) {
+    throw new IllegalArgumentException("Dead End node cannot be visited");
+  }
+
+  @Override
   public Appendable logger() {
     throw new IllegalStateException("Dead end node has no logger.");
   }
@@ -87,11 +92,6 @@ public class DeadEnd extends DeadEndNode implements IHtwNode {
   @Override
   public boolean canEnter() {
     return false;
-  }
-
-  @Override
-  public <R> R receive(IHtwNodeVisitor<R> visitor) {
-    throw new IllegalArgumentException("Dead End node cannot be visited");
   }
 
   @Override

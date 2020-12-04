@@ -10,11 +10,20 @@ import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 
+/**
+ * Builder object for an HtwGame.
+ */
 public class HtwGameBuilder implements IHtwGameBuilder {
   private final IHtwConfiguration configuration;
   private final List<String> names = new ArrayList<>(Arrays.asList("Joe", "Sally"));
 
-  public HtwGameBuilder(IHtwConfiguration configuration) {
+  /**
+   * Constructor for the game builder.
+   *
+   * @param configuration the configuration to use when building the game
+   * @throws IllegalArgumentException if configuration is null
+   */
+  public HtwGameBuilder(IHtwConfiguration configuration) throws IllegalArgumentException {
     if (configuration == null) {
       throw new IllegalArgumentException("Cannot construct game builder. Configuration is null.");
     }

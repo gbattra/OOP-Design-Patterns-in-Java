@@ -37,6 +37,15 @@ public interface IHtwMaze {
   void receive(IHtwPlayer player) throws IOException;
 
   /**
+   * Visitor function for the maze.
+   *
+   * @param visitor the visitor of the maze
+   * @param <R> the return type
+   * @return R
+   */
+  <R> R receive(IHtwMazeVisitor<R> visitor);
+
+  /**
    * Moves the current pointer to the cave at the specified direction.
    *
    * @param player the player taking the action
@@ -77,13 +86,4 @@ public interface IHtwMaze {
    * @throws IOException if writes to out fail
    */
   boolean shoot(IHtwPlayer player, int id, int count);
-
-  /**
-   * Visitor function for the maze.
-   *
-   * @param visitor the visitor of the maze
-   * @param <R> the return type
-   * @return R
-   */
-  <R> R receive(IHtwMazeVisitor<R> visitor);
 }

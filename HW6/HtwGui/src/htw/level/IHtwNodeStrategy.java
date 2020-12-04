@@ -41,6 +41,16 @@ public interface IHtwNodeStrategy {
   void receive(IHtwPlayer player, IHtwNode curr) throws IOException;
 
   /**
+   * Visitor function allowing a visitor to access the state of this node.
+   *
+   * @param visitor the object doing the visiting
+   * @param curr the node being visited
+   * @param <R> the return type for the function
+   * @return R
+   */
+  <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr);
+
+  /**
    * Does the node contain a smell.
    *
    * @param from from which direction is this node being smelled (used for tunnel strategies)
@@ -67,14 +77,4 @@ public interface IHtwNodeStrategy {
    * @return this node if it is not a tunnel
    */
   IHtwNode adjacent(List<ICoordinates> traversed, IHtwNode curr);
-
-  /**
-   * Visitor function allowing a visitor to access the state of this node.
-   *
-   * @param visitor the object doing the visiting
-   * @param curr the node being visited
-   * @param <R> the return type for the function
-   * @return R
-   */
-  <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr);
 }

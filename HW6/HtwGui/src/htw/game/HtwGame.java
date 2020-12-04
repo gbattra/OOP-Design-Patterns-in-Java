@@ -90,7 +90,8 @@ public class HtwGame implements IHtwGame {
       this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
       this.wumpusSlain = true;
     } else {
-      this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
+      this.logger.append(
+              "Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
     }
     this.round++;
 
@@ -105,7 +106,8 @@ public class HtwGame implements IHtwGame {
       this.logger.append("Nice shot! You've slain the Wumpus! VICTORY!\n");
       this.wumpusSlain = true;
     } else {
-      this.logger.append("Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
+      this.logger.append(
+              "Miss... You have " + this.activePlayer().arrowCount() + " remaining arrows.");
     }
     this.round++;
 

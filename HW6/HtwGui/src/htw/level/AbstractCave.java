@@ -154,6 +154,12 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   }
 
   @Override
+  public <R> R receive(IHtwNodeVisitor<R> visitor) {
+    this.strategy.receive(visitor, this);
+    return null;
+  }
+
+  @Override
   public boolean smelly(Direction from) {
     return this.strategy.smelly(from, this);
   }
@@ -203,12 +209,6 @@ public abstract class AbstractCave extends AbstractRoomNode implements IHtwNode 
   @Override
   public int loot(int gold) {
     return 0;
-  }
-
-  @Override
-  public <R> R receive(IHtwNodeVisitor<R> visitor) {
-    this.strategy.receive(visitor, this);
-    return null;
   }
 
   @Override
