@@ -90,6 +90,7 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   @Override
   public void alert(String message) {
     JOptionPane.showMessageDialog(null, message);
+    this.container.requestFocus();
   }
 
   @Override
