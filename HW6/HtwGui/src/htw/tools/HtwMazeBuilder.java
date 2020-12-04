@@ -53,7 +53,6 @@ public class HtwMazeBuilder extends MazeBuilder {
 
     return new HtwMaze(
             start,
-            ((IHtwConfiguration) this.config).getLogger(),
             new Dimension(this.config.columnCount(), this.config.rowCount()),
             this.config.randomSeed());
   }
