@@ -143,11 +143,6 @@ public class Container
 
   @Override
   public void keyPressed(KeyEvent e) {
-    if (this.locked) {
-      return;
-    }
-
-    this.locked = true;
     if (e.getKeyCode() == KeyEvent.VK_UP) {
       this.features.onMove(Direction.NORTH);
     } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -157,8 +152,6 @@ public class Container
     } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
       this.features.onMove(Direction.WEST);
     }
-
-    this.requestFocus();
   }
 
   @Override
