@@ -74,7 +74,16 @@ public class GuiController implements IGuiController {
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException | IOException e) {
       // have view populate alert
-      int x= 0;
+    }
+  }
+
+  @Override
+  public void onShoot(int id, int count) {
+    try {
+      boolean shoot = game.shoot(id, count);
+      this.view.populate(game);
+    } catch (IllegalArgumentException | IllegalStateException | IOException e) {
+      // have view populate alert
     }
   }
 }

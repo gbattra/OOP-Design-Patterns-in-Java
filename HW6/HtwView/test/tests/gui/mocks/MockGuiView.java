@@ -20,6 +20,11 @@ public class MockGuiView implements IView {
   }
 
   @Override
+  public void onShoot(int id, int count) {
+
+  }
+
+  @Override
   public void setFeatures(IViewFeatures features) {
 
   }

@@ -9,6 +9,9 @@ import gui.GuiController;
 import gui.GuiView;
 import gui.IGuiController;
 import gui.IView;
+import htw.level.IHtwMaze;
+import htw.tools.HtwConfigurationBuilder;
+import htw.tools.HtwMazeBuilder;
 import tests.gui.mocks.MockGuiView;
 import tests.htw.mocks.MockMaze;
 
@@ -19,8 +22,9 @@ public class ContainerTest {
   @Test
   public void testValidConstructor() {
     IView view = new GuiView();
+    IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(new HtwConfigurationBuilder().build()).build();
     Container container = new Container(
-            view, new ArrayList<>(), new MockMaze(new StringBuilder()), 1);
+            view, new ArrayList<>(), maze, 1);
   }
 
   @Test(expected = IllegalArgumentException.class)

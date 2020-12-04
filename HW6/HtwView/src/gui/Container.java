@@ -124,7 +124,7 @@ public class Container
 
   @Override
   public void onShoot(int id, int shootCount) {
-    System.out.printf("Shoot %s", shootCount);
+    this.features.onShoot(id, shootCount);
   }
 
   @Override

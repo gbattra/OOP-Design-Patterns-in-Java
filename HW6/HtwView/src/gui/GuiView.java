@@ -69,6 +69,11 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   }
 
   @Override
+  public void onShoot(int id, int count) {
+    this.features.onShoot(id, count);
+  }
+
+  @Override
   public void onQuit() {
     frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
   }
