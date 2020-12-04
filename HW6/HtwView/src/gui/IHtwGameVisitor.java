@@ -6,5 +6,5 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 
 public interface IHtwGameVisitor<R> {
-  R visitGame(List<IHtwPlayer> players, IHtwMaze maze);
+  R visitGame(List<IHtwPlayer> players, IHtwMaze maze, int activePlayerNumber);
 }

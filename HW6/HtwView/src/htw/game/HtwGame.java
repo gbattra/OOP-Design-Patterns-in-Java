@@ -114,7 +114,7 @@ public class HtwGame implements IHtwGame {
 
   @Override
   public <R> R receive(IHtwGameVisitor<R> visitor) {
-    return visitor.visitGame(this.players, this.maze);
+    return visitor.visitGame(this.players, this.maze, this.activePlayer().number());
   }
 
   private IHtwPlayer activePlayer() {

@@ -31,7 +31,7 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
     }
     this.features = features;
     this.nodeId = node.getId();
-
+    this.setLayout(new FlowLayout());
     this.addMouseListener(this);
 
     this.graphics = this.drawGraphics(node);

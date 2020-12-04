@@ -19,12 +19,13 @@ public class ContainerTest {
   @Test
   public void testValidConstructor() {
     IView view = new GuiView();
-    Container container = new Container(view, new ArrayList<>(), new MockMaze(new StringBuilder()));
+    Container container = new Container(
+            view, new ArrayList<>(), new MockMaze(new StringBuilder()), 1);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    Container container = new Container(null, null, null);
+    Container container = new Container(null, null, null, 0);
     fail("Invalid constructor should have failed.");
   }
 }

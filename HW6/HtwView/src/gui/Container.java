@@ -24,7 +24,8 @@ public class Container
   public Container(
           IContainerFeatures features,
           List<IHtwPlayer> players,
-          IHtwMaze maze) {
+          IHtwMaze maze,
+          int activePlayerNumber) {
     super();
     if (features == null) {
       throw new IllegalArgumentException("Cannot instantiate Container. Features are null.");
@@ -44,9 +45,15 @@ public class Container
     this.buttonBar.setLocation(0, 0);
     this.add(this.buttonBar);
 
+    JPanel playerTurnView = new JPanel();
+    playerTurnView.setSize(LayoutConfigs.WIDTH, LayoutConfigs.SMALL / 2);
+    playerTurnView.setBackground(PlayerConfigs.COLORS.get(activePlayerNumber - 1));
+    playerTurnView.setLocation(0, this.buttonBar.getY() + this.buttonBar.getHeight());
+    this.add(playerTurnView);
+
     this.playerBar = new PlayerBar(players);
     this.playerBar.setSize(LayoutConfigs.WIDTH, LayoutConfigs.LARGE);
-    this.playerBar.setLocation(0, this.buttonBar.getY() + this.buttonBar.getHeight());
+    this.playerBar.setLocation(0, playerTurnView.getY() + playerTurnView.getHeight());
     this.add(this.playerBar);
 
     maze.receive(this);

@@ -18,7 +18,8 @@ public class ButtonBarTest {
   @Test
   public void testValidConstructor() {
     IView view = new GuiView();
-    Container container = new Container(view, new ArrayList<>(), new MockMaze(new StringBuilder()));
+    Container container = new Container(
+            view, new ArrayList<>(), new MockMaze(new StringBuilder()), 1);
     ButtonBar buttonBar = new ButtonBar(container);
   }
 

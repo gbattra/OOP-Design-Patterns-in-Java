@@ -42,12 +42,12 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   }
 
   @Override
-  public Void visitGame(List<IHtwPlayer> players, IHtwMaze maze) {
+  public Void visitGame(List<IHtwPlayer> players, IHtwMaze maze, int activePlayerNumber) {
     if (this.container != null) {
       frame.remove(this.container);
     }
 
-    this.container = new Container(this, players, maze);
+    this.container = new Container(this, players, maze, activePlayerNumber);
     this.container.logger.setText(this.log.toString());
     this.container.logger.setCaretPosition(
             this.container.logger.getCaretPosition() + this.log.length());
