@@ -40,79 +40,70 @@ public class StartMenu extends JPanel {
     this.setLayout(new GridLayout(0, 1));
 
     JLabel useSameMazeLabel = new JLabel("Use same maze? ");
+    this.add(useSameMazeLabel);
     this.useSameMaze = new JCheckBox();
+    this.add(this.useSameMaze);
 
     JLabel isMultiplayerLabel = new JLabel("Multiplayer mode? ");
+    this.add(isMultiplayerLabel);
     this.isMultiplayer = new JCheckBox();
     this.isMultiplayer.setSelected(true);
+    this.add(this.isMultiplayer);
 
     JLabel arrowCountLabel = new JLabel("Arrow count: ");
+    this.add(arrowCountLabel);
     this.arrowCount = new JFormattedTextField(new NumberFormatter());
     this.arrowCount.setColumns(10);
     this.arrowCount.setValue(10);
+    this.add(this.arrowCount);
 
     JLabel rowCountLabel = new JLabel(
             String.format("Row Count (max %s): ", ROW_COUNT_LIMIT));
+    this.add(rowCountLabel);
     this.rowCount = new JFormattedTextField(new NumberFormatter());
     this.rowCount.setColumns(10);
     this.rowCount.setValue(DEF_ROW_COUNT);
     this.rowCount.addPropertyChangeListener(l -> this.handleRowCountChange());
+    this.add(this.rowCount);
 
     JLabel columnCountLabel = new JLabel(
             String.format("Column count (max %s): ", COL_COUNT_LIMIT));
+    this.add(columnCountLabel);
     this.columnCount = new JFormattedTextField(new NumberFormatter());
     this.columnCount.setColumns(10);
     this.columnCount.setValue(DEF_COL_COUNT);
     this.columnCount.addPropertyChangeListener(l -> this.handleColumnCountChange());
+    this.add(this.columnCount);
 
     JLabel batFrequencyLabel = new JLabel("Bat frequency (0.0 - 1.0): ");
+    this.add(batFrequencyLabel);
     this.batFrequency = new JFormattedTextField(new NumberFormatter());
     this.batFrequency.setColumns(10);
     this.batFrequency.setValue(DEF_BAT_FREQ);
     this.batFrequency.addPropertyChangeListener(l -> this.handleBatFrequencyChange());
+    this.add(this.batFrequency);
 
     JLabel pitFrequencyLabel = new JLabel("Pit frequency (0.0 - 1.0): ");
+    this.add(pitFrequencyLabel);
     this.pitFrequency = new JFormattedTextField(new NumberFormatter());
     this.pitFrequency.setColumns(10);
     this.pitFrequency.setValue(DEF_PIT_FREQ);
     this.batFrequency.addPropertyChangeListener(l -> this.handlePitFrequencyChange());
+    this.add(this.pitFrequency);
 
     JLabel isRoomMazeLabel = new JLabel("Is room maze? ");
+    this.add(isRoomMazeLabel);
     this.isRoomMaze = new JCheckBox();
     this.isRoomMaze.addItemListener(l -> this.handleIsRoomMazeChange());
+    this.add(this.isRoomMaze);
 
     JLabel finalEdgeCountLabel = new JLabel("Final Edge Count: ");
+    this.add(finalEdgeCountLabel);
     this.finalEdgeCount = new JFormattedTextField(new NumberFormatter());
     this.finalEdgeCount.setColumns(10);
     this.finalEdgeCount.setValue((DEF_ROW_COUNT - 1) * (DEF_COL_COUNT - 1));
     this.finalEdgeCount.setEnabled(false);
-
-    this.add(useSameMazeLabel);
-    this.add(this.useSameMaze);
-
-    this.add(isMultiplayerLabel);
-    this.add(this.isMultiplayer);
-
-    this.add(arrowCountLabel);
-    this.add(this.arrowCount);
-
-    this.add(rowCountLabel);
-    this.add(this.rowCount);
-
-    this.add(columnCountLabel);
-    this.add(this.columnCount);
-
-    this.add(isRoomMazeLabel);
-    this.add(this.isRoomMaze);
-
-    this.add(finalEdgeCountLabel);
     this.add(this.finalEdgeCount);
-
-    this.add(batFrequencyLabel);
-    this.add(this.batFrequency);
-
-    this.add(pitFrequencyLabel);
-    this.add(this.pitFrequency);
   }
 
   /**

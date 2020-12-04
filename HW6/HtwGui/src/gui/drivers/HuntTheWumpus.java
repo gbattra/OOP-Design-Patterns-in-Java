@@ -22,6 +22,11 @@ public class HuntTheWumpus {
    * @param args pass in on execution (mode: --text / --gui)
    */
   public static void main(String[] args) {
+    if (args.length < 1) {
+      System.out.print("Args missing: please provide either --text or --gui arguments.\n");
+      System.exit(1);
+    }
+
     String mode = args[0];
     if (mode.equals("--gui")) {
       IView view = new GuiView();

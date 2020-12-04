@@ -29,13 +29,13 @@ public class WumpusStrategy extends StandardStrategy implements IHtwNodeStrategy
   }
 
   @Override
-  public boolean smelly(Direction from, IHtwNode node) {
-    return true;
+  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
+    return visitor.visitWumpus(curr);
   }
 
   @Override
-  public <R> R receive(IHtwNodeVisitor<R> visitor, IHtwNode curr) {
-    return visitor.visitWumpus(curr);
+  public boolean smelly(Direction from, IHtwNode node) {
+    return true;
   }
 
   @Override
