@@ -157,6 +157,8 @@ public class Container
     } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
       this.features.onMove(Direction.WEST);
     }
+
+    this.requestFocus();
   }
 
   @Override

@@ -122,8 +122,12 @@ public class HtwGame implements IHtwGame {
       return this.players.get(this.round % this.players.size());
     }
     
-    return this.players.get(
-            this.round %
-            this.players.stream().filter(p -> p.isAlive() && p.arrowCount() > 0).toArray().length);
+    IHtwPlayer player = this.players.get(this.round % this.players.size());
+    if (!player.isAlive() || !(player.arrowCount() > 0)) {
+      this.round++;
+      return this.activePlayer();
+    }
+
+    return player;
   }
 }
