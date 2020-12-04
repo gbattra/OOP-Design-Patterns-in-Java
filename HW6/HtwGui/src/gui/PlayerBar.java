@@ -1,11 +1,10 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import htw.game.IHtwPlayer;
 

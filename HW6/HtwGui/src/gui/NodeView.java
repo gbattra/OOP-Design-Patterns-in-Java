@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -10,10 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import htw.level.IHtwNode;
 import maze.Direction;
@@ -139,22 +136,22 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
 
   @Override
   public void mousePressed(MouseEvent e) {
-
+    // unused method from interface
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
-
+    // unused method from interface
   }
 
   @Override
   public void mouseEntered(MouseEvent e) {
-
+    // unused method from interface
   }
 
   @Override
   public void mouseExited(MouseEvent e) {
-
+    // unused method from interface
   }
 
   private JLabel drawGraphics(IHtwNode node) {

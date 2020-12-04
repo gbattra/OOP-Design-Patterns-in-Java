@@ -16,10 +16,14 @@ import static org.junit.Assert.fail;
 public class ContainerTest {
   @Test
   public void testValidConstructor() {
-    IView view = new GuiView();
-    IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(new HtwConfigurationBuilder().build()).build();
-    Container container = new Container(
-            view, new ArrayList<>(), maze, 1);
+    try {
+      IView view = new GuiView();
+      IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(new HtwConfigurationBuilder().build()).build();
+      Container container = new Container(
+              view, new ArrayList<>(), maze, 1);
+    } catch (Exception e) {
+      fail();
+    }
   }
 
   @Test(expected = IllegalArgumentException.class)

@@ -1,6 +1,6 @@
 package htw.level;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
@@ -17,7 +17,6 @@ import maze.components.Maze;
  * The maze object in the Hunt the Wumpus game.
  */
 public class HtwMaze extends Maze implements IHtwMaze {
-  private final Appendable logger;
   private final IHtwNode root;
   private final Dimension dimension;
   private final Random random;
@@ -26,21 +25,18 @@ public class HtwMaze extends Maze implements IHtwMaze {
    * Constructor for the maze.
    *
    * @param root the root node of the maze
-   * @param logger the logger for the maze
    * @param randomSeed the random seed for the maze
    * @throws IllegalArgumentException if params are null
    */
   public HtwMaze(
           IHtwNode root,
-          Appendable logger,
           Dimension dimension,
           int randomSeed) throws IllegalArgumentException {
     super(root, root);
-    if (root == null || logger == null || dimension == null) {
+    if (root == null || dimension == null) {
       throw new IllegalArgumentException("Root, logger and dimension cannot be null.");
     }
     this.root = root;
-    this.logger = logger;
     this.dimension = dimension;
     this.random = new Random(randomSeed);
   }

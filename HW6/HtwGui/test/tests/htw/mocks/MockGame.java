@@ -11,8 +11,6 @@ import maze.Direction;
 public class MockGame implements IHtwGame {
   private final StringBuffer log;
 
-  private int round = -1;
-
   /**
    * Constructor for mock.
    *
@@ -63,6 +61,6 @@ public class MockGame implements IHtwGame {
 
   @Override
   public void start() {
-
+    // unused method from interface
   }
 }

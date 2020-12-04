@@ -1,16 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.TextArea;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
@@ -167,9 +162,11 @@ public class Container
 
   @Override
   public void keyTyped(KeyEvent e) {
+    // unused method from interface
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
+    // unused method from interface
   }
 }

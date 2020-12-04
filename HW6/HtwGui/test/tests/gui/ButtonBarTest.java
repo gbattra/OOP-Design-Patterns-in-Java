@@ -17,11 +17,15 @@ import static org.junit.Assert.fail;
 public class ButtonBarTest {
   @Test
   public void testValidConstructor() {
-    IView view = new GuiView();
-    IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(new HtwConfigurationBuilder().build()).build();
-    Container container = new Container(
-            view, new ArrayList<>(), maze, 1);
-    ButtonBar buttonBar = new ButtonBar(container);
+    try {
+      IView view = new GuiView();
+      IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(new HtwConfigurationBuilder().build()).build();
+      Container container = new Container(
+              view, new ArrayList<>(), maze, 1);
+      ButtonBar buttonBar = new ButtonBar(container);
+    } catch (Exception e) {
+      fail();
+    }
   }
 
   @Test(expected = IllegalArgumentException.class)

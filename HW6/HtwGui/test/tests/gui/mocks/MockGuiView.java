@@ -8,36 +8,44 @@ import gui.RestartRequest;
 import htw.game.IHtwGame;
 import maze.Direction;
 
+/**
+ * Mock gui view for testing.
+ */
 public class MockGuiView implements IView {
   private StringBuilder log;
 
+  /**
+   * Constructor for the mock view.
+   *
+   * @param log the log for the mock
+   */
   public MockGuiView(StringBuilder log) {
     this.log = log;
   }
 
   @Override
   public void alert(String message) {
-
+    // unused method from interface
   }
 
   @Override
   public void populate(IHtwGame game) {
-
+    // unused method from interface
   }
 
   @Override
   public void onShoot(int id, int count) {
-
+    // unused method from interface
   }
 
   @Override
   public void setFeatures(IViewFeatures features) {
-
+    // unused method from interface
   }
 
   @Override
   public void onQuit() {
-
+    // unused method from interface
   }
 
   @Override
@@ -58,12 +66,12 @@ public class MockGuiView implements IView {
 
   @Override
   public void onMove(int id) {
-
+    // unused method from interface
   }
 
   @Override
   public void onMove(Direction dir) {
-
+    // unused method from interface
   }
 
   @Override

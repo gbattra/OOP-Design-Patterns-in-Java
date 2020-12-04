@@ -1,12 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import htw.game.IHtwGame;
 import htw.game.IHtwPlayer;

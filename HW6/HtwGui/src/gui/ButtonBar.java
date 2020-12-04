@@ -1,17 +1,13 @@
 package gui;
 
-import java.awt.GridLayout;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Wrapper panel for the button bar atop the view.
  */
 public class ButtonBar extends JPanel {
-  private final JButton quitBtn;
-  private final JButton restartBtn;
-
   /**
    * Constructor for the button bar.
    *
@@ -27,12 +23,12 @@ public class ButtonBar extends JPanel {
 
     this.setLayout(new GridLayout(0, 2));
 
-    this.quitBtn = new JButton("Quit");
-    this.quitBtn.addActionListener(l -> features.onQuit());
-    this.add(this.quitBtn);
+    JButton quitBtn = new JButton("Quit");
+    quitBtn.addActionListener(l -> features.onQuit());
+    this.add(quitBtn);
 
-    this.restartBtn = new JButton("Restart");
-    this.restartBtn.addActionListener(l -> features.onRestart());
-    this.add(this.restartBtn);
+    JButton restartBtn = new JButton("Restart");
+    restartBtn.addActionListener(l -> features.onRestart());
+    this.add(restartBtn);
   }
 }

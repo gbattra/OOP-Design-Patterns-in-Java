@@ -1,15 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 
 import htw.game.IHtwPlayer;
@@ -20,7 +13,6 @@ import maze.components.Coordinates;
  * View component representing the maze in the game.
  */
 public class MazeView extends JPanel implements INodeViewFeatures, IHtwPlayerVisitor<Void> {
-  private JPanel nodeGrid;
   private NodeView[][] nodeViews;
 
   private final IMazeViewFeatures features;
@@ -47,22 +39,22 @@ public class MazeView extends JPanel implements INodeViewFeatures, IHtwPlayerVis
     this.setLayout(new BorderLayout());
     this.setBackground(Color.YELLOW);
 
-    this.nodeGrid = new JPanel();
-    this.nodeGrid.setSize(
+    JPanel nodeGrid = new JPanel();
+    nodeGrid.setSize(
             LayoutConfigs.NODE_SIZE * dimension.width, LayoutConfigs.NODE_SIZE * dimension.width);
-    this.nodeGrid.setLayout(new GridLayout(dimension.height, dimension.width));
+    nodeGrid.setLayout(new GridLayout(dimension.height, dimension.width));
 
     this.nodeViews = new NodeView[dimension.height][dimension.width];
     for (int r = 0; r < dimension.height; r++) {
       for (int c = 0; c < dimension.width; c++) {
         IHtwNode node = (IHtwNode) root.get(new Coordinates(c, r));
         NodeView nodeView = new NodeView(node, this);
-        this.nodeGrid.add(nodeView);
+        nodeGrid.add(nodeView);
         this.nodeViews[r][c] = nodeView;
       }
     }
 
-    JScrollPane scrollPane = new JScrollPane(this.nodeGrid);
+    JScrollPane scrollPane = new JScrollPane(nodeGrid);
     this.add(scrollPane);
   }
 

@@ -125,7 +125,7 @@ public class HtwGame implements IHtwGame {
     }
     
     IHtwPlayer player = this.players.get(this.round % this.players.size());
-    if (!player.isAlive() || !(player.arrowCount() > 0)) {
+    if (!(player.isAlive() || player.arrowCount() > 0)) {
       this.round++;
       return this.activePlayer();
     }
