@@ -18,12 +18,25 @@ public class RestartRequest {
   public final double pitFrequency;
   public final double batFrequency;
 
+  /**
+   * Constructor for the restart request.
+   *
+   * @param useSameMaze should the new game use the same maze as the current game
+   * @param isMultiplayer is the new game multiplayer
+   * @param isRoomMaze is the new maze a room maze
+   * @param arrowCount starting arrow count for the players
+   * @param finalEdgeCount final edge count if new maze is a room maze
+   * @param rowCount the row size of the new maze
+   * @param columnCount the column size of the new maze
+   * @param pitFrequency how frequently should pit caves appear
+   * @param batFrequency how frequently should bat caves appear
+   */
   public RestartRequest(
           boolean useSameMaze,
           boolean isMultiplayer,
           boolean isRoomMaze,
           int arrowCount,
-          int finalRoomCount,
+          int finalEdgeCount,
           int rowCount,
           int columnCount,
           double pitFrequency,
@@ -32,7 +45,7 @@ public class RestartRequest {
     this.isMultiplayer = isMultiplayer;
     this.isRoomMaze = isRoomMaze;
     this.arrowCount = arrowCount;
-    this.finalEdgeCount = finalRoomCount;
+    this.finalEdgeCount = finalEdgeCount;
     this.rowCount = rowCount;
     this.columnCount = columnCount;
     this.pitFrequency = pitFrequency;

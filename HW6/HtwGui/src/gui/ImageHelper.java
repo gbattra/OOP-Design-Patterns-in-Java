@@ -7,7 +7,19 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Static class with a helper function for processing images.
+ */
 public class ImageHelper {
+  /**
+   * Overlays one image atop of another.
+   *
+   * @param starting the base image
+   * @param fpath the path to the new image
+   * @param offset what offset the new image should be rendered with
+   * @return the new combined image
+   * @throws IOException if the provided image path is invalid
+   */
   public static BufferedImage overlay(
           BufferedImage starting, URL fpath, int offset) throws IOException {
     BufferedImage overlay = ImageIO.read(fpath);

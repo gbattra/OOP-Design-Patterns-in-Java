@@ -9,6 +9,9 @@ import htw.tools.HtwGameBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 import maze.Direction;
 
+/**
+ * Controller for the GUI mode of Hunt the Wumpus.
+ */
 public class GuiController implements IGuiController {
   private final IView view;
   private final Random random = new Random();
@@ -16,6 +19,12 @@ public class GuiController implements IGuiController {
   private IHtwGame game;
   private IHtwConfigurationBuilder configurationBuilder;
 
+  /**
+   * Constructor for the controller.
+   *
+   * @param view the client view which will receive the game model on each update
+   * @throws IllegalArgumentException if view is null
+   */
   public GuiController(IView view) throws IllegalArgumentException {
     if (view == null) {
       throw new IllegalArgumentException("Cannot instantiate GuiController. View is null.");
@@ -36,7 +45,7 @@ public class GuiController implements IGuiController {
       game.start();
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException e) {
-      // have view populate alert
+      this.view.alert(e.getMessage());
     }
   }
 
@@ -64,7 +73,7 @@ public class GuiController implements IGuiController {
       game.start();
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException e) {
-      // have view populate alert
+      this.view.alert(e.getMessage());
     }
   }
 

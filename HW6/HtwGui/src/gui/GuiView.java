@@ -12,6 +12,9 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwMaze;
 import maze.Direction;
 
+/**
+ * The view object which receives the model from the controller and populates its components.
+ */
 public class GuiView implements IView, IHtwGameVisitor<Void> {
   private final StringBuilder log = new StringBuilder();
 
@@ -19,6 +22,9 @@ public class GuiView implements IView, IHtwGameVisitor<Void> {
   private Container container;
   private IViewFeatures features;
 
+  /**
+   * Constructor for the view object.
+   */
   public GuiView() {
     frame = new JFrame("Hunt the Wumpus");
     frame.setSize(LayoutConfigs.WIDTH, LayoutConfigs.HEIGHT);

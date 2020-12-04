@@ -28,6 +28,9 @@ public class StartMenu extends JPanel {
   public final JFormattedTextField batFrequency;
   public final JFormattedTextField pitFrequency;
 
+  /**
+   * Constructor for the start menu.
+   */
   public StartMenu() {
     super();
 
@@ -109,10 +112,16 @@ public class StartMenu extends JPanel {
     this.add(this.pitFrequency);
   }
 
+  /**
+   * Modifies form when room maze is selected/deselected.
+   */
   private void handleIsRoomMazeChange() {
     this.finalEdgeCount.setEnabled(this.isRoomMaze.isSelected());
   }
 
+  /**
+   * Runs validation on the row count value and corrects if user input is invalid.
+   */
   private void handleRowCountChange() {
     if (this.rowCount.getValue() == null) {
       return;
@@ -123,6 +132,9 @@ public class StartMenu extends JPanel {
     }
   }
 
+  /**
+   * Runs validation on the col count value and corrects if user input is invalid.
+   */
   private void handleColumnCountChange() {
     if (this.columnCount.getValue() == null) {
       return;
@@ -133,6 +145,9 @@ public class StartMenu extends JPanel {
     }
   }
 
+  /**
+   * Runs validation on the pit freq value and corrects if user input is invalid.
+   */
   private void handlePitFrequencyChange() {
     if (this.pitFrequency.getValue() == null) {
       return;
@@ -143,6 +158,9 @@ public class StartMenu extends JPanel {
     }
   }
 
+  /**
+   * Runs validation on the bat freq value and corrects if user input is invalid.
+   */
   private void handleBatFrequencyChange() {
     if (this.batFrequency.getValue() == null) {
       return;

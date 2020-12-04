@@ -9,14 +9,32 @@ import htw.game.IHtwPlayer;
 import htw.level.IHtwNode;
 import maze.components.Coordinates;
 
+/**
+ * View component representing the maze in the game.
+ */
 public class MazeView extends JPanel implements INodeViewFeatures, IHtwPlayerVisitor<Void> {
   private JPanel nodeGrid;
   private NodeView[][] nodeViews;
 
   private final IMazeViewFeatures features;
 
-  public MazeView(IHtwNode root, Dimension dimension, IMazeViewFeatures features) {
+  /**
+   * Constructor for the maze object.
+   *
+   * @param root the root node of the maze
+   * @param dimension the dimensions of the maze
+   * @param features the callbacks for this view
+   * @throws IllegalArgumentException if args are null
+   */
+  public MazeView(
+          IHtwNode root,
+          Dimension dimension,
+          IMazeViewFeatures features) throws IllegalArgumentException {
     super();
+    if (root == null || dimension == null || features == null) {
+      throw new IllegalArgumentException("Cannot instantiate view. Args are null.");
+    }
+
     this.features = features;
 
     this.setLayout(new BorderLayout());

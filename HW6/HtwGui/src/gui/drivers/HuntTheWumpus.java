@@ -12,7 +12,15 @@ import htw.game.commands.DirActionStrategy;
 import htw.game.commands.IActionStrategy;
 import htw.game.commands.IdActionStrategy;
 
+/**
+ * Driver for the Hunt the Wumpus game.
+ */
 public class HuntTheWumpus {
+  /**
+   * Entrypoint for running the program.
+   *
+   * @param args pass in on execution (mode: --text / --gui)
+   */
   public static void main(String[] args) {
     String mode = args[0];
     if (mode.equals("--gui")) {

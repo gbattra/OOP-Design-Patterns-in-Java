@@ -12,6 +12,9 @@ import htw.level.IHtwMaze;
 import htw.level.IHtwNode;
 import maze.Direction;
 
+/**
+ * Main wrapper around entire view of the GUI.
+ */
 public class Container
         extends JPanel
         implements IButtonBarFeatures, IMazeViewFeatures, IHtwMazeVisitor<Void>, KeyListener {
@@ -23,6 +26,14 @@ public class Container
 
   private final IContainerFeatures features;
 
+  /**
+   * Constructor for the container.
+   *
+   * @param features object implementing the callback functionality for the container
+   * @param players the list of player objects to populate views
+   * @param maze the maze to populate the view with
+   * @param activePlayerNumber the player number of the player whose turn it is
+   */
   public Container(
           IContainerFeatures features,
           List<IHtwPlayer> players,

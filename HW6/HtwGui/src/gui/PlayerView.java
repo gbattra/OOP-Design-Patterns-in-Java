@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 
 import htw.game.IHtwPlayer;
 
+/**
+ * A view displaying player data: arrow count and alive/dead.
+ */
 public class PlayerView extends JPanel implements IHtwPlayerVisitor<Void> {
   public final JLabel playerLabel;
   public final JLabel arrowCountLabel;
@@ -14,6 +17,9 @@ public class PlayerView extends JPanel implements IHtwPlayerVisitor<Void> {
 
   private static final Font headerFont = new Font("Courier", Font.BOLD, 14);
 
+  /**
+   * Constructor for the player view.
+   */
   public PlayerView() {
     super();
     this.setLayout(new GridLayout(3, 1));

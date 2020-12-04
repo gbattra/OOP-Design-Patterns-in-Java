@@ -8,11 +8,23 @@ import javax.swing.*;
 
 import htw.game.IHtwPlayer;
 
+/**
+ * View wrapper around each player view. Displays player status and arrow count.
+ */
 public class PlayerBar extends JPanel {
   public final List<PlayerView> playerViews;
 
+  /**
+   * Constructor for the player bar.
+   *
+   * @param players the players to display
+   * @throws IllegalArgumentException if players is null
+   */
   public PlayerBar(List<IHtwPlayer> players) {
     super();
+    if (players == null) {
+      throw new IllegalArgumentException("Cannot instantiate player bar. Players object is null.");
+    }
 
     this.setBackground(Color.GREEN);
     this.setLayout(new GridLayout(0, 2));

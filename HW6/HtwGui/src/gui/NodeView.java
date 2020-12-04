@@ -15,6 +15,9 @@ import javax.swing.*;
 import htw.level.IHtwNode;
 import maze.Direction;
 
+/**
+ * View for a single node in the maze.
+ */
 public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<Void> {
   private final INodeViewFeatures features;
   private final int nodeId;
@@ -22,7 +25,14 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
   private BufferedImage nodeImage;
   private JLabel graphics;
 
-  public NodeView(IHtwNode node, INodeViewFeatures features) {
+  /**
+   * Constructor for the node view.
+   *
+   * @param node the node to display
+   * @param features the callbacks for events on this view
+   * @throws IllegalArgumentException if args are null
+   */
+  public NodeView(IHtwNode node, INodeViewFeatures features) throws IllegalArgumentException {
     super();
     if (features == null || node == null) {
       throw new IllegalArgumentException("Cannot instantiate NodeView. Features or node is null.");
@@ -38,6 +48,11 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
     this.add(graphics);
   }
 
+  /**
+   * Sets this node as occupied by a player.
+   *
+   * @param playerId the id of the player occupying the node
+   */
   public void setOccupied(int playerId) {
     if (playerId < 1) {
       throw new IllegalArgumentException("Invalid player ID provided.");
