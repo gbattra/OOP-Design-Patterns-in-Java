@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HtwGui:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HtwGui_jar</output-path>
+    <root id="archive" name="HtwGui.jar">
+      <element id="module-output" name="HtwGui" />
+    </root>
+  </artifact>
+</component>
