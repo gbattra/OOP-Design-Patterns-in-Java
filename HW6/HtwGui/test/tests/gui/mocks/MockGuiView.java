@@ -30,7 +30,7 @@ public class MockGuiView implements IView {
 
   @Override
   public void populate(IHtwGame game) {
-    // unused method from interface
+    this.log.append("populating the game\n");
   }
 
   @Override

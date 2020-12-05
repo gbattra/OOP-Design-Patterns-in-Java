@@ -11,6 +11,7 @@ import htw.game.HtwCommandMapFactory;
 import htw.game.commands.DirActionStrategy;
 import htw.game.commands.IActionStrategy;
 import htw.game.commands.IdActionStrategy;
+import htw.tools.HtwGameBuilder;
 
 /**
  * Driver for the Hunt the Wumpus game.
@@ -30,7 +31,7 @@ public class HuntTheWumpus {
     String mode = args[0];
     if (mode.equals("--gui")) {
       IView view = new GuiView();
-      IGuiController controller = new GuiController(view);
+      IGuiController controller = new GuiController(view, new HtwGameBuilder());
       view.setFeatures(controller);
       controller.startNew();
     } else if (mode.equals("--text")) {

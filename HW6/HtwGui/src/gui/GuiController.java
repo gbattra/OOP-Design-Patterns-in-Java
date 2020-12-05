@@ -7,6 +7,7 @@ import htw.game.IHtwGame;
 import htw.tools.HtwConfigurationBuilder;
 import htw.tools.HtwGameBuilder;
 import htw.tools.IHtwConfigurationBuilder;
+import htw.tools.IHtwGameBuilder;
 import maze.Direction;
 
 /**
@@ -14,6 +15,7 @@ import maze.Direction;
  */
 public class GuiController implements IGuiController {
   private final IView view;
+  private final IHtwGameBuilder gameBuilder;
   private final Random random = new Random();
 
   private IHtwGame game;
@@ -23,13 +25,15 @@ public class GuiController implements IGuiController {
    * Constructor for the controller.
    *
    * @param view the client view which will receive the game model on each update
+   * @param gameBuilder factory to use to build the game
    * @throws IllegalArgumentException if view is null
    */
-  public GuiController(IView view) throws IllegalArgumentException {
-    if (view == null) {
-      throw new IllegalArgumentException("Cannot instantiate GuiController. View is null.");
+  public GuiController(IView view, IHtwGameBuilder gameBuilder) throws IllegalArgumentException {
+    if (view == null || gameBuilder == null) {
+      throw new IllegalArgumentException("Cannot instantiate GuiController. Args are null.");
     }
 
+    this.gameBuilder = gameBuilder;
     this.view = view;
     this.view.setFeatures(this);
   }
@@ -37,11 +41,12 @@ public class GuiController implements IGuiController {
   @Override
   public void startNew() {
     try {
-      configurationBuilder = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
+      this.configurationBuilder = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
               .setLogger(view)
               .setNumPlayers(2)
               .setRandomSeed(this.random.nextInt(1000)));
-      game = new HtwGameBuilder(configurationBuilder.build()).build();
+      this.gameBuilder.setConfiguration(this.configurationBuilder.build());
+      game = this.gameBuilder.build();
       game.start();
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -53,13 +58,14 @@ public class GuiController implements IGuiController {
   public void restart(RestartRequest restartRequest) {
     try {
       if (restartRequest.useSameMaze) {
-        game = new HtwGameBuilder(configurationBuilder.build()).build();
+        this.gameBuilder.setConfiguration(this.configurationBuilder.build());
+        game = this.gameBuilder.build();
         game.start();
         this.view.populate(game);
         return;
       }
 
-      configurationBuilder.setBatFrequency(restartRequest.batFrequency)
+      this.configurationBuilder.setBatFrequency(restartRequest.batFrequency)
                           .setPitFrequency(restartRequest.pitFrequency)
                           .setArrowCount(restartRequest.arrowCount)
                           .setNumPlayers(restartRequest.isMultiplayer ? 2 : 1)
@@ -69,7 +75,8 @@ public class GuiController implements IGuiController {
                           .setColumnCount(restartRequest.columnCount)
                           .setRandomSeed(this.random.nextInt(1000));
 
-      game = new HtwGameBuilder(configurationBuilder.build()).build();
+      this.gameBuilder.setConfiguration(this.configurationBuilder.build());
+      game = this.gameBuilder.build();
       game.start();
       this.view.populate(game);
     } catch (IllegalArgumentException | IllegalStateException e) {
