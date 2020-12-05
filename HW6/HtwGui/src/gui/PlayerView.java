@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import htw.game.IHtwPlayer;
+import htw.IHtwPlayer;
 
 /**
  * A view displaying player data: arrow count and alive/dead.

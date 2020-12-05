@@ -1,6 +1,6 @@
 package gui;
 
-import htw.game.IHtwGame;
+import htw.IHtwGame;
 
 /**
  * Interface for the main view object used by the controller.

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import htw.level.IHtwNode;
+import htw.IHtwNode;
 import maze.Direction;
 
 /**

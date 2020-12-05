@@ -1,6 +1,6 @@
 package gui;
 
-import htw.level.IHtwNode;
+import htw.IHtwNode;
 
 /**
  * Interface for a visitor of an HtwNode object.

@@ -3,10 +3,10 @@ package gui;
 import java.io.IOException;
 import java.util.Random;
 
-import htw.game.IHtwGame;
-import htw.tools.HtwConfigurationBuilder;
-import htw.tools.IHtwConfigurationBuilder;
-import htw.tools.IHtwGameBuilder;
+import htw.IHtwGame;
+import htw.HtwConfigurationBuilder;
+import htw.IHtwConfigurationBuilder;
+import htw.IHtwGameBuilder;
 import maze.Direction;
 
 /**

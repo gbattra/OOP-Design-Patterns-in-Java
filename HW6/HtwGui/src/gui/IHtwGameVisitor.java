@@ -2,8 +2,8 @@ package gui;
 
 import java.util.List;
 
-import htw.game.IHtwPlayer;
-import htw.level.IHtwMaze;
+import htw.IHtwPlayer;
+import htw.IHtwMaze;
 
 /**
  * Interface for a visitor of an IHtwGame object.

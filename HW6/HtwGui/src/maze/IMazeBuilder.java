@@ -2,11 +2,6 @@ package maze;
 
 import java.util.List;
 
-import maze.components.ICoordinates;
-import maze.components.IEdge;
-import maze.components.IMaze;
-import maze.components.Node;
-
 /**
  * Builder class to help setup a maze. It is recommended to use this class to build a maze.
  */

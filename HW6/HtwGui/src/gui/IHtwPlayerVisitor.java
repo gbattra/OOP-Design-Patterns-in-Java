@@ -1,6 +1,6 @@
 package gui;
 
-import htw.game.IHtwPlayer;
+import htw.IHtwPlayer;
 
 /**
  * Interface for a visitor of an HtwPlayer object.

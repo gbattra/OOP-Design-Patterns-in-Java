@@ -4,19 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import maze.components.Coordinates;
-import maze.components.DeadEndNode;
-import maze.components.Edge;
-import maze.components.GoldRoomNode;
-import maze.components.ICoordinates;
-import maze.components.IEdge;
-import maze.components.IMaze;
-import maze.components.Maze;
-import maze.components.Node;
-import maze.components.StandardRoomNode;
-import maze.components.ThiefRoomNode;
-import maze.config.IConfiguration;
-
 /**
  * Builder class for the Maze2d class. Contains default configs to make customizing easier.
  */

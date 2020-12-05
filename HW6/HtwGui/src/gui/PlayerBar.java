@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import htw.game.IHtwPlayer;
+import htw.IHtwPlayer;
 
 /**
  * View wrapper around each player view. Displays player status and arrow count.

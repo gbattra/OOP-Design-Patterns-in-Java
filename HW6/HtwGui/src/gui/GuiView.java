@@ -8,9 +8,9 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import htw.game.IHtwGame;
-import htw.game.IHtwPlayer;
-import htw.level.IHtwMaze;
+import htw.IHtwGame;
+import htw.IHtwPlayer;
+import htw.IHtwMaze;
 import maze.Direction;
 
 /**

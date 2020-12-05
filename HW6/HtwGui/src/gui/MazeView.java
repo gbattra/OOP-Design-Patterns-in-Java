@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.text.NumberFormatter;
 
-import htw.game.IHtwPlayer;
-import htw.level.IHtwNode;
-import maze.components.Coordinates;
+import htw.IHtwPlayer;
+import htw.IHtwNode;
+import maze.Coordinates;
 
 /**
  * View component representing the maze in the game.

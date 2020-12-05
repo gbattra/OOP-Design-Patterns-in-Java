@@ -12,9 +12,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import htw.game.IHtwPlayer;
-import htw.level.IHtwMaze;
-import htw.level.IHtwNode;
+import htw.IHtwPlayer;
+import htw.IHtwMaze;
+import htw.IHtwNode;
 import maze.Direction;
 
 /**

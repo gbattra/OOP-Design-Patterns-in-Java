@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 
-import htw.level.IHtwNode;
+import htw.IHtwNode;
 
 /**
  * Interface for a visitor of an HtwMaze object.
