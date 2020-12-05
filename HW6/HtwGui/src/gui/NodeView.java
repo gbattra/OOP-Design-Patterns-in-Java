@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.*;
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import htw.level.IHtwNode;
 import maze.Direction;
@@ -67,6 +70,7 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
       this.add(this.graphics);
       this.graphics.setVisible(true);
     } catch (IOException ignored) {
+      // ignored
     }
   }
 

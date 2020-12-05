@@ -1,6 +1,6 @@
 package htw.level;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;

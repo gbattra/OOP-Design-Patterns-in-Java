@@ -1,6 +1,6 @@
 package htw.tools;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import htw.level.BatStrategy;

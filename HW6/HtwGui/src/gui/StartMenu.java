@@ -1,8 +1,11 @@
 package gui;
 
-import java.awt.*;
+import java.awt.GridLayout;
 
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.text.NumberFormatter;
 
 /**

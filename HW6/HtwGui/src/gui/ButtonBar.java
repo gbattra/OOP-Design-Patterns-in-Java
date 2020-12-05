@@ -1,8 +1,9 @@
 package gui;
 
-import java.awt.*;
+import java.awt.GridLayout;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  * Wrapper panel for the button bar atop the view.
