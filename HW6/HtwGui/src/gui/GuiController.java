@@ -36,15 +36,16 @@ public class GuiController implements IGuiController {
     this.gameBuilder = gameBuilder;
     this.view = view;
     this.view.setFeatures(this);
+    this.configurationBuilder = new HtwConfigurationBuilder();
   }
 
   @Override
   public void startNew() {
     try {
-      this.configurationBuilder = ((IHtwConfigurationBuilder) new HtwConfigurationBuilder()
+      this.configurationBuilder
               .setLogger(view)
               .setNumPlayers(2)
-              .setRandomSeed(this.random.nextInt(1000)));
+              .setRandomSeed(this.random.nextInt(1000));
       this.gameBuilder.setConfiguration(this.configurationBuilder.build());
       game = this.gameBuilder.build();
       game.start();

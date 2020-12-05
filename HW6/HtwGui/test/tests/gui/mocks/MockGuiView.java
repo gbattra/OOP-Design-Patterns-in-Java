@@ -12,14 +12,15 @@ import maze.Direction;
  * Mock gui view for testing.
  */
 public class MockGuiView implements IView {
-  private StringBuilder log;
+  private StringBuffer log;
+  private IViewFeatures features;
 
   /**
    * Constructor for the mock view.
    *
    * @param log the log for the mock
    */
-  public MockGuiView(StringBuilder log) {
+  public MockGuiView(StringBuffer log) {
     this.log = log;
   }
 
@@ -40,7 +41,7 @@ public class MockGuiView implements IView {
 
   @Override
   public void setFeatures(IViewFeatures features) {
-    // unused method from interface
+    this.features = features;
   }
 
   @Override

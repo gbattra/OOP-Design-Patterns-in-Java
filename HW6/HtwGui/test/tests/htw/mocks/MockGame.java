@@ -61,6 +61,6 @@ public class MockGame implements IHtwGame {
 
   @Override
   public void start() {
-    // unused method from interface
+    this.log.append("Starting\n");
   }
 }
