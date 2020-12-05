@@ -1,9 +1,8 @@
-package tests;
-
 import org.junit.Test;
 
 import java.util.ArrayList;
 
+import gui.ButtonBar;
 import gui.Container;
 import gui.GuiView;
 import gui.IView;
@@ -14,9 +13,9 @@ import htw.HtwMazeBuilder;
 import static org.junit.Assert.fail;
 
 /**
- * Tests for the Container.
+ * Tests for the button bar view.
  */
-public class ContainerTest {
+public class ButtonBarTest {
   @Test
   public void testValidConstructor() {
     try {
@@ -24,6 +23,7 @@ public class ContainerTest {
       IHtwMaze maze = (IHtwMaze) new HtwMazeBuilder(new HtwConfigurationBuilder().build()).build();
       Container container = new Container(
               view, new ArrayList<>(), maze, 1);
+      ButtonBar buttonBar = new ButtonBar(container);
     } catch (Exception e) {
       fail();
     }
@@ -31,7 +31,7 @@ public class ContainerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvalidConstructor() {
-    Container container = new Container(null, null, null, 0);
+    ButtonBar buttonBar = new ButtonBar(null);
     fail("Invalid constructor should have failed.");
   }
 }

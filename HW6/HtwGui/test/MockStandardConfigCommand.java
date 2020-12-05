@@ -1,5 +1,3 @@
-package tests;
-
 import java.io.IOException;
 
 import htw.ICommand;
@@ -7,9 +5,9 @@ import htw.HtwConfigurationBuilder;
 import htw.IHtwConfigurationBuilder;
 
 /**
- * Mock new config command.
+ * Mock standard config command.
  */
-public class MockNewConfigCommand implements ICommand<IHtwConfigurationBuilder> {
+public class MockStandardConfigCommand implements ICommand<IHtwConfigurationBuilder> {
   private final StringBuilder log;
 
   /**
@@ -17,14 +15,14 @@ public class MockNewConfigCommand implements ICommand<IHtwConfigurationBuilder> 
    *
    * @param log log used for testing assertions
    */
-  public MockNewConfigCommand(StringBuilder log) {
+  public MockStandardConfigCommand(StringBuilder log) {
     this.log = log;
   }
 
   @Override
   public IHtwConfigurationBuilder execute(IHtwConfigurationBuilder receiver)
           throws IllegalArgumentException, IOException {
-    this.log.append("config - execute");
+    this.log.append("standard - execute");
     return new HtwConfigurationBuilder();
   }
 }

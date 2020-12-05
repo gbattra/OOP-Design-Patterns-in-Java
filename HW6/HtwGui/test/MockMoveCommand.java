@@ -1,5 +1,3 @@
-package tests;
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -7,9 +5,9 @@ import htw.IHtwGame;
 import htw.ICommand;
 
 /**
- * Mock shoot command.
+ * Mock move command.
  */
-public class MockShootCommand implements ICommand<IHtwGame> {
+public class MockMoveCommand implements ICommand<IHtwGame> {
   private final StringBuffer log;
   private final Scanner scanner;
 
@@ -19,16 +17,15 @@ public class MockShootCommand implements ICommand<IHtwGame> {
    * @param scanner for reading inputs
    * @param log log used for testing assertions
    */
-  public MockShootCommand(Scanner scanner, StringBuffer log) {
+  public MockMoveCommand(Scanner scanner, StringBuffer log) {
     this.log = log;
     this.scanner = scanner;
   }
 
   @Override
   public IHtwGame execute(IHtwGame receiver) throws IllegalArgumentException, IOException {
-    String dir = scanner.next();
-    int count = scanner.nextInt();
-    this.log.append(String.format("execute - shoot - %s - %s", dir, count));
+    String dir = this.scanner.next();
+    this.log.append(String.format("execute - move - %s", dir));
     return receiver;
   }
 }

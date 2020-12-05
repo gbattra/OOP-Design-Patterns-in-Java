@@ -1,5 +1,3 @@
-package tests;
-
 import gui.IHtwGameVisitor;
 import htw.IHtwGame;
 import htw.IActionStrategy;

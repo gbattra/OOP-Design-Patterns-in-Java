@@ -1,5 +1,3 @@
-package tests;
-
 import java.io.IOException;
 
 import gui.IHtwMazeVisitor;

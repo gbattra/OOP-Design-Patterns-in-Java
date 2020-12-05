@@ -1,13 +1,9 @@
-package tests;
-
 import org.junit.Test;
 
 import gui.GuiController;
 import gui.IGuiController;
 import gui.RestartRequest;
 import maze.Direction;
-import tests.MockGameBuilder;
-import tests.MockGuiView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

@@ -1,5 +1,3 @@
-package tests;
-
 import htw.IHtwGame;
 import htw.IHtwConfiguration;
 import htw.IHtwGameBuilder;
