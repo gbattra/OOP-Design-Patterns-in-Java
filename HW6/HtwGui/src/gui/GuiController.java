@@ -5,7 +5,6 @@ import java.util.Random;
 
 import htw.game.IHtwGame;
 import htw.tools.HtwConfigurationBuilder;
-import htw.tools.HtwGameBuilder;
 import htw.tools.IHtwConfigurationBuilder;
 import htw.tools.IHtwGameBuilder;
 import maze.Direction;

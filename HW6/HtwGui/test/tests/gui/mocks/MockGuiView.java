@@ -13,7 +13,6 @@ import maze.Direction;
  */
 public class MockGuiView implements IView {
   private StringBuffer log;
-  private IViewFeatures features;
 
   /**
    * Constructor for the mock view.
@@ -41,7 +40,7 @@ public class MockGuiView implements IView {
 
   @Override
   public void setFeatures(IViewFeatures features) {
-    this.features = features;
+    // unused method from interface
   }
 
   @Override
