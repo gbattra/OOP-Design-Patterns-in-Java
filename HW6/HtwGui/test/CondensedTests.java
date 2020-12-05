@@ -541,6 +541,7 @@ public class CondensedTests {
     assertEquals(0.1, config.pitFrequency(), 0.001);
     assertEquals(0.2, config.batFrequency(), 0.001);
   }
+
   @Test
   public void testConstructor() {
     try {
@@ -624,7 +625,7 @@ public class CondensedTests {
     try {
       IHtwConfiguration configuration = new HtwConfigurationBuilder().build();
       IHtwGame game = new HtwGameBuilder().build();
-    } catch (Exception e){
+    } catch (Exception e) {
       fail("Valid build() should not have failed.");
     }
   }

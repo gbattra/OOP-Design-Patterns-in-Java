@@ -47,6 +47,11 @@ public class MockMaze implements IHtwMaze {
   }
 
   @Override
+  public <R> R receive(IHtwMazeVisitor<R> visitor) {
+    return null;
+  }
+
+  @Override
   public boolean shoot(IHtwPlayer player, Direction direction, int count) {
     this.log.append(String.format("shoot - %s - %s", direction.toString(), count));
     return false;
@@ -56,11 +61,6 @@ public class MockMaze implements IHtwMaze {
   public boolean shoot(IHtwPlayer player, int id, int count) {
     this.log.append(String.format("shoot - %s - %s", id, count));
     return false;
-  }
-
-  @Override
-  public <R> R receive(IHtwMazeVisitor<R> visitor) {
-    return null;
   }
 
   @Override

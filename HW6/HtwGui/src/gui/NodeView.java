@@ -161,7 +161,7 @@ public class NodeView extends JPanel implements MouseListener, IHtwNodeVisitor<V
   private JLabel drawGraphics(IHtwNode node) {
     List<Direction> exits = node.exits();
     String bgIconPath = exits.stream().map(
-            d -> d.toString().substring(0, 1)).collect(Collectors.joining(""));
+        d -> d.toString().substring(0, 1)).collect(Collectors.joining(""));
     try {
       URL path = this.getClass().getResource("/images/" + bgIconPath + ".png");
       this.nodeImage = ImageIO.read(path);

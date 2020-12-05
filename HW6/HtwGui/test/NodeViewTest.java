@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import gui.Container;
